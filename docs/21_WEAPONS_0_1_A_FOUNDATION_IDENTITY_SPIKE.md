@@ -29,13 +29,14 @@ Somente **`weapons.runtime`**, versão de capability 1, é registrada. Esse núm
 | Campo | Semântica |
 |---|---|
 | schemaVersion | `0.1-A-candidate`, não v1 |
-| weaponClass | Classe de arma, normalizada para minúsculas |
+| weaponClass | Classe de arma com a representação fornecida/preservada |
 | muzzle / pointer / optic / bipod | Classes dos acessórios ou string vazia |
-| primaryMagazine / secondaryMagazine | `[]` ou `[magazineClass, ammoCount]` |
 
-O slot equipado é um **locator transitório**, não parte da identidade nem do fingerprint. A informação de tipo vem de `CfgWeapons.type`: rifle=1, handgun=2, launcher=4. A captura usa o formato padrão de sete campos; não mistura o formato extended com o modelo. A validação semântica consulta `compatibleItems` por slot e `compatibleMagazines` por muzzle. Só o primeiro muzzle secundário é contemplado; armas de mods com topologias mais complexas exigem outra candidata.
+Magazine carregado e contagem de munição **não pertencem a WeaponConfiguration**. A captura do formato nativo de sete campos produz também um `loadedState` interno (`0.1-A-loaded-state-candidate`) com `primaryMagazine` e `secondaryMagazine`. Esse estado é observacional/transitório e pode mudar a cada disparo sem alterar a montagem da arma.
 
-O fingerprint é uma serialização canônica ordenada e sem perda, não um hash curto. Inclui acessórios e munição. Detecta igualdade de **configuração**, nunca identidade. Metadados arbitrários foram excluídos para impedir estado de outro domínio e estabilizar a comparação.
+O slot equipado é um **locator transitório**, não parte da identidade nem do fingerprint. A informação de tipo vem de `CfgWeapons.type`: rifle=1, handgun=2, launcher=4. A validação semântica de `WeaponConfiguration` consulta `compatibleItems` por slot. Compatibilidade/estado de magazines será modelada separadamente quando seu contrato próprio for amadurecido; nesta candidata ela é apenas observada.
+
+O fingerprint é uma serialização canônica ordenada da **configuração**, não um hash curto e nunca uma identidade. Classnames armazenados são preservados; `toLowerANSI` é aplicado somente na chave de comparação/fingerprint. Ammo e magazines carregados ficam fora do fingerprint, portanto disparar não cria uma nova WeaponConfiguration.
 
 `WeaponInstance` é um HashMap fechado com `schemaVersion`, `instanceId`, `serial`, `weaponClass`, `configuration`, `metadata`, `createdAt`, `updatedAt`. Metadata aceita somente `scope=SESSION` e `authority=SERVER`. Timestamps são arrays `systemTimeUTC`.
 
@@ -100,9 +101,11 @@ Abordagens rejeitadas nesta entrega: fingerprint como identidade; classname como
 
 ## Segurança e limites do laboratório
 
-Os dois únicos endpoints RemoteExec são `serverHandleLabRequest` e `clientReceiveLabResult`. O primeiro exige servidor, flag de laboratório ativada pelo servidor e correspondência `owner unit == remoteExecutedOwner`. Só aceita operações fechadas e captura dados físicos no servidor. O cliente receptor exige remetente 2 e interface local; `allowedTargets=0` permite o host receber a resposta, além dos clientes. JIP está desativado nos endpoints.
+Os dois únicos endpoints RemoteExec declarados por Weapons são `serverHandleLabRequest` e `clientReceiveLabResult`. O primeiro exige servidor, flag de laboratório ativada pelo servidor e correspondência `owner unit == remoteExecutedOwner`. Só aceita operações fechadas e captura dados físicos no servidor. O cliente receptor exige remetente 2 e interface local; `allowedTargets=0` permite o host receber a resposta, além dos clientes. JIP está desativado por endpoint.
 
-As funções de emissão/domínio não são whitelisted para RemoteExec. Missões que sobrescrevam permissivamente essa whitelist estão fora do modelo de segurança desta candidata. O laboratório é para sessão de desenvolvimento confiável, não para servidor público; diagnosticar todo o registry pode gerar logs grandes. Há limite básico de frequência para comandos, sem pretensão de hardening anticheat. Eventos de invalidação não são descartados por esse limite.
+**Weapons não define `CfgRemoteExec.Functions.mode` nem defaults globais de `jip`.** Essa política é global ao ambiente e não pertence a um módulo de domínio isolado. As funções internas de authority/identity recusam `isRemoteExecuted`; o cliente deve passar pelo gateway deliberado `serverHandleLabRequest`. Assim uma missão com política mais permissiva não transforma `createWeaponInstance` ou mutações internas em API remota acidental.
+
+O laboratório é para sessão de desenvolvimento confiável, não para servidor público; diagnosticar todo o registry pode gerar logs grandes. Há limite básico de frequência para comandos, sem pretensão de hardening anticheat. Eventos de invalidação não são descartados por esse limite.
 
 ## O que instalar/copiar no Arma 3
 
@@ -126,7 +129,7 @@ Executado neste ambiente: `python tools/validate_weapons_0_1_a.py`, pré-process
 
 Preparado, mas **NÃO EXECUTADO**: `[] call ServoPeregrino_Organizador_Weapons_fnc_runDelivery0_1ATests` dentro do Arma. No host, usar a ação **AUTO TEST**. No dedicated, executar a função localmente no console do servidor com a missão ativa.
 
-Cobertura do AUTO TEST: lifecycle/idempotência, Nexus/capability/provider, criação, normalização, deep copy aninhado, validação estrutural/semântica, entradas inválidas, schemas incompatíveis, fingerprints iguais/diferentes, emissão de duas instâncias, serial distinto, invariância após alteração, payload/ID/serial/class/metadata/timestamp inválidos, cópia defensiva, dependências mínimas. A verificação estática cobre ausência de acesso privado a Items. A suite apaga somente os registros que criou e nunca rebobina a sequência autoritativa.
+Cobertura do AUTO TEST: lifecycle/idempotência, Nexus/capability/provider, criação, preservação de classname, deep copy aninhado, validação estrutural/semântica, entradas inválidas, schemas incompatíveis, comparação case-insensitive sem mutar o modelo, separação `WeaponConfiguration`/`loadedState`, prova de que ammo 30→29 não altera o fingerprint de configuração, emissão de duas instâncias, serial distinto, invariância após alteração, payload/ID/serial/class/metadata/timestamp inválidos, cópia defensiva e dependências mínimas. A verificação estática cobre ausência de acesso privado a Items e os gates de RemoteExec. A suite apaga somente os registros que criou e nunca rebobina a sequência autoritativa.
 
 Não executados: empacotamento PBO, carga no Arma, suite SQF, testes SP/hosted/dedicated/MP real/JIP/reconnect. **Não há homologação runtime ou multiplayer.**
 
