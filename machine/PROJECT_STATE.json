@@ -5,7 +5,8 @@
   "source_of_truth": {
     "repository_role": "MONOREPO",
     "product_model": "MULTI_PBO_INDEPENDENT_MODULES",
-    "rule": "Modules integrate only through Nexus capabilities/contracts/events/results; no module may depend on another module's private runtime state."
+    "rule": "Modules integrate only through Nexus capabilities/contracts/events/results; no module may depend on another module's private runtime state.",
+    "repository": "peregrinoklawd/ServoPeregrino_Organizador"
   },
   "architecture": {
     "monorepo": true,
@@ -13,7 +14,8 @@
     "addon_is_product": true,
     "mission_is_test_lab": true,
     "optional_integrations_must_degrade_gracefully": true,
-    "cross_module_private_state_access_forbidden": true
+    "cross_module_private_state_access_forbidden": true,
+    "physical_layout": "Existing runtime addons keep authoritative paths; future modules receive reserved addon directories and are activated only after source/config migration gates."
   },
   "global_next_gate": "Close Items 0.13-A runtime/multiplayer gate: load Packaging R2 in Arma, confirm no Unable to open PBO, open UI, then execute server-authoritative multiplayer smoke.",
   "global_after_gate": "Only after 0.13-A closes, continue Items 0.13-B JIP & State Reconciliation and begin formal cross-module contracts.",
@@ -400,7 +402,8 @@
     "human_start": [
       "docs/00_STATUS_ATUAL.md",
       "docs/01_ARQUITETURA.md",
-      "docs/16_BANCO_DE_IDEIAS_E_CONCEITOS.md"
+      "docs/16_BANCO_DE_IDEIAS_E_CONCEITOS.md",
+      "docs/17_ARMORER_WEAPONS_WEAR_ARCHITECTURE.md"
     ],
     "machine_start": [
       "machine/PROJECT_STATE.json",
