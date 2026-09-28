@@ -2,7 +2,7 @@
   "schema_version": 1,
   "snapshot_date": "2026-09-28",
   "repository": "peregrinoklawd/ServoPeregrino_Organizador",
-  "rule": "Every domain feature has one owning module. Other modules consume it through Nexus contracts/capabilities/events and must not duplicate the implementation.",
+  "rule": "Every domain feature has one owning module. Weapons owns weapon identity/configuration, WeaponCondition owns condition/wear/maintenance logic, and Armorer owns the physical/UI workflow. Other modules consume through Nexus contracts/capabilities/events and must not duplicate the implementation.",
   "modules": {
     "Nexus": [
       "result-envelope",
@@ -34,18 +34,15 @@
     "Weapons": [
       "weapon-kit",
       "weapon-configuration",
+      "weapon-recipe-model",
+      "weapon-recipe-validation",
       "weapon-slot-compatibility",
+      "attachment-compatibility",
+      "magazine-compatibility",
       "dynamic-weapon-swap-without-full-loadout",
       "weapon-instance",
       "weapon-serial",
-      "weapon-condition",
-      "shot-usage",
-      "water-exposure",
-      "submersion-exposure",
-      "weapon-wear",
-      "part-state",
-      "weapon-reliability",
-      "weapon-jams-runtime"
+      "weapon-instance-metadata"
     ],
     "Armorer": [
       "armorer-station",
@@ -54,13 +51,9 @@
       "weapon-preview",
       "weapon-assembly-workflow",
       "weapon-recipe-authoring-ui",
-      "weapon-inspection",
-      "weapon-maintenance",
-      "cleaning",
-      "lubrication-service",
-      "diagnostics-service",
-      "repair-service",
-      "part-replacement",
+      "weapon-inspection-ui",
+      "weapon-maintenance-workflow",
+      "maintenance-result-presentation",
       "chronograph",
       "zeroing",
       "grouping-range"
@@ -107,6 +100,27 @@
       "ace-integration",
       "cba-integration",
       "third-party-mod-integration"
+    ],
+    "WeaponCondition": [
+      "weapon-condition-state",
+      "shot-usage",
+      "water-exposure",
+      "submersion-exposure",
+      "weapon-wear",
+      "barrel-wear",
+      "action-wear",
+      "fouling",
+      "lubrication-state",
+      "corrosion-state",
+      "part-condition",
+      "weapon-reliability",
+      "weapon-jams-runtime",
+      "maintenance-assessment",
+      "cleaning-operation",
+      "lubrication-operation",
+      "repair-operation",
+      "part-replacement-state-transition",
+      "batched-wear-evaluation"
     ]
   },
   "sensitive_ownership": [
@@ -117,34 +131,6 @@
         "Sets",
         "Equipment"
       ]
-    },
-    {
-      "feature": "WeaponConfiguration",
-      "owner": "Weapons",
-      "consumers": [
-        "Armorer",
-        "Sets"
-      ]
-    },
-    {
-      "feature": "WeaponInstance/serial",
-      "owner": "Weapons",
-      "consumers": [
-        "Armorer",
-        "ServerIntegration/Persistence"
-      ]
-    },
-    {
-      "feature": "Weapon wear/condition",
-      "owner": "Weapons",
-      "consumers": [
-        "Armorer"
-      ]
-    },
-    {
-      "feature": "Armorer station/maintenance workflow",
-      "owner": "Armorer",
-      "consumers": []
     },
     {
       "feature": "EquipmentKit",
@@ -219,6 +205,43 @@
       "consumers": [
         "DOMAIN_MODULES"
       ]
+    },
+    {
+      "feature": "WeaponConfiguration/WeaponRecipe model",
+      "owner": "Weapons",
+      "consumers": [
+        "Armorer",
+        "Sets"
+      ]
+    },
+    {
+      "feature": "WeaponInstance/serial",
+      "owner": "Weapons",
+      "consumers": [
+        "WeaponCondition",
+        "Armorer",
+        "ServerIntegration/Persistence"
+      ]
+    },
+    {
+      "feature": "Weapon wear/condition/parts/reliability",
+      "owner": "WeaponCondition",
+      "consumers": [
+        "Armorer",
+        "ServerIntegration/Persistence"
+      ]
+    },
+    {
+      "feature": "Maintenance logic/state transitions",
+      "owner": "WeaponCondition",
+      "consumers": [
+        "Armorer"
+      ]
+    },
+    {
+      "feature": "Armorer station/assembly/inspection/maintenance workflow UI",
+      "owner": "Armorer",
+      "consumers": []
     }
   ]
 }
