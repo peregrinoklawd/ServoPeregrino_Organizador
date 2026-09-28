@@ -226,3 +226,12 @@ A direção desejada passa a incluir:
 A arquitetura detalhada está em `17_ARMORER_WEAPONS_WEAR_ARCHITECTURE.md`.
 
 A intenção de gameplay está aceita, mas o schema e as fórmulas permanecem abertos até os gates técnicos provarem como preservar uma WeaponInstance ao mover armas entre inventário, weapon holder, storage e multiplayer.
+
+
+## 14. Ownership funcional / anti-duplicação
+
+**DECIDIDO**
+
+Cada funcionalidade de domínio terá um único módulo proprietário. Outros módulos só podem consumir essa capacidade por contratos/capabilities/events do Nexus; não devem criar implementações paralelas.
+
+O catálogo oficial está em `18_CATALOGO_FUNCIONAL_E_OWNERSHIP.md` e a matriz legível por máquina em `../machine/FEATURE_OWNERSHIP.json`.
