@@ -138,7 +138,7 @@
         ]
       },
       "status": "PLANNED",
-      "next_gate": "Define public WeaponKit/configuration contracts without copying Items internals; decide whether persistent WeaponInstance identity is required for wear.",
+      "next_gate": "Define WeaponInstance v1 identity/serial lifecycle, prove preservation across inventory/holder/storage and multiplayer transfer, then freeze batched wear/environment contracts.",
       "homologated_artifact": null
     },
     {
@@ -252,7 +252,7 @@
         ]
       },
       "status": "ADVANCED_FROZEN_PENDING_MONOREPO_MIGRATION",
-      "next_gate": "Import authoritative Armorer baseline into monorepo, preserve station/session/lease/preview behavior, then design 2.x wear/maintenance on top of stable commit semantics.",
+      "next_gate": "Import authoritative Armorer baseline without feature changes; prove equivalence; then consume Weapons instance/condition contracts for inspection, repair and parts workflow.",
       "homologated_artifact": "Historical Armorer known-safe baseline; artifact not yet migrated into this monorepo."
     },
     {
@@ -409,5 +409,26 @@
       "machine/PROJECT_STATE.json",
       "machine/FUNCTION_INDEX.json"
     ]
+  },
+  "design_decisions": {
+    "weapon_identity": {
+      "status": "PLANNED",
+      "decision": "Support definitive WeaponInstance identity and serial per weapon for persistent wear/history.",
+      "owner_module": "Weapons",
+      "gate": "Prove identity preservation across player inventory, weapon holders, storage and multiplayer transfers before implementation."
+    },
+    "weapon_wear": {
+      "status": "PLANNED",
+      "decision": "Event-driven counters plus lazy/batched wear evaluation; no per-frame domain wear loops.",
+      "environmental_inputs": [
+        "shots",
+        "swimming/water exposure",
+        "submersion",
+        "future heat/dust/mud when validated"
+      ],
+      "owner_module": "Weapons",
+      "workflow_consumer": "Armorer",
+      "reference": "docs/17_ARMORER_WEAPONS_WEAR_ARCHITECTURE.md"
+    }
   }
 }
