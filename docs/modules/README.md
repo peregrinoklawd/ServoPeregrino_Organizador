@@ -2,6 +2,7 @@
 
 Este diretório consolida ownership e fronteiras dos módulos futuros sem transformar planejamento em API implementada.
 
+- Hub.md
 - Armorer.md
 - Weapons.md
 - WeaponCondition.md
