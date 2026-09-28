@@ -147,21 +147,28 @@ Persistência deve aceitar batching; não salvar a cada tiro.
 
 ## 7. WeaponInstance e PartInstance
 
-**PROPOSTA NOVA — somente se wear persistente exigir**
+**PLANEJADO**
 
-ClassName identifica tipo, não instância. Caso seja necessário:
+ClassName identifica tipo, não uma arma individual. A direção aceita é:
 
 ```text
-WeaponInstance
-  instanceId
-  weaponClass
-  configuration
-  conditionState
-  pendingUsage
-  metadata
+Weapons
+  WeaponInstance
+    instanceId
+    serial
+    weaponClass
+    configuration
+    metadata
+
+WeaponCondition
+  WeaponConditionState
+    weaponInstanceId
+    usage
+    condition
+    parts
 ```
 
-Peças podem futuramente ter PartInstance. Não implementar prematuramente. Weapons deve ser dono do modelo; Armorer consome contratos públicos.
+Weapons é dono da identidade/serial. WeaponCondition é dono da condição/desgaste. Peças começam como PartState; PartInstance/serial próprio só será criado se gameplay/persistência realmente exigirem.
 
 ## 8. Regras de desempenho
 
@@ -204,10 +211,12 @@ Whitelist/blacklist; optional Persistence/Stock/Economy providers; WeaponKit; Eq
 1. fechar Items 0.13-A runtime/MP;
 2. avançar Items 0.13-B/C;
 3. migrar Armorer autoritativo ao monorepo sem feature nova;
-4. formalizar Weapons/Equipment/Sets;
-5. formalizar Policy e Server Providers;
-6. só então iniciar wear/parts 2.x;
-7. economia/estoque permanecem opcionais.
+4. formalizar Weapons e WeaponCondition;
+5. formalizar Equipment/Sets;
+6. formalizar Policy e Server Providers;
+7. iniciar wear/parts 2.x somente após os contratos de identidade/condição;
+8. economia/estoque permanecem opcionais;
+
 
 
 ## 13. Decisão de design — identidade e exposição ambiental da arma (28/09/2026)
