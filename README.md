@@ -39,3 +39,12 @@ O diretório `addons/` agora contém slots explícitos para os módulos futuros.
 O Armorer possui diretório reservado em `addons/ServoPeregrino_Organizador_Armorer/`. A baseline histórica será importada somente depois de confirmar o source autoritativo, sem reconstrução de memória.
 
 Design de identidade/desgaste: `docs/17_ARMORER_WEAPONS_WEAR_ARCHITECTURE.md`.
+
+
+## Fronteira Weapons / WeaponCondition / Armorer
+
+- **Weapons**: identidade, serial, configuração, compatibilidade, receitas e troca dinâmica.
+- **WeaponCondition**: desgaste, condição, peças, uso, ambiente e manutenção lógica.
+- **Armorer**: bancada, Preview, montagem, inspeção e workflow/UI de manutenção.
+
+Catálogo funcional compartilhável: `docs/19_VISAO_FUNCIONAL_COMPARTILHAVEL.md`.
