@@ -1,6 +1,5 @@
 #include "..\..\script_version.hpp"
 params [["_configuration",false]];
-if (isRemoteExecuted) exitWith {[false,"WEAPONS_REMOTE_EXEC_FORBIDDEN","Identity issuance is local-server only; use a declared gateway."] call ServoPeregrino_Organizador_Nexus_fnc_createResult};
 if (!isServer) exitWith {[false,"WEAPONS_SERVER_ONLY","Only local server may issue identities."] call ServoPeregrino_Organizador_Nexus_fnc_createResult};
 private _valid = [_configuration] call ServoPeregrino_Organizador_Weapons_fnc_validateWeaponConfigurationSemantic;
 if !(_valid get "success") exitWith {_valid};
