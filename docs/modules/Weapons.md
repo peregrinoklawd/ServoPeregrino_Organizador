@@ -2,26 +2,44 @@
 
 ## Papel
 
-Dono da semântica de armas e do estado persistente de cada arma quando necessário.
+Dono do que a arma **é**: identidade, configuração, compatibilidade e receitas.
 
 ## Planejado
 
 - WeaponKit;
 - WeaponConfiguration;
+- WeaponRecipe como modelo/contrato;
 - slots/acessórios/compatibilidade;
+- compatibilidade de magazines;
+- montagem/configuração lógica;
+- troca dinâmica de arma sem alterar o restante do loadout;
 - WeaponInstance;
 - serial/instanceId definitivo;
-- condition/wear state;
-- pending usage counters;
-- parts/component state;
-- contratos públicos para Armorer.
+- metadata/histórico de identidade;
+- contratos públicos para Armorer, WeaponCondition e Sets.
+
+## Não é dono
+
+- desgaste;
+- condição;
+- sujeira;
+- lubrificação;
+- corrosão;
+- confiabilidade;
+- manutenção lógica;
+- bancada/UI.
+
+Esses estados pertencem a **WeaponCondition**; a interação física/visual pertence ao **Armorer**.
 
 ## Regra
 
-Armorer manipula uma arma por contratos públicos; não armazena a verdade de condição/desgaste.
+A identidade individual da arma permanece em Weapons mesmo quando WeaponCondition estiver desabilitado.
 
 ## Integrações opcionais
 
 Policy, Persistence, Stock e Economy.
 
-Ver `../17_ARMORER_WEAPONS_WEAR_ARCHITECTURE.md`.
+Ver:
+- `WeaponCondition.md`
+- `Armorer.md`
+- `../17_ARMORER_WEAPONS_WEAR_ARCHITECTURE.md`
