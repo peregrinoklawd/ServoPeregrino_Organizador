@@ -1,5 +1,6 @@
 #include "..\..\script_version.hpp"
 params [["_id","",[""]]];
+if (isRemoteExecuted) exitWith {[false,"WEAPONS_REMOTE_EXEC_FORBIDDEN","Internal authority read is local-only; use a declared gateway."] call ServoPeregrino_Organizador_Nexus_fnc_createResult};
 if (!isServer) exitWith {[false,"WEAPONS_SERVER_ONLY","Local server read only."] call ServoPeregrino_Organizador_Nexus_fnc_createResult};
 private _init = [] call ServoPeregrino_Organizador_Weapons_fnc_initializeAuthority;
 if !(_init get "success") exitWith {_init};
