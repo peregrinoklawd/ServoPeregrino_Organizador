@@ -80,7 +80,9 @@
     "single_player": "NOT_EXECUTED",
     "hosted_multiplayer": "NOT_EXECUTED",
     "dedicated_jip_reconnect": "NOT_EXECUTED",
-    "physical_identity_gates": "A-E OPEN"
+    "physical_identity_gates": "A-E OPEN",
+    "static_pre_review": "59 PASS / 0 FAIL at ca241e59",
+    "static_post_review": "15 PASS / 0 FAIL connector audit of published review deltas; updated Python validator NOT executed after fixes"
   },
   "decisions": [
     "Nexus-only foundation; preserve other addon runtimes and Items pending gate.",
@@ -90,7 +92,10 @@
     "Fingerprint/index/class/carrier cannot stand in for identity.",
     "No auto-transfer/rebind/recovery; diagnostics report UNPROVEN/AMBIGUOUS.",
     "Lab native inventory actions; no fake remove/recreate identity preservation.",
-    "Source-only build handoff via Addon Builder; no custom packer."
+    "Source-only build handoff via Addon Builder; no custom packer.",
+    "Domain modules do not own global CfgRemoteExec policy; Weapons declares only its endpoints and guards internal authority against direct remote execution.",
+    "WeaponConfiguration excludes transient loaded magazine/ammo state; native capture returns separate loadedState.",
+    "Stored class spelling is preserved; case folding is limited to comparison/fingerprint keys."
   ],
   "rejected_approaches": [
     "fingerprint as identity",
@@ -105,9 +110,10 @@
     "Reference-only logical update in A is not physical proof.",
     "Engine/SQF/PBO/MP tests unavailable in this environment.",
     "No persistence, rebind, JIP or reconnect recovery.",
-    "Only first secondary muzzle supported in candidate semantic model.",
     "External script/mod mutations may not produce observed Take/Put events.",
-    "Lab endpoints intended for trusted development sessions, not hardened public servers."
+    "Lab endpoints intended for trusted development sessions, not hardened public servers.",
+    "Updated full Python static validator still needs execution from a repository checkout after review fixes.",
+    "Loaded magazine/ammo compatibility remains observational in 0.1-A and is not a frozen WeaponConfiguration contract."
   ],
   "next_gate": "Human source review; build/load; run AUTO TEST; collect A-E evidence, especially indistinguishable duplicate weapons. Do not start 0.1-B automatically.",
   "full_report": "docs/21_WEAPONS_0_1_A_FOUNDATION_IDENTITY_SPIKE.md",
