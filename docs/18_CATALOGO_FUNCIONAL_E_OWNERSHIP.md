@@ -12,7 +12,7 @@ Regra principal:
 
 Isso evita duplicações como:
 - Items e Equipment criarem dois motores diferentes para o mesmo conteúdo;
-- Armorer e Weapons manterem dois estados diferentes de desgaste;
+- Weapons, WeaponCondition e Armorer criarem estados/lógicas concorrentes para a mesma condição;
 - cada módulo implementar sua própria whitelist/blacklist;
 - cada módulo integrar diretamente com banco/economia/estoque do servidor.
 
@@ -105,23 +105,45 @@ Items **não** deve implementar:
 
 ---
 
-# Weapons — armas, configuração, identidade e condição
+# Weapons — armas, identidade, construção e configuração
 
-**Dono da semântica da arma como entidade e do estado persistente individual da arma.**
+**Dono do que a arma é: identidade, configuração, compatibilidade e receitas.**
 
 Funcionalidades:
 - **PLANEJADO** — WeaponKit;
 - **PLANEJADO** — WeaponConfiguration;
+- **PLANEJADO** — WeaponRecipe como modelo/contrato;
 - **PLANEJADO** — compatibilidade de slots;
 - **PLANEJADO** — acessórios/muzzle/optic/pointer/bipod;
 - **PLANEJADO** — compatibilidade de magazines;
 - **PLANEJADO** — trocar arma dinamicamente sem alterar o restante do loadout;
-- **PLANEJADO** — aplicar somente configuração/arma desejada;
+- **PLANEJADO** — aplicar somente arma/configuração desejada;
 - **PLANEJADO** — identidade individual `WeaponInstance`;
 - **PLANEJADO** — número de série definitivo;
-- **PLANEJADO** — histórico/metadata da instância;
-- **PLANEJADO** — persistência do estado individual;
-- **PLANEJADO** — contador de disparos;
+- **PLANEJADO** — metadata/histórico da identidade;
+- **PLANEJADO** — persistência opcional da identidade/configuração;
+- **PLANEJADO** — contratos públicos para Armorer, WeaponCondition e Sets.
+
+Weapons **não** deve implementar:
+- fórmula de desgaste;
+- condition state;
+- sujeira/lubrificação/corrosão;
+- lógica de reparo;
+- bancada física;
+- UI de manutenção;
+- estoque/preço;
+- whitelist/blacklist própria.
+
+---
+
+# WeaponCondition — desgaste, condição e manutenção lógica
+
+**Dono de como a arma está: uso, condição, ambiente, peças, confiabilidade e manutenção lógica.**
+
+Funcionalidades:
+- **PLANEJADO** — `WeaponConditionState`;
+- **PLANEJADO** — provider autoritativo de condição;
+- **PLANEJADO** — contador total de disparos;
 - **PLANEJADO** — `shotsPending` em memória/batching;
 - **PLANEJADO** — desgaste por disparo;
 - **PLANEJADO** — desgaste do cano;
@@ -131,64 +153,74 @@ Funcionalidades:
 - **PLANEJADO** — lubrificação;
 - **PLANEJADO** — corrosão;
 - **PLANEJADO** — confiabilidade derivada do estado;
-- **PLANEJADO** — exposição a água/natação/submersão;
+- **PLANEJADO** — exposição à água;
+- **PLANEJADO** — tempo nadando;
+- **PLANEJADO** — tempo submerso;
+- **PLANEJADO** — avaliação em lote/event-driven;
+- **PLANEJADO** — condition state por componente/peça;
+- **PLANEJADO** — avaliação de necessidade de manutenção;
+- **PLANEJADO** — limpeza como transição lógica;
+- **PLANEJADO** — lubrificação como transição lógica;
+- **PLANEJADO** — reparo como transição lógica;
+- **PLANEJADO** — substituição lógica de peças;
 - **FUTURO** — exposição a lama/poeira/areia, se detectável de forma confiável;
 - **FUTURO** — ciclos térmicos/temperatura;
-- **PLANEJADO** — PartState por componente;
-- **FUTURO** — PartInstance/serial individual de peça quando realmente necessário;
-- **FUTURO** — panes/jams como consequência do estado, mantendo processamento event-driven;
-- **PLANEJADO** — contratos públicos para o Armorer ler/alterar condição por workflow autorizado.
+- **FUTURO** — PartInstance/serial individual de peça quando necessário;
+- **FUTURO** — panes/jams derivados da condição;
+- **PLANEJADO** — adapters/providers externos de condição;
+- **PLANEJADO** — somente um provider autoritativo de condição por arma/sessão.
 
-Weapons **não** deve implementar:
-- bancada física;
-- UI de manutenção do Armorer;
-- estoque;
-- preço;
-- whitelist/blacklist própria;
-- ItemKit.
+WeaponCondition recebe `WeaponInstance`/serial de Weapons e **não cria uma segunda identidade da arma**.
+
+WeaponCondition **não** deve implementar:
+- WeaponConfiguration/WeaponRecipe;
+- compatibilidade de acessórios;
+- bancada/Preview/UI;
+- estoque/preço;
+- whitelist/blacklist própria.
 
 ---
 
-# Armorer — bancada, montagem, inspeção e manutenção
+# Armorer — bancada, montagem, inspeção e workflow de manutenção
 
-**Dono do workflow físico/visual de armeiro; consome o estado da arma fornecido por Weapons.**
+**Dono do workflow físico/visual; consome Weapons e WeaponCondition.**
 
 Funcionalidades:
 - **AVANÇADO/HISTÓRICO** — estação/bancada física;
 - **AVANÇADO/HISTÓRICO** — sessão de armeiro;
 - **AVANÇADO/HISTÓRICO** — exclusividade/lease multiplayer por estação;
 - **AVANÇADO/HISTÓRICO** — Preview 3D da arma;
-- **AVANÇADO/HISTÓRICO** — montagem/remoção de acessórios;
+- **AVANÇADO/HISTÓRICO** — montagem/remoção visual de acessórios;
 - **AVANÇADO/HISTÓRICO** — rascunho de configuração;
 - **AVANÇADO/HISTÓRICO** — `originalConfiguration`;
 - **AVANÇADO/HISTÓRICO** — `workingConfiguration`;
 - **AVANÇADO/HISTÓRICO** — `confirmedConfiguration`;
 - **AVANÇADO/HISTÓRICO** — commit/rollback de configuração;
-- **PLANEJADO** — criação/edição de receitas de armas na bancada;
+- **PLANEJADO** — criação/edição de receitas na bancada;
 - **PLANEJADO** — salvar receita/configuração preferida;
-- **PLANEJADO** — montar arma a partir de uma receita;
-- **PLANEJADO** — inspeção de condição;
-- **PLANEJADO** — manutenção de armas;
-- **PLANEJADO** — limpeza;
-- **PLANEJADO** — lubrificação;
-- **PLANEJADO** — diagnóstico;
-- **PLANEJADO** — reparo;
-- **PLANEJADO** — substituição de peças;
+- **PLANEJADO** — montar arma a partir de receita;
+- **PLANEJADO** — UI de inspeção de condição;
+- **PLANEJADO** — workflow de manutenção;
+- **PLANEJADO** — UI de limpeza;
+- **PLANEJADO** — UI de lubrificação;
+- **PLANEJADO** — UI de diagnóstico;
+- **PLANEJADO** — UI de reparo;
+- **PLANEJADO** — workflow de troca de peças;
 - **PLANEJADO** — consumir peças/ferramentas de Player/Container/Station Stock;
-- **PLANEJADO** — integração com StockProvider para peças;
-- **PLANEJADO** — integração com EconomyProvider para custo do serviço;
-- **PLANEJADO** — integração com PersistenceProvider para histórico/estado;
+- **PLANEJADO** — integração com StockProvider;
+- **PLANEJADO** — integração com EconomyProvider;
+- **PLANEJADO** — integração com PersistenceProvider;
 - **FUTURO** — cronógrafo;
 - **FUTURO** — zeragem;
 - **FUTURO** — agrupamento/estande;
-- **FUTURO** — relatório de inspeção/reliability.
+- **FUTURO** — relatório de inspeção.
 
-Divisão importante:
+Divisão:
+- **Weapons**: modelo/validação da arma, identidade, configuração, compatibilidade e receita;
+- **WeaponCondition**: desgaste, condição, peças e manutenção lógica;
+- **Armorer**: bancada, Preview, UI e workflow.
 
-- **Armorer cria/edita a receita como experiência de usuário/workflow**;
-- **Weapons é dono do modelo/validação da WeaponConfiguration/WeaponRecipe**.
-
-Armorer **não** deve calcular uma segunda versão de desgaste. Ele solicita/commita mudanças no estado de Weapons.
+Armorer **não** deve manter uma segunda condição/desgaste da arma.
 
 ---
 
@@ -342,10 +374,11 @@ O core não deve ficar cheio de `if ACE...`, `if framework X...`.
 | Funcionalidade | Único proprietário | Consumidores permitidos |
 |---|---|---|
 | ItemKit / conteúdo | Items | Sets, Equipment, UI |
-| WeaponConfiguration | Weapons | Armorer, Sets |
-| WeaponInstance / serial | Weapons | Armorer, Persistence |
-| Desgaste/condição | Weapons | Armorer |
-| Bancada/manutenção | Armorer | jogador/UI |
+| WeaponConfiguration / WeaponRecipe | Weapons | Armorer, Sets |
+| WeaponInstance / serial | Weapons | WeaponCondition, Armorer, Persistence |
+| Desgaste/condição/peças/confiabilidade | WeaponCondition | Armorer, Persistence |
+| Manutenção lógica | WeaponCondition | Armorer |
+| Bancada/montagem/inspeção/workflow de manutenção | Armorer | jogador/UI |
 | EquipmentKit | Equipment | Sets |
 | Composição completa | Sets | jogador/UI |
 | Whitelist/blacklist | Policy | Items, Weapons, Equipment, Armorer |

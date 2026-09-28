@@ -90,7 +90,7 @@
       "id": "Weapons",
       "addon": "ServoPeregrino_Organizador_Weapons",
       "mandatory": false,
-      "status": "PLANNED",
+      "status": "PLANNED_DOMAIN_CORE",
       "stable_version": null,
       "development_version": null,
       "dependencies": [
@@ -102,7 +102,7 @@
           "weapons.runtime",
           "weapons.catalog",
           "weapons.configuration",
-          "weapons.instance-state"
+          "weapons.instance"
         ]
       },
       "contracts_provided": {
@@ -110,6 +110,7 @@
         "planned": [
           "weapons.kit.v1",
           "weapons.configuration.v1",
+          "weapons.recipe.v1",
           "weapons.instance.v1"
         ]
       },
@@ -122,7 +123,7 @@
           "persistence.provider.v1"
         ]
       },
-      "next_gate": "Define WeaponInstance v1 identity/serial lifecycle, prove preservation across inventory/holder/storage and multiplayer transfer, then freeze batched wear/environment contracts.",
+      "next_gate": "Define WeaponInstance v1 identity/serial lifecycle, WeaponConfiguration/WeaponRecipe contracts, slot compatibility and dynamic weapon swap without changing the rest of the loadout.",
       "homologated_artifact": null,
       "current_candidate_artifact": null
     },
@@ -197,6 +198,47 @@
       "current_candidate_artifact": null
     },
     {
+      "id": "WeaponCondition",
+      "addon": "ServoPeregrino_Organizador_WeaponCondition",
+      "mandatory": false,
+      "status": "NEW_PLANNED_DOMAIN_MODULE",
+      "stable_version": null,
+      "development_version": null,
+      "dependencies": [
+        "Nexus"
+      ],
+      "capabilities_provided": {
+        "implemented": [],
+        "planned": [
+          "weaponcondition.runtime",
+          "weaponcondition.provider"
+        ]
+      },
+      "contracts_provided": {
+        "implemented": [],
+        "planned": [
+          "weaponcondition.state.v1",
+          "weaponcondition.usage-delta.v1",
+          "weaponcondition.maintenance.request.v1",
+          "weaponcondition.maintenance.result.v1"
+        ]
+      },
+      "contracts_consumed": {
+        "required": [
+          "weapons.instance.v1"
+        ],
+        "optional": [
+          "policy.provider.v1",
+          "stock.provider.v1",
+          "economy.provider.v1",
+          "persistence.provider.v1"
+        ]
+      },
+      "next_gate": "Define authoritative condition-provider contract, batched usage/environment deltas, part-condition model and maintenance transactions without per-frame domain loops.",
+      "homologated_artifact": null,
+      "current_candidate_artifact": null
+    },
+    {
       "id": "Armorer",
       "addon": "ServoPeregrino_Organizador_Armorer",
       "mandatory": false,
@@ -218,28 +260,31 @@
           "armorer.runtime",
           "armorer.station",
           "armorer.session",
-          "armorer.maintenance"
+          "armorer.workflow"
         ]
       },
       "contracts_provided": {
         "implemented": [],
         "planned": [
           "armorer.session.v1",
-          "armorer.maintenance.request.v1",
-          "armorer.maintenance.result.v1"
+          "armorer.workflow.v1"
         ]
       },
       "contracts_consumed": {
         "required": [],
         "optional": [
           "weapons.configuration.v1",
+          "weapons.recipe.v1",
           "weapons.instance.v1",
+          "weaponcondition.state.v1",
+          "weaponcondition.maintenance.request.v1",
+          "weaponcondition.maintenance.result.v1",
           "stock.provider.v1",
           "economy.provider.v1",
           "persistence.provider.v1"
         ]
       },
-      "next_gate": "Import authoritative Armorer baseline without feature changes; prove equivalence; then consume Weapons instance/condition contracts for inspection, repair and parts workflow.",
+      "next_gate": "Import authoritative Armorer baseline without feature changes; prove equivalence; then integrate with Weapons for construction/configuration and WeaponCondition for inspection/maintenance.",
       "homologated_artifact": "Historical Armorer known-safe baseline; artifact not yet migrated into this monorepo.",
       "current_candidate_artifact": null
     },

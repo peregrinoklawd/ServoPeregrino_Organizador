@@ -19,7 +19,8 @@ Comece por:
 15. `14_API_REFERENCIA_AUTOGERADA.md`
 16. `15_CONSTANTES_E_NAMESPACE.md`
 17. **`16_BANCO_DE_IDEIAS_E_CONCEITOS.md`** — decisões, ideias, módulos futuros, providers, policies e Armorer 2.x.
-18. `17_ARMORER_WEAPONS_WEAR_ARCHITECTURE.md` — identidade individual, desgaste, água e peças.
+18. `17_ARMORER_WEAPONS_WEAR_ARCHITECTURE.md` — divisão Weapons/WeaponCondition/Armorer, identidade, desgaste, ambiente e peças.
 19. **`18_CATALOGO_FUNCIONAL_E_OWNERSHIP.md`** — funcionalidades por módulo e regra anti-duplicação.
+20. **`19_VISAO_FUNCIONAL_COMPARTILHAVEL.md`** — resumo de funcionalidades por módulo pronto para compartilhar com outras equipes.
 
 Histórico: `history/`. Estado global legível por máquina: `../machine/PROJECT_STATE.json`.
