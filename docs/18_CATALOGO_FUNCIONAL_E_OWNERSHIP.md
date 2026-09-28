@@ -51,6 +51,49 @@ Não implementar no Nexus:
 
 ---
 
+# Hub — Central do Organizador e integração visual
+
+**Dono da experiência integrada e da navegação entre módulos.**
+
+Funcionalidades:
+- **PLANEJADO** — menu principal do Organizador;
+- **PLANEJADO** — descobrir módulos disponíveis por capabilities públicas;
+- **PLANEJADO** — mostrar somente módulos realmente instalados/disponíveis;
+- **PLANEJADO** — navegação entre Items, Weapons, Equipment, Sets, Armorer, WeaponCondition e Settings;
+- **PLANEJADO** — passagem de contexto entre módulos;
+- **PLANEJADO** — resumo integrado de equipamento, arma, condição, carga e alertas;
+- **PLANEJADO** — ações contextuais;
+- **PLANEJADO** — notificações compartilhadas;
+- **PLANEJADO** — orquestrar ações que envolvem vários módulos;
+- **PLANEJADO** — abrir o módulo correto já com o item/arma/conjunto selecionado;
+- **PLANEJADO** — verificar restrições, estoque e custo antes de uma ação integrada quando os serviços existirem.
+
+Exemplos de orquestração:
+- criar conjunto completo a partir do personagem atual;
+- aplicar conjunto completo;
+- detectar condição ruim da arma e oferecer “Abrir no Armeiro”;
+- encaminhar uma caixa para Items/estoque;
+- mostrar disponibilidade de um Set sem duplicar sua definição.
+
+Hub **não** deve implementar:
+- ItemKit ou mutação de inventário;
+- WeaponConfiguration/WeaponInstance;
+- desgaste/condição;
+- EquipmentKit;
+- Set como dado persistente;
+- estoque/economia;
+- whitelist/blacklist;
+- lógica interna do Armorer.
+
+Regra de dependência:
+
+```text
+Hub -> descobre/consome módulos
+Módulos de domínio -X-> Hub
+```
+
+---
+
 # Items — conteúdo consumível e kits de itens
 
 **Dono de ItemEntry, ItemKit, conteúdo de U/C/M e transações físicas de itens.**
@@ -373,6 +416,7 @@ O core não deve ficar cheio de `if ACE...`, `if framework X...`.
 
 | Funcionalidade | Único proprietário | Consumidores permitidos |
 |---|---|---|
+| Navegação e experiência integrada entre módulos | Hub | jogador/UI |
 | ItemKit / conteúdo | Items | Sets, Equipment, UI |
 | WeaponConfiguration / WeaponRecipe | Weapons | Armorer, Sets |
 | WeaponInstance / serial | Weapons | WeaponCondition, Armorer, Persistence |

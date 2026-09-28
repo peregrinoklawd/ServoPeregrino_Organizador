@@ -2,7 +2,7 @@
   "schema_version": 1,
   "snapshot_date": "2026-09-28",
   "repository": "peregrinoklawd/ServoPeregrino_Organizador",
-  "rule": "Every domain feature has one owning module. Weapons owns weapon identity/configuration, WeaponCondition owns condition/wear/maintenance logic, and Armorer owns the physical/UI workflow. Other modules consume through Nexus contracts/capabilities/events and must not duplicate the implementation.",
+  "rule": "Every domain feature has one owning module. Hub may coordinate and present features, but it must delegate domain execution to the owning module through Nexus contracts/capabilities/events.",
   "modules": {
     "Nexus": [
       "result-envelope",
@@ -121,6 +121,16 @@
       "repair-operation",
       "part-replacement-state-transition",
       "batched-wear-evaluation"
+    ],
+    "Hub": [
+      "organizer-main-menu",
+      "dynamic-module-navigation",
+      "module-availability-display",
+      "cross-module-status-summary",
+      "context-aware-routing",
+      "integrated-action-orchestration",
+      "shared-navigation-shell",
+      "player-facing-cross-module-notifications"
     ]
   },
   "sensitive_ownership": [
@@ -242,6 +252,13 @@
       "feature": "Armorer station/assembly/inspection/maintenance workflow UI",
       "owner": "Armorer",
       "consumers": []
+    },
+    {
+      "feature": "Unified player-facing integration/navigation",
+      "owner": "Hub",
+      "consumers": [
+        "Player/UI"
+      ]
     }
   ]
 }

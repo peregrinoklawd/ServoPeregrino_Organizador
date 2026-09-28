@@ -19,6 +19,7 @@ Implementados:
 - ServoPeregrino_Organizador_Items
 
 Preparados para importação/desenvolvimento:
+- ServoPeregrino_Organizador_Hub
 - ServoPeregrino_Organizador_Weapons
 - ServoPeregrino_Organizador_WeaponCondition
 - ServoPeregrino_Organizador_Equipment

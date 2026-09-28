@@ -20,6 +20,7 @@ Antes de alterar qualquer runtime, leia:
 - docs/09_ROADMAP_E_PROXIMO_PASSO.md
 - docs/16_BANCO_DE_IDEIAS_E_CONCEITOS.md
 - docs/18_CATALOGO_FUNCIONAL_E_OWNERSHIP.md
+- docs/20_HUB_ARQUITETURA_E_INTEGRACAO.md
 - machine/PROJECT_STATE.json
 - machine/MODULE_MATRIX.json
 - machine/FEATURE_OWNERSHIP.json
@@ -38,6 +39,7 @@ Regras obrigatórias:
 - Weapons = identidade/configuração/receitas;
 - WeaponCondition = condição/desgaste/manutenção lógica;
 - Armorer = bancada/Preview/UI/workflow;
+- Hub = navegação/experiência integrada/orquestração; não executa lógica de domínio e é opcional;
 - somente um provider de condição pode ser autoritativo por arma/sessão.
 ```
 
@@ -49,7 +51,7 @@ Regras obrigatórias:
 - Mission Lab R3 carrega e slots funcionam.
 - Packaging R2 pendente de validação runtime.
 - Armorer possui baseline histórica madura, ainda não importada no monorepo.
-- Weapons/WeaponCondition/Equipment/Sets/Policy/ServerIntegration são planejados.
+- Hub/Weapons/WeaponCondition/Equipment/Sets/Policy/ServerIntegration são planejados.
 
 ## Arquivos para alterações
 

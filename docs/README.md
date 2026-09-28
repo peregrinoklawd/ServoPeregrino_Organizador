@@ -22,5 +22,6 @@ Comece por:
 18. `17_ARMORER_WEAPONS_WEAR_ARCHITECTURE.md` — divisão Weapons/WeaponCondition/Armorer, identidade, desgaste, ambiente e peças.
 19. **`18_CATALOGO_FUNCIONAL_E_OWNERSHIP.md`** — funcionalidades por módulo e regra anti-duplicação.
 20. **`19_VISAO_FUNCIONAL_COMPARTILHAVEL.md`** — resumo de funcionalidades por módulo pronto para compartilhar com outras equipes.
+21. `20_HUB_ARQUITETURA_E_INTEGRACAO.md` — Central do Organizador, navegação dinâmica e orquestração entre módulos.
 
 Histórico: `history/`. Estado global legível por máquina: `../machine/PROJECT_STATE.json`.

@@ -51,3 +51,17 @@ Design de identidade/desgaste: `docs/17_ARMORER_WEAPONS_WEAR_ARCHITECTURE.md`.
 - **Armorer**: bancada, Preview, montagem, inspeção e workflow/UI de manutenção.
 
 Catálogo funcional compartilhável: `docs/19_VISAO_FUNCIONAL_COMPARTILHAVEL.md`.
+
+
+## Hub / Central do Organizador
+
+O módulo planejado `ServoPeregrino_Organizador_Hub` será a camada opcional de integração voltada ao jogador.
+
+```text
+Nexus = faz os módulos conversarem tecnicamente.
+Hub   = faz o jogador conversar com os módulos.
+```
+
+O Hub poderá oferecer menu principal, navegação dinâmica, passagem de contexto e ações integradas. Ele **não executa lógica de domínio** e nenhum módulo dependerá dele para funcionar.
+
+Detalhes: `docs/20_HUB_ARQUITETURA_E_INTEGRACAO.md`.

@@ -44,6 +44,44 @@ Funcionalidades:
 
 ---
 
+## Hub — Central do Organizador
+
+Responsável por reunir os módulos em uma experiência única para o jogador.
+
+Funcionalidades:
+
+- 🔵 Criar um menu principal do Servo Peregrino Organizador
+- 🔵 Mostrar somente os módulos que estiverem instalados e disponíveis
+- 🔵 Criar botões para abrir Itens, Armas, Equipamentos, Conjuntos, Armeiro, Condição das Armas e Configurações
+- 🔵 Facilitar a navegação entre os módulos
+- 🔵 Levar o jogador diretamente para o módulo correto já com a arma, item ou conjunto selecionado
+- 🔵 Mostrar um resumo do equipamento atual do personagem
+- 🔵 Mostrar a arma atualmente selecionada
+- 🔵 Mostrar um resumo da condição da arma quando esse módulo estiver disponível
+- 🔵 Mostrar peso/carga e alertas importantes
+- 🔵 Mostrar restrições do servidor
+- 🔵 Mostrar problemas de disponibilidade de itens ou peças quando houver controle de estoque
+- 🔵 Mostrar custos quando houver sistema de economia
+- 🔵 Criar ações integradas que utilizem vários módulos ao mesmo tempo
+- 🔵 Criar um conjunto completo a partir do equipamento atual
+- 🔵 Ajudar a aplicar um conjunto completo
+- 🔵 Verificar disponibilidade antes de aplicar um conjunto
+- 🔵 Verificar se algum item ou arma está proibido antes da aplicação
+- 🔵 Oferecer atalhos como “Abrir no Armeiro” quando uma arma precisar de manutenção
+- 🔵 Criar ações diferentes dependendo do contexto, como bancada, arma ou caixa selecionada
+- 🔵 Reunir notificações e avisos dos módulos em um único local
+
+**O Hub coordena as ações, mas não substitui os outros módulos.**
+
+Exemplo:
+
+**Nexus faz os módulos conversarem entre si.**  
+**Hub faz o jogador conversar com os módulos.**
+
+Nenhum módulo deve depender do Hub para funcionar.
+
+---
+
 ## Items — itens e kits de itens
 
 Responsável pelos itens e pelo conteúdo de Uniforme, Colete e Mochila.
@@ -371,6 +409,9 @@ Funcionalidades:
 
 | Status | Funcionalidade | Módulo responsável |
 |---|---|---|
+| 🔵 | Menu principal e navegação entre os módulos | **Hub** |
+| 🔵 | Ações integradas envolvendo vários módulos | **Hub** |
+| 🔵 | Resumo integrado do personagem, arma, condição e alertas | **Hub** |
 | ✅ | Criar e gerenciar kits de itens | **Items** |
 | ✅ | Adicionar, remover e aplicar itens no inventário | **Items** |
 | 🔵 | Criar kits, configurações e receitas de armas | **Weapons** |
