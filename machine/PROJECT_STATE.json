@@ -17,7 +17,9 @@
     "cross_module_private_state_access_forbidden": true,
     "physical_layout": "Existing runtime addons keep authoritative paths; future modules receive reserved addon directories and are activated only after source/config migration gates.",
     "single_feature_owner": true,
-    "feature_ownership_rule": "Each domain feature has exactly one owning module; consumers integrate through Nexus contracts/capabilities/events and must not duplicate implementation."
+    "feature_ownership_rule": "Each domain feature has exactly one owning module; consumers integrate through Nexus contracts/capabilities/events and must not duplicate implementation.",
+    "hub_optional": true,
+    "hub_rule": "Hub is an optional player-facing integration/orchestration layer. No domain module may require Hub in order to function."
   },
   "global_next_gate": "Close Items 0.13-A runtime/multiplayer gate: load Packaging R2 in Arma, confirm no Unable to open PBO, open UI, then execute server-authoritative multiplayer smoke.",
   "global_after_gate": "Only after 0.13-A closes, continue Items 0.13-B JIP & State Reconciliation and begin formal cross-module contracts.",
@@ -103,6 +105,51 @@
       "next_gate": "Packaging R2 load gate, UI smoke, then multiplayer authority/revision smoke.",
       "homologated_artifact": "0.12 FINAL — Integration Freeze",
       "current_candidate_artifact": "Packaging R2 + Multiplayer Lab R3"
+    },
+    {
+      "id": "Hub",
+      "addon": "ServoPeregrino_Organizador_Hub",
+      "mandatory": false,
+      "stable_version": null,
+      "development_version": null,
+      "dependencies": [
+        "Nexus"
+      ],
+      "capabilities_provided": {
+        "implemented": [],
+        "planned": [
+          "hub.runtime",
+          "hub.ui",
+          "hub.navigation",
+          "hub.orchestration"
+        ]
+      },
+      "contracts_provided": {
+        "implemented": [],
+        "planned": [
+          "hub.navigation.entry.v1",
+          "hub.context.v1",
+          "hub.action.result.v1"
+        ]
+      },
+      "contracts_consumed": {
+        "required": [],
+        "optional": [
+          "items.ui/open-capability",
+          "weapons.ui/open-capability",
+          "equipment.ui/open-capability",
+          "sets.ui/open-capability",
+          "armorer.ui/open-capability",
+          "weaponcondition.ui/open-capability",
+          "settings.ui/open-capability",
+          "policy.query-capability",
+          "stock.provider.v1",
+          "economy.provider.v1"
+        ]
+      },
+      "status": "NEW_PLANNED_INTEGRATION_UI_MODULE",
+      "next_gate": "Define dynamic module discovery/navigation contract and integrated context handoff without making domain modules depend on Hub.",
+      "homologated_artifact": null
     },
     {
       "id": "Weapons",
@@ -451,7 +498,8 @@
       "docs/16_BANCO_DE_IDEIAS_E_CONCEITOS.md",
       "docs/17_ARMORER_WEAPONS_WEAR_ARCHITECTURE.md",
       "docs/18_CATALOGO_FUNCIONAL_E_OWNERSHIP.md",
-      "docs/19_VISAO_FUNCIONAL_COMPARTILHAVEL.md"
+      "docs/19_VISAO_FUNCIONAL_COMPARTILHAVEL.md",
+      "docs/20_HUB_ARQUITETURA_E_INTEGRACAO.md"
     ],
     "machine_start": [
       "machine/PROJECT_STATE.json",
@@ -487,6 +535,19 @@
       "weapons": "What the weapon is: identity, serial, configuration, compatibility, recipes and dynamic weapon swap.",
       "weaponCondition": "How the weapon is: usage, wear, environment exposure, parts condition, reliability and maintenance state transitions.",
       "armorer": "Where/how the player interacts: station, preview, assembly, inspection and maintenance workflow/UI."
+    },
+    "organizer_hub": {
+      "status": "DECIDED",
+      "decision": "Create optional Hub as the player-facing integration/orchestration layer. Nexus remains technical infrastructure; Hub provides unified navigation, context handoff and cross-module actions without owning domain logic.",
+      "mandatory": false,
+      "dependency_direction": "Hub discovers/consumes modules; domain modules must not depend on Hub.",
+      "invariants": [
+        "Hub coordinates but does not implement domain logic.",
+        "Hub shows only modules/features actually available.",
+        "Hub may orchestrate cross-module actions but each step is executed by its owning module.",
+        "Sets owns persistent composition data; Hub owns the player-facing integrated experience.",
+        "Nexus connects modules technically; Hub connects the player to modules functionally."
+      ]
     }
   }
 }
