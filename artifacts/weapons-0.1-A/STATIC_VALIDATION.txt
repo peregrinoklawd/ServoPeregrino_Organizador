@@ -1,61 +1,41 @@
-PASS | CfgFunctions exact coverage
-PASS | PBO prefix matches absolute paths
-PASS | requiredAddons only A3 and Nexus
-PASS | no dependency on another domain private state/functions
-PASS | only weapons.runtime is registered
-PASS | no stable domain contract publication
-PASS | no inventory mutation in product domain
-PASS | no continuous domain polling or DB persistence
-PASS | all referenced SP_ORG functions resolve
-PASS | balanced delimiters addons/ServoPeregrino_Organizador_Weapons/functions/domain/fn_captureWeaponConfiguration.sqf
-PASS | balanced delimiters addons/ServoPeregrino_Organizador_Weapons/functions/domain/fn_compareWeaponConfigurations.sqf
-PASS | balanced delimiters addons/ServoPeregrino_Organizador_Weapons/functions/domain/fn_configurationFromWeaponArray.sqf
-PASS | balanced delimiters addons/ServoPeregrino_Organizador_Weapons/functions/domain/fn_createWeaponConfiguration.sqf
-PASS | balanced delimiters addons/ServoPeregrino_Organizador_Weapons/functions/domain/fn_deepCopy.sqf
-PASS | balanced delimiters addons/ServoPeregrino_Organizador_Weapons/functions/domain/fn_getConfigurationFingerprint.sqf
-PASS | balanced delimiters addons/ServoPeregrino_Organizador_Weapons/functions/domain/fn_isValidIdentityToken.sqf
-PASS | balanced delimiters addons/ServoPeregrino_Organizador_Weapons/functions/domain/fn_normalizeWeaponConfiguration.sqf
-PASS | balanced delimiters addons/ServoPeregrino_Organizador_Weapons/functions/domain/fn_validateWeaponConfigurationSemantic.sqf
-PASS | balanced delimiters addons/ServoPeregrino_Organizador_Weapons/functions/domain/fn_validateWeaponConfigurationStructural.sqf
-PASS | balanced delimiters addons/ServoPeregrino_Organizador_Weapons/functions/domain/fn_validateWeaponInstance.sqf
-PASS | balanced delimiters addons/ServoPeregrino_Organizador_Weapons/functions/identity/fn_createWeaponInstance.sqf
-PASS | balanced delimiters addons/ServoPeregrino_Organizador_Weapons/functions/identity/fn_getIdentityDiagnostics.sqf
-PASS | balanced delimiters addons/ServoPeregrino_Organizador_Weapons/functions/identity/fn_getWeaponInstance.sqf
-PASS | balanced delimiters addons/ServoPeregrino_Organizador_Weapons/functions/identity/fn_initializeAuthority.sqf
-PASS | balanced delimiters addons/ServoPeregrino_Organizador_Weapons/functions/identity/fn_inspectWeaponCarrier.sqf
-PASS | balanced delimiters addons/ServoPeregrino_Organizador_Weapons/functions/identity/fn_updateWeaponInstanceConfiguration.sqf
-PASS | balanced delimiters addons/ServoPeregrino_Organizador_Weapons/functions/integration/fn_validateNexus.sqf
-PASS | balanced delimiters addons/ServoPeregrino_Organizador_Weapons/functions/lifecycle/fn_getBuildInfo.sqf
-PASS | balanced delimiters addons/ServoPeregrino_Organizador_Weapons/functions/lifecycle/fn_initialize.sqf
-PASS | balanced delimiters addons/ServoPeregrino_Organizador_Weapons/functions/runtime/fn_getRuntimeStatus.sqf
-PASS | balanced delimiters addons/ServoPeregrino_Organizador_Weapons/functions/tests/fn_clientReceiveLabResult.sqf
-PASS | balanced delimiters addons/ServoPeregrino_Organizador_Weapons/functions/tests/fn_installLabActions.sqf
-PASS | balanced delimiters addons/ServoPeregrino_Organizador_Weapons/functions/tests/fn_runDelivery0_1ATests.sqf
-PASS | balanced delimiters addons/ServoPeregrino_Organizador_Weapons/functions/tests/fn_serverHandleLabRequest.sqf
-PASS | balanced delimiters addons/ServoPeregrino_Organizador_Weapons/config.cpp
-PASS | balanced delimiters addons/ServoPeregrino_Organizador_Weapons/script_version.hpp
-PASS | balanced delimiters missions/SP_ORG_Weapons_0_1_A_Identity_Lab_4Slots.VR/initServer.sqf
-PASS | balanced delimiters missions/SP_ORG_Weapons_0_1_A_Identity_Lab_4Slots.VR/initPlayerLocal.sqf
-PASS | balanced delimiters missions/SP_ORG_Weapons_0_1_A_Identity_Lab_4Slots.VR/mission.sqm
-PASS | balanced delimiters missions/SP_ORG_Weapons_0_1_A_Identity_Lab_4Slots.VR/description.ext
-PASS | C preprocessor includes/macros (not SQF compiler)
-PASS | exactly four playable slots
-PASS | mission contains no copied addon implementation
-PASS | manual gates remain OPEN
-PASS | only two RemoteExec endpoints
-PASS | lab endpoint validates enable flag and ownership
-PASS | server identity allocator guard
-PASS | server allocator atomic allocation
-PASS | serial is not classname/config/location-derived
-PASS | immutable fields not updated
-PASS | Items runtime unchanged from baseline
-PASS | Nexus runtime unchanged from baseline
-PASS | Armorer runtime unchanged from baseline
-PASS | Weapons machine state describes candidate
-PASS | machine capabilities match runtime
-PASS | no stable domain contracts
-PASS | Items gate preserved byte-equivalent data
-PASS | function index covers all Weapons functions
-PASS | call graph contains every detected Weapons reference
-STATIC_SUMMARY passed=59 failed=0 total=59
-SQF_EXECUTION=NOT_RUN; PBO_LOAD=NOT_RUN; SP=NOT_RUN; MP=NOT_RUN; IDENTITY_GATE=OPEN
+Weapons 0.1-A static validation record
+
+PRE-REVIEW VALIDATION
+The original candidate executed:
+python tools/validate_weapons_0_1_a.py
+Result: 59 PASS / 0 FAIL
+This result belongs to the pre-review source at ca241e595fb7740adc7c3ce5b99712f14ba064b5 and MUST NOT be interpreted as execution of the post-review source.
+
+POST-REVIEW CONNECTOR AUDIT
+Executed against the published PR #8 branch after review fixes:
+PASS | no global Functions.mode
+PASS | no global Functions.jip
+PASS | exactly two explicit RemoteExec endpoints
+PASS | internal authority functions reject direct RemoteExec
+PASS | WeaponConfiguration schema excludes magazines
+PASS | native capture emits separate loadedState
+PASS | configuration fingerprint excludes ammo/magazines
+PASS | fingerprint case folds only comparison key
+PASS | normalization preserves stored class spelling
+PASS | AUTO TEST covers ammo-independent configuration
+PASS | AUTO TEST covers preserved classname spelling
+PASS | identity gate remains OPEN
+PASS | no stable Weapons contracts implemented
+PASS | validator contains RemoteExec regression gates
+PASS | validator contains configuration/ammo regression gates
+POST_REVIEW_AUDIT_SUMMARY passed=15 failed=0 total=15
+
+IMPORTANT
+The updated tools/validate_weapons_0_1_a.py has NOT been executed after the review fixes in this chat environment because there is no local Git checkout of the PR branch.
+The 15/15 audit above inspected the files actually published in GitHub and specifically validates the review deltas. It is not a substitute for:
+- executing the full Python validator from a repository checkout;
+- compiling/loading the PBO;
+- executing SQF in Arma;
+- SP/hosted/dedicated/MP tests;
+- physical identity gates A-E.
+
+SQF_EXECUTION=NOT_RUN
+PBO_LOAD=NOT_RUN
+SP=NOT_RUN
+MP=NOT_RUN
+IDENTITY_GATE=OPEN
