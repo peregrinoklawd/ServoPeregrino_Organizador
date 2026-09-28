@@ -79,6 +79,12 @@ Domínio de ItemKit, Repository, catálogo, inventário, Draft, Application Engi
 
 `Items` declara dependência de `ServoPeregrino_Organizador_Nexus` em `CfgPatches.requiredAddons`.
 
+## Política de execução remota
+
+Módulos de domínio **não definem a política global de `CfgRemoteExec`**. Cada addon pode declarar apenas seus próprios endpoints suportados e respectivos `allowedTargets`/`jip` por função. A política global (`mode`, defaults globais) pertence ao ambiente/missão/servidor, nunca a um domínio isolado.
+
+Funções internas server-authoritative devem recusar `isRemoteExecuted` quando não forem gateways públicos deliberados. Assim a segurança do módulo não depende de uma whitelist global que poderia interferir em outros addons.
+
 ## Produto vs laboratório
 
 O addon/PBO é o produto. Missões são laboratórios de teste.
@@ -162,4 +168,4 @@ Ver `20_HUB_ARQUITETURA_E_INTEGRACAO.md`.
 
 ## Weapons 0.1-A — implementação candidata
 
-Dependências obrigatórias: `A3_Functions_F` e Nexus. Foundation/lifecycle, modelos fechados internos de configuração/instância, emissão server-side de sessão e observador de inventário. Não há associação física autoritativa nem integração com outros domínios. O registry separa instâncias lógicas de referências transitórias usadas somente no laboratório. Detalhes em `21_WEAPONS_0_1_A_FOUNDATION_IDENTITY_SPIKE.md`.
+Dependências obrigatórias: `A3_Functions_F` e Nexus. Foundation/lifecycle, modelos fechados internos de configuração/instância, emissão server-side de sessão e observador de inventário. `WeaponConfiguration` representa montagem (classe + attachments); magazine/ammo observado fica em estado transitório separado e não altera o fingerprint de configuração. Classnames são preservados no modelo e normalizados apenas para comparação. Não há associação física autoritativa nem integração com outros domínios. O registry separa instâncias lógicas de referências transitórias usadas somente no laboratório. Detalhes em `21_WEAPONS_0_1_A_FOUNDATION_IDENTITY_SPIKE.md`.
