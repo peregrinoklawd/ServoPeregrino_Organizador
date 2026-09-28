@@ -205,3 +205,24 @@ Whitelist/blacklist; optional Persistence/Stock/Economy providers; WeaponKit; Eq
 5. formalizar Policy e Server Providers;
 6. só então iniciar wear/parts 2.x;
 7. economia/estoque permanecem opcionais.
+
+
+## 13. Decisão de design — identidade e exposição ambiental da arma (28/09/2026)
+
+**PLANEJADO**
+
+A direção desejada passa a incluir:
+
+- identidade individual de cada arma;
+- serial definitivo;
+- desgaste por disparos;
+- desgaste ambiental por água, natação e submersão;
+- desgaste separado por componentes/peças;
+- avaliação em lote/event-driven, evitando custo por frame;
+- Weapons como dono do estado da arma;
+- Armorer como workflow de inspeção/manutenção;
+- persistência, estoque e economia opcionais por provider.
+
+A arquitetura detalhada está em `17_ARMORER_WEAPONS_WEAR_ARCHITECTURE.md`.
+
+A intenção de gameplay está aceita, mas o schema e as fórmulas permanecem abertos até os gates técnicos provarem como preservar uma WeaponInstance ao mover armas entre inventário, weapon holder, storage e multiplayer.
