@@ -1,5 +1,4 @@
 #include "..\..\script_version.hpp"
-if (isRemoteExecuted) exitWith {[false,"WEAPONS_REMOTE_EXEC_FORBIDDEN","Registry diagnostics are local-server only; use a declared gateway."] call ServoPeregrino_Organizador_Nexus_fnc_createResult};
 private _init = [] call ServoPeregrino_Organizador_Weapons_fnc_initializeAuthority;
 if !(_init get "success") exitWith {_init};
 private _state = missionNamespace getVariable SP_ORG_WEAPONS_AUTHORITY;
