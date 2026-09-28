@@ -59,7 +59,6 @@ class CfgFunctions {
 };
 class CfgRemoteExec {
  class Functions {
-  mode=1; jip=0;
   class ServoPeregrino_Organizador_Weapons_fnc_serverHandleLabRequest {allowedTargets=2; jip=0;};
   class ServoPeregrino_Organizador_Weapons_fnc_clientReceiveLabResult {allowedTargets=0; jip=0;};
  };
