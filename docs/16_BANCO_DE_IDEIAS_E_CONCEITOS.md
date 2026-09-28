@@ -24,7 +24,7 @@ O SP_ORG é uma família de módulos independentes distribuídos como PBOs separ
 ```text
 Nexus
   ↑ capabilities / contracts / events / results
-Items  Weapons  Equipment  Sets  Armorer  Settings
+Items  Weapons  WeaponCondition  Equipment  Sets  Armorer  Settings
 ```
 
 Regras:
@@ -45,7 +45,10 @@ Regras:
 **IMPLEMENTADO / AVANÇADO** — ItemEntry, ItemKit, Repository, Draft, Catalog, Inventory, Application Engine, Whole-Kit, EXACT, rollback, DnD, UI e PRIVADOS/PÚBLICOS. 0.12 FINAL homologada; 0.13-A em gate runtime/multiplayer.
 
 ### Weapons
-**PLANEJADO** — WeaponKit, WeaponConfiguration, compatibilidade de slots, attachments, magazines e, se necessário, WeaponInstance.
+**PLANEJADO** — WeaponKit, WeaponConfiguration, WeaponRecipe, compatibilidade de slots/attachments/magazines, troca dinâmica sem alterar o restante do loadout, WeaponInstance e serial definitivo.
+
+### WeaponCondition
+**PLANEJADO** — desgaste, uso, água/submersão, condição de peças, sujeira, lubrificação, corrosão, confiabilidade, panes e manutenção lógica; permite provider nativo ou externo com uma única autoridade de condição.
 
 ### Equipment
 **PLANEJADO** — loadout estrutural sem duplicar a semântica de conteúdo de Items.
@@ -219,8 +222,9 @@ A direção desejada passa a incluir:
 - desgaste ambiental por água, natação e submersão;
 - desgaste separado por componentes/peças;
 - avaliação em lote/event-driven, evitando custo por frame;
-- Weapons como dono do estado da arma;
-- Armorer como workflow de inspeção/manutenção;
+- Weapons como dono da identidade/configuração/receitas da arma;
+- WeaponCondition como dono do estado, desgaste e manutenção lógica;
+- Armorer como workflow/UI de montagem, inspeção e manutenção;
 - persistência, estoque e economia opcionais por provider.
 
 A arquitetura detalhada está em `17_ARMORER_WEAPONS_WEAR_ARCHITECTURE.md`.
@@ -235,3 +239,54 @@ A intenção de gameplay está aceita, mas o schema e as fórmulas permanecem ab
 Cada funcionalidade de domínio terá um único módulo proprietário. Outros módulos só podem consumir essa capacidade por contratos/capabilities/events do Nexus; não devem criar implementações paralelas.
 
 O catálogo oficial está em `18_CATALOGO_FUNCIONAL_E_OWNERSHIP.md` e a matriz legível por máquina em `../machine/FEATURE_OWNERSHIP.json`.
+
+
+## 15. Decisão final — separação Weapons / WeaponCondition / Armorer
+
+**DECIDIDO**
+
+A divisão oficial passa a ser:
+
+```text
+Weapons
+= O QUE A ARMA É
+  identidade
+  serial
+  configuração
+  compatibilidade
+  receitas
+  troca dinâmica
+
+WeaponCondition
+= COMO A ARMA ESTÁ
+  uso
+  desgaste
+  água/submersão
+  peças
+  sujeira
+  lubrificação
+  corrosão
+  confiabilidade
+  manutenção lógica
+
+Armorer
+= ONDE/COMO O JOGADOR INTERAGE
+  bancada
+  preview
+  montagem
+  criação visual de receitas
+  inspeção
+  manutenção
+  reparo
+  troca de peças
+```
+
+Motivos:
+- evitar duas fórmulas de desgaste;
+- permitir usar Armorer com provider externo de condição;
+- permitir WeaponCondition sem bancada;
+- permitir Weapons sem desgaste;
+- melhorar compatibilidade com ACE/outros mods;
+- preservar ownership único por funcionalidade.
+
+Somente um provider de condição pode ser autoritativo para a mesma arma/sessão.
