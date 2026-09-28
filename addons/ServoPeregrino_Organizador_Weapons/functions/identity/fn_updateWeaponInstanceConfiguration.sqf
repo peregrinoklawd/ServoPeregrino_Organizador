@@ -1,6 +1,5 @@
 #include "..\..\script_version.hpp"
 params [["_id","",[""]],["_configuration",false]];
-if (isRemoteExecuted) exitWith {[false,"WEAPONS_REMOTE_EXEC_FORBIDDEN","Identity mutation is local-server only; use a declared gateway."] call ServoPeregrino_Organizador_Nexus_fnc_createResult};
 private _lookup = [_id] call ServoPeregrino_Organizador_Weapons_fnc_getWeaponInstance;
 if !(_lookup get "success") exitWith {_lookup};
 private _valid = [_configuration] call ServoPeregrino_Organizador_Weapons_fnc_validateWeaponConfigurationSemantic;
