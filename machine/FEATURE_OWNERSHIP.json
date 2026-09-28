@@ -1,0 +1,224 @@
+{
+  "schema_version": 1,
+  "snapshot_date": "2026-09-28",
+  "repository": "peregrinoklawd/ServoPeregrino_Organizador",
+  "rule": "Every domain feature has one owning module. Other modules consume it through Nexus contracts/capabilities/events and must not duplicate the implementation.",
+  "modules": {
+    "Nexus": [
+      "result-envelope",
+      "diagnostics",
+      "logging",
+      "capability-registry",
+      "contract-registry",
+      "event-bus",
+      "lifecycle-build-info"
+    ],
+    "Items": [
+      "item-entry",
+      "item-kit",
+      "item-kit-edit",
+      "item-kit-merge",
+      "inventory-content-capture",
+      "item-catalog",
+      "item-draft",
+      "private-kit-repository",
+      "public-kit-library",
+      "item-application-engine",
+      "whole-kit-add-remove",
+      "replace-clear",
+      "exact-magazine-state",
+      "inventory-capacity",
+      "item-dnd",
+      "item-transaction-rollback"
+    ],
+    "Weapons": [
+      "weapon-kit",
+      "weapon-configuration",
+      "weapon-slot-compatibility",
+      "dynamic-weapon-swap-without-full-loadout",
+      "weapon-instance",
+      "weapon-serial",
+      "weapon-condition",
+      "shot-usage",
+      "water-exposure",
+      "submersion-exposure",
+      "weapon-wear",
+      "part-state",
+      "weapon-reliability",
+      "weapon-jams-runtime"
+    ],
+    "Armorer": [
+      "armorer-station",
+      "armorer-session",
+      "station-lease",
+      "weapon-preview",
+      "weapon-assembly-workflow",
+      "weapon-recipe-authoring-ui",
+      "weapon-inspection",
+      "weapon-maintenance",
+      "cleaning",
+      "lubrication-service",
+      "diagnostics-service",
+      "repair-service",
+      "part-replacement",
+      "chronograph",
+      "zeroing",
+      "grouping-range"
+    ],
+    "Equipment": [
+      "equipment-kit",
+      "structural-loadout",
+      "uniform-slot",
+      "vest-slot",
+      "backpack-slot",
+      "helmet-slot",
+      "nvg-slot",
+      "facewear-slot",
+      "binocular-slot",
+      "assigned-items-structure"
+    ],
+    "Sets": [
+      "set-definition",
+      "cross-module-kit-composition",
+      "role-presets",
+      "set-orchestration"
+    ],
+    "Policy": [
+      "whitelist",
+      "blacklist",
+      "policy-decision",
+      "catalog-policy-filter",
+      "server-policy-validation"
+    ],
+    "ServerIntegration": [
+      "persistence-provider-adapter",
+      "stock-provider-adapter",
+      "economy-provider-adapter",
+      "quote-reserve-commit-release",
+      "external-server-framework-bridge"
+    ],
+    "Settings": [
+      "user-preferences",
+      "server-settings",
+      "feature-flags",
+      "module-configuration"
+    ],
+    "Adapters": [
+      "ace-integration",
+      "cba-integration",
+      "third-party-mod-integration"
+    ]
+  },
+  "sensitive_ownership": [
+    {
+      "feature": "ItemKit/content",
+      "owner": "Items",
+      "consumers": [
+        "Sets",
+        "Equipment"
+      ]
+    },
+    {
+      "feature": "WeaponConfiguration",
+      "owner": "Weapons",
+      "consumers": [
+        "Armorer",
+        "Sets"
+      ]
+    },
+    {
+      "feature": "WeaponInstance/serial",
+      "owner": "Weapons",
+      "consumers": [
+        "Armorer",
+        "ServerIntegration/Persistence"
+      ]
+    },
+    {
+      "feature": "Weapon wear/condition",
+      "owner": "Weapons",
+      "consumers": [
+        "Armorer"
+      ]
+    },
+    {
+      "feature": "Armorer station/maintenance workflow",
+      "owner": "Armorer",
+      "consumers": []
+    },
+    {
+      "feature": "EquipmentKit",
+      "owner": "Equipment",
+      "consumers": [
+        "Sets"
+      ]
+    },
+    {
+      "feature": "Set composition",
+      "owner": "Sets",
+      "consumers": []
+    },
+    {
+      "feature": "Whitelist/blacklist",
+      "owner": "Policy",
+      "consumers": [
+        "Items",
+        "Weapons",
+        "Equipment",
+        "Armorer"
+      ]
+    },
+    {
+      "feature": "Stock/quantity integration",
+      "owner": "ServerIntegration/StockProvider",
+      "consumers": [
+        "Items",
+        "Weapons",
+        "Equipment",
+        "Armorer"
+      ]
+    },
+    {
+      "feature": "Economy/price integration",
+      "owner": "ServerIntegration/EconomyProvider",
+      "consumers": [
+        "Items",
+        "Weapons",
+        "Equipment",
+        "Armorer"
+      ]
+    },
+    {
+      "feature": "Server persistence integration",
+      "owner": "ServerIntegration/PersistenceProvider",
+      "consumers": [
+        "Items",
+        "Weapons",
+        "Equipment",
+        "Sets",
+        "Armorer"
+      ]
+    },
+    {
+      "feature": "Contracts/capabilities/events",
+      "owner": "Nexus",
+      "consumers": [
+        "ALL"
+      ]
+    },
+    {
+      "feature": "Settings/feature flags",
+      "owner": "Settings",
+      "consumers": [
+        "ALL"
+      ]
+    },
+    {
+      "feature": "ACE/CBA/external compatibility",
+      "owner": "Adapters",
+      "consumers": [
+        "DOMAIN_MODULES"
+      ]
+    }
+  ]
+}

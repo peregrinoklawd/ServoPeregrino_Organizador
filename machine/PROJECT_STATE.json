@@ -15,7 +15,9 @@
     "mission_is_test_lab": true,
     "optional_integrations_must_degrade_gracefully": true,
     "cross_module_private_state_access_forbidden": true,
-    "physical_layout": "Existing runtime addons keep authoritative paths; future modules receive reserved addon directories and are activated only after source/config migration gates."
+    "physical_layout": "Existing runtime addons keep authoritative paths; future modules receive reserved addon directories and are activated only after source/config migration gates.",
+    "single_feature_owner": true,
+    "feature_ownership_rule": "Each domain feature has exactly one owning module; consumers integrate through Nexus contracts/capabilities/events and must not duplicate implementation."
   },
   "global_next_gate": "Close Items 0.13-A runtime/multiplayer gate: load Packaging R2 in Arma, confirm no Unable to open PBO, open UI, then execute server-authoritative multiplayer smoke.",
   "global_after_gate": "Only after 0.13-A closes, continue Items 0.13-B JIP & State Reconciliation and begin formal cross-module contracts.",
@@ -403,11 +405,13 @@
       "docs/00_STATUS_ATUAL.md",
       "docs/01_ARQUITETURA.md",
       "docs/16_BANCO_DE_IDEIAS_E_CONCEITOS.md",
-      "docs/17_ARMORER_WEAPONS_WEAR_ARCHITECTURE.md"
+      "docs/17_ARMORER_WEAPONS_WEAR_ARCHITECTURE.md",
+      "docs/18_CATALOGO_FUNCIONAL_E_OWNERSHIP.md"
     ],
     "machine_start": [
       "machine/PROJECT_STATE.json",
-      "machine/FUNCTION_INDEX.json"
+      "machine/FUNCTION_INDEX.json",
+      "machine/FEATURE_OWNERSHIP.json"
     ]
   },
   "design_decisions": {
