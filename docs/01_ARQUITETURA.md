@@ -83,7 +83,7 @@ Domínio de ItemKit, Repository, catálogo, inventário, Draft, Application Engi
 
 Módulos de domínio **não definem a política global de `CfgRemoteExec`**. Cada addon pode declarar apenas seus próprios endpoints suportados e respectivos `allowedTargets`/`jip` por função. A política global (`mode`, defaults globais) pertence ao ambiente/missão/servidor, nunca a um domínio isolado.
 
-Funções internas server-authoritative devem recusar `isRemoteExecuted` quando não forem gateways públicos deliberados. Assim a segurança do módulo não depende de uma whitelist global que poderia interferir em outros addons.
+O addon declara apenas seus endpoints suportados; a política efetiva de whitelist pertence à missão/servidor. Laboratórios do SP_ORG devem definir essa política no próprio `description.ext`, onde a precedência é apropriada ao ambiente. Funções internas não são endpoints deliberados. Se uma missão de produção optar por `mode=2`, o hardening autoritativo adicional passa a ser responsabilidade explícita daquela integração e deve ter gate próprio.
 
 ## Produto vs laboratório
 
