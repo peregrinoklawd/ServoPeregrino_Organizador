@@ -13,9 +13,11 @@ Comece por:
 9. `08_LICOES_APRENDIDAS_DO_DONT.md`
 10. `09_ROADMAP_E_PROXIMO_PASSO.md`
 11. `10_CONTINUAR_COM_IA.md`
-12. `12_CONTRATOS_UI_NAO_REGREDIR.md`
-13. `13_PACKAGING_INCIDENT_2026_09_25.md`
-14. `14_API_REFERENCIA_AUTOGERADA.md`
-15. `15_CONSTANTES_E_NAMESPACE.md`
+12. `11_GIT_REPOSITORIO_E_VERSIONAMENTO.md`
+13. `12_CONTRATOS_UI_NAO_REGREDIR.md`
+14. `13_PACKAGING_INCIDENT_2026_09_25.md`
+15. `14_API_REFERENCIA_AUTOGERADA.md`
+16. `15_CONSTANTES_E_NAMESPACE.md`
+17. **`16_BANCO_DE_IDEIAS_E_CONCEITOS.md`** — decisões, ideias, módulos futuros, providers, policies e Armorer 2.x.
 
-Os documentos históricos ficam em `history/` e o estado legível por máquina em `../machine/`.
+Histórico: `history/`. Estado global legível por máquina: `../machine/PROJECT_STATE.json`.
