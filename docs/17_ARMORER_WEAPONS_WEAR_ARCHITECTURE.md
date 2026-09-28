@@ -1,20 +1,40 @@
-# Weapons + Armorer — identidade, desgaste e manutenção
+# Weapons + WeaponCondition + Armorer — identidade, condição e manutenção
 
 Status: **DESIGN PLANEJADO; NÃO IMPLEMENTADO**.
 
-## Objetivo
+## Decisão de ownership
 
-Permitir armas individuais com serial definitivo, desgaste por uso/ambiente e peças com condição, sem processamento contínuo caro.
+A arquitetura foi separada em três responsabilidades:
 
-## Ownership
+```text
+Weapons
+= O QUE A ARMA É
 
-- **Weapons**: WeaponInstance, serial, configuração, condição, desgaste e peças.
-- **Armorer**: estação, sessão, inspeção, manutenção, substituição, preview e workflow transacional.
-- **Nexus**: capabilities/contracts/events.
-- **Policy**: allow/deny opcional.
-- **ServerIntegration**: Persistence/Stock/Economy opcionais.
+WeaponCondition
+= COMO A ARMA ESTÁ
 
-## WeaponInstance
+Armorer
+= ONDE/COMO O JOGADOR INTERAGE COM ELA
+```
+
+Essa separação existe para permitir compatibilidade com mods externos e impedir duas implementações concorrentes de desgaste/manutenção.
+
+---
+
+## Weapons — identidade e construção/configuração
+
+Weapons será dono de:
+
+- WeaponInstance;
+- serial/instanceId definitivo;
+- weaponClass;
+- WeaponConfiguration;
+- WeaponRecipe;
+- compatibilidade de slots;
+- compatibilidade de acessórios;
+- compatibilidade de magazines;
+- montagem/configuração lógica;
+- troca dinâmica da arma sem alterar o restante do loadout.
 
 Modelo candidato:
 
@@ -25,78 +45,223 @@ WeaponInstance
   serial
   weaponClass
   configuration
-  conditionState
-  usageState
-  parts
   metadata
   createdAt
   updatedAt
 ```
 
-O servidor deve criar a identidade definitiva quando persistência autoritativa estiver habilitada.
+A identidade continua existindo mesmo quando o módulo WeaponCondition estiver desligado.
 
-## UsageState
+### Gate crítico
 
-Acumular deltas baratos; não persistir a cada evento:
+Antes de congelar WeaponInstance v1, provar que o mesmo `instanceId`/serial pode ser preservado quando a arma passa por:
+
+- inventário do jogador;
+- weapon holder/chão;
+- container/caixa;
+- armazenamento persistente;
+- transferência entre jogadores;
+- multiplayer/JIP/reconnect, quando aplicável.
+
+---
+
+## WeaponCondition — condição e manutenção lógica
+
+WeaponCondition será dono de:
+
+- usage counters;
+- desgaste;
+- sujeira;
+- lubrificação;
+- corrosão;
+- condição das peças;
+- confiabilidade;
+- panes/jams derivados da condição;
+- avaliação da necessidade de manutenção;
+- transições lógicas de limpeza/lubrificação/reparo;
+- provider autoritativo de condição.
+
+Modelo candidato:
 
 ```text
-shotsPending
-waterExposurePendingSeconds
-submergedExposurePendingSeconds
-mud/dust exposure (futuro)
-heatCyclesPending (futuro)
-lastEvaluatedAt
+WeaponConditionState
+  schemaVersion
+  weaponInstanceId
+
+  usage
+    shotsTotal
+    shotsPending
+    waterExposurePendingSeconds
+    submergedExposurePendingSeconds
+    lastEvaluatedAt
+
+  condition
+    barrelWear
+    actionWear
+    fouling
+    lubrication
+    corrosion
+    reliability
+
+  parts[]
+    partType
+    partClass
+    condition
+    usage
 ```
+
+WeaponCondition referencia a identidade fornecida por Weapons; não cria uma identidade paralela.
+
+---
+
+## Provider autoritativo de condição
+
+Objetivo de compatibilidade:
+
+```text
+Armorer
+   |
+   v
+weaponcondition.provider
+   |
+   +-- SP_ORG WeaponCondition nativo
+   |
+   +-- Adapter para mod externo
+   |
+   +-- Provider de servidor
+```
+
+Regra:
+
+> Para uma mesma arma/sessão existe somente **um provider autoritativo de condição**.
+
+Isso evita que SP_ORG e outro mod calculem desgaste/jams simultaneamente.
+
+Modos conceituais possíveis:
+- NATIVE;
+- EXTERNAL;
+- HYBRID_OBSERVER;
+- DISABLED.
+
+Somente um provider pode ser AUTHORITATIVE.
+
+---
+
+## Armorer — bancada e workflow
+
+Armorer será dono de:
+
+- estação/bancada;
+- sessão;
+- lease multiplayer;
+- Preview 3D;
+- montagem/desmontagem visual;
+- UI de receitas;
+- UI de inspeção;
+- UI de manutenção;
+- fluxo transacional;
+- apresentação de resultados.
+
+Armorer consulta Weapons para saber **o que a arma é** e WeaponCondition para saber **como ela está**.
+
+Exemplo:
+
+```text
+ARMORER
+  |
+  +--> Weapons
+  |      identidade
+  |      compatibilidade
+  |      configuração
+  |      receita
+  |
+  +--> WeaponCondition
+  |      condição
+  |      desgaste
+  |      peças
+  |      manutenção
+  |
+  +--> StockProvider (opcional)
+  |      disponibilidade
+  |
+  +--> EconomyProvider (opcional)
+         preço/custo
+```
+
+---
 
 ## Desgaste por disparo
 
-Usar evento local do jogador para acumular `shotsPending`. A avaliação real pode ocorrer em lote.
+Não calcular/persistir condição a cada tiro.
 
-Não calcular/persistir condition a cada tiro.
-
-## Água / natação
-
-A leitura ambiental deve ser barata e local.
-
-Sinais nativos candidatos:
-- `pose unit`: distingue `Swimming`, `SurfaceSwimming`, `Diving`, `BottomSwimming`, etc.;
-- `stance unit`: retorna `UNDEFINED` em situações como natação, útil apenas como fallback;
-- `surfaceIsWater position`: confirma água no XY;
-- `getPosASLW unit`: posição relativa à superfície da água, incluindo ondas/ponds;
-- `underwater object`: existe, mas a própria documentação alerta que é mais confiável para mini-submarinos; não usar sozinho para pessoas;
-- `eyePos player select 2 < 0`: alternativa documentada para cabeça submersa no mar; validar comportamento em ponds/mod maps antes de congelar contrato.
-
-## Estratégia de amostragem
-
-Não usar onEachFrame.
-
-Opção recomendada:
-1. somente o cliente/local owner do jogador mantém um sensor ambiental leve;
-2. intervalo baixo, por exemplo 2–5 s, apenas se existir WeaponInstance rastreada;
-3. consulta `pose` + água/submersão;
-4. acumula segundos em memória;
-5. envia/persiste apenas em threshold/checkpoint/transferência/Armorer/disconnect.
-
-A frequência exata deve ser medida em teste; não congelar número antes de profiling.
-
-## Fórmula
-
-Não fixar constantes ainda. O modelo deve permitir componentes independentes:
+Evento barato:
 
 ```text
-barrelWear      <- shots, ammo, heat cycles
-actionWear      <- shots/cycles
-fouling         <- shots + environment
-lubrication     <- use + time + water
-corrosion       <- water/submersion + protection + time
-reliability     <- função dos estados acima
+Fired/FiredMan
+  -> shotsPending += 1
 ```
 
-Água salgada/do mar pode futuramente ter multiplicador maior que água doce somente se conseguirmos identificar o contexto de forma confiável e barata.
+A avaliação real ocorre em lote.
 
-## Parts
+Possíveis efeitos:
+- barrelWear;
+- actionWear;
+- fouling;
+- recoil spring usage;
+- gas system usage;
+- suppressor/attachment wear, quando suportado;
+- reliability.
 
-Começar com part definitions por tipo, sem serial individual obrigatório.
+A fórmula exata e coeficientes permanecem abertos até profiling/testes de gameplay.
+
+---
+
+## Água / natação / submersão
+
+A exposição ambiental deve ser coletada de forma barata pelo owner local do jogador.
+
+Sinais nativos candidatos já considerados:
+- `pose unit` para estados como Swimming/Diving;
+- `surfaceIsWater position`;
+- `getPosASLW unit`;
+- outras leituras de submersão somente após validação em mapas/ponds/modsets.
+
+Não usar `underwater` isoladamente como autoridade de personagem sem validação.
+
+### Estratégia
+
+Não usar `onEachFrame`.
+
+Opção recomendada:
+
+1. somente o owner local monitora quando existir WeaponInstance rastreada;
+2. baixa frequência, a ser definida por profiling;
+3. acumular segundos de exposição em memória;
+4. não recalcular condition a cada amostra;
+5. consolidar em checkpoint/threshold.
+
+Exemplo:
+
+```text
+waterExposurePendingSeconds += delta
+submergedExposurePendingSeconds += delta
+```
+
+Depois:
+
+```text
+WearEvaluator
+  -> lubrication
+  -> corrosion
+  -> fouling
+  -> reliability
+```
+
+---
+
+## Partes/componentes
+
+Começar com `PartState`, sem serial próprio obrigatório:
 
 ```text
 PartState
@@ -107,17 +272,75 @@ PartState
   usage
 ```
 
-Somente criar `PartInstance` com serial próprio se gameplay/persistência realmente exigir.
-
-Possíveis partes:
+Possíveis componentes:
 - barrel;
 - bolt/carrier;
 - recoil spring;
 - trigger group;
 - gas system;
-- suppressor/attachment wear, quando suportado.
+- suppressor/attachments quando apropriado.
+
+Criar `PartInstance`/serial de peça somente se gameplay/persistência realmente exigirem.
+
+---
+
+## Construção x manutenção
+
+### Construção/configuração
+
+Pertence a Weapons como modelo/validação:
+
+- WeaponConfiguration;
+- WeaponRecipe;
+- compatibilidade;
+- montagem lógica.
+
+Armorer fornece a interface física/visual para esse processo.
+
+### Manutenção da condição
+
+Pertence a WeaponCondition:
+
+- avaliação;
+- limpeza;
+- lubrificação;
+- reparo;
+- substituição lógica de componente;
+- condição resultante.
+
+Armorer fornece a interface/workflow.
+
+---
+
+## Exemplo: troca de cano
+
+```text
+Armorer
+  -> WeaponCondition: cano precisa ser trocado?
+  -> Weapons: quais canos são compatíveis?
+  -> StockProvider: existe peça?
+  -> EconomyProvider: qual o custo?
+  -> Armorer: usuário confirma
+  -> RESERVE
+  -> WeaponCondition: cria working condition
+  -> Weapons: valida configuração/compatibilidade
+  -> COMMIT
+  -> PersistenceProvider: persiste, se existir
+```
+
+Em falha:
+
+```text
+ROLLBACK
++ RELEASE stock
++ REFUND/rollback economy
+```
+
+---
 
 ## Checkpoints de avaliação
+
+Avaliar/consolidar condição apenas quando útil:
 
 - entrada no Armorer;
 - arma trocada/guardada;
@@ -125,45 +348,60 @@ Possíveis partes:
 - save/checkpoint;
 - disconnect;
 - threshold de contadores;
-- lote de baixa frequência.
+- lote periódico de baixa frequência;
+- inspeção solicitada.
 
-## Transação de manutenção
-
-```text
-READ CURRENT STATE
-  -> BUILD WORKING STATE
-  -> QUOTE / RESERVE PARTS (optional)
-  -> APPLY / VALIDATE
-  -> COMMIT
-  -> RELEASE
-```
-
-Falha:
-```text
-ROLLBACK weapon state
-+ RELEASE stock
-+ REFUND/rollback economy when applicable
-```
+---
 
 ## Performance invariants
 
 - sem loop por arma;
-- sem scan global de armas;
+- sem scan global recorrente;
+- sem `onEachFrame` para desgaste de domínio;
 - sem DB write por tiro;
 - sem broadcast por tiro;
-- aggregation/batching;
+- eventos + dirty flags + batching;
+- cálculo lazy;
 - authority server-side no commit;
 - clientes podem coletar deltas locais, mas não definir condition final autoritativa.
 
+---
+
+## Compatibilidade externa
+
+Adapters poderão mapear sistemas externos para os contratos SP_ORG.
+
+Exemplo:
+
+```text
+External Weapon Maintenance Mod
+        |
+        v
+SP_ORG Adapter
+        |
+        v
+weaponcondition.provider
+        |
+        v
+Armorer
+```
+
+Assim o Armorer pode permanecer utilizável mesmo quando o servidor preferir outro sistema de condição.
+
+---
+
 ## Gates futuros
 
-1. definir serial/instance identity lifecycle;
-2. provar como uma instância é preservada ao mover arma entre inventários/holders/armazenamento;
-3. definir schema v1 de WeaponInstance;
-4. laboratório de 1 jogador;
-5. multiplayer ownership transfer;
-6. water exposure sensor;
-7. wear calculation batch;
-8. Armorer inspection;
-9. parts/repair transaction;
-10. persistence/stock/economy providers opcionais.
+1. WeaponInstance/serial lifecycle;
+2. preservação da identidade em inventário/holder/storage/MP;
+3. WeaponConfiguration/WeaponRecipe v1;
+4. `weaponcondition.provider` contract;
+5. WeaponConditionState v1;
+6. coleta de shotsPending;
+7. sensor de água/submersão;
+8. wear evaluation em lote;
+9. parts condition;
+10. integração de inspeção no Armorer;
+11. manutenção transacional;
+12. Stock/Economy/Persistence providers opcionais;
+13. adapters externos.
