@@ -119,7 +119,7 @@
           "weapons.runtime",
           "weapons.catalog",
           "weapons.configuration",
-          "weapons.instance-state"
+          "weapons.instance"
         ]
       },
       "contracts_provided": {
@@ -127,6 +127,7 @@
         "planned": [
           "weapons.kit.v1",
           "weapons.configuration.v1",
+          "weapons.recipe.v1",
           "weapons.instance.v1"
         ]
       },
@@ -139,8 +140,8 @@
           "persistence.provider.v1"
         ]
       },
-      "status": "PLANNED",
-      "next_gate": "Define WeaponInstance v1 identity/serial lifecycle, prove preservation across inventory/holder/storage and multiplayer transfer, then freeze batched wear/environment contracts.",
+      "status": "PLANNED_DOMAIN_CORE",
+      "next_gate": "Define WeaponInstance v1 identity/serial lifecycle, WeaponConfiguration/WeaponRecipe contracts, slot compatibility and dynamic weapon swap without changing the rest of the loadout.",
       "homologated_artifact": null
     },
     {
@@ -212,6 +213,46 @@
       "homologated_artifact": null
     },
     {
+      "id": "WeaponCondition",
+      "addon": "ServoPeregrino_Organizador_WeaponCondition",
+      "mandatory": false,
+      "stable_version": null,
+      "development_version": null,
+      "dependencies": [
+        "Nexus"
+      ],
+      "capabilities_provided": {
+        "implemented": [],
+        "planned": [
+          "weaponcondition.runtime",
+          "weaponcondition.provider"
+        ]
+      },
+      "contracts_provided": {
+        "implemented": [],
+        "planned": [
+          "weaponcondition.state.v1",
+          "weaponcondition.usage-delta.v1",
+          "weaponcondition.maintenance.request.v1",
+          "weaponcondition.maintenance.result.v1"
+        ]
+      },
+      "contracts_consumed": {
+        "required": [
+          "weapons.instance.v1"
+        ],
+        "optional": [
+          "policy.provider.v1",
+          "stock.provider.v1",
+          "economy.provider.v1",
+          "persistence.provider.v1"
+        ]
+      },
+      "status": "NEW_PLANNED_DOMAIN_MODULE",
+      "next_gate": "Define authoritative condition-provider contract, batched usage/environment deltas, part-condition model and maintenance transactions without per-frame domain loops.",
+      "homologated_artifact": null
+    },
+    {
       "id": "Armorer",
       "addon": "ServoPeregrino_Organizador_Armorer",
       "mandatory": false,
@@ -232,29 +273,32 @@
           "armorer.runtime",
           "armorer.station",
           "armorer.session",
-          "armorer.maintenance"
+          "armorer.workflow"
         ]
       },
       "contracts_provided": {
         "implemented": [],
         "planned": [
           "armorer.session.v1",
-          "armorer.maintenance.request.v1",
-          "armorer.maintenance.result.v1"
+          "armorer.workflow.v1"
         ]
       },
       "contracts_consumed": {
         "required": [],
         "optional": [
           "weapons.configuration.v1",
+          "weapons.recipe.v1",
           "weapons.instance.v1",
+          "weaponcondition.state.v1",
+          "weaponcondition.maintenance.request.v1",
+          "weaponcondition.maintenance.result.v1",
           "stock.provider.v1",
           "economy.provider.v1",
           "persistence.provider.v1"
         ]
       },
       "status": "ADVANCED_FROZEN_PENDING_MONOREPO_MIGRATION",
-      "next_gate": "Import authoritative Armorer baseline without feature changes; prove equivalence; then consume Weapons instance/condition contracts for inspection, repair and parts workflow.",
+      "next_gate": "Import authoritative Armorer baseline without feature changes; prove equivalence; then integrate with Weapons for construction/configuration and WeaponCondition for inspection/maintenance.",
       "homologated_artifact": "Historical Armorer known-safe baseline; artifact not yet migrated into this monorepo."
     },
     {
@@ -406,33 +450,43 @@
       "docs/01_ARQUITETURA.md",
       "docs/16_BANCO_DE_IDEIAS_E_CONCEITOS.md",
       "docs/17_ARMORER_WEAPONS_WEAR_ARCHITECTURE.md",
-      "docs/18_CATALOGO_FUNCIONAL_E_OWNERSHIP.md"
+      "docs/18_CATALOGO_FUNCIONAL_E_OWNERSHIP.md",
+      "docs/19_VISAO_FUNCIONAL_COMPARTILHAVEL.md"
     ],
     "machine_start": [
       "machine/PROJECT_STATE.json",
       "machine/FUNCTION_INDEX.json",
-      "machine/FEATURE_OWNERSHIP.json"
+      "machine/FEATURE_OWNERSHIP.json",
+      "machine/MODULE_MATRIX.json"
     ]
   },
   "design_decisions": {
     "weapon_identity": {
       "status": "PLANNED",
-      "decision": "Support definitive WeaponInstance identity and serial per weapon for persistent wear/history.",
+      "decision": "WeaponInstance identity and definitive serial belong to Weapons because identity exists independently of whether wear is enabled.",
       "owner_module": "Weapons",
       "gate": "Prove identity preservation across player inventory, weapon holders, storage and multiplayer transfers before implementation."
     },
     "weapon_wear": {
       "status": "PLANNED",
-      "decision": "Event-driven counters plus lazy/batched wear evaluation; no per-frame domain wear loops.",
+      "decision": "WeaponCondition owns authoritative condition/wear/maintenance logic. Use event-driven counters plus lazy/batched evaluation; no per-frame domain wear loops.",
       "environmental_inputs": [
         "shots",
         "swimming/water exposure",
         "submersion",
         "future heat/dust/mud when validated"
       ],
-      "owner_module": "Weapons",
+      "owner_module": "WeaponCondition",
       "workflow_consumer": "Armorer",
+      "identity_provider": "Weapons",
+      "compatibility_goal": "Allow native SP_ORG condition provider or external adapters while keeping a single authoritative provider per weapon/session.",
       "reference": "docs/17_ARMORER_WEAPONS_WEAR_ARCHITECTURE.md"
+    },
+    "weapon_module_split": {
+      "status": "DECIDED",
+      "weapons": "What the weapon is: identity, serial, configuration, compatibility, recipes and dynamic weapon swap.",
+      "weaponCondition": "How the weapon is: usage, wear, environment exposure, parts condition, reliability and maintenance state transitions.",
+      "armorer": "Where/how the player interacts: station, preview, assembly, inspection and maintenance workflow/UI."
     }
   }
 }
