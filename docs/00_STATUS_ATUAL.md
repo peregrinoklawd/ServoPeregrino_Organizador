@@ -23,6 +23,7 @@ O projeto agora é tratado como **monorepo multi-PBO**, com ownership funcional 
 
 Módulos atuais/planejados:
 - Nexus;
+- Hub;
 - Items;
 - Weapons;
 - WeaponCondition;
@@ -61,7 +62,7 @@ O **Packaging R2** reempacota os mesmos fontes sem alterar SQF funcional. Ele ai
 - Packaging R2 ainda não foi homologado dentro do Arma.
 - 0.13-A ainda não foi homologada em multiplayer real com dois ou mais clientes.
 - JIP/persistência pública/ACL/rate limit/recovery ainda pertencem ao roadmap 0.13-B+.
-- Weapons, WeaponCondition, Equipment, Sets, Policy e ServerIntegration ainda são módulos planejados.
+- Hub, Weapons, WeaponCondition, Equipment, Sets, Policy e ServerIntegration ainda são módulos planejados.
 - Armorer possui base histórica madura, mas o runtime autoritativo ainda não foi importado ao monorepo.
 
 ## Dívida automática aceita
@@ -76,4 +77,5 @@ Ler obrigatoriamente:
 - `machine/FEATURE_OWNERSHIP.json`;
 - `docs/16_BANCO_DE_IDEIAS_E_CONCEITOS.md`;
 - `docs/18_CATALOGO_FUNCIONAL_E_OWNERSHIP.md`;
-- `docs/19_VISAO_FUNCIONAL_COMPARTILHAVEL.md`.
+- `docs/19_VISAO_FUNCIONAL_COMPARTILHAVEL.md`;
+- `docs/20_HUB_ARQUITETURA_E_INTEGRACAO.md`.
