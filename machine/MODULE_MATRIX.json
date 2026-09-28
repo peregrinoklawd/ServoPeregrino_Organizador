@@ -87,6 +87,52 @@
       "current_candidate_artifact": "Packaging R2 + Multiplayer Lab R3"
     },
     {
+      "id": "Hub",
+      "addon": "ServoPeregrino_Organizador_Hub",
+      "mandatory": false,
+      "status": "NEW_PLANNED_INTEGRATION_UI_MODULE",
+      "stable_version": null,
+      "development_version": null,
+      "dependencies": [
+        "Nexus"
+      ],
+      "capabilities_provided": {
+        "implemented": [],
+        "planned": [
+          "hub.runtime",
+          "hub.ui",
+          "hub.navigation",
+          "hub.orchestration"
+        ]
+      },
+      "contracts_provided": {
+        "implemented": [],
+        "planned": [
+          "hub.navigation.entry.v1",
+          "hub.context.v1",
+          "hub.action.result.v1"
+        ]
+      },
+      "contracts_consumed": {
+        "required": [],
+        "optional": [
+          "items.ui/open-capability",
+          "weapons.ui/open-capability",
+          "equipment.ui/open-capability",
+          "sets.ui/open-capability",
+          "armorer.ui/open-capability",
+          "weaponcondition.ui/open-capability",
+          "settings.ui/open-capability",
+          "policy.query-capability",
+          "stock.provider.v1",
+          "economy.provider.v1"
+        ]
+      },
+      "next_gate": "Define dynamic module discovery/navigation contract and integrated context handoff without making domain modules depend on Hub.",
+      "homologated_artifact": null,
+      "current_candidate_artifact": null
+    },
+    {
       "id": "Weapons",
       "addon": "ServoPeregrino_Organizador_Weapons",
       "mandatory": false,
