@@ -136,16 +136,21 @@
       "id": "Weapons",
       "addon": "ServoPeregrino_Organizador_Weapons",
       "mandatory": false,
-      "status": "PLANNED_DOMAIN_CORE",
+      "status": "FOUNDATION_IDENTITY_SPIKE_PENDING_RUNTIME_VALIDATION",
       "stable_version": null,
-      "development_version": null,
+      "development_version": {
+        "display": "0.1-A",
+        "semantic": "0.1.0.1",
+        "build": "0.1.0.1-a-foundation-identity-spike"
+      },
       "dependencies": [
         "Nexus"
       ],
       "capabilities_provided": {
-        "implemented": [],
+        "implemented": [
+          "weapons.runtime"
+        ],
         "planned": [
-          "weapons.runtime",
           "weapons.catalog",
           "weapons.configuration",
           "weapons.instance"
@@ -162,16 +167,17 @@
       },
       "contracts_consumed": {
         "required": [],
-        "optional": [
+        "optional": [],
+        "planned_optional": [
           "policy.provider.v1",
           "stock.provider.v1",
           "economy.provider.v1",
           "persistence.provider.v1"
         ]
       },
-      "next_gate": "Define WeaponInstance v1 identity/serial lifecycle, WeaponConfiguration/WeaponRecipe contracts, slot compatibility and dynamic weapon swap without changing the rest of the loadout.",
+      "next_gate": "OPEN: validate addon mount and AUTO TEST; collect manual A-E evidence. Physical identity across identical weapons/transfers remains UNPROVEN. No stable v1 before proof.",
       "homologated_artifact": null,
-      "current_candidate_artifact": null
+      "current_candidate_artifact": "Weapons 0.1-A source + Identity Lab 4 Slots; PBO build/load not executed"
     },
     {
       "id": "Equipment",

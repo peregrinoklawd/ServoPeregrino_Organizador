@@ -2698,5 +2698,255 @@
     "params_detected": "[\"_mode\",\"MOVE\",[\"\"]], [\"_sourceCtrl\",controlNull,[controlNull]], [\"_display\",displayNull,[displayNull]]",
     "bytes": 5839,
     "references": "ServoPeregrino_Organizador_Items_fnc_escapeStructuredText;ServoPeregrino_Organizador_Items_fnc_resolveUIPointerSource;ServoPeregrino_Organizador_Items_fnc_updateUIItemTooltip"
+  },
+  {
+    "addon": "Weapons",
+    "category": "domain",
+    "function": "captureWeaponConfiguration",
+    "symbol": "ServoPeregrino_Organizador_Weapons_fnc_captureWeaponConfiguration",
+    "path": "functions/domain/fn_captureWeaponConfiguration.sqf",
+    "params_detected": "[\"_unit\",objNull,[objNull]],[\"_slot\",\"PRIMARY\",[\"\"]]",
+    "bytes": 677,
+    "references": "ServoPeregrino_Organizador_Nexus_fnc_createResult;ServoPeregrino_Organizador_Weapons_fnc_configurationFromWeaponArray"
+  },
+  {
+    "addon": "Weapons",
+    "category": "domain",
+    "function": "compareWeaponConfigurations",
+    "symbol": "ServoPeregrino_Organizador_Weapons_fnc_compareWeaponConfigurations",
+    "path": "functions/domain/fn_compareWeaponConfigurations.sqf",
+    "params_detected": "[\"_left\",false],[\"_right\",false]",
+    "bytes": 573,
+    "references": "ServoPeregrino_Organizador_Nexus_fnc_createResult;ServoPeregrino_Organizador_Weapons_fnc_getConfigurationFingerprint"
+  },
+  {
+    "addon": "Weapons",
+    "category": "domain",
+    "function": "configurationFromWeaponArray",
+    "symbol": "ServoPeregrino_Organizador_Weapons_fnc_configurationFromWeaponArray",
+    "path": "functions/domain/fn_configurationFromWeaponArray.sqf",
+    "params_detected": "[\"_row\",false]",
+    "bytes": 591,
+    "references": "ServoPeregrino_Organizador_Nexus_fnc_createResult;ServoPeregrino_Organizador_Weapons_fnc_normalizeWeaponConfiguration"
+  },
+  {
+    "addon": "Weapons",
+    "category": "domain",
+    "function": "createWeaponConfiguration",
+    "symbol": "ServoPeregrino_Organizador_Weapons_fnc_createWeaponConfiguration",
+    "path": "functions/domain/fn_createWeaponConfiguration.sqf",
+    "params_detected": "[\"_weaponClass\",\"\",[\"\"]]",
+    "bytes": 343,
+    "references": "ServoPeregrino_Organizador_Weapons_fnc_normalizeWeaponConfiguration"
+  },
+  {
+    "addon": "Weapons",
+    "category": "domain",
+    "function": "deepCopy",
+    "symbol": "ServoPeregrino_Organizador_Weapons_fnc_deepCopy",
+    "path": "functions/domain/fn_deepCopy.sqf",
+    "params_detected": "\"_value\"",
+    "bytes": 337,
+    "references": "ServoPeregrino_Organizador_Weapons_fnc_deepCopy"
+  },
+  {
+    "addon": "Weapons",
+    "category": "domain",
+    "function": "getConfigurationFingerprint",
+    "symbol": "ServoPeregrino_Organizador_Weapons_fnc_getConfigurationFingerprint",
+    "path": "functions/domain/fn_getConfigurationFingerprint.sqf",
+    "params_detected": "[\"_value\",false]",
+    "bytes": 641,
+    "references": "ServoPeregrino_Organizador_Nexus_fnc_createResult;ServoPeregrino_Organizador_Weapons_fnc_normalizeWeaponConfiguration"
+  },
+  {
+    "addon": "Weapons",
+    "category": "domain",
+    "function": "isValidIdentityToken",
+    "symbol": "ServoPeregrino_Organizador_Weapons_fnc_isValidIdentityToken",
+    "path": "functions/domain/fn_isValidIdentityToken.sqf",
+    "params_detected": "[\"_token\",false],[\"_prefix\",\"WID-\",[\"\"]]",
+    "bytes": 395,
+    "references": ""
+  },
+  {
+    "addon": "Weapons",
+    "category": "domain",
+    "function": "normalizeWeaponConfiguration",
+    "symbol": "ServoPeregrino_Organizador_Weapons_fnc_normalizeWeaponConfiguration",
+    "path": "functions/domain/fn_normalizeWeaponConfiguration.sqf",
+    "params_detected": "[\"_value\",false]",
+    "bytes": 781,
+    "references": "ServoPeregrino_Organizador_Nexus_fnc_createResult;ServoPeregrino_Organizador_Weapons_fnc_deepCopy;ServoPeregrino_Organizador_Weapons_fnc_validateWeaponConfigurationStructural"
+  },
+  {
+    "addon": "Weapons",
+    "category": "domain",
+    "function": "validateWeaponConfigurationSemantic",
+    "symbol": "ServoPeregrino_Organizador_Weapons_fnc_validateWeaponConfigurationSemantic",
+    "path": "functions/domain/fn_validateWeaponConfigurationSemantic.sqf",
+    "params_detected": "[\"_value\",false]",
+    "bytes": 1785,
+    "references": "ServoPeregrino_Organizador_Nexus_fnc_createResult;ServoPeregrino_Organizador_Weapons_fnc_validateWeaponConfigurationStructural"
+  },
+  {
+    "addon": "Weapons",
+    "category": "domain",
+    "function": "validateWeaponConfigurationStructural",
+    "symbol": "ServoPeregrino_Organizador_Weapons_fnc_validateWeaponConfigurationStructural",
+    "path": "functions/domain/fn_validateWeaponConfigurationStructural.sqf",
+    "params_detected": "[\"_value\",false]",
+    "bytes": 2046,
+    "references": "ServoPeregrino_Organizador_Nexus_fnc_createResult"
+  },
+  {
+    "addon": "Weapons",
+    "category": "domain",
+    "function": "validateWeaponInstance",
+    "symbol": "ServoPeregrino_Organizador_Weapons_fnc_validateWeaponInstance",
+    "path": "functions/domain/fn_validateWeaponInstance.sqf",
+    "params_detected": "[\"_value\",false]",
+    "bytes": 2611,
+    "references": "ServoPeregrino_Organizador_Nexus_fnc_createResult;ServoPeregrino_Organizador_Weapons_fnc_isValidIdentityToken;ServoPeregrino_Organizador_Weapons_fnc_validateWeaponConfigurationSemantic"
+  },
+  {
+    "addon": "Weapons",
+    "category": "identity",
+    "function": "createWeaponInstance",
+    "symbol": "ServoPeregrino_Organizador_Weapons_fnc_createWeaponInstance",
+    "path": "functions/identity/fn_createWeaponInstance.sqf",
+    "params_detected": "[\"_configuration\",false]",
+    "bytes": 2131,
+    "references": "ServoPeregrino_Organizador_Nexus_fnc_createResult;ServoPeregrino_Organizador_Weapons_fnc_deepCopy;ServoPeregrino_Organizador_Weapons_fnc_initializeAuthority;ServoPeregrino_Organizador_Weapons_fnc_normalizeWeaponConfiguration;ServoPeregrino_Organizador_Weapons_fnc_validateWeaponConfigurationSemantic"
+  },
+  {
+    "addon": "Weapons",
+    "category": "identity",
+    "function": "getIdentityDiagnostics",
+    "symbol": "ServoPeregrino_Organizador_Weapons_fnc_getIdentityDiagnostics",
+    "path": "functions/identity/fn_getIdentityDiagnostics.sqf",
+    "params_detected": "",
+    "bytes": 774,
+    "references": "ServoPeregrino_Organizador_Nexus_fnc_createResult;ServoPeregrino_Organizador_Weapons_fnc_deepCopy;ServoPeregrino_Organizador_Weapons_fnc_initializeAuthority"
+  },
+  {
+    "addon": "Weapons",
+    "category": "identity",
+    "function": "getWeaponInstance",
+    "symbol": "ServoPeregrino_Organizador_Weapons_fnc_getWeaponInstance",
+    "path": "functions/identity/fn_getWeaponInstance.sqf",
+    "params_detected": "[\"_id\",\"\",[\"\"]]",
+    "bytes": 805,
+    "references": "ServoPeregrino_Organizador_Nexus_fnc_createResult;ServoPeregrino_Organizador_Weapons_fnc_deepCopy;ServoPeregrino_Organizador_Weapons_fnc_initializeAuthority"
+  },
+  {
+    "addon": "Weapons",
+    "category": "identity",
+    "function": "initializeAuthority",
+    "symbol": "ServoPeregrino_Organizador_Weapons_fnc_initializeAuthority",
+    "path": "functions/identity/fn_initializeAuthority.sqf",
+    "params_detected": "",
+    "bytes": 947,
+    "references": "ServoPeregrino_Organizador_Nexus_fnc_createResult"
+  },
+  {
+    "addon": "Weapons",
+    "category": "identity",
+    "function": "inspectWeaponCarrier",
+    "symbol": "ServoPeregrino_Organizador_Weapons_fnc_inspectWeaponCarrier",
+    "path": "functions/identity/fn_inspectWeaponCarrier.sqf",
+    "params_detected": "[\"_carrier\",objNull,[objNull]]",
+    "bytes": 1812,
+    "references": "ServoPeregrino_Organizador_Nexus_fnc_createDiagnostic;ServoPeregrino_Organizador_Nexus_fnc_createResult;ServoPeregrino_Organizador_Weapons_fnc_configurationFromWeaponArray;ServoPeregrino_Organizador_Weapons_fnc_getConfigurationFingerprint"
+  },
+  {
+    "addon": "Weapons",
+    "category": "identity",
+    "function": "updateWeaponInstanceConfiguration",
+    "symbol": "ServoPeregrino_Organizador_Weapons_fnc_updateWeaponInstanceConfiguration",
+    "path": "functions/identity/fn_updateWeaponInstanceConfiguration.sqf",
+    "params_detected": "[\"_id\",\"\",[\"\"]],[\"_configuration\",false]",
+    "bytes": 1274,
+    "references": "ServoPeregrino_Organizador_Nexus_fnc_createResult;ServoPeregrino_Organizador_Weapons_fnc_deepCopy;ServoPeregrino_Organizador_Weapons_fnc_getWeaponInstance;ServoPeregrino_Organizador_Weapons_fnc_normalizeWeaponConfiguration;ServoPeregrino_Organizador_Weapons_fnc_validateWeaponConfigurationSemantic"
+  },
+  {
+    "addon": "Weapons",
+    "category": "integration",
+    "function": "validateNexus",
+    "symbol": "ServoPeregrino_Organizador_Weapons_fnc_validateNexus",
+    "path": "functions/integration/fn_validateNexus.sqf",
+    "params_detected": "",
+    "bytes": 1030,
+    "references": "ServoPeregrino_Organizador_Nexus_fnc_createResult;ServoPeregrino_Organizador_Nexus_fnc_getCapability;ServoPeregrino_Organizador_Nexus_fnc_hasCapability;ServoPeregrino_Organizador_Nexus_fnc_initialize"
+  },
+  {
+    "addon": "Weapons",
+    "category": "lifecycle",
+    "function": "getBuildInfo",
+    "symbol": "ServoPeregrino_Organizador_Weapons_fnc_getBuildInfo",
+    "path": "functions/lifecycle/fn_getBuildInfo.sqf",
+    "params_detected": "",
+    "bytes": 319,
+    "references": ""
+  },
+  {
+    "addon": "Weapons",
+    "category": "lifecycle",
+    "function": "initialize",
+    "symbol": "ServoPeregrino_Organizador_Weapons_fnc_initialize",
+    "path": "functions/lifecycle/fn_initialize.sqf",
+    "params_detected": "",
+    "bytes": 1469,
+    "references": "ServoPeregrino_Organizador_Nexus_fnc_createResult;ServoPeregrino_Organizador_Nexus_fnc_log;ServoPeregrino_Organizador_Nexus_fnc_registerCapability;ServoPeregrino_Organizador_Weapons_fnc_getBuildInfo;ServoPeregrino_Organizador_Weapons_fnc_getRuntimeStatus;ServoPeregrino_Organizador_Weapons_fnc_validateNexus"
+  },
+  {
+    "addon": "Weapons",
+    "category": "runtime",
+    "function": "getRuntimeStatus",
+    "symbol": "ServoPeregrino_Organizador_Weapons_fnc_getRuntimeStatus",
+    "path": "functions/runtime/fn_getRuntimeStatus.sqf",
+    "params_detected": "",
+    "bytes": 324,
+    "references": "ServoPeregrino_Organizador_Nexus_fnc_createResult;ServoPeregrino_Organizador_Weapons_fnc_deepCopy"
+  },
+  {
+    "addon": "Weapons",
+    "category": "tests",
+    "function": "clientReceiveLabResult",
+    "symbol": "ServoPeregrino_Organizador_Weapons_fnc_clientReceiveLabResult",
+    "path": "functions/tests/fn_clientReceiveLabResult.sqf",
+    "params_detected": "[\"_text\",\"\",[\"\"]]",
+    "bytes": 141,
+    "references": ""
+  },
+  {
+    "addon": "Weapons",
+    "category": "tests",
+    "function": "installLabActions",
+    "symbol": "ServoPeregrino_Organizador_Weapons_fnc_installLabActions",
+    "path": "functions/tests/fn_installLabActions.sqf",
+    "params_detected": "[\"_unit\",objNull,[objNull]]",
+    "bytes": 3087,
+    "references": "ServoPeregrino_Organizador_Weapons_fnc_installLabActions;ServoPeregrino_Organizador_Weapons_fnc_runDelivery0_1ATests;ServoPeregrino_Organizador_Weapons_fnc_serverHandleLabRequest"
+  },
+  {
+    "addon": "Weapons",
+    "category": "tests",
+    "function": "runDelivery0_1ATests",
+    "symbol": "ServoPeregrino_Organizador_Weapons_fnc_runDelivery0_1ATests",
+    "path": "functions/tests/fn_runDelivery0_1ATests.sqf",
+    "params_detected": "",
+    "bytes": 9590,
+    "references": "ServoPeregrino_Organizador_Nexus_fnc_createResult;ServoPeregrino_Organizador_Nexus_fnc_getCapability;ServoPeregrino_Organizador_Nexus_fnc_hasCapability;ServoPeregrino_Organizador_Weapons_fnc_captureWeaponConfiguration;ServoPeregrino_Organizador_Weapons_fnc_compareWeaponConfigurations;ServoPeregrino_Organizador_Weapons_fnc_configurationFromWeaponArray;ServoPeregrino_Organizador_Weapons_fnc_createWeaponConfiguration;ServoPeregrino_Organizador_Weapons_fnc_createWeaponInstance;ServoPeregrino_Organizador_Weapons_fnc_deepCopy;ServoPeregrino_Organizador_Weapons_fnc_getConfigurationFingerprint;ServoPeregrino_Organizador_Weapons_fnc_getRuntimeStatus;ServoPeregrino_Organizador_Weapons_fnc_getWeaponInstance;ServoPeregrino_Organizador_Weapons_fnc_initialize;ServoPeregrino_Organizador_Weapons_fnc_isValidIdentityToken;ServoPeregrino_Organizador_Weapons_fnc_updateWeaponInstanceConfiguration;ServoPeregrino_Organizador_Weapons_fnc_validateNexus;ServoPeregrino_Organizador_Weapons_fnc_validateWeaponConfigurationSemantic;ServoPeregrino_Organizador_Weapons_fnc_validateWeaponConfigurationStructural;ServoPeregrino_Organizador_Weapons_fnc_validateWeaponInstance"
+  },
+  {
+    "addon": "Weapons",
+    "category": "tests",
+    "function": "serverHandleLabRequest",
+    "symbol": "ServoPeregrino_Organizador_Weapons_fnc_serverHandleLabRequest",
+    "path": "functions/tests/fn_serverHandleLabRequest.sqf",
+    "params_detected": "[\"_unit\",objNull,[objNull]],[\"_operation\",\"\",[\"\"]],[\"_slot\",\"PRIMARY\",[\"\"]],[\"_target\",objNull,[objNull]],[\"_eventItem\",\"\",[\"\"]]",
+    "bytes": 4364,
+    "references": "ServoPeregrino_Organizador_Nexus_fnc_createResult;ServoPeregrino_Organizador_Weapons_fnc_captureWeaponConfiguration;ServoPeregrino_Organizador_Weapons_fnc_clientReceiveLabResult;ServoPeregrino_Organizador_Weapons_fnc_createWeaponInstance;ServoPeregrino_Organizador_Weapons_fnc_deepCopy;ServoPeregrino_Organizador_Weapons_fnc_getIdentityDiagnostics;ServoPeregrino_Organizador_Weapons_fnc_getWeaponInstance;ServoPeregrino_Organizador_Weapons_fnc_initializeAuthority;ServoPeregrino_Organizador_Weapons_fnc_inspectWeaponCarrier;ServoPeregrino_Organizador_Weapons_fnc_updateWeaponInstanceConfiguration"
   }
 ]

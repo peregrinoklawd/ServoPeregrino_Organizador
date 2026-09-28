@@ -447,3 +447,7 @@ Antes de criar uma funcionalidade nova:
 6. registrar a decisão em `machine/FEATURE_OWNERSHIP.json` e neste documento.
 
 Esse catálogo deve ser tratado como contrato arquitetural do projeto.
+
+## Nota de implementação — Weapons 0.1-A
+
+Os itens planejados de Weapons descrevem o produto final. Nesta entrega existem foundation e implementações internas candidatas de configuração/instância/serial. A identidade física não está comprovada, nenhum contrato v1 está publicado e nenhuma integração de domínio está ativa. Ownership permanece igual.

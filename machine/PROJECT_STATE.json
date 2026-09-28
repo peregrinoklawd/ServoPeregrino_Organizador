@@ -19,10 +19,11 @@
     "single_feature_owner": true,
     "feature_ownership_rule": "Each domain feature has exactly one owning module; consumers integrate through Nexus contracts/capabilities/events and must not duplicate implementation.",
     "hub_optional": true,
-    "hub_rule": "Hub is an optional player-facing integration/orchestration layer. No domain module may require Hub in order to function."
+    "hub_rule": "Hub is an optional player-facing integration/orchestration layer. No domain module may require Hub in order to function.",
+    "independent_core_development": true
   },
-  "global_next_gate": "Close Items 0.13-A runtime/multiplayer gate: load Packaging R2 in Arma, confirm no Unable to open PBO, open UI, then execute server-authoritative multiplayer smoke.",
-  "global_after_gate": "Only after 0.13-A closes, continue Items 0.13-B JIP & State Reconciliation and begin formal cross-module contracts.",
+  "global_next_gate": "Independent gates: Items 0.13-A Packaging R2/runtime/multiplayer remains pending; Weapons 0.1-A addon load/AUTO TEST/physical identity A-E remain OPEN. Neither isolated core waits for the other.",
+  "global_after_gate": "Items 0.13-B only after its own 0.13-A gate. Weapons next delivery only after human review; stable identity contracts require physical lifecycle evidence. Cross-module integrations have separate gates.",
   "modules": [
     {
       "id": "Nexus",
@@ -156,14 +157,19 @@
       "addon": "ServoPeregrino_Organizador_Weapons",
       "mandatory": false,
       "stable_version": null,
-      "development_version": null,
+      "development_version": {
+        "display": "0.1-A",
+        "semantic": "0.1.0.1",
+        "build": "0.1.0.1-a-foundation-identity-spike"
+      },
       "dependencies": [
         "Nexus"
       ],
       "capabilities_provided": {
-        "implemented": [],
+        "implemented": [
+          "weapons.runtime"
+        ],
         "planned": [
-          "weapons.runtime",
           "weapons.catalog",
           "weapons.configuration",
           "weapons.instance"
@@ -180,16 +186,18 @@
       },
       "contracts_consumed": {
         "required": [],
-        "optional": [
+        "optional": [],
+        "planned_optional": [
           "policy.provider.v1",
           "stock.provider.v1",
           "economy.provider.v1",
           "persistence.provider.v1"
         ]
       },
-      "status": "PLANNED_DOMAIN_CORE",
-      "next_gate": "Define WeaponInstance v1 identity/serial lifecycle, WeaponConfiguration/WeaponRecipe contracts, slot compatibility and dynamic weapon swap without changing the rest of the loadout.",
-      "homologated_artifact": null
+      "status": "FOUNDATION_IDENTITY_SPIKE_PENDING_RUNTIME_VALIDATION",
+      "next_gate": "OPEN: validate addon mount and AUTO TEST; collect manual A-E evidence. Physical identity across identical weapons/transfers remains UNPROVEN. No stable v1 before proof.",
+      "homologated_artifact": null,
+      "current_candidate_artifact": "Weapons 0.1-A source + Identity Lab 4 Slots; PBO build/load not executed"
     },
     {
       "id": "Equipment",
@@ -499,7 +507,8 @@
       "docs/17_ARMORER_WEAPONS_WEAR_ARCHITECTURE.md",
       "docs/18_CATALOGO_FUNCIONAL_E_OWNERSHIP.md",
       "docs/19_VISAO_FUNCIONAL_COMPARTILHAVEL.md",
-      "docs/20_HUB_ARQUITETURA_E_INTEGRACAO.md"
+      "docs/20_HUB_ARQUITETURA_E_INTEGRACAO.md",
+      "docs/21_WEAPONS_0_1_A_FOUNDATION_IDENTITY_SPIKE.md"
     ],
     "machine_start": [
       "machine/PROJECT_STATE.json",
@@ -510,10 +519,10 @@
   },
   "design_decisions": {
     "weapon_identity": {
-      "status": "PLANNED",
+      "status": "INTERNAL_CANDIDATE_IDENTITY_SPIKE",
       "decision": "WeaponInstance identity and definitive serial belong to Weapons because identity exists independently of whether wear is enabled.",
       "owner_module": "Weapons",
-      "gate": "Prove identity preservation across player inventory, weapon holders, storage and multiplayer transfers before implementation."
+      "gate": "Prove physical identity preservation across player slots, weapon holders, cargo and MP, especially identical duplicates, before freezing weapons.instance.v1. Logical SESSION issuance does not prove binding."
     },
     "weapon_wear": {
       "status": "PLANNED",

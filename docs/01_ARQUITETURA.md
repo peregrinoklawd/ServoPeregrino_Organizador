@@ -159,3 +159,7 @@ Regras:
 - Hub é dono da experiência integrada/navegação.
 
 Ver `20_HUB_ARQUITETURA_E_INTEGRACAO.md`.
+
+## Weapons 0.1-A — implementação candidata
+
+Dependências obrigatórias: `A3_Functions_F` e Nexus. Foundation/lifecycle, modelos fechados internos de configuração/instância, emissão server-side de sessão e observador de inventário. Não há associação física autoritativa nem integração com outros domínios. O registry separa instâncias lógicas de referências transitórias usadas somente no laboratório. Detalhes em `21_WEAPONS_0_1_A_FOUNDATION_IDENTITY_SPIKE.md`.

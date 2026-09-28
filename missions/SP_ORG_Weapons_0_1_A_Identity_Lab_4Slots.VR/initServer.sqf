@@ -27,5 +27,5 @@ for "_i" from 1 to 2 do {
  if (_result get "success") then {_ids pushBack (((_result get "data") get "instance") get "instanceId")};
 };
 // These two records are UNBOUND. Their order MUST NOT be assigned to cargo rows.
-diag_log format ["[SP_ORG] [WEAPONS] [DUPLICATES_UNBOUND] logicalIds=%1; physicalCount=2; mapping=UNPROVEN",_ids];
+diag_log format ["[SP_ORG] [WEAPONS] [DUPLICATES_UNBOUND] logicalIds=%1; requestedPhysicalCount=2; observedPhysicalCount=%2; mapping=UNPROVEN",_ids,count (weaponsItemsCargo _duplicates)];
 diag_log "[SP_ORG] [WEAPONS] [LAB_READY] 4 slots; all physical gates OPEN";

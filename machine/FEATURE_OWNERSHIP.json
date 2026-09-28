@@ -260,5 +260,19 @@
         "Player/UI"
       ]
     }
-  ]
+  ],
+  "implementation_notes": {
+    "Weapons": {
+      "delivery": "0.1-A",
+      "status": "FOUNDATION_IDENTITY_SPIKE_PENDING_RUNTIME_VALIDATION",
+      "implemented_candidate": [
+        "weapon-configuration",
+        "weapon-instance",
+        "weapon-serial"
+      ],
+      "physical_identity_proven": false,
+      "other_module_integrations": [],
+      "note": "Ownership unchanged. Models internal; runtime capability only; all stable domain contracts planned."
+    }
+  }
 }

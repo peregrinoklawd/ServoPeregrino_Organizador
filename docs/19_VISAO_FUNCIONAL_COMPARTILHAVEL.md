@@ -447,3 +447,7 @@ Antes de criar uma nova funcionalidade:
 5. registrar essa decisão na documentação do projeto.
 
 O objetivo é impedir que diferentes mods criem ações, menus, dados e sistemas duplicados para resolver o mesmo problema.
+
+## Atualização Weapons 0.1-A
+
+Existe agora uma fundação técnica e um laboratório para investigar a identidade individual das armas. A capacidade de preservar essa identidade em movimentações e entre armas idênticas ainda não foi comprovada. Os itens de gameplay acima permanecem planejados; isto não é uma entrega funcional completa de Weapons.

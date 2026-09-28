@@ -9,6 +9,7 @@ Um repositório, vários módulos/PBOs. Nenhum módulo deve depender do estado p
 ## Implementado hoje
 
 - `addons/ServoPeregrino_Organizador_Nexus` — Foundation 1.1.
+- `addons/ServoPeregrino_Organizador_Weapons` — 0.1-A foundation e spike candidato; identidade física não comprovada.
 - `addons/ServoPeregrino_Organizador_Items` — baseline 0.12 FINAL; lógica 0.13-A em validação runtime/multiplayer.
 - `missions/SP_ORG_Items_0_13_A_Multiplayer_Lab_8Slots_R3.VR` — laboratório Items.
 
@@ -65,3 +66,9 @@ Hub   = faz o jogador conversar com os módulos.
 O Hub poderá oferecer menu principal, navegação dinâmica, passagem de contexto e ações integradas. Ele **não executa lógica de domínio** e nenhum módulo dependerá dele para funcionar.
 
 Detalhes: `docs/20_HUB_ARQUITETURA_E_INTEGRACAO.md`.
+
+## Weapons 0.1-A em revisão
+
+Fundação integrada somente ao Nexus, modelos internos candidatos e laboratório de identidade de quatro slots. Contratos v1 não publicados. [Entrega, instalação e gates](docs/21_WEAPONS_0_1_A_FOUNDATION_IDENTITY_SPIKE.md).
+
+O desenvolvimento dos núcleos é independente. O gate de Items 0.13-A permanece pendente e não bloqueia Weapons. Nenhuma integração com outros domínios foi criada.

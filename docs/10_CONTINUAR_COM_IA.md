@@ -51,7 +51,8 @@ Regras obrigatórias:
 - Mission Lab R3 carrega e slots funcionam.
 - Packaging R2 pendente de validação runtime.
 - Armorer possui baseline histórica madura, ainda não importada no monorepo.
-- Hub/Weapons/WeaponCondition/Equipment/Sets/Policy/ServerIntegration são planejados.
+- Weapons 0.1-A é foundation/spike candidato, pendente de validação runtime e identidade física.
+- Hub/WeaponCondition/Equipment/Sets/Policy/ServerIntegration são planejados.
 
 ## Arquivos para alterações
 
@@ -85,3 +86,7 @@ Mudanças relevantes devem preferir:
 3. PR;
 4. merge após revisão;
 5. atualização da documentação de continuidade no mesmo ciclo.
+
+## Continuidade Weapons 0.1-A
+
+Ler `docs/21_WEAPONS_0_1_A_FOUNDATION_IDENTITY_SPIKE.md` e provenance da entrega. Não confundir o registry lógico com uma identidade física comprovada. `weapons.runtime` é a única capability nova; contratos de domínio seguem candidatos/planejados. Não iniciar 0.1-B sem revisão humana. Núcleos independentes podem avançar sem aguardar Items ou Armorer.

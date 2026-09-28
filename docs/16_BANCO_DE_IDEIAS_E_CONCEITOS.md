@@ -50,7 +50,7 @@ Regras:
 **IMPLEMENTADO / AVANÇADO** — ItemEntry, ItemKit, Repository, Draft, Catalog, Inventory, Application Engine, Whole-Kit, EXACT, rollback, DnD, UI e PRIVADOS/PÚBLICOS. 0.12 FINAL homologada; 0.13-A em gate runtime/multiplayer.
 
 ### Weapons
-**PLANEJADO** — WeaponKit, WeaponConfiguration, WeaponRecipe, compatibilidade de slots/attachments/magazines, troca dinâmica sem alterar o restante do loadout, WeaponInstance e serial definitivo.
+**FOUNDATION/SPIKE 0.1-A EM SOURCE; GATE FÍSICO ABERTO** — modelos internos candidatos, emissão SERVER/SESSION e observação. Capacidade pública limitada a `weapons.runtime`. Funcionalidades finais ainda **PLANEJADAS** — WeaponKit, WeaponConfiguration, WeaponRecipe, compatibilidade de slots/attachments/magazines, troca dinâmica sem alterar o restante do loadout, WeaponInstance e serial definitivo.
 
 ### WeaponCondition
 **PLANEJADO** — desgaste, uso, água/submersão, condição de peças, sujeira, lubrificação, corrosão, confiabilidade, panes e manutenção lógica; permite provider nativo ou externo com uma única autoridade de condição.
@@ -341,3 +341,7 @@ Invariantes:
 - Nexus continua sendo a infraestrutura técnica.
 
 Arquitetura detalhada: `20_HUB_ARQUITETURA_E_INTEGRACAO.md`.
+
+## 17. Execução de núcleos independentes — Weapons 0.1-A
+
+A ordem recomendada acima não estabelece dependências obrigatórias entre núcleos. Weapons iniciou isoladamente com Nexus. Fingerprint, classe, índice e localização foram rejeitados como identidade; dois registros lógicos não provam a associação às duas armas físicas. Sem prova, manter gate aberto e schema interno candidato. Condição permanece exclusivamente em WeaponCondition.

@@ -62,7 +62,8 @@ O **Packaging R2** reempacota os mesmos fontes sem alterar SQF funcional. Ele ai
 - Packaging R2 ainda não foi homologado dentro do Arma.
 - 0.13-A ainda não foi homologada em multiplayer real com dois ou mais clientes.
 - JIP/persistência pública/ACL/rate limit/recovery ainda pertencem ao roadmap 0.13-B+.
-- Hub, Weapons, WeaponCondition, Equipment, Sets, Policy e ServerIntegration ainda são módulos planejados.
+- Hub, WeaponCondition, Equipment, Sets, Policy e ServerIntegration ainda são módulos planejados.
+- Weapons 0.1-A possui foundation e modelos candidatos; build/load, AUTO TEST no Arma e identidade física/MP ainda não validados.
 - Armorer possui base histórica madura, mas o runtime autoritativo ainda não foi importado ao monorepo.
 
 ## Dívida automática aceita
@@ -79,3 +80,7 @@ Ler obrigatoriamente:
 - `docs/18_CATALOGO_FUNCIONAL_E_OWNERSHIP.md`;
 - `docs/19_VISAO_FUNCIONAL_COMPARTILHAVEL.md`;
 - `docs/20_HUB_ARQUITETURA_E_INTEGRACAO.md`.
+
+## Frente independente — Weapons 0.1-A
+
+`FOUNDATION_IDENTITY_SPIKE_PENDING_RUNTIME_VALIDATION`. Capability `weapons.runtime`; sem contratos estáveis; registry lógico SERVER/SESSION e observação de inventário. Gate físico A–E **ABERTO**, especialmente armas idênticas. A ordem de desenvolvimento de núcleos não cria dependência de Items/Armorer. Ver [entrega](21_WEAPONS_0_1_A_FOUNDATION_IDENTITY_SPIKE.md).

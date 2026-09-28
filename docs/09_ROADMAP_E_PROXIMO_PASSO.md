@@ -46,7 +46,7 @@ Depois do load gate:
 
 ## Cross-module foundation
 
-Depois de estabilizar Items:
+Sequência recomendada para **integrações futuras**, não pré-requisito para iniciar núcleos independentes:
 1. congelar contratos públicos relevantes no Nexus;
 2. migrar a baseline real do Armorer para o monorepo sem feature nova;
 3. provar coexistência Nexus + Items + Armorer;
@@ -114,3 +114,9 @@ Primeiros gates:
 - laboratório com Nexus + pelo menos dois módulos;
 - provar que módulos continuam funcionando sem Hub;
 - somente depois adicionar ações integradas multi-módulo.
+
+## Weapons 0.1-A — núcleo independente
+
+Foundation, modelos candidatos, emissão SERVER/SESSION e laboratório implementados em source. Validar carga e AUTO TEST; investigar gates físicos A–E. A estratégia observacional **não preserva identidade física nas transferências** e não fecha o gate E.
+
+Proposta 0.1-B: somente após revisão humana, buscar evidência reproduzível de identificador nativo estável ou desenhar transações controladas com limites explícitos. Não iniciar kits/receitas nem congelar `weapons.instance.v1` para contornar o problema. Items e Armorer mantêm gates próprios.

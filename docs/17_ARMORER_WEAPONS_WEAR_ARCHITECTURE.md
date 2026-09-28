@@ -1,6 +1,6 @@
 # Weapons + WeaponCondition + Armorer — identidade, condição e manutenção
 
-Status: **DESIGN PLANEJADO; NÃO IMPLEMENTADO**.
+Status: **INTEGRAÇÕES PLANEJADAS; Weapons possui foundation/spike 0.1-A interno candidato, sem identidade física comprovada**. Ver `21_WEAPONS_0_1_A_FOUNDATION_IDENTITY_SPIKE.md`.
 
 ## Decisão de ownership
 
