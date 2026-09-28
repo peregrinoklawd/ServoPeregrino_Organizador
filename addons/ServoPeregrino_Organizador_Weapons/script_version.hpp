@@ -1,0 +1,5 @@
+#define SERVO_PEREGRINO_ORGANIZADOR_WEAPONS_DISPLAY_VERSION "0.1-A"
+#define SERVO_PEREGRINO_ORGANIZADOR_WEAPONS_SEMANTIC_VERSION "0.1.0.1"
+#define SERVO_PEREGRINO_ORGANIZADOR_WEAPONS_BUILD "0.1.0.1-a-foundation-identity-spike"
+#define SP_ORG_WEAPONS_RUNTIME "ServoPeregrino_Organizador_Weapons_runtime"
+#define SP_ORG_WEAPONS_AUTHORITY "ServoPeregrino_Organizador_Weapons_authority"
