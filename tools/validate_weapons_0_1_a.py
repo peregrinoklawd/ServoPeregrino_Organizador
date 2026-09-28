@@ -71,15 +71,11 @@ check('Weapons does not set global CfgRemoteExec Functions mode', not re.search(
 check('Weapons does not set global CfgRemoteExec Functions jip', not re.search(r'class\s+Functions\s*\{\s*jip\s*=', config))
 endpoint = (ADDON/'functions/tests/fn_serverHandleLabRequest.sqf').read_text()
 check('lab endpoint validates enable flag and ownership', 'SP_ORG_Weapons_LabEnabled' in endpoint and 'owner _unit != _sender' in endpoint and 'remoteExecutedOwner' in endpoint)
-authority_paths = [
- ADDON/'functions/identity/fn_initializeAuthority.sqf',
- ADDON/'functions/identity/fn_createWeaponInstance.sqf',
- ADDON/'functions/identity/fn_getWeaponInstance.sqf',
- ADDON/'functions/identity/fn_updateWeaponInstanceConfiguration.sqf',
- ADDON/'functions/identity/fn_getIdentityDiagnostics.sqf',
- ADDON/'functions/identity/fn_inspectWeaponCarrier.sqf'
-]
-check('internal authority functions reject direct RemoteExec', all('isRemoteExecuted' in p.read_text() for p in authority_paths))
+lab_description = (LAB/'description.ext').read_text()
+check('lab mission owns whitelist RemoteExec policy', re.search(r'class\s+Functions\s*\{\s*mode\s*=\s*1\s*;', lab_description))
+check('lab mission disables JIP globally for test endpoints', re.search(r'class\s+Functions\s*\{\s*mode\s*=\s*1\s*;\s*jip\s*=\s*0\s*;', lab_description))
+check('lab whitelist includes both Weapons endpoints', PREFIX+'serverHandleLabRequest' in lab_description and PREFIX+'clientReceiveLabResult' in lab_description)
+check('lab whitelist keeps debug console explicit', 'BIS_fnc_debugConsoleExec' in lab_description)
 check('server identity allocator guard', 'if (!isServer)' in (ADDON/'functions/identity/fn_createWeaponInstance.sqf').read_text())
 check('server allocator atomic allocation', 'isNil {' in (ADDON/'functions/identity/fn_createWeaponInstance.sqf').read_text())
 check('serial is not classname/config/location-derived', '"SPW-" + _suffix' in all_sources and '_state get "session"' in all_sources)
