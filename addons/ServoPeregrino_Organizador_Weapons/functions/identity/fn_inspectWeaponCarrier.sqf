@@ -1,4 +1,5 @@
 params [["_carrier",objNull,[objNull]]];
+if (isRemoteExecuted) exitWith {[false,"WEAPONS_REMOTE_EXEC_FORBIDDEN","Carrier inspection is local-only; use a declared gateway."] call ServoPeregrino_Organizador_Nexus_fnc_createResult};
 if (isNull _carrier) exitWith {[false,"WEAPONS_CARRIER_INVALID","No carrier."] call ServoPeregrino_Organizador_Nexus_fnc_createResult};
 private _isUnit = _carrier isKindOf "CAManBase";
 private _rows = if (_isUnit) then {(getUnitLoadout _carrier) select [0,3]} else {weaponsItemsCargo _carrier};
