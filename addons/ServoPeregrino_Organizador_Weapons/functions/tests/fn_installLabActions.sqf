@@ -37,7 +37,7 @@ _unit addAction ["Weapons | Instrucoes de movimentacao",{hint "Use I para largar
  _unit addEventHandler [_event,{
   params ["_unit","_container","_item"];
   diag_log format ["[SP_ORG] [WEAPONS] [INVENTORY_EVENT] unit=%1 container=%2 item=%3",netId _unit,netId _container,_item];
-  [_unit,"EVENT","PRIMARY",_container] remoteExecCall ["ServoPeregrino_Organizador_Weapons_fnc_serverHandleLabRequest",2];
+  [_unit,"EVENT","PRIMARY",_container,_item] remoteExecCall ["ServoPeregrino_Organizador_Weapons_fnc_serverHandleLabRequest",2];
  }];
 } forEach ["Take","Put"];
 _unit addEventHandler ["Respawn",{params ["_new"];[_new] call ServoPeregrino_Organizador_Weapons_fnc_installLabActions}];

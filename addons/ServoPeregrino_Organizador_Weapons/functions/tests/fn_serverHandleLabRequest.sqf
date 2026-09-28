@@ -1,7 +1,7 @@
 #include "..\..\script_version.hpp"
 // This is the only remotely callable server entry. No client supplies an ID, serial or configuration.
 if (!isServer || {!(missionNamespace getVariable ["SP_ORG_Weapons_LabEnabled",false])}) exitWith {};
-params [["_unit",objNull,[objNull]],["_operation","",[""]],["_slot","PRIMARY",[""]],["_target",objNull,[objNull]]];
+params [["_unit",objNull,[objNull]],["_operation","",[""]],["_slot","PRIMARY",[""]],["_target",objNull,[objNull]],["_eventItem","",[""]]];
 private _sender = if (isRemoteExecuted) then {remoteExecutedOwner} else {2};
 if (isNull _unit || {!isPlayer _unit} || {owner _unit != _sender}) exitWith {};
 if !(_operation in ["REGISTER","QUERY","UPDATE","OBSERVE","EVENT","DIAGNOSTICS"]) exitWith {};
@@ -21,7 +21,7 @@ private _result = createHashMap;
 if (_operation isEqualTo "EVENT") then {
  {
   private _r = _references get _x;
-  if ((_r get "unit") isEqualTo _unit) then {_r set ["status","UNRESOLVED_AFTER_EXTERNAL_EVENT"]};
+  if ((_r get "unit") isEqualTo _unit && {getNumber (configFile >> "CfgWeapons" >> _eventItem >> "type") in [1,2,4]}) then {_r set ["status","UNRESOLVED_AFTER_EXTERNAL_EVENT"]};
  } forEach keys _references;
  _result = [_unit] call ServoPeregrino_Organizador_Weapons_fnc_inspectWeaponCarrier;
 } else {

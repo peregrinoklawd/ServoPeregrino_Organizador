@@ -49,6 +49,7 @@ class CfgFunctions {
    class getRuntimeStatus {};
   };
   class Tests {
+   class runDelivery0_1ATests {};
    file="\ServoPeregrino_Organizador_Weapons\functions\tests";
    class clientReceiveLabResult {};
    class installLabActions {};
