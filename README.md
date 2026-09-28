@@ -30,3 +30,12 @@ Leia antes de alterar runtime:
 - `machine/PROJECT_STATE.json`
 
 Nunca reconstrua uma entrega por memória. Trabalhe por delta sobre a baseline registrada e preserve contratos homologados.
+
+
+## Estrutura modular preparada
+
+O diretório `addons/` agora contém slots explícitos para os módulos futuros. Um slot com apenas `README.md` **não participa do build**.
+
+O Armorer possui diretório reservado em `addons/ServoPeregrino_Organizador_Armorer/`. A baseline histórica será importada somente depois de confirmar o source autoritativo, sem reconstrução de memória.
+
+Design de identidade/desgaste: `docs/17_ARMORER_WEAPONS_WEAR_ARCHITECTURE.md`.
