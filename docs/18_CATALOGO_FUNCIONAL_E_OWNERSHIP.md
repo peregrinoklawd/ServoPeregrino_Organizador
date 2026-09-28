@@ -12,7 +12,7 @@ Regra principal:
 
 Isso evita duplicações como:
 - Items e Equipment criarem dois motores diferentes para o mesmo conteúdo;
-- Armorer e Weapons manterem dois estados diferentes de desgaste;
+- Weapons, WeaponCondition e Armorer criarem estados/lógicas concorrentes para a mesma condição;
 - cada módulo implementar sua própria whitelist/blacklist;
 - cada módulo integrar diretamente com banco/economia/estoque do servidor.
 
