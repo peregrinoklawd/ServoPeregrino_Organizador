@@ -67,11 +67,29 @@ check('exactly four playable slots', (LAB/'mission.sqm').read_text().count('isPl
 check('mission contains no copied addon implementation', all('createHashMapFromArray' not in p.read_text() for p in LAB.glob('*.sqf')))
 check('manual gates remain OPEN', '"identityGate","OPEN"' in all_sources and '["physicalIdentityProven",false]' in all_sources)
 check('only two RemoteExec endpoints', set(re.findall(r'class (ServoPeregrino_Organizador_Weapons_fnc_\w+) \{allowedTargets=',config)) == {PREFIX+'serverHandleLabRequest',PREFIX+'clientReceiveLabResult'})
+check('Weapons does not set global CfgRemoteExec Functions mode', not re.search(r'class\s+Functions\s*\{\s*mode\s*=', config))
+check('Weapons does not set global CfgRemoteExec Functions jip', not re.search(r'class\s+Functions\s*\{\s*jip\s*=', config))
 endpoint = (ADDON/'functions/tests/fn_serverHandleLabRequest.sqf').read_text()
 check('lab endpoint validates enable flag and ownership', 'SP_ORG_Weapons_LabEnabled' in endpoint and 'owner _unit != _sender' in endpoint and 'remoteExecutedOwner' in endpoint)
+authority_paths = [
+ ADDON/'functions/identity/fn_initializeAuthority.sqf',
+ ADDON/'functions/identity/fn_createWeaponInstance.sqf',
+ ADDON/'functions/identity/fn_getWeaponInstance.sqf',
+ ADDON/'functions/identity/fn_updateWeaponInstanceConfiguration.sqf',
+ ADDON/'functions/identity/fn_getIdentityDiagnostics.sqf',
+ ADDON/'functions/identity/fn_inspectWeaponCarrier.sqf'
+]
+check('internal authority functions reject direct RemoteExec', all('isRemoteExecuted' in p.read_text() for p in authority_paths))
 check('server identity allocator guard', 'if (!isServer)' in (ADDON/'functions/identity/fn_createWeaponInstance.sqf').read_text())
 check('server allocator atomic allocation', 'isNil {' in (ADDON/'functions/identity/fn_createWeaponInstance.sqf').read_text())
 check('serial is not classname/config/location-derived', '"SPW-" + _suffix' in all_sources and '_state get "session"' in all_sources)
+config_structural = (ADDON/'functions/domain/fn_validateWeaponConfigurationStructural.sqf').read_text()
+fingerprint_source = (ADDON/'functions/domain/fn_getConfigurationFingerprint.sqf').read_text()
+normalize_source = (ADDON/'functions/domain/fn_normalizeWeaponConfiguration.sqf').read_text()
+check('WeaponConfiguration excludes loaded magazine/ammo state', 'primaryMagazine' not in config_structural and 'secondaryMagazine' not in config_structural)
+check('configuration fingerprint excludes loaded magazine/ammo state', 'primaryMagazine' not in fingerprint_source and 'secondaryMagazine' not in fingerprint_source)
+check('stored class spelling is preserved by normalization', 'toLowerANSI' not in normalize_source)
+check('fingerprint performs case-insensitive comparison', 'toLowerANSI' in fingerprint_source)
 check('immutable fields not updated', not re.search(r'_instance set \["(?:instanceId|serial|weaponClass|createdAt)"', (ADDON/'functions/identity/fn_updateWeaponInstanceConfiguration.sqf').read_text()))
 for name in ['Items','Nexus','Armorer']:
     out=subprocess.run(['git','diff',BASE,'--','addons/ServoPeregrino_Organizador_'+name],cwd=ROOT,capture_output=True,text=True,check=True).stdout
