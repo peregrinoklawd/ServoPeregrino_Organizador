@@ -73,7 +73,7 @@
   ],
   "stable_domain_contracts": [],
   "tests": {
-    "static": "59 PASS / 0 FAIL; see STATIC_VALIDATION.txt",
+    "static": "PRE_REVIEW_59_PASS_0_FAIL; POST_REVIEW_15_PASS_0_FAIL_CONNECTOR_AUDIT; UPDATED_PYTHON_VALIDATOR_NOT_EXECUTED_AFTER_FIXES",
     "sqf_suite": "PREPARED_NOT_EXECUTED",
     "pbo_build": "NOT_EXECUTED",
     "pbo_load": "NOT_EXECUTED",
