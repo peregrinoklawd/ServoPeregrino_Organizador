@@ -27,7 +27,10 @@ Leia antes de alterar runtime:
 - `docs/09_ROADMAP_E_PROXIMO_PASSO.md`
 - `docs/10_CONTINUAR_COM_IA.md`
 - `docs/16_BANCO_DE_IDEIAS_E_CONCEITOS.md`
+- `docs/18_CATALOGO_FUNCIONAL_E_OWNERSHIP.md`
+- `docs/19_VISAO_FUNCIONAL_COMPARTILHAVEL.md`
 - `machine/PROJECT_STATE.json`
+- `machine/FEATURE_OWNERSHIP.json`
 
 Nunca reconstrua uma entrega por memória. Trabalhe por delta sobre a baseline registrada e preserve contratos homologados.
 
