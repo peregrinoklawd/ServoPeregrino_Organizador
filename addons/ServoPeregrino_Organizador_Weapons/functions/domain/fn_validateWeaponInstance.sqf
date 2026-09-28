@@ -7,7 +7,7 @@ if !([_value get "instanceId","WID-"] call ServoPeregrino_Organizador_Weapons_fn
 if !([_value get "serial","SPW-"] call ServoPeregrino_Organizador_Weapons_fnc_isValidIdentityToken) exitWith {[false,"WEAPONS_SERIAL_INVALID","Invalid serial."] call ServoPeregrino_Organizador_Nexus_fnc_createResult};
 private _valid = [_value get "configuration"] call ServoPeregrino_Organizador_Weapons_fnc_validateWeaponConfigurationSemantic;
 if !(_valid get "success") exitWith {_valid};
-if !((_value get "weaponClass") isEqualTo ((_value get "configuration") get "weaponClass")) exitWith {[false,"WEAPONS_CLASS_MISMATCH","Instance and configuration classes differ."] call ServoPeregrino_Organizador_Nexus_fnc_createResult};
+if !((toLowerANSI (_value get "weaponClass")) isEqualTo (toLowerANSI (((_value get "configuration") get "weaponClass")))) exitWith {[false,"WEAPONS_CLASS_MISMATCH","Instance and configuration classes differ."] call ServoPeregrino_Organizador_Nexus_fnc_createResult};
 private _meta = _value get "metadata";
 if !(_meta isEqualType createHashMap) exitWith {[false,"WEAPONS_METADATA_INVALID","Expected closed metadata."] call ServoPeregrino_Organizador_Nexus_fnc_createResult};
 if !(count _meta isEqualTo 2 && {(_meta getOrDefault ["scope",""]) isEqualTo "SESSION"} && {(_meta getOrDefault ["authority",""]) isEqualTo "SERVER"}) exitWith {[false,"WEAPONS_METADATA_INVALID","Only scope/authority allowed in candidate metadata."] call ServoPeregrino_Organizador_Nexus_fnc_createResult};
