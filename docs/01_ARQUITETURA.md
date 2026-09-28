@@ -5,7 +5,11 @@
 O SP_ORG é um **monorepo com vários addons/PBOs independentes**.
 
 ```text
-Nexus
+          Hub (opcional)
+     experiência integrada
+              |
+              v
+Nexus -----------------------------
   |
   +-- Items
   +-- Weapons
@@ -130,3 +134,28 @@ Sem provider, módulos continuam em modo standalone.
 ## Policy
 
 Whitelist/blacklist pertence somente a Policy. UI pode filtrar; executor/servidor valida novamente.
+
+
+## Hub — integração voltada ao jogador
+
+O Hub é opcional e fica acima dos módulos de domínio como camada de navegação/orquestração.
+
+```text
+Nexus
+= comunicação técnica
+
+Hub
+= experiência integrada para o jogador
+```
+
+Regras:
+- Hub descobre módulos via capacidades/contratos públicos;
+- mostra somente o que estiver disponível;
+- pode encaminhar contexto entre módulos;
+- pode coordenar ações multi-módulo;
+- não executa lógica de domínio;
+- nenhum módulo de domínio depende do Hub;
+- Sets continua dono da composição dos conjuntos;
+- Hub é dono da experiência integrada/navegação.
+
+Ver `20_HUB_ARQUITETURA_E_INTEGRACAO.md`.
