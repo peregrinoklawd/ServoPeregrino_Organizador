@@ -24,6 +24,8 @@ O SP_ORG é uma família de módulos independentes distribuídos como PBOs separ
 ```text
 Nexus
   ↑ capabilities / contracts / events / results
+Hub
+  ↓ integração visual/orquestração
 Items  Weapons  WeaponCondition  Equipment  Sets  Armorer  Settings
 ```
 
@@ -40,6 +42,9 @@ Regras:
 
 ### Nexus
 **IMPLEMENTADO / ESTÁVEL** — Result, Diagnostics, capabilities, contracts, events, lifecycle e logging.
+
+### Hub
+**PLANEJADO** — Central opcional do Organizador para navegação, descoberta de módulos, passagem de contexto e ações integradas. O Hub coordena; não executa lógica de domínio. Nenhum módulo deve depender do Hub.
 
 ### Items
 **IMPLEMENTADO / AVANÇADO** — ItemEntry, ItemKit, Repository, Draft, Catalog, Inventory, Application Engine, Whole-Kit, EXACT, rollback, DnD, UI e PRIVADOS/PÚBLICOS. 0.12 FINAL homologada; 0.13-A em gate runtime/multiplayer.
@@ -299,3 +304,40 @@ Motivos:
 - preservar ownership único por funcionalidade.
 
 Somente um provider de condição pode ser autoritativo para a mesma arma/sessão.
+
+
+## 16. Decisão — Hub / Central do Organizador
+
+**DECIDIDO**
+
+Será criado um módulo opcional `ServoPeregrino_Organizador_Hub`.
+
+Definição:
+
+```text
+Nexus
+= faz os módulos conversarem tecnicamente.
+
+Hub
+= faz o jogador conversar com os módulos.
+```
+
+Responsabilidades do Hub:
+- porta de entrada única opcional;
+- navegação entre módulos;
+- descoberta dinâmica do que está instalado/disponível;
+- mostrar somente ações válidas;
+- passagem de contexto entre módulos;
+- visão integrada de informações resumidas;
+- alertas/notificações compartilhados;
+- orquestração de ações que envolvem vários módulos.
+
+Invariantes:
+- Hub coordena; não executa lógica de domínio;
+- Items/Weapons/Equipment/Sets/Armorer/WeaponCondition continuam funcionais sem Hub;
+- Hub pode acionar módulos, mas não reimplementa suas funções;
+- Sets continua dono da composição persistente de conjuntos;
+- Hub é dono da experiência integrada para o jogador;
+- Nexus continua sendo a infraestrutura técnica.
+
+Arquitetura detalhada: `20_HUB_ARQUITETURA_E_INTEGRACAO.md`.
