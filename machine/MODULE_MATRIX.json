@@ -1,0 +1,361 @@
+{
+  "generated_from": "machine/PROJECT_STATE.json",
+  "snapshot_date": "2026-09-28",
+  "repository": "peregrinoklawd/ServoPeregrino_Organizador",
+  "modules": [
+    {
+      "id": "Nexus",
+      "addon": "ServoPeregrino_Organizador_Nexus",
+      "mandatory": true,
+      "status": "STABLE_FOUNDATION",
+      "stable_version": {
+        "display": "1.1",
+        "semantic": "0.1.1",
+        "build": "0.1.1-dev-nexus-contract-event-foundation"
+      },
+      "development_version": {
+        "display": "1.1",
+        "semantic": "0.1.1",
+        "build": "0.1.1-dev-nexus-contract-event-foundation"
+      },
+      "dependencies": [],
+      "capabilities_provided": {
+        "implemented": [
+          "nexus.runtime"
+        ],
+        "planned": []
+      },
+      "contracts_provided": {
+        "implemented": [
+          "nexus.runtime.status"
+        ],
+        "planned": []
+      },
+      "contracts_consumed": [],
+      "next_gate": "Preserve backward compatibility while future modules register public contracts/capabilities.",
+      "homologated_artifact": "Nexus 1.1 foundation baseline; current Packaging R2 PBO still shares the global addon load gate.",
+      "current_candidate_artifact": null
+    },
+    {
+      "id": "Items",
+      "addon": "ServoPeregrino_Organizador_Items",
+      "mandatory": false,
+      "status": "ADVANCED_PENDING_0_13_A_RUNTIME_MULTIPLAYER_VALIDATION",
+      "stable_version": {
+        "display": "0.12 FINAL",
+        "semantic": "0.12.x",
+        "build": "Integration Freeze",
+        "homologation": "MANUAL_APPROVED"
+      },
+      "development_version": {
+        "display": "0.13-A",
+        "semantic": "0.13.0.1",
+        "build": "0.13.0.1-a-server-authority-foundation"
+      },
+      "dependencies": [
+        "Nexus"
+      ],
+      "capabilities_provided": {
+        "implemented": [
+          "items.runtime",
+          "items.ui"
+        ],
+        "planned": [
+          "items.policy-query",
+          "items.server-provider-awareness"
+        ]
+      },
+      "contracts_provided": {
+        "implemented": [],
+        "planned": [
+          "items.kit.v1",
+          "items.entry.v1",
+          "items.application.request.v1"
+        ]
+      },
+      "contracts_consumed": {
+        "required": [],
+        "optional": [
+          "policy.provider.v1",
+          "stock.provider.v1",
+          "economy.provider.v1",
+          "persistence.provider.v1"
+        ]
+      },
+      "next_gate": "Packaging R2 load gate, UI smoke, then multiplayer authority/revision smoke.",
+      "homologated_artifact": "0.12 FINAL — Integration Freeze",
+      "current_candidate_artifact": "Packaging R2 + Multiplayer Lab R3"
+    },
+    {
+      "id": "Weapons",
+      "addon": "ServoPeregrino_Organizador_Weapons",
+      "mandatory": false,
+      "status": "PLANNED",
+      "stable_version": null,
+      "development_version": null,
+      "dependencies": [
+        "Nexus"
+      ],
+      "capabilities_provided": {
+        "implemented": [],
+        "planned": [
+          "weapons.runtime",
+          "weapons.catalog",
+          "weapons.configuration",
+          "weapons.instance-state"
+        ]
+      },
+      "contracts_provided": {
+        "implemented": [],
+        "planned": [
+          "weapons.kit.v1",
+          "weapons.configuration.v1",
+          "weapons.instance.v1"
+        ]
+      },
+      "contracts_consumed": {
+        "required": [],
+        "optional": [
+          "policy.provider.v1",
+          "stock.provider.v1",
+          "economy.provider.v1",
+          "persistence.provider.v1"
+        ]
+      },
+      "next_gate": "Define public WeaponKit/configuration contracts without copying Items internals; decide whether persistent WeaponInstance identity is required for wear.",
+      "homologated_artifact": null,
+      "current_candidate_artifact": null
+    },
+    {
+      "id": "Equipment",
+      "addon": "ServoPeregrino_Organizador_Equipment",
+      "mandatory": false,
+      "status": "PLANNED",
+      "stable_version": null,
+      "development_version": null,
+      "dependencies": [
+        "Nexus"
+      ],
+      "capabilities_provided": {
+        "implemented": [],
+        "planned": [
+          "equipment.runtime",
+          "equipment.loadout"
+        ]
+      },
+      "contracts_provided": {
+        "implemented": [],
+        "planned": [
+          "equipment.kit.v1"
+        ]
+      },
+      "contracts_consumed": {
+        "required": [],
+        "optional": [
+          "items.kit.v1",
+          "weapons.kit.v1",
+          "policy.provider.v1",
+          "persistence.provider.v1"
+        ]
+      },
+      "next_gate": "Formalize structural loadout ownership: containers/assigned equipment without duplicating Items content semantics.",
+      "homologated_artifact": null,
+      "current_candidate_artifact": null
+    },
+    {
+      "id": "Sets",
+      "addon": "ServoPeregrino_Organizador_Sets",
+      "mandatory": false,
+      "status": "PLANNED_ORCHESTRATOR",
+      "stable_version": null,
+      "development_version": null,
+      "dependencies": [
+        "Nexus"
+      ],
+      "capabilities_provided": {
+        "implemented": [],
+        "planned": [
+          "sets.runtime"
+        ]
+      },
+      "contracts_provided": {
+        "implemented": [],
+        "planned": [
+          "sets.definition.v1"
+        ]
+      },
+      "contracts_consumed": {
+        "required": [],
+        "optional": [
+          "items.kit.v1",
+          "weapons.kit.v1",
+          "equipment.kit.v1"
+        ]
+      },
+      "next_gate": "Define reference-only composition model; Sets must not duplicate physical mutation engines.",
+      "homologated_artifact": null,
+      "current_candidate_artifact": null
+    },
+    {
+      "id": "Armorer",
+      "addon": "ServoPeregrino_Organizador_Armorer",
+      "mandatory": false,
+      "status": "ADVANCED_FROZEN_PENDING_MONOREPO_MIGRATION",
+      "stable_version": {
+        "display": "1.17.13.2",
+        "note": "known-safe baseline in the mature Armorer/Preview line"
+      },
+      "development_version": {
+        "display": "1.17.15.0",
+        "note": "frozen Visual Fidelity line; 1.17.15.1 RTT experiment rejected"
+      },
+      "dependencies": [
+        "Nexus"
+      ],
+      "capabilities_provided": {
+        "implemented": [],
+        "planned": [
+          "armorer.runtime",
+          "armorer.station",
+          "armorer.session",
+          "armorer.maintenance"
+        ]
+      },
+      "contracts_provided": {
+        "implemented": [],
+        "planned": [
+          "armorer.session.v1",
+          "armorer.maintenance.request.v1",
+          "armorer.maintenance.result.v1"
+        ]
+      },
+      "contracts_consumed": {
+        "required": [],
+        "optional": [
+          "weapons.configuration.v1",
+          "weapons.instance.v1",
+          "stock.provider.v1",
+          "economy.provider.v1",
+          "persistence.provider.v1"
+        ]
+      },
+      "next_gate": "Import authoritative Armorer baseline into monorepo, preserve station/session/lease/preview behavior, then design 2.x wear/maintenance on top of stable commit semantics.",
+      "homologated_artifact": "Historical Armorer known-safe baseline; artifact not yet migrated into this monorepo.",
+      "current_candidate_artifact": null
+    },
+    {
+      "id": "Settings",
+      "addon": "ServoPeregrino_Organizador_Settings",
+      "mandatory": false,
+      "status": "PLANNED",
+      "stable_version": null,
+      "development_version": null,
+      "dependencies": [
+        "Nexus"
+      ],
+      "capabilities_provided": {
+        "implemented": [],
+        "planned": [
+          "settings.runtime"
+        ]
+      },
+      "contracts_provided": {
+        "implemented": [],
+        "planned": [
+          "settings.query.v1"
+        ]
+      },
+      "contracts_consumed": [],
+      "next_gate": "Keep Settings small: expose configuration/preferences/feature flags without becoming domain storage or a god object.",
+      "homologated_artifact": null,
+      "current_candidate_artifact": null
+    },
+    {
+      "id": "Policy",
+      "addon": "ServoPeregrino_Organizador_Policy",
+      "mandatory": false,
+      "status": "NEW_PLANNED_OPTIONAL_LAYER",
+      "stable_version": null,
+      "development_version": null,
+      "dependencies": [
+        "Nexus"
+      ],
+      "capabilities_provided": {
+        "implemented": [],
+        "planned": [
+          "policy.provider"
+        ]
+      },
+      "contracts_provided": {
+        "implemented": [],
+        "planned": [
+          "policy.provider.v1",
+          "policy.decision.v1"
+        ]
+      },
+      "contracts_consumed": [],
+      "next_gate": "Specify generic whitelist/blacklist decision contract for Items and Weapons; enforce at UI/catalog and execution/server boundaries.",
+      "homologated_artifact": null,
+      "current_candidate_artifact": null
+    },
+    {
+      "id": "Adapters",
+      "addon": "ServoPeregrino_Organizador_Adapter_*",
+      "mandatory": false,
+      "status": "PLANNED",
+      "stable_version": null,
+      "development_version": null,
+      "dependencies": [
+        "Nexus",
+        "external mod when applicable"
+      ],
+      "capabilities_provided": {
+        "implemented": [],
+        "planned": [
+          "adapter.ace",
+          "adapter.cba",
+          "adapter.server"
+        ]
+      },
+      "contracts_provided": {
+        "implemented": [],
+        "planned": []
+      },
+      "contracts_consumed": [],
+      "next_gate": "Keep ACE/CBA/server-specific code outside domain cores; adapters register capabilities only when dependencies exist.",
+      "homologated_artifact": null,
+      "current_candidate_artifact": null
+    },
+    {
+      "id": "ServerIntegration",
+      "addon": "ServoPeregrino_Organizador_ServerIntegration",
+      "mandatory": false,
+      "status": "NEW_PLANNED_OPTIONAL_BRIDGE",
+      "stable_version": null,
+      "development_version": null,
+      "dependencies": [
+        "Nexus"
+      ],
+      "capabilities_provided": {
+        "implemented": [],
+        "planned": [
+          "persistence.provider",
+          "stock.provider",
+          "economy.provider"
+        ]
+      },
+      "contracts_provided": {
+        "implemented": [],
+        "planned": [
+          "persistence.provider.v1",
+          "stock.provider.v1",
+          "economy.provider.v1"
+        ]
+      },
+      "contracts_consumed": [],
+      "next_gate": "Define provider discovery and transaction semantics so existing server systems can supply persistence/quantity/stock/price without making SP_ORG implement an economy.",
+      "homologated_artifact": null,
+      "current_candidate_artifact": null
+    }
+  ]
+}
