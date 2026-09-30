@@ -9,7 +9,7 @@ Um repositório, vários módulos/PBOs. Nenhum módulo deve depender do estado p
 ## Implementado hoje
 
 - `addons/ServoPeregrino_Organizador_Nexus` — Foundation 1.1.
-- `addons/ServoPeregrino_Organizador_Weapons` — 0.1-A foundation e spike candidato; identidade física não comprovada.
+- `addons/ServoPeregrino_Organizador_Weapons` — source integrado ainda em 0.1-A; validação mission-first avançou por 0.1-B e 0.2. Identidade física intrínseca continua não comprovada.
 - `addons/ServoPeregrino_Organizador_Items` — baseline 0.12 FINAL; lógica 0.13-A em validação runtime/multiplayer.
 - `missions/SP_ORG_Items_0_13_A_Multiplayer_Lab_8Slots_R3.VR` — laboratório Items.
 
@@ -67,8 +67,15 @@ O Hub poderá oferecer menu principal, navegação dinâmica, passagem de contex
 
 Detalhes: `docs/20_HUB_ARQUITETURA_E_INTEGRACAO.md`.
 
-## Weapons 0.1-A em revisão
+## Weapons — estado mission-first
 
-Fundação integrada somente ao Nexus, modelos internos candidatos e laboratório de identidade de quatro slots. Contratos v1 não publicados. [Entrega, instalação e gates](docs/21_WEAPONS_0_1_A_FOUNDATION_IDENTITY_SPIKE.md).
+O source integrado nesta branch continua sendo **0.1-A**, sem contratos v1 publicados. Desde então, os laboratórios mission-first validaram:
+
+- **0.1-B — WeaponInstance Lifecycle / Event-Delta Evidence**: AUTO TEST 128/128 e gate manual Take/Put 3/3; transições únicas podem ser `CORRELATED`, duplicatas idênticas permanecem `AMBIGUOUS`, ausência de evidência permanece `UNPROVEN`; `physicalIdentityProven=false` em todos os casos.
+- **0.2 — WeaponConfiguration**: AUTO TEST final 175/175; schema candidato com `weaponClass + muzzle + pointer + optic + bipod`, diff, apply com round-trip no engine, preservação de loadedState/ammo, no-op sem mutação e rotas PRIMARY/HANDGUN/SECONDARY.
+
+Essas homologações são de **MISSION-FIRST FUNCTIONAL GATE**, não de PBO/addon integrado. MP/JIP e Packaging continuam deferidos. Próximo marco funcional: **0.3 — Catalog & Compatibility**.
+
+Documentação: [0.1-A](docs/21_WEAPONS_0_1_A_FOUNDATION_IDENTITY_SPIKE.md), [0.1-B](docs/22_WEAPONS_0_1_B_IDENTITY_LIFECYCLE.md) e [0.2](docs/23_WEAPONS_0_2_WEAPON_CONFIGURATION.md).
 
 O desenvolvimento dos núcleos é independente. O gate de Items 0.13-A permanece pendente e não bloqueia Weapons. Nenhuma integração com outros domínios foi criada.
