@@ -139,30 +139,40 @@ Funcionalidades:
 
 ---
 
-## Weapons — armas, montagem e configuração
+## Weapons — armas, kits e configuração
 
-Responsável pelo que a arma **é** e por como ela é montada/configurada.
+Responsável por organizar o domínio de armas e oferecer uma **interface própria para o jogador**, simples e direta.
+
+Weapons não é apenas um serviço técnico do Armorer.
 
 Funcionalidades:
 
-- 🔵 Criar kit de armas
-- 🔵 Criar configurações de armas
-- 🔵 Criar receitas de armas
-- 🔵 Salvar receitas de armas
-- 🔵 Validar quais acessórios podem ser usados em cada arma
-- 🔵 Validar quais carregadores são compatíveis
-- 🔵 Controlar encaixes de acessórios
-- 🔵 Montar a configuração de uma arma
-- 🔵 Trocar uma arma sem alterar o restante do equipamento do personagem
-- 🔵 Alterar somente a arma desejada
-- 🔵 Alterar somente os acessórios desejados
-- 🔵 Dar identidade individual para cada arma
-- 🔵 Criar um número de série definitivo para cada arma
-- 🔵 Manter informações históricas da identidade da arma
-- 🔵 Permitir persistência da identidade e configuração da arma
-- 🔵 Fornecer essas informações para o Armeiro, o módulo de Condição das Armas e os conjuntos completos
+- ✅ Estratégia conservadora de lifecycle/identidade lógica validada em missão
+- ✅ WeaponConfiguration validada em missão
+- ✅ Catálogo de armas derivado do engine
+- ✅ Compatibilidade de acessórios por slot
+- ✅ Compatibilidade de carregadores
+- ✅ Identificação do mod/addon de origem
+- ✅ Cache de catálogo
+- 🔵 WeaponRecipe
+- 🔵 WeaponKit
+- 🔵 Criar/editar/renomear/duplicar/excluir WeaponKits
+- 🔵 Interface própria de catálogo de armas
+- 🔵 Mostrar informações da arma
+- 🔵 Mostrar somente acessórios compatíveis
+- 🔵 Selecionar o slot de arma alvo
+- 🔵 Equipar uma arma configurada sem alterar o restante do equipamento
+- 🔵 Autoridade/reconciliação multiplayer
 
-**Weapons não deve calcular desgaste, sujeira, lubrificação, corrosão ou reparos.**
+**Conceito de WeaponKit: uma arma configurada para um slot. Não é um loadout completo.**
+
+A futura interface de Weapons será fortemente inspirada nas lições aprendidas da parte de armas do APM histórico.
+
+Regra de isolamento:
+
+> Ao aplicar um WeaponKit, somente o slot de arma alvo pode ser alterado intencionalmente. Uniforme, colete, mochila, conteúdo de Items e armas não alvo devem ser preservados.
+
+Weapons **não** é responsável por desgaste, condição, manutenção ou bancada especializada.
 
 ---
 
@@ -207,50 +217,39 @@ Funcionalidades:
 
 ## Armorer — Armeiro
 
-Responsável pela bancada e pela interação do jogador com a arma.
+Responsável pela **experiência especializada de bancada** e não pela interface geral de organização de armas.
 
 Funcionalidades:
 
 - 🟡 Bancada física de armeiro
 - 🟡 Sessão individual de trabalho
-- 🟡 Impedir duas pessoas de utilizarem a mesma bancada ao mesmo tempo
-- 🟡 Visualização 3D da arma
+- 🟡 Lease/exclusividade multiplayer por estação
+- 🟡 Visualização 3D avançada da arma
 - 🟡 Girar e inspecionar a arma
-- 🟡 Montar acessórios
-- 🟡 Remover acessórios
+- 🟡 Montagem/remoção visual de acessórios em contexto de bancada
 - 🟡 Testar alterações antes de confirmar
-- 🟡 Confirmar alterações
-- 🟡 Desfazer alterações quando necessário
-- 🔵 Criar receitas de armas pela interface da bancada
-- 🔵 Editar receitas
-- 🔵 Salvar receitas
-- 🔵 Montar uma arma utilizando uma receita
+- 🟡 Commit/rollback no workflow da estação
+- 🔵 Consumir WeaponRecipe/WeaponKit de Weapons
 - 🔵 Inspecionar a condição da arma
 - 🔵 Apresentar desgaste das peças
+- 🔵 Trabalhar com peças/componentes internos
 - 🔵 Iniciar manutenção
 - 🔵 Interface para limpeza
 - 🔵 Interface para lubrificação
 - 🔵 Interface para diagnóstico
 - 🔵 Interface para reparo
 - 🔵 Trocar peças
-- 🔵 Consumir peças e ferramentas do inventário
-- 🔵 Consumir peças e ferramentas de caixas
-- 🔵 Consumir peças do estoque da bancada
-- 🔵 Consultar disponibilidade de peças
-- 🔵 Consultar custo de manutenção
-- 🔵 Consultar custo de reparos
-- 🔵 Registrar histórico de manutenção quando o servidor oferecer esse recurso
-- ⚪ Utilizar cronógrafo
-- ⚪ Fazer zeragem de armas
-- ⚪ Testar agrupamento dos disparos
-- ⚪ Integrar um pequeno estande de testes
-- ⚪ Emitir um relatório técnico da arma
+- 🔵 Consumir peças/ferramentas do inventário, caixas ou estoque da estação
+- 🔵 Consultar disponibilidade e custo quando providers existirem
+- ⚪ Cronógrafo, zeragem, agrupamento/estande e relatório técnico
 
 Divisão importante:
 
-- **Weapons** informa qual é a arma, sua configuração e quais peças/acessórios são compatíveis
-- **WeaponCondition** informa a condição, desgaste e resultado das manutenções
-- **Armorer** oferece a bancada, a interface e o fluxo usado pelo jogador
+- **Weapons**: arma, configuração, compatibilidade, Recipe, WeaponKit, UI simples e equipar por slot
+- **WeaponCondition**: condição, desgaste, peças e resultado das manutenções
+- **Armorer**: bancada, Preview 3D avançado, inspeção, peças e workflow de manutenção
+
+**Weapons funciona sem Armorer.** Armorer consome os modelos e serviços de Weapons para oferecer uma experiência especializada.
 
 ---
 
@@ -415,6 +414,7 @@ Funcionalidades:
 | ✅ | Criar e gerenciar kits de itens | **Items** |
 | ✅ | Adicionar, remover e aplicar itens no inventário | **Items** |
 | 🔵 | Criar kits, configurações e receitas de armas | **Weapons** |
+| 🔵 | Interface simples de catálogo/configuração/equipar armas por slot | **Weapons** |
 | 🔵 | Identidade e número de série da arma | **Weapons** |
 | 🔵 | Trocar arma sem alterar o restante do equipamento | **Weapons** |
 | 🔵 | Desgaste e condição da arma | **WeaponCondition** |
@@ -422,7 +422,7 @@ Funcionalidades:
 | 🔵 | Condição e desgaste das peças | **WeaponCondition** |
 | 🔵 | Cálculo da manutenção e reparos | **WeaponCondition** |
 | 🟡 | Bancada e visualização 3D da arma | **Armorer** |
-| 🟡 | Montagem de armas pela bancada | **Armorer** |
+| 🟡 | Montagem especializada pela bancada / Preview 3D | **Armorer** |
 | 🔵 | Interface completa de inspeção e manutenção | **Armorer** |
 | 🔵 | Configuração de Uniforme, Colete, Mochila e demais equipamentos | **Equipment** |
 | 🔵 | Combinar kits completos para uma função | **Sets** |
@@ -448,6 +448,13 @@ Antes de criar uma nova funcionalidade:
 
 O objetivo é impedir que diferentes mods criem ações, menus, dados e sistemas duplicados para resolver o mesmo problema.
 
-## Atualização Weapons 0.1-A
+## Atualização Weapons — 29/09/2026
 
-Existe agora uma fundação técnica e um laboratório para investigar a identidade individual das armas. A capacidade de preservar essa identidade em movimentações e entre armas idênticas ainda não foi comprovada. Os itens de gameplay acima permanecem planejados; isto não é uma entrega funcional completa de Weapons.
+A linha mission-first já homologou:
+- 0.1-B: 128/128 AUTO + 3/3 live Take/Put;
+- 0.2: 175/175 AUTO;
+- 0.3 R2: 213/213 AUTO.
+
+O source do addon no repositório ainda permanece 0.1-A e precisa receber os deltas antes do Packaging/PBO.
+
+Decisão de produto registrada: **Weapons terá UI própria, próxima em conceito da parte de armas do APM histórico. Armorer permanece uma experiência especializada de bancada/manutenção.**
