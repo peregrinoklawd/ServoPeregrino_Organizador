@@ -9,7 +9,7 @@ Um repositório, vários módulos/PBOs. Nenhum módulo deve depender do estado p
 ## Implementado hoje
 
 - `addons/ServoPeregrino_Organizador_Nexus` — Foundation 1.1.
-- `addons/ServoPeregrino_Organizador_Weapons` — source integrado ainda em 0.1-A; validação mission-first avançou até 0.3. Weapons é um módulo player-facing com UI própria para montar/salvar/equipar armas por slot sem alterar o restante do loadout. Identidade física intrínseca continua não comprovada.
+- `addons/ServoPeregrino_Organizador_Weapons` — source integrado ainda em 0.1-A; validação mission-first avançou até 0.4 R3 (245/245 funcional; baseline freeze pendente de R4 de higiene case-insensitive). Weapons é um módulo player-facing com UI própria para montar/salvar/equipar armas por slot sem alterar o restante do loadout. Identidade física intrínseca continua não comprovada.
 - `addons/ServoPeregrino_Organizador_Items` — baseline 0.12 FINAL; lógica 0.13-A em validação runtime/multiplayer.
 - `missions/SP_ORG_Items_0_13_A_Multiplayer_Lab_8Slots_R3.VR` — laboratório Items.
 
@@ -76,6 +76,7 @@ O source integrado nesta branch continua sendo **0.1-A**, sem contratos v1 publi
 - **0.1-B — WeaponInstance Lifecycle / Event-Delta Evidence**: AUTO TEST 128/128 + Take/Put 3/3.
 - **0.2 — WeaponConfiguration**: AUTO TEST final 175/175; capture/diff/apply/round-trip com loadedState preservado.
 - **0.3 — Catalog & Compatibility**: AUTO TEST final R2 213/213; catálogo derivado do engine, conteúdo modded/provenance, compatibilidade de attachments/magazines sob demanda e cache de sessão.
+- **0.4 — WeaponRecipe**: R3 funcional 245/245; schema/semântica/fingerprint/deep-copy e PRIMARY/HANDGUN/SECONDARY aprovados. Freeze final aguarda R4 de deduplicação case-insensitive de magazines.
 
 Essas homologações são de **MISSION-FIRST FUNCTIONAL GATE**, não de PBO/addon integrado. MP/JIP, Packaging e identidade física intrínseca continuam gates separados.
 
@@ -99,13 +100,13 @@ A referência de UX/lessons learned será a parte de armas do **APM histórico**
 0.1-B  Lifecycle / Event-Delta Evidence        APPROVED
 0.2    WeaponConfiguration                     APPROVED
 0.3    Catalog / Compatibility                 APPROVED
-0.4    WeaponRecipe                            NEXT
-0.5    WeaponKit
+0.4    WeaponRecipe                            FUNCTIONAL PASS 245/245; R4 HYGIENE
+0.5    WeaponKit                               NEXT AFTER R4
 0.6    Weapons Player UI / Kit Builder
 0.7    Slot-Safe Weapon Application
 0.8    Multiplayer Authority / Reconciliation
 ```
 
-Documentação: [0.1-A](docs/21_WEAPONS_0_1_A_FOUNDATION_IDENTITY_SPIKE.md), [0.1-B](docs/22_WEAPONS_0_1_B_IDENTITY_LIFECYCLE.md), [0.2](docs/23_WEAPONS_0_2_WEAPON_CONFIGURATION.md), [0.3](docs/24_WEAPONS_0_3_CATALOG_COMPATIBILITY.md) e [conceito de produto/UI](docs/25_WEAPONS_PLAYER_UI_E_FRONTEIRA_ARMORER.md).
+Documentação: [0.1-A](docs/21_WEAPONS_0_1_A_FOUNDATION_IDENTITY_SPIKE.md), [0.1-B](docs/22_WEAPONS_0_1_B_IDENTITY_LIFECYCLE.md), [0.2](docs/23_WEAPONS_0_2_WEAPON_CONFIGURATION.md), [0.3](docs/24_WEAPONS_0_3_CATALOG_COMPATIBILITY.md), [conceito de produto/UI](docs/25_WEAPONS_PLAYER_UI_E_FRONTEIRA_ARMORER.md) e [0.4](docs/26_WEAPONS_0_4_WEAPON_RECIPE.md).
 
 O desenvolvimento dos núcleos é independente. O gate de Items 0.13-A permanece pendente e não bloqueia Weapons.
