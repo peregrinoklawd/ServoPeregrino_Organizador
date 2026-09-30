@@ -1,6 +1,6 @@
 {
   "generated_from": "machine/PROJECT_STATE.json",
-  "snapshot_date": "2026-09-28",
+  "snapshot_date": "2026-09-29",
   "repository": "peregrinoklawd/ServoPeregrino_Organizador",
   "modules": [
     {
@@ -136,12 +136,12 @@
       "id": "Weapons",
       "addon": "ServoPeregrino_Organizador_Weapons",
       "mandatory": false,
-      "status": "FOUNDATION_IDENTITY_SPIKE_PENDING_RUNTIME_VALIDATION",
+      "status": "MISSION_FIRST_0_2_APPROVED_ADDON_SOURCE_INTEGRATION_PENDING",
       "stable_version": null,
       "development_version": {
-        "display": "0.1-A",
-        "semantic": "0.1.0.1",
-        "build": "0.1.0.1-a-foundation-identity-spike"
+        "display": "0.2 mission-first / addon source 0.1-A",
+        "semantic": "0.2.0.3 mission candidate",
+        "build": "0.2.0.3-secondary-observed-class-fix-mission-first"
       },
       "dependencies": [
         "Nexus"
@@ -175,9 +175,14 @@
           "persistence.provider.v1"
         ]
       },
-      "next_gate": "OPEN: validate addon mount and AUTO TEST; collect manual A-E evidence. Physical identity across identical weapons/transfers remains UNPROVEN. No stable v1 before proof.",
-      "homologated_artifact": null,
-      "current_candidate_artifact": "Weapons 0.1-A source + Identity Lab 4 Slots; PBO build/load not executed"
+      "next_gate": "0.3 Catalog & Compatibility mission-first; addon/PBO integration, MP/JIP and intrinsic physical identity remain open.",
+      "homologated_artifact": "0.1-B SP: 128/128 AUTO + 3/3 live Take/Put. 0.2 R3 SP: 175/175 AUTO.",
+      "current_candidate_artifact": "Addon source in repo remains 0.1-A; mission-first behavior through 0.2 awaits source integration.",
+      "mission_first_validation": {
+        "lifecycle_0_1_b": "APPROVED_SP",
+        "weapon_configuration_0_2": "APPROVED_SP",
+        "next": "0.3 Catalog & Compatibility"
+      }
     },
     {
       "id": "Equipment",
