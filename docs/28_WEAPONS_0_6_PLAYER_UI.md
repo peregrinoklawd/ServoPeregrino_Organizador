@@ -2,7 +2,7 @@
 
 ## Estado atual
 
-**0.6-A R4 — BASELINE VISUAL/ESTRUTURAL CONGELADA PARA CONTINUIDADE FUNCIONAL.**
+**0.6-A R4 — BASELINE VISUAL/ESTRUTURAL CONGELADA. 0.6-B R1 — CANDIDATA MISSION-FIRST.**
 
 Baseline anterior:
 - 0.4 R5 WeaponRecipe: **251/251**;
@@ -23,7 +23,7 @@ Sequência decidida:
 
 ```text
 0.6-A  Shell/layout/listas/filtros                 FROZEN BASELINE
-0.6-B  Seleção de arma + informações              NEXT
+0.6-B  Seleção de arma + informações              CANDIDATE R1
 0.6-C  Dropdowns de compatibilidade
 0.6-D  Rascunho de WeaponKit
 0.6-E  Novo/Renomear/Duplicar/Excluir/Salvar
@@ -231,8 +231,32 @@ Aplicação real permanece em **0.7 — Slot-Safe Weapon Application**.
 - runtime: **362/362 PASS / 0 FAIL**;
 - shell visual aceito como base de continuidade.
 
-## Próximo passo
+## 0.6-B R1 — Seleção de arma + informações
 
-**0.6-B — Seleção de arma + informações.**
+Candidata preparada sobre a R4 congelada.
+
+Build:
+
+`0.6.1.1-selection-information-mission-first`
+
+Escopo:
+- seleção de arma no catálogo como contexto read-only;
+- seleção de WeaponKit como contexto read-only;
+- apresentação de nome, tipo, classe, imagem, origem/mod/addon, baseWeapon e descrição curta;
+- prévia central do catálogo somente quando não existe kit visível/selecionado;
+- seleção de catálogo não sobrescreve WeaponKit;
+- nenhuma descoberta de compatibilidade;
+- nenhum rascunho;
+- nenhum authoring;
+- nenhuma mutação de loadout.
+
+Gates seguintes permanecem:
+- 0.6-C compatibilidade;
+- 0.6-D draft;
+- 0.6-E authoring;
+- 0.6-F adaptação visual final.
+
+Static validation da candidata: **160/160 PASS**.
+Runtime Arma: **pendente**.
 
 Não abrir nova rodada de polimento visual antes de concluir as funcionalidades planejadas da 0.6.
