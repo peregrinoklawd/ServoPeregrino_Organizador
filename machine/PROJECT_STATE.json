@@ -158,9 +158,9 @@
       "mandatory": false,
       "stable_version": null,
       "development_version": {
-        "display": "0.6-A mission-first / addon source 0.1-A",
-        "semantic": "0.6.0.1 mission candidate",
-        "build": "0.6.0.1-player-ui-shell-items-pattern-mission-first"
+        "display": "0.6-A R2 mission-first / addon source 0.1-A",
+        "semantic": "0.6.0.2 mission candidate",
+        "build": "0.6.0.2-cfgfunctions-ui-path-hotfix-mission-first"
       },
       "dependencies": [
         "Nexus"
@@ -197,10 +197,10 @@
           "persistence.provider.v1"
         ]
       },
-      "status": "MISSION_FIRST_0_6_A_UI_SHELL_CANDIDATE_ADDON_SOURCE_INTEGRATION_PENDING",
-      "next_gate": "Run 0.6-A AUTO TEST and visual gate; then continue to 0.6-B.",
+      "status": "MISSION_FIRST_0_6_A_R2_UI_SHELL_CANDIDATE_ADDON_SOURCE_INTEGRATION_PENDING",
+      "next_gate": "0.6-A R2 runtime + visual gate; do not advance to 0.6-B until green.",
       "homologated_artifact": "0.1-B: 128/128 + 3/3. 0.2 R3: 175/175. 0.3 R2: 213/213. 0.4 R5: 251/251. 0.5: 301/301.",
-      "current_candidate_artifact": "0.6-A Player UI Shell; static validation 169/169; runtime/visual pending. Addon source remains 0.1-A.",
+      "current_candidate_artifact": "0.6-A R2 Player UI Shell hotfix; static 141/141; runtime/visual pending; addon source remains 0.1-A.",
       "mission_first_validation": {
         "0.1-B": {
           "status": "APPROVED_SP",
@@ -815,7 +815,7 @@
       "reference": "docs/27_WEAPONS_0_5_WEAPON_KIT.md"
     },
     "weapons_player_ui": {
-      "status": "0.6-A_CANDIDATE",
+      "status": "0.6-A_R2_CANDIDATE_R1_REJECTED",
       "visual_reference": "SP_ORG Items current UI grammar + APM lessons learned",
       "layout": [
         "MEUS KITS",
@@ -858,7 +858,26 @@
         "0.6-E management/save",
         "0.6-F polish/regressions"
       ],
-      "application_gate": "0.7"
+      "application_gate": "0.7",
+      "r1_failure": {
+        "runtime": "306/320",
+        "failed": 14,
+        "root_cause": "CfgFunctions UI file path used doubled backslashes so UI functions were not loaded",
+        "interface_opened": false
+      },
+      "r2": {
+        "build": "0.6.0.2-cfgfunctions-ui-path-hotfix-mission-first",
+        "static_validation": "141/141",
+        "fixes": [
+          "correct CfgFunctions UI path",
+          "assert default false",
+          "11-function UI preflight",
+          "guard UI test block"
+        ],
+        "functional_scope_changed": false,
+        "runtime": "PENDING",
+        "visual_gate": "PENDING"
+      }
     }
   }
 }
