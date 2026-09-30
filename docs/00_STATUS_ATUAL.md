@@ -83,7 +83,7 @@ Ler obrigatoriamente:
 
 ## Frente independente — Weapons
 
-**Source integrado na branch:** 0.1-A. **Validação funcional mission-first atual:** 0.5.
+**Source integrado na branch:** 0.1-A. **Validação funcional mission-first homologada:** 0.5. **Candidata atual:** 0.6-A — Player UI Shell.
 
 ### 0.1-B — lifecycle/identity evidence
 
@@ -155,6 +155,23 @@ Ler obrigatoriamente:
 - autoridade multiplayer permanece em 0.8;
 - **MISSION-FIRST FUNCTIONAL GATE: HOMOLOGADO.**
 
+### 0.6-A — Player UI Shell
+
+- baseline: 0.5 homologada em **301/301**;
+- static validation da candidata: **169/169 PASS**;
+- ordem de painéis: **MEUS KITS | KIT SELECIONADO | CATÁLOGO DE ARMAS**;
+- nomenclatura UI: **Principal -> PRIMARY**, **Porte -> HANDGUN**, **Secundária -> SECONDARY/lançador**;
+- busca, limpar, tooltips, transparência, RobotoCondensed, safeZone e rodapé seguem o padrão Items;
+- filtros em Meus Kits: Principal / Porte / Secundária / Públicos;
+- Públicos visível porém desabilitado até existir biblioteca pública real de WeaponKits;
+- botões Novo/Renomear/Duplicar/Excluir ficam em Meus Kits;
+- Descartar/Salvar/Salvar como novo ficam em Kit Selecionado;
+- acessórios compatíveis não possuem painel próprio; serão dropdowns contextuais dentro de Kit Selecionado;
+- rodapé global: **Context / Message / History**, como Items;
+- 0.6-A não edita Recipe/WeaponKit e não altera loadout;
+- aplicação/equipar continua exclusivamente no gate 0.7;
+- runtime/avaliação visual ainda pendentes.
+
 ### Decisão conceitual — Weapons é player-facing
 
 Weapons possui UI própria, semelhante em conceito à parte de armas do APM histórico:
@@ -170,8 +187,8 @@ Weapons possui UI própria, semelhante em conceito à parte de armas do APM hist
 
 Armorer continua separado: bancada, Preview 3D avançado, peças, inspeção e manutenção.
 
-**Próximo gate mission-first:** **0.6 — Weapons Player UI / Kit Builder**.
+**Gate mission-first ativo:** **0.6-A — Player UI Shell**.
 
-**Gates ainda abertos:** identidade física intrínseca, multiplayer/JIP/reconnect, integração real ao addon/PBO e Packaging Gate. Próximo marco mission-first: **0.6 — Weapons Player UI / Kit Builder**.
+**Gates ainda abertos:** identidade física intrínseca, multiplayer/JIP/reconnect, integração real ao addon/PBO e Packaging Gate. Próximo teste: **0.6-A — AUTO TEST + avaliação visual da UI**.
 
 Ver [0.1-A](21_WEAPONS_0_1_A_FOUNDATION_IDENTITY_SPIKE.md), [0.1-B](22_WEAPONS_0_1_B_IDENTITY_LIFECYCLE.md), [0.2](23_WEAPONS_0_2_WEAPON_CONFIGURATION.md), [0.3](24_WEAPONS_0_3_CATALOG_COMPATIBILITY.md) e [conceito UI](25_WEAPONS_PLAYER_UI_E_FRONTEIRA_ARMORER.md) e [0.4](26_WEAPONS_0_4_WEAPON_RECIPE.md) e [0.5](27_WEAPONS_0_5_WEAPON_KIT.md).
