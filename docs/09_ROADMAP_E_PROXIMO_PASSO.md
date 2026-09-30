@@ -147,19 +147,20 @@ Source integrado na branch. Base histórica da linha atual.
 - provenance modded e cache aprovados;
 - reverse lookup global evitado em favor de futuro índice reverso derivado do catálogo filtrado.
 
-### 0.4 — WeaponRecipe — FUNCTIONAL PASS / FREEZE PENDING
+### 0.4 — WeaponRecipe — FUNCTIONAL PASS / R5 FREEZE CANDIDATE
 
 - R3: **245/245 AUTO**.
 - Model/validation/fingerprint/deep-copy: approved.
 - PRIMARY/HANDGUN/SECONDARY: approved.
 - Runtime variants for SECONDARY resolved generically by `baseWeapon`.
-- R4 is hygiene only: case-insensitive de-duplication of compatibility class lists.
-- No Recipe schema or semantic change planned in R4.
+- R4 hygiene passed, but runtime total was 245/246 because SECONDARY class changed between capture/apply.
+- R5 adds slot-aware runtime/base family equivalence only for SECONDARY type=4 classes sharing `baseWeapon`.
+- PRIMARY/HANDGUN remain strict; Recipe schema/semantics remain unchanged.
 
 ### Roadmap corrigido de produto
 
 ```text
-0.4  WeaponRecipe                            R4 hygiene -> freeze
+0.4  WeaponRecipe                            R5 runtime-family fix -> freeze
 0.5  WeaponKit                               NEXT
 
 0.6  Weapons Player UI / Kit Builder
@@ -170,7 +171,7 @@ Source integrado na branch. Base histórica da linha atual.
 #### 0.4 — WeaponRecipe
 Representar de forma estruturada uma montagem desejada e validável.
 
-Estado atual: R3 funcional 245/245. Freeze final depende apenas da R4 de deduplicação case-insensitive.
+Estado atual: R3 funcional 245/245; R4 hygiene PASS mas 245/246 geral; R5 é a freeze candidate para estabilizar a troca classe-base/variante runtime de SECONDARY.
 
 #### 0.5 — WeaponKit
 Unidade reutilizável/salvável pelo jogador. Um WeaponKit representa **uma arma configurada para um slot**, não um loadout completo.
