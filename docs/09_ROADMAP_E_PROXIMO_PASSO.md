@@ -164,8 +164,8 @@ Source integrado na branch. Base histórica da linha atual.
 ### Roadmap corrigido de produto
 
 ```text
-0.4  WeaponRecipe                            R5 runtime-family fix -> freeze
-0.5  WeaponKit                               NEXT
+0.4  WeaponRecipe                            APPROVED 251/251
+0.5  WeaponKit                               CANDIDATE / RUNTIME PENDING
 
 0.6  Weapons Player UI / Kit Builder
 0.7  Slot-Safe Weapon Application
@@ -175,10 +175,19 @@ Source integrado na branch. Base histórica da linha atual.
 #### 0.4 — WeaponRecipe
 Representar de forma estruturada uma montagem desejada e validável.
 
-Estado atual: R3 funcional 245/245; R4 hygiene PASS mas 245/246 geral; R5 é a freeze candidate para estabilizar a troca classe-base/variante runtime de SECONDARY.
+Estado atual: **R5 homologada 251/251**; baseline mission-first congelada.
 
 #### 0.5 — WeaponKit
 Unidade reutilizável/salvável pelo jogador. Um WeaponKit representa **uma arma configurada para um slot**, não um loadout completo.
+
+Candidata atual:
+- schema `0.5-kit-candidate`;
+- `kitId + name + targetSlot + recipe`;
+- repository `SESSION_LOCAL_CANDIDATE`;
+- create/get/list/rename/duplicate/update/delete;
+- static validation **131/131**;
+- runtime Arma pendente;
+- UI continua em 0.6, application em 0.7 e MP em 0.8.
 
 #### 0.6 — Weapons Player UI / Kit Builder
 UI própria, simples e direta, fortemente inspirada nas lições aprendidas da parte de armas do APM histórico:
