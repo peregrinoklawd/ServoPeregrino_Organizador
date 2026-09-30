@@ -284,8 +284,8 @@
   ],
   "implementation_notes": {
     "Weapons": {
-      "delivery": "0.5 mission-first approved / addon source 0.1-A",
-      "status": "MISSION_FIRST_0_5_APPROVED_ADDON_SOURCE_INTEGRATION_PENDING",
+      "delivery": "0.6-A Player UI Shell mission-first candidate / addon source 0.1-A",
+      "status": "MISSION_FIRST_0_6_A_UI_SHELL_CANDIDATE_ADDON_SOURCE_INTEGRATION_PENDING",
       "homologated": {
         "lifecycle_0_1_b": "128/128 AUTO + 3/3 live Take/Put",
         "configuration_0_2": "175/175 AUTO",
@@ -299,7 +299,7 @@
       "apm_reference_rule": "Historical APM weapon UI is a UX/lessons-learned source. Review KEEP/ADAPT/DROP/NEW before freezing Weapons UI 0.6.",
       "physical_identity_proven": false,
       "addon_source_integrated_through": "0.1-A",
-      "next": "0.6 Weapons Player UI / Kit Builder",
+      "next": "Run 0.6-A AUTO + visual gate, then 0.6-B.",
       "recipe_rule": "WeaponRecipe is frozen as configuration + optional magazineClass; targetSlot/name/identity/ammoCount remain outside Recipe.",
       "secondary_runtime_rule": "PRIMARY/HANDGUN class guards are strict. SECONDARY type=4 runtime/base variants may be equivalent only inside the same baseWeapon family.",
       "weapon_kit_candidate": {
@@ -327,6 +327,34 @@
         "multiplayer": "DEFERRED_0_8",
         "specific_checks": "50/50",
         "status": "FROZEN_MISSION_FIRST"
+      },
+      "weapon_ui_candidate": {
+        "checkpoint": "0.6-A",
+        "build": "0.6.0.1-player-ui-shell-items-pattern-mission-first",
+        "static_validation": "169/169",
+        "runtime": "PENDING",
+        "visual_gate": "PENDING",
+        "panels": [
+          "MEUS KITS",
+          "KIT SELECIONADO",
+          "CATÁLOGO DE ARMAS"
+        ],
+        "footer": [
+          "Context",
+          "Message",
+          "History"
+        ],
+        "slot_ui_labels": {
+          "PRIMARY": "Principal",
+          "HANDGUN": "Porte",
+          "SECONDARY": "Secundária"
+        },
+        "compatible_accessories_panel": false,
+        "compatibility_controls": "dropdowns/selectors inside KIT SELECIONADO",
+        "public_kits": "VISIBLE_DISABLED_RESERVED",
+        "loadout_mutation": false,
+        "weaponkit_mutation": false,
+        "application": "DEFERRED_0_7"
       }
     }
   }
