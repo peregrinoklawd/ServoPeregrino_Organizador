@@ -207,6 +207,21 @@ A branch atual ainda contém o **addon source 0.1-A**. Os deltas mission-first p
 - static validation **131/131**;
 - runtime Arma pendente.
 
+### 0.6-A — CANDIDATE
+
+Primeiro checkpoint da Player UI.
+
+- layout: Meus Kits | Kit Selecionado | Catálogo de Armas;
+- UI labels: Principal / Porte / Secundária;
+- internal slots unchanged: PRIMARY / HANDGUN / SECONDARY;
+- Items-style search, tooltips, panel-local actions and Context/Message/History footer;
+- Públicos visible-disabled until a real public WeaponKit provider exists;
+- no separate Compatible Accessories panel;
+- compatible choices belong to Selected Kit dropdowns;
+- zero WeaponKit/loadout mutation in 0.6-A;
+- static validation: 169/169;
+- runtime + visual gate pending.
+
 ## Roadmap
 
 1. fechar runtime 0.5 — WeaponKit;
