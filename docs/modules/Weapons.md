@@ -207,27 +207,41 @@ A branch atual ainda contém o **addon source 0.1-A**. Os deltas mission-first p
 - static validation **131/131**;
 - runtime Arma pendente.
 
-### 0.6-A — CANDIDATE
+### 0.6-A — FROZEN UI SHELL BASELINE
 
-Primeiro checkpoint da Player UI.
-
+- R4 runtime: **362/362 AUTO**;
 - layout: Meus Kits | Kit Selecionado | Catálogo de Armas;
 - UI labels: Principal / Porte / Secundária;
+- filtros privados: Todos / Principal / Porte / Secundária;
+- filtros catálogo: Todos / Principal / Porte / Secundária;
 - internal slots unchanged: PRIMARY / HANDGUN / SECONDARY;
 - Items-style search, tooltips, panel-local actions and Context/Message/History footer;
 - Públicos visible-disabled until a real public WeaponKit provider exists;
 - no separate Compatible Accessories panel;
-- compatible choices belong to Selected Kit dropdowns;
+- compatible choices belong to Selected Kit selectors;
+- bounded catalog projection: 250 rows;
 - zero WeaponKit/loadout mutation in 0.6-A;
-- static validation: 169/169;
-- runtime + visual gate pending.
+- shell visual/estrutural congelado durante 0.6-B..E.
+
+### Visual polish deferred
+
+Depois de implementar e testar as funcionalidades da 0.6:
+- reavaliar composição vertical de Kit Selecionado;
+- separar visualmente Context / Message / History;
+- aplicar a mesma separação de rodapé em Items e Weapons;
+- validar 1080p e ultrawide.
+
+Ver `../29_SHARED_UI_ITEMS_WEAPONS.md`.
 
 ## Roadmap
 
-1. fechar runtime 0.5 — WeaponKit;
-2. 0.6 — Weapons Player UI / Kit Builder;
-3. 0.7 — Slot-Safe Weapon Application;
-4. 0.8 — Multiplayer Authority / Reconciliation.
+1. 0.6-B — Seleção de arma + informações;
+2. 0.6-C — Seletores de compatibilidade;
+3. 0.6-D — Rascunho de WeaponKit;
+4. 0.6-E — Authoring/lifecycle;
+5. 0.6-F — Adaptação visual final + regressões;
+6. 0.7 — Slot-Safe Weapon Application;
+7. 0.8 — Multiplayer Authority / Reconciliation.
 
 Gates paralelos: integração addon/PBO, Packaging, MP/JIP/reconnect e identidade física intrínseca.
 
