@@ -200,7 +200,7 @@
       "status": "MISSION_FIRST_0_4_R3_FUNCTIONAL_PASS_R4_HYGIENE_PENDING",
       "next_gate": "0.4 R4 case-insensitive compatibility de-duplication and final runtime freeze; then 0.5 WeaponKit.",
       "homologated_artifact": "0.1-B: 128/128 + 3/3. 0.2 R3: 175/175. 0.3 R2: 213/213. 0.4 R3 functional: 245/245; final freeze pending R4 hygiene.",
-      "current_candidate_artifact": "0.4 R4 hygiene candidate to deduplicate compatibility class lists case-insensitively; addon source in repo remains 0.1-A.",
+      "current_candidate_artifact": "0.4 R4 freeze candidate: 94/94 static PASS; runtime pending. Build 0.4.0.4-case-insensitive-compatibility-dedupe-mission-first. Addon source remains 0.1-A.",
       "mission_first_validation": {
         "0.1-B": {
           "status": "APPROVED_SP",
@@ -285,7 +285,17 @@
           "secondary_runtime_variant_strategy": "BASEWEAPON_LINKED_VARIANT_UNION",
           "inventory_mutation": false,
           "observed_hygiene_debt": "case-variant duplicate magazine classnames such as nlaw_f/NLAW_F",
-          "next": "R4 CASE_INSENSITIVE_DEDUPE"
+          "next": "R4 CASE_INSENSITIVE_DEDUPE",
+          "r4_candidate": {
+            "status": "STATIC_PASS_RUNTIME_PENDING",
+            "static_validation": {
+              "passed": 94,
+              "failed": 0,
+              "total": 94
+            },
+            "build": "0.4.0.4-case-insensitive-compatibility-dedupe-mission-first",
+            "purpose": "case-insensitive compatibility de-duplication only"
+          }
         }
       }
     },
