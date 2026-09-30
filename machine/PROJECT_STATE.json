@@ -22,7 +22,7 @@
     "hub_rule": "Hub is an optional player-facing integration/orchestration layer. No domain module may require Hub in order to function.",
     "independent_core_development": true
   },
-  "global_next_gate": "Weapons 0.6-B selection + information over frozen 0.6-A R4 UI shell. Items 0.13-A Packaging/runtime/MP remains an independent pending gate.",
+  "global_next_gate": "Weapons 0.6-B R1 selection + information runtime/manual gate over frozen 0.6-A R4 shell.",
   "global_after_gate": "Weapons 0.6-C compatibility selectors -> 0.6-D WeaponKit draft -> 0.6-E authoring/lifecycle -> 0.6-F final visual adaptation/regression -> 0.7 Slot-Safe Weapon Application -> 0.8 Multiplayer Authority/Reconciliation.",
   "modules": [
     {
@@ -158,9 +158,9 @@
       "mandatory": false,
       "stable_version": null,
       "development_version": {
-        "display": "0.6-A R4 mission-first / addon source 0.1-A",
-        "semantic": "0.6.0.4 mission baseline",
-        "build": "0.6.0.4-all-type-filters-close-timing-mission-first"
+        "display": "0.6-B R1 mission-first / addon source 0.1-A",
+        "semantic": "0.6.1.1 mission candidate",
+        "build": "0.6.1.1-selection-information-mission-first"
       },
       "dependencies": [
         "Nexus"
@@ -197,10 +197,10 @@
           "persistence.provider.v1"
         ]
       },
-      "status": "MISSION_FIRST_0_6_A_R4_UI_BASELINE_FROZEN_ADDON_SOURCE_INTEGRATION_PENDING",
-      "next_gate": "0.6-B selection + information; preserve R4 visual shell until functional checkpoints B-E are complete.",
+      "status": "MISSION_FIRST_0_6_B_R1_CANDIDATE_ADDON_SOURCE_INTEGRATION_PENDING",
+      "next_gate": "Validate 0.6-B R1 runtime + manual information behavior. If green, continue 0.6-C compatibility selectors.",
       "homologated_artifact": "0.1-B 128/128 + 3/3; 0.2 R3 175/175; 0.3 R2 213/213; 0.4 R5 251/251; 0.5 301/301; 0.6-A R4 UI shell 362/362.",
-      "current_candidate_artifact": "Next candidate: 0.6-B selection + information over frozen R4 shell.",
+      "current_candidate_artifact": "0.6-B R1 Selection & Information; static 160/160; runtime pending.",
       "mission_first_validation": {
         "0.1-B": {
           "status": "APPROVED_SP",
@@ -361,6 +361,38 @@
           "loadout_mutation": false,
           "visual_freeze_policy": "PRESERVE_R4_DURING_0_6_B_TO_0_6_E",
           "next": "0.6-B selection + information"
+        },
+        "0.6-B": {
+          "status": "CANDIDATE_RUNTIME_MANUAL_PENDING",
+          "build": "0.6.1.1-selection-information-mission-first",
+          "static_validation": {
+            "passed": 160,
+            "failed": 0,
+            "total": 160
+          },
+          "information_mode": "READ_ONLY_BASIC_WEAPON_PRESENTATION",
+          "presentation_fields": [
+            "weaponClass",
+            "displayName",
+            "descriptionShort",
+            "picture",
+            "category",
+            "categoryLabel",
+            "baseWeapon",
+            "baseWeaponDisplayName",
+            "isPresetVariant",
+            "sourceAddons",
+            "sourceMods",
+            "originLabel"
+          ],
+          "ui_geometry": "PRESERVED_FROM_0_6_A_R4",
+          "compatibility": "DEFERRED_0_6_C",
+          "draft": "DEFERRED_0_6_D",
+          "authoring": "DEFERRED_0_6_E",
+          "application": "DEFERRED_0_7",
+          "loadout_mutation": false,
+          "weaponkit_mutation": false,
+          "next": "0.6-C after runtime/manual gate"
         }
       }
     },
