@@ -38,9 +38,9 @@ Módulos atuais/planejados:
 Regra oficial: **uma funcionalidade de domínio possui um único módulo proprietário**.
 
 Divisão de armas:
-- **Weapons** = identidade, serial, configuração, compatibilidade, receitas e troca dinâmica;
+- **Weapons** = identidade, serial, configuração, compatibilidade, receitas, WeaponKit, UI própria de organização/configuração e aplicação slot-safe;
 - **WeaponCondition** = uso, desgaste, água/submersão, condição de peças, confiabilidade e manutenção lógica;
-- **Armorer** = bancada, Preview, montagem, inspeção e workflow/UI de manutenção.
+- **Armorer** = bancada especializada, Preview 3D, montagem física/visual, inspeção de peças e workflow/UI de manutenção.
 
 ## O que aconteceu na migração para addon Items
 
@@ -63,7 +63,7 @@ O **Packaging R2** reempacota os mesmos fontes sem alterar SQF funcional. Ele ai
 - 0.13-A ainda não foi homologada em multiplayer real com dois ou mais clientes.
 - JIP/persistência pública/ACL/rate limit/recovery ainda pertencem ao roadmap 0.13-B+.
 - Hub, WeaponCondition, Equipment, Sets, Policy e ServerIntegration ainda são módulos planejados.
-- Weapons: source integrado permanece 0.1-A; mission-first 0.1-B foi homologada em SP (AUTO TEST 128/128 + live Take/Put 3/3) e WeaponConfiguration 0.2 foi homologada em SP (175/175). Identidade física intrínseca, MP/JIP e PBO/addon integrado continuam não validados.
+- Weapons: source integrado permanece 0.1-A; mission-first 0.1-B (128/128 + 3/3), 0.2 (175/175) e 0.3 R2 Catalog/Compatibility (213/213) estão homologadas em SP. Weapons terá UI própria player-facing; identidade física intrínseca, MP/JIP e PBO/addon integrado continuam não validados.
 - Armorer possui base histórica madura, mas o runtime autoritativo ainda não foi importado ao monorepo.
 
 ## Dívida automática aceita
@@ -106,6 +106,34 @@ Ler obrigatoriamente:
 - No-op retorna sem mutar o inventário.
 - Attachment inválido e weaponClass incompatível falham antes de mutação.
 
-**Gates ainda abertos:** identidade física intrínseca, multiplayer/JIP/reconnect, integração real ao addon/PBO e Packaging Gate. Próximo marco mission-first: **0.3 — Catalog & Compatibility**.
+### 0.3 — Catalog & Compatibility
 
-Ver [0.1-A](21_WEAPONS_0_1_A_FOUNDATION_IDENTITY_SPIKE.md), [0.1-B](22_WEAPONS_0_1_B_IDENTITY_LIFECYCLE.md) e [0.2](23_WEAPONS_0_2_WEAPON_CONFIGURATION.md).
+- Candidata final R2: **213/213 PASS**.
+- Catálogo-base validado no modset real: **2770** armas (2406 PRIMARY, 279 HANDGUN, 85 SECONDARY).
+- Catálogo com presets: **3380**.
+- 610 presets excluídos do catálogo-base.
+- Compatibilidade de optic/muzzle/pointer/bipod/magazines derivada do engine.
+- Conteúdo modded/provenance confirmado.
+- Cache de sessão confirmado.
+- Reverse lookup global por `compatibleWeapons` foi deliberadamente retirado do gate por produzir varredura ampla e warnings de configs de terceiros; qualquer índice reverso futuro será derivado do catálogo filtrado SP_ORG.
+
+### Decisão conceitual — Weapons é player-facing
+
+Weapons possui UI própria, semelhante em conceito à parte de armas do APM histórico:
+
+- escolher arma;
+- consultar informações;
+- escolher somente acessórios compatíveis;
+- montar/salvar/editar WeaponKit;
+- equipar apenas o slot alvo;
+- preservar todo o restante do loadout.
+
+**WeaponKit = uma arma configurada para um único slot**, não um loadout completo.
+
+Armorer continua separado: bancada, Preview 3D avançado, peças, inspeção e manutenção.
+
+**Próximo marco mission-first:** **0.4 — WeaponRecipe**.
+
+**Gates ainda abertos:** identidade física intrínseca, multiplayer/JIP/reconnect, integração real ao addon/PBO e Packaging Gate. Próximo marco mission-first: **0.4 — WeaponRecipe**.
+
+Ver [0.1-A](21_WEAPONS_0_1_A_FOUNDATION_IDENTITY_SPIKE.md), [0.1-B](22_WEAPONS_0_1_B_IDENTITY_LIFECYCLE.md), [0.2](23_WEAPONS_0_2_WEAPON_CONFIGURATION.md), [0.3](24_WEAPONS_0_3_CATALOG_COMPATIBILITY.md) e [conceito UI](25_WEAPONS_PLAYER_UI_E_FRONTEIRA_ARMORER.md).
