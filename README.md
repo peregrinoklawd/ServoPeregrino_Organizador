@@ -9,7 +9,7 @@ Um repositório, vários módulos/PBOs. Nenhum módulo deve depender do estado p
 ## Implementado hoje
 
 - `addons/ServoPeregrino_Organizador_Nexus` — Foundation 1.1.
-- `addons/ServoPeregrino_Organizador_Weapons` — source integrado ainda em 0.1-A; validação mission-first avançou por 0.1-B e 0.2. Identidade física intrínseca continua não comprovada.
+- `addons/ServoPeregrino_Organizador_Weapons` — source integrado ainda em 0.1-A; validação mission-first avançou até 0.3. Weapons é um módulo player-facing com UI própria para montar/salvar/equipar armas por slot sem alterar o restante do loadout. Identidade física intrínseca continua não comprovada.
 - `addons/ServoPeregrino_Organizador_Items` — baseline 0.12 FINAL; lógica 0.13-A em validação runtime/multiplayer.
 - `missions/SP_ORG_Items_0_13_A_Multiplayer_Lab_8Slots_R3.VR` — laboratório Items.
 
@@ -47,9 +47,11 @@ Design de identidade/desgaste: `docs/17_ARMORER_WEAPONS_WEAR_ARCHITECTURE.md`.
 
 ## Fronteira Weapons / WeaponCondition / Armorer
 
-- **Weapons**: identidade, serial, configuração, compatibilidade, receitas e troca dinâmica.
+- **Weapons**: identidade, serial, configuração, compatibilidade, receitas, WeaponKit, UI própria de montagem/configuração simples e aplicação slot-safe da arma.
 - **WeaponCondition**: desgaste, condição, peças, uso, ambiente e manutenção lógica.
-- **Armorer**: bancada, Preview, montagem, inspeção e workflow/UI de manutenção.
+- **Armorer**: bancada especializada, Preview 3D avançado, montagem física/visual, inspeção, peças e workflow/UI de manutenção.
+
+Regra conceitual: **Weapons não depende do Armorer para ser utilizável pelo jogador**. Sua experiência é deliberadamente próxima da parte de armas do APM histórico: escolher arma, configurar acessórios, consultar informações, salvar/carregar uma configuração e equipar apenas o slot alvo. O restante do loadout deve permanecer intacto.
 
 Catálogo funcional compartilhável: `docs/19_VISAO_FUNCIONAL_COMPARTILHAVEL.md`.
 
@@ -69,13 +71,41 @@ Detalhes: `docs/20_HUB_ARQUITETURA_E_INTEGRACAO.md`.
 
 ## Weapons — estado mission-first
 
-O source integrado nesta branch continua sendo **0.1-A**, sem contratos v1 publicados. Desde então, os laboratórios mission-first validaram:
+O source integrado nesta branch continua sendo **0.1-A**, sem contratos v1 publicados. Os laboratórios mission-first já validaram:
 
-- **0.1-B — WeaponInstance Lifecycle / Event-Delta Evidence**: AUTO TEST 128/128 e gate manual Take/Put 3/3; transições únicas podem ser `CORRELATED`, duplicatas idênticas permanecem `AMBIGUOUS`, ausência de evidência permanece `UNPROVEN`; `physicalIdentityProven=false` em todos os casos.
-- **0.2 — WeaponConfiguration**: AUTO TEST final 175/175; schema candidato com `weaponClass + muzzle + pointer + optic + bipod`, diff, apply com round-trip no engine, preservação de loadedState/ammo, no-op sem mutação e rotas PRIMARY/HANDGUN/SECONDARY.
+- **0.1-B — WeaponInstance Lifecycle / Event-Delta Evidence**: AUTO TEST 128/128 + Take/Put 3/3.
+- **0.2 — WeaponConfiguration**: AUTO TEST final 175/175; capture/diff/apply/round-trip com loadedState preservado.
+- **0.3 — Catalog & Compatibility**: AUTO TEST final R2 213/213; catálogo derivado do engine, conteúdo modded/provenance, compatibilidade de attachments/magazines sob demanda e cache de sessão.
 
-Essas homologações são de **MISSION-FIRST FUNCTIONAL GATE**, não de PBO/addon integrado. MP/JIP e Packaging continuam deferidos. Próximo marco funcional: **0.3 — Catalog & Compatibility**.
+Essas homologações são de **MISSION-FIRST FUNCTIONAL GATE**, não de PBO/addon integrado. MP/JIP, Packaging e identidade física intrínseca continuam gates separados.
 
-Documentação: [0.1-A](docs/21_WEAPONS_0_1_A_FOUNDATION_IDENTITY_SPIKE.md), [0.1-B](docs/22_WEAPONS_0_1_B_IDENTITY_LIFECYCLE.md) e [0.2](docs/23_WEAPONS_0_2_WEAPON_CONFIGURATION.md).
+### Conceito player-facing de Weapons
 
-O desenvolvimento dos núcleos é independente. O gate de Items 0.13-A permanece pendente e não bloqueia Weapons. Nenhuma integração com outros domínios foi criada.
+Weapons segue o mesmo princípio modular de Items:
+
+- possui **UI própria**;
+- permite criar/editar/salvar **WeaponKits**;
+- um WeaponKit representa **uma arma configurada para um slot**, não um loadout completo;
+- permite escolher a arma e acessórios compatíveis;
+- apresenta informações da arma;
+- ao equipar/aplicar, modifica somente o slot de arma alvo e preserva uniforme, colete, mochila, itens, outras armas e demais domínios.
+
+A referência de UX/lessons learned será a parte de armas do **APM histórico**, sem copiar automaticamente decisões antigas de arquitetura.
+
+### Roadmap Weapons
+
+```text
+0.1-A  Foundation / Identity Spike             APPROVED BASE
+0.1-B  Lifecycle / Event-Delta Evidence        APPROVED
+0.2    WeaponConfiguration                     APPROVED
+0.3    Catalog / Compatibility                 APPROVED
+0.4    WeaponRecipe                            NEXT
+0.5    WeaponKit
+0.6    Weapons Player UI / Kit Builder
+0.7    Slot-Safe Weapon Application
+0.8    Multiplayer Authority / Reconciliation
+```
+
+Documentação: [0.1-A](docs/21_WEAPONS_0_1_A_FOUNDATION_IDENTITY_SPIKE.md), [0.1-B](docs/22_WEAPONS_0_1_B_IDENTITY_LIFECYCLE.md), [0.2](docs/23_WEAPONS_0_2_WEAPON_CONFIGURATION.md), [0.3](docs/24_WEAPONS_0_3_CATALOG_COMPATIBILITY.md) e [conceito de produto/UI](docs/25_WEAPONS_PLAYER_UI_E_FRONTEIRA_ARMORER.md).
+
+O desenvolvimento dos núcleos é independente. O gate de Items 0.13-A permanece pendente e não bloqueia Weapons.
