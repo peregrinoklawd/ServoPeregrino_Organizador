@@ -22,8 +22,8 @@
     "hub_rule": "Hub is an optional player-facing integration/orchestration layer. No domain module may require Hub in order to function.",
     "independent_core_development": true
   },
-  "global_next_gate": "Weapons 0.4 R5 runtime gate: preserve R4 case-insensitive hygiene and accept only safe SECONDARY type=4 runtime/base variants in the same baseWeapon family. R4 closed 245/246 due to one timing-sensitive SECONDARY no-op class mismatch.",
-  "global_after_gate": "If Weapons 0.4 R5 is green, freeze WeaponRecipe and proceed to 0.5 WeaponKit.",
+  "global_next_gate": "Weapons 0.5 WeaponKit mission-first. Items 0.13-A Packaging/runtime/MP remains an independent pending gate.",
+  "global_after_gate": "Weapons sequence after 0.5: 0.6 Weapons Player UI / Kit Builder -> 0.7 Slot-Safe Weapon Application -> 0.8 Multiplayer Authority/Reconciliation. Addon/PBO integration remains a separate gate.",
   "modules": [
     {
       "id": "Nexus",
@@ -159,7 +159,7 @@
       "stable_version": null,
       "development_version": {
         "display": "0.4 R5 mission-first / addon source 0.1-A",
-        "semantic": "0.4.0.5 mission candidate",
+        "semantic": "0.4.0.5 mission baseline",
         "build": "0.4.0.5-secondary-runtime-class-family-equivalence-mission-first"
       },
       "dependencies": [
@@ -197,10 +197,10 @@
           "persistence.provider.v1"
         ]
       },
-      "status": "MISSION_FIRST_0_4_R5_FREEZE_CANDIDATE",
-      "next_gate": "Run 0.4 R5. If 0 FAIL, freeze WeaponRecipe and proceed to 0.5 WeaponKit.",
-      "homologated_artifact": "0.1-B: 128/128 + 3/3. 0.2 R3: 175/175. 0.3 R2: 213/213. 0.4 R3 functional: 245/245; final freeze pending R4 hygiene.",
-      "current_candidate_artifact": "0.4 R5 — SECONDARY runtime/base class-family equivalence, preserving R4 case-insensitive compatibility hygiene.",
+      "status": "MISSION_FIRST_0_4_APPROVED_ADDON_SOURCE_INTEGRATION_PENDING",
+      "next_gate": "0.5 WeaponKit.",
+      "homologated_artifact": "0.1-B: 128/128 + 3/3. 0.2 R3: 175/175. 0.3 R2: 213/213. 0.4 R5: 251/251.",
+      "current_candidate_artifact": "Next mission-first candidate: 0.5 WeaponKit. Addon source in repo remains 0.1-A.",
       "mission_first_validation": {
         "0.1-B": {
           "status": "APPROVED_SP",
@@ -274,23 +274,20 @@
         },
         "next": "0.4 WeaponRecipe",
         "0.4": {
-          "status": "R5_FREEZE_CANDIDATE",
-          "r3": {
-            "passed": 245,
+          "status": "APPROVED_SP_FROZEN",
+          "final_candidate": "R5",
+          "auto_test": {
+            "passed": 251,
             "failed": 0,
-            "total": 245
+            "total": 251
           },
-          "r4": {
-            "passed": 245,
-            "failed": 1,
-            "total": 246,
-            "failure": "0.2 SECONDARY no-op apply route; base/runtime class transitioned between capture and apply"
-          },
-          "r4_hygiene": "PASSED",
-          "r5_strategy": "PRIMARY/HANDGUN strict exact class; SECONDARY type=4 may match only within shared baseWeapon family",
           "recipe_schema": "0.4-recipe-candidate",
-          "recipe_schema_changed": false,
-          "next": "R5 runtime gate"
+          "inventory_mutation": false,
+          "case_insensitive_compatibility_dedupe": true,
+          "secondary_runtime_variant_strategy": "BASEWEAPON_LINKED_VARIANT_UNION",
+          "secondary_apply_equivalence": "TYPE4_SHARED_BASEWEAPON_FAMILY_ONLY",
+          "primary_handgun_class_guard": "STRICT",
+          "next": "0.5 WeaponKit"
         }
       }
     },
@@ -672,7 +669,7 @@
       "loaded_state_rule": "Loaded magazine/ammo is transient loadedState, excluded from WeaponConfiguration fingerprint.",
       "apply_rule": "Validate -> diff -> mutate only if changed -> recapture -> verify configuration and loadedState -> rollback attachments on verification failure.",
       "no_op_rule": "changedCount=0 returns without engine mutation.",
-      "next_gate": "0.4 R4 hygiene/freeze; WeaponRecipe R3 passed 245/245.",
+      "next_gate": "0.5 WeaponKit; WeaponRecipe 0.4 R5 is approved SP.",
       "reference": "docs/23_WEAPONS_0_2_WEAPON_CONFIGURATION.md"
     },
     "weapon_player_ui": {
@@ -698,7 +695,7 @@
       "reference": "docs/25_WEAPONS_PLAYER_UI_E_FRONTEIRA_ARMORER.md"
     },
     "weapon_recipe": {
-      "status": "MISSION_FIRST_R5_FREEZE_CANDIDATE",
+      "status": "MISSION_FIRST_0_4_R5_APPROVED_FROZEN",
       "owner_module": "Weapons",
       "schema": "0.4-recipe-candidate",
       "fields": [
@@ -715,10 +712,11 @@
         "ammoCount"
       ],
       "inventory_mutation": false,
-      "secondary_variant_rule": "Resolve type=4 runtime/hidden variants generically through shared baseWeapon; no ACE/NLAW hardcode.",
-      "hygiene_rule_pending": "R4 hygiene passed.",
-      "reference": "docs/26_WEAPONS_0_4_WEAPON_RECIPE.md",
-      "secondary_apply_equivalence": "PRIMARY/HANDGUN exact only; SECONDARY type=4 may treat classes as equivalent only when they share the same baseWeapon family."
+      "secondary_variant_rule": "Resolve type=4 runtime/hidden variants generically through shared baseWeapon; no addon/weapon hardcode.",
+      "class_equivalence_rule": "PRIMARY/HANDGUN strict; SECONDARY may treat type=4 classes with the same baseWeapon family as equivalent for safe no-op/apply verification.",
+      "compatibility_hygiene": "Class lists are deduplicated case-insensitively while preserving canonical config spelling.",
+      "final_runtime": "251/251 AUTO, 0 FAIL",
+      "reference": "docs/26_WEAPONS_0_4_WEAPON_RECIPE.md"
     }
   }
 }
