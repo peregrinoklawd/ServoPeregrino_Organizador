@@ -5,7 +5,8 @@
 **MISSION-FIRST FUNCTIONAL GATE: GREEN IN R3. FREEZE FINAL PENDENTE DE R4 DE HIGIENE.**
 
 - R3 AUTO TEST: **245/245 PASS / 0 FAIL**;
-- R4 pendente apenas para deduplicação case-insensitive de classnames em listas de compatibilidade;
+- R4 freeze candidate preparada: **94/94 static PASS / 0 FAIL**; runtime Arma ainda pendente;
+- R4 altera apenas deduplicação case-insensitive de classnames em listas de compatibilidade;
 - nenhuma mudança de schema/semântica planejada para R4;
 - PBO/Packaging: **DEFERRED**;
 - multiplayer/JIP/reconnect: **DEFERRED**;
@@ -120,9 +121,11 @@ As duas strings representam a mesma classe para nossas comparações case-insens
 
 Isso não causou falha funcional, mas pode gerar duplicação visual futura.
 
-### R4
+### R4 — freeze candidate
 
-R4 deve:
+Candidata preparada em `0.4.0.4-case-insensitive-compatibility-dedupe-mission-first`, com 94/94 checks estáticos.
+
+R4:
 
 - deduplicar classnames case-insensitively;
 - preservar uma grafia original do engine;
