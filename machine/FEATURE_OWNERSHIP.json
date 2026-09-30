@@ -284,8 +284,8 @@
   ],
   "implementation_notes": {
     "Weapons": {
-      "delivery": "0.6-A Player UI Shell mission-first candidate / addon source 0.1-A",
-      "status": "MISSION_FIRST_0_6_A_UI_SHELL_CANDIDATE_ADDON_SOURCE_INTEGRATION_PENDING",
+      "delivery": "0.6-A R3 mission-first candidate / addon source 0.1-A",
+      "status": "MISSION_FIRST_0_6_A_R3_CANDIDATE_ADDON_SOURCE_INTEGRATION_PENDING",
       "homologated": {
         "lifecycle_0_1_b": "128/128 AUTO + 3/3 live Take/Put",
         "configuration_0_2": "175/175 AUTO",
@@ -299,7 +299,7 @@
       "apm_reference_rule": "Historical APM weapon UI is a UX/lessons-learned source. Review KEEP/ADAPT/DROP/NEW before freezing Weapons UI 0.6.",
       "physical_identity_proven": false,
       "addon_source_integrated_through": "0.1-A",
-      "next": "Run 0.6-A AUTO + visual gate, then 0.6-B.",
+      "next": "Validate R3 refresh guard/visual shell; do not advance to 0.6-B until green.",
       "recipe_rule": "WeaponRecipe is frozen as configuration + optional magazineClass; targetSlot/name/identity/ammoCount remain outside Recipe.",
       "secondary_runtime_rule": "PRIMARY/HANDGUN class guards are strict. SECONDARY type=4 runtime/base variants may be equivalent only inside the same baseWeapon family.",
       "weapon_kit_candidate": {
@@ -354,6 +354,13 @@
         "public_kits": "VISIBLE_DISABLED_RESERVED",
         "loadout_mutation": false,
         "weaponkit_mutation": false,
+        "application": "DEFERRED_0_7"
+      },
+      "player_ui_0_6_a": {
+        "r1": "REJECTED_CFGFUNCTIONS_PATH",
+        "r2": "REJECTED_REFRESH_REENTRANCY",
+        "r3": "CANDIDATE_STATIC_134_OF_134",
+        "catalog_render_limit": 250,
         "application": "DEFERRED_0_7"
       }
     }
