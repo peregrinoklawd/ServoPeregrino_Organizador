@@ -1,6 +1,6 @@
 {
   "project": "Servo Peregrino Organizador / SP_ORG",
-  "snapshot_date": "2026-09-29",
+  "snapshot_date": "2026-09-30",
   "state_schema_version": 2,
   "source_of_truth": {
     "repository_role": "MONOREPO",
@@ -22,8 +22,8 @@
     "hub_rule": "Hub is an optional player-facing integration/orchestration layer. No domain module may require Hub in order to function.",
     "independent_core_development": true
   },
-  "global_next_gate": "Independent gates: Items 0.13-A Packaging/runtime/MP remains pending. Weapons mission-first 0.1-B, 0.2 and 0.3 R2 are approved; next Weapons milestone is 0.4 WeaponRecipe. Weapons now explicitly owns its player-facing WeaponKit UI; Armorer remains the specialized station/maintenance experience.",
-  "global_after_gate": "Weapons sequence: 0.4 WeaponRecipe -> 0.5 WeaponKit -> 0.6 Weapons Player UI -> 0.7 Slot-Safe Weapon Application -> 0.8 Multiplayer Authority/Reconciliation. Addon/PBO integration remains a separate gate.",
+  "global_next_gate": "Weapons 0.4 R4 hygiene/freeze: case-insensitive de-duplication of compatibility class lists. R3 is functionally green at 245/245. Items 0.13-A Packaging/runtime/MP remains an independent pending gate.",
+  "global_after_gate": "After Weapons 0.4 R4 runtime green: freeze WeaponRecipe and proceed to 0.5 WeaponKit -> 0.6 Weapons Player UI -> 0.7 Slot-Safe Weapon Application -> 0.8 Multiplayer Authority/Reconciliation.",
   "modules": [
     {
       "id": "Nexus",
@@ -158,9 +158,9 @@
       "mandatory": false,
       "stable_version": null,
       "development_version": {
-        "display": "0.3 R2 mission-first / addon source 0.1-A",
-        "semantic": "0.3.0.2 mission candidate",
-        "build": "0.3.0.2-catalog-compatibility-log-hygiene-mission-first"
+        "display": "0.4 R3 mission-first / addon source 0.1-A",
+        "semantic": "0.4.0.3 mission candidate",
+        "build": "0.4.0.3-secondary-runtime-variant-compatibility-mission-first"
       },
       "dependencies": [
         "Nexus"
@@ -197,10 +197,10 @@
           "persistence.provider.v1"
         ]
       },
-      "status": "MISSION_FIRST_0_3_APPROVED_ADDON_SOURCE_INTEGRATION_PENDING",
-      "next_gate": "0.4 WeaponRecipe. Then 0.5 WeaponKit, 0.6 Weapons Player UI / Kit Builder, 0.7 Slot-Safe Weapon Application and 0.8 Multiplayer Authority/Reconciliation.",
-      "homologated_artifact": "0.1-B SP: 128/128 AUTO + 3/3 live Take/Put. 0.2 R3 SP: 175/175 AUTO. 0.3 R2 SP: 213/213 AUTO; catalog/compatibility approved.",
-      "current_candidate_artifact": "Addon source in repo remains 0.1-A; mission-first validated behavior through 0.3 awaits source integration.",
+      "status": "MISSION_FIRST_0_4_R3_FUNCTIONAL_PASS_R4_HYGIENE_PENDING",
+      "next_gate": "0.4 R4 case-insensitive compatibility de-duplication and final runtime freeze; then 0.5 WeaponKit.",
+      "homologated_artifact": "0.1-B: 128/128 + 3/3. 0.2 R3: 175/175. 0.3 R2: 213/213. 0.4 R3 functional: 245/245; final freeze pending R4 hygiene.",
+      "current_candidate_artifact": "0.4 R4 hygiene candidate to deduplicate compatibility class lists case-insensitively; addon source in repo remains 0.1-A.",
       "mission_first_validation": {
         "0.1-B": {
           "status": "APPROVED_SP",
@@ -272,7 +272,21 @@
           "modded_provenance": true,
           "session_cache": true
         },
-        "next": "0.4 WeaponRecipe"
+        "next": "0.4 WeaponRecipe",
+        "0.4": {
+          "status": "FUNCTIONAL_PASS_FREEZE_PENDING_HYGIENE",
+          "final_runtime_candidate_so_far": "R3",
+          "auto_test": {
+            "passed": 245,
+            "failed": 0,
+            "total": 245
+          },
+          "recipe_schema": "0.4-recipe-candidate",
+          "secondary_runtime_variant_strategy": "BASEWEAPON_LINKED_VARIANT_UNION",
+          "inventory_mutation": false,
+          "observed_hygiene_debt": "case-variant duplicate magazine classnames such as nlaw_f/NLAW_F",
+          "next": "R4 CASE_INSENSITIVE_DEDUPE"
+        }
       }
     },
     {
@@ -588,7 +602,8 @@
       "docs/22_WEAPONS_0_1_B_IDENTITY_LIFECYCLE.md",
       "docs/23_WEAPONS_0_2_WEAPON_CONFIGURATION.md",
       "docs/24_WEAPONS_0_3_CATALOG_COMPATIBILITY.md",
-      "docs/25_WEAPONS_PLAYER_UI_E_FRONTEIRA_ARMORER.md"
+      "docs/25_WEAPONS_PLAYER_UI_E_FRONTEIRA_ARMORER.md",
+      "docs/26_WEAPONS_0_4_WEAPON_RECIPE.md"
     ],
     "machine_start": [
       "machine/PROJECT_STATE.json",
@@ -652,7 +667,7 @@
       "loaded_state_rule": "Loaded magazine/ammo is transient loadedState, excluded from WeaponConfiguration fingerprint.",
       "apply_rule": "Validate -> diff -> mutate only if changed -> recapture -> verify configuration and loadedState -> rollback attachments on verification failure.",
       "no_op_rule": "changedCount=0 returns without engine mutation.",
-      "next_gate": "0.4 WeaponRecipe; 0.3 Catalog & Compatibility is approved SP.",
+      "next_gate": "0.4 R4 hygiene/freeze; WeaponRecipe R3 passed 245/245.",
       "reference": "docs/23_WEAPONS_0_2_WEAPON_CONFIGURATION.md"
     },
     "weapon_player_ui": {
@@ -676,6 +691,28 @@
         "0.8 Multiplayer Authority / Reconciliation"
       ],
       "reference": "docs/25_WEAPONS_PLAYER_UI_E_FRONTEIRA_ARMORER.md"
+    },
+    "weapon_recipe": {
+      "status": "MISSION_FIRST_R3_FUNCTIONAL_PASS_R4_HYGIENE_PENDING",
+      "owner_module": "Weapons",
+      "schema": "0.4-recipe-candidate",
+      "fields": [
+        "configuration",
+        "magazineClass"
+      ],
+      "magazine_optional": true,
+      "target_slot_owner": "WeaponKit",
+      "excludes": [
+        "targetSlot",
+        "kitName",
+        "instanceId",
+        "serial",
+        "ammoCount"
+      ],
+      "inventory_mutation": false,
+      "secondary_variant_rule": "Resolve type=4 runtime/hidden variants generically through shared baseWeapon; no ACE/NLAW hardcode.",
+      "hygiene_rule_pending": "Compatibility lists must be deduplicated case-insensitively while preserving one engine spelling.",
+      "reference": "docs/26_WEAPONS_0_4_WEAPON_RECIPE.md"
     }
   }
 }
