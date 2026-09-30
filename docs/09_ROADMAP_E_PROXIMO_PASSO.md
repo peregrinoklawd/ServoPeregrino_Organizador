@@ -165,9 +165,14 @@ Source integrado na branch. Base histórica da linha atual.
 
 ```text
 0.4  WeaponRecipe                            APPROVED 251/251
-0.5  WeaponKit                               CANDIDATE / RUNTIME PENDING
+0.5  WeaponKit                               APPROVED 301/301
 
-0.6  Weapons Player UI / Kit Builder
+0.6-A Player UI Shell                        FROZEN BASELINE 362/362
+0.6-B Selection + Information                NEXT
+0.6-C Compatibility Selectors
+0.6-D WeaponKit Draft
+0.6-E Kit Authoring/Lifecycle
+0.6-F Final Visual Adaptation/Regression
 0.7  Slot-Safe Weapon Application
 0.8  Multiplayer Authority / Reconciliation
 ```
@@ -180,14 +185,13 @@ Estado atual: **R5 homologada 251/251**; baseline mission-first congelada.
 #### 0.5 — WeaponKit
 Unidade reutilizável/salvável pelo jogador. Um WeaponKit representa **uma arma configurada para um slot**, não um loadout completo.
 
-Candidata atual:
+Estado homologado:
 - schema `0.5-kit-candidate`;
 - `kitId + name + targetSlot + recipe`;
 - repository `SESSION_LOCAL_CANDIDATE`;
 - create/get/list/rename/duplicate/update/delete;
-- static validation **131/131**;
-- runtime Arma pendente;
-- UI continua em 0.6, application em 0.7 e MP em 0.8.
+- runtime final **301/301**;
+- UI segue em 0.6, application em 0.7 e MP em 0.8.
 
 #### 0.6 — Weapons Player UI / Kit Builder
 UI própria, simples e direta, fortemente inspirada nas lições aprendidas da parte de armas do APM histórico:
@@ -217,22 +221,34 @@ Armorer consome modelos/serviços de Weapons; Weapons não depende do Armorer pa
 Gates paralelos ainda abertos: integração addon/PBO, Packaging, MP/JIP/reconnect e identidade física intrínseca. Contratos v1 ainda não devem ser congelados apenas pelos gates mission-first SP.
 
 
-### 0.6-A — Player UI Shell — CANDIDATE
+### 0.6-A — Player UI Shell — FROZEN BASELINE
 
-Objetivo: validar a primeira superfície player-facing de Weapons sem alterar modelos homologados.
+R4 fechou o shell em **362/362 PASS / 0 FAIL**.
 
-Decisões fechadas:
-
-- padrão visual e comportamental inspirado diretamente no Items atual;
-- painéis: `MEUS KITS | KIT SELECIONADO | CATÁLOGO DE ARMAS`;
-- rodapé: `Context | Message | History`;
+Decisões congeladas durante os checkpoints funcionais:
+- layout: `MEUS KITS | KIT SELECIONADO | CATÁLOGO DE ARMAS`;
+- rodapé semântico: `Context | Message | History`;
 - nomes player-facing: `Principal / Porte / Secundária`;
-- internos permanecem `PRIMARY / HANDGUN / SECONDARY`;
-- não existe painel separado de acessórios compatíveis;
-- compatibilidade será apresentada nos dropdowns do Kit Selecionado;
-- botões ficam dentro do submenu proprietário;
-- 1080p e telas maiores usam a mesma estrutura safeZone;
-- `Públicos` reservado, sem simular backend inexistente;
-- 0.6-A é zero-mutation: sem edição de Recipe/WeaponKit e sem equip/application.
+- filtros `Todos / Principal / Porte / Secundária` em Meus Kits e Catálogo;
+- escala de botões/textos igual à linguagem visual do Items;
+- opacidade atual;
+- largura safeZone atual, inclusive ultrawide;
+- catálogo renderiza até 250 resultados por refresh e mantém o conjunto completo em cache;
+- nenhuma mutação de WeaponKit/loadout no shell.
 
-Após AUTO + gate visual da 0.6-A, prosseguir incrementalmente pelos checkpoints B–F.
+### Estratégia 0.6 após freeze do shell
+
+Durante **0.6-B até 0.6-E**, priorizar funcionalidade e testes. Não reabrir polish visual a cada checkpoint.
+
+Depois, em **0.6-F**, adaptar a UI ao conteúdo funcional final.
+
+Polish compartilhado já registrado:
+- reavaliar densidade vertical de KIT SELECIONADO;
+- separar visualmente o rodapé em três faixas `Context / Message / History`;
+- aplicar a mesma mudança de rodapé em **Items e Weapons**, na mesma rodada;
+- validar novamente 1080p e ultrawide.
+
+Referência: `docs/29_SHARED_UI_ITEMS_WEAPONS.md`.
+
+**Próximo checkpoint: 0.6-B — Seleção de arma + informações.**
+
