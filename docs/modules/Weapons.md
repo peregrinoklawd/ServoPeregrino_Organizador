@@ -182,9 +182,19 @@ A branch atual ainda contém o **addon source 0.1-A**. Os deltas mission-first p
 - cache de sessão;
 - reverse global scan deliberadamente evitado.
 
+### 0.4 — FUNCTIONAL PASS / FREEZE PENDING
+
+- R3: **245/245 AUTO**;
+- WeaponRecipe `0.4-recipe-candidate`;
+- Recipe = WeaponConfiguration + `magazineClass` opcional;
+- sem `targetSlot`, kit name, identity/serial ou ammoCount;
+- sem mutação de inventário;
+- SECONDARY runtime variants resolvidas por `baseWeapon`;
+- R4 pendente apenas para deduplicar classnames case-insensitively no resultado de compatibilidade.
+
 ## Roadmap
 
-1. 0.4 — WeaponRecipe;
+1. 0.4 R4 — hygiene/freeze do WeaponRecipe;
 2. 0.5 — WeaponKit;
 3. 0.6 — Weapons Player UI / Kit Builder;
 4. 0.7 — Slot-Safe Weapon Application;
@@ -193,6 +203,7 @@ A branch atual ainda contém o **addon source 0.1-A**. Os deltas mission-first p
 Gates paralelos: integração addon/PBO, Packaging, MP/JIP/reconnect e identidade física intrínseca.
 
 Ver:
+- `../26_WEAPONS_0_4_WEAPON_RECIPE.md`
 - `../24_WEAPONS_0_3_CATALOG_COMPATIBILITY.md`
 - `../25_WEAPONS_PLAYER_UI_E_FRONTEIRA_ARMORER.md`
 - `Armorer.md`
