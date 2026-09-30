@@ -179,4 +179,4 @@ Confirmado no runtime:
 
 **Weapons 0.5 — WeaponKit = HOMOLOGADA / FROZEN mission-first.**
 
-Próximo marco: **0.6 — Weapons Player UI / Kit Builder**.
+Próximo marco: **0.6-A — Player UI Shell**, primeiro checkpoint da linha 0.6.
