@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "snapshot_date": "2026-09-29",
+  "snapshot_date": "2026-09-30",
   "repository": "peregrinoklawd/ServoPeregrino_Organizador",
   "rule": "Every domain feature has one owning module. Hub may coordinate and present features, but it must delegate domain execution to the owning module through Nexus contracts/capabilities/events.",
   "modules": {
@@ -284,12 +284,13 @@
   ],
   "implementation_notes": {
     "Weapons": {
-      "delivery": "0.3 R2 mission-first / addon source 0.1-A",
-      "status": "MISSION_FIRST_0_3_APPROVED_ADDON_SOURCE_INTEGRATION_PENDING",
+      "delivery": "0.4 R5 mission-first / addon source 0.1-A",
+      "status": "MISSION_FIRST_0_4_APPROVED_ADDON_SOURCE_INTEGRATION_PENDING",
       "homologated": {
         "lifecycle_0_1_b": "128/128 AUTO + 3/3 live Take/Put",
         "configuration_0_2": "175/175 AUTO",
-        "catalog_compatibility_0_3_r2": "213/213 AUTO"
+        "catalog_compatibility_0_3_r2": "213/213 AUTO",
+        "weapon_recipe_0_4_r5": "251/251 AUTO"
       },
       "product_concept": "Player-facing module with its own simple APM-like WeaponKit UI. A WeaponKit is one configured weapon targeted to one weapon slot.",
       "slot_isolation_rule": "Applying a WeaponKit may intentionally mutate only the target weapon slot; the rest of the loadout belongs to other domains and must be preserved.",
@@ -297,7 +298,9 @@
       "apm_reference_rule": "Historical APM weapon UI is a UX/lessons-learned source. Review KEEP/ADAPT/DROP/NEW before freezing Weapons UI 0.6.",
       "physical_identity_proven": false,
       "addon_source_integrated_through": "0.1-A",
-      "next": "0.4 WeaponRecipe"
+      "next": "0.5 WeaponKit",
+      "recipe_rule": "WeaponRecipe is frozen as configuration + optional magazineClass; targetSlot/name/identity/ammoCount remain outside Recipe.",
+      "secondary_runtime_rule": "PRIMARY/HANDGUN class guards are strict. SECONDARY type=4 runtime/base variants may be equivalent only inside the same baseWeapon family."
     }
   }
 }
