@@ -136,6 +136,20 @@ Ler obrigatoriamente:
 - WeaponRecipe/schema permanecem inalterados.
 - **MISSION-FIRST FUNCTIONAL GATE: HOMOLOGADO.**
 
+### 0.5 — WeaponKit
+
+- candidata mission-first construída sobre 0.4 R5 congelada;
+- static validation: **131/131 PASS**;
+- schema: `kitId`, `name`, `targetSlot`, `recipe`;
+- repository mode: `SESSION_LOCAL_CANDIDATE`;
+- create/get/list/rename/duplicate/update Recipe/delete;
+- nomes únicos case-insensitively;
+- content fingerprint exclui kitId/nome;
+- UI permanece em 0.6;
+- aplicação/equipar permanece em 0.7;
+- autoridade multiplayer permanece em 0.8;
+- runtime Arma ainda pendente.
+
 ### Decisão conceitual — Weapons é player-facing
 
 Weapons possui UI própria, semelhante em conceito à parte de armas do APM histórico:
@@ -151,8 +165,8 @@ Weapons possui UI própria, semelhante em conceito à parte de armas do APM hist
 
 Armorer continua separado: bancada, Preview 3D avançado, peças, inspeção e manutenção.
 
-**Próximo marco mission-first:** **0.5 — WeaponKit**.
+**Gate mission-first ativo:** **0.5 — WeaponKit**, candidata construída; runtime pendente.
 
 **Gates ainda abertos:** identidade física intrínseca, multiplayer/JIP/reconnect, integração real ao addon/PBO e Packaging Gate. Próximo marco mission-first: **0.5 — WeaponKit**.
 
-Ver [0.1-A](21_WEAPONS_0_1_A_FOUNDATION_IDENTITY_SPIKE.md), [0.1-B](22_WEAPONS_0_1_B_IDENTITY_LIFECYCLE.md), [0.2](23_WEAPONS_0_2_WEAPON_CONFIGURATION.md), [0.3](24_WEAPONS_0_3_CATALOG_COMPATIBILITY.md) e [conceito UI](25_WEAPONS_PLAYER_UI_E_FRONTEIRA_ARMORER.md) e [0.4](26_WEAPONS_0_4_WEAPON_RECIPE.md).
+Ver [0.1-A](21_WEAPONS_0_1_A_FOUNDATION_IDENTITY_SPIKE.md), [0.1-B](22_WEAPONS_0_1_B_IDENTITY_LIFECYCLE.md), [0.2](23_WEAPONS_0_2_WEAPON_CONFIGURATION.md), [0.3](24_WEAPONS_0_3_CATALOG_COMPATIBILITY.md) e [conceito UI](25_WEAPONS_PLAYER_UI_E_FRONTEIRA_ARMORER.md) e [0.4](26_WEAPONS_0_4_WEAPON_RECIPE.md) e [0.5](27_WEAPONS_0_5_WEAPON_KIT.md).
