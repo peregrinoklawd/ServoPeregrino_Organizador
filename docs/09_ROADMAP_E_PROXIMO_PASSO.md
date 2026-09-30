@@ -147,15 +147,19 @@ Source integrado na branch. Base histórica da linha atual.
 - provenance modded e cache aprovados;
 - reverse lookup global evitado em favor de futuro índice reverso derivado do catálogo filtrado.
 
-### 0.4 — WeaponRecipe — FUNCTIONAL PASS / R5 FREEZE CANDIDATE
+### 0.4 — WeaponRecipe — APPROVED SP
 
 - R3: **245/245 AUTO**.
 - Model/validation/fingerprint/deep-copy: approved.
 - PRIMARY/HANDGUN/SECONDARY: approved.
 - Runtime variants for SECONDARY resolved generically by `baseWeapon`.
 - R4 hygiene passed, but runtime total was 245/246 because SECONDARY class changed between capture/apply.
-- R5 adds slot-aware runtime/base family equivalence only for SECONDARY type=4 classes sharing `baseWeapon`.
-- PRIMARY/HANDGUN remain strict; Recipe schema/semantics remain unchanged.
+- R5 final: **251/251 AUTO**.
+- Slot-aware runtime/base family equivalence applies only to SECONDARY type=4 classes sharing `baseWeapon`.
+- PRIMARY/HANDGUN remain strict.
+- R4 case-insensitive hygiene remains green.
+- Recipe schema/semantics remain unchanged.
+- **WeaponRecipe mission-first frozen.**
 
 ### Roadmap corrigido de produto
 
