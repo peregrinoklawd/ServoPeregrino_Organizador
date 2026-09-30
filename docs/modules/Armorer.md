@@ -2,7 +2,7 @@
 
 ## Papel
 
-Dono da bancada física, Preview 3D e workflow/UI de montagem, inspeção e manutenção.
+Dono da bancada física e da experiência especializada de construção, Preview 3D, inspeção de peças e manutenção. Armorer não é a UI geral de organização de armas; Weapons possui sua própria interface player-facing.
 
 ## Já comprovado historicamente
 
@@ -16,13 +16,16 @@ Dono da bancada física, Preview 3D e workflow/UI de montagem, inspeção e manu
 
 ## Construção/montagem
 
-Armorer oferece a experiência de bancada para:
-- montar/desmontar;
-- escolher acessórios;
-- criar/editar receitas;
-- aplicar configuração.
+Armorer oferece a experiência **especializada de bancada** para:
+- montar/desmontar visualmente;
+- trabalhar com Preview 3D;
+- escolher acessórios em contexto de bancada;
+- manipular uma configuração/receita através dos serviços de Weapons;
+- aplicar/confirmar mudanças no workflow da estação.
 
-O modelo e a validação de WeaponConfiguration/WeaponRecipe pertencem a **Weapons**.
+O modelo, validação, persistência lógica e experiência geral de WeaponKit pertencem a **Weapons**.
+
+Weapons possui UI própria para o jogador escolher uma arma, configurar acessórios, salvar/carregar WeaponKits e equipar somente o slot alvo sem alterar o restante do inventário. Armorer não substitui essa interface.
 
 ## Manutenção
 
@@ -57,3 +60,18 @@ O cálculo/estado autoritativo de desgaste e as transições lógicas de manuten
 ## Migração
 
 Importar a baseline histórica autoritativa sem reescrever ou adicionar features. O primeiro gate do Armorer no monorepo é provar equivalência funcional.
+
+
+## Fronteira de UI — decisão 30/09/2026
+
+```text
+Weapons UI
+= simples, direta, APM-like
+= catálogo + configuração + WeaponKit + equipar por slot
+
+Armorer UI
+= bancada especializada
+= Preview 3D + peças + inspeção + manutenção + workflow de estação
+```
+
+A parte de armas do APM histórico será usada como fonte de lessons learned para Weapons UI. O Armorer histórico continua sendo fonte de lessons learned para Preview/bancada/sessão, sem transferir ownership de WeaponKit para Armorer.
