@@ -215,3 +215,24 @@ Autoridade servidor/cliente, concorrência, transferências, JIP/reconnect e rec
 Armorer consome modelos/serviços de Weapons; Weapons não depende do Armorer para ser utilizável.
 
 Gates paralelos ainda abertos: integração addon/PBO, Packaging, MP/JIP/reconnect e identidade física intrínseca. Contratos v1 ainda não devem ser congelados apenas pelos gates mission-first SP.
+
+
+### 0.6-A — Player UI Shell — CANDIDATE
+
+Objetivo: validar a primeira superfície player-facing de Weapons sem alterar modelos homologados.
+
+Decisões fechadas:
+
+- padrão visual e comportamental inspirado diretamente no Items atual;
+- painéis: `MEUS KITS | KIT SELECIONADO | CATÁLOGO DE ARMAS`;
+- rodapé: `Context | Message | History`;
+- nomes player-facing: `Principal / Porte / Secundária`;
+- internos permanecem `PRIMARY / HANDGUN / SECONDARY`;
+- não existe painel separado de acessórios compatíveis;
+- compatibilidade será apresentada nos dropdowns do Kit Selecionado;
+- botões ficam dentro do submenu proprietário;
+- 1080p e telas maiores usam a mesma estrutura safeZone;
+- `Públicos` reservado, sem simular backend inexistente;
+- 0.6-A é zero-mutation: sem edição de Recipe/WeaponKit e sem equip/application.
+
+Após AUTO + gate visual da 0.6-A, prosseguir incrementalmente pelos checkpoints B–F.
