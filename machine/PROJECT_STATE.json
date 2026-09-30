@@ -1,6 +1,6 @@
 {
   "project": "Servo Peregrino Organizador / SP_ORG",
-  "snapshot_date": "2026-09-28",
+  "snapshot_date": "2026-09-29",
   "state_schema_version": 2,
   "source_of_truth": {
     "repository_role": "MONOREPO",
@@ -22,8 +22,8 @@
     "hub_rule": "Hub is an optional player-facing integration/orchestration layer. No domain module may require Hub in order to function.",
     "independent_core_development": true
   },
-  "global_next_gate": "Independent gates: Items 0.13-A Packaging R2/runtime/multiplayer remains pending; Weapons 0.1-A addon load/AUTO TEST/physical identity A-E remain OPEN. Neither isolated core waits for the other.",
-  "global_after_gate": "Items 0.13-B only after its own 0.13-A gate. Weapons next delivery only after human review; stable identity contracts require physical lifecycle evidence. Cross-module integrations have separate gates.",
+  "global_next_gate": "Independent gates: Items 0.13-A Packaging R2/runtime/multiplayer remains pending. Weapons mission-first 0.1-B and 0.2 are approved in SP; next functional milestone is 0.3 Catalog & Compatibility. Addon/PBO integration, MP/JIP and intrinsic physical identity remain separate open gates.",
+  "global_after_gate": "Weapons 0.3 may continue mission-first without claiming stable public contracts. Before addon release, integrate validated deltas into source and pass packaging/runtime/MP gates. Items 0.13-B still waits for its own 0.13-A gate.",
   "modules": [
     {
       "id": "Nexus",
@@ -158,9 +158,9 @@
       "mandatory": false,
       "stable_version": null,
       "development_version": {
-        "display": "0.1-A",
-        "semantic": "0.1.0.1",
-        "build": "0.1.0.1-a-foundation-identity-spike"
+        "display": "0.2 mission-first / addon source 0.1-A",
+        "semantic": "0.2.0.3 mission candidate",
+        "build": "0.2.0.3-secondary-observed-class-fix-mission-first"
       },
       "dependencies": [
         "Nexus"
@@ -194,10 +194,61 @@
           "persistence.provider.v1"
         ]
       },
-      "status": "FOUNDATION_IDENTITY_SPIKE_PENDING_RUNTIME_VALIDATION",
-      "next_gate": "OPEN: validate addon mount and AUTO TEST; collect manual A-E evidence. Physical identity across identical weapons/transfers remains UNPROVEN. No stable v1 before proof.",
-      "homologated_artifact": null,
-      "current_candidate_artifact": "Weapons 0.1-A source + Identity Lab 4 Slots; PBO build/load not executed"
+      "status": "MISSION_FIRST_0_2_APPROVED_ADDON_SOURCE_INTEGRATION_PENDING",
+      "next_gate": "0.3 Catalog & Compatibility in mission-first. Keep intrinsic physical identity, multiplayer/JIP/reconnect and addon/PBO packaging as separate open gates; do not freeze v1 contracts yet.",
+      "homologated_artifact": "Mission-first SP: 0.1-B lifecycle evidence approved (128/128 AUTO + 3/3 live Take/Put); 0.2 WeaponConfiguration R3 approved (175/175 AUTO).",
+      "current_candidate_artifact": "Repository addon source remains 0.1-A; mission-first validated behavior through 0.2 awaits source integration/packaging.",
+      "mission_first_validation": {
+        "0.1-B": {
+          "status": "APPROVED_SP",
+          "auto_test": {
+            "passed": 128,
+            "failed": 0,
+            "total": 128
+          },
+          "manual_live_take_put": {
+            "passed": 3,
+            "failed": 0,
+            "total": 3
+          },
+          "identity_strategy": "EVENT_DELTA_EVIDENCE_CANDIDATE",
+          "invariants": [
+            "unique transition evidence may be CORRELATED",
+            "indistinguishable duplicates remain AMBIGUOUS",
+            "insufficient evidence remains UNPROVEN",
+            "physicalIdentityProven remains false"
+          ]
+        },
+        "0.2": {
+          "status": "APPROVED_SP",
+          "final_candidate": "R3",
+          "auto_test": {
+            "passed": 175,
+            "failed": 0,
+            "total": 175
+          },
+          "configuration_schema": "0.2-candidate",
+          "configuration_fields": [
+            "weaponClass",
+            "muzzle",
+            "pointer",
+            "optic",
+            "bipod"
+          ],
+          "loaded_state_separate": true,
+          "engine_routes_validated": [
+            "PRIMARY",
+            "HANDGUN",
+            "SECONDARY"
+          ],
+          "decisions": [
+            "no-op apply performs no engine mutation",
+            "loaded magazine/ammo is preserved across configuration apply/remove",
+            "invalid attachment and weaponClass mismatch fail before mutation",
+            "SECONDARY target class is derived from engine-observed configuration"
+          ]
+        }
+      }
     },
     {
       "id": "Equipment",
@@ -508,7 +559,9 @@
       "docs/18_CATALOGO_FUNCIONAL_E_OWNERSHIP.md",
       "docs/19_VISAO_FUNCIONAL_COMPARTILHAVEL.md",
       "docs/20_HUB_ARQUITETURA_E_INTEGRACAO.md",
-      "docs/21_WEAPONS_0_1_A_FOUNDATION_IDENTITY_SPIKE.md"
+      "docs/21_WEAPONS_0_1_A_FOUNDATION_IDENTITY_SPIKE.md",
+      "docs/22_WEAPONS_0_1_B_IDENTITY_LIFECYCLE.md",
+      "docs/23_WEAPONS_0_2_WEAPON_CONFIGURATION.md"
     ],
     "machine_start": [
       "machine/PROJECT_STATE.json",
@@ -519,10 +572,10 @@
   },
   "design_decisions": {
     "weapon_identity": {
-      "status": "INTERNAL_CANDIDATE_IDENTITY_SPIKE",
+      "status": "MISSION_FIRST_LIFECYCLE_EVIDENCE_APPROVED_INTRINSIC_IDENTITY_OPEN",
       "decision": "WeaponInstance identity and definitive serial belong to Weapons because identity exists independently of whether wear is enabled.",
       "owner_module": "Weapons",
-      "gate": "Prove physical identity preservation across player slots, weapon holders, cargo and MP, especially identical duplicates, before freezing weapons.instance.v1. Logical SESSION issuance does not prove binding."
+      "gate": "0.1-B proved conservative event-delta correlation in SP, including identical-weapon ambiguity. Intrinsic physical identity across MP/JIP/reconnect remains open; do not freeze weapons.instance.v1."
     },
     "weapon_wear": {
       "status": "PLANNED",
@@ -557,6 +610,23 @@
         "Sets owns persistent composition data; Hub owns the player-facing integrated experience.",
         "Nexus connects modules technically; Hub connects the player to modules functionally."
       ]
+    },
+    "weapon_configuration": {
+      "status": "MISSION_FIRST_0_2_APPROVED",
+      "owner_module": "Weapons",
+      "schema": "0.2-candidate",
+      "fields": [
+        "weaponClass",
+        "muzzle",
+        "pointer",
+        "optic",
+        "bipod"
+      ],
+      "loaded_state_rule": "Loaded magazine/ammo is transient loadedState, excluded from WeaponConfiguration fingerprint.",
+      "apply_rule": "Validate -> diff -> mutate only if changed -> recapture -> verify configuration and loadedState -> rollback attachments on verification failure.",
+      "no_op_rule": "changedCount=0 returns without engine mutation.",
+      "next_gate": "0.3 Catalog & Compatibility; public v1 contract still not frozen.",
+      "reference": "docs/23_WEAPONS_0_2_WEAPON_CONFIGURATION.md"
     }
   }
 }
