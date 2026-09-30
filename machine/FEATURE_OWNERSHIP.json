@@ -284,8 +284,8 @@
   ],
   "implementation_notes": {
     "Weapons": {
-      "delivery": "0.6-A R3 mission-first candidate / addon source 0.1-A",
-      "status": "MISSION_FIRST_0_6_A_R3_CANDIDATE_ADDON_SOURCE_INTEGRATION_PENDING",
+      "delivery": "0.6-A R4 mission-first UI shell baseline / addon source 0.1-A",
+      "status": "MISSION_FIRST_0_6_A_R4_UI_BASELINE_FROZEN_ADDON_SOURCE_INTEGRATION_PENDING",
       "homologated": {
         "lifecycle_0_1_b": "128/128 AUTO + 3/3 live Take/Put",
         "configuration_0_2": "175/175 AUTO",
@@ -299,7 +299,7 @@
       "apm_reference_rule": "Historical APM weapon UI is a UX/lessons-learned source. Review KEEP/ADAPT/DROP/NEW before freezing Weapons UI 0.6.",
       "physical_identity_proven": false,
       "addon_source_integrated_through": "0.1-A",
-      "next": "Validate R3 refresh guard/visual shell; do not advance to 0.6-B until green.",
+      "next": "0.6-B selection + information; no further UI polish until functional checkpoints are implemented/tested.",
       "recipe_rule": "WeaponRecipe is frozen as configuration + optional magazineClass; targetSlot/name/identity/ammoCount remain outside Recipe.",
       "secondary_runtime_rule": "PRIMARY/HANDGUN class guards are strict. SECONDARY type=4 runtime/base variants may be equivalent only inside the same baseWeapon family.",
       "weapon_kit_candidate": {
@@ -330,10 +330,10 @@
       },
       "weapon_ui_candidate": {
         "checkpoint": "0.6-A",
-        "build": "0.6.0.1-player-ui-shell-items-pattern-mission-first",
-        "static_validation": "169/169",
-        "runtime": "PENDING",
-        "visual_gate": "PENDING",
+        "final_candidate": "R4",
+        "build": "0.6.0.4-all-type-filters-close-timing-mission-first",
+        "runtime": "APPROVED_362_OF_362",
+        "visual_gate": "BASELINE_ACCEPTED_AND_FROZEN",
         "panels": [
           "MEUS KITS",
           "KIT SELECIONADO",
@@ -345,23 +345,50 @@
           "History"
         ],
         "slot_ui_labels": {
+          "ALL": "Todos",
           "PRIMARY": "Principal",
           "HANDGUN": "Porte",
           "SECONDARY": "Secundária"
         },
+        "kit_filters": [
+          "ALL",
+          "PRIMARY",
+          "HANDGUN",
+          "SECONDARY"
+        ],
+        "catalog_filters": [
+          "ALL",
+          "PRIMARY",
+          "HANDGUN",
+          "SECONDARY"
+        ],
         "compatible_accessories_panel": false,
-        "compatibility_controls": "dropdowns/selectors inside KIT SELECIONADO",
+        "compatibility_controls": "selectors inside KIT SELECIONADO",
         "public_kits": "VISIBLE_DISABLED_RESERVED",
+        "catalog_render_limit": 250,
         "loadout_mutation": false,
         "weaponkit_mutation": false,
+        "visual_freeze_policy": "PRESERVE_R4_DURING_0_6_B_TO_E",
+        "final_polish": "0.6-F",
         "application": "DEFERRED_0_7"
       },
       "player_ui_0_6_a": {
         "r1": "REJECTED_CFGFUNCTIONS_PATH",
         "r2": "REJECTED_REFRESH_REENTRANCY",
-        "r3": "CANDIDATE_STATIC_134_OF_134",
+        "r3": "345_OF_346_ONLY_CLOSE_TIMING_FALSE_NEGATIVE",
+        "r4": "APPROVED_362_OF_362_UI_SHELL_BASELINE_FROZEN",
         "catalog_render_limit": 250,
         "application": "DEFERRED_0_7"
+      },
+      "shared_ui_polish": {
+        "reference": "docs/29_SHARED_UI_ITEMS_WEAPONS.md",
+        "footer_future": "split Context/Message/History into three visual bands",
+        "modules": [
+          "Items",
+          "Weapons"
+        ],
+        "timing": "after functional checkpoints; execute as coordinated final polish",
+        "current_policy": "do not change button scale, font scale, opacity or ultrawide width now"
       }
     }
   }
