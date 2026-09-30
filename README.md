@@ -9,7 +9,7 @@ Um repositório, vários módulos/PBOs. Nenhum módulo deve depender do estado p
 ## Implementado hoje
 
 - `addons/ServoPeregrino_Organizador_Nexus` — Foundation 1.1.
-- `addons/ServoPeregrino_Organizador_Weapons` — source integrado ainda em 0.1-A; validação mission-first avançou até 0.5, homologada com 301/301. Weapons é um módulo player-facing com UI própria para montar/salvar/equipar armas por slot sem alterar o restante do loadout. Identidade física intrínseca continua não comprovada.
+- `addons/ServoPeregrino_Organizador_Weapons` — source integrado ainda em 0.1-A; validação mission-first homologada até 0.5 (301/301); 0.6-A Player UI Shell é a candidata atual. Weapons é um módulo player-facing com UI própria para montar/salvar/equipar armas por slot sem alterar o restante do loadout. Identidade física intrínseca continua não comprovada.
 - `addons/ServoPeregrino_Organizador_Items` — baseline 0.12 FINAL; lógica 0.13-A em validação runtime/multiplayer.
 - `missions/SP_ORG_Items_0_13_A_Multiplayer_Lab_8Slots_R3.VR` — laboratório Items.
 
@@ -103,11 +103,12 @@ A referência de UX/lessons learned será a parte de armas do **APM histórico**
 0.3    Catalog / Compatibility                 APPROVED
 0.4    WeaponRecipe                            APPROVED 251/251
 0.5    WeaponKit                               APPROVED 301/301
-0.6    Weapons Player UI / Kit Builder         NEXT
+0.6    Weapons Player UI / Kit Builder         CURRENT
+  0.6-A Player UI Shell                        CANDIDATE
 0.7    Slot-Safe Weapon Application
 0.8    Multiplayer Authority / Reconciliation
 ```
 
-Documentação: [0.1-A](docs/21_WEAPONS_0_1_A_FOUNDATION_IDENTITY_SPIKE.md), [0.1-B](docs/22_WEAPONS_0_1_B_IDENTITY_LIFECYCLE.md), [0.2](docs/23_WEAPONS_0_2_WEAPON_CONFIGURATION.md), [0.3](docs/24_WEAPONS_0_3_CATALOG_COMPATIBILITY.md), [conceito de produto/UI](docs/25_WEAPONS_PLAYER_UI_E_FRONTEIRA_ARMORER.md) e [0.4](docs/26_WEAPONS_0_4_WEAPON_RECIPE.md) e [0.5](docs/27_WEAPONS_0_5_WEAPON_KIT.md).
+Documentação: [0.1-A](docs/21_WEAPONS_0_1_A_FOUNDATION_IDENTITY_SPIKE.md), [0.1-B](docs/22_WEAPONS_0_1_B_IDENTITY_LIFECYCLE.md), [0.2](docs/23_WEAPONS_0_2_WEAPON_CONFIGURATION.md), [0.3](docs/24_WEAPONS_0_3_CATALOG_COMPATIBILITY.md), [conceito de produto/UI](docs/25_WEAPONS_PLAYER_UI_E_FRONTEIRA_ARMORER.md) e [0.4](docs/26_WEAPONS_0_4_WEAPON_RECIPE.md) , [0.5](docs/27_WEAPONS_0_5_WEAPON_KIT.md) e [0.6](docs/28_WEAPONS_0_6_PLAYER_UI.md).
 
 O desenvolvimento dos núcleos é independente. O gate de Items 0.13-A permanece pendente e não bloqueia Weapons.
