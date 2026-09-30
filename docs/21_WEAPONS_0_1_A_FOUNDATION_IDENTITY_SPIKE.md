@@ -170,3 +170,18 @@ Riscos conhecidos: ausência de token físico comprovado; eventos incompletos/fo
 ## Proposta técnica para 0.1-B
 
 Aguardar revisão humana. Se a evidência revelar token nativo obtível, investigar sua estabilidade em todos os carriers e em MP antes de usá-lo como ponte para a identidade de domínio. Caso contrário, propor operações físicas controladas/transacionais e declarar quais caminhos externos continuarão ambíguos, com recusa/reconciliation explícita. Não transformar essa restrição em garantia universal. Somente depois decidir schema público e próximos consumidores. Nenhuma 0.1-B foi iniciada.
+
+
+## Atualização pós-review — evidência mission-first posterior
+
+> Esta seção registra resultados posteriores sem reescrever a natureza histórica da 0.1-A nem alegar que o source do addon acima foi automaticamente convertido em 0.1-B/0.2.
+
+A 0.1-A deixou de estar “não executada no Arma” como hipótese de laboratório: a linha mission-first derivada foi exercitada em Arma 3 Stable com modset amplo. A foundation/Nexus, separação WeaponConfiguration/loadedState e observação conservadora permaneceram verdes durante as entregas seguintes.
+
+A investigação de identidade avançou para **0.1-B**, homologada em SP com AUTO TEST 128/128 e live Take/Put 3/3. O resultado não descobriu serial físico nativo; adotou-se `EVENT_DELTA_EVIDENCE_CANDIDATE`: delta único pode correlacionar continuidade lógica, duplicatas idênticas permanecem AMBIGUOUS e ausência de evidência permanece UNPROVEN. `physicalIdentityProven=false` continua invariável.
+
+Depois, **0.2 WeaponConfiguration** foi homologada em SP com AUTO TEST final 175/175. O schema candidato passou a `0.2-candidate`, manteve magazine/ammo em loadedState separado e validou diff + apply/verify/rollback em PRIMARY, HANDGUN e SECONDARY.
+
+Documentos de continuidade: [0.1-B](22_WEAPONS_0_1_B_IDENTITY_LIFECYCLE.md) e [0.2](23_WEAPONS_0_2_WEAPON_CONFIGURATION.md).
+
+Gates que continuam abertos: integração do delta no addon source/PBO, Packaging, multiplayer/JIP/reconnect e identidade física intrínseca/universal.
