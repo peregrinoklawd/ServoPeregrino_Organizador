@@ -58,13 +58,17 @@ Sequência recomendada para **integrações futuras**, não pré-requisito para 
 
 ## Weapons
 
-Primeiros gates:
+Produto player-facing independente, análogo a Items no princípio de isolamento de domínio.
+
+Gates:
 - WeaponInstance/serial lifecycle;
-- preservação da identidade em inventário/holder/storage/MP;
 - WeaponConfiguration;
+- Catalog/Compatibility;
 - WeaponRecipe;
-- compatibilidade;
-- troca dinâmica da arma sem alterar o restante do loadout.
+- WeaponKit;
+- UI própria de organização/configuração de armas;
+- aplicação slot-safe sem alterar o restante do loadout;
+- autoridade/reconciliação multiplayer.
 
 ## WeaponCondition
 
@@ -82,7 +86,8 @@ Primeiros gates:
 
 - importar baseline histórica;
 - validar equivalência;
-- integrar Weapons para construção/configuração;
+- manter Armorer como experiência especializada de bancada/Preview/peças/manutenção;
+- consumir Weapons para configuração/receitas/kits sem substituir a UI geral de Weapons;
 - integrar WeaponCondition para condição/manutenção;
 - somente depois evoluir manutenção 2.x.
 
@@ -118,30 +123,69 @@ Primeiros gates:
 ## Weapons — progresso mission-first
 
 ### 0.1-A — Foundation & Identity Spike
+Source integrado na branch. Base histórica da linha atual.
 
-Source integrado na branch. Estabeleceu registry lógico SERVER/SESSION, separação `WeaponConfiguration`/loadedState e observador conservador. Nenhum contrato v1 congelado.
+### 0.1-B — WeaponInstance Lifecycle / Event-Delta Evidence — APPROVED SP
+- 128/128 AUTO;
+- 3/3 live Take/Put;
+- CORRELATED / AMBIGUOUS / UNPROVEN;
+- identidade física intrínseca continua não alegada.
 
-### 0.1-B — WeaponInstance Lifecycle / Event-Delta Evidence — APROVADA EM MISSION-FIRST SP
+### 0.2 — WeaponConfiguration — APPROVED SP
+- 175/175 AUTO;
+- schema 0.2-candidate;
+- capture/diff/apply/round-trip;
+- PRIMARY/HANDGUN/SECONDARY;
+- loadedState separado e preservado.
 
-- AUTO TEST: 128/128.
-- Live Take/Put manual: 3/3.
-- Evento + delta único => `CORRELATED`.
-- Duplicatas indistinguíveis => `AMBIGUOUS`, sem escolher instanceId.
-- Sem delta suficiente => `UNPROVEN`.
-- `physicalIdentityProven=false` permanece obrigatório.
+### 0.3 — Catalog & Compatibility — APPROVED SP
+- candidata final R2;
+- **213/213 AUTO**;
+- catálogo-base real: 2770 armas;
+- catálogo com presets: 3380;
+- compatibilidade de attachments/magazines derivada do engine;
+- provenance modded e cache aprovados;
+- reverse lookup global evitado em favor de futuro índice reverso derivado do catálogo filtrado.
 
-### 0.2 — WeaponConfiguration — APROVADA EM MISSION-FIRST SP
+### Roadmap corrigido de produto
 
-- AUTO TEST final: 175/175.
-- schema candidato fechado para arma + quatro slots de attachment;
-- diff explícito;
-- apply/verify/rollback;
-- loadedState preservado e fora da identidade/configuração;
-- no-op sem mutação;
-- PRIMARY/HANDGUN/SECONDARY validados.
+```text
+0.4  WeaponRecipe
+0.5  WeaponKit
+0.6  Weapons Player UI / Kit Builder
+0.7  Slot-Safe Weapon Application
+0.8  Multiplayer Authority / Reconciliation
+```
 
-### Próximo marco: 0.3 — Catalog & Compatibility
+#### 0.4 — WeaponRecipe
+Representar de forma estruturada uma montagem desejada e validável.
 
-Objetivo: derivar do engine, inclusive para armas de mods, quais attachments e magazines são compatíveis por arma/slot sem hardcode por classe. Deve permanecer separado de WeaponCondition, economia/estoque/persistência e UI final.
+#### 0.5 — WeaponKit
+Unidade reutilizável/salvável pelo jogador. Um WeaponKit representa **uma arma configurada para um slot**, não um loadout completo.
 
-Gates paralelos ainda abertos: MP/JIP/reconnect, identidade física intrínseca e integração Packaging/PBO. Não congelar `weapons.instance.v1` ou `weapons.configuration.v1` apenas porque os gates mission-first SP passaram.
+#### 0.6 — Weapons Player UI / Kit Builder
+UI própria, simples e direta, fortemente inspirada nas lições aprendidas da parte de armas do APM histórico:
+- meus kits;
+- catálogo de armas;
+- arma/configuração selecionada;
+- acessórios compatíveis;
+- informações da arma;
+- criar/editar/duplicar/excluir/salvar kit;
+- escolher slot alvo;
+- preparar ação de equipar.
+
+#### 0.7 — Slot-Safe Weapon Application
+Aplicar/trocar apenas PRIMARY, HANDGUN ou SECONDARY alvo. Uniforme, colete, mochila, itens, outras armas e demais domínios devem permanecer inalterados.
+
+#### 0.8 — Multiplayer Authority / Reconciliation
+Autoridade servidor/cliente, concorrência, transferências, JIP/reconnect e reconciliação.
+
+### Fronteira com Armorer
+
+**Weapons UI** é a interface cotidiana de organização/configuração de armas e kits.
+
+**Armorer UI** é a experiência especializada de bancada: Preview 3D avançado, peças/componentes, inspeção, condição e manutenção.
+
+Armorer consome modelos/serviços de Weapons; Weapons não depende do Armorer para ser utilizável.
+
+Gates paralelos ainda abertos: integração addon/PBO, Packaging, MP/JIP/reconnect e identidade física intrínseca. Contratos v1 ainda não devem ser congelados apenas pelos gates mission-first SP.
