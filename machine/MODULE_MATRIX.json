@@ -180,7 +180,7 @@
       },
       "next_gate": "0.4 R4 case-insensitive compatibility de-duplication/freeze -> 0.5 WeaponKit -> 0.6 Weapons Player UI -> 0.7 Slot-Safe Weapon Application -> 0.8 Multiplayer Authority/Reconciliation.",
       "homologated_artifact": "0.1-B: 128/128 + 3/3. 0.2 R3: 175/175. 0.3 R2: 213/213. 0.4 R3 functional: 245/245; freeze pending R4 hygiene.",
-      "current_candidate_artifact": "0.4 R4 hygiene candidate; addon source remains 0.1-A.",
+      "current_candidate_artifact": "0.4 R4 freeze candidate; 94/94 static PASS; Arma runtime pending; addon source remains 0.1-A.",
       "mission_first_validation": {
         "lifecycle_0_1_b": "APPROVED_SP",
         "weapon_configuration_0_2": "APPROVED_SP",
@@ -190,7 +190,8 @@
         "product_concept": "WEAPONS_HAS_OWN_PLAYER_UI_APM_LIKE",
         "weapon_kit": "ONE_CONFIGURED_WEAPON_PER_TARGET_SLOT",
         "slot_isolation": "PRESERVE_ALL_NON_TARGET_LOADOUT_DOMAINS",
-        "next": "0.4 R4 hygiene/freeze"
+        "next": "0.4 R4 hygiene/freeze",
+        "weapon_recipe_0_4_r4": "STATIC_PASS_94_OF_94_RUNTIME_PENDING"
       }
     },
     {
