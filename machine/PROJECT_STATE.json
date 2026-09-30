@@ -22,8 +22,8 @@
     "hub_rule": "Hub is an optional player-facing integration/orchestration layer. No domain module may require Hub in order to function.",
     "independent_core_development": true
   },
-  "global_next_gate": "Weapons 0.6 Player UI / Kit Builder mission-first. Items 0.13-A Packaging/runtime/MP remains an independent pending gate.",
-  "global_after_gate": "Weapons sequence after 0.6: 0.7 Slot-Safe Weapon Application -> 0.8 Multiplayer Authority/Reconciliation. Addon/PBO integration remains a separate gate.",
+  "global_next_gate": "Weapons 0.6-A Player UI Shell runtime + visual gate. Items 0.13-A Packaging/runtime/MP remains an independent pending gate.",
+  "global_after_gate": "After 0.6-A: continue 0.6-B selection/info -> 0.6-C compatibility dropdowns -> 0.6-D draft -> 0.6-E kit management/save -> 0.6-F polish/regressions -> 0.7 Slot-Safe Weapon Application -> 0.8 Multiplayer Authority/Reconciliation.",
   "modules": [
     {
       "id": "Nexus",
@@ -158,9 +158,9 @@
       "mandatory": false,
       "stable_version": null,
       "development_version": {
-        "display": "0.5 mission-first / addon source 0.1-A",
-        "semantic": "0.5.0.1 mission baseline",
-        "build": "0.5.0.1-weaponkit-session-model-mission-first"
+        "display": "0.6-A mission-first / addon source 0.1-A",
+        "semantic": "0.6.0.1 mission candidate",
+        "build": "0.6.0.1-player-ui-shell-items-pattern-mission-first"
       },
       "dependencies": [
         "Nexus"
@@ -197,10 +197,10 @@
           "persistence.provider.v1"
         ]
       },
-      "status": "MISSION_FIRST_0_5_APPROVED_ADDON_SOURCE_INTEGRATION_PENDING",
-      "next_gate": "0.6 Weapons Player UI / Kit Builder.",
+      "status": "MISSION_FIRST_0_6_A_UI_SHELL_CANDIDATE_ADDON_SOURCE_INTEGRATION_PENDING",
+      "next_gate": "Run 0.6-A AUTO TEST and visual gate; then continue to 0.6-B.",
       "homologated_artifact": "0.1-B: 128/128 + 3/3. 0.2 R3: 175/175. 0.3 R2: 213/213. 0.4 R5: 251/251. 0.5: 301/301.",
-      "current_candidate_artifact": "Next mission-first candidate: 0.6 Weapons Player UI / Kit Builder. Addon source in repo remains 0.1-A.",
+      "current_candidate_artifact": "0.6-A Player UI Shell; static validation 169/169; runtime/visual pending. Addon source remains 0.1-A.",
       "mission_first_validation": {
         "0.1-B": {
           "status": "APPROVED_SP",
@@ -322,6 +322,38 @@
           "application": "DEFERRED_0_7",
           "multiplayer": "DEFERRED_0_8",
           "next": "0.6 Weapons Player UI / Kit Builder"
+        },
+        "0.6-A": {
+          "status": "CANDIDATE_RUNTIME_VISUAL_PENDING",
+          "static_validation": {
+            "passed": 169,
+            "failed": 0,
+            "total": 169
+          },
+          "build": "0.6.0.1-player-ui-shell-items-pattern-mission-first",
+          "panels": [
+            "MEUS KITS",
+            "KIT SELECIONADO",
+            "CATÁLOGO DE ARMAS"
+          ],
+          "footer": [
+            "Context",
+            "Message",
+            "History"
+          ],
+          "slot_ui_labels": {
+            "PRIMARY": "Principal",
+            "HANDGUN": "Porte",
+            "SECONDARY": "Secundária"
+          },
+          "internal_slot_names_unchanged": true,
+          "public_library": "VISIBLE_DISABLED_RESERVED",
+          "repository_mutation": false,
+          "loadout_mutation": false,
+          "editing": "STAGED_LATER_0_6",
+          "application": "DEFERRED_0_7",
+          "multiplayer": "DEFERRED_0_8",
+          "next": "0.6-B selection + information after gate"
         }
       }
     },
@@ -640,7 +672,8 @@
       "docs/24_WEAPONS_0_3_CATALOG_COMPATIBILITY.md",
       "docs/25_WEAPONS_PLAYER_UI_E_FRONTEIRA_ARMORER.md",
       "docs/26_WEAPONS_0_4_WEAPON_RECIPE.md",
-      "docs/27_WEAPONS_0_5_WEAPON_KIT.md"
+      "docs/27_WEAPONS_0_5_WEAPON_KIT.md",
+      "docs/28_WEAPONS_0_6_PLAYER_UI.md"
     ],
     "machine_start": [
       "machine/PROJECT_STATE.json",
@@ -780,6 +813,52 @@
       "multiplayer_gate": "0.8",
       "final_runtime": "301/301 AUTO, 0 FAIL; 50/50 WeaponKit-specific gates",
       "reference": "docs/27_WEAPONS_0_5_WEAPON_KIT.md"
+    },
+    "weapons_player_ui": {
+      "status": "0.6-A_CANDIDATE",
+      "visual_reference": "SP_ORG Items current UI grammar + APM lessons learned",
+      "layout": [
+        "MEUS KITS",
+        "KIT SELECIONADO",
+        "CATÁLOGO DE ARMAS"
+      ],
+      "panel_local_actions": {
+        "meus_kits": [
+          "Novo",
+          "Renomear",
+          "Duplicar",
+          "Excluir"
+        ],
+        "kit_selecionado": [
+          "Descartar",
+          "Salvar",
+          "Salvar como novo"
+        ]
+      },
+      "no_separate_compatible_accessories_panel": true,
+      "compatibility_ui": "contextual selectors/dropdowns inside KIT SELECIONADO",
+      "footer": [
+        "Context",
+        "Message",
+        "History"
+      ],
+      "search_tooltip_style": "reuse Items vocabulary",
+      "responsive_baseline": "same safeZone structure for 1080p and larger displays",
+      "slot_presentation_map": {
+        "PRIMARY": "Principal",
+        "HANDGUN": "Porte",
+        "SECONDARY": "Secundária"
+      },
+      "public_kits": "reserved visible-disabled until real provider/library exists",
+      "ui_checkpoints": [
+        "0.6-A shell/layout/listas/filtros",
+        "0.6-B seleção+informações",
+        "0.6-C dropdowns compatibilidade",
+        "0.6-D draft WeaponKit",
+        "0.6-E management/save",
+        "0.6-F polish/regressions"
+      ],
+      "application_gate": "0.7"
     }
   }
 }
