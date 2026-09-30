@@ -136,12 +136,12 @@
       "id": "Weapons",
       "addon": "ServoPeregrino_Organizador_Weapons",
       "mandatory": false,
-      "status": "MISSION_FIRST_0_6_A_R3_CANDIDATE_ADDON_SOURCE_INTEGRATION_PENDING",
+      "status": "MISSION_FIRST_0_6_A_R4_UI_BASELINE_FROZEN_ADDON_SOURCE_INTEGRATION_PENDING",
       "stable_version": null,
       "development_version": {
-        "display": "0.6-A R2 mission-first / addon source 0.1-A",
-        "semantic": "0.6.0.2 mission candidate",
-        "build": "0.6.0.2-cfgfunctions-ui-path-hotfix-mission-first"
+        "display": "0.6-A R4 mission-first / addon source 0.1-A",
+        "semantic": "0.6.0.4 mission baseline",
+        "build": "0.6.0.4-all-type-filters-close-timing-mission-first"
       },
       "dependencies": [
         "Nexus"
@@ -178,9 +178,9 @@
           "persistence.provider.v1"
         ]
       },
-      "next_gate": "0.6-A R3 runtime + visual gate.",
-      "homologated_artifact": "0.1-B: 128/128 + 3/3. 0.2 R3: 175/175. 0.3 R2: 213/213. 0.4 R5: 251/251. 0.5: 301/301.",
-      "current_candidate_artifact": "0.6-A R3 Player UI Shell; refresh guard + bounded catalog projection.",
+      "next_gate": "0.6-B selection + information.",
+      "homologated_artifact": "0.1-B 128/128 + 3/3; 0.2 175/175; 0.3 R2 213/213; 0.4 R5 251/251; 0.5 301/301; 0.6-A R4 shell 362/362.",
+      "current_candidate_artifact": "0.6-B next; R4 shell frozen during B-E.",
       "mission_first_validation": {
         "lifecycle_0_1_b": "APPROVED_SP",
         "weapon_configuration_0_2": "APPROVED_SP",
@@ -193,18 +193,23 @@
         "weapon_kit": "ONE_CONFIGURED_WEAPON_PER_TARGET_SLOT",
         "weapon_kit_repository": "SESSION_LOCAL_CANDIDATE",
         "slot_isolation": "PRESERVE_ALL_NON_TARGET_LOADOUT_DOMAINS",
-        "next": "0.6-A R2 runtime + visual gate",
+        "next": "0.6-B selection + information",
         "weapon_kit_specific_checks": "50_OF_50",
         "weapon_kit_slots": "PRIMARY_HANDGUN_SECONDARY",
         "weapon_kit_loadout_mutation": "NONE",
-        "player_ui_0_6_a": "R3_CANDIDATE_R1_R2_REJECTED",
-        "ui_slot_labels": "PRIMARY=>Principal_HANDGUN=>Porte_SECONDARY=>Secundária",
+        "player_ui_0_6_a": "APPROVED_R4_362_OF_362_UI_SHELL_BASELINE_FROZEN",
+        "ui_slot_labels": "ALL=>Todos_PRIMARY=>Principal_HANDGUN=>Porte_SECONDARY=>Secundária",
         "ui_layout": "MEUS_KITS_SELECTED_KIT_WEAPON_CATALOG",
         "ui_footer": "CONTEXT_MESSAGE_HISTORY_ITEMS_PATTERN",
         "ui_public": "VISIBLE_DISABLED_RESERVED",
         "ui_mutation": "NONE_0_6_A",
         "player_ui_0_6_a_r1": "REJECTED_306_OF_320_CFGFUNCTIONS_UI_PATH",
-        "player_ui_0_6_a_r2": "CANDIDATE_STATIC_141_OF_141_RUNTIME_VISUAL_PENDING"
+        "player_ui_0_6_a_r2": "CANDIDATE_STATIC_141_OF_141_RUNTIME_VISUAL_PENDING",
+        "ui_kit_filters": "ALL_PRIMARY_HANDGUN_SECONDARY",
+        "ui_catalog_filters": "ALL_PRIMARY_HANDGUN_SECONDARY",
+        "ui_catalog_render_limit": "250",
+        "ui_visual_freeze": "PRESERVE_R4_THROUGH_0_6_B_TO_E",
+        "shared_footer_refactor": "DEFERRED_ITEMS_AND_WEAPONS_TO_FINAL_POLISH"
       }
     },
     {
