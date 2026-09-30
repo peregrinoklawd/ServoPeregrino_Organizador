@@ -195,7 +195,7 @@ A branch atual ainda contém o **addon source 0.1-A**. Os deltas mission-first p
 - SECONDARY aceita somente variantes type=4 da mesma família `baseWeapon`;
 - baseline mission-first congelada.
 
-### 0.5 — CANDIDATE / RUNTIME PENDING
+### 0.5 — APPROVED SP
 
 - schema `0.5-kit-candidate`;
 - WeaponKit = `kitId + name + targetSlot + recipe`;
