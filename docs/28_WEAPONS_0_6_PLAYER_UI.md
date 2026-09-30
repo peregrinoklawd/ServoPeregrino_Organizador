@@ -2,7 +2,7 @@
 
 ## Estado
 
-**0.6-A R2 — CANDIDATE MISSION-FIRST. R1 REPROVADA.**
+**0.6-A R3 — CANDIDATE MISSION-FIRST. R1 e R2 REPROVADAS.**
 
 Baseline funcional:
 
@@ -13,7 +13,14 @@ Baseline funcional:
 - R1 runtime: **306/320**, 14 FAIL em cascata após funções UI ausentes;
 - 0.6-A R2 hotfix: path corrigido + preflight das 11 funções UI + runner fail-safe;
 - R2 static validation: **141/141 PASS**;
-- runtime/avaliação visual da R2: pendente.
+- R2 runtime: funções UI carregaram e o dialog abriu, porém o jogo travou durante refresh antes do AUTO_TEST_SUMMARY;
+- R2 preflight: `missing=[]`;
+- R2 catálogo-base: 2770 entradas, build ~1597 ms; com presets 3380, ~1740 ms;
+- causa principal R2: reentrância `refreshInterface -> lbSetCurSel/onLBSelChanged -> handleUIEvent -> refreshInterface`;
+- risco secundário R2: renderização integral das 2770 armas no listbox a cada refresh;
+- 0.6-A R3: guard de refresh + seleção idempotente + projeção visual limitada a 250 linhas, mantendo catálogo completo cacheado/pesquisável;
+- R3 static validation: **134/134 PASS**;
+- runtime/avaliação visual da R3: pendente.
 
 O source integrado do addon continua em 0.1-A. Esta linha 0.6 permanece mission-first e não representa Packaging/PBO.
 
@@ -325,23 +332,48 @@ Causa raiz: `CfgFunctions` da classe UI apontava para `SP_ORG\\Weapons\\function
 
 A ausência das funções provocou cascata no runner antigo (`_ok` indefinido) e impediu a abertura da interface.
 
-### R2 — CANDIDATA ATIVA
+### R2 — REPROVADA
 
-Delta estritamente corretivo:
+R2 corrigiu o carregamento das funções UI, comprovado por:
 
-- corrige `file="SP_ORG\Weapons\functions\ui";`;
-- `_assert` usa default `false`;
-- preflight explícito de todas as 11 funções UI;
-- se houver nova falha de carregamento, o bloco UI é pulado e o RPT registra o bloqueio sem cascata;
-- nenhum novo comportamento de UI;
-- WeaponKit/Recipe/Catalog inalterados;
+```text
+[AUTO_TEST_DETAIL] test=UI_FUNCTION_PREFLIGHT_R2 missing=[]
+```
+
+O dialog abriu e todos os controles estruturais foram validados, mas o RPT terminou imediatamente após `core controls stay inside safeZone`, antes do resumo.
+
+Causa identificada no código:
+
+```text
+refreshInterface
+ -> lbClear/lbAdd/lbSetCurSel
+ -> onLBSelChanged
+ -> handleUIEvent
+ -> refreshInterface
+```
+
+A R2 também tentava renderizar as **2770** entradas do catálogo-base no listbox em cada refresh.
+
+### R3 — CANDIDATA ATIVA
+
+Delta:
+
+- `refreshInProgress` bloqueia refresh reentrante;
+- callback de seleção com índice `-1` não refresca;
+- seleção programática/idêntica não refresca;
+- somente mudança real de seleção solicita novo refresh;
+- catálogo completo permanece cacheado e pesquisável;
+- listbox recebe no máximo **250** resultados por refresh;
+- diagnóstico `[UI_REFRESH_R3]` mede duração/requests/applied/rendered/matches;
+- nenhuma nova função de authoring;
+- WeaponKit/Recipe/Catalog sem alteração de contrato;
 - aplicação continua em 0.7.
 
 ## Artefato candidato
 
 ```text
-SP_ORG_Weapons_0_6_A_R2_PlayerUI_Shell_Lab_MissionFirst.VR
-build = 0.6.0.2-cfgfunctions-ui-path-hotfix-mission-first
+SP_ORG_Weapons_0_6_A_R3_PlayerUI_Shell_Lab_MissionFirst.VR
+build = 0.6.0.3-ui-refresh-reentrancy-guard-mission-first
 ```
 
 Depois do gate 0.6-A, continuar para **0.6-B**, sem pular diretamente para aplicação física.
