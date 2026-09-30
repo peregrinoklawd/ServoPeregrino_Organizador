@@ -1,6 +1,6 @@
 # Catálogo funcional e ownership por módulo — SP_ORG
 
-Data de consolidação: **28/09/2026**.
+Data de consolidação: **29/09/2026**.
 
 ## Objetivo
 
@@ -148,24 +148,34 @@ Items **não** deve implementar:
 
 ---
 
-# Weapons — armas, identidade, construção e configuração
+# Weapons — armas, identidade, kits e organização player-facing
 
-**Dono do que a arma é: identidade, configuração, compatibilidade e receitas.**
+**Dono do que a arma é e da experiência simples/direta de organização de armas.**
 
 Funcionalidades:
-- **PLANEJADO** — WeaponKit;
-- **PLANEJADO** — WeaponConfiguration;
-- **PLANEJADO** — WeaponRecipe como modelo/contrato;
-- **PLANEJADO** — compatibilidade de slots;
-- **PLANEJADO** — acessórios/muzzle/optic/pointer/bipod;
-- **PLANEJADO** — compatibilidade de magazines;
-- **PLANEJADO** — trocar arma dinamicamente sem alterar o restante do loadout;
-- **PLANEJADO** — aplicar somente arma/configuração desejada;
-- **PLANEJADO** — identidade individual `WeaponInstance`;
-- **PLANEJADO** — número de série definitivo;
-- **PLANEJADO** — metadata/histórico da identidade;
-- **PLANEJADO** — persistência opcional da identidade/configuração;
-- **PLANEJADO** — contratos públicos para Armorer, WeaponCondition e Sets.
+- **MISSION-FIRST APROVADO** — WeaponInstance lifecycle/evidência conservadora 0.1-B;
+- **MISSION-FIRST APROVADO** — WeaponConfiguration 0.2;
+- **MISSION-FIRST APROVADO** — catálogo/compatibilidade 0.3;
+- **PLANEJADO 0.4** — WeaponRecipe;
+- **PLANEJADO 0.5** — WeaponKit;
+- **PLANEJADO 0.6** — UI própria de Weapons / Kit Builder;
+- **PLANEJADO 0.6** — catálogo de armas na UI;
+- **PLANEJADO 0.6** — visualizar informações da arma;
+- **PLANEJADO 0.6** — editar acessórios compatíveis;
+- **PLANEJADO 0.6** — gerenciar Meus Kits;
+- **PLANEJADO 0.7** — equipar/aplicar somente o slot de arma alvo;
+- **PLANEJADO 0.7** — preservar uniforme/colete/mochila/itens/outras armas;
+- **PLANEJADO 0.8** — autoridade/reconciliação multiplayer;
+- **PLANEJADO** — persistência opcional de kits/identidade/configuração;
+- **PLANEJADO** — contratos públicos para Armorer, WeaponCondition, Equipment e Sets.
+
+Conceito:
+
+> **WeaponKit = uma arma configurada para um slot.**
+
+Não é um loadout completo.
+
+A parte de armas do APM histórico é referência de UX/lessons learned para a UI de Weapons, mas não é automaticamente fonte de ownership ou arquitetura.
 
 Weapons **não** deve implementar:
 - fórmula de desgaste;
@@ -173,11 +183,10 @@ Weapons **não** deve implementar:
 - sujeira/lubrificação/corrosão;
 - lógica de reparo;
 - bancada física;
-- UI de manutenção;
+- Preview 3D avançado de bancada;
+- UI de manutenção/peças;
 - estoque/preço;
 - whitelist/blacklist própria.
-
----
 
 # WeaponCondition — desgaste, condição e manutenção lógica
 
@@ -224,48 +233,32 @@ WeaponCondition **não** deve implementar:
 
 ---
 
-# Armorer — bancada, montagem, inspeção e workflow de manutenção
+# Armorer — bancada especializada, inspeção e manutenção
 
-**Dono do workflow físico/visual; consome Weapons e WeaponCondition.**
+**Dono da experiência física/visual especializada de bancada; consome Weapons e WeaponCondition.**
 
 Funcionalidades:
 - **AVANÇADO/HISTÓRICO** — estação/bancada física;
-- **AVANÇADO/HISTÓRICO** — sessão de armeiro;
-- **AVANÇADO/HISTÓRICO** — exclusividade/lease multiplayer por estação;
-- **AVANÇADO/HISTÓRICO** — Preview 3D da arma;
+- **AVANÇADO/HISTÓRICO** — sessão/lease multiplayer por estação;
+- **AVANÇADO/HISTÓRICO** — Preview 3D avançado da arma;
 - **AVANÇADO/HISTÓRICO** — montagem/remoção visual de acessórios;
-- **AVANÇADO/HISTÓRICO** — rascunho de configuração;
-- **AVANÇADO/HISTÓRICO** — `originalConfiguration`;
-- **AVANÇADO/HISTÓRICO** — `workingConfiguration`;
-- **AVANÇADO/HISTÓRICO** — `confirmedConfiguration`;
-- **AVANÇADO/HISTÓRICO** — commit/rollback de configuração;
-- **PLANEJADO** — criação/edição de receitas na bancada;
-- **PLANEJADO** — salvar receita/configuração preferida;
-- **PLANEJADO** — montar arma a partir de receita;
+- **AVANÇADO/HISTÓRICO** — draft/original/working/confirmed configuration;
+- **AVANÇADO/HISTÓRICO** — commit/rollback em contexto de bancada;
+- **PLANEJADO** — consumir WeaponRecipe/WeaponKit de Weapons;
+- **PLANEJADO** — editar configuração/receita em contexto de bancada sem duplicar o modelo;
 - **PLANEJADO** — UI de inspeção de condição;
-- **PLANEJADO** — workflow de manutenção;
-- **PLANEJADO** — UI de limpeza;
-- **PLANEJADO** — UI de lubrificação;
-- **PLANEJADO** — UI de diagnóstico;
-- **PLANEJADO** — UI de reparo;
+- **PLANEJADO** — peças/componentes internos;
+- **PLANEJADO** — limpeza/lubrificação/diagnóstico/reparo;
 - **PLANEJADO** — workflow de troca de peças;
-- **PLANEJADO** — consumir peças/ferramentas de Player/Container/Station Stock;
-- **PLANEJADO** — integração com StockProvider;
-- **PLANEJADO** — integração com EconomyProvider;
-- **PLANEJADO** — integração com PersistenceProvider;
-- **FUTURO** — cronógrafo;
-- **FUTURO** — zeragem;
-- **FUTURO** — agrupamento/estande;
-- **FUTURO** — relatório de inspeção.
+- **PLANEJADO** — integração Stock/Economy/Persistence;
+- **FUTURO** — cronógrafo, zeragem, agrupamento/estande, relatório técnico.
 
 Divisão:
-- **Weapons**: modelo/validação da arma, identidade, configuração, compatibilidade e receita;
-- **WeaponCondition**: desgaste, condição, peças e manutenção lógica;
-- **Armorer**: bancada, Preview, UI e workflow.
+- **Weapons**: arma, identidade, configuração, compatibilidade, Recipe, Kit, UI cotidiana e aplicação slot-safe;
+- **WeaponCondition**: condição/desgaste/peças e transições de manutenção;
+- **Armorer**: bancada, Preview 3D avançado, inspeção, peças e workflow de manutenção.
 
-Armorer **não** deve manter uma segunda condição/desgaste da arma.
-
----
+Armorer **não substitui a UI própria de Weapons** e não deve manter uma segunda implementação de WeaponKit/WeaponConfiguration.
 
 # Equipment — estrutura de loadout
 
@@ -418,11 +411,12 @@ O core não deve ficar cheio de `if ACE...`, `if framework X...`.
 |---|---|---|
 | Navegação e experiência integrada entre módulos | Hub | jogador/UI |
 | ItemKit / conteúdo | Items | Sets, Equipment, UI |
-| WeaponConfiguration / WeaponRecipe | Weapons | Armorer, Sets |
+| WeaponConfiguration / WeaponRecipe / WeaponKit | Weapons | Armorer, Sets, Equipment |
 | WeaponInstance / serial | Weapons | WeaponCondition, Armorer, Persistence |
 | Desgaste/condição/peças/confiabilidade | WeaponCondition | Armorer, Persistence |
 | Manutenção lógica | WeaponCondition | Armorer |
-| Bancada/montagem/inspeção/workflow de manutenção | Armorer | jogador/UI |
+| UI simples de organização/configuração/equipar arma por slot | Weapons | jogador/UI, Hub |
+| Bancada/Preview 3D/inspeção/peças/workflow de manutenção | Armorer | jogador/UI |
 | EquipmentKit | Equipment | Sets |
 | Composição completa | Sets | jogador/UI |
 | Whitelist/blacklist | Policy | Items, Weapons, Equipment, Armorer |
