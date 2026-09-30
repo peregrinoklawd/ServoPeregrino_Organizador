@@ -2,7 +2,7 @@
 
 ## Estado
 
-**MISSION-FIRST FUNCTIONAL GATE: GREEN IN R3. FREEZE FINAL PENDENTE DE R4 DE HIGIENE.**
+**MISSION-FIRST FUNCTIONAL GATE: GREEN IN R3. R4 corrigiu a higiene, mas expôs uma regressão de timing no SECONDARY. FREEZE FINAL PENDENTE DE R5.**
 
 - R3 AUTO TEST: **245/245 PASS / 0 FAIL**;
 - R4 freeze candidate preparada: **94/94 static PASS / 0 FAIL**; runtime Arma ainda pendente;
@@ -136,11 +136,13 @@ R4:
 
 ## Critério de freeze
 
-Após R4:
+Após R5:
 
 ```text
 AUTO TEST = 0 FAIL
 case-insensitive duplicate regression = PASS
+SECONDARY runtime/base family equivalence = PASS
+PRIMARY/HANDGUN strict class guard = PASS
 WeaponRecipe schema unchanged = PASS
 inventory mutation = NONE
 ```
