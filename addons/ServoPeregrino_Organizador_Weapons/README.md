@@ -1,6 +1,6 @@
 # ServoPeregrino_Organizador_Weapons
 
-**STATUS DO SOURCE NESTA BRANCH: 0.1-A. VALIDAÇÃO MISSION-FIRST EXTERNA: 0.1-B e 0.2 aprovadas em SP; integração ao addon/PBO ainda pendente.**
+**STATUS DO SOURCE NESTA BRANCH: 0.1-A. VALIDAÇÃO MISSION-FIRST EXTERNA: 0.1-B, 0.2 e 0.3 R2 aprovadas em SP; integração ao addon/PBO ainda pendente.**
 
 Domínio próprio (nem toda a lista está implementada nesta entrega):
 - WeaponKit / WeaponConfiguration;
@@ -33,5 +33,17 @@ Os laboratórios mission-first evoluíram sem ainda substituir este source do ad
 
 - 0.1-B: AUTO TEST 128/128 + Take/Put manual 3/3; event-delta CORRELATED/AMBIGUOUS/UNPROVEN sem alegar identidade física.
 - 0.2 R3: AUTO TEST 175/175; WeaponConfiguration 0.2-candidate, diff, apply/round-trip, preservação de loadedState e PRIMARY/HANDGUN/SECONDARY.
+- 0.3 R2: AUTO TEST 213/213; catálogo/compatibilidade derivados do engine, provenance modded e cache aprovados.
 
 Esses resultados não significam que o addon/PBO desta branch já seja 0.2. Antes de publicar uma versão de addon correspondente, o delta mission-first precisa ser integrado ao source, revisado e passar Packaging/MP próprios.
+
+
+## Conceito player-facing
+
+Weapons terá UI própria, simples e direta, inspirada nas lições aprendidas da parte de armas do APM histórico.
+
+WeaponKit representa uma arma configurada para um slot. Aplicá-lo deve alterar somente esse slot e preservar o restante do loadout.
+
+Armorer continua separado: bancada especializada, Preview 3D avançado, peças, inspeção e manutenção.
+
+Referência: `docs/25_WEAPONS_PLAYER_UI_E_FRONTEIRA_ARMORER.md`.
