@@ -136,12 +136,12 @@
       "id": "Weapons",
       "addon": "ServoPeregrino_Organizador_Weapons",
       "mandatory": false,
-      "status": "MISSION_FIRST_0_6_A_UI_SHELL_CANDIDATE_ADDON_SOURCE_INTEGRATION_PENDING",
+      "status": "MISSION_FIRST_0_6_A_R2_UI_SHELL_CANDIDATE_ADDON_SOURCE_INTEGRATION_PENDING",
       "stable_version": null,
       "development_version": {
-        "display": "0.6-A mission-first / addon source 0.1-A",
-        "semantic": "0.6.0.1 mission candidate",
-        "build": "0.6.0.1-player-ui-shell-items-pattern-mission-first"
+        "display": "0.6-A R2 mission-first / addon source 0.1-A",
+        "semantic": "0.6.0.2 mission candidate",
+        "build": "0.6.0.2-cfgfunctions-ui-path-hotfix-mission-first"
       },
       "dependencies": [
         "Nexus"
@@ -178,9 +178,9 @@
           "persistence.provider.v1"
         ]
       },
-      "next_gate": "0.6-A runtime + visual gate -> 0.6-B..F -> 0.7 Slot-Safe Weapon Application -> 0.8 Multiplayer Authority/Reconciliation.",
+      "next_gate": "0.6-A R2 runtime + visual gate -> only then 0.6-B..F -> 0.7 -> 0.8.",
       "homologated_artifact": "0.1-B: 128/128 + 3/3. 0.2 R3: 175/175. 0.3 R2: 213/213. 0.4 R5: 251/251. 0.5: 301/301.",
-      "current_candidate_artifact": "0.6-A Player UI Shell, static 169/169; runtime/visual pending; addon source remains 0.1-A.",
+      "current_candidate_artifact": "0.6-A R2 Player UI Shell hotfix, static 141/141; R1 rejected 306/320 because UI CfgFunctions path did not resolve.",
       "mission_first_validation": {
         "lifecycle_0_1_b": "APPROVED_SP",
         "weapon_configuration_0_2": "APPROVED_SP",
@@ -193,7 +193,7 @@
         "weapon_kit": "ONE_CONFIGURED_WEAPON_PER_TARGET_SLOT",
         "weapon_kit_repository": "SESSION_LOCAL_CANDIDATE",
         "slot_isolation": "PRESERVE_ALL_NON_TARGET_LOADOUT_DOMAINS",
-        "next": "0.6-A runtime + visual gate",
+        "next": "0.6-A R2 runtime + visual gate",
         "weapon_kit_specific_checks": "50_OF_50",
         "weapon_kit_slots": "PRIMARY_HANDGUN_SECONDARY",
         "weapon_kit_loadout_mutation": "NONE",
@@ -202,7 +202,9 @@
         "ui_layout": "MEUS_KITS_SELECTED_KIT_WEAPON_CATALOG",
         "ui_footer": "CONTEXT_MESSAGE_HISTORY_ITEMS_PATTERN",
         "ui_public": "VISIBLE_DISABLED_RESERVED",
-        "ui_mutation": "NONE_0_6_A"
+        "ui_mutation": "NONE_0_6_A",
+        "player_ui_0_6_a_r1": "REJECTED_306_OF_320_CFGFUNCTIONS_UI_PATH",
+        "player_ui_0_6_a_r2": "CANDIDATE_STATIC_141_OF_141_RUNTIME_VISUAL_PENDING"
       }
     },
     {
