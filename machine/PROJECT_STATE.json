@@ -22,8 +22,8 @@
     "hub_rule": "Hub is an optional player-facing integration/orchestration layer. No domain module may require Hub in order to function.",
     "independent_core_development": true
   },
-  "global_next_gate": "Weapons 0.6-A Player UI Shell runtime + visual gate. Items 0.13-A Packaging/runtime/MP remains an independent pending gate.",
-  "global_after_gate": "After 0.6-A: continue 0.6-B selection/info -> 0.6-C compatibility dropdowns -> 0.6-D draft -> 0.6-E kit management/save -> 0.6-F polish/regressions -> 0.7 Slot-Safe Weapon Application -> 0.8 Multiplayer Authority/Reconciliation.",
+  "global_next_gate": "Weapons 0.6-B selection + information over frozen 0.6-A R4 UI shell. Items 0.13-A Packaging/runtime/MP remains an independent pending gate.",
+  "global_after_gate": "Weapons 0.6-C compatibility selectors -> 0.6-D WeaponKit draft -> 0.6-E authoring/lifecycle -> 0.6-F final visual adaptation/regression -> 0.7 Slot-Safe Weapon Application -> 0.8 Multiplayer Authority/Reconciliation.",
   "modules": [
     {
       "id": "Nexus",
@@ -158,9 +158,9 @@
       "mandatory": false,
       "stable_version": null,
       "development_version": {
-        "display": "0.6-A R2 mission-first / addon source 0.1-A",
-        "semantic": "0.6.0.2 mission candidate",
-        "build": "0.6.0.2-cfgfunctions-ui-path-hotfix-mission-first"
+        "display": "0.6-A R4 mission-first / addon source 0.1-A",
+        "semantic": "0.6.0.4 mission baseline",
+        "build": "0.6.0.4-all-type-filters-close-timing-mission-first"
       },
       "dependencies": [
         "Nexus"
@@ -197,10 +197,10 @@
           "persistence.provider.v1"
         ]
       },
-      "status": "MISSION_FIRST_0_6_A_R3_CANDIDATE_ADDON_SOURCE_INTEGRATION_PENDING",
-      "next_gate": "Validate Weapons 0.6-A R3 refresh/reentrancy guard and visual shell before 0.6-B.",
-      "homologated_artifact": "0.1-B: 128/128 + 3/3. 0.2 R3: 175/175. 0.3 R2: 213/213. 0.4 R5: 251/251. 0.5: 301/301.",
-      "current_candidate_artifact": "0.6-A R3 Player UI Shell: refresh reentrancy guard + bounded 250-row catalog projection; runtime/visual pending.",
+      "status": "MISSION_FIRST_0_6_A_R4_UI_BASELINE_FROZEN_ADDON_SOURCE_INTEGRATION_PENDING",
+      "next_gate": "0.6-B selection + information; preserve R4 visual shell until functional checkpoints B-E are complete.",
+      "homologated_artifact": "0.1-B 128/128 + 3/3; 0.2 R3 175/175; 0.3 R2 213/213; 0.4 R5 251/251; 0.5 301/301; 0.6-A R4 UI shell 362/362.",
+      "current_candidate_artifact": "Next candidate: 0.6-B selection + information over frozen R4 shell.",
       "mission_first_validation": {
         "0.1-B": {
           "status": "APPROVED_SP",
@@ -324,36 +324,43 @@
           "next": "0.6 Weapons Player UI / Kit Builder"
         },
         "0.6-A": {
-          "status": "CANDIDATE_RUNTIME_VISUAL_PENDING",
-          "static_validation": {
-            "passed": 169,
+          "status": "APPROVED_UI_SHELL_BASELINE_FROZEN",
+          "final_candidate": "R4",
+          "auto_test": {
+            "passed": 362,
             "failed": 0,
-            "total": 169
+            "total": 362
           },
-          "build": "0.6.0.1-player-ui-shell-items-pattern-mission-first",
           "panels": [
             "MEUS KITS",
             "KIT SELECIONADO",
             "CATÁLOGO DE ARMAS"
           ],
-          "footer": [
-            "Context",
-            "Message",
-            "History"
+          "kit_filters": [
+            "ALL",
+            "PRIMARY",
+            "HANDGUN",
+            "SECONDARY"
           ],
-          "slot_ui_labels": {
+          "catalog_filters": [
+            "ALL",
+            "PRIMARY",
+            "HANDGUN",
+            "SECONDARY"
+          ],
+          "ui_labels": {
             "PRIMARY": "Principal",
             "HANDGUN": "Porte",
-            "SECONDARY": "Secundária"
+            "SECONDARY": "Secundária",
+            "ALL": "Todos"
           },
-          "internal_slot_names_unchanged": true,
           "public_library": "VISIBLE_DISABLED_RESERVED",
+          "catalog_render_limit": 250,
+          "full_catalog_cached": true,
           "repository_mutation": false,
           "loadout_mutation": false,
-          "editing": "STAGED_LATER_0_6",
-          "application": "DEFERRED_0_7",
-          "multiplayer": "DEFERRED_0_8",
-          "next": "0.6-B selection + information after gate"
+          "visual_freeze_policy": "PRESERVE_R4_DURING_0_6_B_TO_0_6_E",
+          "next": "0.6-B selection + information"
         }
       }
     },
@@ -890,6 +897,29 @@
         "runtime": "PENDING",
         "visual_gate": "PENDING"
       }
+    },
+    "shared_ui_items_weapons": {
+      "status": "DEFERRED_APPROVED_CONCEPT",
+      "reference": "docs/29_SHARED_UI_ITEMS_WEAPONS.md",
+      "current_footer_semantics": [
+        "Context",
+        "Message",
+        "History"
+      ],
+      "future_footer_visual": "THREE_VISUALLY_DISTINCT_BANDS",
+      "apply_to": [
+        "Items",
+        "Weapons"
+      ],
+      "timing": "AFTER_WEAPONS_0_6_FUNCTIONAL_CHECKPOINTS_BEFORE_FINAL_UI_FREEZE",
+      "preserve_now": [
+        "button_scale",
+        "font_scale",
+        "opacity",
+        "safeZone_width",
+        "current_footer_semantics"
+      ],
+      "selected_kit_vertical_density": "REVISIT_IN_0_6_F_AFTER_FUNCTIONS_EXIST"
     }
   }
 }
