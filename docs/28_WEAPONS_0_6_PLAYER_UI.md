@@ -1,42 +1,46 @@
 # Weapons 0.6 — Player UI / Kit Builder
 
-## Estado
+## Estado atual
 
-**0.6-A R3 — CANDIDATE MISSION-FIRST. R1 e R2 REPROVADAS.**
+**0.6-A R4 — BASELINE VISUAL/ESTRUTURAL CONGELADA PARA CONTINUIDADE FUNCIONAL.**
 
-Baseline funcional:
-
+Baseline anterior:
 - 0.4 R5 WeaponRecipe: **251/251**;
 - 0.5 WeaponKit: **301/301**;
-- 0.6-A R1 static validation: **169/169**, porém runtime **REPROVADO**;
-- R1: `CfgFunctions > UI > file` usava barras duplicadas e o Arma não carregou as funções UI;
-- R1 runtime: **306/320**, 14 FAIL em cascata após funções UI ausentes;
-- 0.6-A R2 hotfix: path corrigido + preflight das 11 funções UI + runner fail-safe;
-- R2 static validation: **141/141 PASS**;
-- R2 runtime: funções UI carregaram e o dialog abriu, porém o jogo travou durante refresh antes do AUTO_TEST_SUMMARY;
-- R2 preflight: `missing=[]`;
-- R2 catálogo-base: 2770 entradas, build ~1597 ms; com presets 3380, ~1740 ms;
-- causa principal R2: reentrância `refreshInterface -> lbSetCurSel/onLBSelChanged -> handleUIEvent -> refreshInterface`;
-- risco secundário R2: renderização integral das 2770 armas no listbox a cada refresh;
-- 0.6-A R3: guard de refresh + seleção idempotente + projeção visual limitada a 250 linhas, mantendo catálogo completo cacheado/pesquisável;
-- R3 static validation: **134/134 PASS**;
-- runtime/avaliação visual da R3: pendente.
+- 0.6-A R4 runtime: **362/362 PASS / 0 FAIL**;
+- refresh reentrante corrigido;
+- catálogo completo permanece cacheado/pesquisável;
+- projeção visual limitada a 250 linhas;
+- gate visual aceito como base para continuar a implementação.
 
-O source integrado do addon continua em 0.1-A. Esta linha 0.6 permanece mission-first e não representa Packaging/PBO.
+O source integrado do addon continua em 0.1-A. Esta linha permanece mission-first e não representa Packaging/PBO.
 
-## Objetivo da 0.6
+## Decisão de processo
 
-Entregar a interface própria player-facing de Weapons sem depender do Armorer.
+A partir da R4, **não vamos continuar polindo o layout durante cada subentrega funcional**.
 
-A 0.6 edita/navega modelos já homologados. Ela **não equipa armas no jogador**.
+Sequência decidida:
 
-Aplicação real permanece em:
+```text
+0.6-A  Shell/layout/listas/filtros                 FROZEN BASELINE
+0.6-B  Seleção de arma + informações              NEXT
+0.6-C  Dropdowns de compatibilidade
+0.6-D  Rascunho de WeaponKit
+0.6-E  Novo/Renomear/Duplicar/Excluir/Salvar
+0.6-F  Adaptação visual final + foco + regressões
+```
 
-**0.7 — Slot-Safe Weapon Application.**
+Regra:
+1. primeiro implementar e testar as funcionalidades;
+2. preservar a baseline visual R4 durante B–E;
+3. depois adaptar o layout ao conteúdo real que passou a existir;
+4. só então fazer o polimento visual final.
+
+Isso evita retrabalho visual enquanto os controles ainda estão ganhando comportamento.
 
 ## Nomenclatura player-facing
 
-O modelo interno permanece congelado:
+Modelo interno permanece:
 
 ```text
 PRIMARY
@@ -44,107 +48,94 @@ HANDGUN
 SECONDARY
 ```
 
-A interface apresenta:
+UI:
 
 ```text
-Principal  -> PRIMARY   -> arma primária
-Porte      -> HANDGUN   -> arma de porte
-Secundária -> SECONDARY -> lançador
+Principal  -> PRIMARY
+Porte      -> HANDGUN
+Secundária -> SECONDARY / lançador
+Todos      -> filtro de apresentação, não targetSlot
 ```
 
-Essa tradução existe somente na apresentação.
-
-## Gramática visual compartilhada com Items
-
-Weapons deve parecer parte da mesma família do Items.
-
-Padrões reutilizados:
-
-- `RobotoCondensed`;
-- dimensões baseadas em `safeZoneW/safeZoneH`;
-- correção pixel-aspect para controles quadrados com `pixelW/pixelH`;
-- busca com ícone de lupa;
-- botão limpar busca;
-- tooltips;
-- transparência;
-- seleção visual;
-- ações dentro do painel proprietário;
-- feedback textual;
-- rodapé em três linhas:
-  - Context;
-  - Message;
-  - History.
-
-A meta é manter a mesma estrutura em 1080p e em telas maiores, como já acontece no Items. A responsividade será refinada ao longo da 0.6; não é tratada como feature isolada na 0.6-A.
-
-## Layout oficial
+## Layout congelado como baseline
 
 ```text
 ┌──────────────────────┬────────────────────────────────┬───────────────────────────┐
 │ MEUS KITS            │ KIT SELECIONADO                │ CATÁLOGO DE ARMAS         │
 │                      │                                │                           │
-│ 🔍 Buscar...         │ Nome / Tipo                    │ 🔍 Buscar...              │
+│ Buscar               │ Nome / Tipo                    │ Buscar                    │
 │                      │                                │                           │
-│ Tipo:                │ [ imagem nativa da arma ]      │ lista de armas            │
-│ [Principal]          │                                │                           │
-│ [Porte]              │ Arma       [ ... ▼ ]           │                           │
-│ [Secundária]         │ Mira       [ ... ▼ ]           │                           │
-│ [Públicos]           │ Boca       [ ... ▼ ]           │                           │
-│                      │ Pointer    [ ... ▼ ]           │                           │
-│ lista de kits        │ Bipé       [ ... ▼ ]           │                           │
+│ Todos                │ imagem nativa da arma          │ Todos                     │
+│ Principal            │                                │ Principal                 │
+│ Porte                │ Arma       [ ... ▼ ]           │ Porte                     │
+│ Secundária           │ Mira       [ ... ▼ ]           │ Secundária                │
+│                      │ Boca       [ ... ▼ ]           │                           │
+│ lista de kits        │ Pointer    [ ... ▼ ]           │ lista de armas            │
+│                      │ Bipé       [ ... ▼ ]           │                           │
 │                      │ Carregador [ ... ▼ ]           │                           │
 │                      │                                │                           │
-│ Novo / Renomear /    │ Descartar / Salvar /           │                           │
-│ Duplicar / Excluir   │ Salvar como novo               │                           │
+│ Novo/Renomear/       │ Descartar/Salvar/              │                           │
+│ Duplicar/Excluir     │ Salvar como novo               │                           │
 ├──────────────────────┴────────────────────────────────┴───────────────────────────┤
-│ CONTEXTO / INFORMAÇÃO                                                             │
-│ MENSAGEM / FEEDBACK                                                               │
-│ HISTÓRICO                                                                         │
+│ Context                                                                            │
+│ Message                                                                            │
+│ History                                                                            │
 └───────────────────────────────────────────────────────────────────────────────────┘
 ```
 
+## Gramática compartilhada com Items
+
+Manter:
+- `RobotoCondensed`;
+- dimensões por `safeZoneW/safeZoneH`;
+- pixel-aspect para controles quadrados;
+- busca com lupa;
+- botão limpar;
+- tooltips;
+- mesma escala de fontes e botões;
+- transparência atual;
+- ações dentro do painel proprietário;
+- rodapé semântico `Context / Message / History`;
+- mesma estrutura em 1080p e telas maiores.
+
+### Decisões explícitas de freeze
+
+Não alterar agora:
+- largura geral em ultrawide;
+- escala de botões;
+- escala de textos;
+- opacidade;
+- estrutura geral de três painéis;
+- rodapé semântico;
+- comportamento responsivo base.
+
+O painel **KIT SELECIONADO** ainda possui bastante espaço vazio. Isso é aceito temporariamente porque as próximas subentregas vão inserir informações e comportamento reais. A composição vertical será reavaliada somente na fase final de adaptação visual.
+
 ## MEUS KITS
 
-Responsabilidade:
-
-- localizar kits;
-- filtrar coleção;
-- selecionar kit;
-- futuramente executar ações sobre a coleção.
-
-Busca:
-
-- mesmo padrão visual do Items;
-- limpa por botão dedicado;
-- filtra por nome.
-
-Filtros:
+Filtros privados:
 
 ```text
-Tipo: [Principal] [Porte] [Secundária] [Públicos]
+Todos | Principal | Porte | Secundária
 ```
 
-Os três primeiros são filtros de `targetSlot`.
+`Todos` mostra todos os WeaponKits privados/session-local do jogador.
 
-`Públicos` ocupa a posição visual planejada, mas **não é targetSlot**. É uma futura origem/biblioteca de WeaponKits. Na 0.6-A ele permanece visível e desabilitado para não simular um backend que ainda não existe.
+`Públicos` não é tipo de arma. É uma futura origem/biblioteca e permanece separada e desabilitada até existir backend real.
 
-Ações locais:
-
+Ações permanecem dentro do painel:
 - Novo;
 - Renomear;
 - Duplicar;
 - Excluir.
 
-Na 0.6-A os botões validam posição/vocabulário. A ativação funcional de authoring ocorre nos checkpoints posteriores.
-
 ## KIT SELECIONADO
 
-O painel é o editor da arma/WeaponKit.
+É o editor do WeaponKit.
 
-Não existe painel separado de **Acessórios Compatíveis**.
+Não existe painel separado de acessórios compatíveis.
 
-Campos planejados:
-
+Campos:
 - Arma;
 - Mira;
 - Boca;
@@ -152,228 +143,96 @@ Campos planejados:
 - Bipé;
 - Carregador.
 
-Compatibilidade será apresentada pelo próprio seletor/dropdown.
+As opções compatíveis serão apresentadas nos próprios seletores/dropdowns.
 
-Exemplo:
-
-```text
-Mira
-[EOTech EXPS3 ▼]
-  -> Nenhuma
-  -> ACO
-  -> RCO
-  -> EOTech EXPS3
-  -> ...
-```
-
-A lista deve ser derivada da compatibilidade real da arma, nunca de hardcode.
-
-Ações locais:
-
+Ações:
 - Descartar;
 - Salvar;
 - Salvar como novo.
 
 ## CATÁLOGO DE ARMAS
 
-Origem:
+Filtros:
 
-- catálogo homologado da 0.3;
-- `CfgWeapons`;
+```text
+Todos | Principal | Porte | Secundária
+```
+
+Busca textual e filtro de tipo são combináveis.
+
+O catálogo usa a baseline homologada da 0.3:
+- base real: 2770 armas;
+- categorias: PRIMARY/HANDGUN/SECONDARY;
 - conteúdo vanilla e modded;
 - provenance preservada.
 
-0.6-A:
+A UI renderiza no máximo 250 resultados por refresh, mantendo o catálogo completo cacheado e pesquisável.
 
-- busca;
-- lista;
-- imagem do config;
-- categoria player-facing;
-- seleção apenas para informação/navegação.
+## Rodapé — decisão atual e melhoria futura compartilhada
 
-Selecionar uma arma no catálogo **não altera automaticamente o WeaponKit selecionado**.
-
-## Rodapé
-
-Segue o padrão do Items.
-
-### Context
-
-Mostra o objeto/contexto atualmente relevante.
-
-Exemplos:
+Hoje Items e Weapons usam uma única superfície de fundo com três linhas semânticas:
 
 ```text
-Kit | MK18 CQB | Tipo: Principal | Arma: MK18
+Context
+Message
+History
 ```
 
-ou:
+**Não alterar durante 0.6-B até 0.6-E.**
 
-```text
-Catálogo | Principal | HK416 | Classe: ... | Origem: ...
-```
+Foi registrada uma melhoria visual futura:
 
-### Message
+> separar visualmente o rodapé em três faixas distintas — Context, Message e History — mantendo exatamente a mesma semântica.
 
-Feedback imediato da última interação.
+Essa mudança **não deve ser feita somente em Weapons**. Deve ser aplicada de forma coordenada em:
+- Items;
+- Weapons.
 
-### History
+Motivo: preservar a gramática visual compartilhada do SP_ORG.
 
-Histórico curto de feedback da sessão.
+Referência oficial: `docs/29_SHARED_UI_ITEMS_WEAPONS.md`.
 
 ## Fronteiras da 0.6
 
-A 0.6 NÃO deve:
-
+A 0.6 não deve:
 - alterar uniforme/colete/mochila;
-- equipar arma;
-- substituir slot físico do jogador;
-- criar Preview 3D avançado;
-- executar maintenance;
+- equipar a arma no jogador;
+- substituir slot físico;
+- criar Preview 3D de bancada;
+- implementar condição/manutenção;
 - assumir autoridade multiplayer;
-- implementar biblioteca pública fictícia.
+- criar biblioteca pública fictícia.
 
-## Checkpoints
+Aplicação real permanece em **0.7 — Slot-Safe Weapon Application**.
 
-```text
-0.6-A  Shell/layout/listas/filtros
-0.6-B  Seleção de arma + informações
-0.6-C  Dropdowns de compatibilidade
-0.6-D  Rascunho de WeaponKit
-0.6-E  Novo/Renomear/Duplicar/Excluir/Salvar/Salvar como
-0.6-F  Polimento visual/foco/regressões
-```
-
-Cada checkpoint deve preservar o anterior.
-
-## KEEP / ADAPT / DROP / NEW inicial
-
-### KEEP
-
-Do Items:
-
-- safeZone responsive layout;
-- RobotoCondensed;
-- busca + limpar;
-- tooltips;
-- ações dentro do painel proprietário;
-- botão de exclusão em linguagem de perigo;
-- footer Context/Message/History;
-- seleção visual clara;
-- feedback sem confirmações desnecessárias.
-
-### ADAPT
-
-- quatro painéis Items -> três painéis Weapons;
-- filtros de categorias Items -> filtros de tipo da arma;
-- Kit Selecionado baseado em linhas de itens -> Kit Selecionado baseado em slots de configuração;
-- catálogo de itens -> catálogo de armas;
-- imagem/detalhes simples no lugar de Preview 3D.
-
-### DROP
-
-Para o primeiro ciclo de Weapons:
-
-- painel separado de acessórios compatíveis;
-- Drag & Drop como fundamento inicial;
-- controles de quantidade;
-- Equipment/physical content panel;
-- aplicação física dentro da 0.6.
-
-### NEW
-
-- tradução UI `Principal/Porte/Secundária`;
-- dropdowns contextuais por slot de attachment;
-- WeaponRecipe/WeaponKit como fonte única do editor;
-- botão `Públicos` reservado para provider futuro sem fake backend.
-
-## Critério 0.6-A
-
-Automático:
-
-- regressões 0.1-B -> 0.5 verdes;
-- labels UI corretos;
-- filtros internos corretos;
-- busca de kits;
-- busca de catálogo;
-- dialog abre;
-- painéis/rodapé existem;
-- Públicos visível-desabilitado;
-- ações locais nos painéis;
-- controles ficam dentro do safeZone;
-- nenhuma mutação de WeaponKit pelo shell;
-- nenhuma mutação de loadout.
-
-Manual:
-
-- familiaridade visual com Items;
-- leitura em 1080p;
-- leitura em monitor maior;
-- proporções;
-- espaçamentos;
-- tooltips;
-- clareza dos filtros;
-- rodapé;
-- comportamento de busca/seleção.
-
-## Rodadas 0.6-A
+## Histórico 0.6-A
 
 ### R1 — REPROVADA
-
-RPT confirmou:
-
-```text
-Script SP_ORG\\Weapons\\functions\\ui\fn_createUIState.sqf not found
-...
-Script SP_ORG\\Weapons\\functions\\ui\fn_openInterface.sqf not found
-```
-
-Causa raiz: `CfgFunctions` da classe UI apontava para `SP_ORG\\Weapons\\functions\\ui` com separadores duplicados. Os arquivos existiam, mas não foram resolvidos pelo Arma.
-
-A ausência das funções provocou cascata no runner antigo (`_ok` indefinido) e impediu a abertura da interface.
+- funções UI não carregaram;
+- causa: path incorreto no `CfgFunctions`.
 
 ### R2 — REPROVADA
+- funções UI carregaram;
+- dialog abriu;
+- refresh entrou em ciclo por seleção programática/evento;
+- catálogo integral também criava risco de custo excessivo.
 
-R2 corrigiu o carregamento das funções UI, comprovado por:
+### R3 — FUNCIONAL, 1 FALSO NEGATIVO
+- refresh reentrante corrigido;
+- projeção limitada a 250;
+- runtime: **345/346**;
+- única falha: teste verificava `findDisplay` antes do `onUnload`.
 
-```text
-[AUTO_TEST_DETAIL] test=UI_FUNCTION_PREFLIGHT_R2 missing=[]
-```
+### R4 — BASELINE CONGELADA
+- fechamento aguardando frame do `onUnload`;
+- filtros Todos/Principal/Porte/Secundária em Meus Kits;
+- mesmos filtros no Catálogo;
+- busca + filtro combináveis;
+- runtime: **362/362 PASS / 0 FAIL**;
+- shell visual aceito como base de continuidade.
 
-O dialog abriu e todos os controles estruturais foram validados, mas o RPT terminou imediatamente após `core controls stay inside safeZone`, antes do resumo.
+## Próximo passo
 
-Causa identificada no código:
+**0.6-B — Seleção de arma + informações.**
 
-```text
-refreshInterface
- -> lbClear/lbAdd/lbSetCurSel
- -> onLBSelChanged
- -> handleUIEvent
- -> refreshInterface
-```
-
-A R2 também tentava renderizar as **2770** entradas do catálogo-base no listbox em cada refresh.
-
-### R3 — CANDIDATA ATIVA
-
-Delta:
-
-- `refreshInProgress` bloqueia refresh reentrante;
-- callback de seleção com índice `-1` não refresca;
-- seleção programática/idêntica não refresca;
-- somente mudança real de seleção solicita novo refresh;
-- catálogo completo permanece cacheado e pesquisável;
-- listbox recebe no máximo **250** resultados por refresh;
-- diagnóstico `[UI_REFRESH_R3]` mede duração/requests/applied/rendered/matches;
-- nenhuma nova função de authoring;
-- WeaponKit/Recipe/Catalog sem alteração de contrato;
-- aplicação continua em 0.7.
-
-## Artefato candidato
-
-```text
-SP_ORG_Weapons_0_6_A_R3_PlayerUI_Shell_Lab_MissionFirst.VR
-build = 0.6.0.3-ui-refresh-reentrancy-guard-mission-first
-```
-
-Depois do gate 0.6-A, continuar para **0.6-B**, sem pular diretamente para aplicação física.
+Não abrir nova rodada de polimento visual antes de concluir as funcionalidades planejadas da 0.6.
