@@ -223,6 +223,20 @@ A branch atual ainda contém o **addon source 0.1-A**. Os deltas mission-first p
 - zero WeaponKit/loadout mutation in 0.6-A;
 - shell visual/estrutural congelado durante 0.6-B..E.
 
+### 0.6-B — CANDIDATE R1
+
+- build `0.6.1.1-selection-information-mission-first`;
+- R4 geometry preserved;
+- catalog selection = read-only information context;
+- saved-kit selection = read-only information context;
+- information: displayName, category, weaponClass, picture, origin, baseWeapon, description;
+- no compatibility query in UI yet;
+- no draft;
+- no WeaponKit authoring;
+- no loadout mutation;
+- static validation **160/160**;
+- runtime pending.
+
 ### Visual polish deferred
 
 Depois de implementar e testar as funcionalidades da 0.6:
