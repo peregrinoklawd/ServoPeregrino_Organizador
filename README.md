@@ -101,12 +101,12 @@ A referência de UX/lessons learned será a parte de armas do **APM histórico**
 0.2    WeaponConfiguration                     APPROVED
 0.3    Catalog / Compatibility                 APPROVED
 0.4    WeaponRecipe                            APPROVED 251/251
-0.5    WeaponKit                               NEXT
+0.5    WeaponKit                               CANDIDATE / RUNTIME PENDING
 0.6    Weapons Player UI / Kit Builder
 0.7    Slot-Safe Weapon Application
 0.8    Multiplayer Authority / Reconciliation
 ```
 
-Documentação: [0.1-A](docs/21_WEAPONS_0_1_A_FOUNDATION_IDENTITY_SPIKE.md), [0.1-B](docs/22_WEAPONS_0_1_B_IDENTITY_LIFECYCLE.md), [0.2](docs/23_WEAPONS_0_2_WEAPON_CONFIGURATION.md), [0.3](docs/24_WEAPONS_0_3_CATALOG_COMPATIBILITY.md), [conceito de produto/UI](docs/25_WEAPONS_PLAYER_UI_E_FRONTEIRA_ARMORER.md) e [0.4](docs/26_WEAPONS_0_4_WEAPON_RECIPE.md).
+Documentação: [0.1-A](docs/21_WEAPONS_0_1_A_FOUNDATION_IDENTITY_SPIKE.md), [0.1-B](docs/22_WEAPONS_0_1_B_IDENTITY_LIFECYCLE.md), [0.2](docs/23_WEAPONS_0_2_WEAPON_CONFIGURATION.md), [0.3](docs/24_WEAPONS_0_3_CATALOG_COMPATIBILITY.md), [conceito de produto/UI](docs/25_WEAPONS_PLAYER_UI_E_FRONTEIRA_ARMORER.md) e [0.4](docs/26_WEAPONS_0_4_WEAPON_RECIPE.md) e [0.5](docs/27_WEAPONS_0_5_WEAPON_KIT.md).
 
 O desenvolvimento dos núcleos é independente. O gate de Items 0.13-A permanece pendente e não bloqueia Weapons.
