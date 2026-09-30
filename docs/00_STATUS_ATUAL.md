@@ -83,7 +83,7 @@ Ler obrigatoriamente:
 
 ## Frente independente — Weapons
 
-**Source integrado na branch:** 0.1-A. **Validação funcional mission-first homologada:** 0.5. **Candidata atual:** 0.6-A — Player UI Shell.
+**Source integrado na branch:** 0.1-A. **Validação funcional mission-first homologada:** 0.5. **Candidata atual:** 0.6-A R2 — Player UI Shell hotfix.
 
 ### 0.1-B — lifecycle/identity evidence
 
@@ -157,6 +157,8 @@ Ler obrigatoriamente:
 
 ### 0.6-A — Player UI Shell
 
+**R1 REPROVADA / R2 CANDIDATA ATIVA.**
+
 - baseline: 0.5 homologada em **301/301**;
 - static validation da candidata: **169/169 PASS**;
 - ordem de painéis: **MEUS KITS | KIT SELECIONADO | CATÁLOGO DE ARMAS**;
@@ -170,7 +172,11 @@ Ler obrigatoriamente:
 - rodapé global: **Context / Message / History**, como Items;
 - 0.6-A não edita Recipe/WeaponKit e não altera loadout;
 - aplicação/equipar continua exclusivamente no gate 0.7;
-- runtime/avaliação visual ainda pendentes.
+- R1 runtime: **306/320**, 14 FAIL; interface não abriu;
+- causa raiz R1: caminho `CfgFunctions` da classe UI com barras duplicadas, impedindo o carregamento das funções `fn_*UI*.sqf`;
+- R2 corrige somente o path, adiciona preflight das funções UI e endurece o runner contra cascatas;
+- R2 static validation: **141/141 PASS**;
+- runtime/avaliação visual da R2 ainda pendentes.
 
 ### Decisão conceitual — Weapons é player-facing
 
@@ -187,8 +193,8 @@ Weapons possui UI própria, semelhante em conceito à parte de armas do APM hist
 
 Armorer continua separado: bancada, Preview 3D avançado, peças, inspeção e manutenção.
 
-**Gate mission-first ativo:** **0.6-A — Player UI Shell**.
+**Gate mission-first ativo:** **0.6-A R2 — Player UI Shell**.
 
-**Gates ainda abertos:** identidade física intrínseca, multiplayer/JIP/reconnect, integração real ao addon/PBO e Packaging Gate. Próximo teste: **0.6-A — AUTO TEST + avaliação visual da UI**.
+**Gates ainda abertos:** identidade física intrínseca, multiplayer/JIP/reconnect, integração real ao addon/PBO e Packaging Gate. Próximo teste: **0.6-A R2 — AUTO TEST + avaliação visual da UI**.
 
 Ver [0.1-A](21_WEAPONS_0_1_A_FOUNDATION_IDENTITY_SPIKE.md), [0.1-B](22_WEAPONS_0_1_B_IDENTITY_LIFECYCLE.md), [0.2](23_WEAPONS_0_2_WEAPON_CONFIGURATION.md), [0.3](24_WEAPONS_0_3_CATALOG_COMPATIBILITY.md) e [conceito UI](25_WEAPONS_PLAYER_UI_E_FRONTEIRA_ARMORER.md) e [0.4](26_WEAPONS_0_4_WEAPON_RECIPE.md) e [0.5](27_WEAPONS_0_5_WEAPON_KIT.md).
