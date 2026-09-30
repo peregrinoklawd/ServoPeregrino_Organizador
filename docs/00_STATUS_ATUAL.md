@@ -63,7 +63,7 @@ O **Packaging R2** reempacota os mesmos fontes sem alterar SQF funcional. Ele ai
 - 0.13-A ainda não foi homologada em multiplayer real com dois ou mais clientes.
 - JIP/persistência pública/ACL/rate limit/recovery ainda pertencem ao roadmap 0.13-B+.
 - Hub, WeaponCondition, Equipment, Sets, Policy e ServerIntegration ainda são módulos planejados.
-- Weapons: source integrado permanece 0.1-A; mission-first 0.1-B (128/128 + 3/3), 0.2 (175/175) e 0.3 R2 Catalog/Compatibility (213/213) estão homologadas em SP; 0.4 R3 WeaponRecipe fechou funcionalmente 245/245 e aguarda apenas R4 de higiene case-insensitive antes do freeze. Weapons terá UI própria player-facing; identidade física intrínseca, MP/JIP e PBO/addon integrado continuam não validados.
+- Weapons: source integrado permanece 0.1-A; mission-first 0.1-B (128/128 + 3/3), 0.2 (175/175) e 0.3 R2 Catalog/Compatibility (213/213) estão homologadas em SP; 0.4 R3 WeaponRecipe fechou funcionalmente 245/245. R4 passou a higiene case-insensitive, mas fechou 245/246 por uma corrida de classe-base/variante runtime no SECONDARY; R5 é a freeze candidate atual. Weapons terá UI própria player-facing; identidade física intrínseca, MP/JIP e PBO/addon integrado continuam não validados.
 - Armorer possui base histórica madura, mas o runtime autoritativo ainda não foi importado ao monorepo.
 
 ## Dívida automática aceita
@@ -127,7 +127,9 @@ Ler obrigatoriamente:
 - Compatibilidade SECONDARY passou a resolver genericamente variantes runtime ligadas por `baseWeapon`.
 - No ambiente ACE/NLAW, foram observadas `launch_NLAW_F` e `ACE_launch_NLAW_ready_F` como variantes relacionadas, sem hardcode no resolver.
 - R3 revelou apenas dívida de higiene: lista de magazines continha `nlaw_f` e `NLAW_F`, semanticamente a mesma classe.
-- **R4 pendente:** deduplicação case-insensitive preservando uma grafia do engine; sem mudança de contrato/semântica.
+- R4 higiene: PASS; runtime geral **245/246** por uma única regressão antiga no SECONDARY no-op apply.
+- R5: equivalência segura por slot — PRIMARY/HANDGUN estritos; SECONDARY permite apenas variantes `type=4` da mesma família `baseWeapon`.
+- WeaponRecipe/schema permanecem inalterados.
 
 ### Decisão conceitual — Weapons é player-facing
 
@@ -144,7 +146,7 @@ Weapons possui UI própria, semelhante em conceito à parte de armas do APM hist
 
 Armorer continua separado: bancada, Preview 3D avançado, peças, inspeção e manutenção.
 
-**Próximo gate imediato:** **0.4 R4 — case-insensitive catalog hygiene**. Depois: **0.5 — WeaponKit**.
+**Próximo gate imediato:** **0.4 R5 — SECONDARY runtime/base class-family equivalence + freeze**. Depois: **0.5 — WeaponKit**.
 
 **Gates ainda abertos:** identidade física intrínseca, multiplayer/JIP/reconnect, integração real ao addon/PBO e Packaging Gate. Próximo marco após o freeze da R4: **0.5 — WeaponKit**.
 
