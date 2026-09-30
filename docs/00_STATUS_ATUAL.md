@@ -83,7 +83,7 @@ Ler obrigatoriamente:
 
 ## Frente independente — Weapons
 
-**Source integrado na branch:** 0.1-A. **Validação funcional mission-first homologada:** 0.5. **Candidata atual:** 0.6-A R3 — refresh/reentrancy + catálogo bounded-render hotfix.
+**Source integrado na branch:** 0.1-A. **Validação funcional mission-first homologada:** 0.5. **UI shell atual:** 0.6-A R4 — baseline visual/estrutural congelada após **362/362 PASS**.
 
 ### 0.1-B — lifecycle/identity evidence
 
@@ -157,26 +157,29 @@ Ler obrigatoriamente:
 
 ### 0.6-A — Player UI Shell
 
-**R1/R2 REPROVADAS / R3 CANDIDATA ATIVA.**
+**R4 — BASELINE VISUAL/ESTRUTURAL CONGELADA.**
 
-- baseline: 0.5 homologada em **301/301**;
-- static validation da candidata: **169/169 PASS**;
-- ordem de painéis: **MEUS KITS | KIT SELECIONADO | CATÁLOGO DE ARMAS**;
+- runtime final: **362/362 PASS / 0 FAIL**;
+- R1 reprovada por path incorreto em CfgFunctions;
+- R2 reprovada por refresh reentrante;
+- R3 corrigiu travamento e ficou 345/346 por falso negativo de timing no fechamento;
+- R4 corrigiu o teste de onUnload e adicionou filtros completos;
+- painéis: **MEUS KITS | KIT SELECIONADO | CATÁLOGO DE ARMAS**;
 - nomenclatura UI: **Principal -> PRIMARY**, **Porte -> HANDGUN**, **Secundária -> SECONDARY/lançador**;
-- busca, limpar, tooltips, transparência, RobotoCondensed, safeZone e rodapé seguem o padrão Items;
-- filtros em Meus Kits: Principal / Porte / Secundária / Públicos;
-- Públicos visível porém desabilitado até existir biblioteca pública real de WeaponKits;
-- botões Novo/Renomear/Duplicar/Excluir ficam em Meus Kits;
-- Descartar/Salvar/Salvar como novo ficam em Kit Selecionado;
-- acessórios compatíveis não possuem painel próprio; serão dropdowns contextuais dentro de Kit Selecionado;
-- rodapé global: **Context / Message / History**, como Items;
+- filtros Meus Kits: **Todos / Principal / Porte / Secundária**;
+- filtros Catálogo: **Todos / Principal / Porte / Secundária**;
+- busca textual e filtro de tipo podem ser combinados;
+- Públicos permanece separado e desabilitado até existir provider real;
+- catálogo completo permanece cacheado/pesquisável; projeção visual limitada a 250 linhas;
+- escala de botões/textos, opacidade, safeZone e largura atual ficam congelados durante B–E;
+- rodapé permanece semanticamente **Context / Message / History**;
+- melhoria futura aprovada: separar visualmente o rodapé em três faixas, **aplicando a mesma alteração em Items e Weapons**;
+- essa melhoria é deferred para a rodada final de UI, depois das funcionalidades;
+- o espaço vertical de KIT SELECIONADO será reavaliado somente quando os controles reais estiverem implementados;
 - 0.6-A não edita Recipe/WeaponKit e não altera loadout;
-- aplicação/equipar continua exclusivamente no gate 0.7;
-- R1 runtime: **306/320**, 14 FAIL; interface não abriu;
-- causa raiz R1: caminho `CfgFunctions` da classe UI com barras duplicadas, impedindo o carregamento das funções `fn_*UI*.sqf`;
-- R2 corrige somente o path, adiciona preflight das funções UI e endurece o runner contra cascatas;
-- R2 static validation: **141/141 PASS**;
-- runtime/avaliação visual da R2 ainda pendentes.
+- aplicação/equipar continua exclusivamente no gate 0.7.
+
+**Próximo checkpoint:** **0.6-B — Seleção de arma + informações**.
 
 ### Decisão conceitual — Weapons é player-facing
 
@@ -193,8 +196,8 @@ Weapons possui UI própria, semelhante em conceito à parte de armas do APM hist
 
 Armorer continua separado: bancada, Preview 3D avançado, peças, inspeção e manutenção.
 
-**Gate mission-first ativo:** **0.6-A R2 — Player UI Shell**.
+**Gate mission-first ativo:** **0.6-B — Seleção de arma + informações**, preservando a baseline visual 0.6-A R4.
 
-**Gates ainda abertos:** identidade física intrínseca, multiplayer/JIP/reconnect, integração real ao addon/PBO e Packaging Gate. Próximo teste: **0.6-A R2 — AUTO TEST + avaliação visual da UI**.
+**Gates ainda abertos:** 0.6-B..F, aplicação slot-safe 0.7, multiplayer/JIP/reconnect 0.8, identidade física intrínseca, integração real ao addon/PBO e Packaging Gate. O polish visual compartilhado Items+Weapons está documentado em `29_SHARED_UI_ITEMS_WEAPONS.md`.
 
 Ver [0.1-A](21_WEAPONS_0_1_A_FOUNDATION_IDENTITY_SPIKE.md), [0.1-B](22_WEAPONS_0_1_B_IDENTITY_LIFECYCLE.md), [0.2](23_WEAPONS_0_2_WEAPON_CONFIGURATION.md), [0.3](24_WEAPONS_0_3_CATALOG_COMPATIBILITY.md) e [conceito UI](25_WEAPONS_PLAYER_UI_E_FRONTEIRA_ARMORER.md) e [0.4](26_WEAPONS_0_4_WEAPON_RECIPE.md) e [0.5](27_WEAPONS_0_5_WEAPON_KIT.md).
