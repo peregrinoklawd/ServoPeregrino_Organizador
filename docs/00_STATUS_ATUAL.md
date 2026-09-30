@@ -1,6 +1,6 @@
 # Estado atual do projeto
 
-Data do snapshot: **28/09/2026**.
+Data do snapshot: **29/09/2026**.
 
 ## Source of Truth
 
@@ -63,7 +63,7 @@ O **Packaging R2** reempacota os mesmos fontes sem alterar SQF funcional. Ele ai
 - 0.13-A ainda não foi homologada em multiplayer real com dois ou mais clientes.
 - JIP/persistência pública/ACL/rate limit/recovery ainda pertencem ao roadmap 0.13-B+.
 - Hub, WeaponCondition, Equipment, Sets, Policy e ServerIntegration ainda são módulos planejados.
-- Weapons 0.1-A possui foundation e modelos candidatos; build/load, AUTO TEST no Arma e identidade física/MP ainda não validados.
+- Weapons: source integrado permanece 0.1-A; mission-first 0.1-B foi homologada em SP (AUTO TEST 128/128 + live Take/Put 3/3) e WeaponConfiguration 0.2 foi homologada em SP (175/175). Identidade física intrínseca, MP/JIP e PBO/addon integrado continuam não validados.
 - Armorer possui base histórica madura, mas o runtime autoritativo ainda não foi importado ao monorepo.
 
 ## Dívida automática aceita
@@ -81,6 +81,31 @@ Ler obrigatoriamente:
 - `docs/19_VISAO_FUNCIONAL_COMPARTILHAVEL.md`;
 - `docs/20_HUB_ARQUITETURA_E_INTEGRACAO.md`.
 
-## Frente independente — Weapons 0.1-A
+## Frente independente — Weapons
 
-`FOUNDATION_IDENTITY_SPIKE_PENDING_RUNTIME_VALIDATION`. Capability `weapons.runtime`; sem contratos estáveis; registry lógico SERVER/SESSION e observação de inventário. Gate físico A–E **ABERTO**, especialmente armas idênticas. A ordem de desenvolvimento de núcleos não cria dependência de Items/Armorer. Ver [entrega](21_WEAPONS_0_1_A_FOUNDATION_IDENTITY_SPIKE.md).
+**Source integrado na branch:** 0.1-A. **Validação funcional mission-first atual:** 0.2.
+
+### 0.1-B — lifecycle/identity evidence
+
+- AUTO TEST final: **128/128 PASS**.
+- Gate manual real Take/Put: **3/3 PASS**.
+- `TAKE 1→0` e `PUT 0→1`: `CORRELATED/1`.
+- `TAKE 2→1` com duas MX idênticas: `AMBIGUOUS/2`, `instanceId=""`.
+- `physicalIdentityProven=false`: preservado como invariante.
+- Decisão: event-delta é evidência de continuidade lógica quando única; não é serial físico nativo.
+
+### 0.2 — WeaponConfiguration
+
+- AUTO TEST final R3: **175/175 PASS**.
+- Schema candidato: `weaponClass`, `muzzle`, `pointer`, `optic`, `bipod`.
+- Magazine/ammo continuam em `loadedState` separado e fora do fingerprint.
+- Diff e apply com verificação de round-trip no engine.
+- PRIMARY preservou 17 tiros durante aplicação/remoção de attachments.
+- HANDGUN preservou 11 tiros.
+- SECONDARY/NLAW validado via classe realmente observada pelo engine.
+- No-op retorna sem mutar o inventário.
+- Attachment inválido e weaponClass incompatível falham antes de mutação.
+
+**Gates ainda abertos:** identidade física intrínseca, multiplayer/JIP/reconnect, integração real ao addon/PBO e Packaging Gate. Próximo marco mission-first: **0.3 — Catalog & Compatibility**.
+
+Ver [0.1-A](21_WEAPONS_0_1_A_FOUNDATION_IDENTITY_SPIKE.md), [0.1-B](22_WEAPONS_0_1_B_IDENTITY_LIFECYCLE.md) e [0.2](23_WEAPONS_0_2_WEAPON_CONFIGURATION.md).
