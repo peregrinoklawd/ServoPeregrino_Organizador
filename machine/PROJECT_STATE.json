@@ -22,8 +22,8 @@
     "hub_rule": "Hub is an optional player-facing integration/orchestration layer. No domain module may require Hub in order to function.",
     "independent_core_development": true
   },
-  "global_next_gate": "Run Weapons 0.5 WeaponKit mission-first runtime. Items 0.13-A Packaging/runtime/MP remains an independent pending gate.",
-  "global_after_gate": "If Weapons 0.5 is green: freeze WeaponKit, then 0.6 Weapons Player UI / Kit Builder -> 0.7 Slot-Safe Weapon Application -> 0.8 Multiplayer Authority/Reconciliation.",
+  "global_next_gate": "Weapons 0.6 Player UI / Kit Builder mission-first. Items 0.13-A Packaging/runtime/MP remains an independent pending gate.",
+  "global_after_gate": "Weapons sequence after 0.6: 0.7 Slot-Safe Weapon Application -> 0.8 Multiplayer Authority/Reconciliation. Addon/PBO integration remains a separate gate.",
   "modules": [
     {
       "id": "Nexus",
@@ -158,8 +158,8 @@
       "mandatory": false,
       "stable_version": null,
       "development_version": {
-        "display": "0.5 mission-first candidate / addon source 0.1-A",
-        "semantic": "0.5.0.1 mission candidate",
+        "display": "0.5 mission-first / addon source 0.1-A",
+        "semantic": "0.5.0.1 mission baseline",
         "build": "0.5.0.1-weaponkit-session-model-mission-first"
       },
       "dependencies": [
@@ -197,10 +197,10 @@
           "persistence.provider.v1"
         ]
       },
-      "status": "MISSION_FIRST_0_5_CANDIDATE_RUNTIME_PENDING_ADDON_SOURCE_INTEGRATION_PENDING",
-      "next_gate": "Run Weapons 0.5 WeaponKit mission-first AUTO TEST in Arma; if green, homologate 0.5 and move to 0.6 Weapons Player UI.",
-      "homologated_artifact": "0.1-B: 128/128 + 3/3. 0.2 R3: 175/175. 0.3 R2: 213/213. 0.4 R5: 251/251.",
-      "current_candidate_artifact": "Weapons 0.5 WeaponKit mission-first candidate; static 131/131; addon source in repo remains 0.1-A.",
+      "status": "MISSION_FIRST_0_5_APPROVED_ADDON_SOURCE_INTEGRATION_PENDING",
+      "next_gate": "0.6 Weapons Player UI / Kit Builder.",
+      "homologated_artifact": "0.1-B: 128/128 + 3/3. 0.2 R3: 175/175. 0.3 R2: 213/213. 0.4 R5: 251/251. 0.5: 301/301.",
+      "current_candidate_artifact": "Next mission-first candidate: 0.6 Weapons Player UI / Kit Builder. Addon source in repo remains 0.1-A.",
       "mission_first_validation": {
         "0.1-B": {
           "status": "APPROVED_SP",
@@ -290,19 +290,18 @@
           "next": "0.5 WeaponKit"
         },
         "0.5": {
-          "status": "CANDIDATE_RUNTIME_PENDING",
-          "static_validation": {
-            "passed": 131,
+          "status": "APPROVED_SP_FROZEN",
+          "auto_test": {
+            "passed": 301,
             "failed": 0,
-            "total": 131
+            "total": 301
           },
-          "kit_schema": "0.5-kit-candidate",
-          "fields": [
-            "kitId",
-            "name",
-            "targetSlot",
-            "recipe"
-          ],
+          "weaponkit_specific_checks": {
+            "passed": 50,
+            "failed": 0,
+            "total": 50
+          },
+          "schema": "0.5-kit-candidate",
           "repository_mode": "SESSION_LOCAL_CANDIDATE",
           "operations": [
             "create",
@@ -313,15 +312,16 @@
             "updateRecipe",
             "delete"
           ],
-          "name_uniqueness": "CASE_INSENSITIVE",
-          "content_fingerprint_excludes": [
-            "kitId",
-            "name"
+          "slots": [
+            "PRIMARY",
+            "HANDGUN",
+            "SECONDARY"
           ],
-          "inventory_mutation": false,
-          "ui_gate": "DEFERRED_0_6",
-          "application_gate": "DEFERRED_0_7",
-          "mp_gate": "DEFERRED_0_8"
+          "loadout_mutation": false,
+          "ui": "DEFERRED_0_6",
+          "application": "DEFERRED_0_7",
+          "multiplayer": "DEFERRED_0_8",
+          "next": "0.6 Weapons Player UI / Kit Builder"
         }
       }
     },
@@ -754,38 +754,31 @@
       "reference": "docs/26_WEAPONS_0_4_WEAPON_RECIPE.md"
     },
     "weapon_kit": {
-      "status": "MISSION_FIRST_0_5_CANDIDATE",
+      "status": "MISSION_FIRST_0_5_APPROVED_FROZEN",
       "owner_module": "Weapons",
       "schema": "0.5-kit-candidate",
-      "definition": "One configured weapon targeted to one weapon slot; not a full loadout.",
       "fields": [
         "kitId",
         "name",
         "targetSlot",
         "recipe"
       ],
-      "repository_mode": "SESSION_LOCAL_CANDIDATE",
+      "meaning": "One configured weapon targeted to one weapon slot; not a full loadout.",
       "target_slots": [
         "PRIMARY",
         "HANDGUN",
         "SECONDARY"
       ],
-      "slot_rule": "Recipe weapon engine type must match targetSlot: 1 PRIMARY, 2 HANDGUN, 4 SECONDARY.",
-      "lifecycle": [
-        "create",
-        "get",
-        "list",
-        "rename",
-        "duplicate",
-        "updateRecipe",
-        "delete"
+      "repository_mode": "SESSION_LOCAL_CANDIDATE",
+      "content_fingerprint_excludes": [
+        "kitId",
+        "name"
       ],
-      "name_rule": "Trimmed, required, max 64 chars, unique case-insensitively within session repository.",
-      "fingerprint_rule": "Content fingerprint includes targetSlot + Recipe and excludes kitId/name.",
-      "persistence": "DEFERRED_PROVIDER_DRIVEN",
-      "ui": "DEFERRED_0_6",
-      "application": "DEFERRED_0_7",
-      "multiplayer": "DEFERRED_0_8",
+      "loadout_mutation": false,
+      "ui_gate": "0.6",
+      "application_gate": "0.7",
+      "multiplayer_gate": "0.8",
+      "final_runtime": "301/301 AUTO, 0 FAIL; 50/50 WeaponKit-specific gates",
       "reference": "docs/27_WEAPONS_0_5_WEAPON_KIT.md"
     }
   }
