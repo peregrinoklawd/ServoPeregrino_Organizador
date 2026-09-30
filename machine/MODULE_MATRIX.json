@@ -136,7 +136,7 @@
       "id": "Weapons",
       "addon": "ServoPeregrino_Organizador_Weapons",
       "mandatory": false,
-      "status": "MISSION_FIRST_0_6_A_R2_UI_SHELL_CANDIDATE_ADDON_SOURCE_INTEGRATION_PENDING",
+      "status": "MISSION_FIRST_0_6_A_R3_CANDIDATE_ADDON_SOURCE_INTEGRATION_PENDING",
       "stable_version": null,
       "development_version": {
         "display": "0.6-A R2 mission-first / addon source 0.1-A",
@@ -178,9 +178,9 @@
           "persistence.provider.v1"
         ]
       },
-      "next_gate": "0.6-A R2 runtime + visual gate -> only then 0.6-B..F -> 0.7 -> 0.8.",
+      "next_gate": "0.6-A R3 runtime + visual gate.",
       "homologated_artifact": "0.1-B: 128/128 + 3/3. 0.2 R3: 175/175. 0.3 R2: 213/213. 0.4 R5: 251/251. 0.5: 301/301.",
-      "current_candidate_artifact": "0.6-A R2 Player UI Shell hotfix, static 141/141; R1 rejected 306/320 because UI CfgFunctions path did not resolve.",
+      "current_candidate_artifact": "0.6-A R3 Player UI Shell; refresh guard + bounded catalog projection.",
       "mission_first_validation": {
         "lifecycle_0_1_b": "APPROVED_SP",
         "weapon_configuration_0_2": "APPROVED_SP",
@@ -197,7 +197,7 @@
         "weapon_kit_specific_checks": "50_OF_50",
         "weapon_kit_slots": "PRIMARY_HANDGUN_SECONDARY",
         "weapon_kit_loadout_mutation": "NONE",
-        "player_ui_0_6_a": "CANDIDATE_STATIC_169_OF_169_RUNTIME_VISUAL_PENDING",
+        "player_ui_0_6_a": "R3_CANDIDATE_R1_R2_REJECTED",
         "ui_slot_labels": "PRIMARY=>Principal_HANDGUN=>Porte_SECONDARY=>Secundária",
         "ui_layout": "MEUS_KITS_SELECTED_KIT_WEAPON_CATALOG",
         "ui_footer": "CONTEXT_MESSAGE_HISTORY_ITEMS_PATTERN",
