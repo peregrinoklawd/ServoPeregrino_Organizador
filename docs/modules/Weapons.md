@@ -195,18 +195,30 @@ A branch atual ainda contém o **addon source 0.1-A**. Os deltas mission-first p
 - SECONDARY aceita somente variantes type=4 da mesma família `baseWeapon`;
 - baseline mission-first congelada.
 
+### 0.5 — CANDIDATE / RUNTIME PENDING
+
+- schema `0.5-kit-candidate`;
+- WeaponKit = `kitId + name + targetSlot + recipe`;
+- repository `SESSION_LOCAL_CANDIDATE`;
+- create/get/list/rename/duplicate/update Recipe/delete;
+- nomes únicos case-insensitively;
+- content fingerprint não inclui kitId/nome;
+- UI/aplicação/MP continuam deferred;
+- static validation **131/131**;
+- runtime Arma pendente.
+
 ## Roadmap
 
-1. 0.4 R4 — hygiene/freeze do WeaponRecipe;
-2. 0.5 — WeaponKit;
-3. 0.6 — Weapons Player UI / Kit Builder;
-4. 0.7 — Slot-Safe Weapon Application;
-5. 0.8 — Multiplayer Authority / Reconciliation.
+1. fechar runtime 0.5 — WeaponKit;
+2. 0.6 — Weapons Player UI / Kit Builder;
+3. 0.7 — Slot-Safe Weapon Application;
+4. 0.8 — Multiplayer Authority / Reconciliation.
 
 Gates paralelos: integração addon/PBO, Packaging, MP/JIP/reconnect e identidade física intrínseca.
 
 Ver:
 - `../26_WEAPONS_0_4_WEAPON_RECIPE.md`
+- `../27_WEAPONS_0_5_WEAPON_KIT.md`
 - `../24_WEAPONS_0_3_CATALOG_COMPATIBILITY.md`
 - `../25_WEAPONS_PLAYER_UI_E_FRONTEIRA_ARMORER.md`
 - `Armorer.md`
