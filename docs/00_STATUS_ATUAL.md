@@ -83,7 +83,7 @@ Ler obrigatoriamente:
 
 ## Frente independente — Weapons
 
-**Source integrado na branch:** 0.1-A. **Validação funcional mission-first homologada:** 0.5. **Candidata atual:** 0.6-A R2 — Player UI Shell hotfix.
+**Source integrado na branch:** 0.1-A. **Validação funcional mission-first homologada:** 0.5. **Candidata atual:** 0.6-A R3 — refresh/reentrancy + catálogo bounded-render hotfix.
 
 ### 0.1-B — lifecycle/identity evidence
 
@@ -157,7 +157,7 @@ Ler obrigatoriamente:
 
 ### 0.6-A — Player UI Shell
 
-**R1 REPROVADA / R2 CANDIDATA ATIVA.**
+**R1/R2 REPROVADAS / R3 CANDIDATA ATIVA.**
 
 - baseline: 0.5 homologada em **301/301**;
 - static validation da candidata: **169/169 PASS**;
