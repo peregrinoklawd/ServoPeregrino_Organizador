@@ -1,6 +1,6 @@
 # ServoPeregrino_Organizador_Weapons
 
-**STATUS DO SOURCE NESTA BRANCH: 0.1-A. VALIDAÇÃO MISSION-FIRST EXTERNA: 0.1-B, 0.2, 0.3 R2, 0.4 R5 e 0.5 aprovadas em SP; integração ao addon/PBO ainda pendente.**
+**STATUS DO SOURCE NESTA BRANCH: 0.1-A. VALIDAÇÃO MISSION-FIRST EXTERNA: 0.1-B, 0.2, 0.3 R2, 0.4 R5 e 0.5 aprovadas em SP; 0.6-A Player UI Shell é candidata runtime/visual; integração ao addon/PBO ainda pendente.**
 
 Domínio próprio (nem toda a lista está implementada nesta entrega):
 - WeaponKit / WeaponConfiguration;
@@ -36,8 +36,9 @@ Os laboratórios mission-first evoluíram sem ainda substituir este source do ad
 - 0.3 R2: AUTO TEST 213/213; catálogo/compatibilidade derivados do engine, provenance modded e cache aprovados.
 - 0.4 R5: AUTO TEST 251/251; WeaponRecipe, compatibilidade SECONDARY por família baseWeapon e higiene case-insensitive aprovados.
 - 0.5: AUTO TEST 301/301; WeaponKit session-local, CRUD, targetSlot, defensive copy e nenhuma mutação do loadout aprovados.
+- 0.6-A: Player UI Shell construída sobre 0.5; static 169/169; runtime/visual pendente. UI usa Principal/Porte/Secundária sobre PRIMARY/HANDGUN/SECONDARY e segue a gramática visual do Items.
 
-Esses resultados não significam que o addon/PBO desta branch já seja 0.5. Antes de publicar uma versão de addon correspondente, o delta mission-first precisa ser integrado ao source, revisado e passar Packaging/MP próprios.
+Esses resultados não significam que o addon/PBO desta branch já seja 0.6. Antes de publicar uma versão de addon correspondente, o delta mission-first precisa ser integrado ao source, revisado e passar Packaging/MP próprios.
 
 
 ## Conceito player-facing
