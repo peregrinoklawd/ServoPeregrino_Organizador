@@ -115,8 +115,33 @@ Primeiros gates:
 - provar que módulos continuam funcionando sem Hub;
 - somente depois adicionar ações integradas multi-módulo.
 
-## Weapons 0.1-A — núcleo independente
+## Weapons — progresso mission-first
 
-Foundation, modelos candidatos, emissão SERVER/SESSION e laboratório implementados em source. Validar carga e AUTO TEST; investigar gates físicos A–E. A estratégia observacional **não preserva identidade física nas transferências** e não fecha o gate E.
+### 0.1-A — Foundation & Identity Spike
 
-Proposta 0.1-B: somente após revisão humana, buscar evidência reproduzível de identificador nativo estável ou desenhar transações controladas com limites explícitos. Não iniciar kits/receitas nem congelar `weapons.instance.v1` para contornar o problema. Items e Armorer mantêm gates próprios.
+Source integrado na branch. Estabeleceu registry lógico SERVER/SESSION, separação `WeaponConfiguration`/loadedState e observador conservador. Nenhum contrato v1 congelado.
+
+### 0.1-B — WeaponInstance Lifecycle / Event-Delta Evidence — APROVADA EM MISSION-FIRST SP
+
+- AUTO TEST: 128/128.
+- Live Take/Put manual: 3/3.
+- Evento + delta único => `CORRELATED`.
+- Duplicatas indistinguíveis => `AMBIGUOUS`, sem escolher instanceId.
+- Sem delta suficiente => `UNPROVEN`.
+- `physicalIdentityProven=false` permanece obrigatório.
+
+### 0.2 — WeaponConfiguration — APROVADA EM MISSION-FIRST SP
+
+- AUTO TEST final: 175/175.
+- schema candidato fechado para arma + quatro slots de attachment;
+- diff explícito;
+- apply/verify/rollback;
+- loadedState preservado e fora da identidade/configuração;
+- no-op sem mutação;
+- PRIMARY/HANDGUN/SECONDARY validados.
+
+### Próximo marco: 0.3 — Catalog & Compatibility
+
+Objetivo: derivar do engine, inclusive para armas de mods, quais attachments e magazines são compatíveis por arma/slot sem hardcode por classe. Deve permanecer separado de WeaponCondition, economia/estoque/persistência e UI final.
+
+Gates paralelos ainda abertos: MP/JIP/reconnect, identidade física intrínseca e integração Packaging/PBO. Não congelar `weapons.instance.v1` ou `weapons.configuration.v1` apenas porque os gates mission-first SP passaram.
