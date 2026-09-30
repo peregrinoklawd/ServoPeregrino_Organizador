@@ -284,13 +284,14 @@
   ],
   "implementation_notes": {
     "Weapons": {
-      "delivery": "0.5 mission-first candidate / addon source 0.1-A",
-      "status": "MISSION_FIRST_0_5_CANDIDATE_RUNTIME_PENDING_ADDON_SOURCE_INTEGRATION_PENDING",
+      "delivery": "0.5 mission-first approved / addon source 0.1-A",
+      "status": "MISSION_FIRST_0_5_APPROVED_ADDON_SOURCE_INTEGRATION_PENDING",
       "homologated": {
         "lifecycle_0_1_b": "128/128 AUTO + 3/3 live Take/Put",
         "configuration_0_2": "175/175 AUTO",
         "catalog_compatibility_0_3_r2": "213/213 AUTO",
-        "weapon_recipe_0_4_r5": "251/251 AUTO"
+        "weapon_recipe_0_4_r5": "251/251 AUTO",
+        "weapon_kit_0_5": "301/301 AUTO; 50/50 WeaponKit-specific gates"
       },
       "product_concept": "Player-facing module with its own simple APM-like WeaponKit UI. A WeaponKit is one configured weapon targeted to one weapon slot.",
       "slot_isolation_rule": "Applying a WeaponKit may intentionally mutate only the target weapon slot; the rest of the loadout belongs to other domains and must be preserved.",
@@ -298,7 +299,7 @@
       "apm_reference_rule": "Historical APM weapon UI is a UX/lessons-learned source. Review KEEP/ADAPT/DROP/NEW before freezing Weapons UI 0.6.",
       "physical_identity_proven": false,
       "addon_source_integrated_through": "0.1-A",
-      "next": "Run 0.5 WeaponKit AUTO TEST",
+      "next": "0.6 Weapons Player UI / Kit Builder",
       "recipe_rule": "WeaponRecipe is frozen as configuration + optional magazineClass; targetSlot/name/identity/ammoCount remain outside Recipe.",
       "secondary_runtime_rule": "PRIMARY/HANDGUN class guards are strict. SECONDARY type=4 runtime/base variants may be equivalent only inside the same baseWeapon family.",
       "weapon_kit_candidate": {
@@ -320,10 +321,12 @@
           "delete"
         ],
         "static_validation": "131/131",
-        "runtime": "PENDING",
+        "runtime": "APPROVED_301_OF_301",
         "ui": "DEFERRED_0_6",
         "application": "DEFERRED_0_7",
-        "multiplayer": "DEFERRED_0_8"
+        "multiplayer": "DEFERRED_0_8",
+        "specific_checks": "50/50",
+        "status": "FROZEN_MISSION_FIRST"
       }
     }
   }
