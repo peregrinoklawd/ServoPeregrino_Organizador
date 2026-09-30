@@ -62,7 +62,7 @@ O cálculo/estado autoritativo de desgaste e as transições lógicas de manuten
 Importar a baseline histórica autoritativa sem reescrever ou adicionar features. O primeiro gate do Armorer no monorepo é provar equivalência funcional.
 
 
-## Fronteira de UI — decisão 30/09/2026
+## Fronteira de UI — decisão 29/09/2026
 
 ```text
 Weapons UI
@@ -75,3 +75,5 @@ Armorer UI
 ```
 
 A parte de armas do APM histórico será usada como fonte de lessons learned para Weapons UI. O Armorer histórico continua sendo fonte de lessons learned para Preview/bancada/sessão, sem transferir ownership de WeaponKit para Armorer.
+
+Referência de fronteira: `../25_WEAPONS_PLAYER_UI_E_FRONTEIRA_ARMORER.md`.
