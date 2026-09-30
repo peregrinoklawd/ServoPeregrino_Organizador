@@ -46,45 +46,77 @@ bipod
 magazine policy/configuration quando definido pelo contrato futuro
 ```
 
-Categorias atuais do engine:
+Categorias internas continuam exatamente como foram homologadas:
 
-- PRIMARY;
-- HANDGUN;
-- SECONDARY.
+- `PRIMARY`;
+- `HANDGUN`;
+- `SECONDARY`.
 
-No Arma, SECONDARY é usado para launcher.
+A UI não usa esses nomes técnicos diretamente. Mapeamento player-facing oficial:
+
+| UI | Interno | Significado |
+|---|---|---|
+| **Principal** | `PRIMARY` | arma primária |
+| **Porte** | `HANDGUN` | arma de porte |
+| **Secundária** | `SECONDARY` | lançador |
+
+A nomenclatura de apresentação não altera schema, fingerprint, Recipe, WeaponKit ou regras internas.
 
 ## Experiência esperada de Weapons
 
-A interface deverá ser mais simples e direta que Armorer.
+A interface deve manter a mesma gramática visual do **Items**, para reduzir reaprendizado.
 
-Padrão conceitual:
+Estrutura oficial atual:
 
 ```text
-+-----------------------------------------------------+
-| WEAPONS                                             |
-+----------------------+------------------------------+
-| MEUS KITS            | CATÁLOGO DE ARMAS            |
-|                      |                              |
-| MK18 CQB             | MX                           |
-| M4 SOPMOD            | M4A1                         |
-| P07 SD               | SCAR                         |
-| NLAW                 | AK                           |
-+----------------------+------------------------------+
-| KIT / ARMA SELECIONADA                              |
-| slot alvo: PRIMARY                                  |
-| arma: MK18                                           |
-| optic: ...                                           |
-| muzzle: ...                                          |
-| pointer: ...                                         |
-| bipod: ...                                           |
-| informações básicas / compatibilidade                |
-+-----------------------------------------------------+
-| SALVAR | SALVAR COMO | DUPLICAR | EQUIPAR           |
-+-----------------------------------------------------+
++----------------------+--------------------------------+---------------------------+
+| MEUS KITS            | KIT SELECIONADO                | CATÁLOGO DE ARMAS         |
+|                      |                                |                           |
+| [buscar...]          | Nome / Tipo                    | [buscar...]               |
+| Tipo:                |                                |                           |
+| [Principal]          | [ imagem nativa da arma ]      | lista de armas            |
+| [Porte]              |                                |                           |
+| [Secundária]         | Arma       [ ... ▼ ]           |                           |
+| [Públicos]           | Mira       [ ... ▼ ]           |                           |
+|                      | Boca       [ ... ▼ ]           |                           |
+| lista de kits        | Pointer    [ ... ▼ ]           |                           |
+|                      | Bipé       [ ... ▼ ]           |                           |
+|                      | Carregador [ ... ▼ ]           |                           |
+|                      |                                |                           |
+| Novo / Renomear /    | Descartar / Salvar /           |                           |
+| Duplicar / Excluir   | Salvar como novo               |                           |
++----------------------+--------------------------------+---------------------------+
+| CONTEXTO / INFORMAÇÃO                                                    |
+| MENSAGEM / FEEDBACK                                                      |
+| HISTÓRICO                                                                |
++---------------------------------------------------------------------------+
 ```
 
-A composição visual final será decidida na 0.6; este desenho registra apenas o conceito.
+Decisões:
+
+- ordem dos painéis preserva familiaridade com Items: **Meus Kits -> Kit Selecionado -> Catálogo**;
+- não existe painel separado de **Acessórios Compatíveis**;
+- acessórios compatíveis serão apresentados pelos próprios dropdowns do **Kit Selecionado**;
+- botões pertencem ao painel que controlam;
+- busca, botão limpar, tooltips, tipografia, transparência e rodapé seguem o padrão do Items;
+- a área inferior usa as três linhas `Context / Message / History` do Items;
+- a UI usa `safeZoneW/safeZoneH` e métricas pixel-aspect-safe para preservar uso em 1080p e telas maiores;
+- responsividade será validada durante 0.6, mas não é tratada como feature separada neste primeiro checkpoint;
+- `Públicos` ocupa o local planejado, porém só se torna funcional quando houver uma biblioteca pública real de WeaponKits;
+- Preview 3D avançado continua pertencendo ao Armorer.
+
+### Checkpoints planejados da 0.6
+
+```text
+0.6-A  shell/layout/listas/filtros
+0.6-B  seleção de arma + informações
+0.6-C  dropdowns de compatibilidade
+0.6-D  rascunho de WeaponKit
+0.6-E  Novo/Renomear/Duplicar/Excluir/Salvar/Salvar como
+0.6-F  polimento visual/foco/regressões
+```
+
+A 0.7 continua sendo o primeiro gate autorizado a equipar/aplicar um WeaponKit no jogador.
 
 ## Operações da UI
 
@@ -232,9 +264,10 @@ Weapons UI
 0.2    WeaponConfiguration                     APPROVED
 0.3    Catalog / Compatibility                 APPROVED
 
-0.4    WeaponRecipe                            NEXT
-0.5    WeaponKit
-0.6    Weapons Player UI / Kit Builder
+0.4    WeaponRecipe                            APPROVED
+0.5    WeaponKit                               APPROVED
+0.6    Weapons Player UI / Kit Builder         CURRENT
+  0.6-A shell/layout/listas/filtros             CANDIDATE
 0.7    Slot-Safe Weapon Application
 0.8    Multiplayer Authority / Reconciliation
 ```
@@ -243,11 +276,13 @@ Weapons UI
 
 A UI 0.6 só deve congelar seu desenho após:
 
-1. WeaponRecipe 0.4 estar funcional;
-2. WeaponKit 0.5 estar funcional;
-3. revisão explícita da UI de armas do APM histórico;
-4. lista KEEP / ADAPT / DROP / NEW registrada;
-5. garantir que a interface não dependa do Armorer.
+1. WeaponRecipe 0.4 homologado — **concluído**;
+2. WeaponKit 0.5 homologado — **concluído**;
+3. revisão explícita de padrões do Items/APM histórico;
+4. lista KEEP / ADAPT / DROP / NEW registrada e revisada durante os checkpoints;
+5. provar uso em 1080p e em tela maior sem criar duas interfaces diferentes;
+6. garantir que a interface não dependa do Armorer;
+7. manter equip/application fora da 0.6.
 
 ## Critério para 0.7
 
