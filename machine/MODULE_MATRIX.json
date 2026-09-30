@@ -136,11 +136,11 @@
       "id": "Weapons",
       "addon": "ServoPeregrino_Organizador_Weapons",
       "mandatory": false,
-      "status": "MISSION_FIRST_0_5_CANDIDATE_RUNTIME_PENDING_ADDON_SOURCE_INTEGRATION_PENDING",
+      "status": "MISSION_FIRST_0_5_APPROVED_ADDON_SOURCE_INTEGRATION_PENDING",
       "stable_version": null,
       "development_version": {
-        "display": "0.5 mission-first candidate / addon source 0.1-A",
-        "semantic": "0.5.0.1 mission candidate",
+        "display": "0.5 mission-first / addon source 0.1-A",
+        "semantic": "0.5.0.1 mission baseline",
         "build": "0.5.0.1-weaponkit-session-model-mission-first"
       },
       "dependencies": [
@@ -178,22 +178,25 @@
           "persistence.provider.v1"
         ]
       },
-      "next_gate": "Run 0.5 WeaponKit runtime AUTO TEST -> if green, 0.6 Weapons Player UI -> 0.7 Slot-Safe Weapon Application -> 0.8 Multiplayer Authority/Reconciliation.",
-      "homologated_artifact": "0.1-B: 128/128 + 3/3. 0.2 R3: 175/175. 0.3 R2: 213/213. 0.4 R5: 251/251.",
-      "current_candidate_artifact": "Weapons 0.5 WeaponKit mission-first candidate; static 131/131; addon source remains 0.1-A.",
+      "next_gate": "0.6 Weapons Player UI / Kit Builder -> 0.7 Slot-Safe Weapon Application -> 0.8 Multiplayer Authority/Reconciliation.",
+      "homologated_artifact": "0.1-B: 128/128 + 3/3. 0.2 R3: 175/175. 0.3 R2: 213/213. 0.4 R5: 251/251. 0.5: 301/301.",
+      "current_candidate_artifact": "Next mission-first candidate: 0.6 Weapons Player UI / Kit Builder; addon source remains 0.1-A.",
       "mission_first_validation": {
         "lifecycle_0_1_b": "APPROVED_SP",
         "weapon_configuration_0_2": "APPROVED_SP",
         "catalog_compatibility_0_3_r2": "APPROVED_SP_213_OF_213",
         "weapon_recipe_0_4_r5": "APPROVED_SP_251_OF_251",
-        "weapon_kit_0_5": "CANDIDATE_STATIC_131_OF_131_RUNTIME_PENDING",
+        "weapon_kit_0_5": "APPROVED_SP_301_OF_301",
         "recipe_case_insensitive_hygiene": "APPROVED",
         "secondary_runtime_family_equivalence": "APPROVED_TYPE4_SHARED_BASEWEAPON_ONLY",
         "product_concept": "WEAPONS_HAS_OWN_PLAYER_UI_APM_LIKE",
         "weapon_kit": "ONE_CONFIGURED_WEAPON_PER_TARGET_SLOT",
         "weapon_kit_repository": "SESSION_LOCAL_CANDIDATE",
         "slot_isolation": "PRESERVE_ALL_NON_TARGET_LOADOUT_DOMAINS",
-        "next": "0.5 WeaponKit runtime"
+        "next": "0.6 Weapons Player UI / Kit Builder",
+        "weapon_kit_specific_checks": "50_OF_50",
+        "weapon_kit_slots": "PRIMARY_HANDGUN_SECONDARY",
+        "weapon_kit_loadout_mutation": "NONE"
       }
     },
     {
