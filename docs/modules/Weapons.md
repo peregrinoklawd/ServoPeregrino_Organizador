@@ -182,15 +182,18 @@ A branch atual ainda contém o **addon source 0.1-A**. Os deltas mission-first p
 - cache de sessão;
 - reverse global scan deliberadamente evitado.
 
-### 0.4 — FUNCTIONAL PASS / FREEZE PENDING
+### 0.4 — APPROVED SP
 
-- R3: **245/245 AUTO**;
+- R5 final: **251/251 AUTO**;
 - WeaponRecipe `0.4-recipe-candidate`;
 - Recipe = WeaponConfiguration + `magazineClass` opcional;
 - sem `targetSlot`, kit name, identity/serial ou ammoCount;
 - sem mutação de inventário;
 - SECONDARY runtime variants resolvidas por `baseWeapon`;
-- R4 pendente apenas para deduplicar classnames case-insensitively no resultado de compatibilidade.
+- compatibilidade deduplicada case-insensitively;
+- PRIMARY/HANDGUN strict class guard preservado;
+- SECONDARY aceita somente variantes type=4 da mesma família `baseWeapon`;
+- baseline mission-first congelada.
 
 ## Roadmap
 
