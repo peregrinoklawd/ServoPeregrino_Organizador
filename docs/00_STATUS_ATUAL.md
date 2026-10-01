@@ -216,9 +216,9 @@ Weapons possui UI própria, semelhante em conceito à parte de armas do APM hist
 
 Armorer continua separado: bancada, Preview 3D avançado, peças, inspeção e manutenção.
 
-****Gate mission-first ativo:** **0.6-D R2 — UI Convergence / Equipment Content (CANDIDATA)**, preservando a lógica de draft homologada da R1. Quatro painéis, transparência Items R3, scrollbar contínua, filtros de acessórios e equipamento atual read-only.
+******Gate mission-first ativo:** **0.6-D R3 — Focused Refresh / Header Polish (CANDIDATA)**. Preserva o draft R1 e a UI R2, mas troca interações locais por refresh focal e ancora o header a partir do X.
 
-**Gates ainda abertos:** 0.6-D..F, aplicação slot-safe 0.7, multiplayer/JIP/reconnect 0.8, identidade física intrínseca, integração real ao addon/PBO e Packaging Gate. O polish visual compartilhado Items+Weapons está documentado em `29_SHARED_UI_ITEMS_WEAPONS.md`.
+**Gates ainda abertos:** 0.6-D R3, 0.6-E/F, aplicação slot-safe 0.7, multiplayer/JIP/reconnect 0.8, identidade física intrínseca, integração real ao addon/PBO e Packaging Gate. O backlog compartilhado Items+Weapons está em `29_SHARED_UI_ITEMS_WEAPONS.md`.
 
 Ver [0.1-A](21_WEAPONS_0_1_A_FOUNDATION_IDENTITY_SPIKE.md), [0.1-B](22_WEAPONS_0_1_B_IDENTITY_LIFECYCLE.md), [0.2](23_WEAPONS_0_2_WEAPON_CONFIGURATION.md), [0.3](24_WEAPONS_0_3_CATALOG_COMPATIBILITY.md) e [conceito UI](25_WEAPONS_PLAYER_UI_E_FRONTEIRA_ARMORER.md) e [0.4](26_WEAPONS_0_4_WEAPON_RECIPE.md) e [0.5](27_WEAPONS_0_5_WEAPON_KIT.md).
 
@@ -238,7 +238,7 @@ Ver [0.1-A](21_WEAPONS_0_1_A_FOUNDATION_IDENTITY_SPIKE.md), [0.1-B](22_WEAPONS_0
 **Gate 0.6-C fechado.** O RPT real confirmou os seletores, ausência de mutação de WeaponKit/loadout e estabilidade do refresh. Erros recorrentes de CBA PFH já existiam antes desta entrega e não são chamados pelo source SP_ORG.
 
 
-### 0.6-D — WeaponKit Draft — R1 candidata
+### 0.6-D R1 — candidata original (histórico)
 
 - build: `0.6.3.1-weaponkit-draft-local-mission-first`;
 - static validation: **260/260 PASS / 0 FAIL**;
@@ -258,7 +258,7 @@ Ver [0.1-A](21_WEAPONS_0_1_A_FOUNDATION_IDENTITY_SPIKE.md), [0.1-B](22_WEAPONS_0
 - MP/authority: **0.8**;
 - geometria 0.6-A R4 preservada.
 
-**Não homologar nem iniciar 0.6-E antes do RPT e do gate manual da 0.6-D R1.**
+Regra histórica satisfeita: R1 foi homologada em 471/471.
 
 
 ### 0.6-D R1 — WeaponKit Draft — HOMOLOGADA
@@ -267,12 +267,12 @@ Ver [0.1-A](21_WEAPONS_0_1_A_FOUNDATION_IDENTITY_SPIKE.md), [0.1-B](22_WEAPONS_0
 - draft local, SALVO/ALTERADO e DESCARTAR aprovados;
 - nenhum repository/loadout mutation.
 
-### 0.6-D R2 — UI Convergence / Equipment Content — candidata
+### 0.6-D R2 — UI Convergence / Equipment Content — AUTO 500/500 / MANUAL PERF REPROVADO
 
 - build: `0.6.3.2-ui-convergence-equipment-content-mission-first`;
 - static: **232/232**;
 - runner source: **473 assertions**;
-- runtime esperado: **500**;
+- runtime real: **500/500 PASS / 0 FAIL**;
 - runtime Arma: **PENDENTE**;
 - grid/transparência alinhados ao Items Multiplayer Lab R3;
 - MEUS KITS DE ARMAS;
@@ -282,4 +282,21 @@ Ver [0.1-A](21_WEAPONS_0_1_A_FOUNDATION_IDENTITY_SPIKE.md), [0.1-B](22_WEAPONS_0
 - authoring continua 0.6-E; aplicação 0.7; MP 0.8;
 - convergência Items↔Weapons formalizada em `docs/29_SHARED_UI_ITEMS_WEAPONS.md`.
 
-**Não iniciar 0.6-E antes do runtime/manual da R2.**
+- gate manual: **REPROVADO por stuttering**; wheel/slider ainda disparavam full refresh com ~246–254 ms por passo no RPT real.
+
+### 0.6-D R3 — Focused Refresh / Header Polish — candidata ativa
+
+- build: `0.6.3.3-focused-refresh-header-polish-mission-first`;
+- static: **272/272**;
+- runner source: **485 assertions**;
+- runtime projetado: **512**, pendente no Arma;
+- catálogo: refresh focal + projeção/filtros cacheados + janela 32;
+- draft: refresh focal em seletores/Descartar;
+- equipamento: refresh focal em Principal/Porte/Secundária;
+- header: ancorado da direita a partir do X, seguindo a lição APM/Items;
+- build do catálogo: mensagem `Vasculhando inventário e catalogando armas...`;
+- equivalente Items `...catalogando itens...` registrado no backlog, ainda não implementado em Items;
+- nenhuma mutação de repository/loadout;
+- authoring continua 0.6-E; aplicação 0.7; MP 0.8.
+
+**Não iniciar 0.6-E antes do runtime/manual da R3.**
