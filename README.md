@@ -83,7 +83,8 @@ O source integrado nesta branch continua sendo **0.1-A**, sem contratos v1 publi
 - **0.6-C — Compatibility Selectors**: R1 homologada com **445/445**.
 - **0.6-D R1 — WeaponKit Draft**: homologada com **471/471**; draft local por kit, SALVO/ALTERADO e DESCARTAR sem mutar repository/loadout.
 - **0.6-D R2 — UI Convergence / Equipment Content**: **500/500 AUTO**, porém **REJEITADA NO GATE MANUAL DE PERFORMANCE**; interações locais ainda reconstruíam a UI inteira.
-- **0.6-D R3 — Focused Refresh / Header Polish**: performance manual aprovada; catálogo/draft/equipamento usam refresh focal e wheel/slider real ficaram ~5–9 ms sem full refresh. AUTO **511/512** por falso negativo de marcador de schema no teste; hotfix test-only aguarda rerun.
+- **0.6-D R3 — Focused Refresh / Header Polish**: **HOMOLOGADA 512/512** após hotfix test-only; performance manual aprovada, wheel/slider real ~5–9 ms sem full refresh e sem stuttering perceptível.
+- **0.6-E — Authoring/Lifecycle**: próximo gate ativo; Novo/Renomear/Duplicar/Excluir/Salvar/Salvar como novo e troca da arma-base no draft, ainda sem aplicação física.
 
 Essas homologações são de **MISSION-FIRST FUNCTIONAL GATE**, não de PBO/addon integrado. MP/JIP, Packaging e identidade física intrínseca continuam gates separados.
 
@@ -113,7 +114,8 @@ A referência de UX/lessons learned será a parte de armas do **APM histórico**
   0.6-A Player UI Shell                        APPROVED 362/362
   0.6-B Selection + Information                APPROVED 397/397
   0.6-C Compatibility Selectors                APPROVED R1 — 445/445
-  0.6-D WeaponKit Draft                         R1 APPROVED 471/471; R2 AUTO 500/500 / PERF REJECTED; R3 PERF ACCEPTED, AUTO 511/512 FALSE NEGATIVE; TEST-MARKER HOTFIX PENDING RERUN
+  0.6-D WeaponKit Draft                         R1 APPROVED 471/471; R2 PERF REJECTED; R3 APPROVED 512/512
+  0.6-E Authoring/Lifecycle                      ACTIVE
   0.6-E Kit Authoring/Lifecycle
   0.6-F Final Visual Adaptation/Regression
 0.7    Slot-Safe Weapon Application
