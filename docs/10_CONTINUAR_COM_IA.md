@@ -113,3 +113,10 @@ Candidata ativa:
 - não iniciar 0.6-E antes de RPT + teste manual da R1.
 
 Continuam abertos: integração mission-first -> addon/PBO, Packaging, 0.6-D..F, 0.7 aplicação slot-safe, 0.8 MP/JIP/reconnect e identidade física intrínseca.
+
+
+### Regra de UI compartilhada
+
+Consultar `docs/29_SHARED_UI_ITEMS_WEAPONS.md`.
+
+Toda melhoria de UI validada em Weapons que também possa melhorar Items deve entrar no `UI_CONVERGENCE_BACKLOG` como SHARED, DOMAIN-SPECIFIC ou CANDIDATE-SHARED antes de ser portada. Não fazer convergência por memória.
