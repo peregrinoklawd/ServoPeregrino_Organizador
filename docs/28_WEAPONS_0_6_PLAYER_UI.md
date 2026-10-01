@@ -2,7 +2,7 @@
 
 ## Estado atual
 
-**0.6-A R4 — BASELINE VISUAL/ESTRUTURAL CONGELADA. 0.6-B R1 — CANDIDATA MISSION-FIRST.**
+**0.6-A R4 — BASELINE VISUAL/ESTRUTURAL CONGELADA. 0.6-B R4 — SELEÇÃO/INFORMAÇÕES HOMOLOGADA 397/397. 0.6-C — PRÓXIMO GATE.**
 
 Baseline anterior:
 - 0.4 R5 WeaponRecipe: **251/251**;
@@ -22,9 +22,9 @@ A partir da R4, **não vamos continuar polindo o layout durante cada subentrega 
 Sequência decidida:
 
 ```text
-0.6-A  Shell/layout/listas/filtros                 FROZEN BASELINE
-0.6-B  Seleção de arma + informações              CANDIDATE R1
-0.6-C  Dropdowns de compatibilidade
+0.6-A  Shell/layout/listas/filtros                 FROZEN BASELINE 362/362
+0.6-B  Seleção de arma + informações              APPROVED R4 397/397
+0.6-C  Dropdowns de compatibilidade                NEXT
 0.6-D  Rascunho de WeaponKit
 0.6-E  Novo/Renomear/Duplicar/Excluir/Salvar
 0.6-F  Adaptação visual final + foco + regressões
@@ -231,32 +231,95 @@ Aplicação real permanece em **0.7 — Slot-Safe Weapon Application**.
 - runtime: **362/362 PASS / 0 FAIL**;
 - shell visual aceito como base de continuidade.
 
-## 0.6-B R1 — Seleção de arma + informações
+## 0.6-B — Seleção de arma + informações — HOMOLOGADA R4
 
-Candidata preparada sobre a R4 congelada.
+Final mission-first:
 
-Build:
+`0.6.1.4-initial-sync-handshake-test-timing-mission-first`
 
-`0.6.1.1-selection-information-mission-first`
+Runtime final: **397/397 PASS / 0 FAIL**.
 
-Escopo:
-- seleção de arma no catálogo como contexto read-only;
-- seleção de WeaponKit como contexto read-only;
-- apresentação de nome, tipo, classe, imagem, origem/mod/addon, baseWeapon e descrição curta;
-- prévia central do catálogo somente quando não existe kit visível/selecionado;
-- seleção de catálogo não sobrescreve WeaponKit;
-- nenhuma descoberta de compatibilidade;
-- nenhum rascunho;
-- nenhum authoring;
-- nenhuma mutação de loadout.
+### Contrato funcional congelado
 
-Gates seguintes permanecem:
-- 0.6-C compatibilidade;
-- 0.6-D draft;
-- 0.6-E authoring;
-- 0.6-F adaptação visual final.
+Seleção é contexto de **leitura**, não edição.
 
-Static validation da candidata: **160/160 PASS**.
-Runtime Arma: **pendente**.
+Ao selecionar uma arma no Catálogo:
+- resolve `weaponClass`;
+- mostra `displayName`;
+- mostra tipo player-facing;
+- usa `picture` nativo do config;
+- apresenta origem/mod/addon;
+- apresenta `baseWeapon`;
+- apresenta descrição curta quando disponível;
+- pode indicar preset/variant;
+- não consulta compatibilidade ainda;
+- não cria draft;
+- não altera WeaponKit;
+- não altera loadout.
+
+Ao selecionar um WeaponKit:
+- a mesma camada básica de informação é derivada da arma contida em sua Recipe;
+- o kit salvo continua sendo a fonte do painel quando o foco retorna a MEUS KITS.
+
+### Abertura de MEUS KITS
+
+Toda nova abertura da interface inicia deterministicamente com:
+
+```text
+kitTypeFilter = ALL
+kitQuery      = ""
+lastFocus     = KITS
+```
+
+Regras homologadas:
+- **TODOS** é o filtro inicial;
+- todos os kits privados/session-local disponíveis aparecem sem exigir clique;
+- número de linhas visíveis deve corresponder ao repository na abertura canônica;
+- primeiro kit é selecionado quando houver kits;
+- um handshake explícito marca a sincronização inicial concluída;
+- o recovery refresh só ocorre se a abertura ainda estiver na projeção canônica;
+- a sincronização atrasada não deve sobrescrever filtro escolhido pelo jogador após interação.
+
+### Histórico da 0.6-B
+
+#### R1 — funcional verde, higiene rejeitada
+- runtime **392/392**;
+- `Selection & Information` gerava milhares de `Unknown entity: ' Information'`;
+- causa: `&` em texto player-facing interpretado pelo Arma.
+
+#### R2 — higiene corrigida
+- runtime **392/392**;
+- warning de structured text removido;
+- manual revelou que MEUS KITS podia abrir vazio até clicar em um filtro.
+
+#### R3 — comportamento manual corrigido, race de teste
+- abertura em TODOS corrigida;
+- usuário confirmou MEUS KITS abrindo corretamente;
+- AUTO: **391/396**;
+- teste lia `rows=0` enquanto a sincronização ainda estava rodando;
+- logo depois o runtime registrava `rows=3 success=true`.
+
+#### R4 — final homologada
+- handshake `initialSyncComplete`;
+- teste aguarda o refresh inicial realmente concluir, em vez de usar sleep fixo;
+- gate inicial confirmou `rows=3 expectedRows=3 selected=0`;
+- prévia do catálogo voltou a passar;
+- zero mutação de WeaponKit/loadout;
+- runtime: **397/397 PASS / 0 FAIL**.
+
+### Próximo passo: 0.6-C
+
+Implementar **Compatibility Selectors** dentro de KIT SELECIONADO, sem criar painel separado.
+
+Escopo planejado:
+- Mira;
+- Boca;
+- Pointer;
+- Bipé;
+- Carregador;
+- somente opções compatíveis com a arma em contexto;
+- usar a engine de compatibilidade já homologada em 0.3;
+- preservar modo read-only/sem draft até 0.6-D onde aplicável;
+- nenhuma aplicação física da arma, que permanece em 0.7.
 
 Não abrir nova rodada de polimento visual antes de concluir as funcionalidades planejadas da 0.6.
