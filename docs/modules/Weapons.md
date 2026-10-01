@@ -295,12 +295,12 @@ Ver:
 Gate 0.6-C fechado pelo RPT real de 01/10/2026.
 
 
-### 0.6-D — CANDIDATA R1
+### 0.6-D R1 — APPROVED SP / FROZEN
 
 - baseline: 0.6-C R1, **445/445**;
 - build: `0.6.3.1-weaponkit-draft-local-mission-first`;
-- static: **260/260**;
-- runtime esperado: **471**, pendente;
+- static original: **260/260**;
+- runtime: **471/471 PASS / 0 FAIL**;
 - draft: `LOCAL_WEAPONKIT_DRAFT_CANDIDATE`;
 - draft keyed por kitId e derivado do Recipe salvo;
 - campos editáveis: optic/muzzle/pointer/bipod/magazineClass;
@@ -313,4 +313,27 @@ Gate 0.6-C fechado pelo RPT real de 01/10/2026.
 - MP: `DEFERRED_0_8`;
 - geometria: 0.6-A R4 preservada.
 
-Não avançar para 0.6-E antes da validação real no Arma.
+R1 fechada. A R2 de convergência estrutural deve ser validada antes de 0.6-E.
+
+
+### 0.6-D R2 — CANDIDATA
+
+- baseline: R1 **471/471**;
+- build: `0.6.3.2-ui-convergence-equipment-content-mission-first`;
+- static: **232/232**;
+- runtime esperado: **500**;
+- layout: `FOUR_PANEL_ITEMS_CONVERGENCE`;
+- catálogo: `CONTINUOUS_WINDOW_VISIBLE_SLIDER`;
+- equipamento: `READ_ONLY_CURRENT_WEAPON`;
+- draft: preservado, local por kitId;
+- títulos: `MEUS KITS DE ARMAS`, `KIT SELECIONADO / RASCUNHO`;
+- categorias de catálogo: weapon/optic/pointer/bipod/magazine/grip;
+- grip: classificação visual do underbarrel, não regra de compatibilidade;
+- repository mutation: nenhuma;
+- loadout mutation: nenhuma;
+- authoring: `DEFERRED_0_6_E`;
+- application: `DEFERRED_0_7`;
+- multiplayer: `DEFERRED_0_8`;
+- shared UI backlog: `docs/29_SHARED_UI_ITEMS_WEAPONS.md`.
+
+Não avançar para 0.6-E antes do gate real da R2.
