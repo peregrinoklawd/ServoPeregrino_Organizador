@@ -170,7 +170,8 @@ Source integrado na branch. Base histórica da linha atual.
 0.6-A Player UI Shell                        FROZEN BASELINE 362/362
 0.6-B Selection + Information                APPROVED R4 397/397
 0.6-C Compatibility Selectors                APPROVED R1 445/445
-0.6-D WeaponKit Draft                         R1 APPROVED 471/471; R2 AUTO 500/500 / PERF REJECTED; R3 ACTIVE — FOCUSED REFRESH / HEADER POLISH
+0.6-D WeaponKit Draft                         R1 APPROVED 471/471; R2 PERF REJECTED; R3 APPROVED 512/512
+0.6-E Authoring/Lifecycle                      ACTIVE
 0.6-E Kit Authoring/Lifecycle
 0.6-F Final Visual Adaptation/Regression
 0.7  Slot-Safe Weapon Application
@@ -273,7 +274,7 @@ Contrato homologado:
 - authoring permanece para 0.6-E;
 - shell visual R4 permanece congelado.
 
-**Checkpoint ativo: 0.6-D R3 — Focused Refresh / Header Polish. R1 foi homologada em 471/471; R2 fechou 500/500 AUTO, mas foi reprovada manualmente por stuttering; R3 está 272/272 static e runtime projetado 512.**
+**Checkpoint ativo: 0.6-E — Authoring/Lifecycle. A 0.6-D R3 foi homologada em 512/512 após hotfix test-only e gate manual de performance aprovado.**
 
 
 
@@ -346,4 +347,4 @@ Contrato homologado:
 - mensagem amigável de catalogação;
 - nenhuma mudança de ownership/gate: authoring 0.6-E, aplicação 0.7, MP 0.8.
 
-**0.6-E bloqueada até runtime/manual da R3.**
+**Gate R3 fechado. 0.6-E liberada para implementação mission-first.**
