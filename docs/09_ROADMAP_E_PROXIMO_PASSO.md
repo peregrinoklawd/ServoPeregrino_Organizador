@@ -168,8 +168,8 @@ Source integrado na branch. Base histórica da linha atual.
 0.5  WeaponKit                               APPROVED 301/301
 
 0.6-A Player UI Shell                        FROZEN BASELINE 362/362
-0.6-B Selection + Information                CANDIDATE R1
-0.6-C Compatibility Selectors
+0.6-B Selection + Information                APPROVED R4 397/397
+0.6-C Compatibility Selectors                NEXT
 0.6-D WeaponKit Draft
 0.6-E Kit Authoring/Lifecycle
 0.6-F Final Visual Adaptation/Regression
@@ -250,5 +250,28 @@ Polish compartilhado já registrado:
 
 Referência: `docs/29_SHARED_UI_ITEMS_WEAPONS.md`.
 
-**Checkpoint ativo: 0.6-B R1 — Seleção de arma + informações read-only. Static 160/160; runtime pendente.**
+### 0.6-B — Selection + Information — APPROVED R4
+
+Final mission-first: **397/397 PASS / 0 FAIL**.
+
+Histórico:
+- R1: 392/392 funcional, mas rejeitada por warning massivo de structured text causado por `&`;
+- R2: 392/392 e higiene corrigida; manual revelou lista MEUS KITS vazia até interação;
+- R3: abertura corrigida, mas AUTO 391/396 por race de timing;
+- R4: handshake inicial explícito e teste sincronizado; 397/397.
+
+Contrato homologado:
+- seleção de Catálogo e WeaponKit = informação read-only;
+- MEUS KITS abre em TODOS/ALL com busca vazia;
+- lista inicial sincroniza com repository;
+- primeiro kit é selecionado quando existe;
+- apresenta nome/tipo/classe/picture/origem/baseWeapon/descrição;
+- nenhuma mutação de WeaponKit;
+- nenhuma mutação de loadout;
+- compatibilidade permanece para 0.6-C;
+- draft permanece para 0.6-D;
+- authoring permanece para 0.6-E;
+- shell visual R4 permanece congelado.
+
+**Checkpoint ativo: 0.6-C — Compatibility Selectors.**
 
