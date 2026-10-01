@@ -1,0 +1,73 @@
+author = "Claudio Malta Telhada";
+onLoadName = "SP_ORG Items + Weapons UI Lab - Self Contained";
+onLoadMission = "Laboratorio mission-first sem dependencia de PBO do Servo Peregrino.";
+overviewText = "Nexus + UICommon + Items carregados diretamente pela missao. Weapons 0.6 sera incorporado quando a candidata correta for recuperada/reconstruida.";
+enableDebugConsole = 1;
+disabledAI = 1;
+respawn = 3;
+respawnDelay = 2;
+respawnOnStart = -1;
+
+class Header
+{
+    gameType = COOP;
+    minPlayers = 1;
+    maxPlayers = 8;
+};
+
+class CfgFunctions
+{
+class ServoPeregrino_Organizador_Nexus
+    {
+        name = "SP_ORG — Nexus";
+        author = "Claudio Malta Telhada";
+        requiredVersion = 2.18;
+        requiredAddons[] = {"A3_Functions_F"};
+        units[] = {};
+        weapons[] = {};
+        version = SERVO_PEREGRINO_ORGANIZADOR_NEXUS_SEMANTIC_VERSION;
+    };
+
+class ServoPeregrino_Organizador_UICommon
+    {
+        name = "SP_ORG — UICommon";
+        author = "Claudio Malta Telhada";
+        requiredVersion = 2.18;
+        requiredAddons[] = {"A3_Functions_F", "ServoPeregrino_Organizador_Nexus"};
+        units[] = {};
+        weapons[] = {};
+        version = SERVO_PEREGRINO_ORGANIZADOR_UICOMMON_SEMANTIC_VERSION;
+    };
+
+class ServoPeregrino_Organizador_Items
+    {
+        name = "SP_ORG — Items";
+        author = "Claudio Malta Telhada";
+        requiredVersion = 2.18;
+        requiredAddons[] = {"A3_Functions_F", "ServoPeregrino_Organizador_Nexus"};
+        units[] = {};
+        weapons[] = {};
+        version = SERVO_PEREGRINO_ORGANIZADOR_ITEMS_SEMANTIC_VERSION;
+    };
+};
+
+class CfgSounds
+{
+    sounds[] = {};
+    class SP_ORG_Items_UI_Success  {name="SP_ORG_Items_UI_Success";  sound[]={"\ServoPeregrino_Organizador_Items\sounds\ui_success.ogg",0.55,1}; titles[]={};};
+    class SP_ORG_Items_UI_Partial  {name="SP_ORG_Items_UI_Partial";  sound[]={"\ServoPeregrino_Organizador_Items\sounds\ui_partial.ogg",0.52,1}; titles[]={};};
+    class SP_ORG_Items_UI_Failure  {name="SP_ORG_Items_UI_Failure";  sound[]={"\ServoPeregrino_Organizador_Items\sounds\ui_failure.ogg",0.52,1}; titles[]={};};
+    class SP_ORG_Items_UI_Rollback {name="SP_ORG_Items_UI_Rollback"; sound[]={"\ServoPeregrino_Organizador_Items\sounds\ui_rollback.ogg",0.52,1}; titles[]={};};
+    class SP_ORG_Items_UI_Blocked  {name="SP_ORG_Items_UI_Blocked";  sound[]={"\ServoPeregrino_Organizador_Items\sounds\ui_blocked.ogg",0.48,1}; titles[]={};};
+};
+
+#include "items\ui\items_dialog.hpp"
+
+class CfgRemoteExec
+{
+    class Functions
+    {
+        class ServoPeregrino_Organizador_Items_fnc_serverHandlePublicLibraryRequest {allowedTargets=2; jip=0;};
+        class ServoPeregrino_Organizador_Items_fnc_clientReceivePublicLibraryResult {allowedTargets=1; jip=0;};
+    };
+};

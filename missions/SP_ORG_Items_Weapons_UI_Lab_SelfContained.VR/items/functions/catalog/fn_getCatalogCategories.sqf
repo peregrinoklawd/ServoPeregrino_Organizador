@@ -1,0 +1,10 @@
+[
+    "ALL",
+    "MAGAZINES",
+    "GRENADES",
+    "EXPLOSIVES",
+    "TOOLS",
+    "FOOD",
+    "MEDICAL",
+    "OTHER"
+]

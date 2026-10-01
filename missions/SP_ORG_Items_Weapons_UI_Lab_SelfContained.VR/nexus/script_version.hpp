@@ -1,0 +1,16 @@
+/*
+    ServoPeregrino Organizador - Nexus
+    Identidade técnica permanente do projeto.
+    A marca pública poderá mudar sem alterar classes, funções ou contratos.
+*/
+
+#define SERVO_PEREGRINO_ORGANIZADOR_NEXUS_DISPLAY_VERSION "1.1"
+#define SERVO_PEREGRINO_ORGANIZADOR_NEXUS_SEMANTIC_VERSION "0.1.1"
+#define SERVO_PEREGRINO_ORGANIZADOR_NEXUS_BUILD "0.1.1-dev-nexus-contract-event-foundation"
+#define SERVO_PEREGRINO_ORGANIZADOR_NEXUS_RESULT_MAGIC "SERVO_PEREGRINO_ORGANIZADOR_RESULT"
+#define SERVO_PEREGRINO_ORGANIZADOR_NEXUS_CONTRACT_MAGIC "SERVO_PEREGRINO_ORGANIZADOR_CONTRACT"
+#define SERVO_PEREGRINO_ORGANIZADOR_NEXUS_CAPABILITY_REGISTRY_VAR "ServoPeregrino_Organizador_Nexus_capabilityRegistry"
+#define SERVO_PEREGRINO_ORGANIZADOR_NEXUS_CONTRACT_REGISTRY_VAR "ServoPeregrino_Organizador_Nexus_contractRegistry"
+#define SERVO_PEREGRINO_ORGANIZADOR_NEXUS_EVENT_REGISTRY_VAR "ServoPeregrino_Organizador_Nexus_eventRegistry"
+#define SERVO_PEREGRINO_ORGANIZADOR_NEXUS_INITIALIZED_VAR "ServoPeregrino_Organizador_Nexus_initialized"
+#define SERVO_PEREGRINO_ORGANIZADOR_NEXUS_LOG_LEVEL_VAR "ServoPeregrino_Organizador_Nexus_logLevel"
