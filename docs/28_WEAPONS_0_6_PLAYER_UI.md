@@ -2,7 +2,7 @@
 
 ## Estado atual
 
-**0.6-A R4 — SHELL HISTÓRICO 362/362. 0.6-B R4 — 397/397. 0.6-C R1 — 445/445. 0.6-D R1 — WEAPONKIT DRAFT HOMOLOGADA 471/471. 0.6-D R2 — UI CONVERGENCE / EQUIPMENT CONTENT CANDIDATA ATIVA; STATIC 232/232; RUNTIME ESPERADO 500.**
+**0.6-A R4 — 362/362. 0.6-B R4 — 397/397. 0.6-C R1 — 445/445. 0.6-D R1 — 471/471 HOMOLOGADA. 0.6-D R2 — 500/500 AUTO, MAS GATE MANUAL DE PERFORMANCE REPROVADO. 0.6-D R3 — FOCUSED REFRESH / HEADER POLISH CANDIDATA ATIVA; STATIC 272/272; RUNTIME PROJETADO 512.**
 
 Baseline anterior:
 - 0.4 R5 WeaponRecipe: **251/251**;
@@ -25,7 +25,7 @@ Sequência decidida:
 0.6-A  Shell/layout/listas/filtros                 FROZEN BASELINE 362/362
 0.6-B  Seleção de arma + informações              APPROVED R4 397/397
 0.6-C  Dropdowns de compatibilidade                APPROVED R1 445/445
-0.6-D  Rascunho de WeaponKit                       R1 APPROVED 471/471; R2 ACTIVE — UI CONVERGENCE / EQUIPMENT CONTENT
+0.6-D  Rascunho de WeaponKit                       R1 APPROVED 471/471; R2 AUTO 500/500 / PERF REJECTED; R3 ACTIVE — FOCUSED REFRESH / HEADER POLISH
 0.6-E  Novo/Renomear/Duplicar/Excluir/Salvar
 0.6-F  Adaptação visual final + foco + regressões
 ```
@@ -349,13 +349,13 @@ Gates preservados:
 Gate fechado em 01/10/2026 pelo RPT real. O bloco recorrente de erro `CBA_fnc_addPerFrameHandler` já existia em entregas anteriores e não é chamado pelo source SP_ORG desta linha.
 
 
-## 0.6-D — WeaponKit Draft — R1 candidata
+## 0.6-D R1 — candidata original (histórico)
 
 Build mission-first:
 
 `0.6.3.1-weaponkit-draft-local-mission-first`
 
-Estado: **CANDIDATA / NÃO HOMOLOGADA EM RUNTIME**.
+Estado histórico naquele momento: **CANDIDATA / NÃO HOMOLOGADA EM RUNTIME**. O gate foi posteriormente fechado em 471/471, conforme a seção seguinte.
 
 Validação estática: **260/260 PASS / 0 FAIL**. Runner: **444 pontos de asserção no source**; execução esperada no Arma quando todos os pré-requisitos passam: **471 checks**.
 
@@ -383,7 +383,7 @@ Regras:
 - nenhum multiplayer/authority; permanece em **0.8**;
 - geometria da 0.6-A R4 permanece congelada.
 
-Não iniciar 0.6-E antes de runtime + avaliação manual da 0.6-D R1.
+Regra histórica satisfeita: R1 foi homologada em 471/471.
 
 
 ## 0.6-D R1 — HOMOLOGADA
@@ -402,11 +402,11 @@ Homologado:
 - authoring continua 0.6-E;
 - aplicação continua 0.7.
 
-## 0.6-D R2 — UI Convergence / Equipment Content — CANDIDATA
+## 0.6-D R2 — UI Convergence / Equipment Content — AUTO VERDE / GATE MANUAL DE PERFORMANCE REPROVADO
 
 Build: `0.6.3.2-ui-convergence-equipment-content-mission-first`.
 
-Static: **232/232 PASS**. Runner: **473 source assertions**. Runtime esperado: **500 checks**.
+Static: **232/232 PASS**. Runner: **473 source assertions**. Runtime real: **500/500 PASS / 0 FAIL**.
 
 Esta rodada é uma exceção deliberada ao freeze visual antigo: reorganiza a interface **antes** de 0.6-E para evitar construir authoring sobre uma composição que já sabemos que será substituída.
 
@@ -450,4 +450,96 @@ Padrões aprovados/contemplados:
 - SALVO/ALTERADO como candidato shared;
 - rodapé em três faixas Contexto/Resultado/Histórico como candidato shared.
 
-**Não iniciar 0.6-E antes do RPT e do gate manual da 0.6-D R2.**
+### Resultado do gate R2
+
+O AUTO TEST fechou **500/500**, mas o gate manual detectou stuttering no wheel/slider do catálogo. O RPT mostrou que cada deslocamento ainda executava o refresh completo da UI; passos comuns consumiram aproximadamente **246–254 ms**. Portanto, R2 **não é homologada como baseline de continuidade**, apesar de funcionalmente verde.
+
+A causa arquitetural é conhecida: interação local estava acionando reconstrução ampla, reavaliando kits/draft/equipamento e projeção do catálogo sem necessidade.
+
+**Correção obrigatória antes de 0.6-E: 0.6-D R3.**
+
+
+## 0.6-D R3 — Focused Refresh / Header Polish — CANDIDATA ATIVA
+
+Build: `0.6.3.3-focused-refresh-header-polish-mission-first`.
+
+Validação local:
+- static: **272/272 PASS / 0 FAIL**;
+- runner source: **485 assertions**;
+- runtime projetado: **512 checks**;
+- runtime Arma: **PENDENTE**. O RPT real é a autoridade.
+
+### Objetivo
+
+Preservar integralmente:
+- draft homologado da R1;
+- quatro painéis/transparência/filtros/equipment read-only da R2;
+
+e remover reconstruções globais de UI durante interações locais.
+
+### Refresh focal
+
+`CATALOG_FOCUSED`:
+- wheel;
+- slider;
+- busca;
+- filtro Tipo;
+- filtro Acessório;
+- seleção de linha.
+
+`DRAFT_FOCUSED`:
+- Mira;
+- Boca;
+- Apontador;
+- Bipé;
+- Carregador;
+- DESCARTAR.
+
+`EQUIPMENT_FOCUSED`:
+- Principal;
+- Porte;
+- Secundária no painel Conteúdo do Equipamento.
+
+`FULL` permanece somente quando o contexto amplo realmente muda, por exemplo troca do WeaponKit.
+
+### Cache da projeção do catálogo
+
+- catálogo-base 0.3 é convertido para rows da UI uma vez por sessão/build;
+- projeção arma + acessórios é cacheada por `kitId/weaponClass`;
+- índice filtrado é cacheado por `Tipo/Categoria/Busca`;
+- wheel/slider comuns apenas recortam a janela de 32 rows;
+- com a mesma projeção, scroll não relê repository/draft para descobrir a arma-base;
+- nenhum reverse scan global foi reintroduzido.
+
+### Header
+
+Recupera o padrão provado no APM/Items: composição da direita para a esquerda usando o X como âncora.
+
+```text
+título <- contexto <- Operador/Unidade <- reserva futura <- X
+```
+
+O título ocupa apenas o espaço restante. Weapons não copia métricas de peso/capacidade do Items porque essas métricas pertencem ao domínio Items.
+
+### Feedback de catalogação
+
+Durante uma construção real do catálogo, Weapons mostra:
+
+`Vasculhando inventário e catalogando armas...`
+
+O padrão correspondente para Items foi registrado no backlog compartilhado:
+
+`Vasculhando inventário e catalogando itens...`
+
+### Gate R3
+
+Aprovação exige:
+- AUTO runtime verde;
+- wheel e slider sem o stuttering perceptível da R2;
+- logs `[UI_PERF] mode=CATALOG_FOCUSED ... fullRefresh=false`;
+- scroll repetido reutilizando projeção/filtro;
+- draft/equipment usando seus refreshes focais;
+- header sem sobreposição em resolução real;
+- nenhum repository/loadout mutation.
+
+**0.6-E continua bloqueada até RPT + avaliação manual da R3.**
