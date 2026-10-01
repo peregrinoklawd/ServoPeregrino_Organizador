@@ -1,6 +1,6 @@
 # ServoPeregrino_Organizador_Weapons
 
-**STATUS DO SOURCE NESTA BRANCH: 0.1-A. VALIDAÇÃO MISSION-FIRST EXTERNA: 0.1-B, 0.2, 0.3 R2, 0.4 R5 e 0.5 aprovadas em SP; 0.6-A Player UI Shell é candidata runtime/visual; integração ao addon/PBO ainda pendente.**
+**STATUS DO SOURCE NESTA BRANCH: 0.1-A. VALIDAÇÃO MISSION-FIRST EXTERNA: 0.1-B, 0.2, 0.3 R2, 0.4 R5, 0.5, 0.6-A R4 e 0.6-B R4 aprovadas em SP; próximo gate 0.6-C Compatibility Selectors; integração ao addon/PBO ainda pendente.**
 
 Domínio próprio (nem toda a lista está implementada nesta entrega):
 - WeaponKit / WeaponConfiguration;
@@ -36,7 +36,9 @@ Os laboratórios mission-first evoluíram sem ainda substituir este source do ad
 - 0.3 R2: AUTO TEST 213/213; catálogo/compatibilidade derivados do engine, provenance modded e cache aprovados.
 - 0.4 R5: AUTO TEST 251/251; WeaponRecipe, compatibilidade SECONDARY por família baseWeapon e higiene case-insensitive aprovados.
 - 0.5: AUTO TEST 301/301; WeaponKit session-local, CRUD, targetSlot, defensive copy e nenhuma mutação do loadout aprovados.
-- 0.6-A: Player UI Shell construída sobre 0.5; static 169/169; runtime/visual pendente. UI usa Principal/Porte/Secundária sobre PRIMARY/HANDGUN/SECONDARY e segue a gramática visual do Items.
+- 0.6-A R4: Player UI Shell homologada em **362/362**; layout/gramática visual congelados durante B–E, filtros Todos/Principal/Porte/Secundária e bounded rendering de catálogo.
+- 0.6-B R4: Selection + Information homologada em **397/397**; informação read-only por catálogo/WeaponKit, abertura de MEUS KITS em TODOS com sincronização inicial explícita e zero mutação de WeaponKit/loadout.
+- Próximo mission-first gate: **0.6-C — Compatibility Selectors**, reutilizando a compatibilidade on-demand homologada em 0.3.
 
 Esses resultados não significam que o addon/PBO desta branch já seja 0.6. Antes de publicar uma versão de addon correspondente, o delta mission-first precisa ser integrado ao source, revisado e passar Packaging/MP próprios.
 
