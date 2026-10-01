@@ -284,8 +284,8 @@
   ],
   "implementation_notes": {
     "Weapons": {
-      "delivery": "0.6-B R4 mission-first homologated / addon source 0.1-A",
-      "status": "MISSION_FIRST_0_6_B_R4_APPROVED_ADDON_SOURCE_INTEGRATION_PENDING",
+      "delivery": "0.6-C R1 mission-first candidate / addon source 0.1-A",
+      "status": "MISSION_FIRST_0_6_C_R1_CANDIDATE_RUNTIME_PENDING_ADDON_SOURCE_INTEGRATION_PENDING",
       "homologated": {
         "lifecycle_0_1_b": "128/128 AUTO + 3/3 live Take/Put",
         "configuration_0_2": "175/175 AUTO",
@@ -301,7 +301,7 @@
       "apm_reference_rule": "Historical APM weapon UI is a UX/lessons-learned source. Review KEEP/ADAPT/DROP/NEW before freezing Weapons UI 0.6.",
       "physical_identity_proven": false,
       "addon_source_integrated_through": "0.1-A",
-      "next": "0.6-C Compatibility Selectors; consume 0.3 compatibility in KIT SELECIONADO without draft/save/application.",
+      "next": "Validate 0.6-C R1 Compatibility Selectors in Arma; require runtime/manual gate before 0.6-D.",
       "recipe_rule": "WeaponRecipe is frozen as configuration + optional magazineClass; targetSlot/name/identity/ammoCount remain outside Recipe.",
       "secondary_runtime_rule": "PRIMARY/HANDGUN class guards are strict. SECONDARY type=4 runtime/base variants may be equivalent only inside the same baseWeapon family.",
       "weapon_kit_candidate": {
@@ -331,28 +331,23 @@
         "status": "FROZEN_MISSION_FIRST"
       },
       "weapon_ui_candidate": {
-        "checkpoint": "0.6-B",
-        "final_candidate": "R4",
-        "build": "0.6.1.4-initial-sync-handshake-test-timing-mission-first",
-        "runtime": "APPROVED_397_OF_397",
+        "checkpoint": "0.6-C",
+        "final_candidate": "R1",
+        "build": "0.6.2.1-compatibility-selectors-read-only-mission-first",
+        "static_validation": "335/335",
+        "runtime": "PENDING_ARMA_EXPECTED_445",
         "visual_baseline": "0.6-A R4 FROZEN",
+        "information_baseline": "0.6-B R4 FROZEN 397/397",
         "information_mode": "READ_ONLY_BASIC_WEAPON_PRESENTATION",
-        "initial_opening": "MEUS_KITS_ALL_EMPTY_QUERY_REPOSITORY_SYNC_FIRST_KIT_SELECTED",
-        "initial_sync": "EXPLICIT_HANDSHAKE",
-        "selection_sources": [
-          "PRIVATE_WEAPONKIT",
-          "WEAPON_CATALOG"
+        "compatibility_mode": "READ_ONLY_COMPATIBILITY_SELECTORS",
+        "selector_fields": [
+          "optic",
+          "muzzle",
+          "pointer",
+          "bipod",
+          "magazineClass"
         ],
-        "presentation_fields": [
-          "weaponClass",
-          "displayName",
-          "descriptionShort",
-          "picture",
-          "categoryLabel",
-          "baseWeapon",
-          "originLabel"
-        ],
-        "compatibility": "NEXT_0_6_C",
+        "compatibility_source": "0.3 ENGINE_FORWARD_ON_DEMAND",
         "draft": "DEFERRED_0_6_D",
         "authoring": "DEFERRED_0_6_E",
         "loadout_mutation": false,
@@ -383,6 +378,11 @@
         "r3": "391_OF_396_MANUAL_BEHAVIOR_FIXED_TEST_TIMING_RACE",
         "r4": "APPROVED_397_OF_397_INITIAL_SYNC_HANDSHAKE",
         "status": "FROZEN_MISSION_FIRST"
+      },
+      "player_ui_0_6_c": {
+        "r1": "CANDIDATE_STATIC_335_OF_335_RUNTIME_PENDING_EXPECTED_445",
+        "mode": "READ_ONLY_COMPATIBILITY_SELECTORS",
+        "status": "ACTIVE_CANDIDATE"
       }
     }
   }
