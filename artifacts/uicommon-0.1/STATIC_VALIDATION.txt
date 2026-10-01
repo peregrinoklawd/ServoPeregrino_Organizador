@@ -1,0 +1,31 @@
+UICommon 0.1 Foundation — Static Audit
+Date: 2026-10-01
+Branch: feature/uicommon-0.1-foundation
+Head audited: 31ccfce1a4797e301b2b6932a3b4666ff668ee2d
+
+RESULT: 25 PASS / 0 FAIL
+
+Scope:
+- UICommon addon skeleton and dependency direction
+- CfgPatches/CfgFunctions registration
+- absence of Items/Weapons runtime dependency in UICommon
+- absence of global CfgRemoteExec policy
+- Nexus Result contract usage
+- virtual list helper/test registration
+- shared mission lab existence
+- 8 playable slots
+- guarded Items / Weapons UI / UICommon entry points
+- lab actions for Items, Weapons, UICommon and module status
+- explicit refusal to impersonate Weapons 0.6 UI with integrated 0.1-A core
+
+IMPORTANT LIMITATION:
+This is a repository/static audit. It is NOT an Arma SQF compile/runtime result.
+The built-in UICommon foundation suite has 8 runtime assertions, but they remain UNEXECUTED IN ARMA until the mission is run.
+
+Next runtime gate:
+1. load Nexus + UICommon + Items;
+2. open SP_ORG_Items_Weapons_UI_Lab.VR;
+3. run TESTAR UICOMMON;
+4. expect 8 PASS / 0 FAIL;
+5. open Items and run a short smoke;
+6. send RPT before Items runtime is migrated to UICommon.
