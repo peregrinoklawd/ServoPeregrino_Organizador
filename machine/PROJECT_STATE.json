@@ -1,6 +1,6 @@
 {
   "project": "Servo Peregrino Organizador / SP_ORG",
-  "snapshot_date": "2026-09-30",
+  "snapshot_date": "2026-10-01",
   "state_schema_version": 2,
   "source_of_truth": {
     "repository_role": "MONOREPO",
@@ -22,8 +22,8 @@
     "hub_rule": "Hub is an optional player-facing integration/orchestration layer. No domain module may require Hub in order to function.",
     "independent_core_development": true
   },
-  "global_next_gate": "Weapons 0.6-B R1 selection + information runtime/manual gate over frozen 0.6-A R4 shell.",
-  "global_after_gate": "Weapons 0.6-C compatibility selectors -> 0.6-D WeaponKit draft -> 0.6-E authoring/lifecycle -> 0.6-F final visual adaptation/regression -> 0.7 Slot-Safe Weapon Application -> 0.8 Multiplayer Authority/Reconciliation.",
+  "global_next_gate": "Weapons 0.6-C Compatibility Selectors over frozen 0.6-A R4 shell and homologated 0.6-B R4 selection/information.",
+  "global_after_gate": "Weapons 0.6-D WeaponKit draft -> 0.6-E authoring/lifecycle -> 0.6-F final visual adaptation/regression -> 0.7 Slot-Safe Weapon Application -> 0.8 Multiplayer Authority/Reconciliation.",
   "modules": [
     {
       "id": "Nexus",
@@ -158,9 +158,9 @@
       "mandatory": false,
       "stable_version": null,
       "development_version": {
-        "display": "0.6-B R1 mission-first / addon source 0.1-A",
-        "semantic": "0.6.1.1 mission candidate",
-        "build": "0.6.1.1-selection-information-mission-first"
+        "display": "0.6-B R4 mission-first / addon source 0.1-A",
+        "semantic": "0.6.1.4 mission-first homologated",
+        "build": "0.6.1.4-initial-sync-handshake-test-timing-mission-first"
       },
       "dependencies": [
         "Nexus"
@@ -197,10 +197,10 @@
           "persistence.provider.v1"
         ]
       },
-      "status": "MISSION_FIRST_0_6_B_R1_CANDIDATE_ADDON_SOURCE_INTEGRATION_PENDING",
-      "next_gate": "Validate 0.6-B R1 runtime + manual information behavior. If green, continue 0.6-C compatibility selectors.",
-      "homologated_artifact": "0.1-B 128/128 + 3/3; 0.2 R3 175/175; 0.3 R2 213/213; 0.4 R5 251/251; 0.5 301/301; 0.6-A R4 UI shell 362/362.",
-      "current_candidate_artifact": "0.6-B R1 Selection & Information; static 160/160; runtime pending.",
+      "status": "MISSION_FIRST_0_6_B_R4_APPROVED_ADDON_SOURCE_INTEGRATION_PENDING",
+      "next_gate": "0.6-C Compatibility Selectors. Reuse the 0.3 on-demand engine compatibility and preserve 0.6-A R4 visual geometry; no draft or loadout mutation yet.",
+      "homologated_artifact": "0.1-B 128/128 + 3/3; 0.2 R3 175/175; 0.3 R2 213/213; 0.4 R5 251/251; 0.5 301/301; 0.6-A R4 UI shell 362/362; 0.6-B R4 selection/information 397/397.",
+      "current_candidate_artifact": "Next: 0.6-C Compatibility Selectors.",
       "mission_first_validation": {
         "0.1-B": {
           "status": "APPROVED_SP",
@@ -363,14 +363,25 @@
           "next": "0.6-B selection + information"
         },
         "0.6-B": {
-          "status": "CANDIDATE_RUNTIME_MANUAL_PENDING",
-          "build": "0.6.1.1-selection-information-mission-first",
-          "static_validation": {
-            "passed": 160,
+          "status": "APPROVED_SP_FROZEN",
+          "final_candidate": "R4",
+          "build": "0.6.1.4-initial-sync-handshake-test-timing-mission-first",
+          "auto_test": {
+            "passed": 397,
             "failed": 0,
-            "total": 160
+            "total": 397
+          },
+          "candidate_history": {
+            "R1": "392/392 functional; rejected for structured-text entity noise from raw ampersand",
+            "R2": "392/392; entity hygiene fixed; manual found initial MEUS KITS blank until filter interaction",
+            "R3": "manual opening behavior fixed; 391/396 because test raced initial refresh",
+            "R4": "397/397; explicit initial-render handshake and synchronized tests"
           },
           "information_mode": "READ_ONLY_BASIC_WEAPON_PRESENTATION",
+          "selection_sources": [
+            "PRIVATE_WEAPONKIT",
+            "WEAPON_CATALOG"
+          ],
           "presentation_fields": [
             "weaponClass",
             "displayName",
@@ -385,14 +396,23 @@
             "sourceMods",
             "originLabel"
           ],
-          "ui_geometry": "PRESERVED_FROM_0_6_A_R4",
+          "initial_opening": {
+            "kit_filter": "ALL",
+            "kit_query": "",
+            "focus": "KITS",
+            "repository_row_sync": true,
+            "auto_select_first_kit": true,
+            "handshake": "initialSyncComplete",
+            "recovery_refresh": "ONLY_WHILE_CANONICAL_OPENING"
+          },
           "compatibility": "DEFERRED_0_6_C",
           "draft": "DEFERRED_0_6_D",
           "authoring": "DEFERRED_0_6_E",
           "application": "DEFERRED_0_7",
           "loadout_mutation": false,
           "weaponkit_mutation": false,
-          "next": "0.6-C after runtime/manual gate"
+          "ui_geometry": "PRESERVED_FROM_0_6_A_R4",
+          "next": "0.6-C Compatibility Selectors"
         }
       }
     },
@@ -854,7 +874,7 @@
       "reference": "docs/27_WEAPONS_0_5_WEAPON_KIT.md"
     },
     "weapons_player_ui": {
-      "status": "0.6-A_R3_CANDIDATE_R1_R2_REJECTED",
+      "status": "0.6_A_R4_AND_0.6_B_R4_APPROVED_0.6_C_NEXT",
       "visual_reference": "SP_ORG Items current UI grammar + APM lessons learned",
       "layout": [
         "MEUS KITS",
@@ -928,7 +948,8 @@
         "full_catalog_cached_searchable": true,
         "runtime": "PENDING",
         "visual_gate": "PENDING"
-      }
+      },
+      "current_checkpoint": "0.6-C Compatibility Selectors"
     },
     "shared_ui_items_weapons": {
       "status": "DEFERRED_APPROVED_CONCEPT",
