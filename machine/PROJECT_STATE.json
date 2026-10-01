@@ -1,6 +1,6 @@
 {
   "project": "Servo Peregrino Organizador / SP_ORG",
-  "snapshot_date": "2026-09-28",
+  "snapshot_date": "2026-10-01",
   "state_schema_version": 2,
   "source_of_truth": {
     "repository_role": "MONOREPO",
@@ -19,10 +19,11 @@
     "single_feature_owner": true,
     "feature_ownership_rule": "Each domain feature has exactly one owning module; consumers integrate through Nexus contracts/capabilities/events and must not duplicate implementation.",
     "hub_optional": true,
-    "hub_rule": "Hub is an optional player-facing integration/orchestration layer. No domain module may require Hub in order to function."
+    "hub_rule": "Hub is an optional player-facing integration/orchestration layer. No domain module may require Hub in order to function.",
+    "independent_core_development": true
   },
-  "global_next_gate": "Close Items 0.13-A runtime/multiplayer gate: load Packaging R2 in Arma, confirm no Unable to open PBO, open UI, then execute server-authoritative multiplayer smoke.",
-  "global_after_gate": "Only after 0.13-A closes, continue Items 0.13-B JIP & State Reconciliation and begin formal cross-module contracts.",
+  "global_next_gate": "Weapons 0.6-E R2 UX Convergence / Direct Draft Equip runtime/manual validation. R1 is AUTO-green 536/536 but superseded by manual UX feedback.",
+  "global_after_gate": "Weapons 0.6-F final visual adaptation/regression -> 0.7 Slot-Safe Weapon Application -> 0.8 Multiplayer Authority/Reconciliation.",
   "modules": [
     {
       "id": "Nexus",
@@ -156,17 +157,25 @@
       "addon": "ServoPeregrino_Organizador_Weapons",
       "mandatory": false,
       "stable_version": null,
-      "development_version": null,
+      "development_version": {
+        "display": "0.6-E R2 mission-first candidate / addon source 0.1-A",
+        "semantic": "0.6.4.2 mission-first candidate",
+        "build": "0.6.4.2-ux-convergence-direct-draft-equip-mission-first"
+      },
       "dependencies": [
         "Nexus"
       ],
       "capabilities_provided": {
-        "implemented": [],
+        "implemented": [
+          "weapons.runtime"
+        ],
         "planned": [
-          "weapons.runtime",
           "weapons.catalog",
           "weapons.configuration",
-          "weapons.instance"
+          "weapons.instance",
+          "weapons.kit",
+          "weapons.ui",
+          "weapons.slot-safe-application"
         ]
       },
       "contracts_provided": {
@@ -180,16 +189,440 @@
       },
       "contracts_consumed": {
         "required": [],
-        "optional": [
+        "optional": [],
+        "planned_optional": [
           "policy.provider.v1",
           "stock.provider.v1",
           "economy.provider.v1",
           "persistence.provider.v1"
         ]
       },
-      "status": "PLANNED_DOMAIN_CORE",
-      "next_gate": "Define WeaponInstance v1 identity/serial lifecycle, WeaponConfiguration/WeaponRecipe contracts, slot compatibility and dynamic weapon swap without changing the rest of the loadout.",
-      "homologated_artifact": null
+      "status": "MISSION_FIRST_0_6_E_R2_UX_CONVERGENCE_CANDIDATE_RUNTIME_PENDING_ADDON_SOURCE_INTEGRATION_PENDING",
+      "next_gate": "Validate 0.6-E R2 in Arma: projected ~545 checks plus manual NOVO->Catalog->Draft, row-arrow grammar, layout convergence, no-loadout-mutation and performance regression. Do not start 0.6-F until green.",
+      "homologated_artifact": "0.1-B 128/128 + 3/3; 0.2 175/175; 0.3 R2 213/213; 0.4 R5 251/251; 0.5 301/301; 0.6-A R4 362/362; 0.6-B R4 397/397; 0.6-C R1 445/445; 0.6-D R1 471/471; 0.6-D R3 512/512 + manual performance accepted.",
+      "current_candidate_artifact": "0.6-E R2 UX Convergence / Direct Draft Equip; R1 AUTO 536/536 but UX superseded; R2 static 296/296; runner source 518; projected runtime ~545; Arma pending.",
+      "mission_first_validation": {
+        "0.1-B": {
+          "status": "APPROVED_SP",
+          "auto_test": {
+            "passed": 128,
+            "failed": 0,
+            "total": 128
+          },
+          "manual_live_take_put": {
+            "passed": 3,
+            "failed": 0,
+            "total": 3
+          },
+          "identity_strategy": "EVENT_DELTA_EVIDENCE_CANDIDATE",
+          "invariants": [
+            "unique transition evidence may be CORRELATED",
+            "indistinguishable duplicates remain AMBIGUOUS",
+            "insufficient evidence remains UNPROVEN",
+            "physicalIdentityProven remains false"
+          ]
+        },
+        "0.2": {
+          "status": "APPROVED_SP",
+          "final_candidate": "R3",
+          "auto_test": {
+            "passed": 175,
+            "failed": 0,
+            "total": 175
+          },
+          "configuration_schema": "0.2-candidate",
+          "configuration_fields": [
+            "weaponClass",
+            "muzzle",
+            "pointer",
+            "optic",
+            "bipod"
+          ],
+          "loaded_state_separate": true,
+          "engine_routes_validated": [
+            "PRIMARY",
+            "HANDGUN",
+            "SECONDARY"
+          ],
+          "decisions": [
+            "no-op apply performs no engine mutation",
+            "loaded magazine/ammo is preserved across configuration apply/remove",
+            "invalid attachment and weaponClass mismatch fail before mutation",
+            "SECONDARY target class is derived from engine-observed configuration"
+          ]
+        },
+        "0.3": {
+          "status": "APPROVED_SP",
+          "final_candidate": "R2",
+          "auto_test": {
+            "passed": 213,
+            "failed": 0,
+            "total": 213
+          },
+          "catalog_base": {
+            "total": 2770,
+            "primary": 2406,
+            "handgun": 279,
+            "secondary": 85,
+            "presets_skipped": 610
+          },
+          "catalog_with_presets": 3380,
+          "compatibility_source": "ENGINE_FORWARD_ON_DEMAND",
+          "reverse_lookup_strategy": "DEFERRED_FILTERED_INDEX",
+          "modded_provenance": true,
+          "session_cache": true
+        },
+        "next": "0.5 WeaponKit runtime",
+        "0.4": {
+          "status": "APPROVED_SP_FROZEN",
+          "final_candidate": "R5",
+          "auto_test": {
+            "passed": 251,
+            "failed": 0,
+            "total": 251
+          },
+          "recipe_schema": "0.4-recipe-candidate",
+          "inventory_mutation": false,
+          "case_insensitive_compatibility_dedupe": true,
+          "secondary_runtime_variant_strategy": "BASEWEAPON_LINKED_VARIANT_UNION",
+          "secondary_apply_equivalence": "TYPE4_SHARED_BASEWEAPON_FAMILY_ONLY",
+          "primary_handgun_class_guard": "STRICT",
+          "next": "0.5 WeaponKit"
+        },
+        "0.5": {
+          "status": "APPROVED_SP_FROZEN",
+          "auto_test": {
+            "passed": 301,
+            "failed": 0,
+            "total": 301
+          },
+          "weaponkit_specific_checks": {
+            "passed": 50,
+            "failed": 0,
+            "total": 50
+          },
+          "schema": "0.5-kit-candidate",
+          "repository_mode": "SESSION_LOCAL_CANDIDATE",
+          "operations": [
+            "create",
+            "get",
+            "list",
+            "rename",
+            "duplicate",
+            "updateRecipe",
+            "delete"
+          ],
+          "slots": [
+            "PRIMARY",
+            "HANDGUN",
+            "SECONDARY"
+          ],
+          "loadout_mutation": false,
+          "ui": "DEFERRED_0_6",
+          "application": "DEFERRED_0_7",
+          "multiplayer": "DEFERRED_0_8",
+          "next": "0.6 Weapons Player UI / Kit Builder"
+        },
+        "0.6-A": {
+          "status": "APPROVED_UI_SHELL_BASELINE_FROZEN",
+          "final_candidate": "R4",
+          "auto_test": {
+            "passed": 362,
+            "failed": 0,
+            "total": 362
+          },
+          "panels": [
+            "MEUS KITS",
+            "KIT SELECIONADO",
+            "CATÁLOGO DE ARMAS"
+          ],
+          "kit_filters": [
+            "ALL",
+            "PRIMARY",
+            "HANDGUN",
+            "SECONDARY"
+          ],
+          "catalog_filters": [
+            "ALL",
+            "PRIMARY",
+            "HANDGUN",
+            "SECONDARY"
+          ],
+          "ui_labels": {
+            "PRIMARY": "Principal",
+            "HANDGUN": "Porte",
+            "SECONDARY": "Secundária",
+            "ALL": "Todos"
+          },
+          "public_library": "VISIBLE_DISABLED_RESERVED",
+          "catalog_render_limit": 250,
+          "full_catalog_cached": true,
+          "repository_mutation": false,
+          "loadout_mutation": false,
+          "visual_freeze_policy": "PRESERVE_R4_DURING_0_6_B_TO_0_6_E",
+          "next": "0.6-B selection + information"
+        },
+        "0.6-B": {
+          "status": "APPROVED_SP_FROZEN",
+          "final_candidate": "R4",
+          "build": "0.6.1.4-initial-sync-handshake-test-timing-mission-first",
+          "auto_test": {
+            "passed": 397,
+            "failed": 0,
+            "total": 397
+          },
+          "candidate_history": {
+            "R1": "392/392 functional; rejected for structured-text entity noise from raw ampersand",
+            "R2": "392/392; entity hygiene fixed; manual found initial MEUS KITS blank until filter interaction",
+            "R3": "manual opening behavior fixed; 391/396 because test raced initial refresh",
+            "R4": "397/397; explicit initial-render handshake and synchronized tests"
+          },
+          "information_mode": "READ_ONLY_BASIC_WEAPON_PRESENTATION",
+          "selection_sources": [
+            "PRIVATE_WEAPONKIT",
+            "WEAPON_CATALOG"
+          ],
+          "presentation_fields": [
+            "weaponClass",
+            "displayName",
+            "descriptionShort",
+            "picture",
+            "category",
+            "categoryLabel",
+            "baseWeapon",
+            "baseWeaponDisplayName",
+            "isPresetVariant",
+            "sourceAddons",
+            "sourceMods",
+            "originLabel"
+          ],
+          "initial_opening": {
+            "kit_filter": "ALL",
+            "kit_query": "",
+            "focus": "KITS",
+            "repository_row_sync": true,
+            "auto_select_first_kit": true,
+            "handshake": "initialSyncComplete",
+            "recovery_refresh": "ONLY_WHILE_CANONICAL_OPENING"
+          },
+          "compatibility": "DEFERRED_0_6_C",
+          "draft": "DEFERRED_0_6_D",
+          "authoring": "DEFERRED_0_6_E",
+          "application": "DEFERRED_0_7",
+          "loadout_mutation": false,
+          "weaponkit_mutation": false,
+          "ui_geometry": "PRESERVED_FROM_0_6_A_R4",
+          "next": "0.6-C Compatibility Selectors"
+        },
+        "0.6-C": {
+          "status": "APPROVED_SP_FROZEN",
+          "candidate": "R1",
+          "build": "0.6.2.1-compatibility-selectors-read-only-mission-first",
+          "static_validation": {
+            "passed": 335,
+            "failed": 0,
+            "total": 335
+          },
+          "auto_test": {
+            "passed": 445,
+            "failed": 0,
+            "total": 445
+          },
+          "compatibility_source": "0.3 ENGINE_FORWARD_ON_DEMAND",
+          "selectors": [
+            "optic",
+            "muzzle",
+            "pointer",
+            "bipod",
+            "magazineClass"
+          ],
+          "mode": "READ_ONLY_COMPATIBILITY_SELECTORS",
+          "ui_geometry": "PRESERVED_FROM_0_6_A_R4",
+          "loadout_mutation": false,
+          "weaponkit_mutation": false,
+          "next": "0.6-D WeaponKit Draft"
+        },
+        "0.6-D": {
+          "status": "R3_APPROVED_512_OF_512_PERFORMANCE_ACCEPTED",
+          "approved_candidate": "R1",
+          "approved_build": "0.6.3.1-weaponkit-draft-local-mission-first",
+          "approved_auto_test": {
+            "passed": 471,
+            "failed": 0,
+            "total": 471
+          },
+          "r2": {
+            "build": "0.6.3.2-ui-convergence-equipment-content-mission-first",
+            "static_validation": {
+              "passed": 232,
+              "failed": 0,
+              "total": 232
+            },
+            "auto_test": {
+              "passed": 500,
+              "failed": 0,
+              "total": 500
+            },
+            "manual_gate": "REJECTED_STUTTER_FULL_REFRESH",
+            "observed_catalog_scroll_refresh_ms": "246-254",
+            "preserved_ui": [
+              "FOUR_PANEL_ITEMS_CONVERGENCE",
+              "ITEMS_MULTIPLAYER_LAB_R3_OPACITY",
+              "ACCESSORY_FILTERS",
+              "READ_ONLY_EQUIPMENT_CONTENT"
+            ]
+          },
+          "candidate": "R3",
+          "build": "0.6.3.3-focused-refresh-header-polish-mission-first",
+          "static_validation": {
+            "passed": 272,
+            "failed": 0,
+            "total": 272
+          },
+          "runner_source_assertions": 485,
+          "expected_auto_test": {
+            "total": 512,
+            "status": "COMPLETED"
+          },
+          "runtime_truth": "ARMA_RPT_REQUIRED",
+          "draft_mode": "LOCAL_WEAPONKIT_DRAFT_PRESERVED_FROM_R1",
+          "ui_layout": "FOUR_PANEL_ITEMS_CONVERGENCE_PRESERVED_FROM_R2",
+          "visual_reference": "ITEMS_MULTIPLAYER_LAB_R3_PLUS_APM_HEADER_LESSONS",
+          "refresh_modes": [
+            "FULL",
+            "CATALOG_FOCUSED",
+            "DRAFT_FOCUSED",
+            "EQUIPMENT_FOCUSED"
+          ],
+          "catalog_mode": "CONTINUOUS_WINDOW_VISIBLE_SLIDER_FOCUSED_REFRESH",
+          "catalog_window_size": 32,
+          "catalog_projection_cache": "BY_BUILD_KIT_WEAPON",
+          "catalog_filter_cache": "BY_TYPE_CATEGORY_QUERY",
+          "header_layout": "RIGHT_TO_LEFT_ANCHORED_FROM_CLOSE_X",
+          "catalog_build_message": "Vasculhando inventário e catalogando armas...",
+          "items_backlog_message": "Vasculhando inventário e catalogando itens...",
+          "equipment_content": "READ_ONLY_CURRENT_WEAPON",
+          "shared_ui_backlog": "docs/29_SHARED_UI_ITEMS_WEAPONS.md",
+          "authoring": "NEXT_GATE_0_6_E",
+          "application": "DEFERRED_0_7",
+          "multiplayer": "DEFERRED_0_8",
+          "loadout_mutation": false,
+          "weaponkit_mutation": false,
+          "next": "0.6-E Authoring/Lifecycle",
+          "actual_auto_test": {
+            "passed": 512,
+            "failed": 0,
+            "total": 512
+          },
+          "failure_classification": "NONE_FINAL",
+          "runtime_ui_state_marker": "0.6-D-r3-ui-state-candidate",
+          "performance_gate": "ACCEPTED",
+          "manual_perf": {
+            "wheel_ms": "5-7 typical",
+            "slider_absolute_ms": "5-9 typical",
+            "draft_ms": "21 observed",
+            "equipment_ms": "0-1 observed",
+            "stutter_user_report": "NOT_PERCEPTIBLE"
+          }
+        },
+        "0.6-E": {
+          "status": "R1_AUTO_GREEN_536_OF_536_UX_SUPERSEDED_R2_CANDIDATE",
+          "candidate": "R2",
+          "build": "0.6.4.2-ux-convergence-direct-draft-equip-mission-first",
+          "baseline": "0.6-D R3 APPROVED 512/512",
+          "static_validation": {
+            "passed": 296,
+            "failed": 0,
+            "total": 296
+          },
+          "runner_source_assertions": 518,
+          "expected_auto_test": {
+            "total_approx": 545,
+            "status": "PROJECTED_PENDING_ARMA",
+            "note": "Projection only; RPT is authoritative"
+          },
+          "repository_mode": "SESSION_LOCAL_CANDIDATE",
+          "operations": [
+            "NEW",
+            "RENAME",
+            "DUPLICATE",
+            "DELETE",
+            "SAVE_DRAFT",
+            "SAVE_AS_NEW",
+            "SET_DRAFT_WEAPON_SAME_SLOT"
+          ],
+          "name_authoring": "INLINE_EDIT_EXPLICIT_COMMIT",
+          "duplicate_semantics": "COPY_SAVED_SNAPSHOT_NOT_DIRTY_DRAFT",
+          "save_semantics": "PERSIST_DRAFT_RECIPE_NOT_PHYSICAL_EQUIP",
+          "save_as_semantics": "NEW_IDENTITY_FROM_CURRENT_DRAFT_SOURCE_UNCHANGED",
+          "base_weapon_edit": "SAME_TARGET_SLOT_DRAFT_ONLY",
+          "base_weapon_change_reset": [
+            "optic",
+            "muzzle",
+            "pointer",
+            "bipod",
+            "magazineClass"
+          ],
+          "focused_refresh_preserves_typed_name": true,
+          "physical_loadout_mutation": false,
+          "application": "DEFERRED_0_7",
+          "multiplayer": "DEFERRED_0_8",
+          "public_library": "DEFERRED",
+          "next": "Runtime/manual R2 gate; do not start 0.6-F",
+          "r1": {
+            "build": "0.6.4.1-authoring-lifecycle-session-local-mission-first",
+            "static_validation": {
+              "passed": 257,
+              "failed": 0,
+              "total": 257
+            },
+            "auto_test": {
+              "passed": 536,
+              "failed": 0,
+              "total": 536
+            },
+            "manual_gate": "SUPERSEDED_BY_UX_FEEDBACK",
+            "preserved": [
+              "SESSION_LOCAL_AUTHORING",
+              "NO_PHYSICAL_LOADOUT_MUTATION",
+              "FOCUSED_REFRESH_R3"
+            ]
+          },
+          "new_kit_flow": "NEW_PENDING_THEN_CATALOG_TO_DRAFT",
+          "p1_actions": [
+            "NEW",
+            "DUPLICATE",
+            "DELETE",
+            "PUBLISH_RESERVED"
+          ],
+          "rename_location": "P2_INLINE_NAME_PLUS_SAVE",
+          "draft_actions_top": [
+            "SAVE",
+            "SAVE_AS_NEW",
+            "DISCARD",
+            "CLEAR"
+          ],
+          "draft_search": "SYNCED_CATALOG_QUERY_SHORTCUT",
+          "equipment_search": "SYNCED_CATALOG_QUERY_SHORTCUT",
+          "catalog_row_actions": {
+            "left": "APPLY_TO_DRAFT_ACTIVE",
+            "right": "PHYSICAL_RESERVED_0_7"
+          },
+          "catalog_big_action": "EQUIPAR_NO_RASCUNHO",
+          "catalog_content_filters": [
+            "ALL",
+            "WEAPON",
+            "OPTIC",
+            "POINTER",
+            "UNDERBARREL",
+            "MAGAZINE"
+          ],
+          "underbarrel_presentation": "BIPOD_PLUS_GRIP_VISUAL_FILTER_ONLY_ENGINE_COMPATIBILITY_PRESERVED",
+          "equipment_label": "VISUALIZAR",
+          "footer": "THREE_BANDS_NO_OUTER_FRAME_HIGHER_HISTORY_CONTRAST",
+          "info_rectangles": "P2_P3_P4_VERTICALLY_ALIGNED"
+        }
+      }
     },
     {
       "id": "Equipment",
@@ -499,7 +932,15 @@
       "docs/17_ARMORER_WEAPONS_WEAR_ARCHITECTURE.md",
       "docs/18_CATALOGO_FUNCIONAL_E_OWNERSHIP.md",
       "docs/19_VISAO_FUNCIONAL_COMPARTILHAVEL.md",
-      "docs/20_HUB_ARQUITETURA_E_INTEGRACAO.md"
+      "docs/20_HUB_ARQUITETURA_E_INTEGRACAO.md",
+      "docs/21_WEAPONS_0_1_A_FOUNDATION_IDENTITY_SPIKE.md",
+      "docs/22_WEAPONS_0_1_B_IDENTITY_LIFECYCLE.md",
+      "docs/23_WEAPONS_0_2_WEAPON_CONFIGURATION.md",
+      "docs/24_WEAPONS_0_3_CATALOG_COMPATIBILITY.md",
+      "docs/25_WEAPONS_PLAYER_UI_E_FRONTEIRA_ARMORER.md",
+      "docs/26_WEAPONS_0_4_WEAPON_RECIPE.md",
+      "docs/27_WEAPONS_0_5_WEAPON_KIT.md",
+      "docs/28_WEAPONS_0_6_PLAYER_UI.md"
     ],
     "machine_start": [
       "machine/PROJECT_STATE.json",
@@ -510,10 +951,10 @@
   },
   "design_decisions": {
     "weapon_identity": {
-      "status": "PLANNED",
+      "status": "MISSION_FIRST_LIFECYCLE_EVIDENCE_APPROVED_INTRINSIC_IDENTITY_OPEN",
       "decision": "WeaponInstance identity and definitive serial belong to Weapons because identity exists independently of whether wear is enabled.",
       "owner_module": "Weapons",
-      "gate": "Prove identity preservation across player inventory, weapon holders, storage and multiplayer transfers before implementation."
+      "gate": "0.1-B proved conservative event-delta correlation in SP, including identical-weapon ambiguity. Intrinsic physical identity across MP/JIP/reconnect remains open; do not freeze weapons.instance.v1."
     },
     "weapon_wear": {
       "status": "PLANNED",
@@ -531,10 +972,10 @@
       "reference": "docs/17_ARMORER_WEAPONS_WEAR_ARCHITECTURE.md"
     },
     "weapon_module_split": {
-      "status": "DECIDED",
-      "weapons": "What the weapon is: identity, serial, configuration, compatibility, recipes and dynamic weapon swap.",
+      "status": "DECIDED_REFINED_2026_09_29",
+      "weapons": "What the weapon is AND the simple player-facing organization experience: identity, serial, configuration, compatibility, Recipe, WeaponKit, Weapons UI and slot-safe equip.",
       "weaponCondition": "How the weapon is: usage, wear, environment exposure, parts condition, reliability and maintenance state transitions.",
-      "armorer": "Where/how the player interacts: station, preview, assembly, inspection and maintenance workflow/UI."
+      "armorer": "Specialized station experience: bench/session, advanced 3D preview, detailed assembly context, parts inspection and maintenance workflow/UI."
     },
     "organizer_hub": {
       "status": "DECIDED",
@@ -548,6 +989,198 @@
         "Sets owns persistent composition data; Hub owns the player-facing integrated experience.",
         "Nexus connects modules technically; Hub connects the player to modules functionally."
       ]
+    },
+    "weapon_configuration": {
+      "status": "MISSION_FIRST_0_2_APPROVED",
+      "owner_module": "Weapons",
+      "schema": "0.2-candidate",
+      "fields": [
+        "weaponClass",
+        "muzzle",
+        "pointer",
+        "optic",
+        "bipod"
+      ],
+      "loaded_state_rule": "Loaded magazine/ammo is transient loadedState, excluded from WeaponConfiguration fingerprint.",
+      "apply_rule": "Validate -> diff -> mutate only if changed -> recapture -> verify configuration and loadedState -> rollback attachments on verification failure.",
+      "no_op_rule": "changedCount=0 returns without engine mutation.",
+      "next_gate": "0.5 WeaponKit; WeaponRecipe 0.4 R5 is approved SP.",
+      "reference": "docs/23_WEAPONS_0_2_WEAPON_CONFIGURATION.md"
+    },
+    "weapon_player_ui": {
+      "status": "DECIDED",
+      "owner_module": "Weapons",
+      "concept": "Weapons is player-facing like Items. It has its own simple/direct UI to choose a weapon, edit compatible attachments, inspect basic information, manage WeaponKits and equip a target slot.",
+      "weapon_kit_definition": "One configured weapon targeted to one weapon slot; not a complete loadout.",
+      "target_slots": [
+        "PRIMARY",
+        "HANDGUN",
+        "SECONDARY"
+      ],
+      "isolation_invariant": "Applying a WeaponKit must preserve all non-target loadout domains and non-target weapon slots.",
+      "armorer_boundary": "Armorer is not required to use Weapons. Armorer is the specialized bench/3D preview/parts/inspection/maintenance surface and consumes Weapons models/services.",
+      "apm_reference": "Historical APM weapon UI is a lessons-learned/UX reference; review KEEP/ADAPT/DROP/NEW before freezing 0.6 UI.",
+      "roadmap": [
+        "0.4 WeaponRecipe",
+        "0.5 WeaponKit",
+        "0.6 Weapons Player UI / Kit Builder",
+        "0.7 Slot-Safe Weapon Application",
+        "0.8 Multiplayer Authority / Reconciliation"
+      ],
+      "reference": "docs/25_WEAPONS_PLAYER_UI_E_FRONTEIRA_ARMORER.md"
+    },
+    "weapon_recipe": {
+      "status": "MISSION_FIRST_0_4_R5_APPROVED_FROZEN",
+      "owner_module": "Weapons",
+      "schema": "0.4-recipe-candidate",
+      "fields": [
+        "configuration",
+        "magazineClass"
+      ],
+      "magazine_optional": true,
+      "target_slot_owner": "WeaponKit",
+      "excludes": [
+        "targetSlot",
+        "kitName",
+        "instanceId",
+        "serial",
+        "ammoCount"
+      ],
+      "inventory_mutation": false,
+      "secondary_variant_rule": "Resolve type=4 runtime/hidden variants generically through shared baseWeapon; no addon/weapon hardcode.",
+      "class_equivalence_rule": "PRIMARY/HANDGUN strict; SECONDARY may treat type=4 classes with the same baseWeapon family as equivalent for safe no-op/apply verification.",
+      "compatibility_hygiene": "Class lists are deduplicated case-insensitively while preserving canonical config spelling.",
+      "final_runtime": "251/251 AUTO, 0 FAIL",
+      "reference": "docs/26_WEAPONS_0_4_WEAPON_RECIPE.md"
+    },
+    "weapon_kit": {
+      "status": "MISSION_FIRST_0_5_APPROVED_FROZEN",
+      "owner_module": "Weapons",
+      "schema": "0.5-kit-candidate",
+      "fields": [
+        "kitId",
+        "name",
+        "targetSlot",
+        "recipe"
+      ],
+      "meaning": "One configured weapon targeted to one weapon slot; not a full loadout.",
+      "target_slots": [
+        "PRIMARY",
+        "HANDGUN",
+        "SECONDARY"
+      ],
+      "repository_mode": "SESSION_LOCAL_CANDIDATE",
+      "content_fingerprint_excludes": [
+        "kitId",
+        "name"
+      ],
+      "loadout_mutation": false,
+      "ui_gate": "0.6",
+      "application_gate": "0.7",
+      "multiplayer_gate": "0.8",
+      "final_runtime": "301/301 AUTO, 0 FAIL; 50/50 WeaponKit-specific gates",
+      "reference": "docs/27_WEAPONS_0_5_WEAPON_KIT.md"
+    },
+    "weapons_player_ui": {
+      "status": "0.6_D_R3_APPROVED_0_6_E_R1_536_OF_536_UX_SUPERSEDED_R2_ACTIVE",
+      "visual_reference": "SP_ORG Items current UI grammar + APM lessons learned",
+      "layout": [
+        "MEUS KITS",
+        "KIT SELECIONADO",
+        "CATÁLOGO DE ARMAS"
+      ],
+      "panel_local_actions": {
+        "meus_kits": [
+          "Novo",
+          "Renomear",
+          "Duplicar",
+          "Excluir"
+        ],
+        "kit_selecionado": [
+          "Descartar",
+          "Salvar",
+          "Salvar como novo"
+        ]
+      },
+      "no_separate_compatible_accessories_panel": true,
+      "compatibility_ui": "contextual selectors/dropdowns inside KIT SELECIONADO",
+      "footer": [
+        "Context",
+        "Message",
+        "History"
+      ],
+      "search_tooltip_style": "reuse Items vocabulary",
+      "responsive_baseline": "same safeZone structure for 1080p and larger displays",
+      "slot_presentation_map": {
+        "PRIMARY": "Principal",
+        "HANDGUN": "Porte",
+        "SECONDARY": "Secundária"
+      },
+      "public_kits": "reserved visible-disabled until real provider/library exists",
+      "ui_checkpoints": [
+        "0.6-A shell/layout/listas/filtros",
+        "0.6-B seleção+informações",
+        "0.6-C dropdowns compatibilidade",
+        "0.6-D draft WeaponKit",
+        "0.6-E management/save",
+        "0.6-F polish/regressions"
+      ],
+      "application_gate": "0.7",
+      "r1_failure": {
+        "runtime": "306/320",
+        "failed": 14,
+        "root_cause": "CfgFunctions UI file path used doubled backslashes so UI functions were not loaded",
+        "interface_opened": false
+      },
+      "r2": {
+        "build": "0.6.0.2-cfgfunctions-ui-path-hotfix-mission-first",
+        "ui_functions_loaded": true,
+        "preflight_missing": [],
+        "interface_opened": true,
+        "catalog_base_count": 2770,
+        "catalog_build_ms": 1597,
+        "last_auto_marker": "0.6-A core controls stay inside safeZone",
+        "auto_test_summary_reached": false,
+        "root_cause": "refreshInterface -> programmatic list selection -> onLBSelChanged -> handleUIEvent -> refreshInterface recursion",
+        "status": "REJECTED"
+      },
+      "r3": {
+        "build": "0.6.0.3-ui-refresh-reentrancy-guard-mission-first",
+        "static_validation": "134/134",
+        "fixes": [
+          "refreshInProgress guard",
+          "invalid/same selection no-refresh",
+          "bounded catalog list projection"
+        ],
+        "catalog_render_limit": 250,
+        "full_catalog_cached_searchable": true,
+        "runtime": "PENDING",
+        "visual_gate": "PENDING"
+      },
+      "current_checkpoint": "0.6-E R2 UX Convergence / Direct Draft Equip"
+    },
+    "shared_ui_items_weapons": {
+      "status": "DEFERRED_APPROVED_CONCEPT",
+      "reference": "docs/29_SHARED_UI_ITEMS_WEAPONS.md",
+      "current_footer_semantics": [
+        "Context",
+        "Message",
+        "History"
+      ],
+      "future_footer_visual": "THREE_VISUALLY_DISTINCT_BANDS",
+      "apply_to": [
+        "Items",
+        "Weapons"
+      ],
+      "timing": "AFTER_WEAPONS_0_6_FUNCTIONAL_CHECKPOINTS_BEFORE_FINAL_UI_FREEZE",
+      "preserve_now": [
+        "button_scale",
+        "font_scale",
+        "opacity",
+        "safeZone_width",
+        "current_footer_semantics"
+      ],
+      "selected_kit_vertical_density": "REVISIT_IN_0_6_F_AFTER_FUNCTIONS_EXIST"
     }
   }
 }

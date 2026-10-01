@@ -9,6 +9,7 @@ Um repositório, vários módulos/PBOs. Nenhum módulo deve depender do estado p
 ## Implementado hoje
 
 - `addons/ServoPeregrino_Organizador_Nexus` — Foundation 1.1.
+- `addons/ServoPeregrino_Organizador_Weapons` — source integrado ainda em 0.1-A; mission-first homologado até **0.6-D R3 — 512/512**. **0.6-E R1** fechou funcionalmente **536/536**, mas foi **superada no gate manual de UX**: criação de kit exigia selecionar no Catálogo e voltar ao painel de kits. **0.6-E R2 — UX Convergence / Direct Draft Equip** é a candidata ativa: static **296/296**, runner source **518**, runtime projetado ~**545** (RPT será a autoridade).
 - `addons/ServoPeregrino_Organizador_Items` — baseline 0.12 FINAL; lógica 0.13-A em validação runtime/multiplayer.
 - `missions/SP_ORG_Items_0_13_A_Multiplayer_Lab_8Slots_R3.VR` — laboratório Items.
 
@@ -46,9 +47,11 @@ Design de identidade/desgaste: `docs/17_ARMORER_WEAPONS_WEAR_ARCHITECTURE.md`.
 
 ## Fronteira Weapons / WeaponCondition / Armorer
 
-- **Weapons**: identidade, serial, configuração, compatibilidade, receitas e troca dinâmica.
+- **Weapons**: identidade, serial, configuração, compatibilidade, receitas, WeaponKit, UI própria de montagem/configuração simples e aplicação slot-safe da arma.
 - **WeaponCondition**: desgaste, condição, peças, uso, ambiente e manutenção lógica.
-- **Armorer**: bancada, Preview, montagem, inspeção e workflow/UI de manutenção.
+- **Armorer**: bancada especializada, Preview 3D avançado, montagem física/visual, inspeção, peças e workflow/UI de manutenção.
+
+Regra conceitual: **Weapons não depende do Armorer para ser utilizável pelo jogador**. Sua experiência é deliberadamente próxima da parte de armas do APM histórico: escolher arma, configurar acessórios, consultar informações, salvar/carregar uma configuração e equipar apenas o slot alvo. O restante do loadout deve permanecer intacto.
 
 Catálogo funcional compartilhável: `docs/19_VISAO_FUNCIONAL_COMPARTILHAVEL.md`.
 
@@ -65,3 +68,60 @@ Hub   = faz o jogador conversar com os módulos.
 O Hub poderá oferecer menu principal, navegação dinâmica, passagem de contexto e ações integradas. Ele **não executa lógica de domínio** e nenhum módulo dependerá dele para funcionar.
 
 Detalhes: `docs/20_HUB_ARQUITETURA_E_INTEGRACAO.md`.
+
+## Weapons — estado mission-first
+
+O source integrado nesta branch continua sendo **0.1-A**, sem contratos v1 publicados. Os laboratórios mission-first já validaram:
+
+- **0.1-B — WeaponInstance Lifecycle / Event-Delta Evidence**: AUTO TEST 128/128 + Take/Put 3/3.
+- **0.2 — WeaponConfiguration**: AUTO TEST final 175/175; capture/diff/apply/round-trip com loadedState preservado.
+- **0.3 — Catalog & Compatibility**: AUTO TEST final R2 213/213; catálogo derivado do engine, conteúdo modded/provenance, compatibilidade de attachments/magazines sob demanda e cache de sessão.
+- **0.4 — WeaponRecipe**: R5 homologada com 251/251; schema/semântica/fingerprint/deep-copy, higiene case-insensitive e equivalência segura de variantes runtime SECONDARY aprovados.
+- **0.5 — WeaponKit**: homologada com **301/301**; lifecycle session-local de kits, PRIMARY/HANDGUN/SECONDARY, CRUD, defensive copy, isolamento de slot e nenhuma mutação do loadout.
+- **0.6-A — Player UI Shell**: R4 homologada com **362/362**; shell visual/estrutural congelado, filtros Todos/Principal/Porte/Secundária, catálogo bounded-render e rodapé Context/Message/History.
+- **0.6-B — Selection + Information**: R4 homologada com **397/397**; seleção read-only de catálogo/WeaponKit, informações básicas da arma e abertura determinística de MEUS KITS em TODOS, sem mutação de WeaponKit/loadout.
+- **0.6-C — Compatibility Selectors**: R1 homologada com **445/445**.
+- **0.6-D R1 — WeaponKit Draft**: homologada com **471/471**; draft local por kit, SALVO/ALTERADO e DESCARTAR sem mutar repository/loadout.
+- **0.6-D R2 — UI Convergence / Equipment Content**: **500/500 AUTO**, porém **REJEITADA NO GATE MANUAL DE PERFORMANCE**; interações locais ainda reconstruíam a UI inteira.
+- **0.6-D R3 — Focused Refresh / Header Polish**: **HOMOLOGADA 512/512** após hotfix test-only; performance manual aprovada, wheel/slider real ~5–9 ms sem full refresh e sem stuttering perceptível.
+- **0.6-E R1 — Authoring/Lifecycle**: **536/536 AUTO**, funcionalmente verde, porém **superada pelo gate manual de UX**.
+- **0.6-E R2 — UX Convergence / Direct Draft Equip**: candidata ativa; fluxo NOVO → Catálogo → ← EQUIPAR NO RASCUNHO, setas por linha, layout P1/P2/P4 convergente com Items, Bipé+Empunhadura em UNDERBARREL e footer revisado. A seta física é apenas affordance reservada a 0.7. Static **296/296**; runner source **518**; runtime projetado ~**545**.
+
+Essas homologações são de **MISSION-FIRST FUNCTIONAL GATE**, não de PBO/addon integrado. MP/JIP, Packaging e identidade física intrínseca continuam gates separados.
+
+### Conceito player-facing de Weapons
+
+Weapons segue o mesmo princípio modular de Items:
+
+- possui **UI própria**;
+- permite criar/editar/salvar **WeaponKits**;
+- um WeaponKit representa **uma arma configurada para um slot**, não um loadout completo;
+- permite escolher a arma e acessórios compatíveis;
+- apresenta informações da arma;
+- ao equipar/aplicar, modifica somente o slot de arma alvo e preserva uniforme, colete, mochila, itens, outras armas e demais domínios.
+
+A referência de UX/lessons learned será a parte de armas do **APM histórico**, sem copiar automaticamente decisões antigas de arquitetura.
+
+### Roadmap Weapons
+
+```text
+0.1-A  Foundation / Identity Spike             APPROVED BASE
+0.1-B  Lifecycle / Event-Delta Evidence        APPROVED
+0.2    WeaponConfiguration                     APPROVED
+0.3    Catalog / Compatibility                 APPROVED
+0.4    WeaponRecipe                            APPROVED 251/251
+0.5    WeaponKit                               APPROVED 301/301
+0.6    Weapons Player UI / Kit Builder         CURRENT
+  0.6-A Player UI Shell                        APPROVED 362/362
+  0.6-B Selection + Information                APPROVED 397/397
+  0.6-C Compatibility Selectors                APPROVED R1 — 445/445
+  0.6-D WeaponKit Draft                         R1 APPROVED 471/471; R2 PERF REJECTED; R3 APPROVED 512/512
+  0.6-E Authoring/Lifecycle                      R1 AUTO 536/536 / UX SUPERSEDED; R2 ACTIVE — STATIC 296/296; RUNTIME PENDING (~545 projected)
+  0.6-F Final Visual Adaptation/Regression
+0.7    Slot-Safe Weapon Application
+0.8    Multiplayer Authority / Reconciliation
+```
+
+Documentação: [0.1-A](docs/21_WEAPONS_0_1_A_FOUNDATION_IDENTITY_SPIKE.md), [0.1-B](docs/22_WEAPONS_0_1_B_IDENTITY_LIFECYCLE.md), [0.2](docs/23_WEAPONS_0_2_WEAPON_CONFIGURATION.md), [0.3](docs/24_WEAPONS_0_3_CATALOG_COMPATIBILITY.md), [conceito de produto/UI](docs/25_WEAPONS_PLAYER_UI_E_FRONTEIRA_ARMORER.md), [0.4](docs/26_WEAPONS_0_4_WEAPON_RECIPE.md), [0.5](docs/27_WEAPONS_0_5_WEAPON_KIT.md) e [0.6](docs/28_WEAPONS_0_6_PLAYER_UI.md).
+
+O desenvolvimento dos núcleos é independente. O gate de Items 0.13-A permanece pendente e não bloqueia Weapons.

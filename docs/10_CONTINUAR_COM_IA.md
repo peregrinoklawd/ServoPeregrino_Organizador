@@ -51,7 +51,8 @@ Regras obrigatórias:
 - Mission Lab R3 carrega e slots funcionam.
 - Packaging R2 pendente de validação runtime.
 - Armorer possui baseline histórica madura, ainda não importada no monorepo.
-- Hub/Weapons/WeaponCondition/Equipment/Sets/Policy/ServerIntegration são planejados.
+- Weapons addon source continua integrado até 0.1-A. 0.6-D R3 está homologada 512/512. **0.6-E R1 fechou 536/536**, mas o gate manual de UX pediu nova composição. **0.6-E R2 — UX Convergence / Direct Draft Equip** é a candidata ativa: static 296/296, runner source 518, runtime projetado ~545.
+- Hub/WeaponCondition/Equipment/Sets/Policy/ServerIntegration são planejados.
 
 ## Arquivos para alterações
 
@@ -85,3 +86,49 @@ Mudanças relevantes devem preferir:
 3. PR;
 4. merge após revisão;
 5. atualização da documentação de continuidade no mesmo ciclo.
+
+## Continuidade Weapons
+
+O addon source desta PR continua em **0.1-A**; não confundir isso com a linha funcional mission-first.
+
+Baselines mission-first homologadas:
+- 0.1-B: 128/128 + 3/3 live;
+- 0.2: 175/175;
+- 0.3 R2: 213/213;
+- 0.4 R5: 251/251;
+- 0.5: 301/301;
+- 0.6-A R4: 362/362, shell visual congelado;
+- 0.6-B R4: 397/397, seleção/informações congeladas.
+
+Última baseline homologada:
+- **0.6-C R1 — Compatibility Selectors**;
+- build `0.6.2.1-compatibility-selectors-read-only-mission-first`;
+- runtime **445/445 PASS**.
+
+Candidata ativa:
+- **0.6-E R2 — UX Convergence / Direct Draft Equip**;
+- build `0.6.4.2-ux-convergence-direct-draft-equip-mission-first`;
+- baseline funcional: E R1 **536/536**;
+- static **296/296**;
+- runner source **518**;
+- runtime projetado ~**545**, pendente;
+- NOVO não depende de pré-seleção: entra em estado pendente e a arma vem do Catálogo;
+- seta esquerda / EQUIPAR NO RASCUNHO aplicam arma/acessório ao draft;
+- P1: Novo / Duplicar / Excluir / Publicar;
+- rename via nome inline + SALVAR no P2;
+- P2/P4 search sincronizam a busca do Catálogo;
+- P2 ações no topo; Descartar/Limpar destrutivos;
+- filtro UNDERBARREL agrega Bipé + Empunhadura;
+- P4 usa Visualizar + slots na mesma linha;
+- footer sem background externo e Histórico com maior contraste;
+- seta física do Catálogo é somente affordance nesta rodada; mutação real continua 0.7;
+- **não iniciar 0.6-F antes de RPT + teste manual da R2**.
+
+Continuam abertos: integração mission-first -> addon/PBO, Packaging, 0.6-E R2/0.6-F, 0.7 aplicação slot-safe, 0.8 MP/JIP/reconnect e identidade física intrínseca.
+
+
+### Regra de UI compartilhada
+
+Consultar `docs/29_SHARED_UI_ITEMS_WEAPONS.md`.
+
+Toda melhoria de UI validada em Weapons que também possa melhorar Items deve entrar no `UI_CONVERGENCE_BACKLOG` como SHARED, DOMAIN-SPECIFIC ou CANDIDATE-SHARED antes de ser portada. Não fazer convergência por memória.

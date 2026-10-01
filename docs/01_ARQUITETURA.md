@@ -79,6 +79,12 @@ Domínio de ItemKit, Repository, catálogo, inventário, Draft, Application Engi
 
 `Items` declara dependência de `ServoPeregrino_Organizador_Nexus` em `CfgPatches.requiredAddons`.
 
+## Política de execução remota
+
+Módulos de domínio **não definem a política global de `CfgRemoteExec`**. Cada addon pode declarar apenas seus próprios endpoints suportados e respectivos `allowedTargets`/`jip` por função. A política global (`mode`, defaults globais) pertence ao ambiente/missão/servidor, nunca a um domínio isolado.
+
+O addon declara apenas seus endpoints suportados; a política efetiva de whitelist pertence à missão/servidor. Laboratórios do SP_ORG devem definir essa política no próprio `description.ext`, onde a precedência é apropriada ao ambiente. Funções internas não são endpoints deliberados. Se uma missão de produção optar por `mode=2`, o hardening autoritativo adicional passa a ser responsabilidade explícita daquela integração e deve ter gate próprio.
+
 ## Produto vs laboratório
 
 O addon/PBO é o produto. Missões são laboratórios de teste.
@@ -159,3 +165,7 @@ Regras:
 - Hub é dono da experiência integrada/navegação.
 
 Ver `20_HUB_ARQUITETURA_E_INTEGRACAO.md`.
+
+## Weapons 0.1-A — implementação candidata
+
+Dependências obrigatórias: `A3_Functions_F` e Nexus. Foundation/lifecycle, modelos fechados internos de configuração/instância, emissão server-side de sessão e observador de inventário. `WeaponConfiguration` representa montagem (classe + attachments); magazine/ammo observado fica em estado transitório separado e não altera o fingerprint de configuração. Classnames são preservados no modelo e normalizados apenas para comparação. Não há associação física autoritativa nem integração com outros domínios. O registry separa instâncias lógicas de referências transitórias usadas somente no laboratório. Detalhes em `21_WEAPONS_0_1_A_FOUNDATION_IDENTITY_SPIKE.md`.

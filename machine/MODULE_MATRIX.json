@@ -1,6 +1,6 @@
 {
   "generated_from": "machine/PROJECT_STATE.json",
-  "snapshot_date": "2026-09-28",
+  "snapshot_date": "2026-10-01",
   "repository": "peregrinoklawd/ServoPeregrino_Organizador",
   "modules": [
     {
@@ -136,19 +136,27 @@
       "id": "Weapons",
       "addon": "ServoPeregrino_Organizador_Weapons",
       "mandatory": false,
-      "status": "PLANNED_DOMAIN_CORE",
+      "status": "MISSION_FIRST_0_6_E_R2_UX_CONVERGENCE_CANDIDATE_RUNTIME_PENDING_ADDON_SOURCE_INTEGRATION_PENDING",
       "stable_version": null,
-      "development_version": null,
+      "development_version": {
+        "display": "0.6-E R2 mission-first candidate / addon source 0.1-A",
+        "semantic": "0.6.4.2 mission-first candidate",
+        "build": "0.6.4.2-ux-convergence-direct-draft-equip-mission-first"
+      },
       "dependencies": [
         "Nexus"
       ],
       "capabilities_provided": {
-        "implemented": [],
+        "implemented": [
+          "weapons.runtime"
+        ],
         "planned": [
-          "weapons.runtime",
           "weapons.catalog",
           "weapons.configuration",
-          "weapons.instance"
+          "weapons.instance",
+          "weapons.kit",
+          "weapons.ui",
+          "weapons.slot-safe-application"
         ]
       },
       "contracts_provided": {
@@ -162,16 +170,99 @@
       },
       "contracts_consumed": {
         "required": [],
-        "optional": [
+        "optional": [],
+        "planned_optional": [
           "policy.provider.v1",
           "stock.provider.v1",
           "economy.provider.v1",
           "persistence.provider.v1"
         ]
       },
-      "next_gate": "Define WeaponInstance v1 identity/serial lifecycle, WeaponConfiguration/WeaponRecipe contracts, slot compatibility and dynamic weapon swap without changing the rest of the loadout.",
-      "homologated_artifact": null,
-      "current_candidate_artifact": null
+      "next_gate": "Validate 0.6-E R2 in Arma; projected ~545 checks plus manual UX/no-loadout/performance regression before 0.6-F.",
+      "homologated_artifact": "0.1-B 128/128 + 3/3; 0.2 175/175; 0.3 R2 213/213; 0.4 R5 251/251; 0.5 301/301; 0.6-A R4 362/362; 0.6-B R4 397/397; 0.6-C R1 445/445; 0.6-D R1 471/471; 0.6-D R3 512/512 + manual performance.",
+      "current_candidate_artifact": "0.6-E R2 UX Convergence / Direct Draft Equip; R1 AUTO 536/536 UX-superseded; R2 static 296/296; runner 518; projected runtime ~545.",
+      "mission_first_validation": {
+        "lifecycle_0_1_b": "APPROVED_SP",
+        "weapon_configuration_0_2": "APPROVED_SP",
+        "catalog_compatibility_0_3_r2": "APPROVED_SP_213_OF_213",
+        "weapon_recipe_0_4_r5": "APPROVED_SP_251_OF_251",
+        "weapon_kit_0_5": "APPROVED_SP_301_OF_301",
+        "recipe_case_insensitive_hygiene": "APPROVED",
+        "secondary_runtime_family_equivalence": "APPROVED_TYPE4_SHARED_BASEWEAPON_ONLY",
+        "product_concept": "WEAPONS_HAS_OWN_PLAYER_UI_APM_LIKE",
+        "weapon_kit": "ONE_CONFIGURED_WEAPON_PER_TARGET_SLOT",
+        "weapon_kit_repository": "SESSION_LOCAL_CANDIDATE",
+        "slot_isolation": "PRESERVE_ALL_NON_TARGET_LOADOUT_DOMAINS",
+        "next": "Validate 0.6-E R2 runtime/manual",
+        "weapon_kit_specific_checks": "50_OF_50",
+        "weapon_kit_slots": "PRIMARY_HANDGUN_SECONDARY",
+        "weapon_kit_loadout_mutation": "NONE",
+        "player_ui_0_6_a": "APPROVED_R4_362_OF_362_UI_SHELL_BASELINE_FROZEN",
+        "ui_slot_labels": "ALL=>Todos_PRIMARY=>Principal_HANDGUN=>Porte_SECONDARY=>Secundária",
+        "ui_layout": "FOUR_PANEL_ITEMS_CONVERGENCE",
+        "ui_footer": "CONTEXT_MESSAGE_HISTORY_ITEMS_PATTERN",
+        "ui_public": "VISIBLE_DISABLED_RESERVED",
+        "ui_mutation": "NONE_0_6_A",
+        "player_ui_0_6_a_r1": "REJECTED_306_OF_320_CFGFUNCTIONS_UI_PATH",
+        "player_ui_0_6_a_r2": "CANDIDATE_STATIC_141_OF_141_RUNTIME_VISUAL_PENDING",
+        "ui_kit_filters": "ALL_PRIMARY_HANDGUN_SECONDARY",
+        "ui_catalog_filters": "ALL_PRIMARY_HANDGUN_SECONDARY",
+        "ui_catalog_render_limit": "250",
+        "ui_visual_freeze": "PRESERVE_R4_THROUGH_0_6_B_TO_E",
+        "shared_footer_refactor": "DEFERRED_ITEMS_AND_WEAPONS_TO_FINAL_POLISH",
+        "player_ui_0_6_b": "APPROVED_R4_397_OF_397_SELECTION_INFORMATION",
+        "ui_information_mode": "READ_ONLY_BASIC_WEAPON_PRESENTATION",
+        "ui_geometry": "FROZEN_R4",
+        "ui_initial_kit_filter": "ALL",
+        "ui_initial_kit_query": "EMPTY",
+        "ui_initial_sync": "HANDSHAKE_APPROVED",
+        "ui_initial_repository_rows": "MATCH_VISIBLE_ROWS",
+        "ui_initial_first_kit_selection": "APPROVED",
+        "compatibility_selectors": "APPROVED_R1_445_OF_445",
+        "draft": "ACTIVE_0_6_D_R1_BEHAVIOR_PRESERVED",
+        "authoring": "ACTIVE_0_6_E_R2_UX_CONVERGENCE_SESSION_LOCAL",
+        "application": "DEFERRED_0_7",
+        "compatibility_selector_mode": "READ_ONLY_COMPATIBILITY_SELECTORS_FROZEN_0_6_C",
+        "compatibility_selector_source": "WEAPONS_0_3_ENGINE_QUERY",
+        "compatibility_selector_expected_runtime": "445",
+        "weaponkit_draft": "R1_APPROVED_471_OF_471_R3_APPROVED_512_OF_512",
+        "weaponkit_draft_mode": "LOCAL_SESSION_ONLY_BY_KIT_ID",
+        "weaponkit_draft_fields": "OPTIC_MUZZLE_POINTER_BIPOD_MAGAZINECLASS",
+        "weaponkit_draft_discard": "ACTIVE",
+        "base_weapon_edit": "SAME_TARGET_SLOT_DRAFT_ONLY_RESETS_ATTACHMENTS_AND_MAGAZINE",
+        "ui_convergence": "R3_APPROVED_512_OF_512_PERFORMANCE_ACCEPTED",
+        "visual_reference": "ITEMS_MULTIPLAYER_LAB_R3_PLUS_APM_HEADER",
+        "catalog_mode": "CONTINUOUS_WINDOW_VISIBLE_SLIDER_FOCUSED_REFRESH_WINDOW_32",
+        "catalog_content_filters": "ALL_WEAPON_OPTIC_POINTER_UNDERBARREL_MAGAZINE",
+        "equipment_content": "READ_ONLY_CURRENT_WEAPON_PRIMARY_HANDGUN_SECONDARY",
+        "shared_ui_backlog": "docs/29_SHARED_UI_ITEMS_WEAPONS.md",
+        "ui_performance": "R3_APPROVED_SCROLL_5_TO_9_MS_NO_PERCEPTIBLE_STUTTER",
+        "refresh_modes": "FULL_CATALOG_FOCUSED_DRAFT_FOCUSED_EQUIPMENT_FOCUSED",
+        "catalog_projection_cache": "BUILD_KIT_WEAPON",
+        "catalog_filter_cache": "TYPE_CATEGORY_QUERY",
+        "header_layout": "RIGHT_TO_LEFT_ANCHORED_FROM_CLOSE_X",
+        "catalog_build_message": "VASCULHANDO_INVENTARIO_E_CATALOGANDO_ARMAS",
+        "items_backlog_catalog_message": "VASCULHANDO_INVENTARIO_E_CATALOGANDO_ITENS",
+        "test_marker_hotfix": "APPROVED_FINAL_512_OF_512",
+        "authoring_static": "257_OF_257",
+        "authoring_runner_source_assertions": "509",
+        "authoring_runtime": "PROJECTED_APPROX_536_PENDING_ARMA",
+        "authoring_operations": "NEW_RENAME_DUPLICATE_DELETE_SAVE_SAVE_AS_NEW_SET_BASE_WEAPON_SAME_SLOT",
+        "name_authoring": "INLINE_EDIT_EXPLICIT_COMMIT",
+        "duplicate_semantics": "SAVED_SNAPSHOT_ONLY",
+        "save_semantics": "PERSIST_DRAFT_RECIPE_NOT_EQUIP",
+        "authoring_r1": "AUTO_536_OF_536_FUNCTIONAL_UX_SUPERSEDED",
+        "authoring_r2_static": "296_OF_296",
+        "authoring_r2_runner_source_assertions": "518",
+        "authoring_r2_runtime": "PROJECTED_APPROX_545_PENDING_ARMA",
+        "new_kit_flow": "NEW_PENDING_THEN_CATALOG_TO_DRAFT",
+        "p1_action_order": "NEW_DUPLICATE_DELETE_PUBLISH",
+        "rename_location": "P2_INLINE_NAME_PLUS_SAVE",
+        "catalog_row_actions": "LEFT_DRAFT_ACTIVE_RIGHT_PHYSICAL_RESERVED_0_7",
+        "underbarrel_filter": "BIPOD_PLUS_GRIP",
+        "equipment_label": "VISUALIZAR",
+        "footer": "NO_OUTER_FRAME_THREE_BANDS_HIGHER_HISTORY_CONTRAST"
+      }
     },
     {
       "id": "Equipment",
@@ -330,7 +421,7 @@
           "persistence.provider.v1"
         ]
       },
-      "next_gate": "Import authoritative Armorer baseline without feature changes; prove equivalence; then integrate with Weapons for construction/configuration and WeaponCondition for inspection/maintenance.",
+      "next_gate": "Import authoritative Armorer baseline without feature changes; prove equivalence; preserve Armorer as specialized station/3D preview/parts/maintenance UI while consuming Weapons models/services. Do not replace the general Weapons player UI.",
       "homologated_artifact": "Historical Armorer known-safe baseline; artifact not yet migrated into this monorepo.",
       "current_candidate_artifact": null
     },

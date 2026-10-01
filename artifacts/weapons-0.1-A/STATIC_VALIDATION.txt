@@ -1,0 +1,43 @@
+Weapons 0.1-A static validation record
+
+PRE-REVIEW VALIDATION
+The original candidate executed:
+python tools/validate_weapons_0_1_a.py
+Result: 59 PASS / 0 FAIL
+This result belongs to the pre-review source at ca241e595fb7740adc7c3ce5b99712f14ba064b5 and MUST NOT be interpreted as execution of the post-review source.
+
+POST-REVIEW CONNECTOR AUDIT
+Executed against the published PR #8 branch after the final review fixes:
+PASS | addon does not set global Functions.mode
+PASS | addon does not set global Functions.jip
+PASS | addon declares exactly two Weapons RemoteExec endpoints
+PASS | lab mission owns mode=1 whitelist
+PASS | lab mission sets jip=0
+PASS | lab whitelist contains both Weapons endpoints
+PASS | lab whitelist explicitly preserves debug console
+PASS | WeaponConfiguration excludes magazines
+PASS | native capture emits separate loadedState
+PASS | configuration fingerprint excludes ammo/magazines
+PASS | fingerprint case folds comparison key
+PASS | normalization preserves stored spelling
+PASS | AUTO TEST covers ammo-independent configuration
+PASS | AUTO TEST covers preserved classname spelling
+PASS | identity gate remains OPEN and no stable contracts
+PASS | validator contains mission-owned RemoteExec gates
+PASS | validator contains configuration-state gates
+POST_REVIEW_AUDIT_SUMMARY passed=17 failed=0 total=17
+
+IMPORTANT
+The updated tools/validate_weapons_0_1_a.py has NOT been executed after the review fixes in this chat environment because there is no local Git checkout of the PR branch.
+The 17/17 audit above inspected the files actually published in GitHub and specifically validates the review deltas. It is not a substitute for:
+- executing the full Python validator from a repository checkout;
+- compiling/loading the PBO;
+- executing SQF in Arma;
+- SP/hosted/dedicated/MP tests;
+- physical identity gates A-E.
+
+SQF_EXECUTION=NOT_RUN
+PBO_LOAD=NOT_RUN
+SP=NOT_RUN
+MP=NOT_RUN
+IDENTITY_GATE=OPEN

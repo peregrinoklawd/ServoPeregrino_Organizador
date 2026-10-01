@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "snapshot_date": "2026-09-28",
+  "snapshot_date": "2026-10-01",
   "repository": "peregrinoklawd/ServoPeregrino_Organizador",
   "rule": "Every domain feature has one owning module. Hub may coordinate and present features, but it must delegate domain execution to the owning module through Nexus contracts/capabilities/events.",
   "modules": {
@@ -42,7 +42,13 @@
       "dynamic-weapon-swap-without-full-loadout",
       "weapon-instance",
       "weapon-serial",
-      "weapon-instance-metadata"
+      "weapon-instance-metadata",
+      "weapon-kit-target-slot",
+      "weapons-player-ui",
+      "weapon-kit-builder-ui",
+      "weapon-kit-management-ui",
+      "weapon-information-presentation",
+      "slot-safe-weapon-application"
     ],
     "Armorer": [
       "armorer-station",
@@ -50,13 +56,15 @@
       "station-lease",
       "weapon-preview",
       "weapon-assembly-workflow",
-      "weapon-recipe-authoring-ui",
+      "armorer-station-configuration-ui",
       "weapon-inspection-ui",
       "weapon-maintenance-workflow",
       "maintenance-result-presentation",
       "chronograph",
       "zeroing",
-      "grouping-range"
+      "grouping-range",
+      "armorer-parts-inspection-ui",
+      "armorer-specialized-maintenance-ui"
     ],
     "Equipment": [
       "equipment-kit",
@@ -217,14 +225,6 @@
       ]
     },
     {
-      "feature": "WeaponConfiguration/WeaponRecipe model",
-      "owner": "Weapons",
-      "consumers": [
-        "Armorer",
-        "Sets"
-      ]
-    },
-    {
       "feature": "WeaponInstance/serial",
       "owner": "Weapons",
       "consumers": [
@@ -249,16 +249,200 @@
       ]
     },
     {
-      "feature": "Armorer station/assembly/inspection/maintenance workflow UI",
-      "owner": "Armorer",
-      "consumers": []
-    },
-    {
       "feature": "Unified player-facing integration/navigation",
       "owner": "Hub",
       "consumers": [
         "Player/UI"
       ]
+    },
+    {
+      "feature": "WeaponConfiguration/WeaponRecipe/WeaponKit model",
+      "owner": "Weapons",
+      "consumers": [
+        "Armorer",
+        "Sets",
+        "Equipment",
+        "Weapons UI"
+      ]
+    },
+    {
+      "feature": "Weapons player UI / WeaponKit authoring / slot-safe equip",
+      "owner": "Weapons",
+      "consumers": [
+        "Player/UI",
+        "Hub",
+        "Armorer as model consumer"
+      ]
+    },
+    {
+      "feature": "Armorer station/Preview/inspection/parts/maintenance workflow UI",
+      "owner": "Armorer",
+      "consumers": [
+        "Player/UI"
+      ]
     }
-  ]
+  ],
+  "implementation_notes": {
+    "Weapons": {
+      "delivery": "0.6-E R2 mission-first UX convergence/direct-draft-equip candidate / addon source 0.1-A",
+      "status": "MISSION_FIRST_0_6_E_R2_UX_CONVERGENCE_CANDIDATE_RUNTIME_PENDING_ADDON_SOURCE_INTEGRATION_PENDING",
+      "homologated": {
+        "lifecycle_0_1_b": "128/128 AUTO + 3/3 live Take/Put",
+        "configuration_0_2": "175/175 AUTO",
+        "catalog_compatibility_0_3_r2": "213/213 AUTO",
+        "weapon_recipe_0_4_r5": "251/251 AUTO",
+        "weapon_kit_0_5": "301/301 AUTO; 50/50 WeaponKit-specific gates",
+        "player_ui_0_6_a": "362/362 AUTO; visual/structural baseline frozen",
+        "player_ui_0_6_b": "397/397 AUTO; selection/information and initial ALL-kit synchronization approved",
+        "player_ui_0_6_c": "445/445 AUTO; read-only compatibility selectors approved",
+        "player_ui_0_6_d_r1": "471/471 AUTO; session-local WeaponKit draft, SALVO/ALTERADO/DESCARTAR approved",
+        "player_ui_0_6_d_r3": "512/512 AUTO after test-only marker hotfix; focused-refresh performance manual gate accepted"
+      },
+      "product_concept": "Player-facing module with its own simple APM-like WeaponKit UI. A WeaponKit is one configured weapon targeted to one weapon slot.",
+      "slot_isolation_rule": "Applying a WeaponKit may intentionally mutate only the target weapon slot; the rest of the loadout belongs to other domains and must be preserved.",
+      "armorer_boundary": "Armorer owns station/advanced 3D preview/parts/inspection/maintenance UI and consumes Weapons models/services; it is not the general Weapons UI.",
+      "apm_reference_rule": "Historical APM weapon UI is a UX/lessons-learned source. Review KEEP/ADAPT/DROP/NEW before freezing Weapons UI 0.6.",
+      "physical_identity_proven": false,
+      "addon_source_integrated_through": "0.1-A",
+      "next": "Validate 0.6-E R2 in Arma; projected ~545 checks plus manual flow/layout/no-loadout/performance regression. Require green gate before 0.6-F.",
+      "recipe_rule": "WeaponRecipe is frozen as configuration + optional magazineClass; targetSlot/name/identity/ammoCount remain outside Recipe.",
+      "secondary_runtime_rule": "PRIMARY/HANDGUN class guards are strict. SECONDARY type=4 runtime/base variants may be equivalent only inside the same baseWeapon family.",
+      "weapon_kit_candidate": {
+        "schema": "0.5-kit-candidate",
+        "fields": [
+          "kitId",
+          "name",
+          "targetSlot",
+          "recipe"
+        ],
+        "repository_mode": "SESSION_LOCAL_CANDIDATE",
+        "operations": [
+          "create",
+          "get",
+          "list",
+          "rename",
+          "duplicate",
+          "updateRecipe",
+          "delete"
+        ],
+        "static_validation": "131/131",
+        "runtime": "APPROVED_301_OF_301",
+        "ui": "DEFERRED_0_6",
+        "application": "DEFERRED_0_7",
+        "multiplayer": "DEFERRED_0_8",
+        "specific_checks": "50/50",
+        "status": "FROZEN_MISSION_FIRST"
+      },
+      "weapon_ui_candidate": {
+        "checkpoint": "0.6-E R2",
+        "final_candidate": "R2",
+        "build": "0.6.4.2-ux-convergence-direct-draft-equip-mission-first",
+        "static_validation": "296/296",
+        "runner_source_assertions": 518,
+        "runtime": "PENDING_ARMA_PROJECTED_APPROX_545",
+        "runtime_truth": "RPT_REQUIRED",
+        "baseline": "0.6-D R3 APPROVED 512/512; 0.6-E R1 AUTHORING AUTO 536/536",
+        "ux_reason": "R1 manual flow required catalog preselection then P1 NEW; superseded",
+        "new_kit_flow": "NEW_PENDING_THEN_CATALOG_TO_DRAFT",
+        "p1_actions": [
+          "NEW",
+          "DUPLICATE",
+          "DELETE",
+          "PUBLISH_RESERVED"
+        ],
+        "rename": "P2_INLINE_NAME_COMMITTED_BY_SAVE",
+        "p2_search": "SYNCED_CATALOG_QUERY_SHORTCUT",
+        "p4_search": "SYNCED_CATALOG_QUERY_SHORTCUT",
+        "draft_actions": [
+          "SAVE",
+          "SAVE_AS_NEW",
+          "DISCARD",
+          "CLEAR"
+        ],
+        "catalog_row_actions": {
+          "left": "DRAFT_ACTIVE",
+          "right": "PHYSICAL_RESERVED_0_7"
+        },
+        "catalog_big_action": "EQUIPAR_NO_RASCUNHO",
+        "catalog_filter_underbarrel": "BIPOD_PLUS_GRIP",
+        "equipment_vocabulary": "VISUALIZAR",
+        "footer": "THREE_BANDS_NO_OUTER_FRAME_HIGHER_HISTORY_CONTRAST",
+        "info_alignment": "P2_P3_P4_ALIGNED",
+        "loadout_mutation": false,
+        "application": "DEFERRED_0_7",
+        "multiplayer": "DEFERRED_0_8",
+        "convergence_backlog": "docs/29_SHARED_UI_ITEMS_WEAPONS.md"
+      },
+      "player_ui_0_6_a": {
+        "r1": "REJECTED_CFGFUNCTIONS_PATH",
+        "r2": "REJECTED_REFRESH_REENTRANCY",
+        "r3": "345_OF_346_ONLY_CLOSE_TIMING_FALSE_NEGATIVE",
+        "r4": "APPROVED_362_OF_362_UI_SHELL_BASELINE_FROZEN",
+        "catalog_render_limit": 250,
+        "application": "DEFERRED_0_7"
+      },
+      "shared_ui_polish": {
+        "reference": "docs/29_SHARED_UI_ITEMS_WEAPONS.md",
+        "policy": "formal convergence backlog; port validated shared patterns explicitly",
+        "r2_preserved": [
+          "Items opacity tokens",
+          "four-panel grid",
+          "visible continuous catalog scrollbar",
+          "KIT SELECIONADO / RASCUNHO",
+          "three-band footer"
+        ],
+        "r3_trial": [
+          "focused refresh by panel",
+          "cached catalog projection/filter",
+          "right-to-left X-anchored header",
+          "friendly catalog-build message"
+        ],
+        "items_pending": [
+          "KIT SELECIONADO / RASCUNHO title",
+          "friendly catalog-build message",
+          "evaluate SALVO/ALTERADO",
+          "evaluate three-band footer",
+          "rename Mostrar -> Visualizar",
+          "evaluate footer no-outer-frame + brighter history"
+        ],
+        "authoring_boundary": "0.6-E R2 active",
+        "application_boundary": "0.7 remains deferred",
+        "r3_status": "APPROVED_512_OF_512",
+        "r4_candidate": [
+          "P1 New/Duplicate/Delete/Publish order",
+          "inline kit name in title row",
+          "draft actions below search with destructive red",
+          "catalog row arrows",
+          "Visualizar vocabulary for physical view",
+          "footer without outer frame + brighter history",
+          "P2/P4 catalog-query shortcuts"
+        ]
+      },
+      "player_ui_0_6_b": {
+        "r1": "392_OF_392_FUNCTIONAL_REJECTED_STRUCTURED_TEXT_ENTITY_NOISE",
+        "r2": "392_OF_392_HYGIENE_GREEN_MANUAL_INITIAL_KIT_LIST_ISSUE_FOUND",
+        "r3": "391_OF_396_MANUAL_BEHAVIOR_FIXED_TEST_TIMING_RACE",
+        "r4": "APPROVED_397_OF_397_INITIAL_SYNC_HANDSHAKE",
+        "status": "FROZEN_MISSION_FIRST"
+      },
+      "player_ui_0_6_c": {
+        "r1": "APPROVED_445_OF_445",
+        "mode": "READ_ONLY_COMPATIBILITY_SELECTORS",
+        "status": "FROZEN_MISSION_FIRST"
+      },
+      "player_ui_0_6_d": {
+        "r1": "APPROVED_471_OF_471",
+        "r2": "AUTO_500_OF_500_MANUAL_PERF_REJECTED_FULL_REFRESH_STUTTER",
+        "r3": "APPROVED_512_OF_512_PERFORMANCE_ACCEPTED",
+        "mode": "LOCAL_DRAFT_PLUS_FOUR_PANEL_UI_PLUS_FOCUSED_REFRESH",
+        "status": "FROZEN_MISSION_FIRST"
+      },
+      "player_ui_0_6_e": {
+        "r1": "AUTO_536_OF_536_FUNCTIONAL_UX_SUPERSEDED",
+        "r2": "CANDIDATE_STATIC_296_OF_296_RUNNER_518_RUNTIME_PENDING_PROJECTED_APPROX_545",
+        "mode": "SESSION_LOCAL_AUTHORING_PLUS_UX_CONVERGENCE_DIRECT_DRAFT_EQUIP_NO_PHYSICAL_APPLICATION",
+        "status": "ACTIVE_R2_CANDIDATE"
+      }
+    }
+  }
 }
