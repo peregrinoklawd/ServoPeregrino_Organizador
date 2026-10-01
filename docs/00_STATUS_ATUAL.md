@@ -83,7 +83,7 @@ Ler obrigatoriamente:
 
 ## Frente independente — Weapons
 
-****Source integrado na branch:** 0.1-A. **0.6-A R4:** 362/362. **0.6-B R4:** 397/397. **0.6-C R1:** 445/445. **0.6-D R1 WeaponKit Draft:** **471/471 HOMOLOGADA**. **Candidata ativa:** 0.6-D R2 — UI Convergence / Equipment Content, static **232/232**, runtime esperado **500**, ainda pendente no Arma.
+**Source integrado na branch:** 0.1-A. **0.6-A R4:** 362/362. **0.6-B R4:** 397/397. **0.6-C R1:** 445/445. **0.6-D R1:** **471/471 HOMOLOGADA**. **0.6-D R2:** **500/500 AUTO / MANUAL PERF REPROVADO**. **Candidata ativa:** 0.6-D R3 — Focused Refresh / Header Polish, static **272/272**, runtime projetado **512**, pendente no Arma.
 
 ### 0.1-B — lifecycle/identity evidence
 
@@ -216,7 +216,7 @@ Weapons possui UI própria, semelhante em conceito à parte de armas do APM hist
 
 Armorer continua separado: bancada, Preview 3D avançado, peças, inspeção e manutenção.
 
-******Gate mission-first ativo:** **0.6-D R3 — Focused Refresh / Header Polish (CANDIDATA)**. Preserva o draft R1 e a UI R2, mas troca interações locais por refresh focal e ancora o header a partir do X.
+**Gate mission-first ativo:** **0.6-D R3 — Focused Refresh / Header Polish (CANDIDATA)**. Preserva o draft R1 e a UI R2, mas troca interações locais por refresh focal e ancora o header a partir do X.
 
 **Gates ainda abertos:** 0.6-D R3, 0.6-E/F, aplicação slot-safe 0.7, multiplayer/JIP/reconnect 0.8, identidade física intrínseca, integração real ao addon/PBO e Packaging Gate. O backlog compartilhado Items+Weapons está em `29_SHARED_UI_ITEMS_WEAPONS.md`.
 
