@@ -7,7 +7,7 @@ if (missionNamespace getVariable [SERVO_PEREGRINO_ORGANIZADOR_UICOMMON_INITIALIZ
 };
 
 private _nexusResult = [] call ServoPeregrino_Organizador_Nexus_fnc_initialize;
-if !(_nexusResult getOrDefault ["ok", false]) exitWith {
+if !(_nexusResult getOrDefault ["success", false]) exitWith {
     [false, "UICOMMON_NEXUS_UNAVAILABLE", "UICommon não conseguiu inicializar o Nexus.", createHashMap] call ServoPeregrino_Organizador_Nexus_fnc_createResult
 };
 
