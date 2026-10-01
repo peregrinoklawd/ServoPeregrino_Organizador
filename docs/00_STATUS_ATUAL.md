@@ -83,7 +83,7 @@ Ler obrigatoriamente:
 
 ## Frente independente — Weapons
 
-**Source integrado na branch:** 0.1-A. **0.6-A R4:** 362/362. **0.6-B R4:** 397/397. **0.6-C R1:** 445/445. **0.6-D R1:** **471/471 HOMOLOGADA**. **0.6-D R2:** **500/500 AUTO / MANUAL PERF REPROVADO**. **Candidata ativa:** 0.6-D R3 — Focused Refresh / Header Polish, static **272/272**, runtime projetado **512**, pendente no Arma.
+**Source integrado na branch:** 0.1-A. **0.6-A R4:** 362/362. **0.6-B R4:** 397/397. **0.6-C R1:** 445/445. **0.6-D R1:** 471/471. **0.6-D R2:** AUTO 500/500 / performance rejeitada. **0.6-D R3:** **512/512 HOMOLOGADA**, performance manual aprovada. **Candidata ativa:** 0.6-E R1 — Authoring/Lifecycle, static **257/257**, runtime projetado ~**536** pendente.
 
 ### 0.1-B — lifecycle/identity evidence
 
@@ -218,7 +218,7 @@ Armorer continua separado: bancada, Preview 3D avançado, peças, inspeção e m
 
 **Gate mission-first ativo:** **0.6-E — Authoring/Lifecycle**. A 0.6-D R3 foi homologada após o hotfix test-only fechar **512/512 PASS / 0 FAIL**; performance manual também aprovada.
 
-**Gates ainda abertos:** 0.6-D R3, 0.6-E/F, aplicação slot-safe 0.7, multiplayer/JIP/reconnect 0.8, identidade física intrínseca, integração real ao addon/PBO e Packaging Gate. O backlog compartilhado Items+Weapons está em `29_SHARED_UI_ITEMS_WEAPONS.md`.
+**Gates ainda abertos:** 0.6-E R1, 0.6-F, aplicação slot-safe 0.7, multiplayer/JIP/reconnect 0.8, identidade física intrínseca, integração real ao addon/PBO e Packaging Gate. O backlog compartilhado Items+Weapons está em `29_SHARED_UI_ITEMS_WEAPONS.md`.
 
 Ver [0.1-A](21_WEAPONS_0_1_A_FOUNDATION_IDENTITY_SPIKE.md), [0.1-B](22_WEAPONS_0_1_B_IDENTITY_LIFECYCLE.md), [0.2](23_WEAPONS_0_2_WEAPON_CONFIGURATION.md), [0.3](24_WEAPONS_0_3_CATALOG_COMPATIBILITY.md) e [conceito UI](25_WEAPONS_PLAYER_UI_E_FRONTEIRA_ARMORER.md) e [0.4](26_WEAPONS_0_4_WEAPON_RECIPE.md) e [0.5](27_WEAPONS_0_5_WEAPON_KIT.md).
 
@@ -284,7 +284,7 @@ Regra histórica satisfeita: R1 foi homologada em 471/471.
 
 - gate manual: **REPROVADO por stuttering**; wheel/slider ainda disparavam full refresh com ~246–254 ms por passo no RPT real.
 
-### 0.6-D R3 — Focused Refresh / Header Polish — candidata ativa
+### 0.6-D R3 — Focused Refresh / Header Polish — histórico da candidata
 
 - build: `0.6.3.3-focused-refresh-header-polish-mission-first`;
 - static: **272/272**;
@@ -299,7 +299,7 @@ Regra histórica satisfeita: R1 foi homologada em 471/471.
 - nenhuma mutação de repository/loadout;
 - authoring continua 0.6-E; aplicação 0.7; MP 0.8.
 
-**Não iniciar 0.6-E antes do runtime/manual da R3.**
+Gate satisfeito posteriormente: R3 homologada 512/512 e performance manual aprovada.
 
 
 ### Resultado real R3 — performance corrigida / falso negativo de teste
@@ -320,7 +320,7 @@ Decisão:
 - performance da R3: **ACEITA**;
 - R3 ainda não homologada formalmente enquanto o rerun do hotfix test-only não fechar **512/512**;
 - nenhuma mudança funcional/UI no hotfix;
-- 0.6-E continua bloqueada até o rerun verde.
+- bloqueio satisfeito posteriormente: hotfix test-only fechou 512/512.
 
 
 ### 0.6-D R3 — HOMOLOGADA
@@ -336,3 +336,35 @@ Decisão:
 - nenhuma mutação de repository/loadout fora das fronteiras planejadas.
 
 **Próximo gate: 0.6-E — Authoring/Lifecycle.**
+
+
+### 0.6-E R1 — Authoring/Lifecycle — CANDIDATA ATIVA
+
+Build: `0.6.4.1-authoring-lifecycle-session-local-mission-first`.
+
+Validação local:
+- static: **257/257 PASS / 0 FAIL**;
+- runner source: **509 assertions explícitos**;
+- runtime projetado: aproximadamente **536 checks** pela dinâmica observada na R3;
+- runtime Arma: **PENDENTE**; o RPT é a autoridade.
+
+Escopo:
+- NOVO a partir de uma arma selecionada no Catálogo;
+- RENOMEAR pelo campo inline do painel KIT SELECIONADO / RASCUNHO;
+- DUPLICAR a partir do conteúdo **salvo**, sem copiar rascunho sujo;
+- EXCLUIR imediatamente do repository da sessão;
+- SALVAR persiste o Recipe do rascunho no WeaponKit atual;
+- SALVAR COMO NOVO cria novo kit com nova identidade e o Recipe atual do draft;
+- troca da arma-base no draft somente dentro do mesmo `targetSlot`;
+- troca da arma-base reseta acessórios/carregador do draft para evitar configuração incompatível;
+- nome digitado é preservado durante refresh focal do draft;
+- nenhuma ação da 0.6-E equipa fisicamente a arma.
+
+Fronteiras preservadas:
+- repository: **SESSION_LOCAL_CANDIDATE**;
+- aplicação física: **DEFERRED_0_7**;
+- multiplayer authority/JIP/reconnect: **DEFERRED_0_8**;
+- biblioteca pública real: futuro;
+- addon/PBO: ainda não integrado.
+
+**Próximo passo:** RPT + teste manual da 0.6-E R1. Não iniciar 0.6-F antes desse gate.
