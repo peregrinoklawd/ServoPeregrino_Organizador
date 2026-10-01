@@ -9,7 +9,7 @@ Um repositório, vários módulos/PBOs. Nenhum módulo deve depender do estado p
 ## Implementado hoje
 
 - `addons/ServoPeregrino_Organizador_Nexus` — Foundation 1.1.
-- `addons/ServoPeregrino_Organizador_Weapons` — source integrado ainda em 0.1-A; validação mission-first homologada até **0.6-B R4**. 0.6-A R4 congelou o shell visual em 362/362 e 0.6-B R4 homologou seleção/informações read-only em **397/397**. **0.6-C R1 — Compatibility Selectors** está como candidata mission-first, com **335/335** validações estáticas e runtime Arma pendente. Identidade física intrínseca continua não comprovada.
+- `addons/ServoPeregrino_Organizador_Weapons` — source integrado ainda em 0.1-A; validação mission-first homologada até **0.6-C R1**. 0.6-A R4 congelou o shell em **362/362**, 0.6-B R4 homologou seleção/informações em **397/397** e 0.6-C R1 homologou Compatibility Selectors em **445/445**. **0.6-D R1 — WeaponKit Draft** é a candidata ativa, com **260/260 static** e runtime Arma pendente (esperado: 471). Identidade física intrínseca continua não comprovada.
 - `addons/ServoPeregrino_Organizador_Items` — baseline 0.12 FINAL; lógica 0.13-A em validação runtime/multiplayer.
 - `missions/SP_ORG_Items_0_13_A_Multiplayer_Lab_8Slots_R3.VR` — laboratório Items.
 
@@ -108,8 +108,8 @@ A referência de UX/lessons learned será a parte de armas do **APM histórico**
 0.6    Weapons Player UI / Kit Builder         CURRENT
   0.6-A Player UI Shell                        APPROVED 362/362
   0.6-B Selection + Information                APPROVED 397/397
-  0.6-C Compatibility Selectors                ACTIVE R1 — STATIC 335/335; RUNTIME PENDING
-  0.6-D WeaponKit Draft
+  0.6-C Compatibility Selectors                APPROVED R1 — 445/445
+  0.6-D WeaponKit Draft                         ACTIVE R1 — STATIC 260/260; RUNTIME PENDING
   0.6-E Kit Authoring/Lifecycle
   0.6-F Final Visual Adaptation/Regression
 0.7    Slot-Safe Weapon Application
