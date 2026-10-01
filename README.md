@@ -9,7 +9,7 @@ Um repositório, vários módulos/PBOs. Nenhum módulo deve depender do estado p
 ## Implementado hoje
 
 - `addons/ServoPeregrino_Organizador_Nexus` — Foundation 1.1.
-- `addons/ServoPeregrino_Organizador_Weapons` — source integrado ainda em 0.1-A; validação mission-first homologada até 0.5 (301/301); 0.6-A Player UI Shell é a candidata atual. Weapons é um módulo player-facing com UI própria para montar/salvar/equipar armas por slot sem alterar o restante do loadout. Identidade física intrínseca continua não comprovada.
+- `addons/ServoPeregrino_Organizador_Weapons` — source integrado ainda em 0.1-A; validação mission-first homologada até **0.6-B R4**. 0.6-A R4 congelou o shell visual em 362/362 e 0.6-B R4 homologou seleção/informações read-only em **397/397**. Próximo gate: **0.6-C — Compatibility Selectors**. Identidade física intrínseca continua não comprovada.
 - `addons/ServoPeregrino_Organizador_Items` — baseline 0.12 FINAL; lógica 0.13-A em validação runtime/multiplayer.
 - `missions/SP_ORG_Items_0_13_A_Multiplayer_Lab_8Slots_R3.VR` — laboratório Items.
 
@@ -78,6 +78,8 @@ O source integrado nesta branch continua sendo **0.1-A**, sem contratos v1 publi
 - **0.3 — Catalog & Compatibility**: AUTO TEST final R2 213/213; catálogo derivado do engine, conteúdo modded/provenance, compatibilidade de attachments/magazines sob demanda e cache de sessão.
 - **0.4 — WeaponRecipe**: R5 homologada com 251/251; schema/semântica/fingerprint/deep-copy, higiene case-insensitive e equivalência segura de variantes runtime SECONDARY aprovados.
 - **0.5 — WeaponKit**: homologada com **301/301**; lifecycle session-local de kits, PRIMARY/HANDGUN/SECONDARY, CRUD, defensive copy, isolamento de slot e nenhuma mutação do loadout.
+- **0.6-A — Player UI Shell**: R4 homologada com **362/362**; shell visual/estrutural congelado, filtros Todos/Principal/Porte/Secundária, catálogo bounded-render e rodapé Context/Message/History.
+- **0.6-B — Selection + Information**: R4 homologada com **397/397**; seleção read-only de catálogo/WeaponKit, informações básicas da arma e abertura determinística de MEUS KITS em TODOS, sem mutação de WeaponKit/loadout.
 
 Essas homologações são de **MISSION-FIRST FUNCTIONAL GATE**, não de PBO/addon integrado. MP/JIP, Packaging e identidade física intrínseca continuam gates separados.
 
@@ -104,7 +106,12 @@ A referência de UX/lessons learned será a parte de armas do **APM histórico**
 0.4    WeaponRecipe                            APPROVED 251/251
 0.5    WeaponKit                               APPROVED 301/301
 0.6    Weapons Player UI / Kit Builder         CURRENT
-  0.6-A Player UI Shell                        CANDIDATE
+  0.6-A Player UI Shell                        APPROVED 362/362
+  0.6-B Selection + Information                APPROVED 397/397
+  0.6-C Compatibility Selectors                NEXT
+  0.6-D WeaponKit Draft
+  0.6-E Kit Authoring/Lifecycle
+  0.6-F Final Visual Adaptation/Regression
 0.7    Slot-Safe Weapon Application
 0.8    Multiplayer Authority / Reconciliation
 ```
