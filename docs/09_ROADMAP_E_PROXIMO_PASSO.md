@@ -310,7 +310,7 @@ Contrato homologado:
 - MP continua para 0.8;
 - shell R4 preservado.
 
-**0.6-E permanece bloqueada; antes dela, a 0.6-D R2 executa a convergência estrutural aprovada.**
+**A convergência estrutural R2 foi implementada; como o gate manual de performance falhou, 0.6-E permanece bloqueada até a correção R3.**
 
 
 #### 0.6-D R2 — AUTO verde / gate manual de performance reprovado
