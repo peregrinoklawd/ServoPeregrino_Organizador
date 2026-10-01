@@ -275,12 +275,115 @@ PartState
 Possíveis componentes:
 - barrel;
 - bolt/carrier;
+- extractor;
+- ejector, quando aplicável;
+- firing pin;
 - recoil spring;
 - trigger group;
 - gas system;
+- magazine/feed interface;
 - suppressor/attachments quando apropriado.
 
+### Princípio de modelagem: componentes funcionais virtuais
+
+O Arma 3 não precisa expor cada componente mecânico como objeto físico de inventário. O `WeaponCondition` poderá representar **componentes funcionais virtuais** dentro do estado da arma.
+
+Cada família de arma poderá declarar um perfil de componentes aplicáveis. Nem toda arma precisa possuir exatamente os mesmos `partType`; pistolas, fuzis operados a gás, blowback, bolt-action e armas de mods externos podem ter perfis diferentes.
+
+Exemplo conceitual:
+
+```text
+WeaponPartProfile
+  weaponFamily
+  parts[]
+    barrel
+    boltCarrier/action
+    extractor
+    ejector
+    firingPin
+    recoilSpring
+    triggerGroup
+    gasSystem
+    magazineInterface
+```
+
+Esses componentes são **estado de domínio**, não uma obrigação de criar dezenas de itens físicos. `PartInstance`/serial individual só deve existir se gameplay, troca física de peças ou persistência justificarem a complexidade.
+
 Criar `PartInstance`/serial de peça somente se gameplay/persistência realmente exigirem.
+
+---
+
+## Panes causais e diagnóstico
+
+A direção de design é evitar uma regra primária simplista do tipo `chanceGlobalDeTravamento = X%`.
+
+Uma pane pode usar probabilidade, mas a probabilidade deve ser **derivada do estado da arma e do contexto**, por exemplo:
+
+```text
+estado das peças
++ sujeira/fouling
++ lubrificação
++ corrosão
++ uso/desgaste
++ magazine/ammo/contexto
++ perfil da família da arma
+        ↓
+avaliação de confiabilidade
+        ↓
+tipo de pane observada
+```
+
+O sistema deve separar duas coisas:
+
+- **pane observada**: o que aconteceu com a arma;
+- **causas/contribuições prováveis**: quais estados contribuíram para aquela pane.
+
+Taxonomia inicial candidata:
+
+- `FAILURE_TO_FEED` — falha ao alimentar/chamberizar o próximo cartucho;
+- `FAILURE_TO_FIRE` — ciclo de disparo iniciado, mas não ocorre disparo;
+- `FAILURE_TO_EXTRACT` — estojo/cápsula não é extraído corretamente;
+- `FAILURE_TO_EJECT` — extração ocorreu, mas a ejeção não concluiu corretamente;
+- `STOVEPIPE` — apresentação/subtipo candidato de falha de ejeção;
+- `DOUBLE_FEED` — alimentação concorrente/incompatível de cartuchos.
+
+Exemplos causais candidatos:
+
+```text
+magazine/feed interface degradada
+  -> maior contribuição para FAILURE_TO_FEED
+
+firing pin / mecanismo de disparo degradado
+  -> maior contribuição para FAILURE_TO_FIRE
+
+extractor degradado
+  -> maior contribuição para FAILURE_TO_EXTRACT
+
+ejector/action degradado + fouling
+  -> maior contribuição para FAILURE_TO_EJECT / STOVEPIPE
+
+problema de alimentação + estado do magazine + ciclo incompleto
+  -> maior contribuição para DOUBLE_FEED
+```
+
+Esses vínculos são **hipóteses de gameplay a validar**, não coeficientes finais nem afirmações de que toda pane possui uma única causa. Munição, magazines, mods externos e outros providers poderão contribuir para a falha sem que uma peça da arma esteja degradada.
+
+Um evento futuro de pane deve conseguir preservar diagnóstico suficiente para explicar a ocorrência sem expor necessariamente números crus ao jogador:
+
+```text
+MalfunctionEvent
+  weaponInstanceId
+  malfunctionType
+  contributingFactors[]
+  suspectedPartTypes[]
+  conditionSnapshot/ref
+  occurredAt
+```
+
+A UI do Armorer poderá traduzir isso para mensagens como "desgaste acentuado do extrator" ou "falha de alimentação recorrente", respeitando o nível de inspeção disponível.
+
+As fórmulas, pesos, thresholds e probabilidades permanecem abertas até prototipagem, profiling e testes de gameplay. Esta decisão **não amplia o escopo da Weapons 0.1-A**, que continua limitada à fundação/identidade.
+
 
 ---
 
@@ -400,8 +503,10 @@ Assim o Armorer pode permanecer utilizável mesmo quando o servidor preferir out
 6. coleta de shotsPending;
 7. sensor de água/submersão;
 8. wear evaluation em lote;
-9. parts condition;
-10. integração de inspeção no Armorer;
-11. manutenção transacional;
-12. Stock/Economy/Persistence providers opcionais;
-13. adapters externos.
+9. parts condition e perfis funcionais por família de arma;
+10. taxonomia de panes e causal mapping condição -> pane;
+11. diagnóstico de fatores contribuintes;
+12. integração de inspeção no Armorer;
+13. manutenção transacional;
+14. Stock/Economy/Persistence providers opcionais;
+15. adapters externos.
