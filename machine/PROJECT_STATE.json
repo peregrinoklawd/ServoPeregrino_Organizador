@@ -22,8 +22,8 @@
     "hub_rule": "Hub is an optional player-facing integration/orchestration layer. No domain module may require Hub in order to function.",
     "independent_core_development": true
   },
-  "global_next_gate": "Weapons 0.6-D R3 Focused Refresh / Header Polish runtime/manual validation after R2 AUTO 500/500 but manual performance rejection.",
-  "global_after_gate": "Weapons 0.6-E authoring/lifecycle -> 0.6-F final polish/regression -> 0.7 Slot-Safe Weapon Application -> 0.8 Multiplayer Authority/Reconciliation.",
+  "global_next_gate": "Weapons 0.6-E R1 Authoring/Lifecycle runtime/manual validation. 0.6-D R3 is homologated 512/512 with performance gate accepted.",
+  "global_after_gate": "Weapons 0.6-F final visual adaptation/regression -> 0.7 Slot-Safe Weapon Application -> 0.8 Multiplayer Authority/Reconciliation.",
   "modules": [
     {
       "id": "Nexus",
@@ -158,9 +158,9 @@
       "mandatory": false,
       "stable_version": null,
       "development_version": {
-        "display": "0.6-D R3 mission-first candidate / addon source 0.1-A",
-        "semantic": "0.6.3.3 mission-first candidate",
-        "build": "0.6.3.3-focused-refresh-header-polish-mission-first"
+        "display": "0.6-E R1 mission-first candidate / addon source 0.1-A",
+        "semantic": "0.6.4.1 mission-first candidate",
+        "build": "0.6.4.1-authoring-lifecycle-session-local-mission-first"
       },
       "dependencies": [
         "Nexus"
@@ -197,10 +197,10 @@
           "persistence.provider.v1"
         ]
       },
-      "status": "MISSION_FIRST_0_6_D_R3_PERFORMANCE_ACCEPTED_TEST_MARKER_HOTFIX_RERUN_PENDING_ADDON_SOURCE_INTEGRATION_PENDING",
-      "next_gate": "Rerun 0.6-D R3 test-marker hotfix in Arma; expect 512/512. Performance/manual gate already accepted (~5-9 ms scroll/slider, no perceptible stutter). Do not start 0.6-E until rerun is green.",
-      "homologated_artifact": "0.1-B 128/128 + 3/3; 0.2 175/175; 0.3 R2 213/213; 0.4 R5 251/251; 0.5 301/301; 0.6-A R4 362/362; 0.6-B R4 397/397; 0.6-C R1 445/445; 0.6-D R1 471/471.",
-      "current_candidate_artifact": "0.6-D R3 Focused Refresh / Header Polish; static 272/272; runtime 511/512 with one test-only stale schema-marker expectation; performance/manual accepted; hotfix rerun pending.",
+      "status": "MISSION_FIRST_0_6_E_R1_AUTHORING_LIFECYCLE_CANDIDATE_RUNTIME_PENDING_ADDON_SOURCE_INTEGRATION_PENDING",
+      "next_gate": "Validate 0.6-E R1 in Arma: projected ~536 checks plus manual authoring lifecycle/no-loadout-mutation/performance regression gate. Do not start 0.6-F until green.",
+      "homologated_artifact": "0.1-B 128/128 + 3/3; 0.2 175/175; 0.3 R2 213/213; 0.4 R5 251/251; 0.5 301/301; 0.6-A R4 362/362; 0.6-B R4 397/397; 0.6-C R1 445/445; 0.6-D R1 471/471; 0.6-D R3 512/512 + manual performance accepted.",
+      "current_candidate_artifact": "0.6-E R1 Authoring/Lifecycle; static 257/257; runner source 509; projected runtime ~536; Arma pending.",
       "mission_first_validation": {
         "0.1-B": {
           "status": "APPROVED_SP",
@@ -443,7 +443,7 @@
           "next": "0.6-D WeaponKit Draft"
         },
         "0.6-D": {
-          "status": "R1_APPROVED_R2_PERF_REJECTED_R3_PERF_ACCEPTED_TEST_FALSE_NEGATIVE_HOTFIX_PENDING",
+          "status": "R3_APPROVED_512_OF_512_PERFORMANCE_ACCEPTED",
           "approved_candidate": "R1",
           "approved_build": "0.6.3.1-weaponkit-draft-local-mission-first",
           "approved_auto_test": {
@@ -482,7 +482,7 @@
           "runner_source_assertions": 485,
           "expected_auto_test": {
             "total": 512,
-            "status": "HOTFIX_RERUN_PENDING"
+            "status": "COMPLETED"
           },
           "runtime_truth": "ARMA_RPT_REQUIRED",
           "draft_mode": "LOCAL_WEAPONKIT_DRAFT_PRESERVED_FROM_R1",
@@ -503,21 +503,19 @@
           "items_backlog_message": "Vasculhando inventário e catalogando itens...",
           "equipment_content": "READ_ONLY_CURRENT_WEAPON",
           "shared_ui_backlog": "docs/29_SHARED_UI_ITEMS_WEAPONS.md",
-          "authoring": "DEFERRED_0_6_E",
+          "authoring": "NEXT_GATE_0_6_E",
           "application": "DEFERRED_0_7",
           "multiplayer": "DEFERRED_0_8",
           "loadout_mutation": false,
           "weaponkit_mutation": false,
-          "next": "Rerun test-marker hotfix; require 512/512 before 0.6-E",
+          "next": "0.6-E Authoring/Lifecycle",
           "actual_auto_test": {
-            "passed": 511,
-            "failed": 1,
+            "passed": 512,
+            "failed": 0,
             "total": 512
           },
-          "single_failure": "0.6-D UI state schema marker",
-          "failure_classification": "TEST_ONLY_STALE_EXPECTATION",
+          "failure_classification": "NONE_FINAL",
           "runtime_ui_state_marker": "0.6-D-r3-ui-state-candidate",
-          "stale_runner_expectation": "R2_OR_LEGACY_UI_STATE_MARKER",
           "performance_gate": "ACCEPTED",
           "manual_perf": {
             "wheel_ms": "5-7 typical",
@@ -526,6 +524,51 @@
             "equipment_ms": "0-1 observed",
             "stutter_user_report": "NOT_PERCEPTIBLE"
           }
+        },
+        "0.6-E": {
+          "status": "R1_CANDIDATE_RUNTIME_PENDING",
+          "candidate": "R1",
+          "build": "0.6.4.1-authoring-lifecycle-session-local-mission-first",
+          "baseline": "0.6-D R3 APPROVED 512/512",
+          "static_validation": {
+            "passed": 257,
+            "failed": 0,
+            "total": 257
+          },
+          "runner_source_assertions": 509,
+          "expected_auto_test": {
+            "total_approx": 536,
+            "status": "PROJECTED_PENDING_ARMA",
+            "note": "Projection from R3 dynamic delta; RPT is authoritative"
+          },
+          "repository_mode": "SESSION_LOCAL_CANDIDATE",
+          "operations": [
+            "NEW",
+            "RENAME",
+            "DUPLICATE",
+            "DELETE",
+            "SAVE_DRAFT",
+            "SAVE_AS_NEW",
+            "SET_DRAFT_WEAPON_SAME_SLOT"
+          ],
+          "name_authoring": "INLINE_EDIT_EXPLICIT_COMMIT",
+          "duplicate_semantics": "COPY_SAVED_SNAPSHOT_NOT_DIRTY_DRAFT",
+          "save_semantics": "PERSIST_DRAFT_RECIPE_NOT_PHYSICAL_EQUIP",
+          "save_as_semantics": "NEW_IDENTITY_FROM_CURRENT_DRAFT_SOURCE_UNCHANGED",
+          "base_weapon_edit": "SAME_TARGET_SLOT_DRAFT_ONLY",
+          "base_weapon_change_reset": [
+            "optic",
+            "muzzle",
+            "pointer",
+            "bipod",
+            "magazineClass"
+          ],
+          "focused_refresh_preserves_typed_name": true,
+          "physical_loadout_mutation": false,
+          "application": "DEFERRED_0_7",
+          "multiplayer": "DEFERRED_0_8",
+          "public_library": "DEFERRED",
+          "next": "Runtime/manual gate; do not start 0.6-F yet"
         }
       }
     },
@@ -987,7 +1030,7 @@
       "reference": "docs/27_WEAPONS_0_5_WEAPON_KIT.md"
     },
     "weapons_player_ui": {
-      "status": "0.6_D_R1_APPROVED_R2_AUTO_GREEN_MANUAL_PERF_REJECTED_R3_ACTIVE",
+      "status": "0.6_D_R3_APPROVED_512_OF_512_0_6_E_R1_ACTIVE",
       "visual_reference": "SP_ORG Items current UI grammar + APM lessons learned",
       "layout": [
         "MEUS KITS",
@@ -1062,7 +1105,7 @@
         "runtime": "PENDING",
         "visual_gate": "PENDING"
       },
-      "current_checkpoint": "0.6-D R3 Focused Refresh / Header Polish"
+      "current_checkpoint": "0.6-E R1 Authoring/Lifecycle"
     },
     "shared_ui_items_weapons": {
       "status": "DEFERRED_APPROVED_CONCEPT",
