@@ -1,0 +1,36 @@
+name: Package self-contained UI lab
+
+on:
+  push:
+    branches:
+      - feature/uicommon-0.1-foundation
+    paths:
+      - "missions/SP_ORG_Items_Weapons_UI_Lab_SelfContained.VR/**"
+      - ".github/workflows/package-selfcontained-ui-lab.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  package:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Package mission
+        run: |
+          mkdir -p dist
+          cd missions
+          zip -r "../dist/SP_ORG_Items_Weapons_UI_Lab_SelfContained.zip" "SP_ORG_Items_Weapons_UI_Lab_SelfContained.VR"
+          cd ..
+          sha256sum dist/SP_ORG_Items_Weapons_UI_Lab_SelfContained.zip | tee dist/SHA256.txt
+
+      - name: Upload mission artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: SP_ORG_Items_Weapons_UI_Lab_SelfContained
+          path: dist/
+          if-no-files-found: error
+          retention-days: 30
