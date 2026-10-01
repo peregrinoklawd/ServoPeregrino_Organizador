@@ -285,7 +285,7 @@
   "implementation_notes": {
     "Weapons": {
       "delivery": "0.6-D R3 mission-first focused-refresh/header-polish candidate / addon source 0.1-A",
-      "status": "MISSION_FIRST_0_6_D_R3_FOCUSED_REFRESH_CANDIDATE_RUNTIME_PENDING_ADDON_SOURCE_INTEGRATION_PENDING",
+      "status": "MISSION_FIRST_0_6_D_R3_PERFORMANCE_ACCEPTED_TEST_MARKER_HOTFIX_RERUN_PENDING_ADDON_SOURCE_INTEGRATION_PENDING",
       "homologated": {
         "lifecycle_0_1_b": "128/128 AUTO + 3/3 live Take/Put",
         "configuration_0_2": "175/175 AUTO",
@@ -303,7 +303,7 @@
       "apm_reference_rule": "Historical APM weapon UI is a UX/lessons-learned source. Review KEEP/ADAPT/DROP/NEW before freezing Weapons UI 0.6.",
       "physical_identity_proven": false,
       "addon_source_integrated_through": "0.1-A",
-      "next": "Validate 0.6-D R3 in Arma; projected 512 checks plus manual no-stutter/focused-refresh/header gate before 0.6-E.",
+      "next": "Rerun 0.6-D R3 test-marker hotfix; require 512/512 before 0.6-E. Performance/manual gate already accepted.",
       "recipe_rule": "WeaponRecipe is frozen as configuration + optional magazineClass; targetSlot/name/identity/ammoCount remain outside Recipe.",
       "secondary_runtime_rule": "PRIMARY/HANDGUN class guards are strict. SECONDARY type=4 runtime/base variants may be equivalent only inside the same baseWeapon family.",
       "weapon_kit_candidate": {
@@ -338,7 +338,7 @@
         "build": "0.6.3.3-focused-refresh-header-polish-mission-first",
         "static_validation": "272/272",
         "runner_source_assertions": 485,
-        "runtime": "PENDING_ARMA_PROJECTED_512",
+        "runtime": "ACTUAL_511_OF_512_SINGLE_TEST_ONLY_SCHEMA_MARKER_FALSE_NEGATIVE",
         "runtime_truth": "RPT_REQUIRED",
         "draft_baseline": "0.6-D R1 FROZEN 471/471",
         "r2_result": "500/500 AUTO; MANUAL PERFORMANCE REJECTED due full refresh on catalog scroll (~246-254 ms)",
@@ -361,7 +361,9 @@
         "authoring": "DEFERRED_0_6_E",
         "application": "DEFERRED_0_7",
         "loadout_mutation": false,
-        "weaponkit_mutation": false
+        "weaponkit_mutation": false,
+        "performance_gate": "ACCEPTED_SCROLL_5_TO_9_MS_NO_PERCEPTIBLE_STUTTER",
+        "test_marker_hotfix": "PENDING_RERUN_EXPECTED_512_OF_512"
       },
       "player_ui_0_6_a": {
         "r1": "REJECTED_CFGFUNCTIONS_PATH",
@@ -411,9 +413,9 @@
       "player_ui_0_6_d": {
         "r1": "APPROVED_471_OF_471",
         "r2": "AUTO_500_OF_500_MANUAL_PERF_REJECTED_FULL_REFRESH_STUTTER",
-        "r3": "CANDIDATE_STATIC_272_OF_272_RUNTIME_PENDING_PROJECTED_512",
+        "r3": "PERFORMANCE_ACCEPTED_AUTO_511_OF_512_TEST_ONLY_SCHEMA_MARKER_FALSE_NEGATIVE",
         "mode": "LOCAL_DRAFT_PLUS_FOUR_PANEL_UI_PLUS_FOCUSED_REFRESH",
-        "status": "ACTIVE_R3_CANDIDATE"
+        "status": "R3_TEST_MARKER_HOTFIX_RERUN_PENDING"
       }
     }
   }
