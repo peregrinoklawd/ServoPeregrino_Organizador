@@ -216,7 +216,7 @@ Weapons possui UI própria, semelhante em conceito à parte de armas do APM hist
 
 Armorer continua separado: bancada, Preview 3D avançado, peças, inspeção e manutenção.
 
-**Gate mission-first ativo:** **0.6-D R3 — Focused Refresh / Header Polish (CANDIDATA)**. Preserva o draft R1 e a UI R2, mas troca interações locais por refresh focal e ancora o header a partir do X.
+**Gate mission-first ativo:** **0.6-D R3 — TEST-MARKER HOTFIX / RERUN PENDENTE**. O gate manual de performance foi aceito: wheel/slider real operam ~5–9 ms sem full refresh. AUTO atual **511/512**; o único FAIL é um falso negativo de teste no marcador de schema da UI (runtime publica R3, runner esperava R2/legado).
 
 **Gates ainda abertos:** 0.6-D R3, 0.6-E/F, aplicação slot-safe 0.7, multiplayer/JIP/reconnect 0.8, identidade física intrínseca, integração real ao addon/PBO e Packaging Gate. O backlog compartilhado Items+Weapons está em `29_SHARED_UI_ITEMS_WEAPONS.md`.
 
@@ -289,7 +289,7 @@ Regra histórica satisfeita: R1 foi homologada em 471/471.
 - build: `0.6.3.3-focused-refresh-header-polish-mission-first`;
 - static: **272/272**;
 - runner source: **485 assertions**;
-- runtime projetado: **512**, pendente no Arma;
+- runtime real: **511/512**; único FAIL = expectativa stale do marcador de UI no runner; hotfix somente de teste preparado para rerun **512/512**;
 - catálogo: refresh focal + projeção/filtros cacheados + janela 32;
 - draft: refresh focal em seletores/Descartar;
 - equipamento: refresh focal em Principal/Porte/Secundária;
@@ -300,3 +300,24 @@ Regra histórica satisfeita: R1 foi homologada em 471/471.
 - authoring continua 0.6-E; aplicação 0.7; MP 0.8.
 
 **Não iniciar 0.6-E antes do runtime/manual da R3.**
+
+
+### Resultado real R3 — performance corrigida / falso negativo de teste
+
+RPT real:
+- AUTO: **511/512**;
+- único FAIL: `0.6-D UI state schema marker`;
+- causa confirmada: `fn_createUIState` publica `0.6-D-r3-ui-state-candidate`, enquanto o runner R3 ainda esperava marcador R2/legado;
+- nenhum defeito funcional associado ao FAIL;
+- wheel manual: aproximadamente **5–7 ms** na maior parte da sequência;
+- slider absoluto manual: aproximadamente **5–9 ms**;
+- `projectionBuilt=false`, `filterBuilt=false` e `fullRefresh=false` durante scroll repetido;
+- draft manual: **21 ms** nas seleções observadas;
+- equipamento manual: **0–1 ms** nas trocas observadas;
+- usuário reportou ausência perceptível do stuttering.
+
+Decisão:
+- performance da R3: **ACEITA**;
+- R3 ainda não homologada formalmente enquanto o rerun do hotfix test-only não fechar **512/512**;
+- nenhuma mudança funcional/UI no hotfix;
+- 0.6-E continua bloqueada até o rerun verde.
