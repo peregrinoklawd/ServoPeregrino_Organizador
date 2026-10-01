@@ -77,9 +77,12 @@ Classificação: **SHARED STRUCTURE + DOMAIN-SPECIFIC CONTENT**.
 | Conteúdo do equipamento como quarto painel | Items/APM | R2/R3 | existente | SHARED CONCEPT / DOMAIN-SPECIFIC | preservar leitura do estado físico real |
 | Separação gestão do kit vs edição do draft | Weapons/Items | candidata | parcialmente existente | SHARED | lifecycle no P1; edição/persistência do draft no P2 |
 | Comparação visual Draft vs Equipado | Weapons | futuro | avaliar | CANDIDATE-SHARED | considerar no polish/0.7, não antecipar agora |
-| Focused refresh por painel | Items/APM | **0.6-D R3 candidata** | existente | **SHARED** | catálogo/draft/equipamento não devem reconstruir toda a UI por interação local |
-| Header ancorado da direita a partir do X | APM/Items | **0.6-D R3 candidata** | existente | **SHARED** | X → reserva → identidade/contexto → título; validar sem sobreposição |
+| Focused refresh por painel | Items/APM | **0.6-D R3 homologada** | existente | **SHARED** | catálogo/draft/equipamento não devem reconstruir toda a UI por interação local |
+| Header ancorado da direita a partir do X | APM/Items | **0.6-D R3 homologada** | existente | **SHARED** | X → reserva → identidade/contexto → título; preservar sem sobreposição |
 | Mensagem amigável durante construção do catálogo | Weapons/feedback do usuário | **"Vasculhando inventário e catalogando armas..."** | **PENDENTE: "Vasculhando inventário e catalogando itens..."** | **SHARED PATTERN** | portar para Items na próxima convergência sem alterar a lógica do build |
+| Nome inline + commit explícito | Weapons 0.6-E R1 | **candidata** | avaliar | CANDIDATE-SHARED | campo editável; ação explícita RENOMEAR; focused refresh não apaga texto digitado |
+| Semântica Salvar vs Aplicar | Weapons/Items | **0.6-E R1 explicita** | existente conceitualmente | **SHARED** | SALVAR persiste definição; APLICAR/EQUIPAR altera estado físico e deve ser ação/gate distinto |
+| Duplicação usa snapshot salvo | Weapons 0.6-E R1 | **candidata** | avaliar | CANDIDATE-SHARED | não copiar silenciosamente alterações de rascunho ainda não salvas |
 
 ## KIT SELECIONADO / RASCUNHO
 
@@ -221,3 +224,13 @@ Padrão player-facing aprovado:
 - Items: **Vasculhando inventário e catalogando itens...** — pendente para a próxima rodada explícita de convergência.
 
 A mensagem não deve mudar a semântica/cache do catálogo; é apenas feedback durante uma varredura real, não em cache hit.
+
+
+## Lição 0.6-E — authoring sem confundir persistência com aplicação
+
+A candidata Weapons 0.6-E R1 formaliza uma separação que deve permanecer familiar entre módulos:
+- **SALVAR** persiste a definição lógica do kit;
+- **APLICAR / EQUIPAR** altera o estado físico do personagem;
+- essas ações não devem ser sinônimos nem acontecer implicitamente uma pela outra.
+
+Também é candidato compartilhável manter o nome como edição inline com **commit explícito**, preservando o texto digitado durante refreshes focais. A adoção em Items depende do gate real da 0.6-E e de uma rodada explícita de convergência.
