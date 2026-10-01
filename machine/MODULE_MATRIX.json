@@ -1,6 +1,6 @@
 {
   "generated_from": "machine/PROJECT_STATE.json",
-  "snapshot_date": "2026-09-30",
+  "snapshot_date": "2026-10-01",
   "repository": "peregrinoklawd/ServoPeregrino_Organizador",
   "modules": [
     {
@@ -136,12 +136,12 @@
       "id": "Weapons",
       "addon": "ServoPeregrino_Organizador_Weapons",
       "mandatory": false,
-      "status": "MISSION_FIRST_0_6_B_R1_CANDIDATE_ADDON_SOURCE_INTEGRATION_PENDING",
+      "status": "MISSION_FIRST_0_6_B_R4_APPROVED_ADDON_SOURCE_INTEGRATION_PENDING",
       "stable_version": null,
       "development_version": {
-        "display": "0.6-B R1 mission-first / addon source 0.1-A",
-        "semantic": "0.6.1.1 mission candidate",
-        "build": "0.6.1.1-selection-information-mission-first"
+        "display": "0.6-B R4 mission-first / addon source 0.1-A",
+        "semantic": "0.6.1.4 mission-first homologated",
+        "build": "0.6.1.4-initial-sync-handshake-test-timing-mission-first"
       },
       "dependencies": [
         "Nexus"
@@ -178,9 +178,9 @@
           "persistence.provider.v1"
         ]
       },
-      "next_gate": "0.6-B R1 runtime + manual information gate.",
-      "homologated_artifact": "0.1-B 128/128 + 3/3; 0.2 175/175; 0.3 R2 213/213; 0.4 R5 251/251; 0.5 301/301; 0.6-A R4 shell 362/362.",
-      "current_candidate_artifact": "0.6-B R1 Selection & Information; static 160/160; runtime pending.",
+      "next_gate": "0.6-C Compatibility Selectors.",
+      "homologated_artifact": "0.1-B 128/128 + 3/3; 0.2 175/175; 0.3 R2 213/213; 0.4 R5 251/251; 0.5 301/301; 0.6-A R4 362/362; 0.6-B R4 397/397.",
+      "current_candidate_artifact": "Next candidate: 0.6-C Compatibility Selectors.",
       "mission_first_validation": {
         "lifecycle_0_1_b": "APPROVED_SP",
         "weapon_configuration_0_2": "APPROVED_SP",
@@ -193,7 +193,7 @@
         "weapon_kit": "ONE_CONFIGURED_WEAPON_PER_TARGET_SLOT",
         "weapon_kit_repository": "SESSION_LOCAL_CANDIDATE",
         "slot_isolation": "PRESERVE_ALL_NON_TARGET_LOADOUT_DOMAINS",
-        "next": "0.6-C only after 0.6-B gate",
+        "next": "0.6-C Compatibility Selectors",
         "weapon_kit_specific_checks": "50_OF_50",
         "weapon_kit_slots": "PRIMARY_HANDGUN_SECONDARY",
         "weapon_kit_loadout_mutation": "NONE",
@@ -210,9 +210,18 @@
         "ui_catalog_render_limit": "250",
         "ui_visual_freeze": "PRESERVE_R4_THROUGH_0_6_B_TO_E",
         "shared_footer_refactor": "DEFERRED_ITEMS_AND_WEAPONS_TO_FINAL_POLISH",
-        "player_ui_0_6_b": "CANDIDATE_R1_STATIC_160_OF_160_RUNTIME_PENDING",
+        "player_ui_0_6_b": "APPROVED_R4_397_OF_397_SELECTION_INFORMATION",
         "ui_information_mode": "READ_ONLY_BASIC_WEAPON_PRESENTATION",
-        "ui_geometry": "FROZEN_R4"
+        "ui_geometry": "FROZEN_R4",
+        "ui_initial_kit_filter": "ALL",
+        "ui_initial_kit_query": "EMPTY",
+        "ui_initial_sync": "HANDSHAKE_APPROVED",
+        "ui_initial_repository_rows": "MATCH_VISIBLE_ROWS",
+        "ui_initial_first_kit_selection": "APPROVED",
+        "compatibility_selectors": "NEXT_0_6_C",
+        "draft": "DEFERRED_0_6_D",
+        "authoring": "DEFERRED_0_6_E",
+        "application": "DEFERRED_0_7"
       }
     },
     {
