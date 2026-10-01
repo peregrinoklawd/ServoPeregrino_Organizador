@@ -170,7 +170,7 @@ Source integrado na branch. Base histórica da linha atual.
 0.6-A Player UI Shell                        FROZEN BASELINE 362/362
 0.6-B Selection + Information                APPROVED R4 397/397
 0.6-C Compatibility Selectors                APPROVED R1 445/445
-0.6-D WeaponKit Draft                         ACTIVE R1 — STATIC 260/260; RUNTIME PENDING
+0.6-D WeaponKit Draft                         R1 APPROVED 471/471; R2 ACTIVE — UI CONVERGENCE / EQUIPMENT CONTENT
 0.6-E Kit Authoring/Lifecycle
 0.6-F Final Visual Adaptation/Regression
 0.7  Slot-Safe Weapon Application
@@ -292,13 +292,13 @@ Contrato homologado:
 **Gate 0.6-C fechado. Próximo gate funcional: 0.6-D WeaponKit Draft.**
 
 
-#### 0.6-D R1 — candidata ativa
+#### 0.6-D R1 — homologada
 
 - baseline: 0.6-C R1 homologada **445/445**;
 - build: `0.6.3.1-weaponkit-draft-local-mission-first`;
-- static: **260/260**;
+- static original: **260/260**;
 - runner source: **444 assertions**;
-- AUTO runtime esperado: **471**, ainda pendente;
+- runtime real: **471/471 PASS / 0 FAIL**;
 - draft session-local por WeaponKit;
 - Mira/Boca/Pointer/Bipé/Carregador editam somente o draft;
 - compatibilidade continua derivada da engine 0.3;
@@ -310,4 +310,26 @@ Contrato homologado:
 - MP continua para 0.8;
 - shell R4 preservado.
 
-**0.6-E permanece bloqueada até homologação runtime/manual da 0.6-D R1.**
+**0.6-E permanece bloqueada; antes dela, a 0.6-D R2 executa a convergência estrutural aprovada.**
+
+
+#### 0.6-D R2 — candidata ativa
+
+- baseline funcional: 0.6-D R1 **471/471**;
+- build: `0.6.3.2-ui-convergence-equipment-content-mission-first`;
+- static: **232/232**;
+- runner source: **473 assertions**;
+- runtime esperado: **500**, pendente;
+- quatro painéis alinhados estruturalmente ao Items Multiplayer Lab R3;
+- transparência/tokens visuais do Items;
+- catálogo com filtro Tipo + Acessório;
+- janela contínua de 32 linhas + scrollbar/wheel;
+- quarto painel Conteúdo do Equipamento read-only;
+- título `KIT SELECIONADO / RASCUNHO`;
+- draft 0.6-D R1 preservado;
+- authoring/save permanece 0.6-E;
+- aplicação física permanece 0.7;
+- MP permanece 0.8;
+- backlog formal Items↔Weapons em `docs/29_SHARED_UI_ITEMS_WEAPONS.md`.
+
+**0.6-E bloqueada até runtime/manual da R2.**
