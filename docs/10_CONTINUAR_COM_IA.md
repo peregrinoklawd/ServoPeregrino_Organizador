@@ -51,7 +51,7 @@ Regras obrigatórias:
 - Mission Lab R3 carrega e slots funcionam.
 - Packaging R2 pendente de validação runtime.
 - Armorer possui baseline histórica madura, ainda não importada no monorepo.
-- Weapons addon source continua integrado até 0.1-A; mission-first está homologado até 0.6-B R4 (397/397). 0.6-C R1 Compatibility Selectors é a candidata ativa, com 335/335 static e runtime pendente.
+- Weapons addon source continua integrado até 0.1-A; mission-first está homologado até **0.6-C R1 (445/445)**. **0.6-D R1 WeaponKit Draft** é a candidata ativa, com **260/260 static**, runner esperado **471** e runtime Arma pendente.
 - Hub/WeaponCondition/Equipment/Sets/Policy/ServerIntegration são planejados.
 
 ## Arquivos para alterações
@@ -100,11 +100,16 @@ Baselines mission-first homologadas:
 - 0.6-A R4: 362/362, shell visual congelado;
 - 0.6-B R4: 397/397, seleção/informações congeladas.
 
-Candidata ativa:
+Última baseline homologada:
 - **0.6-C R1 — Compatibility Selectors**;
 - build `0.6.2.1-compatibility-selectors-read-only-mission-first`;
-- static 335/335;
-- runtime Arma pendente;
-- não iniciar 0.6-D antes de RPT + teste manual da R1.
+- runtime **445/445 PASS**.
+
+Candidata ativa:
+- **0.6-D R1 — WeaponKit Draft**;
+- build `0.6.3.1-weaponkit-draft-local-mission-first`;
+- static **260/260**;
+- runtime esperado **471**;
+- não iniciar 0.6-E antes de RPT + teste manual da R1.
 
 Continuam abertos: integração mission-first -> addon/PBO, Packaging, 0.6-D..F, 0.7 aplicação slot-safe, 0.8 MP/JIP/reconnect e identidade física intrínseca.
