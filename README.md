@@ -9,7 +9,7 @@ Um repositório, vários módulos/PBOs. Nenhum módulo deve depender do estado p
 ## Implementado hoje
 
 - `addons/ServoPeregrino_Organizador_Nexus` — Foundation 1.1.
-- `addons/ServoPeregrino_Organizador_Weapons` — source integrado ainda em 0.1-A; mission-first homologado até **0.6-D R3 — 512/512**, incluindo focused refresh sem stuttering perceptível (~5–9 ms em wheel/slider). **0.6-E R1 — Authoring/Lifecycle** é a candidata ativa: static **257/257**, **509** asserts explícitos no runner, runtime projetado ~**536** (RPT será a autoridade). Identidade física intrínseca continua não comprovada.
+- `addons/ServoPeregrino_Organizador_Weapons` — source integrado ainda em 0.1-A; mission-first homologado até **0.6-D R3 — 512/512**. **0.6-E R1** fechou funcionalmente **536/536**, mas foi **superada no gate manual de UX**: criação de kit exigia selecionar no Catálogo e voltar ao painel de kits. **0.6-E R2 — UX Convergence / Direct Draft Equip** é a candidata ativa: static **296/296**, runner source **518**, runtime projetado ~**545** (RPT será a autoridade).
 - `addons/ServoPeregrino_Organizador_Items` — baseline 0.12 FINAL; lógica 0.13-A em validação runtime/multiplayer.
 - `missions/SP_ORG_Items_0_13_A_Multiplayer_Lab_8Slots_R3.VR` — laboratório Items.
 
@@ -84,7 +84,8 @@ O source integrado nesta branch continua sendo **0.1-A**, sem contratos v1 publi
 - **0.6-D R1 — WeaponKit Draft**: homologada com **471/471**; draft local por kit, SALVO/ALTERADO e DESCARTAR sem mutar repository/loadout.
 - **0.6-D R2 — UI Convergence / Equipment Content**: **500/500 AUTO**, porém **REJEITADA NO GATE MANUAL DE PERFORMANCE**; interações locais ainda reconstruíam a UI inteira.
 - **0.6-D R3 — Focused Refresh / Header Polish**: **HOMOLOGADA 512/512** após hotfix test-only; performance manual aprovada, wheel/slider real ~5–9 ms sem full refresh e sem stuttering perceptível.
-- **0.6-E R1 — Authoring/Lifecycle**: candidata ativa; Novo/Renomear/Duplicar/Excluir/Salvar/Salvar como novo e troca da arma-base no draft do mesmo slot. Repository continua session-local; aplicação física permanece 0.7. Static **257/257**; runner source **509**; runtime projetado ~**536**, pendente no Arma.
+- **0.6-E R1 — Authoring/Lifecycle**: **536/536 AUTO**, funcionalmente verde, porém **superada pelo gate manual de UX**.
+- **0.6-E R2 — UX Convergence / Direct Draft Equip**: candidata ativa; fluxo NOVO → Catálogo → ← EQUIPAR NO RASCUNHO, setas por linha, layout P1/P2/P4 convergente com Items, Bipé+Empunhadura em UNDERBARREL e footer revisado. A seta física é apenas affordance reservada a 0.7. Static **296/296**; runner source **518**; runtime projetado ~**545**.
 
 Essas homologações são de **MISSION-FIRST FUNCTIONAL GATE**, não de PBO/addon integrado. MP/JIP, Packaging e identidade física intrínseca continuam gates separados.
 
@@ -115,7 +116,7 @@ A referência de UX/lessons learned será a parte de armas do **APM histórico**
   0.6-B Selection + Information                APPROVED 397/397
   0.6-C Compatibility Selectors                APPROVED R1 — 445/445
   0.6-D WeaponKit Draft                         R1 APPROVED 471/471; R2 PERF REJECTED; R3 APPROVED 512/512
-  0.6-E Authoring/Lifecycle                      ACTIVE R1 — STATIC 257/257; RUNTIME PENDING (~536 projected)
+  0.6-E Authoring/Lifecycle                      R1 AUTO 536/536 / UX SUPERSEDED; R2 ACTIVE — STATIC 296/296; RUNTIME PENDING (~545 projected)
   0.6-F Final Visual Adaptation/Regression
 0.7    Slot-Safe Weapon Application
 0.8    Multiplayer Authority / Reconciliation
