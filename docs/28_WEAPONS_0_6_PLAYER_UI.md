@@ -2,7 +2,7 @@
 
 ## Estado atual
 
-**0.6-A R4 — 362/362. 0.6-B R4 — 397/397. 0.6-C R1 — 445/445. 0.6-D R1 — 471/471. 0.6-D R2 — 500/500 AUTO / PERF REPROVADO. 0.6-D R3 — **512/512 HOMOLOGADA**, performance manual aprovada. 0.6-E R1 — **CANDIDATA ATIVA**, static 257/257, runner source 509, runtime projetado ~536.**
+**0.6-A R4 — 362/362. 0.6-B R4 — 397/397. 0.6-C R1 — 445/445. 0.6-D R3 — 512/512 HOMOLOGADA. 0.6-E R1 — **536/536 AUTO / UX SUPERADA**. 0.6-E R2 — **CANDIDATA ATIVA**, static 296/296, runner source 518, runtime projetado ~545.**
 
 Baseline anterior:
 - 0.4 R5 WeaponRecipe: **251/251**;
@@ -26,7 +26,7 @@ Sequência decidida:
 0.6-B  Seleção de arma + informações              APPROVED R4 397/397
 0.6-C  Dropdowns de compatibilidade                APPROVED R1 445/445
 0.6-D  Rascunho de WeaponKit                       R1 APPROVED 471/471; R2 PERF REJECTED; R3 APPROVED 512/512
-0.6-E  Authoring/Lifecycle                           ACTIVE R1 — STATIC 257/257; RUNTIME PENDING (~536 projected)
+0.6-E  Authoring/Lifecycle                           R1 AUTO 536/536 / UX SUPERSEDED; R2 ACTIVE — STATIC 296/296; RUNTIME PENDING (~545 projected)
 0.6-F  Adaptação visual final + foco + regressões
 ```
 
@@ -570,7 +570,7 @@ O header também passou os gates automáticos de ordenação/ancoragem:
 **Decisão final:** hotfix test-only fechou **512/512 PASS / 0 FAIL**. A 0.6-D R3 está homologada e 0.6-E foi liberada.
 
 
-## 0.6-E R1 — Authoring/Lifecycle — CANDIDATA ATIVA
+## 0.6-E R1 — Authoring/Lifecycle — AUTO 536/536 / UX SUPERADA
 
 Build: `0.6.4.1-authoring-lifecycle-session-local-mission-first`.
 
@@ -636,4 +636,109 @@ O runner da E R1 cobre as próprias rotas de UI:
 - comparar repository antes/depois;
 - provar que `getUnitLoadout player` não mudou.
 
-**Não iniciar 0.6-F antes do RPT + gate manual da 0.6-E R1.**
+**Resultado R1:** 536/536 PASS / 0 FAIL. O gate humano rejeitou o fluxo de criação e pediu convergência visual/operacional adicional; continuidade na R2.
+
+
+## 0.6-E R2 — UX Convergence / Direct Draft Equip — CANDIDATA ATIVA
+
+Build: `0.6.4.2-ux-convergence-direct-draft-equip-mission-first`.
+
+Validação local:
+- static: **296/296 PASS / 0 FAIL**;
+- runner: **518 assertions explícitos**;
+- runtime projetado: ~**545**;
+- runtime real: **PENDENTE**.
+
+### Por que existe R2 se R1 passou 536/536?
+
+A R1 provou que o authoring funcionava, mas o fluxo manual era ruim: para criar um novo kit, o jogador precisava selecionar uma arma no Catálogo e depois deslocar a atenção para P1 para clicar NOVO. O gate humano corretamente rejeitou essa ergonomia.
+
+R2 preserva a lógica da R1 e muda o modelo mental para:
+
+```text
+NOVO
+  ↓
+RASCUNHO NOVO — aguardando arma
+  ↓
+Catálogo
+  ↓
+← / EQUIPAR NO RASCUNHO
+  ↓
+WeaponKit válido criado + selecionado
+```
+
+### P1 — MEUS KITS DE ARMAS
+
+Ordem compartilhada com Items:
+`NOVO | DUPLICAR | EXCLUIR | PUBLICAR`.
+
+- RENOMEAR deixa de existir em P1;
+- rename é feito pelo campo de nome no P2 e confirmado com SALVAR;
+- PUBLICAR permanece reservado até biblioteca pública real.
+
+### P2 — KIT SELECIONADO / RASCUNHO
+
+Convergência com Items:
+- nome na mesma linha do título;
+- status SALVO / ALTERADO / NOVO ao lado;
+- busca abaixo do título;
+- ações no topo: SALVAR / SALVAR COMO NOVO / DESCARTAR / LIMPAR;
+- DESCARTAR e LIMPAR em estilo destrutivo;
+- retângulo de informações deslocado para baixo e alinhado com P3/P4.
+
+A busca do P2 **não finge procurar dentro de um modelo ainda inexistente**. Nesta candidata ela é um atalho sincronizado da busca do Catálogo, preservando foco/contexto de rascunho.
+
+`LIMPAR` remove optic/muzzle/pointer/bipod/magazineClass do draft e preserva arma-base/targetSlot. Até SALVAR, DESCARTAR continua podendo restaurar o snapshot salvo.
+
+### P3 — CATÁLOGO DE ARMAS
+
+Cada linha recebe gramática Items/APM:
+
+```text
+[←] [imagem] [arma/acessório] [→]
+```
+
+- `←`: funcional agora; aplica a seleção ao rascunho;
+- botão grande `← EQUIPAR NO RASCUNHO`: mesma semântica;
+- `→`: affordance visual reservada para aplicação física 0.7.
+
+A ação esquerda aceita:
+- WEAPON;
+- OPTIC;
+- POINTER;
+- BIPOD/GRIP;
+- MAGAZINE.
+
+Arma-base:
+- deve pertencer ao mesmo targetSlot do kit existente;
+- cross-slot é recusado;
+- mudança de arma-base reseta acessórios/carregador no draft.
+
+Filtro visual:
+`TODOS | ARMA | ÓTICAS | APONTADORES | BIPÉ/EMP. | CARREGADORES`.
+
+`BIPÉ/EMP.` = filtro `UNDERBARREL`; internamente BIPOD e GRIP continuam distintos e compatibilidade permanece engine-derived.
+
+### P4 — CONTEÚDO DO EQUIPAMENTO
+
+- busca adicionada;
+- nesta candidata ela também é um atalho sincronizado da busca do Catálogo;
+- `Visualizar:` mantido em Weapons;
+- Principal / Porte / Secundária ficam na mesma linha do rótulo;
+- retângulo de informações alinhado com P2/P3;
+- continua read-only em 0.6-E.
+
+### Footer
+
+- removido o grande retângulo externo;
+- CONTEXTO / RESULTADO / HISTÓRICO mantêm faixas próprias alinhadas;
+- Histórico ganha maior contraste.
+
+### Fronteira 0.7
+
+A R2 **não antecipa a aplicação física**:
+- seta esquerda = draft lógico;
+- seta direita = reservada/explicativa;
+- qualquer mutação do slot físico continua exclusivamente em **0.7 Slot-Safe Weapon Application**.
+
+**Não iniciar 0.6-F antes do RPT + gate manual da 0.6-E R2.**
