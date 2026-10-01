@@ -169,8 +169,8 @@ Source integrado na branch. Base histórica da linha atual.
 
 0.6-A Player UI Shell                        FROZEN BASELINE 362/362
 0.6-B Selection + Information                APPROVED R4 397/397
-0.6-C Compatibility Selectors                ACTIVE R1 — STATIC 335/335; RUNTIME PENDING
-0.6-D WeaponKit Draft
+0.6-C Compatibility Selectors                APPROVED R1 445/445
+0.6-D WeaponKit Draft                         ACTIVE R1 — STATIC 260/260; RUNTIME PENDING
 0.6-E Kit Authoring/Lifecycle
 0.6-F Final Visual Adaptation/Regression
 0.7  Slot-Safe Weapon Application
@@ -273,20 +273,41 @@ Contrato homologado:
 - authoring permanece para 0.6-E;
 - shell visual R4 permanece congelado.
 
-**Checkpoint ativo: 0.6-C R1 — Compatibility Selectors. Candidata estática 335/335; runtime Arma pendente.**
+**Checkpoint ativo: 0.6-D R1 — WeaponKit Draft. 0.6-C R1 foi homologada em 445/445; 0.6-D está 260/260 static, runtime esperado 471 ainda pendente.**
 
 
 
-#### 0.6-C R1 — candidata ativa
+#### 0.6-C R1 — homologada
 
 - baseline: 0.6-B R4 homologada 397/397;
 - build: `0.6.2.1-compatibility-selectors-read-only-mission-first`;
 - static: **335/335**;
-- AUTO runtime esperado: **445**, ainda pendente;
+- runtime real: **445/445 PASS / 0 FAIL**;
 - dropdowns: Mira/Boca/Pointer/Bipé/Carregador;
 - fonte: engine de compatibilidade da 0.3;
 - comportamento: consulta read-only; valor salvo é restaurado após seleção alternativa;
 - sem draft, authoring, aplicação física ou MP;
 - shell R4 preservado.
 
-**Gate seguinte permanece 0.6-D, bloqueado até homologação runtime/manual da 0.6-C.**
+**Gate 0.6-C fechado. Próximo gate funcional: 0.6-D WeaponKit Draft.**
+
+
+#### 0.6-D R1 — candidata ativa
+
+- baseline: 0.6-C R1 homologada **445/445**;
+- build: `0.6.3.1-weaponkit-draft-local-mission-first`;
+- static: **260/260**;
+- runner source: **444 assertions**;
+- AUTO runtime esperado: **471**, ainda pendente;
+- draft session-local por WeaponKit;
+- Mira/Boca/Pointer/Bipé/Carregador editam somente o draft;
+- compatibilidade continua derivada da engine 0.3;
+- status SALVO/ALTERADO + DESCARTAR funcional;
+- draft deve sobreviver refresh/foco/fechar-reabrir sem perda silenciosa;
+- repository/loadout permanecem imutáveis;
+- arma-base e authoring/save continuam para 0.6-E;
+- aplicação física continua para 0.7;
+- MP continua para 0.8;
+- shell R4 preservado.
+
+**0.6-E permanece bloqueada até homologação runtime/manual da 0.6-D R1.**
