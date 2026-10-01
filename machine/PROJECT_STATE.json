@@ -22,7 +22,7 @@
     "hub_rule": "Hub is an optional player-facing integration/orchestration layer. No domain module may require Hub in order to function.",
     "independent_core_development": true
   },
-  "global_next_gate": "Weapons 0.6-E R1 Authoring/Lifecycle runtime/manual validation. 0.6-D R3 is homologated 512/512 with performance gate accepted.",
+  "global_next_gate": "Weapons 0.6-E R2 UX Convergence / Direct Draft Equip runtime/manual validation. R1 is AUTO-green 536/536 but superseded by manual UX feedback.",
   "global_after_gate": "Weapons 0.6-F final visual adaptation/regression -> 0.7 Slot-Safe Weapon Application -> 0.8 Multiplayer Authority/Reconciliation.",
   "modules": [
     {
@@ -158,9 +158,9 @@
       "mandatory": false,
       "stable_version": null,
       "development_version": {
-        "display": "0.6-E R1 mission-first candidate / addon source 0.1-A",
-        "semantic": "0.6.4.1 mission-first candidate",
-        "build": "0.6.4.1-authoring-lifecycle-session-local-mission-first"
+        "display": "0.6-E R2 mission-first candidate / addon source 0.1-A",
+        "semantic": "0.6.4.2 mission-first candidate",
+        "build": "0.6.4.2-ux-convergence-direct-draft-equip-mission-first"
       },
       "dependencies": [
         "Nexus"
@@ -197,10 +197,10 @@
           "persistence.provider.v1"
         ]
       },
-      "status": "MISSION_FIRST_0_6_E_R1_AUTHORING_LIFECYCLE_CANDIDATE_RUNTIME_PENDING_ADDON_SOURCE_INTEGRATION_PENDING",
-      "next_gate": "Validate 0.6-E R1 in Arma: projected ~536 checks plus manual authoring lifecycle/no-loadout-mutation/performance regression gate. Do not start 0.6-F until green.",
+      "status": "MISSION_FIRST_0_6_E_R2_UX_CONVERGENCE_CANDIDATE_RUNTIME_PENDING_ADDON_SOURCE_INTEGRATION_PENDING",
+      "next_gate": "Validate 0.6-E R2 in Arma: projected ~545 checks plus manual NOVO->Catalog->Draft, row-arrow grammar, layout convergence, no-loadout-mutation and performance regression. Do not start 0.6-F until green.",
       "homologated_artifact": "0.1-B 128/128 + 3/3; 0.2 175/175; 0.3 R2 213/213; 0.4 R5 251/251; 0.5 301/301; 0.6-A R4 362/362; 0.6-B R4 397/397; 0.6-C R1 445/445; 0.6-D R1 471/471; 0.6-D R3 512/512 + manual performance accepted.",
-      "current_candidate_artifact": "0.6-E R1 Authoring/Lifecycle; static 257/257; runner source 509; projected runtime ~536; Arma pending.",
+      "current_candidate_artifact": "0.6-E R2 UX Convergence / Direct Draft Equip; R1 AUTO 536/536 but UX superseded; R2 static 296/296; runner source 518; projected runtime ~545; Arma pending.",
       "mission_first_validation": {
         "0.1-B": {
           "status": "APPROVED_SP",
@@ -526,20 +526,20 @@
           }
         },
         "0.6-E": {
-          "status": "R1_CANDIDATE_RUNTIME_PENDING",
-          "candidate": "R1",
-          "build": "0.6.4.1-authoring-lifecycle-session-local-mission-first",
+          "status": "R1_AUTO_GREEN_536_OF_536_UX_SUPERSEDED_R2_CANDIDATE",
+          "candidate": "R2",
+          "build": "0.6.4.2-ux-convergence-direct-draft-equip-mission-first",
           "baseline": "0.6-D R3 APPROVED 512/512",
           "static_validation": {
-            "passed": 257,
+            "passed": 296,
             "failed": 0,
-            "total": 257
+            "total": 296
           },
-          "runner_source_assertions": 509,
+          "runner_source_assertions": 518,
           "expected_auto_test": {
-            "total_approx": 536,
+            "total_approx": 545,
             "status": "PROJECTED_PENDING_ARMA",
-            "note": "Projection from R3 dynamic delta; RPT is authoritative"
+            "note": "Projection only; RPT is authoritative"
           },
           "repository_mode": "SESSION_LOCAL_CANDIDATE",
           "operations": [
@@ -568,7 +568,59 @@
           "application": "DEFERRED_0_7",
           "multiplayer": "DEFERRED_0_8",
           "public_library": "DEFERRED",
-          "next": "Runtime/manual gate; do not start 0.6-F yet"
+          "next": "Runtime/manual R2 gate; do not start 0.6-F",
+          "r1": {
+            "build": "0.6.4.1-authoring-lifecycle-session-local-mission-first",
+            "static_validation": {
+              "passed": 257,
+              "failed": 0,
+              "total": 257
+            },
+            "auto_test": {
+              "passed": 536,
+              "failed": 0,
+              "total": 536
+            },
+            "manual_gate": "SUPERSEDED_BY_UX_FEEDBACK",
+            "preserved": [
+              "SESSION_LOCAL_AUTHORING",
+              "NO_PHYSICAL_LOADOUT_MUTATION",
+              "FOCUSED_REFRESH_R3"
+            ]
+          },
+          "new_kit_flow": "NEW_PENDING_THEN_CATALOG_TO_DRAFT",
+          "p1_actions": [
+            "NEW",
+            "DUPLICATE",
+            "DELETE",
+            "PUBLISH_RESERVED"
+          ],
+          "rename_location": "P2_INLINE_NAME_PLUS_SAVE",
+          "draft_actions_top": [
+            "SAVE",
+            "SAVE_AS_NEW",
+            "DISCARD",
+            "CLEAR"
+          ],
+          "draft_search": "SYNCED_CATALOG_QUERY_SHORTCUT",
+          "equipment_search": "SYNCED_CATALOG_QUERY_SHORTCUT",
+          "catalog_row_actions": {
+            "left": "APPLY_TO_DRAFT_ACTIVE",
+            "right": "PHYSICAL_RESERVED_0_7"
+          },
+          "catalog_big_action": "EQUIPAR_NO_RASCUNHO",
+          "catalog_content_filters": [
+            "ALL",
+            "WEAPON",
+            "OPTIC",
+            "POINTER",
+            "UNDERBARREL",
+            "MAGAZINE"
+          ],
+          "underbarrel_presentation": "BIPOD_PLUS_GRIP_VISUAL_FILTER_ONLY_ENGINE_COMPATIBILITY_PRESERVED",
+          "equipment_label": "VISUALIZAR",
+          "footer": "THREE_BANDS_NO_OUTER_FRAME_HIGHER_HISTORY_CONTRAST",
+          "info_rectangles": "P2_P3_P4_VERTICALLY_ALIGNED"
         }
       }
     },
@@ -1030,7 +1082,7 @@
       "reference": "docs/27_WEAPONS_0_5_WEAPON_KIT.md"
     },
     "weapons_player_ui": {
-      "status": "0.6_D_R3_APPROVED_512_OF_512_0_6_E_R1_ACTIVE",
+      "status": "0.6_D_R3_APPROVED_0_6_E_R1_536_OF_536_UX_SUPERSEDED_R2_ACTIVE",
       "visual_reference": "SP_ORG Items current UI grammar + APM lessons learned",
       "layout": [
         "MEUS KITS",
@@ -1105,7 +1157,7 @@
         "runtime": "PENDING",
         "visual_gate": "PENDING"
       },
-      "current_checkpoint": "0.6-E R1 Authoring/Lifecycle"
+      "current_checkpoint": "0.6-E R2 UX Convergence / Direct Draft Equip"
     },
     "shared_ui_items_weapons": {
       "status": "DEFERRED_APPROVED_CONCEPT",
