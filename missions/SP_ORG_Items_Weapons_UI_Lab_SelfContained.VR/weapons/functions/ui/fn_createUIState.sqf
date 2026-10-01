@@ -1,0 +1,60 @@
+#include "..\..\script_version.hpp"
+private _existing = missionNamespace getVariable [SP_ORG_WEAPONS_UI_STATE,createHashMap];
+if ((count _existing) > 0) exitWith {
+ [_existing] call ServoPeregrino_Organizador_Weapons_fnc_deepCopy
+};
+
+private _state = createHashMapFromArray [
+ ["version","0.6-E-r1-ui-state-candidate"],
+ ["ready",true],
+ ["open",false],
+ ["kitQuery",""],
+ ["kitTypeFilter","ALL"],
+ ["selectedKitId",""],
+ ["catalogQuery",""],
+ ["catalogTypeFilter","ALL"],
+ ["catalogCategoryFilter","ALL"],
+ ["catalogOffset",0],
+ ["catalogWindowSize",SP_ORG_WEAPONS_UI_CATALOG_WINDOW_SIZE],
+ ["catalogTotalFiltered",0],
+ ["catalogMaxOffset",0],
+ ["catalogScrollRatio",0],
+ ["selectedCatalogClass",""],
+ ["selectedCatalogKind",""],
+ ["equipmentSlotView","PRIMARY"],
+ ["lastFocus","KITS"],
+ ["draftsByKitId",createHashMap],
+ ["activeDraftKitId",""],
+ ["refreshInProgress",false],
+ ["catalogRefreshInProgress",false],
+ ["draftRefreshInProgress",false],
+ ["equipmentRefreshInProgress",false],
+ ["catalogFocusedRefreshCount",0],
+ ["draftFocusedRefreshCount",0],
+ ["equipmentFocusedRefreshCount",0],
+ ["lastCatalogFocusedRefreshDurationMs",-1],
+ ["lastCatalogProjectionBuildDurationMs",-1],
+ ["lastCatalogFilterDurationMs",-1],
+ ["lastDraftFocusedRefreshDurationMs",-1],
+ ["lastEquipmentFocusedRefreshDurationMs",-1],
+ ["lastRefreshMode","NONE"],
+ ["selectedKitName",""],
+ ["selectedKitSlot",""],
+ ["selectedKitDraftDirty",false],
+ ["initialSyncComplete",false],
+ ["initialSyncRows",-1],
+ ["initialSyncExpectedRows",-1],
+ ["initialSyncElapsedMs",-1],
+ ["refreshRequestCount",0],
+ ["refreshAppliedCount",0],
+ ["wheelConsumeCount",0],
+ ["wheelCatalogScrollCount",0],
+ ["temporaryMessage","Organizador de Armas pronto. 0.6-E R1: authoring session-local habilitado; aplicação física continua em 0.7."],
+ ["lastFeedbackKind","INFO"],
+ ["history",[]],
+ ["revision",0],
+ ["openedAtTick",-1],
+ ["lastRefreshTick",-1]
+];
+missionNamespace setVariable [SP_ORG_WEAPONS_UI_STATE,_state];
+[_state] call ServoPeregrino_Organizador_Weapons_fnc_deepCopy
