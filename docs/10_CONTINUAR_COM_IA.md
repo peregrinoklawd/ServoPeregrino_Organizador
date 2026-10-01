@@ -51,7 +51,7 @@ Regras obrigatórias:
 - Mission Lab R3 carrega e slots funcionam.
 - Packaging R2 pendente de validação runtime.
 - Armorer possui baseline histórica madura, ainda não importada no monorepo.
-- Weapons addon source continua integrado até 0.1-A; mission-first está homologado até **0.6-C R1 (445/445)**. **0.6-D R1 WeaponKit Draft** é a candidata ativa, com **260/260 static**, runner esperado **471** e runtime Arma pendente.
+- Weapons addon source continua integrado até 0.1-A; mission-first funcional está homologado até **0.6-D R1 (471/471)**. **0.6-D R2** obteve **500/500 AUTO**, mas foi reprovada manualmente por stuttering/full refresh no catálogo. **0.6-D R3 Focused Refresh / Header Polish** é a candidata ativa: static **272/272**, runner source **485**, runtime projetado **512**.
 - Hub/WeaponCondition/Equipment/Sets/Policy/ServerIntegration são planejados.
 
 ## Arquivos para alterações
@@ -106,13 +106,19 @@ Baselines mission-first homologadas:
 - runtime **445/445 PASS**.
 
 Candidata ativa:
-- **0.6-D R1 — WeaponKit Draft**;
-- build `0.6.3.1-weaponkit-draft-local-mission-first`;
-- static **260/260**;
-- runtime esperado **471**;
-- não iniciar 0.6-E antes de RPT + teste manual da R1.
+- **0.6-D R3 — Focused Refresh / Header Polish**;
+- build `0.6.3.3-focused-refresh-header-polish-mission-first`;
+- preservar R1 471/471 + estrutura R2;
+- catálogo/draft/equipamento usam refresh focal;
+- projeção/filtro do catálogo cacheados;
+- header ancorado a partir do X;
+- mensagem de build Weapons: `Vasculhando inventário e catalogando armas...`;
+- mensagem equivalente Items está no UI_CONVERGENCE_BACKLOG;
+- static **272/272**;
+- runtime projetado **512**, pendente;
+- **não iniciar 0.6-E antes de RPT + teste manual da R3**.
 
-Continuam abertos: integração mission-first -> addon/PBO, Packaging, 0.6-D..F, 0.7 aplicação slot-safe, 0.8 MP/JIP/reconnect e identidade física intrínseca.
+Continuam abertos: integração mission-first -> addon/PBO, Packaging, 0.6-D R3, 0.6-E/F, 0.7 aplicação slot-safe, 0.8 MP/JIP/reconnect e identidade física intrínseca.
 
 
 ### Regra de UI compartilhada
