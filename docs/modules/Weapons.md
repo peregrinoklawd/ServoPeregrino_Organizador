@@ -246,7 +246,7 @@ A branch atual ainda contém o **addon source 0.1-A**. Os deltas mission-first p
 - geometry remains frozen from 0.6-A R4;
 - **mission-first functional gate homologado**.
 
-**Gate ativo: 0.6-E R1 — Authoring/Lifecycle. 0.6-D R3 homologada 512/512; E R1 static 257/257, runner source 509, runtime projetado ~536 pendente.**
+**Gate ativo: 0.6-E R2 — UX Convergence / Direct Draft Equip. R1 fechou 536/536 AUTO, mas o gate manual pediu melhoria do fluxo; R2 static 296/296, runner source 518, runtime projetado ~545.**
 
 ### Visual polish deferred
 
@@ -374,7 +374,7 @@ Gate satisfeito: R3 homologada 512/512.
 - header ancorado a partir do X;
 - quatro painéis e equipment read-only preservados.
 
-### 0.6-E R1 — CANDIDATA ATIVA
+### 0.6-E R1 — AUTO 536/536 / UX SUPERADA
 
 - build: `0.6.4.1-authoring-lifecycle-session-local-mission-first`;
 - static: **257/257**;
@@ -395,3 +395,23 @@ Escopo:
 - persistência continua no repository session-local 0.5;
 - aplicação física continua **0.7**;
 - multiplayer continua **0.8**.
+
+
+### 0.6-E R2 — CANDIDATA ATIVA
+
+- build: `0.6.4.2-ux-convergence-direct-draft-equip-mission-first`;
+- static: **296/296**;
+- runner source: **518**;
+- runtime projetado: ~**545**;
+- authoring R1 preservado;
+- NOVO pendente → Catálogo → `← EQUIPAR NO RASCUNHO`;
+- P1: Novo / Duplicar / Excluir / Publicar;
+- rename: nome inline + SALVAR no P2;
+- Catálogo com row-actions e filtro `UNDERBARREL`;
+- P4: `Visualizar:` + slots na mesma linha;
+- footer simplificado;
+- loadout mutation: **NONE**;
+- physical row action: **DEFERRED_0_7**;
+- multiplayer: **DEFERRED_0_8**.
+
+Não avançar para 0.6-F antes do gate real da R2.
