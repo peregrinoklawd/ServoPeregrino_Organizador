@@ -246,7 +246,7 @@ A branch atual ainda contém o **addon source 0.1-A**. Os deltas mission-first p
 - geometry remains frozen from 0.6-A R4;
 - **mission-first functional gate homologado**.
 
-**Gate ativo: 0.6-D R1 — WeaponKit Draft. 0.6-C R1 homologada 445/445; 0.6-D R1 static 260/260, runtime esperado 471 pendente.**
+**Gate ativo: 0.6-D R3 — Focused Refresh / Header Polish. R1 homologada 471/471; R2 fechou 500/500 AUTO mas falhou no gate manual de performance; R3 static 272/272, runtime projetado 512 pendente.**
 
 ### Visual polish deferred
 
@@ -316,12 +316,12 @@ Gate 0.6-C fechado pelo RPT real de 01/10/2026.
 R1 fechada. A R2 de convergência estrutural deve ser validada antes de 0.6-E.
 
 
-### 0.6-D R2 — CANDIDATA
+### 0.6-D R2 — AUTO GREEN / MANUAL PERFORMANCE REJECTED
 
 - baseline: R1 **471/471**;
 - build: `0.6.3.2-ui-convergence-equipment-content-mission-first`;
 - static: **232/232**;
-- runtime esperado: **500**;
+- runtime real: **500/500 PASS / 0 FAIL**;
 - layout: `FOUR_PANEL_ITEMS_CONVERGENCE`;
 - catálogo: `CONTINUOUS_WINDOW_VISIBLE_SLIDER`;
 - equipamento: `READ_ONLY_CURRENT_WEAPON`;
@@ -336,4 +336,30 @@ R1 fechada. A R2 de convergência estrutural deve ser validada antes de 0.6-E.
 - multiplayer: `DEFERRED_0_8`;
 - shared UI backlog: `docs/29_SHARED_UI_ITEMS_WEAPONS.md`.
 
-Não avançar para 0.6-E antes do gate real da R2.
+Gate manual R2 rejeitado: scroll/slider acionavam refresh completo e geravam stuttering perceptível.
+
+### 0.6-D R3 — CANDIDATA ATIVA
+
+- build: `0.6.3.3-focused-refresh-header-polish-mission-first`;
+- baseline funcional: R1 **471/471**;
+- baseline estrutural: R2 quatro painéis, filtros e equipamento read-only preservados;
+- static: **272/272**;
+- runner source: **485 assertions**;
+- runtime projetado: **512**;
+- catalog refresh: `CATALOG_FOCUSED`;
+- draft refresh: `DRAFT_FOCUSED`;
+- equipment refresh: `EQUIPMENT_FOCUSED`;
+- full refresh: somente mudanças amplas de contexto;
+- catalog projection: cache por kit/arma-base;
+- catalog filter index: cache por tipo/categoria/query;
+- scroll comum: janela 32 sobre cache, sem rebuild global;
+- header: right-to-left ancorado no X;
+- catalog build copy: `Vasculhando inventário e catalogando armas...`;
+- Items equivalent copy registrada no backlog;
+- repository mutation: nenhuma;
+- loadout mutation: nenhuma;
+- authoring: `DEFERRED_0_6_E`;
+- application: `DEFERRED_0_7`;
+- multiplayer: `DEFERRED_0_8`.
+
+Não avançar para 0.6-E antes do gate runtime/manual da R3.
