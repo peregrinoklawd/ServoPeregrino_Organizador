@@ -246,7 +246,7 @@ A branch atual ainda contém o **addon source 0.1-A**. Os deltas mission-first p
 - geometry remains frozen from 0.6-A R4;
 - **mission-first functional gate homologado**.
 
-**Gate ativo: 0.6-E — Authoring/Lifecycle. 0.6-D R3 homologada em 512/512 com performance manual aprovada.**
+**Gate ativo: 0.6-E R1 — Authoring/Lifecycle. 0.6-D R3 homologada 512/512; E R1 static 257/257, runner source 509, runtime projetado ~536 pendente.**
 
 ### Visual polish deferred
 
@@ -338,7 +338,7 @@ R1 fechada. A R2 de convergência estrutural deve ser validada antes de 0.6-E.
 
 Gate manual R2 rejeitado: scroll/slider acionavam refresh completo e geravam stuttering perceptível.
 
-### 0.6-D R3 — CANDIDATA ATIVA
+### 0.6-D R3 — HISTÓRICO DA CANDIDATA
 
 - build: `0.6.3.3-focused-refresh-header-polish-mission-first`;
 - baseline funcional: R1 **471/471**;
@@ -362,7 +362,7 @@ Gate manual R2 rejeitado: scroll/slider acionavam refresh completo e geravam stu
 - application: `DEFERRED_0_7`;
 - multiplayer: `DEFERRED_0_8`.
 
-Não avançar para 0.6-E antes do gate runtime/manual da R3.
+Gate satisfeito: R3 homologada 512/512.
 
 
 ### 0.6-D R3 — HOMOLOGADA
@@ -374,7 +374,15 @@ Não avançar para 0.6-E antes do gate runtime/manual da R3.
 - header ancorado a partir do X;
 - quatro painéis e equipment read-only preservados.
 
-### 0.6-E — PRÓXIMO GATE ATIVO
+### 0.6-E R1 — CANDIDATA ATIVA
+
+- build: `0.6.4.1-authoring-lifecycle-session-local-mission-first`;
+- static: **257/257**;
+- runner source: **509 assertions**;
+- runtime projetado: ~**536**, pendente no Arma;
+- repository: `SESSION_LOCAL_CANDIDATE`;
+- aplicação física: `DEFERRED_0_7`;
+- multiplayer: `DEFERRED_0_8`.
 
 Escopo:
 - Novo;
