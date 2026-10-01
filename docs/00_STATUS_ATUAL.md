@@ -83,7 +83,7 @@ Ler obrigatoriamente:
 
 ## Frente independente — Weapons
 
-**Source integrado na branch:** 0.1-A. **UI shell homologada:** 0.6-A R4 — **362/362 PASS**. **Seleção/informações homologada:** 0.6-B R4 — **397/397 PASS**. **Compatibility Selectors homologada:** 0.6-C R1 — **445/445 PASS**. **Candidata ativa:** 0.6-D R1 — WeaponKit Draft, **260/260 static**, runtime esperado **471**, ainda pendente no Arma.
+****Source integrado na branch:** 0.1-A. **0.6-A R4:** 362/362. **0.6-B R4:** 397/397. **0.6-C R1:** 445/445. **0.6-D R1 WeaponKit Draft:** **471/471 HOMOLOGADA**. **Candidata ativa:** 0.6-D R2 — UI Convergence / Equipment Content, static **232/232**, runtime esperado **500**, ainda pendente no Arma.
 
 ### 0.1-B — lifecycle/identity evidence
 
@@ -216,7 +216,7 @@ Weapons possui UI própria, semelhante em conceito à parte de armas do APM hist
 
 Armorer continua separado: bancada, Preview 3D avançado, peças, inspeção e manutenção.
 
-**Gate mission-first ativo:** **0.6-D R1 — WeaponKit Draft (CANDIDATA)**, sobre 0.6-C R1 homologada em **445/445**. Static da 0.6-D: **260/260**; runtime esperado **471 checks**, ainda não executado.
+****Gate mission-first ativo:** **0.6-D R2 — UI Convergence / Equipment Content (CANDIDATA)**, preservando a lógica de draft homologada da R1. Quatro painéis, transparência Items R3, scrollbar contínua, filtros de acessórios e equipamento atual read-only.
 
 **Gates ainda abertos:** 0.6-D..F, aplicação slot-safe 0.7, multiplayer/JIP/reconnect 0.8, identidade física intrínseca, integração real ao addon/PBO e Packaging Gate. O polish visual compartilhado Items+Weapons está documentado em `29_SHARED_UI_ITEMS_WEAPONS.md`.
 
@@ -259,3 +259,27 @@ Ver [0.1-A](21_WEAPONS_0_1_A_FOUNDATION_IDENTITY_SPIKE.md), [0.1-B](22_WEAPONS_0
 - geometria 0.6-A R4 preservada.
 
 **Não homologar nem iniciar 0.6-E antes do RPT e do gate manual da 0.6-D R1.**
+
+
+### 0.6-D R1 — WeaponKit Draft — HOMOLOGADA
+
+- runtime: **471/471 PASS / 0 FAIL**;
+- draft local, SALVO/ALTERADO e DESCARTAR aprovados;
+- nenhum repository/loadout mutation.
+
+### 0.6-D R2 — UI Convergence / Equipment Content — candidata
+
+- build: `0.6.3.2-ui-convergence-equipment-content-mission-first`;
+- static: **232/232**;
+- runner source: **473 assertions**;
+- runtime esperado: **500**;
+- runtime Arma: **PENDENTE**;
+- grid/transparência alinhados ao Items Multiplayer Lab R3;
+- MEUS KITS DE ARMAS;
+- KIT SELECIONADO / RASCUNHO;
+- Catálogo com Tipo + Acessório e janela 32 + scrollbar/wheel;
+- Conteúdo do Equipamento read-only por Principal/Porte/Secundária;
+- authoring continua 0.6-E; aplicação 0.7; MP 0.8;
+- convergência Items↔Weapons formalizada em `docs/29_SHARED_UI_ITEMS_WEAPONS.md`.
+
+**Não iniciar 0.6-E antes do runtime/manual da R2.**
