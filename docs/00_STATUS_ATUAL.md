@@ -216,7 +216,7 @@ Weapons possui UI própria, semelhante em conceito à parte de armas do APM hist
 
 Armorer continua separado: bancada, Preview 3D avançado, peças, inspeção e manutenção.
 
-**Gate mission-first ativo:** **0.6-D R3 — TEST-MARKER HOTFIX / RERUN PENDENTE**. O gate manual de performance foi aceito: wheel/slider real operam ~5–9 ms sem full refresh. AUTO atual **511/512**; o único FAIL é um falso negativo de teste no marcador de schema da UI (runtime publica R3, runner esperava R2/legado).
+**Gate mission-first ativo:** **0.6-E — Authoring/Lifecycle**. A 0.6-D R3 foi homologada após o hotfix test-only fechar **512/512 PASS / 0 FAIL**; performance manual também aprovada.
 
 **Gates ainda abertos:** 0.6-D R3, 0.6-E/F, aplicação slot-safe 0.7, multiplayer/JIP/reconnect 0.8, identidade física intrínseca, integração real ao addon/PBO e Packaging Gate. O backlog compartilhado Items+Weapons está em `29_SHARED_UI_ITEMS_WEAPONS.md`.
 
@@ -289,7 +289,7 @@ Regra histórica satisfeita: R1 foi homologada em 471/471.
 - build: `0.6.3.3-focused-refresh-header-polish-mission-first`;
 - static: **272/272**;
 - runner source: **485 assertions**;
-- runtime real: **511/512**; único FAIL = expectativa stale do marcador de UI no runner; hotfix somente de teste preparado para rerun **512/512**;
+- runtime final: **512/512 PASS / 0 FAIL** após hotfix somente de teste;
 - catálogo: refresh focal + projeção/filtros cacheados + janela 32;
 - draft: refresh focal em seletores/Descartar;
 - equipamento: refresh focal em Principal/Porte/Secundária;
@@ -321,3 +321,18 @@ Decisão:
 - R3 ainda não homologada formalmente enquanto o rerun do hotfix test-only não fechar **512/512**;
 - nenhuma mudança funcional/UI no hotfix;
 - 0.6-E continua bloqueada até o rerun verde.
+
+
+### 0.6-D R3 — HOMOLOGADA
+
+- build funcional: `0.6.3.3-focused-refresh-header-polish-mission-first`;
+- hotfix final: somente expectativa do marcador de schema no runner;
+- AUTO final: **512/512 PASS / 0 FAIL**;
+- performance manual: aprovada;
+- wheel/slider: ~**5–9 ms** sem full refresh;
+- stuttering: não perceptível no gate manual;
+- quatro painéis, filtros, draft e equipamento read-only preservados;
+- header right-to-left ancorado no X aprovado;
+- nenhuma mutação de repository/loadout fora das fronteiras planejadas.
+
+**Próximo gate: 0.6-E — Authoring/Lifecycle.**
