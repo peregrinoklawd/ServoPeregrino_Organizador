@@ -132,3 +132,29 @@ Continuam abertos: integração mission-first -> addon/PBO, Packaging, 0.6-E R2/
 Consultar `docs/29_SHARED_UI_ITEMS_WEAPONS.md`.
 
 Toda melhoria de UI validada em Weapons que também possa melhorar Items deve entrar no `UI_CONVERGENCE_BACKLOG` como SHARED, DOMAIN-SPECIFIC ou CANDIDATE-SHARED antes de ser portada. Não fazer convergência por memória.
+
+
+## Continuação ativa — UICommon 0.1
+
+Branch ativa: `feature/uicommon-0.1-foundation`.
+
+Estado de entrada:
+- Items: última versão PBO multiplayer testada pelo usuário considerada baseline homologada para o conjunto efetivamente testado; Public Loadouts ainda aguardam validação manual específica;
+- Weapons: 0.6-E R2 continua candidata/requisito de UX e está congelada enquanto UICommon é construído;
+- não iniciar 0.6-F/0.7 antes do gate R2 pós-UICommon.
+
+Já criado:
+- addon UICommon 0.1 foundation;
+- capability `uicommon.runtime`;
+- lifecycle/build/runtime;
+- tokens visuais;
+- virtual-list helpers iniciais;
+- foundation tests;
+- contratos 30/31/32.
+
+Próximo passo:
+1. validar UICommon foundation isoladamente;
+2. preparar `SP_ORG_Items_Weapons_UI_Lab.VR` usando os mesmos fontes/contratos;
+3. migrar Items para UICommon em modo equivalência;
+4. executar checklist completo de regressão;
+5. depois migrar Weapons e implementar integralmente 0.6-E R2.
