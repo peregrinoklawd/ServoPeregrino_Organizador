@@ -83,7 +83,7 @@ Ler obrigatoriamente:
 
 ## Frente independente — Weapons
 
-**Source integrado na branch:** 0.1-A. **0.6-A R4:** 362/362. **0.6-B R4:** 397/397. **0.6-C R1:** 445/445. **0.6-D R1:** 471/471. **0.6-D R2:** AUTO 500/500 / performance rejeitada. **0.6-D R3:** **512/512 HOMOLOGADA**, performance manual aprovada. **Candidata ativa:** 0.6-E R1 — Authoring/Lifecycle, static **257/257**, runtime projetado ~**536** pendente.
+**Source integrado na branch:** 0.1-A. **0.6-D R3:** 512/512 HOMOLOGADA. **0.6-E R1:** 536/536 AUTO, funcionalmente verde, mas superada pelo gate manual de UX. **Candidata ativa:** 0.6-E R2 — UX Convergence / Direct Draft Equip, static **296/296**, runner source **518**, runtime projetado ~**545**.
 
 ### 0.1-B — lifecycle/identity evidence
 
@@ -216,9 +216,9 @@ Weapons possui UI própria, semelhante em conceito à parte de armas do APM hist
 
 Armorer continua separado: bancada, Preview 3D avançado, peças, inspeção e manutenção.
 
-**Gate mission-first ativo:** **0.6-E — Authoring/Lifecycle**. A 0.6-D R3 foi homologada após o hotfix test-only fechar **512/512 PASS / 0 FAIL**; performance manual também aprovada.
+**Gate mission-first ativo:** **0.6-E R2 — UX Convergence / Direct Draft Equip**. Preserva o authoring funcional da R1 e corrige a experiência de criação/edição para convergir com Items/APM.
 
-**Gates ainda abertos:** 0.6-E R1, 0.6-F, aplicação slot-safe 0.7, multiplayer/JIP/reconnect 0.8, identidade física intrínseca, integração real ao addon/PBO e Packaging Gate. O backlog compartilhado Items+Weapons está em `29_SHARED_UI_ITEMS_WEAPONS.md`.
+**Gates ainda abertos:** 0.6-E R2, 0.6-F, aplicação slot-safe 0.7, multiplayer/JIP/reconnect 0.8, identidade física intrínseca, integração real ao addon/PBO e Packaging Gate. O backlog compartilhado Items+Weapons está em `29_SHARED_UI_ITEMS_WEAPONS.md`.
 
 Ver [0.1-A](21_WEAPONS_0_1_A_FOUNDATION_IDENTITY_SPIKE.md), [0.1-B](22_WEAPONS_0_1_B_IDENTITY_LIFECYCLE.md), [0.2](23_WEAPONS_0_2_WEAPON_CONFIGURATION.md), [0.3](24_WEAPONS_0_3_CATALOG_COMPATIBILITY.md) e [conceito UI](25_WEAPONS_PLAYER_UI_E_FRONTEIRA_ARMORER.md) e [0.4](26_WEAPONS_0_4_WEAPON_RECIPE.md) e [0.5](27_WEAPONS_0_5_WEAPON_KIT.md).
 
@@ -338,7 +338,7 @@ Decisão:
 **Próximo gate: 0.6-E — Authoring/Lifecycle.**
 
 
-### 0.6-E R1 — Authoring/Lifecycle — CANDIDATA ATIVA
+### 0.6-E R1 — Authoring/Lifecycle — AUTO VERDE / UX SUPERADA
 
 Build: `0.6.4.1-authoring-lifecycle-session-local-mission-first`.
 
@@ -367,4 +367,37 @@ Fronteiras preservadas:
 - biblioteca pública real: futuro;
 - addon/PBO: ainda não integrado.
 
-**Próximo passo:** RPT + teste manual da 0.6-E R1. Não iniciar 0.6-F antes desse gate.
+**Resultado:** AUTO **536/536 PASS / 0 FAIL**. Gate manual de UX pediu reorganização do fluxo e da gramática visual; a continuidade foi movida para R2 sem descartar o authoring funcional.
+
+
+### 0.6-E R2 — UX Convergence / Direct Draft Equip — CANDIDATA ATIVA
+
+Build: `0.6.4.2-ux-convergence-direct-draft-equip-mission-first`.
+
+Validação local:
+- static: **296/296 PASS / 0 FAIL**;
+- runner source: **518 assertions explícitos**;
+- runtime projetado: ~**545**, pendente no Arma;
+- verdade final: RPT.
+
+Delta UX:
+- P1: `NOVO | DUPLICAR | EXCLUIR | PUBLICAR`; RENOMEAR sai do P1;
+- NOVO entra em estado pendente e **não cria kit inválido**;
+- arma é escolhida depois no Catálogo e enviada ao rascunho por seta esquerda ou `EQUIPAR NO RASCUNHO`;
+- nome inline no P2; SALVAR confirma nome + Recipe;
+- busca em P2/P4 funciona como atalho sincronizado da busca do Catálogo nesta candidata;
+- ações P2 no topo: SALVAR, SALVAR COMO NOVO, DESCARTAR, LIMPAR;
+- DESCARTAR/LIMPAR usam affordance destrutiva;
+- LIMPAR remove acessórios/carregador do draft e preserva a arma-base;
+- Catálogo ganha ações por linha `← draft | conteúdo | → físico`;
+- `BIPOD` + `GRIP` são apresentados em um único filtro `UNDERBARREL / BIPÉ-EMP.`;
+- P4 usa `Visualizar:` e tabs na mesma linha;
+- painéis P2/P3/P4 alinham os retângulos de informação;
+- footer remove o grande background externo, preserva apenas três faixas e aumenta o contraste do Histórico.
+
+Fronteira obrigatória:
+- seta esquerda / `EQUIPAR NO RASCUNHO`: **funcional em 0.6-E R2**;
+- seta direita para equipamento físico: **visível, mas não mutante; reservada para 0.7**;
+- nenhuma ação 0.6-E pode alterar `getUnitLoadout player`.
+
+**Não iniciar 0.6-F antes do RPT + gate manual da 0.6-E R2.**
