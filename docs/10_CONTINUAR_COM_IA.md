@@ -51,7 +51,7 @@ Regras obrigatórias:
 - Mission Lab R3 carrega e slots funcionam.
 - Packaging R2 pendente de validação runtime.
 - Armorer possui baseline histórica madura, ainda não importada no monorepo.
-- Weapons addon source continua integrado até 0.1-A. Mission-first está homologado até **0.6-D R3 (512/512)** com focused refresh/performance aprovados. **0.6-E R1 — Authoring/Lifecycle** é a candidata ativa: static **257/257**, runner source **509**, runtime projetado ~**536** pendente no Arma.
+- Weapons addon source continua integrado até 0.1-A. 0.6-D R3 está homologada 512/512. **0.6-E R1 fechou 536/536**, mas o gate manual de UX pediu nova composição. **0.6-E R2 — UX Convergence / Direct Draft Equip** é a candidata ativa: static 296/296, runner source 518, runtime projetado ~545.
 - Hub/WeaponCondition/Equipment/Sets/Policy/ServerIntegration são planejados.
 
 ## Arquivos para alterações
@@ -106,21 +106,25 @@ Baselines mission-first homologadas:
 - runtime **445/445 PASS**.
 
 Candidata ativa:
-- **0.6-E R1 — Authoring/Lifecycle**;
-- build `0.6.4.1-authoring-lifecycle-session-local-mission-first`;
-- baseline: 0.6-D R3 **512/512**;
-- static **257/257**;
-- runner source **509**;
-- runtime projetado ~**536**, pendente;
-- NOVO / RENOMEAR / DUPLICAR / EXCLUIR;
-- SALVAR / SALVAR COMO NOVO;
-- troca da arma-base no draft somente no mesmo targetSlot;
-- troca da arma reseta attachments/magazine do draft;
-- nome inline preservado em focused refresh;
-- repository session-local; nenhuma aplicação física;
-- **não iniciar 0.6-F antes de RPT + teste manual da 0.6-E R1**.
+- **0.6-E R2 — UX Convergence / Direct Draft Equip**;
+- build `0.6.4.2-ux-convergence-direct-draft-equip-mission-first`;
+- baseline funcional: E R1 **536/536**;
+- static **296/296**;
+- runner source **518**;
+- runtime projetado ~**545**, pendente;
+- NOVO não depende de pré-seleção: entra em estado pendente e a arma vem do Catálogo;
+- seta esquerda / EQUIPAR NO RASCUNHO aplicam arma/acessório ao draft;
+- P1: Novo / Duplicar / Excluir / Publicar;
+- rename via nome inline + SALVAR no P2;
+- P2/P4 search sincronizam a busca do Catálogo;
+- P2 ações no topo; Descartar/Limpar destrutivos;
+- filtro UNDERBARREL agrega Bipé + Empunhadura;
+- P4 usa Visualizar + slots na mesma linha;
+- footer sem background externo e Histórico com maior contraste;
+- seta física do Catálogo é somente affordance nesta rodada; mutação real continua 0.7;
+- **não iniciar 0.6-F antes de RPT + teste manual da R2**.
 
-Continuam abertos: integração mission-first -> addon/PBO, Packaging, 0.6-E R1/0.6-F, 0.7 aplicação slot-safe, 0.8 MP/JIP/reconnect e identidade física intrínseca.
+Continuam abertos: integração mission-first -> addon/PBO, Packaging, 0.6-E R2/0.6-F, 0.7 aplicação slot-safe, 0.8 MP/JIP/reconnect e identidade física intrínseca.
 
 
 ### Regra de UI compartilhada
