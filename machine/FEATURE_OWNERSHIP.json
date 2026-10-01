@@ -284,8 +284,8 @@
   ],
   "implementation_notes": {
     "Weapons": {
-      "delivery": "0.6-E R1 mission-first authoring/lifecycle candidate / addon source 0.1-A",
-      "status": "MISSION_FIRST_0_6_E_R1_AUTHORING_LIFECYCLE_CANDIDATE_RUNTIME_PENDING_ADDON_SOURCE_INTEGRATION_PENDING",
+      "delivery": "0.6-E R2 mission-first UX convergence/direct-draft-equip candidate / addon source 0.1-A",
+      "status": "MISSION_FIRST_0_6_E_R2_UX_CONVERGENCE_CANDIDATE_RUNTIME_PENDING_ADDON_SOURCE_INTEGRATION_PENDING",
       "homologated": {
         "lifecycle_0_1_b": "128/128 AUTO + 3/3 live Take/Put",
         "configuration_0_2": "175/175 AUTO",
@@ -304,7 +304,7 @@
       "apm_reference_rule": "Historical APM weapon UI is a UX/lessons-learned source. Review KEEP/ADAPT/DROP/NEW before freezing Weapons UI 0.6.",
       "physical_identity_proven": false,
       "addon_source_integrated_through": "0.1-A",
-      "next": "Validate 0.6-E R1 in Arma; projected ~536 checks plus manual lifecycle/no-loadout/performance regression. Require green gate before 0.6-F.",
+      "next": "Validate 0.6-E R2 in Arma; projected ~545 checks plus manual flow/layout/no-loadout/performance regression. Require green gate before 0.6-F.",
       "recipe_rule": "WeaponRecipe is frozen as configuration + optional magazineClass; targetSlot/name/identity/ammoCount remain outside Recipe.",
       "secondary_runtime_rule": "PRIMARY/HANDGUN class guards are strict. SECONDARY type=4 runtime/base variants may be equivalent only inside the same baseWeapon family.",
       "weapon_kit_candidate": {
@@ -334,38 +334,40 @@
         "status": "FROZEN_MISSION_FIRST"
       },
       "weapon_ui_candidate": {
-        "checkpoint": "0.6-E R1",
-        "final_candidate": "R1",
-        "build": "0.6.4.1-authoring-lifecycle-session-local-mission-first",
-        "static_validation": "257/257",
-        "runner_source_assertions": 509,
-        "runtime": "PENDING_ARMA_PROJECTED_APPROX_536",
+        "checkpoint": "0.6-E R2",
+        "final_candidate": "R2",
+        "build": "0.6.4.2-ux-convergence-direct-draft-equip-mission-first",
+        "static_validation": "296/296",
+        "runner_source_assertions": 518,
+        "runtime": "PENDING_ARMA_PROJECTED_APPROX_545",
         "runtime_truth": "RPT_REQUIRED",
-        "baseline": "0.6-D R3 APPROVED 512/512",
-        "visual_reference": "Items Multiplayer Lab R3 + APM header lessons",
-        "ui_layout": "FOUR_PANEL_ITEMS_CONVERGENCE",
-        "refresh_modes": [
-          "FULL",
-          "CATALOG_FOCUSED",
-          "DRAFT_FOCUSED",
-          "EQUIPMENT_FOCUSED"
-        ],
-        "authoring_operations": [
+        "baseline": "0.6-D R3 APPROVED 512/512; 0.6-E R1 AUTHORING AUTO 536/536",
+        "ux_reason": "R1 manual flow required catalog preselection then P1 NEW; superseded",
+        "new_kit_flow": "NEW_PENDING_THEN_CATALOG_TO_DRAFT",
+        "p1_actions": [
           "NEW",
-          "RENAME",
           "DUPLICATE",
           "DELETE",
-          "SAVE_DRAFT",
-          "SAVE_AS_NEW",
-          "SET_DRAFT_WEAPON_SAME_SLOT"
+          "PUBLISH_RESERVED"
         ],
-        "repository_mode": "SESSION_LOCAL_CANDIDATE",
-        "name_authoring": "INLINE_EDIT_EXPLICIT_COMMIT",
-        "focused_refresh_preserves_typed_name": true,
-        "duplicate_semantics": "COPY_SAVED_SNAPSHOT",
-        "save_semantics": "PERSIST_DRAFT_RECIPE_ONLY",
-        "save_as_semantics": "CREATE_NEW_ID_FROM_CURRENT_DRAFT_SOURCE_UNCHANGED",
-        "base_weapon_edit": "SAME_TARGET_SLOT_ONLY_RESET_ATTACHMENTS_AND_MAGAZINE",
+        "rename": "P2_INLINE_NAME_COMMITTED_BY_SAVE",
+        "p2_search": "SYNCED_CATALOG_QUERY_SHORTCUT",
+        "p4_search": "SYNCED_CATALOG_QUERY_SHORTCUT",
+        "draft_actions": [
+          "SAVE",
+          "SAVE_AS_NEW",
+          "DISCARD",
+          "CLEAR"
+        ],
+        "catalog_row_actions": {
+          "left": "DRAFT_ACTIVE",
+          "right": "PHYSICAL_RESERVED_0_7"
+        },
+        "catalog_big_action": "EQUIPAR_NO_RASCUNHO",
+        "catalog_filter_underbarrel": "BIPOD_PLUS_GRIP",
+        "equipment_vocabulary": "VISUALIZAR",
+        "footer": "THREE_BANDS_NO_OUTER_FRAME_HIGHER_HISTORY_CONTRAST",
+        "info_alignment": "P2_P3_P4_ALIGNED",
         "loadout_mutation": false,
         "application": "DEFERRED_0_7",
         "multiplayer": "DEFERRED_0_8",
@@ -399,15 +401,21 @@
           "KIT SELECIONADO / RASCUNHO title",
           "friendly catalog-build message",
           "evaluate SALVO/ALTERADO",
-          "evaluate three-band footer"
+          "evaluate three-band footer",
+          "rename Mostrar -> Visualizar",
+          "evaluate footer no-outer-frame + brighter history"
         ],
-        "authoring_boundary": "0.6-E R1 active",
+        "authoring_boundary": "0.6-E R2 active",
         "application_boundary": "0.7 remains deferred",
         "r3_status": "APPROVED_512_OF_512",
         "r4_candidate": [
-          "inline kit name + explicit commit",
-          "Salvar definition distinct from Aplicar/Equipar",
-          "duplicate saved snapshot semantics"
+          "P1 New/Duplicate/Delete/Publish order",
+          "inline kit name in title row",
+          "draft actions below search with destructive red",
+          "catalog row arrows",
+          "Visualizar vocabulary for physical view",
+          "footer without outer frame + brighter history",
+          "P2/P4 catalog-query shortcuts"
         ]
       },
       "player_ui_0_6_b": {
@@ -430,9 +438,10 @@
         "status": "FROZEN_MISSION_FIRST"
       },
       "player_ui_0_6_e": {
-        "r1": "CANDIDATE_STATIC_257_OF_257_RUNTIME_PENDING_PROJECTED_APPROX_536",
-        "mode": "SESSION_LOCAL_AUTHORING_LIFECYCLE_WITHOUT_PHYSICAL_APPLICATION",
-        "status": "ACTIVE_R1_CANDIDATE"
+        "r1": "AUTO_536_OF_536_FUNCTIONAL_UX_SUPERSEDED",
+        "r2": "CANDIDATE_STATIC_296_OF_296_RUNNER_518_RUNTIME_PENDING_PROJECTED_APPROX_545",
+        "mode": "SESSION_LOCAL_AUTHORING_PLUS_UX_CONVERGENCE_DIRECT_DRAFT_EQUIP_NO_PHYSICAL_APPLICATION",
+        "status": "ACTIVE_R2_CANDIDATE"
       }
     }
   }
