@@ -2,7 +2,7 @@
 
 ## Estado atual
 
-**0.6-A R4 — 362/362. 0.6-B R4 — 397/397. 0.6-C R1 — 445/445. 0.6-D R1 — 471/471 HOMOLOGADA. 0.6-D R2 — 500/500 AUTO, MAS GATE MANUAL DE PERFORMANCE REPROVADO. 0.6-D R3 — FOCUSED REFRESH / HEADER POLISH CANDIDATA ATIVA; STATIC 272/272; RUNTIME PROJETADO 512.**
+**0.6-A R4 — 362/362. 0.6-B R4 — 397/397. 0.6-C R1 — 445/445. 0.6-D R1 — 471/471 HOMOLOGADA. 0.6-D R2 — 500/500 AUTO / PERF REPROVADO. 0.6-D R3 — PERFORMANCE MANUAL APROVADA; AUTO 511/512 por falso negativo de schema marker; hotfix test-only aguarda rerun 512/512.**
 
 Baseline anterior:
 - 0.4 R5 WeaponRecipe: **251/251**;
@@ -25,7 +25,7 @@ Sequência decidida:
 0.6-A  Shell/layout/listas/filtros                 FROZEN BASELINE 362/362
 0.6-B  Seleção de arma + informações              APPROVED R4 397/397
 0.6-C  Dropdowns de compatibilidade                APPROVED R1 445/445
-0.6-D  Rascunho de WeaponKit                       R1 APPROVED 471/471; R2 AUTO 500/500 / PERF REJECTED; R3 ACTIVE — FOCUSED REFRESH / HEADER POLISH
+0.6-D  Rascunho de WeaponKit                       R1 APPROVED 471/471; R2 PERF REJECTED; R3 PERF ACCEPTED / AUTO 511/512 FALSE NEGATIVE / HOTFIX TEST-ONLY PENDING
 0.6-E  Novo/Renomear/Duplicar/Excluir/Salvar
 0.6-F  Adaptação visual final + foco + regressões
 ```
@@ -543,3 +543,28 @@ Aprovação exige:
 - nenhum repository/loadout mutation.
 
 **0.6-E continua bloqueada até RPT + avaliação manual da R3.**
+
+
+### Resultado runtime/manual da R3
+
+RPT real:
+- **511/512 PASS**;
+- único FAIL: `0.6-D UI state schema marker`;
+- diagnóstico: a UI R3 publica corretamente `0.6-D-r3-ui-state-candidate`; o runner preservou uma expectativa R2/legada;
+- correção: hotfix somente nos testes, sem tocar em lógica funcional ou UI.
+
+Performance observada após o AUTO:
+- wheel: principalmente **5–7 ms**;
+- slider absoluto: principalmente **5–9 ms**;
+- em scroll repetido: `projectionBuilt=false`, `filterBuilt=false`, `fullRefresh=false`;
+- draft focado: **21 ms** nas interações manuais registradas;
+- equipamento focado: **0–1 ms**;
+- avaliação humana: stuttering não perceptível.
+
+O header também passou os gates automáticos de ordenação/ancoragem:
+- X = controle operacional mais à direita;
+- bloco Operador/Unidade à esquerda da reserva;
+- contexto à esquerda do operador;
+- título termina antes do contexto operacional.
+
+**Decisão:** performance/arquitetura R3 aceitas. Homologação formal aguarda somente o rerun 512/512 do hotfix de teste. 0.6-E permanece bloqueada até esse rerun.
