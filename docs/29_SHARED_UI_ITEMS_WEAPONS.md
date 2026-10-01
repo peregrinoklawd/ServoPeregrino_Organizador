@@ -83,6 +83,13 @@ Classificação: **SHARED STRUCTURE + DOMAIN-SPECIFIC CONTENT**.
 | Nome inline + commit explícito | Weapons 0.6-E R1 | **candidata** | avaliar | CANDIDATE-SHARED | campo editável; ação explícita RENOMEAR; focused refresh não apaga texto digitado |
 | Semântica Salvar vs Aplicar | Weapons/Items | **0.6-E R1 explicita** | existente conceitualmente | **SHARED** | SALVAR persiste definição; APLICAR/EQUIPAR altera estado físico e deve ser ação/gate distinto |
 | Duplicação usa snapshot salvo | Weapons 0.6-E R1 | **candidata** | avaliar | CANDIDATE-SHARED | não copiar silenciosamente alterações de rascunho ainda não salvas |
+| Ações P1 Novo / Duplicar / Excluir / Publicar | Items | **0.6-E R2 candidata** | existente | **SHARED** | mesma ordem e sem Renomear em P1 |
+| Nome do kit na linha do título do draft | Items | **0.6-E R2 candidata** | existente | **SHARED** | título + nome inline + estado na mesma faixa |
+| Ações do draft logo abaixo da busca | Items | **0.6-E R2 candidata** | existente | **SHARED** | Salvar / Salvar como novo / Descartar / Limpar; destrutivas destacadas |
+| Setas por linha do catálogo | Items | **0.6-E R2 candidata** | existente | SHARED GRAMMAR | esquerda = lógico/draft; direita = físico quando o domínio físico estiver habilitado |
+| Rótulo **Visualizar:** no painel físico | Weapons | existente | **PENDENTE: trocar Mostrar → Visualizar** | **SHARED** | adotar em Items em rodada explícita de convergência |
+| Sem outer frame no footer + três faixas alinhadas | Weapons 0.6-E R2 | **candidata** | avaliar | CANDIDATE-SHARED | reduzir sobreposição visual e aumentar contraste do Histórico |
+| Busca P2/P4 como atalho ao Catálogo | Weapons 0.6-E R2 | **candidata** | avaliar | DOMAIN-SPECIFIC/CANDIDATE | útil enquanto não houver semântica própria de busca nesses painéis |
 
 ## KIT SELECIONADO / RASCUNHO
 
@@ -234,3 +241,43 @@ A candidata Weapons 0.6-E R1 formaliza uma separação que deve permanecer famil
 - essas ações não devem ser sinônimos nem acontecer implicitamente uma pela outra.
 
 Também é candidato compartilhável manter o nome como edição inline com **commit explícito**, preservando o texto digitado durante refreshes focais. A adoção em Items depende do gate real da 0.6-E e de uma rodada explícita de convergência.
+
+
+## 0.6-E R2 — convergência operacional
+
+A R1 fechou funcionalmente **536/536**, mas o gate humano mostrou que o fluxo de criação ainda obrigava o jogador a saltar entre Catálogo e P1. A R2 trata isso como problema de UX, não de domínio.
+
+Padrões adotados de Items/APM:
+- P1: Novo / Duplicar / Excluir / Publicar;
+- nome do kit na linha do título do draft;
+- busca logo abaixo;
+- ações do draft no topo;
+- destrutivas em vermelho;
+- setas nas bordas das linhas do Catálogo;
+- tabs do painel físico na mesma linha do rótulo;
+- retângulos de informação alinhados.
+
+### Visualizar vs Mostrar
+
+Decisão de vocabulário:
+- Weapons mantém **Visualizar:**;
+- Items atualmente usa **Mostrar:**;
+- backlog: trocar Items para **Visualizar:** em uma rodada explícita de convergência.
+
+### Setas por linha e fronteira física
+
+A gramática visual é compartilhada, mas a disponibilidade funcional respeita o gate do domínio:
+- Weapons 0.6-E R2: seta esquerda aplica ao draft;
+- Weapons 0.6-E R2: seta direita é visível, mas apenas informa que a aplicação física chega em 0.7;
+- Items já possui executor físico homologado e pode usar ambas.
+
+Não antecipar 0.7 apenas para tornar a simetria visual imediatamente funcional.
+
+### Busca em P2/P4
+
+A funcionalidade final ainda não foi definida. Em R2:
+- P2 search e P4 search sincronizam `catalogQuery`;
+- são atalhos contextuais para encontrar uma arma/acessório no Catálogo;
+- não fingem filtrar conteúdo do draft/equipamento quando esse comportamento não foi especificado.
+
+Essa solução deve ser reavaliada no gate manual antes de ser promovida a SHARED.
