@@ -83,7 +83,7 @@ Ler obrigatoriamente:
 
 ## Frente independente — Weapons
 
-**Source integrado na branch:** 0.1-A. **UI shell homologada:** 0.6-A R4 — **362/362 PASS**. **Seleção/informações homologada:** 0.6-B R4 — **397/397 PASS**. **Candidata ativa:** 0.6-C R1 — Compatibility Selectors, **335/335 static**, runtime Arma pendente.
+**Source integrado na branch:** 0.1-A. **UI shell homologada:** 0.6-A R4 — **362/362 PASS**. **Seleção/informações homologada:** 0.6-B R4 — **397/397 PASS**. **Compatibility Selectors homologada:** 0.6-C R1 — **445/445 PASS**. **Candidata ativa:** 0.6-D R1 — WeaponKit Draft, **260/260 static**, runtime esperado **471**, ainda pendente no Arma.
 
 ### 0.1-B — lifecycle/identity evidence
 
@@ -216,23 +216,46 @@ Weapons possui UI própria, semelhante em conceito à parte de armas do APM hist
 
 Armorer continua separado: bancada, Preview 3D avançado, peças, inspeção e manutenção.
 
-**Gate mission-first ativo:** **0.6-C R1 — Compatibility Selectors (CANDIDATA)**, preservando a baseline visual 0.6-A R4 e a seleção/informações homologada da 0.6-B R4. Static: **335/335**; runtime esperado 445 checks, ainda não executado.
+**Gate mission-first ativo:** **0.6-D R1 — WeaponKit Draft (CANDIDATA)**, sobre 0.6-C R1 homologada em **445/445**. Static da 0.6-D: **260/260**; runtime esperado **471 checks**, ainda não executado.
 
-**Gates ainda abertos:** 0.6-C..F, aplicação slot-safe 0.7, multiplayer/JIP/reconnect 0.8, identidade física intrínseca, integração real ao addon/PBO e Packaging Gate. O polish visual compartilhado Items+Weapons está documentado em `29_SHARED_UI_ITEMS_WEAPONS.md`.
+**Gates ainda abertos:** 0.6-D..F, aplicação slot-safe 0.7, multiplayer/JIP/reconnect 0.8, identidade física intrínseca, integração real ao addon/PBO e Packaging Gate. O polish visual compartilhado Items+Weapons está documentado em `29_SHARED_UI_ITEMS_WEAPONS.md`.
 
 Ver [0.1-A](21_WEAPONS_0_1_A_FOUNDATION_IDENTITY_SPIKE.md), [0.1-B](22_WEAPONS_0_1_B_IDENTITY_LIFECYCLE.md), [0.2](23_WEAPONS_0_2_WEAPON_CONFIGURATION.md), [0.3](24_WEAPONS_0_3_CATALOG_COMPATIBILITY.md) e [conceito UI](25_WEAPONS_PLAYER_UI_E_FRONTEIRA_ARMORER.md) e [0.4](26_WEAPONS_0_4_WEAPON_RECIPE.md) e [0.5](27_WEAPONS_0_5_WEAPON_KIT.md).
 
 
-### 0.6-C — Compatibility Selectors — R1 candidata
+### 0.6-C — Compatibility Selectors — HOMOLOGADA R1
 
 - build: `0.6.2.1-compatibility-selectors-read-only-mission-first`;
 - static validation: **335/335 PASS / 0 FAIL**;
-- runtime Arma: **PENDENTE**;
-- total esperado no AUTO TEST: **445 checks**;
+- runtime Arma: **445/445 PASS / 0 FAIL**;
+- AUTO TEST real: **445 checks**;
 - Mira/Boca/Pointer/Bipé/Carregador usam a compatibilidade engine-derived homologada na 0.3;
 - seletores permanecem read-only; escolha alternativa é apenas consulta;
 - nenhum draft, nenhuma mutação de WeaponKit e nenhuma mutação de loadout;
 - geometria da 0.6-A R4 preservada;
 - 0.6-D/0.6-E/0.7/0.8 continuam separados.
 
-**Não homologar nem iniciar 0.6-D antes do RPT e do gate manual da R1.**
+**Gate 0.6-C fechado.** O RPT real confirmou os seletores, ausência de mutação de WeaponKit/loadout e estabilidade do refresh. Erros recorrentes de CBA PFH já existiam antes desta entrega e não são chamados pelo source SP_ORG.
+
+
+### 0.6-D — WeaponKit Draft — R1 candidata
+
+- build: `0.6.3.1-weaponkit-draft-local-mission-first`;
+- static validation: **260/260 PASS / 0 FAIL**;
+- runner source: **444 assertions**;
+- runtime esperado: **471 checks**;
+- runtime Arma: **PENDENTE**;
+- draft local por `kitId`, derivado do WeaponKit salvo;
+- campos: optic/muzzle/pointer/bipod/magazineClass;
+- somente opções compatíveis da engine 0.3 podem entrar no draft;
+- status `SALVO` / `ALTERADO`;
+- `DESCARTAR` restaura o snapshot salvo;
+- draft deve sobreviver a refresh/foco/fechar-reabrir durante a sessão;
+- repository 0.5 continua imutável;
+- loadout físico continua imutável;
+- troca da arma-base e authoring completo: **0.6-E**;
+- aplicação física: **0.7**;
+- MP/authority: **0.8**;
+- geometria 0.6-A R4 preservada.
+
+**Não homologar nem iniciar 0.6-E antes do RPT e do gate manual da 0.6-D R1.**
