@@ -284,8 +284,8 @@
   ],
   "implementation_notes": {
     "Weapons": {
-      "delivery": "0.6-C R1 mission-first candidate / addon source 0.1-A",
-      "status": "MISSION_FIRST_0_6_C_R1_CANDIDATE_RUNTIME_PENDING_ADDON_SOURCE_INTEGRATION_PENDING",
+      "delivery": "0.6-D R1 mission-first candidate / addon source 0.1-A",
+      "status": "MISSION_FIRST_0_6_D_R1_CANDIDATE_RUNTIME_PENDING_ADDON_SOURCE_INTEGRATION_PENDING",
       "homologated": {
         "lifecycle_0_1_b": "128/128 AUTO + 3/3 live Take/Put",
         "configuration_0_2": "175/175 AUTO",
@@ -293,7 +293,8 @@
         "weapon_recipe_0_4_r5": "251/251 AUTO",
         "weapon_kit_0_5": "301/301 AUTO; 50/50 WeaponKit-specific gates",
         "player_ui_0_6_a": "362/362 AUTO; visual/structural baseline frozen",
-        "player_ui_0_6_b": "397/397 AUTO; selection/information and initial ALL-kit synchronization approved"
+        "player_ui_0_6_b": "397/397 AUTO; selection/information and initial ALL-kit synchronization approved",
+        "player_ui_0_6_c": "445/445 AUTO; read-only compatibility selectors approved"
       },
       "product_concept": "Player-facing module with its own simple APM-like WeaponKit UI. A WeaponKit is one configured weapon targeted to one weapon slot.",
       "slot_isolation_rule": "Applying a WeaponKit may intentionally mutate only the target weapon slot; the rest of the loadout belongs to other domains and must be preserved.",
@@ -301,7 +302,7 @@
       "apm_reference_rule": "Historical APM weapon UI is a UX/lessons-learned source. Review KEEP/ADAPT/DROP/NEW before freezing Weapons UI 0.6.",
       "physical_identity_proven": false,
       "addon_source_integrated_through": "0.1-A",
-      "next": "Validate 0.6-C R1 Compatibility Selectors in Arma; require runtime/manual gate before 0.6-D.",
+      "next": "Validate 0.6-D R1 WeaponKit Draft in Arma; require runtime/manual gate before 0.6-E.",
       "recipe_rule": "WeaponRecipe is frozen as configuration + optional magazineClass; targetSlot/name/identity/ammoCount remain outside Recipe.",
       "secondary_runtime_rule": "PRIMARY/HANDGUN class guards are strict. SECONDARY type=4 runtime/base variants may be equivalent only inside the same baseWeapon family.",
       "weapon_kit_candidate": {
@@ -331,24 +332,27 @@
         "status": "FROZEN_MISSION_FIRST"
       },
       "weapon_ui_candidate": {
-        "checkpoint": "0.6-C",
+        "checkpoint": "0.6-D",
         "final_candidate": "R1",
-        "build": "0.6.2.1-compatibility-selectors-read-only-mission-first",
-        "static_validation": "335/335",
-        "runtime": "PENDING_ARMA_EXPECTED_445",
+        "build": "0.6.3.1-weaponkit-draft-local-mission-first",
+        "static_validation": "260/260",
+        "runner_source_assertions": 444,
+        "runtime": "PENDING_ARMA_EXPECTED_471",
         "visual_baseline": "0.6-A R4 FROZEN",
         "information_baseline": "0.6-B R4 FROZEN 397/397",
-        "information_mode": "READ_ONLY_BASIC_WEAPON_PRESENTATION",
-        "compatibility_mode": "READ_ONLY_COMPATIBILITY_SELECTORS",
-        "selector_fields": [
+        "compatibility_baseline": "0.6-C R1 FROZEN 445/445",
+        "draft_mode": "LOCAL_WEAPONKIT_DRAFT_CANDIDATE",
+        "draft_key": "kitId",
+        "editable_fields": [
           "optic",
           "muzzle",
           "pointer",
           "bipod",
           "magazineClass"
         ],
-        "compatibility_source": "0.3 ENGINE_FORWARD_ON_DEMAND",
-        "draft": "DEFERRED_0_6_D",
+        "base_weapon_edit": "DEFERRED_0_6_E",
+        "discard": "ACTIVE",
+        "save": "DEFERRED_0_6_E",
         "authoring": "DEFERRED_0_6_E",
         "loadout_mutation": false,
         "weaponkit_mutation": false,
@@ -380,8 +384,13 @@
         "status": "FROZEN_MISSION_FIRST"
       },
       "player_ui_0_6_c": {
-        "r1": "CANDIDATE_STATIC_335_OF_335_RUNTIME_PENDING_EXPECTED_445",
+        "r1": "APPROVED_445_OF_445",
         "mode": "READ_ONLY_COMPATIBILITY_SELECTORS",
+        "status": "FROZEN_MISSION_FIRST"
+      },
+      "player_ui_0_6_d": {
+        "r1": "CANDIDATE_STATIC_260_OF_260_RUNTIME_PENDING_EXPECTED_471",
+        "mode": "LOCAL_WEAPONKIT_DRAFT_CANDIDATE",
         "status": "ACTIVE_CANDIDATE"
       }
     }
