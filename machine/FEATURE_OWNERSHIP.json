@@ -284,8 +284,8 @@
   ],
   "implementation_notes": {
     "Weapons": {
-      "delivery": "0.6-D R2 mission-first UI convergence candidate / addon source 0.1-A",
-      "status": "MISSION_FIRST_0_6_D_R2_UI_CONVERGENCE_CANDIDATE_RUNTIME_PENDING_ADDON_SOURCE_INTEGRATION_PENDING",
+      "delivery": "0.6-D R3 mission-first focused-refresh/header-polish candidate / addon source 0.1-A",
+      "status": "MISSION_FIRST_0_6_D_R3_FOCUSED_REFRESH_CANDIDATE_RUNTIME_PENDING_ADDON_SOURCE_INTEGRATION_PENDING",
       "homologated": {
         "lifecycle_0_1_b": "128/128 AUTO + 3/3 live Take/Put",
         "configuration_0_2": "175/175 AUTO",
@@ -303,7 +303,7 @@
       "apm_reference_rule": "Historical APM weapon UI is a UX/lessons-learned source. Review KEEP/ADAPT/DROP/NEW before freezing Weapons UI 0.6.",
       "physical_identity_proven": false,
       "addon_source_integrated_through": "0.1-A",
-      "next": "Validate 0.6-D R2 in Arma; require 500/500 plus manual UI convergence gate before 0.6-E.",
+      "next": "Validate 0.6-D R3 in Arma; projected 512 checks plus manual no-stutter/focused-refresh/header gate before 0.6-E.",
       "recipe_rule": "WeaponRecipe is frozen as configuration + optional magazineClass; targetSlot/name/identity/ammoCount remain outside Recipe.",
       "secondary_runtime_rule": "PRIMARY/HANDGUN class guards are strict. SECONDARY type=4 runtime/base variants may be equivalent only inside the same baseWeapon family.",
       "weapon_kit_candidate": {
@@ -333,33 +333,30 @@
         "status": "FROZEN_MISSION_FIRST"
       },
       "weapon_ui_candidate": {
-        "checkpoint": "0.6-D R2",
-        "final_candidate": "R2",
-        "build": "0.6.3.2-ui-convergence-equipment-content-mission-first",
-        "static_validation": "232/232",
-        "runner_source_assertions": 473,
-        "runtime": "PENDING_ARMA_EXPECTED_500",
+        "checkpoint": "0.6-D R3",
+        "final_candidate": "R3",
+        "build": "0.6.3.3-focused-refresh-header-polish-mission-first",
+        "static_validation": "272/272",
+        "runner_source_assertions": 485,
+        "runtime": "PENDING_ARMA_PROJECTED_512",
+        "runtime_truth": "RPT_REQUIRED",
         "draft_baseline": "0.6-D R1 FROZEN 471/471",
-        "visual_reference": "Items Multiplayer Lab R3",
+        "r2_result": "500/500 AUTO; MANUAL PERFORMANCE REJECTED due full refresh on catalog scroll (~246-254 ms)",
+        "visual_reference": "Items Multiplayer Lab R3 + APM header lessons",
         "ui_layout": "FOUR_PANEL_ITEMS_CONVERGENCE",
-        "panel_titles": [
-          "MEUS KITS DE ARMAS",
-          "KIT SELECIONADO / RASCUNHO",
-          "CATÁLOGO DE ARMAS",
-          "CONTEÚDO DO EQUIPAMENTO"
+        "refresh_modes": [
+          "FULL",
+          "CATALOG_FOCUSED",
+          "DRAFT_FOCUSED",
+          "EQUIPMENT_FOCUSED"
         ],
-        "catalog_mode": "CONTINUOUS_WINDOW_VISIBLE_SLIDER",
+        "catalog_mode": "CONTINUOUS_WINDOW_VISIBLE_SLIDER_FOCUSED_REFRESH",
         "catalog_window_size": 32,
-        "catalog_content_filters": [
-          "ALL",
-          "WEAPON",
-          "OPTIC",
-          "POINTER",
-          "BIPOD",
-          "MAGAZINE",
-          "GRIP"
-        ],
-        "equipment_content": "READ_ONLY_CURRENT_WEAPON",
+        "catalog_projection_cache": "BUILD_KIT_WEAPON",
+        "catalog_filter_cache": "TYPE_CATEGORY_QUERY",
+        "header_layout": "RIGHT_TO_LEFT_ANCHORED_FROM_CLOSE_X",
+        "catalog_build_message": "Vasculhando inventário e catalogando armas...",
+        "items_backlog_message": "Vasculhando inventário e catalogando itens...",
         "convergence_backlog": "docs/29_SHARED_UI_ITEMS_WEAPONS.md",
         "authoring": "DEFERRED_0_6_E",
         "application": "DEFERRED_0_7",
@@ -377,12 +374,24 @@
       "shared_ui_polish": {
         "reference": "docs/29_SHARED_UI_ITEMS_WEAPONS.md",
         "policy": "formal convergence backlog; port validated shared patterns explicitly",
-        "r2_trial": [
+        "r2_preserved": [
           "Items opacity tokens",
           "four-panel grid",
           "visible continuous catalog scrollbar",
           "KIT SELECIONADO / RASCUNHO",
           "three-band footer"
+        ],
+        "r3_trial": [
+          "focused refresh by panel",
+          "cached catalog projection/filter",
+          "right-to-left X-anchored header",
+          "friendly catalog-build message"
+        ],
+        "items_pending": [
+          "KIT SELECIONADO / RASCUNHO title",
+          "friendly catalog-build message",
+          "evaluate SALVO/ALTERADO",
+          "evaluate three-band footer"
         ],
         "authoring_boundary": "0.6-E remains deferred",
         "application_boundary": "0.7 remains deferred"
@@ -401,9 +410,10 @@
       },
       "player_ui_0_6_d": {
         "r1": "APPROVED_471_OF_471",
-        "r2": "CANDIDATE_STATIC_232_OF_232_RUNTIME_PENDING_EXPECTED_500",
-        "mode": "LOCAL_DRAFT_PLUS_UI_CONVERGENCE_EQUIPMENT_CONTENT",
-        "status": "ACTIVE_R2_CANDIDATE"
+        "r2": "AUTO_500_OF_500_MANUAL_PERF_REJECTED_FULL_REFRESH_STUTTER",
+        "r3": "CANDIDATE_STATIC_272_OF_272_RUNTIME_PENDING_PROJECTED_512",
+        "mode": "LOCAL_DRAFT_PLUS_FOUR_PANEL_UI_PLUS_FOCUSED_REFRESH",
+        "status": "ACTIVE_R3_CANDIDATE"
       }
     }
   }
