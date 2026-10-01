@@ -246,7 +246,7 @@ A branch atual ainda contém o **addon source 0.1-A**. Os deltas mission-first p
 - geometry remains frozen from 0.6-A R4;
 - **mission-first functional gate homologado**.
 
-**Gate ativo: 0.6-D R3 — Focused Refresh / Header Polish. R1 homologada 471/471; R2 fechou 500/500 AUTO mas falhou no gate manual de performance; R3 static 272/272, runtime projetado 512 pendente.**
+**Gate ativo: 0.6-E — Authoring/Lifecycle. 0.6-D R3 homologada em 512/512 com performance manual aprovada.**
 
 ### Visual polish deferred
 
@@ -363,3 +363,27 @@ Gate manual R2 rejeitado: scroll/slider acionavam refresh completo e geravam stu
 - multiplayer: `DEFERRED_0_8`.
 
 Não avançar para 0.6-E antes do gate runtime/manual da R3.
+
+
+### 0.6-D R3 — HOMOLOGADA
+
+- AUTO final: **512/512 PASS / 0 FAIL**;
+- focused refresh aprovado;
+- wheel/slider ~5–9 ms no gate real;
+- sem stuttering perceptível;
+- header ancorado a partir do X;
+- quatro painéis e equipment read-only preservados.
+
+### 0.6-E — PRÓXIMO GATE ATIVO
+
+Escopo:
+- Novo;
+- Renomear;
+- Duplicar;
+- Excluir;
+- Salvar;
+- Salvar como novo;
+- troca da arma-base no draft usando arma selecionada no Catálogo;
+- persistência continua no repository session-local 0.5;
+- aplicação física continua **0.7**;
+- multiplayer continua **0.8**.
