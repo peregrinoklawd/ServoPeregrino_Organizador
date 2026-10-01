@@ -197,10 +197,10 @@
           "persistence.provider.v1"
         ]
       },
-      "status": "MISSION_FIRST_0_6_D_R3_FOCUSED_REFRESH_CANDIDATE_RUNTIME_PENDING_ADDON_SOURCE_INTEGRATION_PENDING",
-      "next_gate": "Validate 0.6-D R3 in Arma; projected 512 checks plus manual no-stutter wheel/slider, focused-refresh and right-anchored-header gate before 0.6-E.",
+      "status": "MISSION_FIRST_0_6_D_R3_PERFORMANCE_ACCEPTED_TEST_MARKER_HOTFIX_RERUN_PENDING_ADDON_SOURCE_INTEGRATION_PENDING",
+      "next_gate": "Rerun 0.6-D R3 test-marker hotfix in Arma; expect 512/512. Performance/manual gate already accepted (~5-9 ms scroll/slider, no perceptible stutter). Do not start 0.6-E until rerun is green.",
       "homologated_artifact": "0.1-B 128/128 + 3/3; 0.2 175/175; 0.3 R2 213/213; 0.4 R5 251/251; 0.5 301/301; 0.6-A R4 362/362; 0.6-B R4 397/397; 0.6-C R1 445/445; 0.6-D R1 471/471.",
-      "current_candidate_artifact": "0.6-D R3 Focused Refresh / Header Polish; static 272/272; runner source 485; projected runtime 512; Arma pending. R2 AUTO 500/500 but manual performance rejected.",
+      "current_candidate_artifact": "0.6-D R3 Focused Refresh / Header Polish; static 272/272; runtime 511/512 with one test-only stale schema-marker expectation; performance/manual accepted; hotfix rerun pending.",
       "mission_first_validation": {
         "0.1-B": {
           "status": "APPROVED_SP",
@@ -443,7 +443,7 @@
           "next": "0.6-D WeaponKit Draft"
         },
         "0.6-D": {
-          "status": "R1_APPROVED_R2_AUTO_GREEN_MANUAL_PERF_REJECTED_R3_CANDIDATE",
+          "status": "R1_APPROVED_R2_PERF_REJECTED_R3_PERF_ACCEPTED_TEST_FALSE_NEGATIVE_HOTFIX_PENDING",
           "approved_candidate": "R1",
           "approved_build": "0.6.3.1-weaponkit-draft-local-mission-first",
           "approved_auto_test": {
@@ -482,7 +482,7 @@
           "runner_source_assertions": 485,
           "expected_auto_test": {
             "total": 512,
-            "status": "PROJECTED_PENDING_ARMA"
+            "status": "HOTFIX_RERUN_PENDING"
           },
           "runtime_truth": "ARMA_RPT_REQUIRED",
           "draft_mode": "LOCAL_WEAPONKIT_DRAFT_PRESERVED_FROM_R1",
@@ -508,7 +508,24 @@
           "multiplayer": "DEFERRED_0_8",
           "loadout_mutation": false,
           "weaponkit_mutation": false,
-          "next": "Runtime/manual R3 gate; do not start 0.6-E yet"
+          "next": "Rerun test-marker hotfix; require 512/512 before 0.6-E",
+          "actual_auto_test": {
+            "passed": 511,
+            "failed": 1,
+            "total": 512
+          },
+          "single_failure": "0.6-D UI state schema marker",
+          "failure_classification": "TEST_ONLY_STALE_EXPECTATION",
+          "runtime_ui_state_marker": "0.6-D-r3-ui-state-candidate",
+          "stale_runner_expectation": "R2_OR_LEGACY_UI_STATE_MARKER",
+          "performance_gate": "ACCEPTED",
+          "manual_perf": {
+            "wheel_ms": "5-7 typical",
+            "slider_absolute_ms": "5-9 typical",
+            "draft_ms": "21 observed",
+            "equipment_ms": "0-1 observed",
+            "stutter_user_report": "NOT_PERCEPTIBLE"
+          }
         }
       }
     },
