@@ -1,31 +1,51 @@
 UICommon 0.1 Foundation — Static Audit
 Date: 2026-10-01
 Branch: feature/uicommon-0.1-foundation
-Head audited: 31ccfce1a4797e301b2b6932a3b4666ff668ee2d
 
-RESULT: 25 PASS / 0 FAIL
+RESULT: 33 PASS / 0 FAIL
 
-Scope:
+Phase A — foundation structure: 25/25
 - UICommon addon skeleton and dependency direction
 - CfgPatches/CfgFunctions registration
 - absence of Items/Weapons runtime dependency in UICommon
 - absence of global CfgRemoteExec policy
-- Nexus Result contract usage
-- virtual list helper/test registration
+- Nexus Result success contract
+- virtual-list helper/test registration
 - shared mission lab existence
 - 8 playable slots
 - guarded Items / Weapons UI / UICommon entry points
 - lab actions for Items, Weapons, UICommon and module status
 - explicit refusal to impersonate Weapons 0.6 UI with integrated 0.1-A core
 
-IMPORTANT LIMITATION:
-This is a repository/static audit. It is NOT an Arma SQF compile/runtime result.
-The built-in UICommon foundation suite has 8 runtime assertions, but they remain UNEXECUTED IN ARMA until the mission is run.
+Phase B — mission-first source mirror: 8/8
+The following mission-first files are content-identical to the authoritative UICommon addon sources and have identical Git blob SHA:
+- script_version.hpp
+- lifecycle/fn_getBuildInfo.sqf
+- lifecycle/fn_initialize.sqf
+- runtime/fn_getRuntimeStatus.sqf
+- theme/fn_getThemeTokens.sqf
+- lists/fn_clampVirtualOffset.sqf
+- lists/fn_getVirtualWindow.sqf
+- tests/fn_runFoundationTests.sqf
 
-Next runtime gate:
-1. load Nexus + UICommon + Items;
-2. open SP_ORG_Items_Weapons_UI_Lab.VR;
-3. run TESTAR UICOMMON;
-4. expect 8 PASS / 0 FAIL;
-5. open Items and run a short smoke;
-6. send RPT before Items runtime is migrated to UICommon.
+IMPORTANT LIMITATION:
+This is repository/static validation only.
+It is NOT an Arma SQF compile/runtime result.
+
+Runtime foundation suite:
+- 8 assertions prepared
+- expected: 8 PASS / 0 FAIL
+- status: PENDING REAL ARMA EXECUTION
+
+Next gate:
+1. load the same Nexus + Items PBO package already validated by the user;
+2. do NOT require UICommon.pbo for this mission-first gate;
+3. open SP_ORG_Items_Weapons_UI_Lab.VR;
+4. run TESTAR UICOMMON;
+5. expect 8 PASS / 0 FAIL;
+6. run STATUS MODULOS;
+7. open Items and perform a short smoke;
+8. send full RPT.
+
+Weapons UI note:
+The monorepo-integrated Weapons addon is still 0.1-A. The previously tested mission-first 0.6-E R1 package is not stored as source in the current repo/library. The lab therefore refuses to treat 0.1-A core as the 0.6 UI. R2 requirements remain frozen in docs/32_WEAPONS_0_6_E_R2_UI_FREEZE.md.
