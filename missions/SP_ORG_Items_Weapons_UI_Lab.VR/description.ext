@@ -14,3 +14,47 @@ class Header
     minPlayers = 1;
     maxPlayers = 8;
 };
+
+/*
+    Mission-first mirror of UICommon 0.1 foundation.
+    Authoritative source remains addons/ServoPeregrino_Organizador_UICommon.
+*/
+class CfgFunctions
+{
+    class ServoPeregrino_Organizador_UICommon
+    {
+        tag = "ServoPeregrino_Organizador_UICommon";
+
+        class Lifecycle
+        {
+            file = "uicommon\functions\lifecycle";
+            class initialize { preInit = 1; };
+            class getBuildInfo {};
+        };
+
+        class Runtime
+        {
+            file = "uicommon\functions\runtime";
+            class getRuntimeStatus {};
+        };
+
+        class Theme
+        {
+            file = "uicommon\functions\theme";
+            class getThemeTokens {};
+        };
+
+        class Lists
+        {
+            file = "uicommon\functions\lists";
+            class clampVirtualOffset {};
+            class getVirtualWindow {};
+        };
+
+        class Tests
+        {
+            file = "uicommon\functions\tests";
+            class runFoundationTests {};
+        };
+    };
+};
