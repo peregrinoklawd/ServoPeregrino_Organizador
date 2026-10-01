@@ -9,7 +9,7 @@ Um repositório, vários módulos/PBOs. Nenhum módulo deve depender do estado p
 ## Implementado hoje
 
 - `addons/ServoPeregrino_Organizador_Nexus` — Foundation 1.1.
-- `addons/ServoPeregrino_Organizador_Weapons` — source integrado ainda em 0.1-A; validação mission-first homologada até **0.6-C R1**. 0.6-A R4 congelou o shell em **362/362**, 0.6-B R4 homologou seleção/informações em **397/397** e 0.6-C R1 homologou Compatibility Selectors em **445/445**. **0.6-D R1 — WeaponKit Draft** é a candidata ativa, com **260/260 static** e runtime Arma pendente (esperado: 471). Identidade física intrínseca continua não comprovada.
+- `addons/ServoPeregrino_Organizador_Weapons` — source integrado ainda em 0.1-A; mission-first homologado até **0.6-D R1 — 471/471**. **0.6-D R2 — UI Convergence / Equipment Content** é a candidata ativa: quatro painéis, transparência do Items Multiplayer Lab R3, catálogo contínuo com scrollbar/filtro de acessórios e equipamento atual read-only. Static: **232/232**; runtime esperado: **500 checks**. Identidade física intrínseca continua não comprovada.
 - `addons/ServoPeregrino_Organizador_Items` — baseline 0.12 FINAL; lógica 0.13-A em validação runtime/multiplayer.
 - `missions/SP_ORG_Items_0_13_A_Multiplayer_Lab_8Slots_R3.VR` — laboratório Items.
 
@@ -80,6 +80,9 @@ O source integrado nesta branch continua sendo **0.1-A**, sem contratos v1 publi
 - **0.5 — WeaponKit**: homologada com **301/301**; lifecycle session-local de kits, PRIMARY/HANDGUN/SECONDARY, CRUD, defensive copy, isolamento de slot e nenhuma mutação do loadout.
 - **0.6-A — Player UI Shell**: R4 homologada com **362/362**; shell visual/estrutural congelado, filtros Todos/Principal/Porte/Secundária, catálogo bounded-render e rodapé Context/Message/History.
 - **0.6-B — Selection + Information**: R4 homologada com **397/397**; seleção read-only de catálogo/WeaponKit, informações básicas da arma e abertura determinística de MEUS KITS em TODOS, sem mutação de WeaponKit/loadout.
+- **0.6-C — Compatibility Selectors**: R1 homologada com **445/445**.
+- **0.6-D R1 — WeaponKit Draft**: homologada com **471/471**; draft local por kit, SALVO/ALTERADO e DESCARTAR sem mutar repository/loadout.
+- **0.6-D R2 — UI Convergence / Equipment Content**: candidata ativa; static **232/232**, runtime esperado **500**.
 
 Essas homologações são de **MISSION-FIRST FUNCTIONAL GATE**, não de PBO/addon integrado. MP/JIP, Packaging e identidade física intrínseca continuam gates separados.
 
@@ -109,7 +112,7 @@ A referência de UX/lessons learned será a parte de armas do **APM histórico**
   0.6-A Player UI Shell                        APPROVED 362/362
   0.6-B Selection + Information                APPROVED 397/397
   0.6-C Compatibility Selectors                APPROVED R1 — 445/445
-  0.6-D WeaponKit Draft                         ACTIVE R1 — STATIC 260/260; RUNTIME PENDING
+  0.6-D WeaponKit Draft                         R1 APPROVED 471/471; R2 ACTIVE — UI CONVERGENCE, STATIC 232/232; RUNTIME PENDING 500
   0.6-E Kit Authoring/Lifecycle
   0.6-F Final Visual Adaptation/Regression
 0.7    Slot-Safe Weapon Application
