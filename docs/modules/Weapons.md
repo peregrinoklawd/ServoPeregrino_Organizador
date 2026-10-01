@@ -246,7 +246,7 @@ A branch atual ainda contém o **addon source 0.1-A**. Os deltas mission-first p
 - geometry remains frozen from 0.6-A R4;
 - **mission-first functional gate homologado**.
 
-**Próximo gate: 0.6-C — Compatibility Selectors.**
+**Gate ativo: 0.6-C R1 — Compatibility Selectors. Static 335/335; runtime pendente.**
 
 ### Visual polish deferred
 
@@ -275,3 +275,21 @@ Ver:
 - `../24_WEAPONS_0_3_CATALOG_COMPATIBILITY.md`
 - `../25_WEAPONS_PLAYER_UI_E_FRONTEIRA_ARMORER.md`
 - `Armorer.md`
+
+
+### 0.6-C — CANDIDATA R1
+
+- baseline: 0.6-B R4, 397/397;
+- build: `0.6.2.1-compatibility-selectors-read-only-mission-first`;
+- static: **335/335**;
+- runtime: **PENDENTE**;
+- cinco seletores: optic/muzzle/pointer/bipod/magazineClass;
+- opções derivadas de `getWeaponCompatibility` da 0.3;
+- modo: `READ_ONLY_COMPATIBILITY_SELECTORS`;
+- draft: `DEFERRED_0_6_D`;
+- authoring: `DEFERRED_0_6_E`;
+- aplicação: `DEFERRED_0_7`;
+- mutação de WeaponKit/loadout: nenhuma;
+- geometria: preservada da 0.6-A R4.
+
+Não avançar para 0.6-D antes da validação real no Arma.
