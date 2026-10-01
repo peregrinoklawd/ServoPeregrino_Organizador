@@ -171,7 +171,7 @@ Source integrado na branch. Base histórica da linha atual.
 0.6-B Selection + Information                APPROVED R4 397/397
 0.6-C Compatibility Selectors                APPROVED R1 445/445
 0.6-D WeaponKit Draft                         R1 APPROVED 471/471; R2 PERF REJECTED; R3 APPROVED 512/512
-0.6-E Authoring/Lifecycle                      ACTIVE R1 — STATIC 257/257; RUNTIME PENDING (~536 projected)
+0.6-E Authoring/Lifecycle                      R1 AUTO 536/536 / UX SUPERSEDED; R2 ACTIVE — STATIC 296/296; RUNTIME PENDING (~545 projected)
 0.6-F Final Visual Adaptation/Regression
 0.7  Slot-Safe Weapon Application
 0.8  Multiplayer Authority / Reconciliation
@@ -273,7 +273,7 @@ Contrato homologado:
 - authoring permanece para 0.6-E;
 - shell visual R4 permanece congelado.
 
-**Checkpoint ativo: 0.6-E R1 — Authoring/Lifecycle. 0.6-D R3 homologada em 512/512; candidata E R1 está 257/257 static, runner source 509 e runtime projetado ~536 pendente no Arma.**
+**Checkpoint ativo: 0.6-E R2 — UX Convergence / Direct Draft Equip. R1 fechou 536/536, mas foi superada no gate manual de UX; R2 está 296/296 static, runner source 518, runtime projetado ~545.**
 
 
 
@@ -349,7 +349,7 @@ Contrato homologado:
 **Gate R3 fechado. 0.6-E liberada para implementação mission-first.**
 
 
-#### 0.6-E R1 — candidata ativa
+#### 0.6-E R1 — AUTO 536/536 / UX superada
 
 - build: `0.6.4.1-authoring-lifecycle-session-local-mission-first`;
 - baseline: 0.6-D R3 **512/512**;
@@ -367,4 +367,26 @@ Contrato homologado:
 - aplicação continua 0.7;
 - MP/JIP/reconnect continua 0.8.
 
-**0.6-F bloqueada até runtime/manual da 0.6-E R1.**
+**0.6-F bloqueada até runtime/manual da 0.6-E R2.**
+
+
+#### 0.6-E R2 — candidata ativa
+
+- build: `0.6.4.2-ux-convergence-direct-draft-equip-mission-first`;
+- R1: **536/536**, authoring funcional preservado;
+- static R2: **296/296**;
+- runner source: **518**;
+- runtime projetado: ~**545**, pendente;
+- NOVO passa a preparar rascunho e pedir a arma via Catálogo;
+- `←` e `EQUIPAR NO RASCUNHO` aplicam seleção do Catálogo ao draft;
+- P1 converge para `Novo/Duplicar/Excluir/Publicar`;
+- rename fica no P2 via nome inline + SALVAR;
+- P2/P4 recebem buscas sincronizadas ao Catálogo;
+- P2 recebe ações no topo e destrutivas vermelhas;
+- Bipé + Empunhadura = filtro UNDERBARREL;
+- P4 usa Visualizar + slots na mesma linha;
+- footer sem outer frame e Histórico com maior contraste;
+- ação física da seta direita permanece **DEFERRED_0_7**;
+- focused refresh R3 preservado.
+
+**0.6-F bloqueada até runtime/manual da R2.**
