@@ -1,6 +1,6 @@
 # Estado atual do projeto
 
-Data do snapshot: **30/09/2026**.
+Data do snapshot: **01/10/2026**.
 
 ## Source of Truth
 
@@ -83,7 +83,7 @@ Ler obrigatoriamente:
 
 ## Frente independente — Weapons
 
-**Source integrado na branch:** 0.1-A. **UI shell homologada:** 0.6-A R4 — **362/362 PASS**. **Candidata ativa:** 0.6-B R1 — seleção/informações read-only.
+**Source integrado na branch:** 0.1-A. **UI shell homologada:** 0.6-A R4 — **362/362 PASS**. **Seleção/informações homologada:** 0.6-B R4 — **397/397 PASS**. **Próximo gate:** 0.6-C — Compatibility Selectors.
 
 ### 0.1-B — lifecycle/identity evidence
 
@@ -179,7 +179,27 @@ Ler obrigatoriamente:
 - 0.6-A não edita Recipe/WeaponKit e não altera loadout;
 - aplicação/equipar continua exclusivamente no gate 0.7.
 
-**0.6-B R1 candidata:** seleção de arma + informações básicas read-only; static **160/160**; runtime pendente.
+### 0.6-B — Selection + Information
+
+**R4 — MISSION-FIRST HOMOLOGADA / FROZEN.**
+
+- R1: **392/392 PASS**, mas rejeitada por higiene de texto; o rótulo `Selection & Information` gerava milhares de warnings `Unknown entity: ' Information'`;
+- R2: **392/392 PASS**, higiene corrigida; teste manual revelou que MEUS KITS podia abrir visualmente vazio até o primeiro clique em filtro;
+- R3: comportamento de abertura corrigido manualmente; AUTO ficou **391/396** por race de timing entre teste e sincronização inicial;
+- R4: handshake explícito de sincronização inicial; **397/397 PASS / 0 FAIL**;
+- `MEUS KITS` abre deterministicamente em **TODOS/ALL**, com busca vazia;
+- linhas visíveis são sincronizadas com o repository e o primeiro kit é selecionado quando existe;
+- seleção de arma no Catálogo é contexto read-only;
+- seleção de WeaponKit é contexto read-only;
+- apresentação básica inclui nome, tipo, classe, imagem nativa, origem/mod/addon, `baseWeapon` e descrição;
+- prévia do catálogo não inventa acessórios/compatibilidade;
+- nenhuma consulta de compatibilidade na UI ainda;
+- nenhum draft;
+- nenhum authoring;
+- nenhuma mutação de WeaponKit;
+- nenhuma mutação de loadout;
+- geometria da 0.6-A R4 preservada;
+- **MISSION-FIRST FUNCTIONAL GATE: HOMOLOGADO.**
 
 ### Decisão conceitual — Weapons é player-facing
 
@@ -196,8 +216,8 @@ Weapons possui UI própria, semelhante em conceito à parte de armas do APM hist
 
 Armorer continua separado: bancada, Preview 3D avançado, peças, inspeção e manutenção.
 
-**Gate mission-first ativo:** **0.6-B R1 — Seleção de arma + informações**, preservando a baseline visual 0.6-A R4.
+**Gate mission-first ativo:** **0.6-C — Compatibility Selectors**, preservando a baseline visual 0.6-A R4 e a seleção/informações homologada da 0.6-B R4.
 
-**Gates ainda abertos:** 0.6-B..F, aplicação slot-safe 0.7, multiplayer/JIP/reconnect 0.8, identidade física intrínseca, integração real ao addon/PBO e Packaging Gate. O polish visual compartilhado Items+Weapons está documentado em `29_SHARED_UI_ITEMS_WEAPONS.md`.
+**Gates ainda abertos:** 0.6-C..F, aplicação slot-safe 0.7, multiplayer/JIP/reconnect 0.8, identidade física intrínseca, integração real ao addon/PBO e Packaging Gate. O polish visual compartilhado Items+Weapons está documentado em `29_SHARED_UI_ITEMS_WEAPONS.md`.
 
 Ver [0.1-A](21_WEAPONS_0_1_A_FOUNDATION_IDENTITY_SPIKE.md), [0.1-B](22_WEAPONS_0_1_B_IDENTITY_LIFECYCLE.md), [0.2](23_WEAPONS_0_2_WEAPON_CONFIGURATION.md), [0.3](24_WEAPONS_0_3_CATALOG_COMPATIBILITY.md) e [conceito UI](25_WEAPONS_PLAYER_UI_E_FRONTEIRA_ARMORER.md) e [0.4](26_WEAPONS_0_4_WEAPON_RECIPE.md) e [0.5](27_WEAPONS_0_5_WEAPON_KIT.md).
