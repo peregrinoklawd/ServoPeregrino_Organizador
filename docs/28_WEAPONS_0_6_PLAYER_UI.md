@@ -2,7 +2,7 @@
 
 ## Estado atual
 
-**0.6-A R4 — 362/362. 0.6-B R4 — 397/397. 0.6-C R1 — 445/445. 0.6-D R1 — 471/471 HOMOLOGADA. 0.6-D R2 — 500/500 AUTO / PERF REPROVADO. 0.6-D R3 — PERFORMANCE MANUAL APROVADA; AUTO 511/512 por falso negativo de schema marker; hotfix test-only aguarda rerun 512/512.**
+**0.6-A R4 — 362/362. 0.6-B R4 — 397/397. 0.6-C R1 — 445/445. 0.6-D R1 — 471/471. 0.6-D R2 — 500/500 AUTO / PERF REPROVADO. 0.6-D R3 — **512/512 HOMOLOGADA**, performance manual aprovada. 0.6-E R1 — **CANDIDATA ATIVA**, static 257/257, runner source 509, runtime projetado ~536.**
 
 Baseline anterior:
 - 0.4 R5 WeaponRecipe: **251/251**;
@@ -25,8 +25,8 @@ Sequência decidida:
 0.6-A  Shell/layout/listas/filtros                 FROZEN BASELINE 362/362
 0.6-B  Seleção de arma + informações              APPROVED R4 397/397
 0.6-C  Dropdowns de compatibilidade                APPROVED R1 445/445
-0.6-D  Rascunho de WeaponKit                       R1 APPROVED 471/471; R2 PERF REJECTED; R3 PERF ACCEPTED / AUTO 511/512 FALSE NEGATIVE / HOTFIX TEST-ONLY PENDING
-0.6-E  Novo/Renomear/Duplicar/Excluir/Salvar
+0.6-D  Rascunho de WeaponKit                       R1 APPROVED 471/471; R2 PERF REJECTED; R3 APPROVED 512/512
+0.6-E  Authoring/Lifecycle                           ACTIVE R1 — STATIC 257/257; RUNTIME PENDING (~536 projected)
 0.6-F  Adaptação visual final + foco + regressões
 ```
 
@@ -459,7 +459,7 @@ A causa arquitetural é conhecida: interação local estava acionando reconstru�
 **Correção obrigatória antes de 0.6-E: 0.6-D R3.**
 
 
-## 0.6-D R3 — Focused Refresh / Header Polish — CANDIDATA ATIVA
+## 0.6-D R3 — Focused Refresh / Header Polish — HOMOLOGADA
 
 Build: `0.6.3.3-focused-refresh-header-polish-mission-first`.
 
@@ -542,7 +542,7 @@ Aprovação exige:
 - header sem sobreposição em resolução real;
 - nenhum repository/loadout mutation.
 
-**0.6-E continua bloqueada até RPT + avaliação manual da R3.**
+Gate satisfeito: R3 homologada 512/512 após hotfix test-only e performance manual aprovada.
 
 
 ### Resultado runtime/manual da R3
@@ -567,4 +567,73 @@ O header também passou os gates automáticos de ordenação/ancoragem:
 - contexto à esquerda do operador;
 - título termina antes do contexto operacional.
 
-**Decisão:** performance/arquitetura R3 aceitas. Homologação formal aguarda somente o rerun 512/512 do hotfix de teste. 0.6-E permanece bloqueada até esse rerun.
+**Decisão final:** hotfix test-only fechou **512/512 PASS / 0 FAIL**. A 0.6-D R3 está homologada e 0.6-E foi liberada.
+
+
+## 0.6-E R1 — Authoring/Lifecycle — CANDIDATA ATIVA
+
+Build: `0.6.4.1-authoring-lifecycle-session-local-mission-first`.
+
+Validação local:
+- static: **257/257 PASS / 0 FAIL**;
+- runner: **509 assertions explícitos**;
+- runtime projetado: aproximadamente **536 checks** a partir da dinâmica homologada da R3;
+- runtime real: **PENDENTE**; o RPT do Arma é a autoridade.
+
+### Modelo de authoring
+
+A 0.6-E transforma os controles que estavam reservados em operações reais sobre o repository **session-local** da 0.5.
+
+`MEUS KITS DE ARMAS`:
+- **NOVO**: cria um WeaponKit usando a arma `WEAPON` selecionada no Catálogo;
+- **RENOMEAR**: usa o texto do campo de nome em KIT SELECIONADO / RASCUNHO e preserva `kitId`/Recipe;
+- **DUPLICAR**: cria nova identidade copiando o conteúdo **SALVO** do kit de origem; rascunho sujo não é copiado;
+- **EXCLUIR**: remove imediatamente o kit do repository desta sessão, sem popup modal.
+
+`KIT SELECIONADO / RASCUNHO`:
+- campo de nome torna-se editável;
+- **SALVAR**: persiste o Recipe do draft no WeaponKit atual;
+- **SALVAR COMO NOVO**: cria nova identidade usando o Recipe atual do draft;
+- se o nome de Salvar como novo permanecer igual ao nome do kit, é gerado um nome de cópia único;
+- se o jogador digitar um nome explicitamente diferente, esse nome é validado pelo repository;
+- refresh focal do draft **não apaga o nome digitado**; full refresh por troca de contexto volta ao nome salvo.
+
+### Troca da arma-base
+
+O campo **Arma** passa a aceitar a arma selecionada no Catálogo:
+1. selecionar uma linha de tipo `WEAPON`;
+2. clicar no campo Arma do rascunho;
+3. a arma deve pertencer ao mesmo `targetSlot` do WeaponKit;
+4. cross-slot é recusado; para outro slot, usar **NOVO**;
+5. ao trocar a arma-base, Mira/Boca/Apontador/Bipé/Carregador do draft são resetados;
+6. o repository permanece inalterado até **SALVAR**;
+7. o loadout físico permanece sempre inalterado na 0.6-E.
+
+### Invariantes
+
+- authoring pode mutar **WeaponKit repository session-local**;
+- authoring não pode chamar mutadores do loadout físico;
+- `SALVAR` não significa equipar;
+- `SALVAR COMO NOVO` não altera o kit de origem;
+- `DUPLICAR` duplica o snapshot salvo;
+- focused refresh/cache da R3 permanece obrigatório;
+- aplicação física continua exclusivamente em **0.7**;
+- multiplayer authority/JIP/reconnect continua **0.8**;
+- biblioteca pública real continua fora deste gate.
+
+### Teste
+
+O runner da E R1 cobre as próprias rotas de UI:
+- criar;
+- renomear;
+- duplicar;
+- excluir;
+- trocar arma-base same-slot;
+- rejeitar cross-slot;
+- salvar draft;
+- salvar como novo;
+- limpar os kits temporários;
+- comparar repository antes/depois;
+- provar que `getUnitLoadout player` não mudou.
+
+**Não iniciar 0.6-F antes do RPT + gate manual da 0.6-E R1.**
