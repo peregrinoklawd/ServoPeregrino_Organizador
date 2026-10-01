@@ -284,8 +284,8 @@
   ],
   "implementation_notes": {
     "Weapons": {
-      "delivery": "0.6-D R3 mission-first focused-refresh/header-polish candidate / addon source 0.1-A",
-      "status": "MISSION_FIRST_0_6_D_R3_PERFORMANCE_ACCEPTED_TEST_MARKER_HOTFIX_RERUN_PENDING_ADDON_SOURCE_INTEGRATION_PENDING",
+      "delivery": "0.6-E R1 mission-first authoring/lifecycle candidate / addon source 0.1-A",
+      "status": "MISSION_FIRST_0_6_E_R1_AUTHORING_LIFECYCLE_CANDIDATE_RUNTIME_PENDING_ADDON_SOURCE_INTEGRATION_PENDING",
       "homologated": {
         "lifecycle_0_1_b": "128/128 AUTO + 3/3 live Take/Put",
         "configuration_0_2": "175/175 AUTO",
@@ -295,7 +295,8 @@
         "player_ui_0_6_a": "362/362 AUTO; visual/structural baseline frozen",
         "player_ui_0_6_b": "397/397 AUTO; selection/information and initial ALL-kit synchronization approved",
         "player_ui_0_6_c": "445/445 AUTO; read-only compatibility selectors approved",
-        "player_ui_0_6_d_r1": "471/471 AUTO; session-local WeaponKit draft, SALVO/ALTERADO/DESCARTAR approved"
+        "player_ui_0_6_d_r1": "471/471 AUTO; session-local WeaponKit draft, SALVO/ALTERADO/DESCARTAR approved",
+        "player_ui_0_6_d_r3": "512/512 AUTO after test-only marker hotfix; focused-refresh performance manual gate accepted"
       },
       "product_concept": "Player-facing module with its own simple APM-like WeaponKit UI. A WeaponKit is one configured weapon targeted to one weapon slot.",
       "slot_isolation_rule": "Applying a WeaponKit may intentionally mutate only the target weapon slot; the rest of the loadout belongs to other domains and must be preserved.",
@@ -303,7 +304,7 @@
       "apm_reference_rule": "Historical APM weapon UI is a UX/lessons-learned source. Review KEEP/ADAPT/DROP/NEW before freezing Weapons UI 0.6.",
       "physical_identity_proven": false,
       "addon_source_integrated_through": "0.1-A",
-      "next": "Rerun 0.6-D R3 test-marker hotfix; require 512/512 before 0.6-E. Performance/manual gate already accepted.",
+      "next": "Validate 0.6-E R1 in Arma; projected ~536 checks plus manual lifecycle/no-loadout/performance regression. Require green gate before 0.6-F.",
       "recipe_rule": "WeaponRecipe is frozen as configuration + optional magazineClass; targetSlot/name/identity/ammoCount remain outside Recipe.",
       "secondary_runtime_rule": "PRIMARY/HANDGUN class guards are strict. SECONDARY type=4 runtime/base variants may be equivalent only inside the same baseWeapon family.",
       "weapon_kit_candidate": {
@@ -333,15 +334,14 @@
         "status": "FROZEN_MISSION_FIRST"
       },
       "weapon_ui_candidate": {
-        "checkpoint": "0.6-D R3",
-        "final_candidate": "R3",
-        "build": "0.6.3.3-focused-refresh-header-polish-mission-first",
-        "static_validation": "272/272",
-        "runner_source_assertions": 485,
-        "runtime": "ACTUAL_511_OF_512_SINGLE_TEST_ONLY_SCHEMA_MARKER_FALSE_NEGATIVE",
+        "checkpoint": "0.6-E R1",
+        "final_candidate": "R1",
+        "build": "0.6.4.1-authoring-lifecycle-session-local-mission-first",
+        "static_validation": "257/257",
+        "runner_source_assertions": 509,
+        "runtime": "PENDING_ARMA_PROJECTED_APPROX_536",
         "runtime_truth": "RPT_REQUIRED",
-        "draft_baseline": "0.6-D R1 FROZEN 471/471",
-        "r2_result": "500/500 AUTO; MANUAL PERFORMANCE REJECTED due full refresh on catalog scroll (~246-254 ms)",
+        "baseline": "0.6-D R3 APPROVED 512/512",
         "visual_reference": "Items Multiplayer Lab R3 + APM header lessons",
         "ui_layout": "FOUR_PANEL_ITEMS_CONVERGENCE",
         "refresh_modes": [
@@ -350,20 +350,26 @@
           "DRAFT_FOCUSED",
           "EQUIPMENT_FOCUSED"
         ],
-        "catalog_mode": "CONTINUOUS_WINDOW_VISIBLE_SLIDER_FOCUSED_REFRESH",
-        "catalog_window_size": 32,
-        "catalog_projection_cache": "BUILD_KIT_WEAPON",
-        "catalog_filter_cache": "TYPE_CATEGORY_QUERY",
-        "header_layout": "RIGHT_TO_LEFT_ANCHORED_FROM_CLOSE_X",
-        "catalog_build_message": "Vasculhando inventário e catalogando armas...",
-        "items_backlog_message": "Vasculhando inventário e catalogando itens...",
-        "convergence_backlog": "docs/29_SHARED_UI_ITEMS_WEAPONS.md",
-        "authoring": "DEFERRED_0_6_E",
-        "application": "DEFERRED_0_7",
+        "authoring_operations": [
+          "NEW",
+          "RENAME",
+          "DUPLICATE",
+          "DELETE",
+          "SAVE_DRAFT",
+          "SAVE_AS_NEW",
+          "SET_DRAFT_WEAPON_SAME_SLOT"
+        ],
+        "repository_mode": "SESSION_LOCAL_CANDIDATE",
+        "name_authoring": "INLINE_EDIT_EXPLICIT_COMMIT",
+        "focused_refresh_preserves_typed_name": true,
+        "duplicate_semantics": "COPY_SAVED_SNAPSHOT",
+        "save_semantics": "PERSIST_DRAFT_RECIPE_ONLY",
+        "save_as_semantics": "CREATE_NEW_ID_FROM_CURRENT_DRAFT_SOURCE_UNCHANGED",
+        "base_weapon_edit": "SAME_TARGET_SLOT_ONLY_RESET_ATTACHMENTS_AND_MAGAZINE",
         "loadout_mutation": false,
-        "weaponkit_mutation": false,
-        "performance_gate": "ACCEPTED_SCROLL_5_TO_9_MS_NO_PERCEPTIBLE_STUTTER",
-        "test_marker_hotfix": "PENDING_RERUN_EXPECTED_512_OF_512"
+        "application": "DEFERRED_0_7",
+        "multiplayer": "DEFERRED_0_8",
+        "convergence_backlog": "docs/29_SHARED_UI_ITEMS_WEAPONS.md"
       },
       "player_ui_0_6_a": {
         "r1": "REJECTED_CFGFUNCTIONS_PATH",
@@ -395,8 +401,14 @@
           "evaluate SALVO/ALTERADO",
           "evaluate three-band footer"
         ],
-        "authoring_boundary": "0.6-E remains deferred",
-        "application_boundary": "0.7 remains deferred"
+        "authoring_boundary": "0.6-E R1 active",
+        "application_boundary": "0.7 remains deferred",
+        "r3_status": "APPROVED_512_OF_512",
+        "r4_candidate": [
+          "inline kit name + explicit commit",
+          "Salvar definition distinct from Aplicar/Equipar",
+          "duplicate saved snapshot semantics"
+        ]
       },
       "player_ui_0_6_b": {
         "r1": "392_OF_392_FUNCTIONAL_REJECTED_STRUCTURED_TEXT_ENTITY_NOISE",
@@ -413,9 +425,14 @@
       "player_ui_0_6_d": {
         "r1": "APPROVED_471_OF_471",
         "r2": "AUTO_500_OF_500_MANUAL_PERF_REJECTED_FULL_REFRESH_STUTTER",
-        "r3": "PERFORMANCE_ACCEPTED_AUTO_511_OF_512_TEST_ONLY_SCHEMA_MARKER_FALSE_NEGATIVE",
+        "r3": "APPROVED_512_OF_512_PERFORMANCE_ACCEPTED",
         "mode": "LOCAL_DRAFT_PLUS_FOUR_PANEL_UI_PLUS_FOCUSED_REFRESH",
-        "status": "R3_TEST_MARKER_HOTFIX_RERUN_PENDING"
+        "status": "FROZEN_MISSION_FIRST"
+      },
+      "player_ui_0_6_e": {
+        "r1": "CANDIDATE_STATIC_257_OF_257_RUNTIME_PENDING_PROJECTED_APPROX_536",
+        "mode": "SESSION_LOCAL_AUTHORING_LIFECYCLE_WITHOUT_PHYSICAL_APPLICATION",
+        "status": "ACTIVE_R1_CANDIDATE"
       }
     }
   }
