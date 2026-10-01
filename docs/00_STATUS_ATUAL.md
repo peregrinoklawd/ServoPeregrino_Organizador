@@ -401,3 +401,25 @@ Fronteira obrigatória:
 - nenhuma ação 0.6-E pode alterar `getUnitLoadout player`.
 
 **Não iniciar 0.6-F antes do RPT + gate manual da 0.6-E R2.**
+
+
+## UICommon — foundation 0.1
+
+Decisão registrada em 01/10/2026:
+- nova frente: `feature/uicommon-0.1-foundation`;
+- `UICommon.pbo` será addon técnico separado, distribuído junto do Nexus no pacote Core;
+- dependência: UICommon -> Nexus; Items/Weapons -> Nexus + UICommon somente após seus gates de migração;
+- Items e Weapons continuam independentes entre si;
+- Items baseline PBO multiplayer é considerada HOMOLOGADA para o conjunto testado pelo usuário; Public Loadouts ficam PENDENTES de validação manual específica;
+- Weapons 0.6-E R2 fica funcionalmente congelada enquanto a fundação UICommon é criada; seus requisitos de UX continuam obrigatórios;
+- documentos autoritativos novos: `30_ITEMS_UI_REGRESSION_CONTRACT.md`, `31_UICOMMON_ARCHITECTURE_AND_MIGRATION.md`, `32_WEAPONS_0_6_E_R2_UI_FREEZE.md`.
+
+Fundação criada sem alterar Items/Weapons:
+- addon `ServoPeregrino_Organizador_UICommon`;
+- lifecycle/build/runtime;
+- capability `uicommon.runtime`;
+- tokens visuais compartilhados;
+- helpers puros iniciais de virtualização;
+- suíte foundation inicial.
+
+Próximo gate: validar UICommon isoladamente e então iniciar **Items + UICommon equivalence**, sem mudança deliberada de UX.
