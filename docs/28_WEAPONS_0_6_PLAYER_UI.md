@@ -2,7 +2,7 @@
 
 ## Estado atual
 
-**0.6-A R4 — BASELINE VISUAL/ESTRUTURAL CONGELADA. 0.6-B R4 — SELEÇÃO/INFORMAÇÕES HOMOLOGADA 397/397. 0.6-C — PRÓXIMO GATE.**
+**0.6-A R4 — BASELINE VISUAL/ESTRUTURAL CONGELADA. 0.6-B R4 — SELEÇÃO/INFORMAÇÕES HOMOLOGADA 397/397. 0.6-C R1 — CANDIDATA ATIVA; STATIC 335/335; RUNTIME PENDENTE.**
 
 Baseline anterior:
 - 0.4 R5 WeaponRecipe: **251/251**;
@@ -24,7 +24,7 @@ Sequência decidida:
 ```text
 0.6-A  Shell/layout/listas/filtros                 FROZEN BASELINE 362/362
 0.6-B  Seleção de arma + informações              APPROVED R4 397/397
-0.6-C  Dropdowns de compatibilidade                NEXT
+0.6-C  Dropdowns de compatibilidade                ACTIVE R1 — STATIC 335/335; RUNTIME PENDING
 0.6-D  Rascunho de WeaponKit
 0.6-E  Novo/Renomear/Duplicar/Excluir/Salvar
 0.6-F  Adaptação visual final + foco + regressões
@@ -323,3 +323,34 @@ Escopo planejado:
 - nenhuma aplicação física da arma, que permanece em 0.7.
 
 Não abrir nova rodada de polimento visual antes de concluir as funcionalidades planejadas da 0.6.
+
+
+## 0.6-C — Compatibility Selectors — R1 candidata
+
+Build mission-first:
+
+`0.6.2.1-compatibility-selectors-read-only-mission-first`
+
+Estado: **CANDIDATA / NÃO HOMOLOGADA EM RUNTIME**.
+
+Validação estática da candidata: **335/335 PASS / 0 FAIL**. O runner cumulativo contém 418 pontos de asserção no source e a execução esperada no Arma é **445 checks**.
+
+Delta funcional:
+- os controles existentes de Mira, Boca, Pointer, Bipé e Carregador passam a ser dropdowns;
+- as opções são derivadas exclusivamente de `getWeaponCompatibility`, a engine homologada na 0.3;
+- a geometria da 0.6-A R4 permanece congelada;
+- o valor atualmente salvo no WeaponRecipe permanece selecionado;
+- os seletores são **read-only** nesta etapa;
+- escolher outra opção serve somente para consultar compatibilidade e a UI restaura o valor salvo;
+- nenhum draft é criado;
+- nenhum WeaponKit é alterado;
+- nenhum loadout é alterado.
+
+Gates preservados:
+- draft: **0.6-D**;
+- authoring/lifecycle: **0.6-E**;
+- polish final: **0.6-F**;
+- aplicação física slot-safe: **0.7**;
+- multiplayer/authority: **0.8**.
+
+Não avançar para 0.6-D antes de runtime + avaliação manual da 0.6-C R1.
