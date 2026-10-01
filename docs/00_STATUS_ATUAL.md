@@ -83,7 +83,7 @@ Ler obrigatoriamente:
 
 ## Frente independente — Weapons
 
-**Source integrado na branch:** 0.1-A. **UI shell homologada:** 0.6-A R4 — **362/362 PASS**. **Seleção/informações homologada:** 0.6-B R4 — **397/397 PASS**. **Próximo gate:** 0.6-C — Compatibility Selectors.
+**Source integrado na branch:** 0.1-A. **UI shell homologada:** 0.6-A R4 — **362/362 PASS**. **Seleção/informações homologada:** 0.6-B R4 — **397/397 PASS**. **Candidata ativa:** 0.6-C R1 — Compatibility Selectors, **335/335 static**, runtime Arma pendente.
 
 ### 0.1-B — lifecycle/identity evidence
 
@@ -216,8 +216,23 @@ Weapons possui UI própria, semelhante em conceito à parte de armas do APM hist
 
 Armorer continua separado: bancada, Preview 3D avançado, peças, inspeção e manutenção.
 
-**Gate mission-first ativo:** **0.6-C — Compatibility Selectors**, preservando a baseline visual 0.6-A R4 e a seleção/informações homologada da 0.6-B R4.
+**Gate mission-first ativo:** **0.6-C R1 — Compatibility Selectors (CANDIDATA)**, preservando a baseline visual 0.6-A R4 e a seleção/informações homologada da 0.6-B R4. Static: **335/335**; runtime esperado 445 checks, ainda não executado.
 
 **Gates ainda abertos:** 0.6-C..F, aplicação slot-safe 0.7, multiplayer/JIP/reconnect 0.8, identidade física intrínseca, integração real ao addon/PBO e Packaging Gate. O polish visual compartilhado Items+Weapons está documentado em `29_SHARED_UI_ITEMS_WEAPONS.md`.
 
 Ver [0.1-A](21_WEAPONS_0_1_A_FOUNDATION_IDENTITY_SPIKE.md), [0.1-B](22_WEAPONS_0_1_B_IDENTITY_LIFECYCLE.md), [0.2](23_WEAPONS_0_2_WEAPON_CONFIGURATION.md), [0.3](24_WEAPONS_0_3_CATALOG_COMPATIBILITY.md) e [conceito UI](25_WEAPONS_PLAYER_UI_E_FRONTEIRA_ARMORER.md) e [0.4](26_WEAPONS_0_4_WEAPON_RECIPE.md) e [0.5](27_WEAPONS_0_5_WEAPON_KIT.md).
+
+
+### 0.6-C — Compatibility Selectors — R1 candidata
+
+- build: `0.6.2.1-compatibility-selectors-read-only-mission-first`;
+- static validation: **335/335 PASS / 0 FAIL**;
+- runtime Arma: **PENDENTE**;
+- total esperado no AUTO TEST: **445 checks**;
+- Mira/Boca/Pointer/Bipé/Carregador usam a compatibilidade engine-derived homologada na 0.3;
+- seletores permanecem read-only; escolha alternativa é apenas consulta;
+- nenhum draft, nenhuma mutação de WeaponKit e nenhuma mutação de loadout;
+- geometria da 0.6-A R4 preservada;
+- 0.6-D/0.6-E/0.7/0.8 continuam separados.
+
+**Não homologar nem iniciar 0.6-D antes do RPT e do gate manual da R1.**
