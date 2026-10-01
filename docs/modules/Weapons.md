@@ -205,7 +205,7 @@ A branch atual ainda contém o **addon source 0.1-A**. Os deltas mission-first p
 - content fingerprint não inclui kitId/nome;
 - UI/aplicação/MP continuam deferred;
 - static validation **131/131**;
-- runtime Arma pendente.
+- runtime final **301/301 PASS / 0 FAIL**;
 
 ### 0.6-A — FROZEN UI SHELL BASELINE
 
@@ -223,19 +223,30 @@ A branch atual ainda contém o **addon source 0.1-A**. Os deltas mission-first p
 - zero WeaponKit/loadout mutation in 0.6-A;
 - shell visual/estrutural congelado durante 0.6-B..E.
 
-### 0.6-B — CANDIDATE R1
+### 0.6-B — APPROVED SP / FROZEN R4
 
-- build `0.6.1.1-selection-information-mission-first`;
-- R4 geometry preserved;
+- final build: `0.6.1.4-initial-sync-handshake-test-timing-mission-first`;
+- runtime final: **397/397 PASS / 0 FAIL**;
+- R1: 392/392, rejeitada apenas por structured-text entity noise;
+- R2: 392/392, higiene corrigida; manual revelou abertura inicial sem linhas em MEUS KITS;
+- R3: comportamento manual corrigido; 391/396 por race de timing no teste;
+- R4: handshake explícito de sincronização inicial e gate automático corrigido;
+- `MEUS KITS` abre em **TODOS/ALL**, busca vazia;
+- visible rows == repository rows no gate inicial;
+- primeiro kit selecionado quando existem kits;
 - catalog selection = read-only information context;
 - saved-kit selection = read-only information context;
 - information: displayName, category, weaponClass, picture, origin, baseWeapon, description;
+- catalog preview does not fabricate accessory compatibility;
 - no compatibility query in UI yet;
 - no draft;
 - no WeaponKit authoring;
 - no loadout mutation;
-- static validation **160/160**;
-- runtime pending.
+- no WeaponKit mutation;
+- geometry remains frozen from 0.6-A R4;
+- **mission-first functional gate homologado**.
+
+**Próximo gate: 0.6-C — Compatibility Selectors.**
 
 ### Visual polish deferred
 
@@ -249,13 +260,12 @@ Ver `../29_SHARED_UI_ITEMS_WEAPONS.md`.
 
 ## Roadmap
 
-1. 0.6-B — Seleção de arma + informações;
-2. 0.6-C — Seletores de compatibilidade;
-3. 0.6-D — Rascunho de WeaponKit;
-4. 0.6-E — Authoring/lifecycle;
-5. 0.6-F — Adaptação visual final + regressões;
-6. 0.7 — Slot-Safe Weapon Application;
-7. 0.8 — Multiplayer Authority / Reconciliation.
+1. 0.6-C — Seletores de compatibilidade;
+2. 0.6-D — Rascunho de WeaponKit;
+3. 0.6-E — Authoring/lifecycle;
+4. 0.6-F — Adaptação visual final + regressões;
+5. 0.7 — Slot-Safe Weapon Application;
+6. 0.8 — Multiplayer Authority / Reconciliation.
 
 Gates paralelos: integração addon/PBO, Packaging, MP/JIP/reconnect e identidade física intrínseca.
 
