@@ -246,7 +246,7 @@ A branch atual ainda contém o **addon source 0.1-A**. Os deltas mission-first p
 - geometry remains frozen from 0.6-A R4;
 - **mission-first functional gate homologado**.
 
-**Gate ativo: 0.6-C R1 — Compatibility Selectors. Static 335/335; runtime pendente.**
+**Gate ativo: 0.6-D R1 — WeaponKit Draft. 0.6-C R1 homologada 445/445; 0.6-D R1 static 260/260, runtime esperado 471 pendente.**
 
 ### Visual polish deferred
 
@@ -277,12 +277,12 @@ Ver:
 - `Armorer.md`
 
 
-### 0.6-C — CANDIDATA R1
+### 0.6-C — APPROVED SP / FROZEN R1
 
 - baseline: 0.6-B R4, 397/397;
 - build: `0.6.2.1-compatibility-selectors-read-only-mission-first`;
 - static: **335/335**;
-- runtime: **PENDENTE**;
+- runtime: **445/445 PASS / 0 FAIL**;
 - cinco seletores: optic/muzzle/pointer/bipod/magazineClass;
 - opções derivadas de `getWeaponCompatibility` da 0.3;
 - modo: `READ_ONLY_COMPATIBILITY_SELECTORS`;
@@ -292,4 +292,25 @@ Ver:
 - mutação de WeaponKit/loadout: nenhuma;
 - geometria: preservada da 0.6-A R4.
 
-Não avançar para 0.6-D antes da validação real no Arma.
+Gate 0.6-C fechado pelo RPT real de 01/10/2026.
+
+
+### 0.6-D — CANDIDATA R1
+
+- baseline: 0.6-C R1, **445/445**;
+- build: `0.6.3.1-weaponkit-draft-local-mission-first`;
+- static: **260/260**;
+- runtime esperado: **471**, pendente;
+- draft: `LOCAL_WEAPONKIT_DRAFT_CANDIDATE`;
+- draft keyed por kitId e derivado do Recipe salvo;
+- campos editáveis: optic/muzzle/pointer/bipod/magazineClass;
+- arma-base permanece não editável neste gate;
+- compatibilidade: engine 0.3;
+- repository mutation: nenhuma;
+- loadout mutation: nenhuma;
+- authoring/save: `DEFERRED_0_6_E`;
+- application: `DEFERRED_0_7`;
+- MP: `DEFERRED_0_8`;
+- geometria: 0.6-A R4 preservada.
+
+Não avançar para 0.6-E antes da validação real no Arma.
