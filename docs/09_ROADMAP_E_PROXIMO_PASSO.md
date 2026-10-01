@@ -169,7 +169,7 @@ Source integrado na branch. Base histórica da linha atual.
 
 0.6-A Player UI Shell                        FROZEN BASELINE 362/362
 0.6-B Selection + Information                APPROVED R4 397/397
-0.6-C Compatibility Selectors                NEXT
+0.6-C Compatibility Selectors                ACTIVE R1 — STATIC 335/335; RUNTIME PENDING
 0.6-D WeaponKit Draft
 0.6-E Kit Authoring/Lifecycle
 0.6-F Final Visual Adaptation/Regression
@@ -273,5 +273,20 @@ Contrato homologado:
 - authoring permanece para 0.6-E;
 - shell visual R4 permanece congelado.
 
-**Checkpoint ativo: 0.6-C — Compatibility Selectors.**
+**Checkpoint ativo: 0.6-C R1 — Compatibility Selectors. Candidata estática 335/335; runtime Arma pendente.**
 
+
+
+#### 0.6-C R1 — candidata ativa
+
+- baseline: 0.6-B R4 homologada 397/397;
+- build: `0.6.2.1-compatibility-selectors-read-only-mission-first`;
+- static: **335/335**;
+- AUTO runtime esperado: **445**, ainda pendente;
+- dropdowns: Mira/Boca/Pointer/Bipé/Carregador;
+- fonte: engine de compatibilidade da 0.3;
+- comportamento: consulta read-only; valor salvo é restaurado após seleção alternativa;
+- sem draft, authoring, aplicação física ou MP;
+- shell R4 preservado.
+
+**Gate seguinte permanece 0.6-D, bloqueado até homologação runtime/manual da 0.6-C.**
