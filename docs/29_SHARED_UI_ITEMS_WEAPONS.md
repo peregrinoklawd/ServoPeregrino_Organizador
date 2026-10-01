@@ -67,16 +67,19 @@ Classificação: **SHARED STRUCTURE + DOMAIN-SPECIFIC CONTENT**.
 
 | Feature | Origem | Weapons | Items | Classificação | Próxima ação |
 |---|---|---|---|---|---|
-| Transparência/contraste do Multiplayer Lab R3 | Items | **0.6-D R2 candidata** | existente | SHARED | validar em Weapons e congelar tokens |
-| Grade de quatro painéis | Items/APM | **0.6-D R2 candidata** | existente | SHARED STRUCTURE | validar 1080p + ultrawide |
-| Catálogo contínuo virtualizado com scrollbar visível + wheel | Items | **0.6-D R2 candidata** | existente | SHARED | validar navegação/consumo do wheel |
-| Título **KIT SELECIONADO / RASCUNHO** | Weapons | **0.6-D R2 candidata** | pendente | **SHARED** | levar para Items em rodada de convergência |
+| Transparência/contraste do Multiplayer Lab R3 | Items | R2 visualmente aceita / preservada em R3 | existente | SHARED | congelar após gate R3 |
+| Grade de quatro painéis | Items/APM | R2 funcional / preservada em R3 | existente | SHARED STRUCTURE | validar 1080p + ultrawide |
+| Catálogo contínuo virtualizado com scrollbar visível + wheel | Items | **R3 candidata com refresh focal** | existente | SHARED | validar fluidez real e ausência de full refresh |
+| Título **KIT SELECIONADO / RASCUNHO** | Weapons | R2/R3 | pendente | **SHARED** | levar para Items em rodada de convergência |
 | Estado textual **SALVO / ALTERADO** | Weapons | existente desde 0.6-D R1 | avaliar | CANDIDATE-SHARED | validar utilidade em Items |
-| Rodapé em três faixas visuais | decisão compartilhada | **0.6-D R2 candidata** | pendente | CANDIDATE-SHARED | se aprovado em Weapons, aplicar em Items |
+| Rodapé em três faixas visuais | decisão compartilhada | R2/R3 | pendente | CANDIDATE-SHARED | se aprovado em Weapons, aplicar em Items |
 | Título específico da biblioteca: MEUS KITS DE ARMAS / MEUS KITS DE ITENS | ambos | candidata/ativo | existente | SHARED PATTERN | manter domínio explícito |
-| Conteúdo do equipamento como quarto painel | Items/APM | **0.6-D R2 candidata** | existente | SHARED CONCEPT / DOMAIN-SPECIFIC | preservar leitura do estado físico real |
+| Conteúdo do equipamento como quarto painel | Items/APM | R2/R3 | existente | SHARED CONCEPT / DOMAIN-SPECIFIC | preservar leitura do estado físico real |
 | Separação gestão do kit vs edição do draft | Weapons/Items | candidata | parcialmente existente | SHARED | lifecycle no P1; edição/persistência do draft no P2 |
 | Comparação visual Draft vs Equipado | Weapons | futuro | avaliar | CANDIDATE-SHARED | considerar no polish/0.7, não antecipar agora |
+| Focused refresh por painel | Items/APM | **0.6-D R3 candidata** | existente | **SHARED** | catálogo/draft/equipamento não devem reconstruir toda a UI por interação local |
+| Header ancorado da direita a partir do X | APM/Items | **0.6-D R3 candidata** | existente | **SHARED** | X → reserva → identidade/contexto → título; validar sem sobreposição |
+| Mensagem amigável durante construção do catálogo | Weapons/feedback do usuário | **"Vasculhando inventário e catalogando armas..."** | **PENDENTE: "Vasculhando inventário e catalogando itens..."** | **SHARED PATTERN** | portar para Items na próxima convergência sem alterar a lógica do build |
 
 ## KIT SELECIONADO / RASCUNHO
 
@@ -188,3 +191,33 @@ Compartilhar **gramática**, não estado privado.
 - Items UI atual: `addons/ServoPeregrino_Organizador_Items/ui/items_dialog.hpp`
 - Weapons UI: `docs/28_WEAPONS_0_6_PLAYER_UI.md`
 - APM histórico: referência de UX/lessons learned, não source of truth arquitetural.
+
+
+## Lição R2 → R3 — teste verde não substitui gate humano de fluidez
+
+A 0.6-D R2 fechou **500/500 AUTO**, mas o RPT/manual mostrou que cada avanço do wheel/slider ainda chamava o refresh completo da interface. Interações observadas no catálogo consumiam aproximadamente **246–254 ms por passo**, produzindo stuttering perceptível.
+
+Decisão:
+- R2 **não é homologada** apesar do AUTO verde;
+- scroll, slider, busca/filtro e seleção do catálogo devem usar refresh focal;
+- troca de visualização do equipamento deve atualizar somente P4;
+- edição/descartar do draft deve atualizar somente P2;
+- full refresh fica reservado a mudanças de contexto amplo, por exemplo troca do WeaponKit;
+- projeções/índices caros devem ser cacheados e reutilizados enquanto a origem não mudar.
+
+Essa é uma regra **SHARED** para interfaces SP_ORG com listas grandes.
+
+## Header — padrão APM/Items recuperado na R3
+
+O header deve ser composto **da direita para a esquerda**, usando o botão Fechar como âncora:
+`X <- reserva futura <- identidade/contexto operacional <- título`.
+
+Weapons 0.6-D R3 aplica o padrão. Items já usa a mesma lógica de ancoragem. Métricas específicas continuam pertencendo a cada domínio.
+
+## Mensagem de catalogação
+
+Padrão player-facing aprovado:
+- Weapons: **Vasculhando inventário e catalogando armas...**
+- Items: **Vasculhando inventário e catalogando itens...** — pendente para a próxima rodada explícita de convergência.
+
+A mensagem não deve mudar a semântica/cache do catálogo; é apenas feedback durante uma varredura real, não em cache hit.
