@@ -284,8 +284,8 @@
   ],
   "implementation_notes": {
     "Weapons": {
-      "delivery": "0.6-D R1 mission-first candidate / addon source 0.1-A",
-      "status": "MISSION_FIRST_0_6_D_R1_CANDIDATE_RUNTIME_PENDING_ADDON_SOURCE_INTEGRATION_PENDING",
+      "delivery": "0.6-D R2 mission-first UI convergence candidate / addon source 0.1-A",
+      "status": "MISSION_FIRST_0_6_D_R2_UI_CONVERGENCE_CANDIDATE_RUNTIME_PENDING_ADDON_SOURCE_INTEGRATION_PENDING",
       "homologated": {
         "lifecycle_0_1_b": "128/128 AUTO + 3/3 live Take/Put",
         "configuration_0_2": "175/175 AUTO",
@@ -294,7 +294,8 @@
         "weapon_kit_0_5": "301/301 AUTO; 50/50 WeaponKit-specific gates",
         "player_ui_0_6_a": "362/362 AUTO; visual/structural baseline frozen",
         "player_ui_0_6_b": "397/397 AUTO; selection/information and initial ALL-kit synchronization approved",
-        "player_ui_0_6_c": "445/445 AUTO; read-only compatibility selectors approved"
+        "player_ui_0_6_c": "445/445 AUTO; read-only compatibility selectors approved",
+        "player_ui_0_6_d_r1": "471/471 AUTO; session-local WeaponKit draft, SALVO/ALTERADO/DESCARTAR approved"
       },
       "product_concept": "Player-facing module with its own simple APM-like WeaponKit UI. A WeaponKit is one configured weapon targeted to one weapon slot.",
       "slot_isolation_rule": "Applying a WeaponKit may intentionally mutate only the target weapon slot; the rest of the loadout belongs to other domains and must be preserved.",
@@ -302,7 +303,7 @@
       "apm_reference_rule": "Historical APM weapon UI is a UX/lessons-learned source. Review KEEP/ADAPT/DROP/NEW before freezing Weapons UI 0.6.",
       "physical_identity_proven": false,
       "addon_source_integrated_through": "0.1-A",
-      "next": "Validate 0.6-D R1 WeaponKit Draft in Arma; require runtime/manual gate before 0.6-E.",
+      "next": "Validate 0.6-D R2 in Arma; require 500/500 plus manual UI convergence gate before 0.6-E.",
       "recipe_rule": "WeaponRecipe is frozen as configuration + optional magazineClass; targetSlot/name/identity/ammoCount remain outside Recipe.",
       "secondary_runtime_rule": "PRIMARY/HANDGUN class guards are strict. SECONDARY type=4 runtime/base variants may be equivalent only inside the same baseWeapon family.",
       "weapon_kit_candidate": {
@@ -332,31 +333,38 @@
         "status": "FROZEN_MISSION_FIRST"
       },
       "weapon_ui_candidate": {
-        "checkpoint": "0.6-D",
-        "final_candidate": "R1",
-        "build": "0.6.3.1-weaponkit-draft-local-mission-first",
-        "static_validation": "260/260",
-        "runner_source_assertions": 444,
-        "runtime": "PENDING_ARMA_EXPECTED_471",
-        "visual_baseline": "0.6-A R4 FROZEN",
-        "information_baseline": "0.6-B R4 FROZEN 397/397",
-        "compatibility_baseline": "0.6-C R1 FROZEN 445/445",
-        "draft_mode": "LOCAL_WEAPONKIT_DRAFT_CANDIDATE",
-        "draft_key": "kitId",
-        "editable_fields": [
-          "optic",
-          "muzzle",
-          "pointer",
-          "bipod",
-          "magazineClass"
+        "checkpoint": "0.6-D R2",
+        "final_candidate": "R2",
+        "build": "0.6.3.2-ui-convergence-equipment-content-mission-first",
+        "static_validation": "232/232",
+        "runner_source_assertions": 473,
+        "runtime": "PENDING_ARMA_EXPECTED_500",
+        "draft_baseline": "0.6-D R1 FROZEN 471/471",
+        "visual_reference": "Items Multiplayer Lab R3",
+        "ui_layout": "FOUR_PANEL_ITEMS_CONVERGENCE",
+        "panel_titles": [
+          "MEUS KITS DE ARMAS",
+          "KIT SELECIONADO / RASCUNHO",
+          "CATÁLOGO DE ARMAS",
+          "CONTEÚDO DO EQUIPAMENTO"
         ],
-        "base_weapon_edit": "DEFERRED_0_6_E",
-        "discard": "ACTIVE",
-        "save": "DEFERRED_0_6_E",
+        "catalog_mode": "CONTINUOUS_WINDOW_VISIBLE_SLIDER",
+        "catalog_window_size": 32,
+        "catalog_content_filters": [
+          "ALL",
+          "WEAPON",
+          "OPTIC",
+          "POINTER",
+          "BIPOD",
+          "MAGAZINE",
+          "GRIP"
+        ],
+        "equipment_content": "READ_ONLY_CURRENT_WEAPON",
+        "convergence_backlog": "docs/29_SHARED_UI_ITEMS_WEAPONS.md",
         "authoring": "DEFERRED_0_6_E",
+        "application": "DEFERRED_0_7",
         "loadout_mutation": false,
-        "weaponkit_mutation": false,
-        "application": "DEFERRED_0_7"
+        "weaponkit_mutation": false
       },
       "player_ui_0_6_a": {
         "r1": "REJECTED_CFGFUNCTIONS_PATH",
@@ -368,13 +376,16 @@
       },
       "shared_ui_polish": {
         "reference": "docs/29_SHARED_UI_ITEMS_WEAPONS.md",
-        "footer_future": "split Context/Message/History into three visual bands",
-        "modules": [
-          "Items",
-          "Weapons"
+        "policy": "formal convergence backlog; port validated shared patterns explicitly",
+        "r2_trial": [
+          "Items opacity tokens",
+          "four-panel grid",
+          "visible continuous catalog scrollbar",
+          "KIT SELECIONADO / RASCUNHO",
+          "three-band footer"
         ],
-        "timing": "after functional checkpoints; execute as coordinated final polish",
-        "current_policy": "do not change button scale, font scale, opacity or ultrawide width now"
+        "authoring_boundary": "0.6-E remains deferred",
+        "application_boundary": "0.7 remains deferred"
       },
       "player_ui_0_6_b": {
         "r1": "392_OF_392_FUNCTIONAL_REJECTED_STRUCTURED_TEXT_ENTITY_NOISE",
@@ -389,9 +400,10 @@
         "status": "FROZEN_MISSION_FIRST"
       },
       "player_ui_0_6_d": {
-        "r1": "CANDIDATE_STATIC_260_OF_260_RUNTIME_PENDING_EXPECTED_471",
-        "mode": "LOCAL_WEAPONKIT_DRAFT_CANDIDATE",
-        "status": "ACTIVE_CANDIDATE"
+        "r1": "APPROVED_471_OF_471",
+        "r2": "CANDIDATE_STATIC_232_OF_232_RUNTIME_PENDING_EXPECTED_500",
+        "mode": "LOCAL_DRAFT_PLUS_UI_CONVERGENCE_EQUIPMENT_CONTENT",
+        "status": "ACTIVE_R2_CANDIDATE"
       }
     }
   }
