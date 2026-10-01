@@ -136,12 +136,12 @@
       "id": "Weapons",
       "addon": "ServoPeregrino_Organizador_Weapons",
       "mandatory": false,
-      "status": "MISSION_FIRST_0_6_D_R2_UI_CONVERGENCE_CANDIDATE_RUNTIME_PENDING_ADDON_SOURCE_INTEGRATION_PENDING",
+      "status": "MISSION_FIRST_0_6_D_R3_FOCUSED_REFRESH_CANDIDATE_RUNTIME_PENDING_ADDON_SOURCE_INTEGRATION_PENDING",
       "stable_version": null,
       "development_version": {
-        "display": "0.6-D R2 mission-first candidate / addon source 0.1-A",
-        "semantic": "0.6.3.2 mission-first candidate",
-        "build": "0.6.3.2-ui-convergence-equipment-content-mission-first"
+        "display": "0.6-D R3 mission-first candidate / addon source 0.1-A",
+        "semantic": "0.6.3.3 mission-first candidate",
+        "build": "0.6.3.3-focused-refresh-header-polish-mission-first"
       },
       "dependencies": [
         "Nexus"
@@ -178,9 +178,9 @@
           "persistence.provider.v1"
         ]
       },
-      "next_gate": "Validate 0.6-D R2 in Arma; expect 500/500 plus manual UI convergence gate before 0.6-E.",
+      "next_gate": "Validate 0.6-D R3 in Arma; projected 512 checks plus manual focused-refresh/no-stutter/header gate before 0.6-E.",
       "homologated_artifact": "0.1-B 128/128 + 3/3; 0.2 175/175; 0.3 R2 213/213; 0.4 R5 251/251; 0.5 301/301; 0.6-A R4 362/362; 0.6-B R4 397/397; 0.6-C R1 445/445; 0.6-D R1 471/471.",
-      "current_candidate_artifact": "0.6-D R2 UI Convergence / Equipment Content; static 232/232; expected runtime 500.",
+      "current_candidate_artifact": "0.6-D R3 Focused Refresh / Header Polish; static 272/272; projected runtime 512. R2 was 500/500 AUTO but manually rejected for stutter.",
       "mission_first_validation": {
         "lifecycle_0_1_b": "APPROVED_SP",
         "weapon_configuration_0_2": "APPROVED_SP",
@@ -193,7 +193,7 @@
         "weapon_kit": "ONE_CONFIGURED_WEAPON_PER_TARGET_SLOT",
         "weapon_kit_repository": "SESSION_LOCAL_CANDIDATE",
         "slot_isolation": "PRESERVE_ALL_NON_TARGET_LOADOUT_DOMAINS",
-        "next": "Validate 0.6-D R2 runtime/manual",
+        "next": "Validate 0.6-D R3 runtime/manual",
         "weapon_kit_specific_checks": "50_OF_50",
         "weapon_kit_slots": "PRIMARY_HANDGUN_SECONDARY",
         "weapon_kit_loadout_mutation": "NONE",
@@ -225,17 +225,24 @@
         "compatibility_selector_mode": "READ_ONLY_COMPATIBILITY_SELECTORS_FROZEN_0_6_C",
         "compatibility_selector_source": "WEAPONS_0_3_ENGINE_QUERY",
         "compatibility_selector_expected_runtime": "445",
-        "weaponkit_draft": "R1_APPROVED_471_OF_471_R2_PRESERVES_DRAFT",
+        "weaponkit_draft": "R1_APPROVED_471_OF_471_R3_PRESERVES_DRAFT",
         "weaponkit_draft_mode": "LOCAL_SESSION_ONLY_BY_KIT_ID",
         "weaponkit_draft_fields": "OPTIC_MUZZLE_POINTER_BIPOD_MAGAZINECLASS",
         "weaponkit_draft_discard": "ACTIVE",
         "base_weapon_edit": "DEFERRED_0_6_E",
-        "ui_convergence": "CANDIDATE_R2_STATIC_232_OF_232_RUNTIME_PENDING_EXPECTED_500",
-        "visual_reference": "ITEMS_MULTIPLAYER_LAB_R3",
-        "catalog_mode": "CONTINUOUS_WINDOW_VISIBLE_SLIDER_WINDOW_32",
+        "ui_convergence": "R2_AUTO_500_OF_500_MANUAL_PERF_REJECTED_R3_PRESERVES_LAYOUT",
+        "visual_reference": "ITEMS_MULTIPLAYER_LAB_R3_PLUS_APM_HEADER",
+        "catalog_mode": "CONTINUOUS_WINDOW_VISIBLE_SLIDER_FOCUSED_REFRESH_WINDOW_32",
         "catalog_content_filters": "ALL_WEAPON_OPTIC_POINTER_BIPOD_MAGAZINE_GRIP",
         "equipment_content": "READ_ONLY_CURRENT_WEAPON_PRIMARY_HANDGUN_SECONDARY",
-        "shared_ui_backlog": "docs/29_SHARED_UI_ITEMS_WEAPONS.md"
+        "shared_ui_backlog": "docs/29_SHARED_UI_ITEMS_WEAPONS.md",
+        "ui_performance": "R3_CANDIDATE_STATIC_272_OF_272_RUNTIME_PROJECTED_512",
+        "refresh_modes": "FULL_CATALOG_FOCUSED_DRAFT_FOCUSED_EQUIPMENT_FOCUSED",
+        "catalog_projection_cache": "BUILD_KIT_WEAPON",
+        "catalog_filter_cache": "TYPE_CATEGORY_QUERY",
+        "header_layout": "RIGHT_TO_LEFT_ANCHORED_FROM_CLOSE_X",
+        "catalog_build_message": "VASCULHANDO_INVENTARIO_E_CATALOGANDO_ARMAS",
+        "items_backlog_catalog_message": "VASCULHANDO_INVENTARIO_E_CATALOGANDO_ITENS"
       }
     },
     {
