@@ -1,6 +1,6 @@
 # Banco de ideias, decisões e conceitos — SP_ORG
 
-Data de consolidação: **28/09/2026**.
+Data de consolidação: **01/10/2026**.
 
 Este documento existe para impedir que ideias, experiências, decisões e caminhos rejeitados desapareçam entre chats, entregas ou desenvolvedores.
 
@@ -345,3 +345,50 @@ Arquitetura detalhada: `20_HUB_ARQUITETURA_E_INTEGRACAO.md`.
 ## 17. Execução de núcleos independentes — Weapons 0.1-A
 
 A ordem recomendada acima não estabelece dependências obrigatórias entre núcleos. Weapons iniciou isoladamente com Nexus. Fingerprint, classe, índice e localização foram rejeitados como identidade; dois registros lógicos não provam a associação às duas armas físicas. Sem prova, manter gate aberto e schema interno candidato. Condição permanece exclusivamente em WeaponCondition.
+
+## 18. Decisão de design — componentes virtuais e panes causais (01/10/2026)
+
+**PLANEJADO**
+
+Foi consolidada a direção para modelar as partes internas da arma como **componentes funcionais virtuais** no `WeaponCondition`, sem exigir que cada mola, pino ou peça mecânica exista como item físico no inventário.
+
+Cada família de arma poderá possuir um perfil de componentes aplicáveis. Candidatos iniciais incluem:
+- barrel;
+- bolt/carrier ou action;
+- extractor;
+- ejector, quando aplicável;
+- firing pin;
+- recoil spring;
+- trigger group;
+- gas system;
+- magazine/feed interface.
+
+A condição de cada componente poderá contribuir para a confiabilidade da arma. A pane não deve ser tratada primariamente como uma porcentagem global aleatória; a direção é uma cadeia causal:
+
+```text
+estado da arma/componentes + ambiente/uso + contexto de magazine/ammo
+    -> confiabilidade
+    -> pane observada
+    -> fatores contribuintes/diagnóstico
+```
+
+Taxonomia inicial candidata:
+- FAILURE_TO_FEED;
+- FAILURE_TO_FIRE;
+- FAILURE_TO_EXTRACT;
+- FAILURE_TO_EJECT;
+- STOVEPIPE como apresentação/subtipo candidato de ejeção;
+- DOUBLE_FEED.
+
+Regra importante: **pane observada não é sinônimo de causa única**. O sistema deve registrar fatores contribuintes e permitir que peças, sujeira, lubrificação, corrosão, magazine, munição ou providers externos participem da explicação.
+
+Exemplos de relações candidatas:
+- extractor degradado -> maior contribuição para falha de extração;
+- firing pin/mecanismo de disparo degradado -> maior contribuição para falha de disparo;
+- magazine/feed interface degradada -> maior contribuição para falha de alimentação;
+- ejector/action + fouling -> maior contribuição para falha de ejeção/stovepipe.
+
+Fórmulas, pesos, thresholds e probabilidades permanecem abertos. A intenção é garantir **causalidade explicável e diagnosticável**, não simular cada peça física desde o início.
+
+Esta decisão é documentação de arquitetura futura de `WeaponCondition` e **não altera o escopo da Weapons 0.1-A**, que permanece focada em foundation/identity e com gate físico aberto.
+
