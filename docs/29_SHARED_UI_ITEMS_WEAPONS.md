@@ -281,3 +281,22 @@ A funcionalidade final ainda não foi definida. Em R2:
 - não fingem filtrar conteúdo do draft/equipamento quando esse comportamento não foi especificado.
 
 Essa solução deve ser reavaliada no gate manual antes de ser promovida a SHARED.
+
+
+## UICommon — decisão de fundação
+
+Em 01/10/2026 a convergência deixa de ser apenas visual/documental e passa a ter uma fundação técnica dedicada.
+
+- addon: `ServoPeregrino_Organizador_UICommon`;
+- distribuição: mesmo pacote Core do Nexus, PBO separado;
+- dependência permitida: UICommon -> Nexus;
+- Items e Weapons poderão depender de UICommon após seus gates de migração;
+- UICommon não depende de Items/Weapons e não possui domínio;
+- primeira migração: Items equivalence;
+- segunda migração: Weapons 0.6-E R2;
+- mudanças player-facing em Items só entram após a equivalência estrutural.
+
+Documentos autoritativos:
+- `30_ITEMS_UI_REGRESSION_CONTRACT.md`;
+- `31_UICOMMON_ARCHITECTURE_AND_MIGRATION.md`;
+- `32_WEAPONS_0_6_E_R2_UI_FREEZE.md`.
