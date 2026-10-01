@@ -51,7 +51,7 @@ Regras obrigatórias:
 - Mission Lab R3 carrega e slots funcionam.
 - Packaging R2 pendente de validação runtime.
 - Armorer possui baseline histórica madura, ainda não importada no monorepo.
-- Weapons addon source continua integrado até 0.1-A; mission-first funcional está homologado até **0.6-D R1 (471/471)**. **0.6-D R2** obteve **500/500 AUTO**, mas foi reprovada manualmente por stuttering/full refresh no catálogo. **0.6-D R3 Focused Refresh / Header Polish** é a candidata ativa: static **272/272**, runner source **485**, runtime projetado **512**.
+- Weapons addon source continua integrado até 0.1-A. Mission-first está homologado até **0.6-D R3 (512/512)** com focused refresh/performance aprovados. **0.6-E R1 — Authoring/Lifecycle** é a candidata ativa: static **257/257**, runner source **509**, runtime projetado ~**536** pendente no Arma.
 - Hub/WeaponCondition/Equipment/Sets/Policy/ServerIntegration são planejados.
 
 ## Arquivos para alterações
@@ -106,19 +106,21 @@ Baselines mission-first homologadas:
 - runtime **445/445 PASS**.
 
 Candidata ativa:
-- **0.6-D R3 — Focused Refresh / Header Polish**;
-- build `0.6.3.3-focused-refresh-header-polish-mission-first`;
-- preservar R1 471/471 + estrutura R2;
-- catálogo/draft/equipamento usam refresh focal;
-- projeção/filtro do catálogo cacheados;
-- header ancorado a partir do X;
-- mensagem de build Weapons: `Vasculhando inventário e catalogando armas...`;
-- mensagem equivalente Items está no UI_CONVERGENCE_BACKLOG;
-- static **272/272**;
-- runtime projetado **512**, pendente;
-- **não iniciar 0.6-E antes de RPT + teste manual da R3**.
+- **0.6-E R1 — Authoring/Lifecycle**;
+- build `0.6.4.1-authoring-lifecycle-session-local-mission-first`;
+- baseline: 0.6-D R3 **512/512**;
+- static **257/257**;
+- runner source **509**;
+- runtime projetado ~**536**, pendente;
+- NOVO / RENOMEAR / DUPLICAR / EXCLUIR;
+- SALVAR / SALVAR COMO NOVO;
+- troca da arma-base no draft somente no mesmo targetSlot;
+- troca da arma reseta attachments/magazine do draft;
+- nome inline preservado em focused refresh;
+- repository session-local; nenhuma aplicação física;
+- **não iniciar 0.6-F antes de RPT + teste manual da 0.6-E R1**.
 
-Continuam abertos: integração mission-first -> addon/PBO, Packaging, 0.6-D R3, 0.6-E/F, 0.7 aplicação slot-safe, 0.8 MP/JIP/reconnect e identidade física intrínseca.
+Continuam abertos: integração mission-first -> addon/PBO, Packaging, 0.6-E R1/0.6-F, 0.7 aplicação slot-safe, 0.8 MP/JIP/reconnect e identidade física intrínseca.
 
 
 ### Regra de UI compartilhada
