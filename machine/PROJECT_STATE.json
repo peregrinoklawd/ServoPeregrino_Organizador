@@ -22,8 +22,8 @@
     "hub_rule": "Hub is an optional player-facing integration/orchestration layer. No domain module may require Hub in order to function.",
     "independent_core_development": true
   },
-  "global_next_gate": "Weapons 0.6-D R1 WeaponKit Draft runtime/manual validation over homologated 0.6-C R1 Compatibility Selectors.",
-  "global_after_gate": "Weapons 0.6-E authoring/lifecycle -> 0.6-F final visual adaptation/regression -> 0.7 Slot-Safe Weapon Application -> 0.8 Multiplayer Authority/Reconciliation.",
+  "global_next_gate": "Weapons 0.6-D R2 UI Convergence / Equipment Content runtime/manual validation over homologated 0.6-D R1 draft.",
+  "global_after_gate": "Weapons 0.6-E authoring/lifecycle -> 0.6-F final polish/regression -> 0.7 Slot-Safe Weapon Application -> 0.8 Multiplayer Authority/Reconciliation.",
   "modules": [
     {
       "id": "Nexus",
@@ -158,9 +158,9 @@
       "mandatory": false,
       "stable_version": null,
       "development_version": {
-        "display": "0.6-D R1 mission-first candidate / addon source 0.1-A",
-        "semantic": "0.6.3.1 mission-first candidate",
-        "build": "0.6.3.1-weaponkit-draft-local-mission-first"
+        "display": "0.6-D R2 mission-first candidate / addon source 0.1-A",
+        "semantic": "0.6.3.2 mission-first candidate",
+        "build": "0.6.3.2-ui-convergence-equipment-content-mission-first"
       },
       "dependencies": [
         "Nexus"
@@ -197,10 +197,10 @@
           "persistence.provider.v1"
         ]
       },
-      "status": "MISSION_FIRST_0_6_D_R1_CANDIDATE_RUNTIME_PENDING_ADDON_SOURCE_INTEGRATION_PENDING",
-      "next_gate": "Validate 0.6-D R1 WeaponKit Draft in Arma; expect 471/471 plus manual persistence/discard/no-mutation regression before 0.6-E.",
-      "homologated_artifact": "0.1-B 128/128 + 3/3; 0.2 R3 175/175; 0.3 R2 213/213; 0.4 R5 251/251; 0.5 301/301; 0.6-A R4 362/362; 0.6-B R4 397/397; 0.6-C R1 445/445.",
-      "current_candidate_artifact": "0.6-D R1 WeaponKit Draft; static 260/260; expected runtime 471; Arma pending.",
+      "status": "MISSION_FIRST_0_6_D_R2_UI_CONVERGENCE_CANDIDATE_RUNTIME_PENDING_ADDON_SOURCE_INTEGRATION_PENDING",
+      "next_gate": "Validate 0.6-D R2 in Arma; expect 500/500 plus manual four-panel/transparency/scrollbar/accessory-filter/equipment-read-only regression before 0.6-E.",
+      "homologated_artifact": "0.1-B 128/128 + 3/3; 0.2 175/175; 0.3 R2 213/213; 0.4 R5 251/251; 0.5 301/301; 0.6-A R4 362/362; 0.6-B R4 397/397; 0.6-C R1 445/445; 0.6-D R1 471/471.",
+      "current_candidate_artifact": "0.6-D R2 UI Convergence / Equipment Content; static 232/232; runner source 473; expected runtime 500; Arma pending.",
       "mission_first_validation": {
         "0.1-B": {
           "status": "APPROVED_SP",
@@ -443,38 +443,60 @@
           "next": "0.6-D WeaponKit Draft"
         },
         "0.6-D": {
-          "status": "CANDIDATE_RUNTIME_PENDING",
-          "candidate": "R1",
-          "build": "0.6.3.1-weaponkit-draft-local-mission-first",
-          "static_validation": {
-            "passed": 260,
+          "status": "R1_APPROVED_R2_CANDIDATE_RUNTIME_PENDING",
+          "approved_candidate": "R1",
+          "approved_build": "0.6.3.1-weaponkit-draft-local-mission-first",
+          "approved_auto_test": {
+            "passed": 471,
             "failed": 0,
-            "total": 260
+            "total": 471
           },
-          "runner_source_assertions": 444,
+          "candidate": "R2",
+          "build": "0.6.3.2-ui-convergence-equipment-content-mission-first",
+          "static_validation": {
+            "passed": 232,
+            "failed": 0,
+            "total": 232
+          },
+          "runner_source_assertions": 473,
           "expected_auto_test": {
-            "total": 471,
+            "total": 500,
             "status": "PENDING_ARMA"
           },
-          "draft_mode": "LOCAL_WEAPONKIT_DRAFT_CANDIDATE",
-          "draft_key": "kitId",
-          "editable_fields": [
-            "optic",
-            "muzzle",
-            "pointer",
-            "bipod",
-            "magazineClass"
+          "draft_mode": "LOCAL_WEAPONKIT_DRAFT_CANDIDATE_PRESERVED_FROM_R1",
+          "ui_layout": "FOUR_PANEL_ITEMS_CONVERGENCE",
+          "visual_reference": "ITEMS_MULTIPLAYER_LAB_R3",
+          "catalog_mode": "CONTINUOUS_WINDOW_VISIBLE_SLIDER",
+          "catalog_window_size": 32,
+          "catalog_filters": {
+            "type": [
+              "ALL",
+              "PRIMARY",
+              "HANDGUN",
+              "SECONDARY"
+            ],
+            "content": [
+              "ALL",
+              "WEAPON",
+              "OPTIC",
+              "POINTER",
+              "BIPOD",
+              "MAGAZINE",
+              "GRIP"
+            ]
+          },
+          "equipment_content": "READ_ONLY_CURRENT_WEAPON",
+          "equipment_slots": [
+            "PRIMARY",
+            "HANDGUN",
+            "SECONDARY"
           ],
-          "base_weapon_edit": "DEFERRED_0_6_E",
-          "compatibility_source": "0.3 ENGINE_FORWARD_ON_DEMAND",
-          "discard": "ACTIVE",
-          "save": "DEFERRED_0_6_E",
+          "shared_ui_backlog": "docs/29_SHARED_UI_ITEMS_WEAPONS.md",
           "authoring": "DEFERRED_0_6_E",
           "application": "DEFERRED_0_7",
           "multiplayer": "DEFERRED_0_8",
           "loadout_mutation": false,
           "weaponkit_mutation": false,
-          "ui_geometry": "PRESERVED_FROM_0_6_A_R4",
           "next": "Runtime/manual gate; do not start 0.6-E yet"
         }
       }
