@@ -51,7 +51,7 @@ Regras obrigatórias:
 - Mission Lab R3 carrega e slots funcionam.
 - Packaging R2 pendente de validação runtime.
 - Armorer possui baseline histórica madura, ainda não importada no monorepo.
-- Weapons 0.1-A é foundation/spike candidato, pendente de validação runtime e identidade física.
+- Weapons addon source continua integrado até 0.1-A; mission-first está homologado até 0.6-B R4 (397/397). 0.6-C R1 Compatibility Selectors é a candidata ativa, com 335/335 static e runtime pendente.
 - Hub/WeaponCondition/Equipment/Sets/Policy/ServerIntegration são planejados.
 
 ## Arquivos para alterações
@@ -87,6 +87,24 @@ Mudanças relevantes devem preferir:
 4. merge após revisão;
 5. atualização da documentação de continuidade no mesmo ciclo.
 
-## Continuidade Weapons 0.1-A
+## Continuidade Weapons
 
-Ler `docs/21_WEAPONS_0_1_A_FOUNDATION_IDENTITY_SPIKE.md` e provenance da entrega. Não confundir o registry lógico com uma identidade física comprovada. `weapons.runtime` é a única capability nova; contratos de domínio seguem candidatos/planejados. Não iniciar 0.1-B sem revisão humana. Núcleos independentes podem avançar sem aguardar Items ou Armorer.
+O addon source desta PR continua em **0.1-A**; não confundir isso com a linha funcional mission-first.
+
+Baselines mission-first homologadas:
+- 0.1-B: 128/128 + 3/3 live;
+- 0.2: 175/175;
+- 0.3 R2: 213/213;
+- 0.4 R5: 251/251;
+- 0.5: 301/301;
+- 0.6-A R4: 362/362, shell visual congelado;
+- 0.6-B R4: 397/397, seleção/informações congeladas.
+
+Candidata ativa:
+- **0.6-C R1 — Compatibility Selectors**;
+- build `0.6.2.1-compatibility-selectors-read-only-mission-first`;
+- static 335/335;
+- runtime Arma pendente;
+- não iniciar 0.6-D antes de RPT + teste manual da R1.
+
+Continuam abertos: integração mission-first -> addon/PBO, Packaging, 0.6-D..F, 0.7 aplicação slot-safe, 0.8 MP/JIP/reconnect e identidade física intrínseca.
