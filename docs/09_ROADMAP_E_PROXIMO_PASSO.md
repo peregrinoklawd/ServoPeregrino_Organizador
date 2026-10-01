@@ -390,3 +390,25 @@ Contrato homologado:
 - focused refresh R3 preservado.
 
 **0.6-F bloqueada até runtime/manual da R2.**
+
+
+## Gate imediato — UICommon
+
+A frente ativa passa a ser a fundação compartilhada de UI antes de continuar a Weapons 0.6-E R2.
+
+Sequência obrigatória:
+1. validar `UICommon 0.1 foundation` isoladamente;
+2. criar/validar laboratório conjunto mission-first Items + Weapons + UICommon;
+3. migrar infraestrutura genérica de Items para UICommon sem alterar UX;
+4. executar o contrato `30_ITEMS_UI_REGRESSION_CONTRACT.md`;
+5. homologar equivalência Items + UICommon;
+6. migrar/implementar Weapons 0.6-E R2 sobre UICommon conforme `32_WEAPONS_0_6_E_R2_UI_FREEZE.md`;
+7. validar Weapons em runtime/manual/performance;
+8. somente então retomar 0.6-F/0.7;
+9. numa rodada posterior, aplicar em Items as melhorias compartilhadas já homologadas.
+
+Regras:
+- não criar dependência Items <-> Weapons;
+- UICommon permanece separado do Nexus em PBO, embora ambos sejam distribuídos no pacote Core;
+- missão e PBO devem consumir os mesmos contratos/fontes, evitando duas implementações divergentes;
+- Public Loadouts de Items permanecem pendentes de validação manual específica e não bloqueiam a extração inicial do UICommon.
