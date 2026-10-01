@@ -170,7 +170,7 @@ Source integrado na branch. Base histórica da linha atual.
 0.6-A Player UI Shell                        FROZEN BASELINE 362/362
 0.6-B Selection + Information                APPROVED R4 397/397
 0.6-C Compatibility Selectors                APPROVED R1 445/445
-0.6-D WeaponKit Draft                         R1 APPROVED 471/471; R2 ACTIVE — UI CONVERGENCE / EQUIPMENT CONTENT
+0.6-D WeaponKit Draft                         R1 APPROVED 471/471; R2 AUTO 500/500 / PERF REJECTED; R3 ACTIVE — FOCUSED REFRESH / HEADER POLISH
 0.6-E Kit Authoring/Lifecycle
 0.6-F Final Visual Adaptation/Regression
 0.7  Slot-Safe Weapon Application
@@ -273,7 +273,7 @@ Contrato homologado:
 - authoring permanece para 0.6-E;
 - shell visual R4 permanece congelado.
 
-**Checkpoint ativo: 0.6-D R1 — WeaponKit Draft. 0.6-C R1 foi homologada em 445/445; 0.6-D está 260/260 static, runtime esperado 471 ainda pendente.**
+**Checkpoint ativo: 0.6-D R3 — Focused Refresh / Header Polish. R1 foi homologada em 471/471; R2 fechou 500/500 AUTO, mas foi reprovada manualmente por stuttering; R3 está 272/272 static e runtime projetado 512.**
 
 
 
@@ -289,7 +289,7 @@ Contrato homologado:
 - sem draft, authoring, aplicação física ou MP;
 - shell R4 preservado.
 
-**Gate 0.6-C fechado. Próximo gate funcional: 0.6-D WeaponKit Draft.**
+**Gate funcional R1 fechado; gate atual é 0.6-D R3 de performance/arquitetura de UI antes de 0.6-E.**
 
 
 #### 0.6-D R1 — homologada
@@ -313,13 +313,13 @@ Contrato homologado:
 **0.6-E permanece bloqueada; antes dela, a 0.6-D R2 executa a convergência estrutural aprovada.**
 
 
-#### 0.6-D R2 — candidata ativa
+#### 0.6-D R2 — AUTO verde / gate manual de performance reprovado
 
 - baseline funcional: 0.6-D R1 **471/471**;
 - build: `0.6.3.2-ui-convergence-equipment-content-mission-first`;
 - static: **232/232**;
 - runner source: **473 assertions**;
-- runtime esperado: **500**, pendente;
+- runtime real: **500/500 PASS / 0 FAIL**;
 - quatro painéis alinhados estruturalmente ao Items Multiplayer Lab R3;
 - transparência/tokens visuais do Items;
 - catálogo com filtro Tipo + Acessório;
@@ -332,4 +332,18 @@ Contrato homologado:
 - MP permanece 0.8;
 - backlog formal Items↔Weapons em `docs/29_SHARED_UI_ITEMS_WEAPONS.md`.
 
-**0.6-E bloqueada até runtime/manual da R2.**
+- manual: **REPROVADO** por stuttering do catálogo; o RPT mostrou full refresh em cada passo de scroll (~246–254 ms).
+
+#### 0.6-D R3 — candidata ativa
+
+- build: `0.6.3.3-focused-refresh-header-polish-mission-first`;
+- static **272/272**;
+- runner source **485**;
+- runtime projetado **512**, pendente;
+- refresh focal de catálogo/draft/equipamento;
+- projeção/filtro do catálogo cacheados;
+- header ancorado da direita para a esquerda a partir do X;
+- mensagem amigável de catalogação;
+- nenhuma mudança de ownership/gate: authoring 0.6-E, aplicação 0.7, MP 0.8.
+
+**0.6-E bloqueada até runtime/manual da R3.**
