@@ -2,7 +2,7 @@
 
 ## Estado atual
 
-**0.6-A R4 — BASELINE VISUAL/ESTRUTURAL CONGELADA. 0.6-B R4 — SELEÇÃO/INFORMAÇÕES HOMOLOGADA 397/397. 0.6-C R1 — COMPATIBILITY SELECTORS HOMOLOGADA 445/445. 0.6-D R1 — WEAPONKIT DRAFT CANDIDATA ATIVA; STATIC 260/260; RUNTIME PENDENTE.**
+**0.6-A R4 — SHELL HISTÓRICO 362/362. 0.6-B R4 — 397/397. 0.6-C R1 — 445/445. 0.6-D R1 — WEAPONKIT DRAFT HOMOLOGADA 471/471. 0.6-D R2 — UI CONVERGENCE / EQUIPMENT CONTENT CANDIDATA ATIVA; STATIC 232/232; RUNTIME ESPERADO 500.**
 
 Baseline anterior:
 - 0.4 R5 WeaponRecipe: **251/251**;
@@ -25,16 +25,16 @@ Sequência decidida:
 0.6-A  Shell/layout/listas/filtros                 FROZEN BASELINE 362/362
 0.6-B  Seleção de arma + informações              APPROVED R4 397/397
 0.6-C  Dropdowns de compatibilidade                APPROVED R1 445/445
-0.6-D  Rascunho de WeaponKit                       ACTIVE R1 — STATIC 260/260; RUNTIME PENDING
+0.6-D  Rascunho de WeaponKit                       R1 APPROVED 471/471; R2 ACTIVE — UI CONVERGENCE / EQUIPMENT CONTENT
 0.6-E  Novo/Renomear/Duplicar/Excluir/Salvar
 0.6-F  Adaptação visual final + foco + regressões
 ```
 
-Regra:
-1. primeiro implementar e testar as funcionalidades;
-2. preservar a baseline visual R4 durante B–E;
-3. depois adaptar o layout ao conteúdo real que passou a existir;
-4. só então fazer o polimento visual final.
+Regra revisada após o gate 0.6-D R1:
+1. a lógica de draft da R1 está homologada e deve ser preservada;
+2. antes de 0.6-E, executar uma **rodada deliberada de convergência estrutural R2** porque o usuário aprovou quatro painéis e alinhamento com Items/APM;
+3. 0.6-E continua responsável por authoring/lifecycle persistente;
+4. 0.6-F permanece o polish/regressão final após conteúdo funcional.
 
 Isso evita retrabalho visual enquanto os controles ainda estão ganhando comportamento.
 
@@ -100,14 +100,7 @@ Manter:
 
 ### Decisões explícitas de freeze
 
-Não alterar agora:
-- largura geral em ultrawide;
-- escala de botões;
-- escala de textos;
-- opacidade;
-- estrutura geral de três painéis;
-- rodapé semântico;
-- comportamento responsivo base.
+A antiga regra de não alterar opacidade/três painéis foi **superada pela decisão explícita da 0.6-D R2**. A R2 pode alterar estrutura/opacidade somente para convergir com Items Multiplayer Lab R3 e recuperar o painel de equipamento do APM, sem mudar gates de domínio.
 
 O painel **KIT SELECIONADO** ainda possui bastante espaço vazio. Isso é aceito temporariamente porque as próximas subentregas vão inserir informações e comportamento reais. A composição vertical será reavaliada somente na fase final de adaptação visual.
 
@@ -391,3 +384,70 @@ Regras:
 - geometria da 0.6-A R4 permanece congelada.
 
 Não iniciar 0.6-E antes de runtime + avaliação manual da 0.6-D R1.
+
+
+## 0.6-D R1 — HOMOLOGADA
+
+Build: `0.6.3.1-weaponkit-draft-local-mission-first`.
+
+Runtime real: **471/471 PASS / 0 FAIL**.
+
+Homologado:
+- draft session-local por `kitId`;
+- Mira/Boca/Pointer/Bipé/Carregador editam apenas o draft;
+- estado SALVO/ALTERADO;
+- DESCARTAR restaura o snapshot salvo;
+- refresh/foco preservam o draft;
+- repository e loadout permanecem imutáveis;
+- authoring continua 0.6-E;
+- aplicação continua 0.7.
+
+## 0.6-D R2 — UI Convergence / Equipment Content — CANDIDATA
+
+Build: `0.6.3.2-ui-convergence-equipment-content-mission-first`.
+
+Static: **232/232 PASS**. Runner: **473 source assertions**. Runtime esperado: **500 checks**.
+
+Esta rodada é uma exceção deliberada ao freeze visual antigo: reorganiza a interface **antes** de 0.6-E para evitar construir authoring sobre uma composição que já sabemos que será substituída.
+
+### Layout
+
+Quatro painéis, usando a transparência e a grade do Items Multiplayer Lab R3:
+1. **MEUS KITS DE ARMAS**;
+2. **KIT SELECIONADO / RASCUNHO**;
+3. **CATÁLOGO DE ARMAS**;
+4. **CONTEÚDO DO EQUIPAMENTO**.
+
+### Catálogo
+
+Mantém filtro por Tipo e adiciona filtro player-facing:
+`Todos | Arma | Óticas | Apontadores | Bipés | Carregadores | Empunhaduras`.
+
+Catálogo passa a usar janela virtualizada de **32 linhas**, wheel + scrollbar visível no padrão Items. Busca/filtro resetam offset para o topo.
+
+A compatibilidade continua exclusivamente engine-derived pela 0.3. Empunhaduras é somente uma classificação de apresentação de opções compatíveis do UnderBarrelSlot que não são identificadas como bipé; não cria compatibilidade nova.
+
+`muzzle/Boca` continua no draft, mas não ganhou categoria de catálogo nesta rodada porque a lista acordada não inclui Boca.
+
+### Conteúdo do Equipamento
+
+Read-only por slot:
+- Principal;
+- Porte;
+- Secundária.
+
+Mostra arma realmente equipada e Mira/Boca/Apontador/Bipé/Carregador observados. Nenhuma ação física existe neste painel na R2.
+
+### Shared UI
+
+A R2 inaugura o `UI_CONVERGENCE_BACKLOG` em `docs/29_SHARED_UI_ITEMS_WEAPONS.md`.
+
+Padrões aprovados/contemplados:
+- transparência do Items;
+- quatro painéis;
+- scrollbar contínua;
+- `KIT SELECIONADO / RASCUNHO`;
+- SALVO/ALTERADO como candidato shared;
+- rodapé em três faixas Contexto/Resultado/Histórico como candidato shared.
+
+**Não iniciar 0.6-E antes do RPT e do gate manual da 0.6-D R2.**
