@@ -2,7 +2,7 @@
 
 ## Estado atual
 
-**0.6-A R4 — BASELINE VISUAL/ESTRUTURAL CONGELADA. 0.6-B R4 — SELEÇÃO/INFORMAÇÕES HOMOLOGADA 397/397. 0.6-C R1 — CANDIDATA ATIVA; STATIC 335/335; RUNTIME PENDENTE.**
+**0.6-A R4 — BASELINE VISUAL/ESTRUTURAL CONGELADA. 0.6-B R4 — SELEÇÃO/INFORMAÇÕES HOMOLOGADA 397/397. 0.6-C R1 — COMPATIBILITY SELECTORS HOMOLOGADA 445/445. 0.6-D R1 — WEAPONKIT DRAFT CANDIDATA ATIVA; STATIC 260/260; RUNTIME PENDENTE.**
 
 Baseline anterior:
 - 0.4 R5 WeaponRecipe: **251/251**;
@@ -24,8 +24,8 @@ Sequência decidida:
 ```text
 0.6-A  Shell/layout/listas/filtros                 FROZEN BASELINE 362/362
 0.6-B  Seleção de arma + informações              APPROVED R4 397/397
-0.6-C  Dropdowns de compatibilidade                ACTIVE R1 — STATIC 335/335; RUNTIME PENDING
-0.6-D  Rascunho de WeaponKit
+0.6-C  Dropdowns de compatibilidade                APPROVED R1 445/445
+0.6-D  Rascunho de WeaponKit                       ACTIVE R1 — STATIC 260/260; RUNTIME PENDING
 0.6-E  Novo/Renomear/Duplicar/Excluir/Salvar
 0.6-F  Adaptação visual final + foco + regressões
 ```
@@ -307,7 +307,7 @@ Regras homologadas:
 - zero mutação de WeaponKit/loadout;
 - runtime: **397/397 PASS / 0 FAIL**.
 
-### Próximo passo: 0.6-C
+### 0.6-C — Compatibility Selectors — HOMOLOGADA R1
 
 Implementar **Compatibility Selectors** dentro de KIT SELECIONADO, sem criar painel separado.
 
@@ -325,15 +325,15 @@ Escopo planejado:
 Não abrir nova rodada de polimento visual antes de concluir as funcionalidades planejadas da 0.6.
 
 
-## 0.6-C — Compatibility Selectors — R1 candidata
+## 0.6-C — Compatibility Selectors — HOMOLOGADA R1
 
 Build mission-first:
 
 `0.6.2.1-compatibility-selectors-read-only-mission-first`
 
-Estado: **CANDIDATA / NÃO HOMOLOGADA EM RUNTIME**.
+Estado: **HOMOLOGADA MISSION-FIRST / 445/445 PASS / 0 FAIL**.
 
-Validação estática da candidata: **335/335 PASS / 0 FAIL**. O runner cumulativo contém 418 pontos de asserção no source e a execução esperada no Arma é **445 checks**.
+Validação estática da candidata original: **335/335 PASS / 0 FAIL**. Runtime homologado no Arma: **445/445 PASS / 0 FAIL**. A sessão manteve refreshes repetidos sem recursão ou mutação de WeaponKit/loadout.
 
 Delta funcional:
 - os controles existentes de Mira, Boca, Pointer, Bipé e Carregador passam a ser dropdowns;
@@ -353,4 +353,41 @@ Gates preservados:
 - aplicação física slot-safe: **0.7**;
 - multiplayer/authority: **0.8**.
 
-Não avançar para 0.6-D antes de runtime + avaliação manual da 0.6-C R1.
+Gate fechado em 01/10/2026 pelo RPT real. O bloco recorrente de erro `CBA_fnc_addPerFrameHandler` já existia em entregas anteriores e não é chamado pelo source SP_ORG desta linha.
+
+
+## 0.6-D — WeaponKit Draft — R1 candidata
+
+Build mission-first:
+
+`0.6.3.1-weaponkit-draft-local-mission-first`
+
+Estado: **CANDIDATA / NÃO HOMOLOGADA EM RUNTIME**.
+
+Validação estática: **260/260 PASS / 0 FAIL**. Runner: **444 pontos de asserção no source**; execução esperada no Arma quando todos os pré-requisitos passam: **471 checks**.
+
+### Contrato funcional da candidata
+
+A 0.6-D introduz um **rascunho local/session-local por WeaponKit**, sem escrever no repository 0.5 e sem alterar o loadout físico.
+
+Campos editáveis no draft:
+- Mira / `optic`;
+- Boca / `muzzle`;
+- Pointer / `pointer`;
+- Bipé / `bipod`;
+- Carregador / `magazineClass`.
+
+Regras:
+- opções continuam vindo exclusivamente da engine de compatibilidade homologada em 0.3;
+- a arma-base não é trocada nesta entrega;
+- alteração compatível fica persistida no draft durante a sessão;
+- status `SALVO` = draft igual ao Recipe salvo;
+- status `ALTERADO` = draft diferente;
+- `DESCARTAR` restaura o snapshot do WeaponKit salvo;
+- refresh, mudança de foco e fechamento/reabertura da UI não devem apagar o draft silenciosamente;
+- `SALVAR`, `SALVAR COMO NOVO`, `NOVO`, `RENOMEAR`, `DUPLICAR` e `EXCLUIR` continuam deferred para **0.6-E**;
+- nenhuma aplicação física; permanece em **0.7**;
+- nenhum multiplayer/authority; permanece em **0.8**;
+- geometria da 0.6-A R4 permanece congelada.
+
+Não iniciar 0.6-E antes de runtime + avaliação manual da 0.6-D R1.
