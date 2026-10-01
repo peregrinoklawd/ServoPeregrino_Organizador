@@ -1,0 +1,16 @@
+author = "Claudio Malta Telhada";
+onLoadName = "SP_ORG Items + Weapons UI Lab";
+onLoadMission = "Laboratorio compartilhado para validar UICommon e comparar Items / Weapons.";
+overviewText = "Mission-first lab: UICommon foundation, Items equivalence e Weapons UI migration.";
+enableDebugConsole = 1;
+disabledAI = 1;
+respawn = 3;
+respawnDelay = 2;
+respawnOnStart = -1;
+
+class Header
+{
+    gameType = COOP;
+    minPlayers = 1;
+    maxPlayers = 8;
+};
