@@ -171,8 +171,7 @@ Source integrado na branch. Base histórica da linha atual.
 0.6-B Selection + Information                APPROVED R4 397/397
 0.6-C Compatibility Selectors                APPROVED R1 445/445
 0.6-D WeaponKit Draft                         R1 APPROVED 471/471; R2 PERF REJECTED; R3 APPROVED 512/512
-0.6-E Authoring/Lifecycle                      ACTIVE
-0.6-E Kit Authoring/Lifecycle
+0.6-E Authoring/Lifecycle                      ACTIVE R1 — STATIC 257/257; RUNTIME PENDING (~536 projected)
 0.6-F Final Visual Adaptation/Regression
 0.7  Slot-Safe Weapon Application
 0.8  Multiplayer Authority / Reconciliation
@@ -274,7 +273,7 @@ Contrato homologado:
 - authoring permanece para 0.6-E;
 - shell visual R4 permanece congelado.
 
-**Checkpoint ativo: 0.6-E — Authoring/Lifecycle. A 0.6-D R3 foi homologada em 512/512 após hotfix test-only e gate manual de performance aprovado.**
+**Checkpoint ativo: 0.6-E R1 — Authoring/Lifecycle. 0.6-D R3 homologada em 512/512; candidata E R1 está 257/257 static, runner source 509 e runtime projetado ~536 pendente no Arma.**
 
 
 
@@ -290,7 +289,7 @@ Contrato homologado:
 - sem draft, authoring, aplicação física ou MP;
 - shell R4 preservado.
 
-**Gate funcional R1 fechado; gate atual é 0.6-D R3 de performance/arquitetura de UI antes de 0.6-E.**
+**Gate 0.6-D fechado. Gate atual: 0.6-E R1 Authoring/Lifecycle.**
 
 
 #### 0.6-D R1 — homologada
@@ -335,7 +334,7 @@ Contrato homologado:
 
 - manual: **REPROVADO** por stuttering do catálogo; o RPT mostrou full refresh em cada passo de scroll (~246–254 ms).
 
-#### 0.6-D R3 — candidata ativa
+#### 0.6-D R3 — HOMOLOGADA
 
 - build: `0.6.3.3-focused-refresh-header-polish-mission-first`;
 - static **272/272**;
@@ -348,3 +347,24 @@ Contrato homologado:
 - nenhuma mudança de ownership/gate: authoring 0.6-E, aplicação 0.7, MP 0.8.
 
 **Gate R3 fechado. 0.6-E liberada para implementação mission-first.**
+
+
+#### 0.6-E R1 — candidata ativa
+
+- build: `0.6.4.1-authoring-lifecycle-session-local-mission-first`;
+- baseline: 0.6-D R3 **512/512**;
+- static: **257/257**;
+- runner source: **509**;
+- runtime projetado: ~**536**, pendente;
+- NOVO / RENOMEAR / DUPLICAR / EXCLUIR;
+- SALVAR / SALVAR COMO NOVO;
+- troca da arma-base no draft, somente dentro do mesmo slot;
+- mudança da arma-base reseta attachments/magazine do draft;
+- focused refresh R3 preservado;
+- nome inline preservado durante refresh focal;
+- repository continua session-local;
+- nenhuma mutação de loadout físico;
+- aplicação continua 0.7;
+- MP/JIP/reconnect continua 0.8.
+
+**0.6-F bloqueada até runtime/manual da 0.6-E R1.**
