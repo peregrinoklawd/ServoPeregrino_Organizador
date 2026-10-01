@@ -22,7 +22,7 @@
     "hub_rule": "Hub is an optional player-facing integration/orchestration layer. No domain module may require Hub in order to function.",
     "independent_core_development": true
   },
-  "global_next_gate": "Weapons 0.6-D R2 UI Convergence / Equipment Content runtime/manual validation over homologated 0.6-D R1 draft.",
+  "global_next_gate": "Weapons 0.6-D R3 Focused Refresh / Header Polish runtime/manual validation after R2 AUTO 500/500 but manual performance rejection.",
   "global_after_gate": "Weapons 0.6-E authoring/lifecycle -> 0.6-F final polish/regression -> 0.7 Slot-Safe Weapon Application -> 0.8 Multiplayer Authority/Reconciliation.",
   "modules": [
     {
@@ -158,9 +158,9 @@
       "mandatory": false,
       "stable_version": null,
       "development_version": {
-        "display": "0.6-D R2 mission-first candidate / addon source 0.1-A",
-        "semantic": "0.6.3.2 mission-first candidate",
-        "build": "0.6.3.2-ui-convergence-equipment-content-mission-first"
+        "display": "0.6-D R3 mission-first candidate / addon source 0.1-A",
+        "semantic": "0.6.3.3 mission-first candidate",
+        "build": "0.6.3.3-focused-refresh-header-polish-mission-first"
       },
       "dependencies": [
         "Nexus"
@@ -197,10 +197,10 @@
           "persistence.provider.v1"
         ]
       },
-      "status": "MISSION_FIRST_0_6_D_R2_UI_CONVERGENCE_CANDIDATE_RUNTIME_PENDING_ADDON_SOURCE_INTEGRATION_PENDING",
-      "next_gate": "Validate 0.6-D R2 in Arma; expect 500/500 plus manual four-panel/transparency/scrollbar/accessory-filter/equipment-read-only regression before 0.6-E.",
+      "status": "MISSION_FIRST_0_6_D_R3_FOCUSED_REFRESH_CANDIDATE_RUNTIME_PENDING_ADDON_SOURCE_INTEGRATION_PENDING",
+      "next_gate": "Validate 0.6-D R3 in Arma; projected 512 checks plus manual no-stutter wheel/slider, focused-refresh and right-anchored-header gate before 0.6-E.",
       "homologated_artifact": "0.1-B 128/128 + 3/3; 0.2 175/175; 0.3 R2 213/213; 0.4 R5 251/251; 0.5 301/301; 0.6-A R4 362/362; 0.6-B R4 397/397; 0.6-C R1 445/445; 0.6-D R1 471/471.",
-      "current_candidate_artifact": "0.6-D R2 UI Convergence / Equipment Content; static 232/232; runner source 473; expected runtime 500; Arma pending.",
+      "current_candidate_artifact": "0.6-D R3 Focused Refresh / Header Polish; static 272/272; runner source 485; projected runtime 512; Arma pending. R2 AUTO 500/500 but manual performance rejected.",
       "mission_first_validation": {
         "0.1-B": {
           "status": "APPROVED_SP",
@@ -443,7 +443,7 @@
           "next": "0.6-D WeaponKit Draft"
         },
         "0.6-D": {
-          "status": "R1_APPROVED_R2_CANDIDATE_RUNTIME_PENDING",
+          "status": "R1_APPROVED_R2_AUTO_GREEN_MANUAL_PERF_REJECTED_R3_CANDIDATE",
           "approved_candidate": "R1",
           "approved_build": "0.6.3.1-weaponkit-draft-local-mission-first",
           "approved_auto_test": {
@@ -451,53 +451,64 @@
             "failed": 0,
             "total": 471
           },
-          "candidate": "R2",
-          "build": "0.6.3.2-ui-convergence-equipment-content-mission-first",
-          "static_validation": {
-            "passed": 232,
-            "failed": 0,
-            "total": 232
-          },
-          "runner_source_assertions": 473,
-          "expected_auto_test": {
-            "total": 500,
-            "status": "PENDING_ARMA"
-          },
-          "draft_mode": "LOCAL_WEAPONKIT_DRAFT_CANDIDATE_PRESERVED_FROM_R1",
-          "ui_layout": "FOUR_PANEL_ITEMS_CONVERGENCE",
-          "visual_reference": "ITEMS_MULTIPLAYER_LAB_R3",
-          "catalog_mode": "CONTINUOUS_WINDOW_VISIBLE_SLIDER",
-          "catalog_window_size": 32,
-          "catalog_filters": {
-            "type": [
-              "ALL",
-              "PRIMARY",
-              "HANDGUN",
-              "SECONDARY"
-            ],
-            "content": [
-              "ALL",
-              "WEAPON",
-              "OPTIC",
-              "POINTER",
-              "BIPOD",
-              "MAGAZINE",
-              "GRIP"
+          "r2": {
+            "build": "0.6.3.2-ui-convergence-equipment-content-mission-first",
+            "static_validation": {
+              "passed": 232,
+              "failed": 0,
+              "total": 232
+            },
+            "auto_test": {
+              "passed": 500,
+              "failed": 0,
+              "total": 500
+            },
+            "manual_gate": "REJECTED_STUTTER_FULL_REFRESH",
+            "observed_catalog_scroll_refresh_ms": "246-254",
+            "preserved_ui": [
+              "FOUR_PANEL_ITEMS_CONVERGENCE",
+              "ITEMS_MULTIPLAYER_LAB_R3_OPACITY",
+              "ACCESSORY_FILTERS",
+              "READ_ONLY_EQUIPMENT_CONTENT"
             ]
           },
-          "equipment_content": "READ_ONLY_CURRENT_WEAPON",
-          "equipment_slots": [
-            "PRIMARY",
-            "HANDGUN",
-            "SECONDARY"
+          "candidate": "R3",
+          "build": "0.6.3.3-focused-refresh-header-polish-mission-first",
+          "static_validation": {
+            "passed": 272,
+            "failed": 0,
+            "total": 272
+          },
+          "runner_source_assertions": 485,
+          "expected_auto_test": {
+            "total": 512,
+            "status": "PROJECTED_PENDING_ARMA"
+          },
+          "runtime_truth": "ARMA_RPT_REQUIRED",
+          "draft_mode": "LOCAL_WEAPONKIT_DRAFT_PRESERVED_FROM_R1",
+          "ui_layout": "FOUR_PANEL_ITEMS_CONVERGENCE_PRESERVED_FROM_R2",
+          "visual_reference": "ITEMS_MULTIPLAYER_LAB_R3_PLUS_APM_HEADER_LESSONS",
+          "refresh_modes": [
+            "FULL",
+            "CATALOG_FOCUSED",
+            "DRAFT_FOCUSED",
+            "EQUIPMENT_FOCUSED"
           ],
+          "catalog_mode": "CONTINUOUS_WINDOW_VISIBLE_SLIDER_FOCUSED_REFRESH",
+          "catalog_window_size": 32,
+          "catalog_projection_cache": "BY_BUILD_KIT_WEAPON",
+          "catalog_filter_cache": "BY_TYPE_CATEGORY_QUERY",
+          "header_layout": "RIGHT_TO_LEFT_ANCHORED_FROM_CLOSE_X",
+          "catalog_build_message": "Vasculhando inventário e catalogando armas...",
+          "items_backlog_message": "Vasculhando inventário e catalogando itens...",
+          "equipment_content": "READ_ONLY_CURRENT_WEAPON",
           "shared_ui_backlog": "docs/29_SHARED_UI_ITEMS_WEAPONS.md",
           "authoring": "DEFERRED_0_6_E",
           "application": "DEFERRED_0_7",
           "multiplayer": "DEFERRED_0_8",
           "loadout_mutation": false,
           "weaponkit_mutation": false,
-          "next": "Runtime/manual gate; do not start 0.6-E yet"
+          "next": "Runtime/manual R3 gate; do not start 0.6-E yet"
         }
       }
     },
@@ -959,7 +970,7 @@
       "reference": "docs/27_WEAPONS_0_5_WEAPON_KIT.md"
     },
     "weapons_player_ui": {
-      "status": "0.6_A_R4_AND_0.6_B_R4_APPROVED_0.6_C_NEXT",
+      "status": "0.6_D_R1_APPROVED_R2_AUTO_GREEN_MANUAL_PERF_REJECTED_R3_ACTIVE",
       "visual_reference": "SP_ORG Items current UI grammar + APM lessons learned",
       "layout": [
         "MEUS KITS",
@@ -1034,7 +1045,7 @@
         "runtime": "PENDING",
         "visual_gate": "PENDING"
       },
-      "current_checkpoint": "0.6-D WeaponKit Draft"
+      "current_checkpoint": "0.6-D R3 Focused Refresh / Header Polish"
     },
     "shared_ui_items_weapons": {
       "status": "DEFERRED_APPROVED_CONCEPT",
