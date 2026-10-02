@@ -1,0 +1,162 @@
+# Items + UICommon Equivalence R1
+
+Data: 2026-10-02.
+
+## Estado
+
+Candidata de Gate 2.
+
+Builds:
+- UICommon: `0.1.1-items-equivalence-r1`;
+- Items: `0.13.0.1-a-server-authority-foundation-uicommon-equivalence-r1`;
+- Weapons permanece na baseline mission-first `0.6.4.1-authoring-lifecycle-session-local-mission-first`.
+
+Esta entrega NÃO é uma rodada de redesign.
+
+## Objetivo
+
+Provar que Items pode começar a consumir infraestrutura compartilhada do UICommon sem perder comportamento, performance ou contratos já homologados.
+
+A regra de sucesso é equivalência:
+`Items antes == Items + UICommon depois`, exceto pelos novos markers/diagnósticos da dependência.
+
+## Delta técnico
+
+### UICommon 0.1.1
+UICommon passa a possuir:
+- escaping genérico de structured text;
+- clamp de offset virtual já existente;
+- janela virtual já existente;
+- foundation tests ampliados de 8 para 12 checks.
+
+Nova função:
+- `ServoPeregrino_Organizador_UICommon_fnc_escapeStructuredText`.
+
+### Items
+Items:
+- passa a declarar UICommon em `requiredAddons` no formato PBO;
+- valida UICommon no lifecycle;
+- publica no runtime que UICommon é obrigatório e qual build está em uso;
+- mantém `Items_fnc_escapeStructuredText` como wrapper de compatibilidade;
+- usa `UICommon_fnc_clampVirtualOffset` para o clamp da janela do Catálogo;
+- ganha `runUICommonEquivalenceTests`.
+
+Nenhuma lógica de domínio foi movida para UICommon.
+
+## Hotfix 1 incorporado ao source oficial de Items
+
+A candidata também carrega os hotfixes já exercitados no laboratório conjunto:
+- CLOSE_UI sem modal redundante, preservando rascunho session-local;
+- causa de rejeição física player-facing;
+- PHYSICAL_FLOW com rejectCode e métricas de capacidade.
+
+## Não muda nesta entrega
+
+Não alterar deliberadamente:
+- geometria/layout dos quatro painéis;
+- ações e ordem dos botões;
+- Draft/Repository/Storage;
+- Whole-Kit/Application Engine;
+- EXACT;
+- DnD/ghost;
+- Equipment;
+- Public Library;
+- áudio;
+- authorities de destino;
+- Weapons E R1;
+- aplicação física de Weapons, ainda 0.7;
+- multiplayer/JIP de Weapons, ainda 0.8.
+
+## Mudanças player-facing já aprovadas, mas DEFERIDAS
+
+Entram somente após a equivalência estrutural, em rodada explícita de convergência:
+- Items: `Mostrar:` -> `Visualizar:`;
+- Items: mensagem `Vasculhando inventário e catalogando itens...`;
+- padronização `KIT SELECIONADO / RASCUNHO`;
+- estados `SALVO / ALTERADO / NOVO` onde aplicável;
+- footer Contexto / Resultado / Histórico compartilhado;
+- demais alinhamentos/tokens compartilhados.
+
+O RPT técnico continua livre para registrar `CfgWeapons`, `CfgMagazines`, contadores e tempos.
+
+## Weapons
+
+Weapons permanece byte a byte na baseline E R1 dentro desta candidata de equivalência.
+
+A 0.6-E R2 continua congelada em:
+- `docs/32_WEAPONS_0_6_E_R2_UI_FREEZE.md`.
+
+Depois que Items + UICommon fechar equivalência, o próximo gate é implementar Weapons R2 sobre UICommon.
+
+## Testes automáticos esperados
+
+### UICommon
+Ação:
+`TESTAR UICOMMON`
+
+Esperado:
+- **12/12 PASS**.
+
+### Items + UICommon
+Ação:
+`TESTAR ITEMS + UICOMMON`
+
+Esperado:
+- **12/12 PASS**.
+
+Valida:
+- funções compartilhadas carregadas;
+- wrapper Items mantém escaping anterior;
+- caracteres reservados continuam escapados;
+- clamp/window compartilhados;
+- runtime Items expõe UICommon ready;
+- build compartilhado correto.
+
+### Weapons
+Runner histórico:
+- **536/536 PASS**.
+
+Nenhum teste histórico da Weapons foi alterado.
+
+## Gate manual Items
+
+Usar `docs/30_ITEMS_UI_REGRESSION_CONTRACT.md`.
+
+Smoke mínimo desta candidata:
+1. abrir Items;
+2. catálogo carregar;
+3. busca;
+4. wheel;
+5. slider;
+6. seleção;
+7. Draft;
+8. fechar/reabrir preservando Draft;
+9. DnD Catálogo -> Draft;
+10. DnD Catálogo -> Equipment;
+11. falha por falta de capacidade mostra motivo;
+12. trocar kit sem reconstrução indevida do Catálogo;
+13. verificar RPT sem novo erro SP_ORG.
+
+Public Loadouts permanecem pendentes de validação manual específica.
+
+## Gate manual Weapons
+
+Somente regressão:
+1. abrir pela primeira vez sem clicar;
+2. Catálogo e Equipment devem materializar;
+3. `UI_INITIAL_SYNC_HOTFIX1 ok=true`;
+4. AUTO 536/536.
+
+## Critério de homologação
+
+Equivalence R1 só fecha quando:
+- UICommon 12/12;
+- Items+UICommon 12/12;
+- Weapons 536/536;
+- checklist manual mínimo de Items sem regressão;
+- performance igual ou melhor que a baseline;
+- nenhum novo erro SP_ORG no RPT.
+
+Depois disso:
+1. Gate 3 — Weapons 0.6-E R2 sobre UICommon;
+2. depois rodada explícita de convergência visual de Items.
