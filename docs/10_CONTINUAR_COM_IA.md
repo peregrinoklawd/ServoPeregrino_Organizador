@@ -158,3 +158,37 @@ Próximo passo:
 3. migrar Items para UICommon em modo equivalência;
 4. executar checklist completo de regressão;
 5. depois migrar Weapons e implementar integralmente 0.6-E R2.
+
+
+## Continuação ativa — Gate 2 / Items + UICommon Equivalence R1
+
+Estado em 02/10/2026:
+- Hotfix 1 conjunto aceito;
+- UICommon anterior 8/8;
+- Weapons cold-open corrigido;
+- Weapons E R1 preserva 536/536;
+- causa de capacidade do Items agora é observável no RPT.
+
+Fonte atual:
+- UICommon `0.1.1-items-equivalence-r1`;
+- Items `0.13.0.1-a-server-authority-foundation-uicommon-equivalence-r1`.
+
+Primeiro consumo compartilhado:
+- escaping de structured text;
+- clamp de offset virtual.
+
+Próximo teste:
+- UICommon 12/12;
+- Items+UICommon 12/12;
+- smoke manual de Items;
+- Weapons 536/536.
+
+Não aplicar ainda:
+- Items Mostrar -> Visualizar;
+- Items `Vasculhando inventário e catalogando itens...`;
+- convergence/footer/status redesign;
+- Weapons R2.
+
+Após equivalência:
+1. implementar Weapons 0.6-E R2 sobre UICommon;
+2. depois convergência visual explícita de Items.
