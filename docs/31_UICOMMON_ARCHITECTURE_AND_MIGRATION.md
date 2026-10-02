@@ -172,3 +172,25 @@ UICommon inicia como 0.1 experimental.
 Não publicar API v1 estável nesta etapa.
 
 Consumidores devem declarar a versão mínima quando a integração real começar.
+
+
+## Gate 2 R1 — implementação inicial
+
+A primeira migração real foi deliberadamente pequena.
+
+UICommon 0.1.1 passa a fornecer:
+- `escapeStructuredText`;
+- `clampVirtualOffset`;
+- `getVirtualWindow`.
+
+Items consome:
+- escaping via wrapper compatível `Items_fnc_escapeStructuredText`;
+- clamp no `getUICatalogWindow`.
+
+Motivo para wrapper:
+- preservar callers e testes existentes;
+- deslocar ownership sem provocar refactor amplo no mesmo gate.
+
+Critério:
+- equivalência comportamental primeiro;
+- remoção de wrappers somente em uma migração posterior e explícita.
