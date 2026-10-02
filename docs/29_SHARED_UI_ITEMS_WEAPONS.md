@@ -300,3 +300,25 @@ Documentos autoritativos:
 - `30_ITEMS_UI_REGRESSION_CONTRACT.md`;
 - `31_UICOMMON_ARCHITECTURE_AND_MIGRATION.md`;
 - `32_WEAPONS_0_6_E_R2_UI_FREEZE.md`.
+
+
+## Equivalence R1 — primeiro consumo real do UICommon
+
+Items passa a consumir UICommon sem mudança player-facing:
+- structured-text escaping;
+- clamp de offset virtual;
+- lifecycle expõe dependência compartilhada.
+
+Regra de compatibilidade:
+- funções antigas de Items permanecem como wrappers quando há muitos callers;
+- nenhuma lógica de ItemKit/WeaponKit migra para UICommon;
+- nenhuma alteração visual é usada para “provar” a extração.
+
+Backlog visual continua separado:
+- Items: `Vasculhando inventário e catalogando itens...`;
+- Items: `Visualizar:`;
+- status SALVO/ALTERADO/NOVO;
+- footer compartilhado;
+- demais deltas aprovados.
+
+Weapons E R1 permanece baseline imutável durante este gate.
