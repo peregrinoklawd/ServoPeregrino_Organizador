@@ -146,3 +146,22 @@ Teste manual esperado:
 Depois da homologação do Hotfix 1:
 - continuar Gate 2 de Items + UICommon equivalence;
 - depois implementar a Weapons 0.6-E R2 sobre UICommon.
+
+
+## Resultado do rerun — Hotfix 1 aceito
+
+RPT de 02/10/2026 confirmou:
+- UICommon foundation: **8/8 PASS**;
+- Items passou a registrar a causa real de falha física:
+  - `ITEMS_TARGET_CAPACITY_INSUFFICIENT`;
+  - availableLoad/currentLoad/maxLoad disponíveis no PHYSICAL_FLOW;
+- Weapons cold-open:
+  - `UI_INITIAL_SYNC_HOTFIX1 ok=true`;
+  - Catálogo materializado;
+  - Equipment materializado;
+- Weapons E R1 manteve a suíte histórica **536/536 PASS / 0 FAIL**.
+
+Decisão:
+- Hotfix 1: **ACEITO PARA CONTINUIDADE**;
+- a baseline conjunta fica liberada para Gate 2 — Items + UICommon Equivalence R1;
+- nenhuma mudança visual R2 foi antecipada pelo hotfix.
