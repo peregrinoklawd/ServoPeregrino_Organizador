@@ -1,11 +1,4 @@
+// Compatibility wrapper kept under the Items API while the generic implementation
+// is owned by UICommon. Domain callers do not need to know the shared provider yet.
 params [["_text", "", [""]]];
-private _out = "";
-{
-    switch _x do {
-        case 38: {_out = _out + "&amp;";};   // &
-        case 60: {_out = _out + "&lt;";};    // <
-        case 62: {_out = _out + "&gt;";};    // >
-        default {_out = _out + toString [_x];};
-    };
-} forEach (toArray _text);
-_out
+[_text] call ServoPeregrino_Organizador_UICommon_fnc_escapeStructuredText
