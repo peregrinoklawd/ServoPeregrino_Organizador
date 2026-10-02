@@ -1,5 +1,25 @@
 #include "..\..\script_version.hpp"
 
+if (isNil "ServoPeregrino_Organizador_UICommon_fnc_initialize" || {isNil "ServoPeregrino_Organizador_UICommon_fnc_getBuildInfo"}) exitWith {
+    [
+        false,
+        "ITEMS_UICOMMON_REQUIRED",
+        "SP_ORG_Items requer UICommon nesta entrega de equivalência.",
+        createHashMapFromArray [["minimumVersion",SERVO_PEREGRINO_ORGANIZADOR_ITEMS_UICOMMON_MIN_VERSION]]
+    ] call ServoPeregrino_Organizador_Nexus_fnc_createResult
+};
+
+private _uiCommonInit = [] call ServoPeregrino_Organizador_UICommon_fnc_initialize;
+if !(_uiCommonInit getOrDefault ["success", false]) exitWith {
+    [
+        false,
+        "ITEMS_UICOMMON_INITIALIZATION_FAILED",
+        "UICommon não pôde ser inicializado para SP_ORG_Items.",
+        createHashMapFromArray [["uiCommonResult",_uiCommonInit]]
+    ] call ServoPeregrino_Organizador_Nexus_fnc_createResult
+};
+private _uiCommonBuild = [] call ServoPeregrino_Organizador_UICommon_fnc_getBuildInfo;
+
 private _nexusValidation = [] call ServoPeregrino_Organizador_Items_fnc_validateNexus;
 if !(_nexusValidation getOrDefault ["success", false]) exitWith {
     diag_log format [
@@ -52,6 +72,10 @@ private _runtime = createHashMapFromArray [
     ["draftVersion", SERVO_PEREGRINO_ORGANIZADOR_ITEMS_DRAFT_VERSION],
     ["uiStateVersion", SERVO_PEREGRINO_ORGANIZADOR_ITEMS_UI_STATE_VERSION],
     ["uiReadOnlyShell", false],
+        ["uiCommonRequired", true],
+        ["uiCommonReady", true],
+        ["uiCommonMinimumVersion", SERVO_PEREGRINO_ORGANIZADOR_ITEMS_UICOMMON_MIN_VERSION],
+        ["uiCommonBuild", _uiCommonBuild],
     ["initializedAtUTC", systemTimeUTC],
     ["build", _buildInfo]
 ];
@@ -128,6 +152,10 @@ private _runtimeCapabilityResult = [
         ["draftVersion", SERVO_PEREGRINO_ORGANIZADOR_ITEMS_DRAFT_VERSION],
     ["uiStateVersion", SERVO_PEREGRINO_ORGANIZADOR_ITEMS_UI_STATE_VERSION],
     ["uiReadOnlyShell", false],
+        ["uiCommonRequired", true],
+        ["uiCommonReady", true],
+        ["uiCommonMinimumVersion", SERVO_PEREGRINO_ORGANIZADOR_ITEMS_UICOMMON_MIN_VERSION],
+        ["uiCommonBuild", _uiCommonBuild],
         ["catalogProvider", SERVO_PEREGRINO_ORGANIZADOR_ITEMS_CATALOG_PROVIDER],
         ["catalogBuildMode", "LAZY_SESSION_CACHE"],
         ["containerProvider", SERVO_PEREGRINO_ORGANIZADOR_ITEMS_CONTAINER_PROVIDER],
@@ -212,6 +240,10 @@ missionNamespace setVariable [SERVO_PEREGRINO_ORGANIZADOR_ITEMS_INITIALIZED_VAR,
         ["draftVersion", SERVO_PEREGRINO_ORGANIZADOR_ITEMS_DRAFT_VERSION],
     ["uiStateVersion", SERVO_PEREGRINO_ORGANIZADOR_ITEMS_UI_STATE_VERSION],
     ["uiReadOnlyShell", false],
+        ["uiCommonRequired", true],
+        ["uiCommonReady", true],
+        ["uiCommonMinimumVersion", SERVO_PEREGRINO_ORGANIZADOR_ITEMS_UICOMMON_MIN_VERSION],
+        ["uiCommonBuild", _uiCommonBuild],
         ["catalogProvider", SERVO_PEREGRINO_ORGANIZADOR_ITEMS_CATALOG_PROVIDER],
         ["catalogCacheBuilt", false],
         ["containerProvider", SERVO_PEREGRINO_ORGANIZADOR_ITEMS_CONTAINER_PROVIDER],
