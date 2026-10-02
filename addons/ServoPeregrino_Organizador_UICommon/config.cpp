@@ -46,6 +46,12 @@ class CfgFunctions
             class getVirtualWindow {};
         };
 
+        class Text
+        {
+            file = "\ServoPeregrino_Organizador_UICommon\functions\text";
+            class escapeStructuredText {};
+        };
+
         class Tests
         {
             file = "\ServoPeregrino_Organizador_UICommon\functions\tests";
