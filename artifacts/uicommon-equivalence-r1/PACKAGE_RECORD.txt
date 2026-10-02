@@ -1,0 +1,32 @@
+Items + UICommon Equivalence R1 — Package Record
+Date: 2026-10-02
+
+Artifact:
+SP_ORG_Items_Weapons_UI_Lab_UICommon_Equivalence_R1.zip
+
+SHA-256:
+bd8cc6ccea8b57f46c7c3ec52afa2e34c93da0eb058b6d82cffc037f312df607
+
+Mission files:
+403
+
+Static audit:
+23 PASS / 0 FAIL
+
+Runtime expectations:
+- UICommon foundation: 12/12
+- Items + UICommon equivalence: 12/12
+- Weapons E R1 regression: 536/536
+
+Baseline rules:
+- Weapons is byte-identical to Integration Hotfix 1.
+- Nexus is byte-identical to Integration Hotfix 1.
+- Items changes are limited to UICommon dependency/integration and the already-accepted Hotfix 1 source.
+- UICommon changes are limited to 0.1.1 shared primitives/tests.
+- Player-facing visual convergence is deferred.
+
+Deferred player-facing text:
+Items -> "Vasculhando inventário e catalogando itens..."
+Weapons -> "Vasculhando inventário e catalogando armas..."
+
+RPT remains authoritative for runtime homologation.
