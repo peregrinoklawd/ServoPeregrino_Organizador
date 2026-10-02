@@ -41,11 +41,15 @@ private _queueConfirmation = {
     [true,_pendingCode,_pendingMessage,createHashMapFromArray [["action",_a],["payload",_p]]] call ServoPeregrino_Organizador_Nexus_fnc_createResult
 };
 
-// Fechar nunca descarta o estado de edição: se alterado, apenas confirma que ele permanecerá em memória.
-if (_actionU isEqualTo "CLOSE_UI" && {_dirty} && {!_confirmed}) exitWith {
-    [_actionU,_payload,"O kit possui alterações não salvas.<br/><br/>Fechar a interface mantendo o rascunho em memória?","ITEMS_UI_CONFIRMATION_PENDING","Confirmação de fechamento pendente."] call _queueConfirmation
+// Fechar nunca descarta o estado de edição. Como o rascunho permanece session-local em memória,
+// não há decisão destrutiva a confirmar: o X fecha imediatamente, preservando todas as alterações.
+if (_actionU isEqualTo "CLOSE_UI") exitWith {
+    closeDialog 0;
+    [true,"ITEMS_UI_CLOSED","Interface fechada. As alterações não salvas permanecem no rascunho desta sessão.",createHashMapFromArray [
+        ["draftPreserved",_dirty],
+        ["confirmationRequired",false]
+    ]] call ServoPeregrino_Organizador_Nexus_fnc_createResult
 };
-if (_actionU isEqualTo "CLOSE_UI") exitWith {closeDialog 0; [true,"ITEMS_UI_CLOSED","Interface fechada. As alterações não salvas foram mantidas para esta sessão.",createHashMap] call ServoPeregrino_Organizador_Nexus_fnc_createResult};
 
 // Troca de kit / Novo / Descartar exige decisão explícita se há dirty.
 if (_dirty && {!_confirmed} && {_actionU in ["LOAD_KIT","NEW_DRAFT","DISCARD_DRAFT"]}) exitWith {
