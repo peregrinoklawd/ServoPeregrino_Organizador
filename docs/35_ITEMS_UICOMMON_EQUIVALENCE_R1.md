@@ -198,3 +198,38 @@ Observação sobre baseline visual:
 - portanto ele NÃO contém `items_dialog.hpp` nem o runtime visual do Items;
 - a discrepância de transparência entre a missão atual e o último addon/PBO homologado permanece aberta;
 - até recuperar o addon/packaging real, o source atual não deve ser tratado como baseline visual definitiva.
+
+
+## Reconciliação com o addon PBO homologado — 02/10/2026
+
+Artefato recebido:
+- `MODS.rar` SHA-256: `5be99befbcddf7e6cac996c47b07a12a344f21300dc5f42fb75b74ce21a8c133`
+- `ServoPeregrino_Organizador_Items.pbo` SHA-256: `0b9ad341f74bbfbd67f9180895365122275a0496eb95b7d312f73511d8b47b0e`
+- tamanho do addon Items PBO: 3.802.477 bytes
+- arquivos extraídos do addon: 257
+
+Resultado da comparação com a missão Equivalence R1:
+- 249/257 arquivos do addon existem na missão e são byte-equivalentes após normalizar CRLF/LF;
+- 7 diferenças são exatamente os deltas intencionais desta rodada:
+  - script_version.hpp;
+  - lifecycle initialize;
+  - executeUITransferCommand;
+  - requestDraftTransition;
+  - getUICatalogWindow;
+  - escapeStructuredText;
+  - classifyUIOutcome;
+- config.cpp do addon não existe como arquivo local na missão, pois a missão registra as classes no description.ext.
+
+Arquivos visuais confirmados IDÊNTICOS entre addon PBO homologado e missão Equivalence R1:
+- `ui/items_dialog.hpp`;
+- `fn_refreshInterface.sqf`;
+- `fn_refreshDraftMutationUI.sqf`;
+- `fn_renderCatalogRowsUI.sqf`;
+- `fn_refreshHeaderUI.sqf`;
+- demais renderers inspecionados.
+
+Conclusão:
+- a hipótese de que ajustes finais de transparência ficaram apenas dentro do PBO NÃO foi confirmada;
+- o source visual do PBO é o mesmo source visual usado na missão;
+- a diferença visual percebida deve ser investigada como diferença de contexto de carregamento/renderização (addon config.cpp vs mission description.ext, interação de configuração, ambiente ou outro fator), não como versão anterior do items_dialog.hpp;
+- NÃO alterar transparências até reproduzir e isolar a causa.
