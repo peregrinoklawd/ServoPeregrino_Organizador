@@ -66,7 +66,9 @@ private _windowIndices = [];
 
 if (_needle isEqualTo "") then {
     _total = count _indices;
-    if (_safeOffset >= _total && {_total > 0}) then {_safeOffset = ((_total-_safeWindow) max 0);};
+    if (_total > 0) then {
+        _safeOffset = [_safeOffset,_total,_safeWindow] call ServoPeregrino_Organizador_UICommon_fnc_clampVirtualOffset;
+    };
     private _take = (_total-_safeOffset) min _safeWindow;
     if (_take > 0) then {_windowIndices = _indices select [_safeOffset,_take];};
 } else {
@@ -92,11 +94,14 @@ if (_needle isEqualTo "") then {
     private _first = [_safeOffset] call _scan;
     _total = _first # 0;
     _windowIndices = _first # 1;
-    if (_safeOffset >= _total && {_total > 0}) then {
-        _safeOffset = ((_total-_safeWindow) max 0);
-        private _second = [_safeOffset] call _scan;
-        _total = _second # 0;
-        _windowIndices = _second # 1;
+    if (_total > 0) then {
+        private _clampedOffset = [_safeOffset,_total,_safeWindow] call ServoPeregrino_Organizador_UICommon_fnc_clampVirtualOffset;
+        if (_clampedOffset isNotEqualTo _safeOffset) then {
+            _safeOffset = _clampedOffset;
+            private _second = [_safeOffset] call _scan;
+            _total = _second # 0;
+            _windowIndices = _second # 1;
+        };
     };
 };
 private _filterMs = round ((diag_tickTime-_filterStartedAt)*1000);
