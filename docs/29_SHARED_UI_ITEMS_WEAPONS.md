@@ -322,3 +322,44 @@ Backlog visual continua separado:
 - demais deltas aprovados.
 
 Weapons E R1 permanece baseline imutável durante este gate.
+
+
+## Requisitos UX congelados após Equivalence R1 — 02/10/2026
+
+### Título do painel de conteúdo do kit
+
+Substituir o título genérico anterior:
+- Items: `KIT SELECIONADO` / `KIT SELECIONADO / RASCUNHO` -> **ITENS DO KIT**;
+- Weapons: `KIT SELECIONADO` / `KIT SELECIONADO / RASCUNHO` -> **ARMAS DO KIT**.
+
+O estado do draft permanece separado e deve continuar visível por indicador:
+- SALVO;
+- ALTERADO;
+- NOVO.
+
+### Destaque de linhas alteradas — Items
+
+Dentro de **ITENS DO KIT**, toda linha VISÍVEL cujo estado atual divergir do kit salvo/original deve ser marcada.
+
+Regra visual:
+- background da linha usa a mesma cor-base/acento usada no texto do estado **ALTERADO**;
+- preservar contraste e legibilidade do texto/ícones;
+- o destaque não substitui o indicador global ALTERADO.
+
+São diferenças relevantes:
+- item adicionado ao draft que não existe no snapshot salvo;
+- quantidade diferente da quantidade salva;
+- item/class atual diferente do snapshot correspondente, quando aplicável.
+
+Item removido do draft não possui linha atual para destacar; a divergência continua representada pelo estado global ALTERADO. Não criar ghost row de item removido sem requisito explícito futuro.
+
+A regra acima é obrigatória para Items. Não aplicar automaticamente a Weapons até o comportamento equivalente ser especificado no contexto de WeaponKit/recipe.
+
+### Baseline visual
+
+Há evidência prática de drift entre o source visual atual e o último addon Items efetivamente homologado.
+
+Até recuperação do addon/PBO correto:
+- NÃO recalibrar transparências "no olho";
+- tratar a aparência do último addon homologado como referência visual externa;
+- recuperar/diffar addon real antes da convergência final.
