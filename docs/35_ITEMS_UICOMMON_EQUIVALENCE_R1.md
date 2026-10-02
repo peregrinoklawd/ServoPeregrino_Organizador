@@ -160,3 +160,41 @@ Equivalence R1 só fecha quando:
 Depois disso:
 1. Gate 3 — Weapons 0.6-E R2 sobre UICommon;
 2. depois rodada explícita de convergência visual de Items.
+
+
+## Resultado de runtime — APROVADA PARA ITEMS
+
+RPT recebido em 02/10/2026:
+- UICommon foundation: **12/12 PASS**;
+- Items + UICommon Equivalence R1: **12/12 PASS**;
+- uso manual extenso de Items sem regressão funcional reportada:
+  - troca de kits;
+  - DnD KIT -> Draft;
+  - DnD Catalog -> Draft;
+  - DnD Catalog -> Equipment;
+  - botões de transferência;
+  - + / - / quantidade;
+  - busca/filtro;
+  - wheel;
+  - slider;
+  - U/C/M de visualização;
+  - U/C/M de destino;
+  - ADD / REMOVE / REPLACE físico;
+  - resultado PARTIAL;
+  - falta de capacidade com causa exposta.
+
+Decisão:
+- **Gate de equivalência Items + UICommon R1: APROVADO para o escopo Items**.
+- Este RPT não contém nova abertura nem AUTO TEST da Weapons; portanto a Weapons não é re-homologada por esta execução.
+- A baseline Weapons E R1 continua sendo a homologação anterior de 536/536.
+
+Artefatos recebidos:
+- RPT SHA-256: `83f576ba34822ef3edc41fb9ff519fda1f6c250d7bc5964e30f3774ff805530b`;
+- missão multiplayer R3 PBO SHA-256: `54c7eaf968f5bb1d0bb35ccb11f80e795a14c030696b70f53886000d3fe8325a`.
+
+Observação sobre baseline visual:
+- o PBO recebido é o PBO da **missão multiplayer R3**, não o addon Items;
+- contém somente a missão e invoca as funções do addon carregado externamente;
+- portanto ele NÃO contém `items_dialog.hpp` nem o runtime visual do Items;
+- a discrepância de transparência entre a missão atual e o último addon/PBO homologado permanece aberta;
+- até recuperar o addon/packaging real, o source atual não deve ser tratado como baseline visual definitiva.
