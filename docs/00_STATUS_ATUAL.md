@@ -423,3 +423,35 @@ Fundação criada sem alterar Items/Weapons:
 - suíte foundation inicial.
 
 Próximo gate: validar UICommon isoladamente e então iniciar **Items + UICommon equivalence**, sem mudança deliberada de UX.
+
+
+## Gate 2 — Items + UICommon Equivalence R1 — CANDIDATA
+
+Data: 02/10/2026.
+
+Hotfix 1 anterior:
+- aceito para continuidade;
+- UICommon 8/8;
+- Items confirmou `ITEMS_TARGET_CAPACITY_INSUFFICIENT` com telemetria de capacidade;
+- Weapons cold-open corrigido com `UI_INITIAL_SYNC_HOTFIX1 ok=true`;
+- Weapons E R1 manteve 536/536.
+
+Candidata atual:
+- UICommon: `0.1.1-items-equivalence-r1`;
+- Items: `0.13.0.1-a-server-authority-foundation-uicommon-equivalence-r1`;
+- Weapons: E R1 congelada como baseline de comparação.
+
+Primeiras primitivas compartilhadas:
+- structured-text escaping;
+- virtual offset clamp;
+- virtual window helper já existente.
+
+Items agora declara/valida UICommon e mantém wrappers de compatibilidade.
+
+Esperado no runtime:
+- UICommon: 12/12;
+- Items + UICommon equivalence: 12/12;
+- Weapons: 536/536;
+- regressão manual conforme `30_ITEMS_UI_REGRESSION_CONTRACT.md`.
+
+Mudanças visuais de Items, inclusive `Vasculhando inventário e catalogando itens...`, permanecem DEFERIDAS para a rodada explícita de convergência visual após equivalência.
