@@ -266,3 +266,25 @@ Depois que Items + UICommon provar equivalência, aplicar em rodada explícita:
 - padrões compartilhados validados pela Weapons 0.6-E R2.
 
 Não misturar essas mudanças com o primeiro gate de extração.
+
+
+## Delta visual futuro — ITENS DO KIT
+
+Requisito aceito em 02/10/2026, ainda NÃO implementado nesta baseline:
+
+- título do painel P2: **ITENS DO KIT**;
+- indicador de estado continua SALVO / ALTERADO / NOVO;
+- quando o draft estiver baseado em kit salvo, comparar cada entrada atual com o snapshot original;
+- linhas atuais divergentes devem receber background com o mesmo acento visual do estado **ALTERADO**;
+- quantidade alterada conta como divergência;
+- entrada adicionada conta como divergência;
+- entrada removida não gera linha fantasma nesta especificação.
+
+Novos checks manuais futuros:
+1. carregar kit salvo -> nenhuma linha marcada;
+2. aumentar quantidade -> somente a linha alterada é marcada;
+3. reduzir quantidade -> somente a linha alterada é marcada;
+4. adicionar item -> nova linha é marcada;
+5. desfazer mudança até valor original -> marcação some;
+6. salvar -> todas as marcações somem e estado volta a SALVO;
+7. fechar/reabrir draft alterado -> marcação continua coerente com snapshot salvo.
