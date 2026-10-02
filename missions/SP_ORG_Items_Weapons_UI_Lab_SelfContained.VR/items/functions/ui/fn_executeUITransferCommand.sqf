@@ -155,8 +155,20 @@ private _rd = _result getOrDefault ["data",createHashMap];
 private _apply = _rd getOrDefault ["applyResult",createHashMap];
 private _appliedQty = 0;
 {_appliedQty = _appliedQty + (_x param [3,0,[0]]);} forEach (_apply getOrDefault ["appliedEntries",[]]);
-private _rejected = count (_apply getOrDefault ["rejectedEntries",[]]);
+private _applyRejected = _apply getOrDefault ["rejectedEntries",[]];
+private _planRejected = _rd getOrDefault ["rejectedEntries",[]];
+private _effectiveRejected = if ((count _applyRejected)>0) then {_applyRejected} else {_planRejected};
+private _rejected = count _effectiveRejected;
 private _actions = count (_apply getOrDefault ["actionResults",[]]);
 private _status = _apply getOrDefault ["status",if (_result getOrDefault ["success",false]) then {"COMPLETE"} else {"FAILED"}];
-diag_log format ["[SP_ORG] [ITEMS] [PHYSICAL_FLOW] POST id=%1 origin=%2 source=%3 op=%4 requested=%5 resolved=%6 success=%7 code=%8 status=%9 actions=%10 appliedQty=%11 rejected=%12 durationMs=%13",_commandId,_origin,_source,_op,_requestedTargetForMeta,_target,_result getOrDefault ["success",false],_result getOrDefault ["code","UNKNOWN"],_status,_actions,_appliedQty,_rejected,round ((diag_tickTime-_startedAt)*1000)];
+private _rejectCode = if (_rejected>0) then {toUpper ((_effectiveRejected#0) getOrDefault ["code","-"])} else {"-"};
+private _capacity = _rd getOrDefault ["capacity",createHashMap];
+diag_log format [
+    "[SP_ORG] [ITEMS] [PHYSICAL_FLOW] POST id=%1 origin=%2 source=%3 op=%4 requested=%5 resolved=%6 success=%7 code=%8 status=%9 actions=%10 appliedQty=%11 rejected=%12 rejectCode=%13 availableLoad=%14 currentLoad=%15 maxLoad=%16 durationMs=%17",
+    _commandId,_origin,_source,_op,_requestedTargetForMeta,_target,
+    _result getOrDefault ["success",false],_result getOrDefault ["code","UNKNOWN"],_status,
+    _actions,_appliedQty,_rejected,_rejectCode,
+    _capacity getOrDefault ["availableLoad",-1],_capacity getOrDefault ["currentLoad",-1],_capacity getOrDefault ["maxLoad",-1],
+    round ((diag_tickTime-_startedAt)*1000)
+];
 _result
