@@ -412,3 +412,18 @@ Regras:
 - UICommon permanece separado do Nexus em PBO, embora ambos sejam distribuídos no pacote Core;
 - missão e PBO devem consumir os mesmos contratos/fontes, evitando duas implementações divergentes;
 - Public Loadouts de Items permanecem pendentes de validação manual específica e não bloqueiam a extração inicial do UICommon.
+
+
+## Checkpoint ativo — Items + UICommon Equivalence R1
+
+Gate 1 foi concluído e o Hotfix 1 conjunto foi aceito.
+
+Agora:
+1. executar UICommon 0.1.1 -> 12/12;
+2. executar Items + UICommon Equivalence -> 12/12;
+3. smoke/checklist de Items sem redesign;
+4. Weapons permanece baseline E R1 -> 536/536;
+5. se equivalência fechar, iniciar Weapons 0.6-E R2 sobre UICommon;
+6. depois da R2, executar rodada explícita de convergência visual de Items.
+
+A mensagem Items `Vasculhando inventário e catalogando itens...` está confirmada no backlog e NÃO faz parte da Equivalence R1.
