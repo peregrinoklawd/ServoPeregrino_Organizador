@@ -35,13 +35,33 @@ if (_rollbackFailed) then {_outcome="ROLLBACK_FAILED"; _severity="ERROR"; _sound
 
 private _appliedQty=0;
 {_appliedQty=_appliedQty+(_x param [3,0,[0]]);} forEach (_apply getOrDefault ["appliedEntries",[]]);
-private _rejected=count (_apply getOrDefault ["rejectedEntries",[]]);
+
+// Falhas de planejamento acontecem antes de existir applyResult. Nesses casos,
+// rejectedEntries/capacity ficam diretamente em data. Preserve essa causa para UI e telemetria.
+private _applyRejected=_apply getOrDefault ["rejectedEntries",[]];
+private _planRejected=_data getOrDefault ["rejectedEntries",[]];
+private _effectiveRejected=if ((count _applyRejected)>0) then {_applyRejected} else {_planRejected};
+private _rejected=count _effectiveRejected;
 private _actions=count (_apply getOrDefault ["actionResults",[]]);
 private _operation=toUpper (_cmd getOrDefault ["operation",_data getOrDefault ["operation","OP"]]);
 private _target=_cmd getOrDefault ["target",_data getOrDefault ["target","-"]];
 private _targetLabel=[_target] call ServoPeregrino_Organizador_Items_fnc_getUITargetLabel;
 private _commandId=_cmd getOrDefault ["commandId","-"];
 private _qtyText=if (_appliedQty isEqualTo 1) then {"1 item"} else {format ["%1 itens",_appliedQty]};
+
+private _primaryReject=createHashMap;
+if ((count _effectiveRejected)>0) then {_primaryReject=_effectiveRejected#0};
+private _primaryRejectCode=toUpper (_primaryReject getOrDefault ["code",""]);
+private _primaryRejectMessage=_primaryReject getOrDefault ["message",""];
+private _capacity=_data getOrDefault ["capacity",createHashMap];
+private _failureReason=switch _primaryRejectCode do {
+    case "ITEMS_TARGET_CAPACITY_INSUFFICIENT": {format ["Não há espaço suficiente em %1 para adicionar o item solicitado.",_targetLabel]};
+    case "ITEMS_CLASS_UNAVAILABLE": {"O item solicitado não está disponível na sessão atual."};
+    case "ITEMS_CONTENT_NOT_PRESENT": {format ["%1 não possui a quantidade solicitada para remoção.",_targetLabel]};
+    default {
+        if (_primaryRejectMessage isNotEqualTo "") then {_primaryRejectMessage} else {_msg}
+    };
+};
 
 private _movementKey="";
 if (_ok && {!_partial} && {!_rolledBack}) then {
@@ -80,7 +100,13 @@ if ((count _cmd)>0) then {
         case "BLOCKED": {_friendlyBlocked};
         case "ROLLBACK": {format ["A operação em %1 encontrou um problema e foi desfeita com segurança.",_targetLabel]};
         case "ROLLBACK_FAILED": {format ["Falha crítica ao restaurar %1. Evite novas alterações e consulte o RPT.",_targetLabel]};
-        default {format ["Não foi possível concluir a operação em %1. %2",_targetLabel,_msg]};
+        default {
+            if (_code isEqualTo "ITEMS_PLAN_FAILED") then {
+                format ["Não foi possível concluir a operação em %1. Motivo: %2",_targetLabel,_failureReason]
+            } else {
+                format ["Não foi possível concluir a operação em %1. %2",_targetLabel,_msg]
+            }
+        };
     };
 } else {
     _summary=switch _outcome do {
@@ -97,5 +123,7 @@ createHashMapFromArray [
     ["outcome",_outcome],["severity",_severity],["soundKey",_soundKey],["message",_summary],
     ["code",_code],["status",_status],["operation",_operation],["target",_target],["commandId",_commandId],
     ["appliedQty",_appliedQty],["rejectedCount",_rejected],["actionCount",_actions],
-    ["rolledBack",_rolledBack],["rollbackSucceeded",_rollbackSucceeded],["movementKey",_movementKey]
+    ["rolledBack",_rolledBack],["rollbackSucceeded",_rollbackSucceeded],["movementKey",_movementKey],
+    ["primaryRejectCode",_primaryRejectCode],["primaryRejectMessage",_primaryRejectMessage],
+    ["capacity",_capacity]
 ]
