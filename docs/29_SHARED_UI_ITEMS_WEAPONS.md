@@ -363,3 +363,18 @@ Até recuperação do addon/PBO correto:
 - NÃO recalibrar transparências "no olho";
 - tratar a aparência do último addon homologado como referência visual externa;
 - recuperar/diffar addon real antes da convergência final.
+
+
+## Correção de hipótese — baseline PBO x mission-first
+
+Após receber o addon Items PBO real, a comparação direta mostrou que a camada visual central do Items no addon homologado é idêntica à missão conjunta:
+- mesmo `items_dialog.hpp`;
+- mesmos renderers e refreshers relevantes;
+- mesmos valores de alpha/background.
+
+Portanto, não reconstruir a aparência por memória e não copiar valores arbitrários.
+A investigação deve agora comparar o comportamento do mesmo UI source quando registrado em:
+1. addon `config.cpp`;
+2. mission `description.ext`.
+
+O objetivo é descobrir por que o render final aparenta diferença mesmo com source visual equivalente.
