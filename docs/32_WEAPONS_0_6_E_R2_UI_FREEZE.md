@@ -114,3 +114,13 @@ O retorno ao padrão ~246–254 ms por interação observado na R2 histórica é
 - aplicação slot-safe permanece 0.7.
 - MP authority/JIP/reconnect permanece 0.8.
 - UICommon não toma ownership de WeaponKit/Recipe/compatibilidade.
+
+
+## Ajuste de nomenclatura posterior — ARMAS DO KIT
+
+Requisito aceito em 02/10/2026:
+- o painel anteriormente denominado `KIT SELECIONADO / RASCUNHO` deve usar o título player-facing **ARMAS DO KIT**;
+- o nome do kit e o indicador SALVO / ALTERADO / NOVO continuam compondo o cabeçalho/estado;
+- esta alteração faz parte da próxima rodada de UI Weapons e não altera o ownership de WeaponKit.
+
+Não assumir nesta fase que a regra visual de "linha alterada" de Items se aplica 1:1 a Weapons. A representação de diferenças em WeaponRecipe/attachments deve ser especificada de forma compatível com o domínio Weapons.
