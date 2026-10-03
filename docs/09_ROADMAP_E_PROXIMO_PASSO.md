@@ -427,3 +427,28 @@ Agora:
 6. depois da R2, executar rodada explícita de convergência visual de Items.
 
 A mensagem Items `Vasculhando inventário e catalogando itens...` está confirmada no backlog e NÃO faz parte da Equivalence R1.
+
+
+## Checkpoint ativo — Weapons 0.6-E R2 + UICommon
+
+Items + UICommon Equivalence R1 foi aprovada para Items.
+
+Checkpoint agora:
+1. testar UICommon 12/12 como regressão;
+2. testar Items+UICommon 12/12 como regressão;
+3. abrir Weapons R2 no cold-open;
+4. validar novo fluxo de criação;
+5. validar Catálogo -> ARMAS DO KIT;
+6. validar SALVAR nome + Recipe;
+7. validar PUBLICAR reservado;
+8. validar ausência de mutação física;
+9. rodar AUTO R2;
+10. avaliar wheel/slider e focused refresh manualmente;
+11. enviar RPT + prints.
+
+Somente após R2 AUTO/manual/performance verde:
+- iniciar 0.6-F Final Visual Adaptation/Regression;
+- depois 0.7 Slot-Safe Weapon Application;
+- depois 0.8 Multiplayer Authority/Reconciliation.
+
+A convergência visual de Items continua posterior e separada.
