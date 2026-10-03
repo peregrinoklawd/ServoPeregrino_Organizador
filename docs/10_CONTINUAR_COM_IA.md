@@ -192,3 +192,23 @@ Não aplicar ainda:
 Após equivalência:
 1. implementar Weapons 0.6-E R2 sobre UICommon;
 2. depois convergência visual explícita de Items.
+
+
+## Continuação ativa — Weapons 0.6-E R2 + UICommon
+
+Último checkpoint:
+- Items + UICommon Equivalence R1 aprovada para Items;
+- nova candidata Weapons R2 preparada;
+- static 75/75;
+- R1 runner histórico preservado;
+- R2 runner separado.
+
+Não criar 0.6-F/0.7 antes do RPT/manual/performance da R2.
+
+Não mexer na convergência visual de Items durante o gate R2.
+
+Artefato:
+`SP_ORG_Items_Weapons_UI_Lab_Weapons_0_6_E_R2_UICommon.zip`
+
+SHA-256:
+`3c386b4cf5a7fab52633e9dc2f5fe13325c30fdff3eb9e1e5ed65238d0c9ed69`
