@@ -171,7 +171,7 @@ Source integrado na branch. Base histórica da linha atual.
 0.6-B Selection + Information                APPROVED R4 397/397
 0.6-C Compatibility Selectors                APPROVED R1 445/445
 0.6-D WeaponKit Draft                         R1 APPROVED 471/471; R2 PERF REJECTED; R3 APPROVED 512/512
-0.6-E Authoring/Lifecycle                      R1 AUTO 536/536 / UX SUPERSEDED; R2 ACTIVE — STATIC 296/296; RUNTIME PENDING (~545 projected)
+0.6-E Authoring/Lifecycle                      R1 AUTO 536/536 / UX SUPERSEDED; R2 ORIGINAL 534/554 (20 FAIL); R2 HF1 ACTIVE — STATIC 69/69; RUNTIME/MANUAL/PERF PENDING
 0.6-F Final Visual Adaptation/Regression
 0.7  Slot-Safe Weapon Application
 0.8  Multiplayer Authority / Reconciliation
@@ -452,3 +452,55 @@ Somente após R2 AUTO/manual/performance verde:
 - depois 0.8 Multiplayer Authority/Reconciliation.
 
 A convergência visual de Items continua posterior e separada.
+
+
+## Atualização 03/10/2026 — Weapons 0.6-E R2 Hotfix 1
+
+Resultado real da candidata R2 original:
+- AUTO: **534/554 PASS, 20 FAIL**;
+- UICommon: **12/12**;
+- Items + UICommon Equivalence: **12/12**;
+- a candidata R2 original fica **REPROVADA** e não libera 0.6-F.
+
+Causas consolidadas do Hotfix 1:
+1. **NOVO / seleção:** o fallback legado do ViewModel selecionava automaticamente o primeiro WeaponKit quando `selectedKitId` estava vazio, sequestrando o estado `pendingNewKit`;
+2. **P2 / filtro vazio:** o estado antigo podia continuar chegando ao renderer quando a projeção de Meus Kits não continha a seleção, fazendo P2 impersonar um kit fora do filtro;
+3. **Catálogo de acessórios:** a projeção cacheada de compatibilidade podia permanecer associada à arma-base anterior depois de uma troca no Draft dentro do mesmo `kitId`; o dropdown Mira lia o Draft atual e o Catálogo podia continuar lendo a projeção antiga;
+4. **runner R2:** a expectativa dos seletores de equipamento ainda exigia os textos antigos completos, embora a R2 use intencionalmente `PRINC. / PORTE / SEC.`;
+5. **Items 0.13-A em mission-first:** 4 FAILs eram causados pelo test harness procurando caminhos do addon/PBO em uma missão self-contained.
+
+Hotfix 1:
+- preserva `NOVO` sem repository object até a primeira ARMA;
+- ao iniciar NOVO, limpa busca/seleção anterior e força a categoria `WEAPON`;
+- sincroniza a seleção resolvida pelo ViewModel antes de renderizar ARMAS DO KIT;
+- invalida a projeção do Catálogo em troca de arma-base e em DESCARTAR;
+- adiciona regressão automática para provar paridade entre a ótica do dropdown e a projeção do Catálogo;
+- adiciona regressão para provar rebuild da projeção após troca da arma-base;
+- adapta somente o runner Items 0.13-A aos paths mission-first;
+- mantém aplicação física em 0.7 e MP/JIP/reconciliação em 0.8.
+
+Validação estática do Hotfix 1:
+- **69/69 PASS**;
+- runner R2 HF1: **531 assertion sites**;
+- runtime real continua pendente; o RPT é a autoridade.
+
+Gate atual:
+1. testar R2 HF1 no Arma sem PBOs SP_ORG;
+2. UICommon 12/12;
+3. Items + UICommon 12/12;
+4. validar NOVO -> ARMA -> EQUIPAR NO RASCUNHO;
+5. validar dropdown Mira x filtro ÓTICAS para a mesma arma;
+6. trocar arma-base no mesmo slot e confirmar que ÓTICAS acompanha a nova arma;
+7. validar LIMPAR / DESCARTAR / SALVAR / SALVAR COMO NOVO;
+8. executar AUTO R2 HF1;
+9. validar wheel/slider sem regressão de full refresh/stutter;
+10. enviar RPT + prints.
+
+Somente após AUTO + manual + performance verdes:
+- **0.6-F** Final Visual Adaptation/Regression;
+- **0.7** Slot-Safe Weapon Application;
+- **0.8** Multiplayer Authority/Reconciliation.
+
+### Auditoria BGD Development
+
+A issue **#9** continua marcada como importante, mas **não é gate do checkpoint atual**. O momento de execução permanece em avaliação e pode ser deslocado para a revisão final do projeto antes do packaging/PBO definitivo.
