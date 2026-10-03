@@ -1,0 +1,43 @@
+Weapons 0.6-E R2 + UICommon — Candidate Package Record
+Date: 2026-10-03
+
+Artifact:
+SP_ORG_Items_Weapons_UI_Lab_Weapons_0_6_E_R2_UICommon.zip
+
+SHA-256:
+3c386b4cf5a7fab52633e9dc2f5fe13325c30fdff3eb9e1e5ed65238d0c9ed69
+
+Mission:
+SP_ORG_Items_Weapons_UI_Lab_Weapons_0_6_E_R2_UICommon.VR
+
+Mission files:
+408
+
+Static validation:
+75 PASS / 0 FAIL
+
+R2 cumulative runner:
+528 explicit assertion sites in source.
+Runtime total is NOT pre-homologated; AUTO_TEST_SUMMARY in the real Arma RPT is authoritative.
+
+Preservation:
+- Nexus byte-identical to Items+UICommon Equivalence R1.
+- UICommon byte-identical to Items+UICommon Equivalence R1.
+- Items byte-identical to Items+UICommon Equivalence R1.
+- Weapons E R1 historical runner preserved byte-identical.
+- New R2 runner is separate.
+
+R2 build:
+0.6.4.2-ux-convergence-direct-draft-equip-uicommon-mission-first
+
+Gates:
+- physical application: DEFERRED_0_7
+- multiplayer/JIP/reconciliation: DEFERRED_0_8
+- PBO/addon integration: later packaging gate
+
+Items visual transparency investigation:
+OPEN / NON-BLOCKING / NO CHANGE IN THIS DELIVERY
+
+Source promotion rule:
+This package is a runtime candidate. Documentation and artifact identity are recorded now.
+Do not declare R2 homologated or advance 0.6-F/0.7 until RPT + manual + performance gates pass.
