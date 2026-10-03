@@ -455,3 +455,37 @@ Esperado no runtime:
 - regressão manual conforme `30_ITEMS_UI_REGRESSION_CONTRACT.md`.
 
 Mudanças visuais de Items, inclusive `Vasculhando inventário e catalogando itens...`, permanecem DEFERIDAS para a rodada explícita de convergência visual após equivalência.
+
+
+## Atualização 03/10/2026 — Weapons 0.6-E R2 preparada
+
+Gate Items + UICommon Equivalence R1:
+- aprovado para Items;
+- UICommon 12/12;
+- Items+UICommon 12/12.
+
+Candidata ativa:
+**Weapons 0.6-E R2 + UICommon**
+
+Build:
+`0.6.4.2-ux-convergence-direct-draft-equip-uicommon-mission-first`
+
+Validação estática:
+- **75/75 PASS**;
+- Nexus/UICommon/Items preservados byte a byte em relação à Equivalence R1;
+- runner histórico E R1 preservado;
+- runner R2 separado com 528 assertion sites.
+
+Estado R2:
+- mission-first pronta para teste;
+- runtime/manual/performance ainda pendentes;
+- nenhuma aplicação física de Weapons;
+- nenhuma mudança visual nova de Items.
+
+Próximo gate real:
+- executar R2 no Arma;
+- avaliar fluxo NOVO -> Catálogo -> EQUIPAR NO RASCUNHO;
+- avaliar ARMAS DO KIT;
+- validar nome inline/SALVAR;
+- validar performance;
+- enviar RPT + prints.
