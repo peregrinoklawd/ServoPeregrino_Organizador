@@ -124,3 +124,43 @@ Requisito aceito em 02/10/2026:
 - esta alteração faz parte da próxima rodada de UI Weapons e não altera o ownership de WeaponKit.
 
 Não assumir nesta fase que a regra visual de "linha alterada" de Items se aplica 1:1 a Weapons. A representação de diferenças em WeaponRecipe/attachments deve ser especificada de forma compatível com o domínio Weapons.
+
+
+## Candidate implementation — 03/10/2026
+
+A fundação UICommon/Items Equivalence R1 fechou para Items e a R2 foi preparada como candidata mission-first.
+
+Build:
+`0.6.4.2-ux-convergence-direct-draft-equip-uicommon-mission-first`
+
+Implementado:
+- dependência UICommon 0.1.1;
+- P1 NOVO / DUPLICAR / EXCLUIR / PUBLICAR;
+- título P2 ARMAS DO KIT;
+- nome inline + SALVAR;
+- SALVO / ALTERADO / NOVO;
+- buscas P2/P4 sincronizadas ao Catálogo nesta candidata;
+- SALVAR / SALVAR COMO NOVO / DESCARTAR / LIMPAR;
+- NOVO pendente sem criar objeto inválido;
+- Catálogo -> Draft para WEAPON/OPTIC/POINTER/BIPOD/GRIP/MAGAZINE;
+- botão ← EQUIPAR NO RASCUNHO;
+- duplo clique do Catálogo com a mesma ação;
+- EQUIPAMENTO → visível/reservado para 0.7;
+- P4 read-only;
+- footer sem outer background;
+- focused refresh R3 preservado;
+- cold-open Hotfix 1 preservado.
+
+Nota de implementação:
+- o ListBox do Catálogo permanece um controle único; as setas desenhadas na linha são indicação visual;
+- a interação direta é fornecida por duplo clique e pelo botão grande;
+- hit-zones independentes por seta dentro da linha não fazem parte desta candidata.
+
+Validação local:
+- 75/75 estático;
+- runner R2 com 528 sites de assertion no source;
+- total real e homologação dependem do RPT.
+
+Estado:
+**RUNTIME / MANUAL / PERFORMANCE PENDENTES.**
+0.6-F e 0.7 continuam bloqueadas.
