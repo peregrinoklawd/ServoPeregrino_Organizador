@@ -489,3 +489,22 @@ Próximo gate real:
 - validar nome inline/SALVAR;
 - validar performance;
 - enviar RPT + prints.
+
+
+## Atualização 03/10/2026 — Weapons R2 runtime e Hotfix 1
+
+A candidata **Weapons 0.6-E R2** foi executada no Arma e terminou em **534/554 PASS, 20 FAIL**. Ela não está homologada.
+
+O **R2 Hotfix 1** corrige:
+- isolamento do estado NOVO contra auto-seleção do primeiro kit;
+- P2 SEM KIT quando a projeção de Meus Kits não contém seleção;
+- invalidação da projeção cacheada de acessórios quando a arma-base do Draft muda ou é restaurada por DESCARTAR;
+- regressão automática dropdown Mira x Catálogo ÓTICAS;
+- expectativa textual dos seletores compactos R2;
+- paths do runner Items 0.13-A em modo self-contained.
+
+Static HF1: **69/69**. Runner R2 HF1: **531 assertion sites**. Runtime/manual/performance: **PENDENTES**.
+
+**0.6-F permanece bloqueada.**
+
+A auditoria BGD Development permanece importante na issue #9, mas o timing está em avaliação; não bloqueia o Hotfix 1 e pode ser executada no fechamento do projeto.
