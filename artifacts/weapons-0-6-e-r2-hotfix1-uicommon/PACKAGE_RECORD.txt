@@ -1,0 +1,43 @@
+Weapons 0.6-E R2 Hotfix 1 + UICommon — Candidate Package Record
+Date: 2026-10-03
+
+Artifact:
+SP_ORG_Items_Weapons_UI_Lab_Weapons_0_6_E_R2_Hotfix1_UICommon.zip
+
+SHA-256:
+a8a9fdf74a5a473be268971c59bb796cdded2eb9abbd25708f7ca002e658f704
+
+Mission:
+SP_ORG_Items_Weapons_UI_Lab_Weapons_0_6_E_R2_Hotfix1_UICommon.VR
+
+Mission files:
+408
+
+Source R2 runtime:
+534 PASS / 20 FAIL / 554 total
+
+Hotfix static validation:
+69 PASS / 0 FAIL
+
+R2 HF1 runner:
+531 explicit assertion sites in source.
+Runtime total is authoritative only from the next real Arma RPT.
+
+Hotfix scope:
+- pending NOVO isolation
+- P2 filtered-empty selection correctness
+- catalog projection invalidation on draft base-weapon mutation/discard
+- dropdown Mira x Catalogo Oticas regression checks
+- compact R2 equipment selector test expectation
+- Items 0.13-A mission-first test-path fix only
+
+Gates:
+- R2 homologation: PENDING runtime/manual/performance
+- 0.6-F: BLOCKED
+- physical application: DEFERRED_0_7
+- multiplayer/JIP/reconciliation: DEFERRED_0_8
+- BGD Development audit: IMPORTANT / TIMING UNDER EVALUATION / NOT CURRENT GATE
+
+Source promotion:
+This is a runtime candidate produced from the exact R2 package tested by the user.
+Do not declare R2 homologated until the new RPT and manual/performance gates pass.
