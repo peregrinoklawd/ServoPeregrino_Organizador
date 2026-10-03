@@ -212,3 +212,29 @@ Artefato:
 
 SHA-256:
 `3c386b4cf5a7fab52633e9dc2f5fe13325c30fdff3eb9e1e5ed65238d0c9ed69`
+
+
+## Checkpoint de continuidade — 03/10/2026 — Weapons 0.6-E R2 HF1
+
+Não iniciar 0.6-F.
+
+Último runtime real:
+- R2 original: 534/554, 20 FAIL;
+- UICommon: 12/12;
+- Items+UICommon: 12/12.
+
+Candidata atual:
+- Weapons **0.6-E R2 Hotfix 1**;
+- build `0.6.4.2-ux-convergence-direct-draft-equip-uicommon-mission-first-hotfix1`;
+- static 69/69;
+- runner 531 assertion sites;
+- runtime/manual/performance pendentes.
+
+Foco do próximo teste:
+- NOVO não pode selecionar/criar kit antes da primeira arma;
+- dropdown Mira e Catálogo ÓTICAS devem refletir a mesma arma do Draft;
+- troca da arma-base deve reconstruir compatibilidade do Catálogo;
+- Items 0.13-A mission-first não deve falhar por paths de PBO;
+- wheel/slider continua sem full refresh por passo.
+
+Auditoria BGD Development: issue #9 importante, timing em avaliação, não é gate atual.
