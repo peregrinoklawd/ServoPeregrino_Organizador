@@ -580,3 +580,21 @@ Preservação:
 
 Runtime/manual/performance: PENDENTES.
 0.7 continua bloqueada até homologação da 0.6-F.
+
+
+## Atualização 04/10/2026 — Weapons 0.6-F R3 preparada
+
+Candidata ativa:
+- 0.6-F R3;
+- build `0.6.5.3-search-isolation-global-catalog-query-name-edit-hotfix-uicommon-mission-first`;
+- static **36/36**;
+- runner **555 assertion sites**.
+
+Correções:
+- nome inline pode ficar vazio durante edição, com validação somente ao salvar;
+- P2/P3/P4 têm buscas independentes;
+- busca textual do Catálogo ignora temporariamente Tipo/Acessório;
+- limpar a busca restaura os filtros armazenados.
+
+Items/Nexus/UICommon permanecem congelados.
+0.7 continua bloqueada até homologação da 0.6-F R3.
