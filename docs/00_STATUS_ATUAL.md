@@ -553,3 +553,30 @@ Preservação:
 
 A convergência visual de Items continua separada.
 A auditoria BGD Development permanece importante na issue #9, mas o timing continua em avaliação e não é gate desta candidata.
+
+
+## Atualização 04/10/2026 — Weapons 0.6-F R2 preparada
+
+Candidata ativa:
+- display `0.6-F R2`;
+- semantic `0.6.5.2`;
+- build `0.6.5.2-final-visual-regression-changed-rows-preview-ready-uicommon-mission-first`.
+
+Escopo:
+- ARMAS DO KIT destaca, em âmbar translúcido, somente campos que divergem do `baseRecipe`;
+- desfazer a diferença remove o destaque;
+- P2 espelha verticalmente preview/nome/classe de P4;
+- área de preview foi ampliada e preparada para evolução 3D futura;
+- nenhum preview 3D real ou aplicação física entra agora.
+
+Static:
+- Weapons 69/69;
+- full-lab 30/30;
+- runner 545 assertion sites.
+
+Preservação:
+- Items/Nexus/UICommon byte-idênticos à 0.6-F R1;
+- runner histórico R1 preservado.
+
+Runtime/manual/performance: PENDENTES.
+0.7 continua bloqueada até homologação da 0.6-F.
