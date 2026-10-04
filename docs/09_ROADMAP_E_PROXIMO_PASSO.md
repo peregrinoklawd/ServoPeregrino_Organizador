@@ -171,8 +171,8 @@ Source integrado na branch. Base histórica da linha atual.
 0.6-B Selection + Information                APPROVED R4 397/397
 0.6-C Compatibility Selectors                APPROVED R1 445/445
 0.6-D WeaponKit Draft                         R1 APPROVED 471/471; R2 PERF REJECTED; R3 APPROVED 512/512
-0.6-E Authoring/Lifecycle                      R1 AUTO 536/536 / UX SUPERSEDED; R2 ORIGINAL 534/554 (20 FAIL); R2 HF1 ACTIVE — STATIC 69/69; RUNTIME/MANUAL/PERF PENDING
-0.6-F Final Visual Adaptation/Regression
+0.6-E Authoring/Lifecycle                      R1 AUTO 536/536 / UX SUPERSEDED; R2 ORIGINAL 534/554; R2 HF1 557/558 — SUPERSEDED BY 0.6-F
+0.6-F Final Visual Adaptation/Regression        R1 ACTIVE — STATIC 86/86; RUNNER 537; RUNTIME/MANUAL/PERF PENDING
 0.7  Slot-Safe Weapon Application
 0.8  Multiplayer Authority / Reconciliation
 ```
@@ -273,7 +273,7 @@ Contrato homologado:
 - authoring permanece para 0.6-E;
 - shell visual R4 permanece congelado.
 
-**Checkpoint ativo: 0.6-E R2 — UX Convergence / Direct Draft Equip. R1 fechou 536/536, mas foi superada no gate manual de UX; R2 está 296/296 static, runner source 518, runtime projetado ~545.**
+**Checkpoint ativo: 0.6-F R1 — Final Visual Adaptation / Regression. A R2 HF1 fechou 557/558; o único FAIL foi absorvido como hotfix da 0.6-F.**
 
 
 
@@ -504,3 +504,73 @@ Somente após AUTO + manual + performance verdes:
 ### Auditoria BGD Development
 
 A issue **#9** continua marcada como importante, mas **não é gate do checkpoint atual**. O momento de execução permanece em avaliação e pode ser deslocado para a revisão final do projeto antes do packaging/PBO definitivo.
+
+
+## Atualização 04/10/2026 — Checkpoint ativo: Weapons 0.6-F R1
+
+A 0.6-E R2 HF1 foi executada no Arma:
+- **557 PASS / 1 FAIL / 558 total**;
+- UICommon: 12/12;
+- Items + UICommon: 12/12;
+- compatibilidade Mira x Catálogo ÓTICAS: aprovada;
+- rebuild da projeção após troca da arma-base: aprovado;
+- focused refresh de wheel/slider: preservado;
+- único FAIL: cancelamento de NOVO restaurava seleção pelo fallback genérico em vez de manter contrato explícito.
+
+Decisão:
+- não criar R2 HF2;
+- incorporar o ajuste diretamente à **0.6-F R1**.
+
+### 0.6-F R1 — Final Visual Adaptation / Regression
+
+Build:
+`0.6.5.1-final-visual-regression-uicommon-mission-first`
+
+Escopo:
+1. congelar a composição visual final da linha 0.6 sem redesign amplo;
+2. preservar integralmente o authoring direto da R2 HF1;
+3. preservar focused refresh/cache da R3;
+4. incorporar `previousKitIdBeforeNew`;
+5. `NOVO -> DESCARTAR` restaura o kit anterior quando possível e nunca cria WeaponKit apenas para cancelar;
+6. manter aplicação física reservada para 0.7;
+7. manter MP/JIP/reconciliação reservada para 0.8.
+
+Validação local:
+- Weapons static: **86/86 PASS**;
+- full-lab static: **24/24 PASS**;
+- runner: **537 assertion sites**;
+- Items/Nexus/UICommon: byte-idênticos à HF1;
+- runner histórico R2 HF1: byte-idêntico.
+
+Gate para homologar 0.6-F:
+1. missão sem PBOs SP_ORG;
+2. UICommon 12/12;
+3. Items + UICommon 12/12;
+4. selecionar kit A -> NOVO -> DESCARTAR -> kit A deve voltar;
+5. NOVO -> arma -> EQUIPAR NO RASCUNHO;
+6. Mira/ÓTICAS e troca de arma-base;
+7. SALVAR / SALVAR COMO NOVO / DUPLICAR / EXCLUIR;
+8. PUBLICAR continua reservado;
+9. EQUIPAMENTO → continua não mutante;
+10. wheel/slider sem full refresh/stutter;
+11. AUTO 0.6-F com **0 FAIL**;
+12. RPT + prints.
+
+Se fechar:
+- **0.6 é homologada e congelada**;
+- próximo checkpoint: **0.7 Slot-Safe Weapon Application**;
+- depois: **0.8 Multiplayer Authority / Reconciliation**.
+
+### Items
+
+A 0.6-F R1 **não** executa a convergência visual própria de Items.
+Continuam no backlog separado:
+- `ITENS DO KIT`;
+- destaque de linhas alteradas;
+- `Mostrar -> Visualizar`;
+- `Vasculhando inventário e catalogando itens...`;
+- investigação da transparência mission-first x PBO.
+
+### Auditoria BGD Development
+
+Issue #9 continua importante, porém não é gate da 0.6-F. O timing permanece em avaliação e pode ser movido para a revisão final antes do packaging/PBO definitivo.
