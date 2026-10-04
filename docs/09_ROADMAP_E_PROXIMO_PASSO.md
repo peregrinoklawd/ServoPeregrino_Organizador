@@ -606,3 +606,22 @@ Pendências Items continuam separadas:
 - diferença visual mission-first x PBO.
 
 Auditoria BGD continua issue #9, importante, timing em avaliação.
+
+
+## Atualização 04/10/2026 — Checkpoint 0.6-F R3
+
+Checkpoint ativo:
+**Weapons 0.6-F R3 — Search Isolation / Name Editing**
+
+Foco final da linha 0.6:
+1. nome inline estável;
+2. buscas P2/P3/P4 independentes;
+3. busca global do Catálogo pausando filtros;
+4. changed-row highlight;
+5. preview-ready P2/P4;
+6. regressão/performance.
+
+Se fechar runtime/manual/performance com 0 FAIL:
+- linha 0.6 homologada/congelada;
+- próximo checkpoint: 0.7 Slot-Safe Weapon Application;
+- depois 0.8 Multiplayer Authority/Reconciliation.
