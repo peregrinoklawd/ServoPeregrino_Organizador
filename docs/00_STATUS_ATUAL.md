@@ -216,9 +216,9 @@ Weapons possui UI própria, semelhante em conceito à parte de armas do APM hist
 
 Armorer continua separado: bancada, Preview 3D avançado, peças, inspeção e manutenção.
 
-**Gate mission-first ativo:** **0.6-E R2 — UX Convergence / Direct Draft Equip**. Preserva o authoring funcional da R1 e corrige a experiência de criação/edição para convergir com Items/APM.
+**Gate mission-first ativo:** **0.6-F R1 — Final Visual Adaptation / Regression**. A R2 HF1 fechou 557/558; o único FAIL de cancelamento de NOVO foi incorporado à 0.6-F, que congela a UI final da linha 0.6 antes da aplicação física 0.7.
 
-**Gates ainda abertos:** 0.6-E R2, 0.6-F, aplicação slot-safe 0.7, multiplayer/JIP/reconnect 0.8, identidade física intrínseca, integração real ao addon/PBO e Packaging Gate. O backlog compartilhado Items+Weapons está em `29_SHARED_UI_ITEMS_WEAPONS.md`.
+**Gates ainda abertos:** homologação runtime/manual/performance da 0.6-F R1, aplicação slot-safe 0.7, multiplayer/JIP/reconnect 0.8, identidade física intrínseca, integração real ao addon/PBO e Packaging Gate. O backlog compartilhado Items+Weapons está em `29_SHARED_UI_ITEMS_WEAPONS.md`.
 
 Ver [0.1-A](21_WEAPONS_0_1_A_FOUNDATION_IDENTITY_SPIKE.md), [0.1-B](22_WEAPONS_0_1_B_IDENTITY_LIFECYCLE.md), [0.2](23_WEAPONS_0_2_WEAPON_CONFIGURATION.md), [0.3](24_WEAPONS_0_3_CATALOG_COMPATIBILITY.md) e [conceito UI](25_WEAPONS_PLAYER_UI_E_FRONTEIRA_ARMORER.md) e [0.4](26_WEAPONS_0_4_WEAPON_RECIPE.md) e [0.5](27_WEAPONS_0_5_WEAPON_KIT.md).
 
@@ -508,3 +508,48 @@ Static HF1: **69/69**. Runner R2 HF1: **531 assertion sites**. Runtime/manual/pe
 **0.6-F permanece bloqueada.**
 
 A auditoria BGD Development permanece importante na issue #9, mas o timing está em avaliação; não bloqueia o Hotfix 1 e pode ser executada no fechamento do projeto.
+
+
+## Atualização 04/10/2026 — Weapons 0.6-F R1 preparada
+
+Decisão do gate:
+- a 0.6-E R2 HF1 executou no Arma com **557/558 PASS, 1 FAIL**;
+- o único FAIL foi `DESCARTAR cancels pending-new without creating kit`;
+- repository e loadout permaneceram corretos;
+- por ser uma correção pequena de seleção/contexto visual, ela foi incorporada diretamente à **0.6-F R1**, sem criar Hotfix 2 separado.
+
+Candidata:
+- display: `0.6-F R1`;
+- semantic: `0.6.5.1`;
+- build: `0.6.5.1-final-visual-regression-uicommon-mission-first`;
+- static Weapons: **86/86 PASS**;
+- full-lab static: **24/24 PASS**;
+- runner 0.6-F: **537 assertion sites**;
+- runtime/manual/performance: **PENDENTES**.
+
+Hotfix incorporado:
+- `NOVO` memoriza o WeaponKit selecionado antes da criação;
+- `DESCARTAR` antes da primeira arma cancela o pending-new sem criar WeaponKit;
+- quando o kit anterior ainda existe, ele é restaurado;
+- a primeira arma aceita pelo novo draft limpa o contexto temporário;
+- seleção manual de outro kit também limpa o contexto temporário.
+
+Freeze 0.6-F:
+- quatro painéis;
+- `ARMAS DO KIT`;
+- nome inline + `SALVO / ALTERADO / NOVO`;
+- catálogo contínuo + focused refresh;
+- compatibilidade engine-derived;
+- Conteúdo do Equipamento read-only;
+- footer em três faixas;
+- aplicação física continua **DEFERRED_0_7**;
+- MP/JIP/reconciliação continua **DEFERRED_0_8**.
+
+Preservação:
+- Items: byte-idêntico à R2 HF1;
+- Nexus: byte-idêntico;
+- UICommon: byte-idêntico;
+- runner histórico R2 HF1: byte-idêntico.
+
+A convergência visual de Items continua separada.
+A auditoria BGD Development permanece importante na issue #9, mas o timing continua em avaliação e não é gate desta candidata.
