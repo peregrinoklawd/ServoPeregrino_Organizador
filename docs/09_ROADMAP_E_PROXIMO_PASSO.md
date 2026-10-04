@@ -574,3 +574,35 @@ Continuam no backlog separado:
 ### Auditoria BGD Development
 
 Issue #9 continua importante, porém não é gate da 0.6-F. O timing permanece em avaliação e pode ser movido para a revisão final antes do packaging/PBO definitivo.
+
+
+## Atualização 04/10/2026 — 0.6-F R2 UI Polish
+
+Checkpoint ativo:
+**Weapons 0.6-F R2 — UI Polish / Changed-State Highlight**
+
+A R2 concentra os últimos ajustes de UI da linha 0.6:
+1. destaque semântico por campo alterado em ARMAS DO KIT;
+2. reversão do destaque quando o valor volta ao Recipe salvo;
+3. preview/nome/classe de ARMAS DO KIT alinhados ao CONTEÚDO DO EQUIPAMENTO;
+4. área visual preparada para futuro preview 3D;
+5. regressão completa sem aplicação física.
+
+Validação local:
+- Weapons 69/69;
+- full-lab 30/30;
+- runner 545 assertion sites.
+
+Se runtime + manual + performance fecharem:
+- **linha Weapons 0.6 HOMOLOGADA/CONGELADA**;
+- próximo checkpoint: **0.7 Slot-Safe Weapon Application**;
+- depois: **0.8 Multiplayer Authority/Reconciliation**.
+
+Pendências Items continuam separadas:
+- ITENS DO KIT;
+- linhas alteradas;
+- Visualizar;
+- mensagem amigável de catalogação;
+- diferença visual mission-first x PBO.
+
+Auditoria BGD continua issue #9, importante, timing em avaliação.
