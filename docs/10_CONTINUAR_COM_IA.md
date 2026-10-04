@@ -238,3 +238,51 @@ Foco do próximo teste:
 - wheel/slider continua sem full refresh por passo.
 
 Auditoria BGD Development: issue #9 importante, timing em avaliação, não é gate atual.
+
+
+## Checkpoint de continuidade — 04/10/2026 — Weapons 0.6-F R1
+
+Decisão:
+- R2 HF1 runtime: **557/558**;
+- único FAIL pequeno foi absorvido na 0.6-F;
+- não existe R2 HF2 separado.
+
+Candidata ativa:
+- **Weapons 0.6-F R1 — Final Visual Adaptation / Regression**;
+- semantic `0.6.5.1`;
+- build `0.6.5.1-final-visual-regression-uicommon-mission-first`;
+- static Weapons **86/86**;
+- full-lab static **24/24**;
+- runner **537 assertion sites**;
+- runtime/manual/performance pendentes.
+
+Hotfix integrado:
+- estado `previousKitIdBeforeNew`;
+- NOVO memoriza seleção anterior;
+- DESCARTAR antes da primeira arma cancela pending-new e restaura o kit anterior quando possível;
+- nenhuma criação de WeaponKit apenas para cancelar.
+
+Preservar:
+- Items/Nexus/UICommon byte-idênticos à HF1;
+- R2 HF1 historical runner byte-idêntico;
+- compatibilidade de acessórios engine-derived;
+- catalog projection invalidation;
+- focused refresh R3;
+- nenhuma aplicação física antes de 0.7.
+
+Próximo teste:
+1. UICommon 12/12;
+2. Items+UICommon 12/12;
+3. selecionar kit -> NOVO -> DESCARTAR -> mesmo kit;
+4. fluxo NOVO -> arma -> draft;
+5. Mira x ÓTICAS;
+6. troca da arma-base;
+7. AUTO 0.6-F com 0 FAIL;
+8. performance manual;
+9. enviar RPT + prints.
+
+Somente depois:
+- 0.7 Slot-Safe Weapon Application;
+- 0.8 Multiplayer Authority/Reconciliation.
+
+Auditoria BGD Development: issue #9 importante; timing em avaliação; não é gate atual.
