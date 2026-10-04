@@ -1,0 +1,41 @@
+Weapons 0.6-F R2 + UICommon — Candidate Package Record
+Date: 2026-10-04
+
+Artifact:
+SP_ORG_Items_Weapons_UI_Lab_Weapons_0_6_F_R2_UICommon.zip
+
+SHA-256:
+29fb6cb7274dd32e3dacd518b977083d947957ac0e8c3d2f8b2077f964b0f821
+
+Mission:
+SP_ORG_Items_Weapons_UI_Lab_Weapons_0_6_F_R2_UICommon.VR
+
+Mission files:
+416
+
+Static:
+Weapons = 69 PASS / 0 FAIL
+Full lab = 30 PASS / 0 FAIL
+
+Runner:
+545 explicit assertion sites.
+Runtime total is authoritative only from the next Arma RPT.
+
+Scope:
+- semantic changed-row highlight against baseRecipe
+- changed rows use ALTERADO amber family with transparency
+- P2 preview/name/class vertically aligned with P4
+- larger preview-ready P2 area
+- no real 3D preview
+- no physical application
+
+Preserved:
+- Items byte-identical to F R1
+- Nexus byte-identical
+- UICommon byte-identical
+- historical 0.6-F R1 runner byte-identical
+
+Gates:
+- 0.6-F R2 homologation: PENDING runtime/manual/performance
+- 0.7 physical application: BLOCKED
+- 0.8 multiplayer/JIP: BLOCKED
