@@ -286,3 +286,29 @@ Somente depois:
 - 0.8 Multiplayer Authority/Reconciliation.
 
 Auditoria BGD Development: issue #9 importante; timing em avaliação; não é gate atual.
+
+
+## Checkpoint de continuidade — 04/10/2026 — Weapons 0.6-F R2
+
+Não iniciar 0.7 antes do próximo RPT.
+
+Candidata:
+- 0.6-F R2;
+- changed-row semantic diff contra baseRecipe;
+- P2/P4 preview-ready convergence;
+- static Weapons 69/69;
+- full-lab 30/30;
+- runner 545 assertion sites.
+
+Teste prioritário:
+- kit SALVO sem linhas âmbar;
+- mudar um único componente -> somente aquela linha âmbar;
+- restaurar valor original -> destaque some;
+- SALVAR -> highlights zeram;
+- comparar visualmente ARMAS DO KIT x CONTEÚDO DO EQUIPAMENTO;
+- AUTO 0.6-F R2 com 0 FAIL;
+- performance wheel/slider sem regressão.
+
+Items/UICommon/Nexus permanecem congelados.
+Aplicação física é 0.7.
+MP/JIP é 0.8.
