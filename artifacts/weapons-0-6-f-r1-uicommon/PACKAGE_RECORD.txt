@@ -1,0 +1,46 @@
+Weapons 0.6-F R1 + UICommon — Candidate Package Record
+Date: 2026-10-04
+
+Artifact:
+SP_ORG_Items_Weapons_UI_Lab_Weapons_0_6_F_R1_UICommon.zip
+
+SHA-256:
+71c7351b28879763ef0f0f1dde4f177d0f1f84a84915a84d1e374b2441197eba
+
+Mission:
+SP_ORG_Items_Weapons_UI_Lab_Weapons_0_6_F_R1_UICommon.VR
+
+Mission files excluding SHA manifest:
+409
+
+Source runtime:
+0.6-E R2 HF1 = 557 PASS / 1 FAIL / 558 total
+
+0.6-F static:
+Weapons = 86 PASS / 0 FAIL
+Full lab = 24 PASS / 0 FAIL
+
+0.6-F runner:
+537 explicit assertion sites.
+Runtime total is authoritative only from the next real Arma RPT.
+
+Included delta:
+- previousKitIdBeforeNew state
+- NOVO captures prior selection
+- pending-new DESCARTAR restores prior kit when still valid
+- first weapon / explicit kit selection clear restore context
+- final 0.6 visual/runtime markers
+- active 0.6-F regression runner
+
+Preserved:
+- Items byte-identical to HF1
+- Nexus byte-identical to HF1
+- UICommon byte-identical to HF1
+- historical R2 HF1 runner byte-identical
+
+Gates:
+- 0.6-F homologation: PENDING runtime/manual/performance
+- physical application: DEFERRED_0_7
+- multiplayer/JIP/reconciliation: DEFERRED_0_8
+- Items visual convergence: SEPARATE
+- BGD Development audit: IMPORTANT / TIMING UNDER EVALUATION / NOT CURRENT GATE
