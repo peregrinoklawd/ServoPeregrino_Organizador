@@ -1,0 +1,32 @@
+Weapons 0.6-F R3 + UICommon — Candidate Package Record
+Date: 2026-10-04
+
+Artifact:
+SP_ORG_Items_Weapons_UI_Lab_Weapons_0_6_F_R3_UICommon.zip
+
+SHA-256:
+7cde5a3f896d6f819edc4a248f6e6a9857c4935da2f9e24232b4c0c9fe713eb8
+
+Static:
+36 PASS / 0 FAIL
+
+Runner:
+555 assertion sites
+
+Scope:
+- stable temporarily-empty inline name editing
+- independent P2/P3/P4 search state
+- global Catalog text search ignores stored Type/Accessory filters while active
+- stored filters restored after query clear
+- local P2/P4 row filtering
+
+Preserved:
+- Items byte-identical
+- Nexus byte-identical
+- UICommon byte-identical
+- F R1 and F R2 historical runners preserved
+- physical application DEFERRED_0_7
+- multiplayer/JIP DEFERRED_0_8
+
+Runtime/manual/performance:
+PENDING
