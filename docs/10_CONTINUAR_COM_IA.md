@@ -389,3 +389,25 @@ Não regredir:
 - focused refresh.
 
 Items/Nexus/UICommon continuam congelados durante o primeiro gate 0.7.
+
+
+## Handoff autoritativo novo — 05/10/2026
+
+As seções históricas acima permanecem para rastreabilidade, mas o estado mais recente para novo chat está em:
+
+`docs/46_NEXT_CHAT_HANDOFF_WEAPONS_0_7.md`
+
+Leia também obrigatoriamente:
+- `docs/43_UI_AUTOMATED_TEST_STABILITY_POLICY.md`;
+- `docs/44_WEAPONS_0_7_APM_APPLICATION_CASE_STUDY.md`;
+- `docs/45_WEAPONS_PREVIEW_3D_APM_ARMORER_CASE_STUDY.md`.
+
+Resumo:
+- Weapons 0.6-F R6 liberada para continuidade;
+- runtime 595/597, 2 FAILs somente de harness/version-text;
+- manual aprovado;
+- não criar R7;
+- próxima frente: 0.7-A Plan/Snapshot/Dry-Run;
+- antes, sincronizar source R6 no repositório;
+- Preview 3D é estudo separado;
+- não reconstruir R6 de memória.
