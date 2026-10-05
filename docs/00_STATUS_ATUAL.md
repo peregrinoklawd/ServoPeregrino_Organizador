@@ -632,3 +632,44 @@ Items/Nexus/UICommon congelados.
 - aplicação física segue bloqueada para 0.7 e MP/JIP para 0.8;
 - documentação detalhada: `docs/42_WEAPONS_0_6_F_R5_DYNAMIC_DRAFT_AUTHORING_CANDIDATE.md`;
 - **atenção:** o source avançado R5 ainda não foi espelhado integralmente na missão canônica do repositório, que continua contendo Weapons E R1; não declarar equivalência de source até a sincronização.
+
+
+## Atualização 05/10/2026 — Weapons 0.6 encerrada para continuidade
+
+Último runtime real:
+- candidata: **Weapons 0.6-F R6**;
+- AUTO: **595 PASS / 2 FAIL / 597 total**;
+- testes manuais: **APROVADOS**;
+- UICommon: **12/12**;
+- Items + UICommon: **12/12**;
+- authoring dinâmico, troca entre categorias internas, busca, filtros, preview proporcional, highlight de diferenças e focused refresh funcionaram conforme esperado.
+
+Os 2 FAILs restantes NÃO representam regressões funcionais:
+1. expectation do `uiState.schemaVersion` ainda acoplada à revisão textual;
+2. expectation do texto literal do header ainda acoplada à revisão textual.
+
+Decisão:
+- **não criar 0.6-F R7 somente para corrigir testes frágeis**;
+- **linha Weapons 0.6 liberada para continuidade funcional**;
+- próximo checkpoint: **0.7 — Slot-Safe Weapon Application**;
+- a limpeza dos asserts frágeis do harness será absorvida no início da 0.7.
+
+### Regra nova de testes automáticos
+
+Testes automáticos de UI NÃO devem falhar apenas porque mudou:
+- número de revisão exibido no header;
+- texto literal de versão/candidato;
+- marcador textual usado somente para identificar a entrega;
+- string cosmética sem semântica funcional.
+
+Quando necessário, validar:
+- presença do controle;
+- capability/feature flag estável;
+- comportamento;
+- estado funcional;
+- contrato de dados.
+
+Versão/build/revisão continuam registrados em logs e buildInfo, mas não devem ser usados como gate frágil de UI.
+
+Estado:
+**Weapons 0.6 — FUNCIONAL/MANUAL APROVADA PARA CONTINUIDADE; 2 FAILs de harness conhecidos e não-bloqueantes.**
