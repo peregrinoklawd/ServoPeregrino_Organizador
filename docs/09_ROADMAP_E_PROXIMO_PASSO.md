@@ -728,3 +728,43 @@ Auditoria BGD:
 - importante;
 - timing ainda em avaliação;
 - pode ser executada mais perto do fechamento/packaging final.
+
+
+## Atualização 05/10/2026 — 0.7 com estudo APM pronto
+
+A implementação da 0.7 deve usar como referência:
+`docs/44_WEAPONS_0_7_APM_APPLICATION_CASE_STUDY.md`.
+
+Sequência recomendada:
+- **0.7-A** Plan / Snapshot / Dry-Run — nenhuma mutação física;
+- **0.7-B** Slot-Safe Apply;
+- **0.7-C** Post-Validation / Rollback;
+- **0.7-D** UI Integration / Undo candidate.
+
+Hipótese principal para spike:
+- clonar `getUnitLoadout`;
+- substituir somente slot alvo;
+- `setUnitLoadout <clone>, false`;
+- pós-validar alvo e fingerprints de preservação;
+- rollback se houver divergência.
+
+A estratégia é hipótese até runtime; comparar com comandos slot-local se necessário.
+
+### Preview 3D
+
+Caso de estudo:
+`docs/45_WEAPONS_PREVIEW_3D_APM_ARMORER_CASE_STUDY.md`.
+
+Não misturar com o primeiro gate 0.7.
+Direção preferida:
+- arquitetura híbrida nova;
+- APM fidelity/transparent integration/natural scale;
+- Armorer framing/pivot/diagnostics;
+- controles simplificados e mais fluidos.
+
+Timing padrão:
+- depois da 0.7 e 0.8;
+- spike paralelo permitido apenas após 0.7-B estável.
+
+Handoff:
+`docs/46_NEXT_CHAT_HANDOFF_WEAPONS_0_7.md`.
