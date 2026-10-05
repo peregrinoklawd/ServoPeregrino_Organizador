@@ -288,3 +288,28 @@ Novos checks manuais futuros:
 5. desfazer mudança até valor original -> marcação some;
 6. salvar -> todas as marcações somem e estado volta a SALVO;
 7. fechar/reabrir draft alterado -> marcação continua coerente com snapshot salvo.
+
+
+## Regra compartilhada de estabilidade dos testes de UI
+
+Decisão compartilhada registrada em 05/10/2026:
+
+Testes automáticos de UI devem validar contratos funcionais e estruturais, não a identidade textual da entrega.
+
+NÃO usar como gate:
+- texto literal de versão no header;
+- número da revisão exibido;
+- nome textual da candidata;
+- strings cosméticas que mudam entre releases sem alterar comportamento.
+
+Preferir:
+- controle existe/está visível;
+- ordem/posição relativa quando isso é requisito de UX;
+- estado do ViewModel;
+- capability estável;
+- resultado da ação;
+- invariantes de dados;
+- ausência de mutação indevida;
+- performance/focused refresh quando aplicável.
+
+A regra vale para Items, Weapons e futuros consumidores de UICommon.
