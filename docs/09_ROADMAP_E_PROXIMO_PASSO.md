@@ -671,3 +671,60 @@ Antes de abrir 0.7:
 8. somente então congelar 0.6 e iniciar 0.7 Slot-Safe Weapon Application.
 
 Pendência técnica de repositório: sincronizar o source avançado R5 para a missão canônica; atualmente ela ainda carrega Weapons E R1.
+
+
+## Atualização 05/10/2026 — Weapons 0.6 liberada / próximo gate 0.7
+
+Resultado da última candidata:
+- **0.6-F R6**;
+- runtime **595/597**;
+- **2 FAILs exclusivamente de test harness** ligados a identificação textual de revisão/header;
+- testes manuais aprovados;
+- sem regressão funcional observada;
+- layout/filtros/preview/authoring/focused-refresh aceitos.
+
+Decisão de continuidade:
+- não gerar R7 apenas para trocar/remover texto de header;
+- remover ou substituir asserts de texto/versionamento cosmético por checks funcionais estáveis;
+- considerar a linha **0.6 encerrada para avanço funcional**;
+- iniciar **0.7 — Slot-Safe Weapon Application**.
+
+### 0.7 — Slot-Safe Weapon Application
+
+Objetivo:
+aplicar fisicamente o WeaponKit no slot derivado internamente da arma do Draft sem alterar os demais slots/equipamentos do jogador.
+
+Contrato inicial:
+- PRIMARY altera somente arma principal;
+- HANDGUN altera somente arma de porte;
+- SECONDARY altera somente lançador/secundária;
+- demais armas permanecem intactas;
+- uniforme/colete/mochila permanecem intactos;
+- itens gerais permanecem intactos;
+- acessórios aplicados devem continuar engine-derived/compatíveis;
+- o jogador não precisa gerenciar `targetSlot`; a aplicação usa o metadata interno derivado;
+- a ação física do Catálogo/Equipment que estava reservada desde 0.6 passa a ser habilitada nesta fase.
+
+Primeiro passo técnico da 0.7:
+1. limpar asserts frágeis herdados da 0.6 que verificam revisão/header literal;
+2. sincronizar o source mission-first avançado com o repositório antes de congelar a nova baseline;
+3. criar testes de isolamento de slot;
+4. somente depois habilitar mutação física na UI.
+
+Próximo após 0.7:
+- **0.8 — Multiplayer Authority / JIP / Reconciliation**.
+
+### Pendências paralelas
+
+Items permanece separado:
+- ITENS DO KIT;
+- destaque de linhas alteradas;
+- Visualizar;
+- mensagem amigável de catalogação;
+- diferença visual mission-first x PBO.
+
+Auditoria BGD:
+- issue #9;
+- importante;
+- timing ainda em avaliação;
+- pode ser executada mais perto do fechamento/packaging final.
