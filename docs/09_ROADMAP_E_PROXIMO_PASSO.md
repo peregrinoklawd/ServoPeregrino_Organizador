@@ -656,3 +656,18 @@ Se runtime + manual + performance fecharem com 0 FAIL:
 - depois: 0.8 Multiplayer Authority/Reconciliation.
 
 Botões com imagens estilo Arsenal e Preview 3D real permanecem futuras evoluções, não entram na R4.
+
+
+## Gate imediato — Weapons 0.6-F R5
+
+Antes de abrir 0.7:
+1. validar cold-open sem kits;
+2. Catalogo -> arma -> EQUIPAR NO RASCUNHO deve criar kit NOVO automaticamente;
+3. validar troca dinâmica Principal/Porte/Secundária sem trava de tipo;
+4. confirmar que o tipo interno não aparece em ARMAS DO KIT/footer;
+5. validar mensagens amigáveis sem códigos internos;
+6. executar AUTO R5 e exigir 0 FAIL;
+7. revisar performance/focused refresh;
+8. somente então congelar 0.6 e iniciar 0.7 Slot-Safe Weapon Application.
+
+Pendência técnica de repositório: sincronizar o source avançado R5 para a missão canônica; atualmente ela ainda carrega Weapons E R1.
