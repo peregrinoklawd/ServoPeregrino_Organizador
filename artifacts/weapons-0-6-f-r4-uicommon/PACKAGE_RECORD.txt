@@ -1,0 +1,38 @@
+Weapons 0.6-F R4 + UICommon — Candidate Package Record
+Date: 2026-10-05
+
+Artifact:
+SP_ORG_Items_Weapons_UI_Lab_Weapons_0_6_F_R4_UICommon.zip
+
+SHA-256:
+bb0360d11bf048f915c1d2a4045d5a37db0ba61050c1ff9a5ff9039dc2c19996
+
+Static:
+86 PASS / 0 FAIL
+
+Runner:
+560 assertion sites
+
+Scope:
+- header revision fix
+- obsolete synchronized-search tests replaced by isolation contract
+- keep-aspect centered weapon previews
+- uniform compact Catalog Type buttons
+- uniform single-row Catalog Accessory buttons
+- Catalog list recovers vertical area
+
+Preserved:
+- Items byte-identical
+- Nexus byte-identical
+- UICommon byte-identical
+- historical R3 runner byte-identical
+
+Deferred:
+- image/icon filter buttons
+- real 3D preview
+- physical application 0.7
+- multiplayer/JIP 0.8
+- Items visual convergence
+
+Runtime/manual/performance:
+PENDING
