@@ -619,3 +619,16 @@ Candidata ativa:
 
 Items/Nexus/UICommon congelados.
 0.7 continua bloqueada até homologação runtime/manual/performance da R4.
+
+
+## Atualização 05/10/2026 — Weapons 0.6-F R5
+
+- candidata mission-first R5 preparada após teste real da R4;
+- authoring passa a criar kit automaticamente ao enviar arma sem kit selecionado;
+- troca da arma-base passa a aceitar mudança entre categorias internas, atualizando `targetSlot + Recipe` de forma atômica;
+- tipo interno deixa de ser informação de jogador em ARMAS DO KIT/footer;
+- feedback direto deixa de expor códigos `WEAPONS_UI_*`;
+- corrigidos tooltip `CatalogSearch`, expectativas antigas do runner e política global de `CfgRemoteExec` da missão;
+- aplicação física segue bloqueada para 0.7 e MP/JIP para 0.8;
+- documentação detalhada: `docs/42_WEAPONS_0_6_F_R5_DYNAMIC_DRAFT_AUTHORING_CANDIDATE.md`;
+- **atenção:** o source avançado R5 ainda não foi espelhado integralmente na missão canônica do repositório, que continua contendo Weapons E R1; não declarar equivalência de source até a sincronização.
