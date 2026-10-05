@@ -598,3 +598,24 @@ Correções:
 
 Items/Nexus/UICommon permanecem congelados.
 0.7 continua bloqueada até homologação da 0.6-F R3.
+
+
+## Atualização 05/10/2026 — Weapons 0.6-F R4 preparada
+
+Resultado R3:
+- 579/582;
+- 3 FAILs;
+- 1 era header visual ainda em R2;
+- 2 eram expectativas legadas de busca sincronizada, incompatíveis com o contrato R3 de buscas independentes.
+
+Candidata ativa:
+- display 0.6-F R4;
+- semantic 0.6.5.4;
+- keep-aspect centralizado para previews 2D;
+- filtros Tipo/Acessório do Catálogo com largura e gramática padronizadas;
+- lista do Catálogo ampliada verticalmente;
+- static 86/86;
+- runner 560 assertion sites.
+
+Items/Nexus/UICommon congelados.
+0.7 continua bloqueada até homologação runtime/manual/performance da R4.
