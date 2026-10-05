@@ -312,3 +312,28 @@ Teste prioritário:
 Items/UICommon/Nexus permanecem congelados.
 Aplicação física é 0.7.
 MP/JIP é 0.8.
+
+
+## Checkpoint de continuidade — 05/10/2026 — Weapons 0.6-F R4
+
+Candidata ativa:
+- 0.6-F R4;
+- keep-aspect para previews P2/P4;
+- filtros Catálogo uniformes;
+- header/test drift corrigidos;
+- static 86/86;
+- runner 560 assertion sites.
+
+Teste prioritário:
+1. preview não estica;
+2. preview centralizado;
+3. filtros Tipo/Acessório uniformes;
+4. tooltips corretos;
+5. buscas independentes/globais continuam verdes;
+6. changed-row highlight continua verde;
+7. AUTO R4 com 0 FAIL;
+8. wheel/slider sem regressão;
+9. RPT + prints.
+
+Não iniciar 0.7 antes deste gate.
+Items/Nexus/UICommon permanecem congelados.
