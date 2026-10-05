@@ -673,3 +673,32 @@ Versão/build/revisão continuam registrados em logs e buildInfo, mas não devem
 
 Estado:
 **Weapons 0.6 — FUNCIONAL/MANUAL APROVADA PARA CONTINUIDADE; 2 FAILs de harness conhecidos e não-bloqueantes.**
+
+
+## Atualização 05/10/2026 — estudos APM/Armorer concluídos
+
+Antes de iniciar runtime 0.7 foram concluídos dois estudos de referência:
+
+1. `docs/44_WEAPONS_0_7_APM_APPLICATION_CASE_STUDY.md`
+   - APM usado como referência de contrato, não como código para copiar;
+   - plan/snapshot/mutation/post-validation/rollback;
+   - `fullMagazines=false`;
+   - same-slot application;
+   - undo transitório separado de rollback;
+   - proposta de 0.7-A Dry-Run antes da primeira mutação física.
+
+2. `docs/45_WEAPONS_PREVIEW_3D_APM_ARMORER_CASE_STUDY.md`
+   - comparação APM x Armorer;
+   - direção híbrida nova;
+   - APM: fidelidade/transparência/natural scale/keep-aspect;
+   - Armorer: framing/pivot/diagnóstico/perfis;
+   - controles futuros simplificados;
+   - Preview 3D NÃO entra no primeiro gate de 0.7.
+
+Handoff autoritativo para novo chat:
+`docs/46_NEXT_CHAT_HANDOFF_WEAPONS_0_7.md`.
+
+Próximo passo real:
+- preservar R6;
+- sincronizar source avançado mission-first no repositório;
+- iniciar 0.7-A Plan / Snapshot / Dry-Run sem mutação.
