@@ -625,3 +625,34 @@ Se fechar runtime/manual/performance com 0 FAIL:
 - linha 0.6 homologada/congelada;
 - próximo checkpoint: 0.7 Slot-Safe Weapon Application;
 - depois 0.8 Multiplayer Authority/Reconciliation.
+
+
+## Atualização 05/10/2026 — Checkpoint 0.6-F R4
+
+Checkpoint ativo:
+**Weapons 0.6-F R4 — Keep Aspect / Uniform Catalog Filters**
+
+R3 real:
+- 579 PASS / 3 FAIL / 582;
+- os dois FAILs de busca eram test drift;
+- o FAIL de header era visual/versionamento.
+
+R4 fecha:
+1. preview 2D sem distorção;
+2. centralização da arma dentro da área;
+3. mesma regra de proporção para P2 e P4;
+4. Tipo do Catálogo em botões uniformes;
+5. Acessório do Catálogo em uma única linha de botões uniformes;
+6. atualização dos testes legados de busca;
+7. header R4.
+
+Validação local:
+- 86/86;
+- runner 560 assertion sites.
+
+Se runtime + manual + performance fecharem com 0 FAIL:
+- Weapons 0.6 homologada/congelada;
+- próximo gate: 0.7 Slot-Safe Weapon Application;
+- depois: 0.8 Multiplayer Authority/Reconciliation.
+
+Botões com imagens estilo Arsenal e Preview 3D real permanecem futuras evoluções, não entram na R4.
