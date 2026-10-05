@@ -337,3 +337,13 @@ Teste prioritário:
 
 Não iniciar 0.7 antes deste gate.
 Items/Nexus/UICommon permanecem congelados.
+
+
+## Checkpoint Weapons — 05/10/2026
+
+Candidata atual de teste: **Weapons 0.6-F R5 — Dynamic Draft Authoring**.
+Contrato: auto-criação de kit ao enviar arma sem kit, troca dinâmica da arma-base entre categorias internas, `targetSlot` interno/oculto ao jogador, feedback amigável sem códigos internos. Aplicação física segue para 0.7.
+
+Leia também: `docs/42_WEAPONS_0_6_F_R5_DYNAMIC_DRAFT_AUTHORING_CANDIDATE.md`.
+
+Importante: a missão canônica no repositório ainda contém source Weapons E R1. A candidata R5 existe no pacote mission-first e ainda requer sincronização integral de source antes de o GitHub poder ser usado como baseline executável R5.
