@@ -347,3 +347,45 @@ Contrato: auto-criação de kit ao enviar arma sem kit, troca dinâmica da arma-
 Leia também: `docs/42_WEAPONS_0_6_F_R5_DYNAMIC_DRAFT_AUTHORING_CANDIDATE.md`.
 
 Importante: a missão canônica no repositório ainda contém source Weapons E R1. A candidata R5 existe no pacote mission-first e ainda requer sincronização integral de source antes de o GitHub poder ser usado como baseline executável R5.
+
+
+## Checkpoint de continuidade — 05/10/2026 — Weapons 0.7 liberada
+
+Último runtime:
+- Weapons 0.6-F R6;
+- AUTO 595/597;
+- 2 FAILs = harness/version-text only;
+- testes manuais aprovados.
+
+Decisão:
+- não criar R7;
+- não bloquear continuidade por header/version text;
+- próxima entrega deve ser **0.7 Slot-Safe Weapon Application**.
+
+Regra obrigatória de testes:
+- não assertar número de revisão em header;
+- não assertar texto cosmético de versão;
+- não usar schema/version marker de entrega como gate se não houver contrato funcional associado;
+- preferir capability/behavior/state/data-contract checks.
+
+Na abertura da 0.7:
+1. remover/substituir os 2 asserts frágeis herdados;
+2. preservar todo comportamento 0.6 aprovado;
+3. sincronizar source avançado mission-first no repositório;
+4. implementar aplicação física isolada por slot;
+5. provar que os demais slots/loadout ficam intactos;
+6. manter MP/JIP para 0.8.
+
+Não regredir:
+- auto-criação de Draft ao enviar arma sem kit;
+- troca dinâmica da arma entre categorias internas;
+- targetSlot oculto ao jogador;
+- feedback amigável;
+- buscas independentes;
+- busca global do Catálogo;
+- preview keep-aspect;
+- highlights semânticos;
+- filtros compactos;
+- focused refresh.
+
+Items/Nexus/UICommon continuam congelados durante o primeiro gate 0.7.
