@@ -24,14 +24,23 @@ private _filteredKits = _allKits select {
 _filteredKits = [_filteredKits,[],{toLowerANSI (_x getOrDefault ["name",""])},"ASCEND"] call BIS_fnc_sortBy;
 
 private _selectedKitId = _state getOrDefault ["selectedKitId",""];
+private _pendingNewKit = _state getOrDefault ["pendingNewKit",false];
 private _selectedKit = createHashMap;
 if (_selectedKitId isNotEqualTo "") then {
  private _idx = _filteredKits findIf {(_x getOrDefault ["kitId",""]) isEqualTo _selectedKitId};
  if (_idx >= 0) then {_selectedKit = _filteredKits select _idx};
 };
-if ((count _selectedKit) isEqualTo 0 && {(count _filteredKits) > 0}) then {
- _selectedKit = _filteredKits select 0;
- _selectedKitId = _selectedKit getOrDefault ["kitId",""];
+// R2 Hotfix 1: a pending NOVO deliberately has no repository object yet.
+// Never let the legacy "pick first kit" fallback hijack that state.
+// When the current filter projects no selected kit, resolve the UI selection to empty
+// so P2 renders SEM KIT instead of leaking the previously selected repository kit.
+if ((count _selectedKit) isEqualTo 0) then {
+ if (!_pendingNewKit && {(count _filteredKits) > 0}) then {
+  _selectedKit = _filteredKits select 0;
+  _selectedKitId = _selectedKit getOrDefault ["kitId",""];
+ } else {
+  _selectedKitId = "";
+ };
 };
 
 private _selectedKitWeaponInfo = createHashMap;
@@ -81,7 +90,7 @@ private _equipmentSnapshot = createHashMap;
 private _equipmentCode = _equipmentResult getOrDefault ["code","UNKNOWN"];
 if (_equipmentResult get "success") then {_equipmentSnapshot = (_equipmentResult get "data") get "snapshot"};
 
-[true,"WEAPONS_UI_VIEW_MODEL","0.6-E R1 view model built with authoring lifecycle over the homologated four-panel/focused-refresh baseline.",createHashMapFromArray [
+[true,"WEAPONS_UI_VIEW_MODEL","0.6-F R1 view model built with direct Catalog-to-Draft authoring over UICommon and the homologated four-panel/focused-refresh baseline.",createHashMapFromArray [
  ["state",_state],
  ["kits",_filteredKits],
  ["allKitCount",count _allKits],

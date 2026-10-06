@@ -1,0 +1,441 @@
+{
+  "artifact": "SP_ORG_Items_Weapons_UI_Lab_Weapons_0_6_F_R1_UICommon",
+  "date": "2026-10-04",
+  "scope": "STATIC_ONLY_NOT_ARMA_RUNTIME",
+  "passed": 86,
+  "failed": 0,
+  "total": 86,
+  "runnerAssertionSites": 537,
+  "checks": [
+    {
+      "name": "DIR_NEXUS",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "DIR_UICOMMON",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "DIR_ITEMS",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "DIR_WEAPONS",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "NO_CFGPATCHES",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "NO_SPORG_REQUIREDADDONS",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "NEXUS_RELATIVE",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "UICOMMON_RELATIVE",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "ITEMS_RELATIVE",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "WEAPONS_RELATIVE",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "ITEMS_UI_INCLUDED",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "WEAPONS_UI_INCLUDED",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "F_RUNNER_REGISTERED",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "R2_RUNNER_PRESERVED",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "MISSION_TITLE_F",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "MISSION_REMOTEEXEC_POLICY_PRESENT",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "DISPLAY_VERSION_F",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "SEMANTIC_VERSION_F",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "BUILD_VERSION_F",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "UICOMMON_MIN_PRESERVED",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "STATE_SCHEMA_F",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "STATE_PREVIOUS_KIT_FIELD",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "NEW_CAPTURES_PREVIOUS_KIT",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "DISCARD_READS_PREVIOUS",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "DISCARD_VALIDATES_PREVIOUS",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "DISCARD_RESTORES_SELECTED",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "DISCARD_CLEARS_RESTORE_CONTEXT",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "FIRST_WEAPON_CLEARS_RESTORE_CONTEXT",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "KIT_SELECT_CLEARS_RESTORE_CONTEXT",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "RUNTIME_CHECKPOINT_F",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "RUNTIME_REVISION_R1",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "RUNTIME_VISUAL_FREEZE",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "RUNTIME_LAYOUT_COMPAT_PRESERVED",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "RUNTIME_KITUI_COMPAT_PRESERVED",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "HEADER_F",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "P1_TITLE",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "P2_TITLE",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "P3_TITLE",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "P4_TITLE",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "P4_VISUALIZAR",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "ACTION_NOVO",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "ACTION_DUPLICAR",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "ACTION_EXCLUIR",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "ACTION_PUBLICAR",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "DRAFT_SALVAR",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "DRAFT_SALVAR_COMO",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "DRAFT_DESCARTAR",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "DRAFT_LIMPAR",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "FOOTER_3_BANDS",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "CATALOG_WINDOW_32",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "CATALOG_FOCUSED_LOG",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "CATALOG_FULLREFRESH_FALSE",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "PHYSICAL_GATE_0_7",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "NO_UI_PHYSICAL_SETUNITLOADOUT",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "NO_UI_PHYSICAL_ADDWEAPON",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "NO_UI_PHYSICAL_REMOVEWEAPON",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "NO_UI_PHYSICAL_ADDPRIMARYWEAPONITEM",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "NO_UI_PHYSICAL_REMOVEPRIMARYWEAPONITEM",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "NO_UI_APPLY_CONFIGURATION",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "HISTORICAL_R2_RUNNER_BYTE_IDENTICAL",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "F_RUNNER_MODE",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "F_RUNNER_CHECKPOINT",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "F_RUNNER_PREVIOUS_KIT_ASSERT",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "F_RUNNER_RESTORE_ASSERT",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "F_RUNNER_VISUAL_FREEZE_ASSERT",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "F_RUNNER_HEADER_ASSERT",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "F_RUNNER_FOOTER_ORDER_ASSERT",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "F_RUNNER_SCHEMA_ASSERT",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "F_RUNNER_ASSERTION_SITE_GROWTH",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "TOP_ACTION_F",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "LAB_ACTION_F",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "ITEMS_FILESET_IDENTICAL_HF1",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "ITEMS_BYTES_IDENTICAL_HF1",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "NEXUS_FILESET_IDENTICAL_HF1",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "NEXUS_BYTES_IDENTICAL_HF1",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "UICOMMON_FILESET_IDENTICAL_HF1",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "UICOMMON_BYTES_IDENTICAL_HF1",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "BALANCED_FN_CREATEUISTATE.SQF",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "BALANCED_FN_HANDLEUIEVENT.SQF",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "BALANCED_FN_APPLYCATALOGSELECTIONTODRAFT.SQF",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "BALANCED_FN_INITIALIZE.SQF",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "BALANCED_FN_RUNDELIVERY0_6_FTESTS.SQF",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "FILE_README_MD",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "FILE_LEIA_PRIMEIRO_TXT",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "FILE_WEAPONS_0_6_F_R1_NOTES_MD",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "FILE_DELIVERY_METADATA_WEAPONS_0_6_F_R1_JSON",
+      "pass": true,
+      "detail": ""
+    }
+  ]
+}

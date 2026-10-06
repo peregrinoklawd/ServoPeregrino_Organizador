@@ -1,0 +1,151 @@
+{
+  "passed": 36,
+  "failed": 0,
+  "total": 36,
+  "checks": [
+    {
+      "name": "nexus-byte-identical",
+      "pass": true
+    },
+    {
+      "name": "uicommon-byte-identical",
+      "pass": true
+    },
+    {
+      "name": "items-byte-identical",
+      "pass": true
+    },
+    {
+      "name": "historical-fn_runDelivery0_6_FR2Tests.sqf-preserved",
+      "pass": true
+    },
+    {
+      "name": "historical-fn_runDelivery0_6_FTests.sqf-preserved",
+      "pass": true
+    },
+    {
+      "name": "display-r3",
+      "pass": true
+    },
+    {
+      "name": "semantic-0653",
+      "pass": true
+    },
+    {
+      "name": "state-draftQuery",
+      "pass": true
+    },
+    {
+      "name": "state-catalogQuery",
+      "pass": true
+    },
+    {
+      "name": "state-equipmentQuery",
+      "pass": true
+    },
+    {
+      "name": "state-draftNameInput",
+      "pass": true
+    },
+    {
+      "name": "state-draftNameEditing",
+      "pass": true
+    },
+    {
+      "name": "p2-local",
+      "pass": true
+    },
+    {
+      "name": "p4-local",
+      "pass": true
+    },
+    {
+      "name": "name-edit-state",
+      "pass": true
+    },
+    {
+      "name": "blank-save-validation",
+      "pass": true
+    },
+    {
+      "name": "catalog-filtersIgnoredBySearch",
+      "pass": true
+    },
+    {
+      "name": "catalog-effectiveTypeFilter",
+      "pass": true
+    },
+    {
+      "name": "catalog-effectiveKindFilter",
+      "pass": true
+    },
+    {
+      "name": "catalog-storedTypeFilter",
+      "pass": true
+    },
+    {
+      "name": "catalog-storedCategoryFilter",
+      "pass": true
+    },
+    {
+      "name": "catalog-global-type",
+      "pass": true
+    },
+    {
+      "name": "catalog-global-kind",
+      "pass": true
+    },
+    {
+      "name": "no-three-search-sync",
+      "pass": true
+    },
+    {
+      "name": "no-synchronized-tooltip",
+      "pass": true
+    },
+    {
+      "name": "p2-focused-draft",
+      "pass": true
+    },
+    {
+      "name": "p4-focused-equipment",
+      "pass": true
+    },
+    {
+      "name": "draft-row-filter",
+      "pass": true
+    },
+    {
+      "name": "equipment-row-filter",
+      "pass": true
+    },
+    {
+      "name": "runner-exists",
+      "pass": true
+    },
+    {
+      "name": "runner-independent-search-tests",
+      "pass": true
+    },
+    {
+      "name": "runner-global-search-tests",
+      "pass": true
+    },
+    {
+      "name": "runner-name-test",
+      "pass": true
+    },
+    {
+      "name": "runner-registered",
+      "pass": true
+    },
+    {
+      "name": "runner-active",
+      "pass": true
+    },
+    {
+      "name": "physical-deferred",
+      "pass": true
+    }
+  ]
+}

@@ -5,57 +5,56 @@ params [
  ["_className","",[""]]
 ];
 
-private _fieldL = toLowerANSI _field;
-if !(_fieldL in ["optic","muzzle","pointer","bipod","magazine"]) exitWith {
- [false,"WEAPONS_UI_DRAFT_FIELD_INVALID","Draft field must be OPTIC/MUZZLE/POINTER/BIPOD/MAGAZINE."] call ServoPeregrino_Organizador_Nexus_fnc_createResult
+if (_kitId isEqualTo "") exitWith {
+ [false,"WEAPONS_UI_DRAFT_KIT_ID_EMPTY","WeaponKit id is required to edit a draft."] call ServoPeregrino_Organizador_Nexus_fnc_createResult
+};
+
+private _fieldName = if (_field isEqualTo "magazineClass") then {"magazineClass"} else {toLowerANSI _field};
+if !(_fieldName in ["optic","muzzle","pointer","bipod","magazineClass"]) exitWith {
+ [false,"WEAPONS_UI_DRAFT_FIELD_INVALID","Draft field is not editable in 0.6-D.",createHashMapFromArray [["field",_field]]] call ServoPeregrino_Organizador_Nexus_fnc_createResult
 };
 
 private _draftResult = [_kitId] call ServoPeregrino_Organizador_Weapons_fnc_getOrCreateWeaponKitDraft;
 if !(_draftResult get "success") exitWith {_draftResult};
-private _draft = (_draftResult get "data") get "draft";
+private _draft = ((_draftResult get "data") get "draft");
 private _recipe = [_draft getOrDefault ["recipe",createHashMap]] call ServoPeregrino_Organizador_Weapons_fnc_deepCopy;
 private _configuration = [_recipe getOrDefault ["configuration",createHashMap]] call ServoPeregrino_Organizador_Weapons_fnc_deepCopy;
 private _weaponClass = _configuration getOrDefault ["weaponClass",""];
-if (_weaponClass isEqualTo "") exitWith {
- [false,"WEAPONS_UI_DRAFT_WEAPON_EMPTY","Draft does not contain a weapon class."] call ServoPeregrino_Organizador_Nexus_fnc_createResult
+
+private _selectorResult = [_weaponClass,_recipe] call ServoPeregrino_Organizador_Weapons_fnc_buildCompatibilitySelectorModel;
+if !(_selectorResult get "success") exitWith {_selectorResult};
+private _model = ((_selectorResult get "data") get "model");
+private _selector = (_model getOrDefault ["selectors",createHashMap]) getOrDefault [_fieldName,createHashMap];
+if ((count _selector) isEqualTo 0) exitWith {
+ [false,"WEAPONS_UI_DRAFT_SELECTOR_MISSING","Compatibility selector is unavailable for requested draft field.",createHashMapFromArray [["field",_fieldName]]] call ServoPeregrino_Organizador_Nexus_fnc_createResult
 };
 
-private _compatResult = [_weaponClass] call ServoPeregrino_Organizador_Weapons_fnc_getWeaponCompatibility;
-if !(_compatResult get "success") exitWith {_compatResult};
-private _compat = _compatResult get "data";
-private _compatKey = switch (_fieldL) do {
- case "optic": {"optics"};
- case "muzzle": {"muzzles"};
- case "pointer": {"pointers"};
- case "bipod": {"bipods"};
- case "magazine": {"magazines"};
+private _requestedLower = toLowerANSI _className;
+private _options = _selector getOrDefault ["options",[]];
+private _matchIndex = _options findIf {
+ (toLowerANSI (_x getOrDefault ["className",""])) isEqualTo _requestedLower
 };
-private _allowed = (_compat getOrDefault [_compatKey,[]]) apply {toLowerANSI _x};
-if (_className isNotEqualTo "" && {!((toLowerANSI _className) in _allowed)}) exitWith {
- [false,"WEAPONS_UI_DRAFT_SELECTION_INCOMPATIBLE","Selected class is not engine-compatible with the draft weapon.",createHashMapFromArray [
-  ["weaponClass",_weaponClass],
-  ["field",toUpperANSI _fieldL],
-  ["className",_className]
+if (_matchIndex < 0) exitWith {
+ [false,"WEAPONS_UI_DRAFT_SELECTION_INCOMPATIBLE","Requested value is not present in the engine-derived compatibility selector.",createHashMapFromArray [
+  ["field",_fieldName],["className",_className],["weaponClass",_weaponClass]
  ]] call ServoPeregrino_Organizador_Nexus_fnc_createResult
 };
+private _canonicalClass = (_options select _matchIndex) getOrDefault ["className",""];
 
-if (_fieldL isEqualTo "magazine") then {
- _recipe set ["magazineClass",_className];
+if (_fieldName isEqualTo "magazineClass") then {
+ _recipe set ["magazineClass",_canonicalClass];
 } else {
- _configuration set [_fieldL,_className];
+ _configuration set [_fieldName,_canonicalClass];
  _recipe set ["configuration",_configuration];
 };
 
-private _recipeSemantic = [_recipe] call ServoPeregrino_Organizador_Weapons_fnc_validateWeaponRecipeSemantic;
-if !(_recipeSemantic get "success") exitWith {_recipeSemantic};
-private _recipeNormal = [_recipe] call ServoPeregrino_Organizador_Weapons_fnc_normalizeWeaponRecipe;
-if !(_recipeNormal get "success") exitWith {_recipeNormal};
-_recipe = (_recipeNormal get "data") get "recipe";
+private _semantic = [_recipe] call ServoPeregrino_Organizador_Weapons_fnc_validateWeaponRecipeSemantic;
+if !(_semantic get "success") exitWith {_semantic};
 
 private _baseRecipe = _draft getOrDefault ["baseRecipe",createHashMap];
-private _compare = [_baseRecipe,_recipe] call ServoPeregrino_Organizador_Weapons_fnc_compareWeaponRecipes;
-private _dirty = true;
-if (_compare get "success") then {_dirty = !((_compare get "data") getOrDefault ["equal",false])};
+private _comparison = [_baseRecipe,_recipe] call ServoPeregrino_Organizador_Weapons_fnc_compareWeaponRecipes;
+if !(_comparison get "success") exitWith {_comparison};
+private _dirty = !(((_comparison get "data") getOrDefault ["equal",false]));
 
 _draft set ["recipe",[_recipe] call ServoPeregrino_Organizador_Weapons_fnc_deepCopy];
 _draft set ["dirty",_dirty];
@@ -69,10 +68,11 @@ _state set ["draftsByKitId",_drafts];
 _state set ["activeDraftKitId",_kitId];
 missionNamespace setVariable [SP_ORG_WEAPONS_UI_STATE,_state];
 
-[true,"WEAPONS_UI_DRAFT_SELECTION_UPDATED","Local WeaponKit draft updated. Repository and physical loadout were not changed.",createHashMapFromArray [
+[true,"WEAPONS_UI_DRAFT_SELECTION_UPDATED","Compatibility selection updated only the session-local WeaponKit draft.",createHashMapFromArray [
+ ["field",_fieldName],
+ ["className",_canonicalClass],
+ ["dirty",_dirty],
  ["draft",[_draft] call ServoPeregrino_Organizador_Weapons_fnc_deepCopy],
- ["field",toUpperANSI _fieldL],
- ["className",_className],
  ["weaponKitMutation",false],
  ["loadoutMutation",false]
 ]] call ServoPeregrino_Organizador_Nexus_fnc_createResult

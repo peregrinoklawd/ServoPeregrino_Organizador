@@ -26,6 +26,9 @@ if (
  ]] call ServoPeregrino_Organizador_Nexus_fnc_createResult
 };
 
+// Compatibility is engine-derived but stable for a fixed mission/modset. Cache only
+// the raw discovery result for the UI session so ordinary search/filter refreshes do
+// not repeatedly execute the SECONDARY variant scan.
 private _cache = missionNamespace getVariable ["SP_ORG_Weapons_UI_CompatibilityCache",createHashMap];
 private _cacheKey = toLowerANSI _canonicalWeaponClass;
 private _compatibility = _cache getOrDefault [_cacheKey,createHashMap];

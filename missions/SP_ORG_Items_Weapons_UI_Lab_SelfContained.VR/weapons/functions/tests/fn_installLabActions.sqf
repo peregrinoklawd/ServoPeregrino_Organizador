@@ -3,11 +3,11 @@ if (!hasInterface || {isNull _unit} || {!local _unit}) exitWith {false};
 if (_unit getVariable ["SP_ORG_Weapons_labActionsInstalled",false]) exitWith {true};
 _unit setVariable ["SP_ORG_Weapons_labActionsInstalled",true];
 
-_unit addAction ["Weapons | AUTO TEST 0.6-E R1 - Authoring",{
- [] spawn ServoPeregrino_Organizador_Weapons_fnc_runDelivery0_6_ETests
+_unit addAction ["Weapons | AUTO TEST 0.6-F R6 - Compact Filter Regression",{
+ [] spawn ServoPeregrino_Organizador_Weapons_fnc_runDelivery0_6_FR6Tests
 },nil,1.5,true,true,"","isServer"];
 
-_unit addAction ["Weapons | ABRIR UI 0.6-E R1",{
+_unit addAction ["Weapons | ABRIR UI 0.6-F R6",{
  private _result = [] call ServoPeregrino_Organizador_Weapons_fnc_openInterface;
  if !(_result get "success") then {
   hint format ["UI falhou: %1",_result get "code"];
@@ -30,8 +30,8 @@ _unit addAction ["Weapons | Compatibilidade MX - RPT",{
  hint "Compatibilidade da MX gravada no RPT.";
 }];
 
-_unit addAction ["Weapons | Sobre o teste 0.6-E R1",{
- hint "0.6-E R1 preserva a baseline R3 e habilita authoring session-local: NOVO, RENOMEAR, DUPLICAR, EXCLUIR, SALVAR, SALVAR COMO NOVO e troca da arma-base no rascunho. Nenhuma dessas ações equipa fisicamente a arma; aplicação continua em 0.7.";
+_unit addAction ["Weapons | Sobre o teste 0.6-F R6",{
+ hint "0.6-F R6 preserva o authoring dinâmico da R5 e compacta o espaço entre Tipo/Acessório e seus filtros: se não houver kit, enviar uma ARMA do Catálogo cria um novo kit automaticamente; uma arma de outra categoria pode substituir a arma do rascunho sem bloqueio; o tipo interno não é exibido ao jogador; mensagens do fluxo de rascunho são explicativas e não mostram códigos WEAPONS_UI_*. Aplicação física continua reservada para 0.7.";
 }];
 
 _unit addEventHandler ["Respawn",{params ["_new"];[_new] call ServoPeregrino_Organizador_Weapons_fnc_installLabActions}];

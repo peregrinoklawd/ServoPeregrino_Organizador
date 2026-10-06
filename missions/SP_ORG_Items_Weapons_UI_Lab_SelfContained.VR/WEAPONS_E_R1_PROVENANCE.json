@@ -1,0 +1,513 @@
+{
+  "weapons_source_zip": "SP_ORG_Weapons_0_6_E_R1_AuthoringLifecycle_TestPackage(1).zip",
+  "weapons_source_zip_sha256": "e504188631231ae837d8105481a48989f9726e0348db1dc45afdf5cd2ee3a855",
+  "weapons_files": 101,
+  "weapons_identical_files": 101,
+  "weapons_manifest": {
+    "functions/catalog/fn_buildWeaponCatalog.sqf": {
+      "source_sha256": "f02401b53f64284599cc227df5a4b168470ba3af871f03b0ff10edf925bbce1a",
+      "mission_sha256": "f02401b53f64284599cc227df5a4b168470ba3af871f03b0ff10edf925bbce1a",
+      "identical": true
+    },
+    "functions/catalog/fn_getWeaponCatalog.sqf": {
+      "source_sha256": "0054829042e4f00373192ad7cbb781e8e84319fe1a16e0ac42bc32d324b2a1f3",
+      "mission_sha256": "0054829042e4f00373192ad7cbb781e8e84319fe1a16e0ac42bc32d324b2a1f3",
+      "identical": true
+    },
+    "functions/catalog/fn_getWeaponCatalogEntry.sqf": {
+      "source_sha256": "a5cdc0a01a2b059482b6de1c72c5530b9837584169787f7d1c2a4997aa046d20",
+      "mission_sha256": "a5cdc0a01a2b059482b6de1c72c5530b9837584169787f7d1c2a4997aa046d20",
+      "identical": true
+    },
+    "functions/catalog/fn_getWeaponCompatibility.sqf": {
+      "source_sha256": "9109c0182a8205065a1267fd4bd239340bddbffa40f74529aaf507777d3e6de2",
+      "mission_sha256": "9109c0182a8205065a1267fd4bd239340bddbffa40f74529aaf507777d3e6de2",
+      "identical": true
+    },
+    "functions/domain/fn_applyWeaponConfiguration.sqf": {
+      "source_sha256": "da88ff5a7ddd39f6fdc18140fc3a8e369a14dcf96d3fd357c5971d2e2f69a393",
+      "mission_sha256": "da88ff5a7ddd39f6fdc18140fc3a8e369a14dcf96d3fd357c5971d2e2f69a393",
+      "identical": true
+    },
+    "functions/domain/fn_areWeaponClassesEquivalentForSlot.sqf": {
+      "source_sha256": "0a6dd706e6bc147e8917d973a93d2701a1270d23e312c249e630ea6f089b297c",
+      "mission_sha256": "0a6dd706e6bc147e8917d973a93d2701a1270d23e312c249e630ea6f089b297c",
+      "identical": true
+    },
+    "functions/domain/fn_captureWeaponConfiguration.sqf": {
+      "source_sha256": "52f6231d38e5398a7890d9ed9a971eb4ce39e7228f619a033095d55ad04dee2f",
+      "mission_sha256": "52f6231d38e5398a7890d9ed9a971eb4ce39e7228f619a033095d55ad04dee2f",
+      "identical": true
+    },
+    "functions/domain/fn_compareWeaponConfigurations.sqf": {
+      "source_sha256": "bcd6aafac309ea1d11e8ae383ec2c68d3c39cafde958de1c91417eaf3a835d82",
+      "mission_sha256": "bcd6aafac309ea1d11e8ae383ec2c68d3c39cafde958de1c91417eaf3a835d82",
+      "identical": true
+    },
+    "functions/domain/fn_configurationFromWeaponArray.sqf": {
+      "source_sha256": "ee24ec57927a841a6e60721bb8484876d44bb567fc0ba91139ddb4b5306bd2dc",
+      "mission_sha256": "ee24ec57927a841a6e60721bb8484876d44bb567fc0ba91139ddb4b5306bd2dc",
+      "identical": true
+    },
+    "functions/domain/fn_createWeaponConfiguration.sqf": {
+      "source_sha256": "2ebcb8492073dd70c165ed01f26daa79bab631c5d7d18b57592b7c714a275eea",
+      "mission_sha256": "2ebcb8492073dd70c165ed01f26daa79bab631c5d7d18b57592b7c714a275eea",
+      "identical": true
+    },
+    "functions/domain/fn_deepCopy.sqf": {
+      "source_sha256": "c78b4e122de7f94127ef7b31b8c672322e249118149bca9b5feeecc994710737",
+      "mission_sha256": "c78b4e122de7f94127ef7b31b8c672322e249118149bca9b5feeecc994710737",
+      "identical": true
+    },
+    "functions/domain/fn_diffWeaponConfigurations.sqf": {
+      "source_sha256": "068907cc65bae182a75251b41c8274dc548fdb37531c6face8f71a28d8128d90",
+      "mission_sha256": "068907cc65bae182a75251b41c8274dc548fdb37531c6face8f71a28d8128d90",
+      "identical": true
+    },
+    "functions/domain/fn_getConfigurationFingerprint.sqf": {
+      "source_sha256": "320fecb8a397dd12badca1b7371050d16bd241174724e28687d46db4f1a77f97",
+      "mission_sha256": "320fecb8a397dd12badca1b7371050d16bd241174724e28687d46db4f1a77f97",
+      "identical": true
+    },
+    "functions/domain/fn_getConfigurationSlotDefinitions.sqf": {
+      "source_sha256": "968050bd9cc7f3487ff4ffef3941c2a2f1f43ac644927f7e9053d8f9994e71e4",
+      "mission_sha256": "968050bd9cc7f3487ff4ffef3941c2a2f1f43ac644927f7e9053d8f9994e71e4",
+      "identical": true
+    },
+    "functions/domain/fn_isValidIdentityToken.sqf": {
+      "source_sha256": "b2881ab2ab4ae3e16f82e26c51a9bf979740e220b932fecec4f61c58e090753e",
+      "mission_sha256": "b2881ab2ab4ae3e16f82e26c51a9bf979740e220b932fecec4f61c58e090753e",
+      "identical": true
+    },
+    "functions/domain/fn_normalizeWeaponConfiguration.sqf": {
+      "source_sha256": "dbe5aa83b9fac9aa162e83c6d7e38ef0f772693c6ad3662677d63da5d2156ac4",
+      "mission_sha256": "dbe5aa83b9fac9aa162e83c6d7e38ef0f772693c6ad3662677d63da5d2156ac4",
+      "identical": true
+    },
+    "functions/domain/fn_validateWeaponConfigurationSemantic.sqf": {
+      "source_sha256": "68ef638b6bba0e87699bc7b43c13dd464947ee6b7a457c3465bc3890734c323a",
+      "mission_sha256": "68ef638b6bba0e87699bc7b43c13dd464947ee6b7a457c3465bc3890734c323a",
+      "identical": true
+    },
+    "functions/domain/fn_validateWeaponConfigurationStructural.sqf": {
+      "source_sha256": "877d5d00f14f1812503e0c7d9d27474d2440af266a838d0c94aabe16d42daed0",
+      "mission_sha256": "877d5d00f14f1812503e0c7d9d27474d2440af266a838d0c94aabe16d42daed0",
+      "identical": true
+    },
+    "functions/domain/fn_validateWeaponInstance.sqf": {
+      "source_sha256": "b77797514e4c5b025fc68e880ed7f05486cfbf4add27f5de35247ce1d3eb4804",
+      "mission_sha256": "b77797514e4c5b025fc68e880ed7f05486cfbf4add27f5de35247ce1d3eb4804",
+      "identical": true
+    },
+    "functions/identity/fn_analyzeLifecycleTransition.sqf": {
+      "source_sha256": "df748d520c03f395aaa942f4897c19bbdaaf8c62f9afeeb051166145af9e82ea",
+      "mission_sha256": "df748d520c03f395aaa942f4897c19bbdaaf8c62f9afeeb051166145af9e82ea",
+      "identical": true
+    },
+    "functions/identity/fn_createLifecycleEvidence.sqf": {
+      "source_sha256": "5aae728b2032336f227688350256a7b5a0d5a0c485f248e13b8a8712bfad7f9f",
+      "mission_sha256": "5aae728b2032336f227688350256a7b5a0d5a0c485f248e13b8a8712bfad7f9f",
+      "identical": true
+    },
+    "functions/identity/fn_createWeaponInstance.sqf": {
+      "source_sha256": "431ff3f5e626ec193f06db6ec442b88d4fed656b0a2a25d17b90637ce7bec2b1",
+      "mission_sha256": "431ff3f5e626ec193f06db6ec442b88d4fed656b0a2a25d17b90637ce7bec2b1",
+      "identical": true
+    },
+    "functions/identity/fn_detectLifecycleDelta.sqf": {
+      "source_sha256": "0864d16bebdb6ed9b9717c6fff796937b889248fc7de0757f4121ba73114b09e",
+      "mission_sha256": "0864d16bebdb6ed9b9717c6fff796937b889248fc7de0757f4121ba73114b09e",
+      "identical": true
+    },
+    "functions/identity/fn_getFingerprintMultiplicity.sqf": {
+      "source_sha256": "cfabe6e45bcc566f8d3ad09d60a9ce41b803763acaa9fd5d20addd8f9d966730",
+      "mission_sha256": "cfabe6e45bcc566f8d3ad09d60a9ce41b803763acaa9fd5d20addd8f9d966730",
+      "identical": true
+    },
+    "functions/identity/fn_getIdentityDiagnostics.sqf": {
+      "source_sha256": "95dcf22af349a32c274aad6c227d9b4c5ed0e8a123c4b77ada4763cdd9804cd3",
+      "mission_sha256": "95dcf22af349a32c274aad6c227d9b4c5ed0e8a123c4b77ada4763cdd9804cd3",
+      "identical": true
+    },
+    "functions/identity/fn_getWeaponInstance.sqf": {
+      "source_sha256": "1727c37a75d078bb6f62dcc6e9a719e1b77e5132743ee9a0fe4f48115d1ab2f0",
+      "mission_sha256": "1727c37a75d078bb6f62dcc6e9a719e1b77e5132743ee9a0fe4f48115d1ab2f0",
+      "identical": true
+    },
+    "functions/identity/fn_initializeAuthority.sqf": {
+      "source_sha256": "1a19d354df525712137c456abc9f53562559c0bddc407570d57a55b4cc86bd8e",
+      "mission_sha256": "1a19d354df525712137c456abc9f53562559c0bddc407570d57a55b4cc86bd8e",
+      "identical": true
+    },
+    "functions/identity/fn_inspectWeaponCarrier.sqf": {
+      "source_sha256": "71f43f9d8d2435544bc34b7201599143742993db5ce2b76990be81a60816a7fa",
+      "mission_sha256": "71f43f9d8d2435544bc34b7201599143742993db5ce2b76990be81a60816a7fa",
+      "identical": true
+    },
+    "functions/identity/fn_updateWeaponInstanceConfiguration.sqf": {
+      "source_sha256": "3bc01b0a997aa39a1212989f651f492ff381277d78a349e6f7e7d558bba16424",
+      "mission_sha256": "3bc01b0a997aa39a1212989f651f492ff381277d78a349e6f7e7d558bba16424",
+      "identical": true
+    },
+    "functions/integration/fn_validateNexus.sqf": {
+      "source_sha256": "871f91dc4f21752217b808f40f43de8c42b6198c7e761de48a420623cb23d134",
+      "mission_sha256": "871f91dc4f21752217b808f40f43de8c42b6198c7e761de48a420623cb23d134",
+      "identical": true
+    },
+    "functions/kit/fn_compareWeaponKits.sqf": {
+      "source_sha256": "bd1f8df29afbe6e544ec19231b743b077ff1675d537fb0aa439cbd5cdcb8ddc6",
+      "mission_sha256": "bd1f8df29afbe6e544ec19231b743b077ff1675d537fb0aa439cbd5cdcb8ddc6",
+      "identical": true
+    },
+    "functions/kit/fn_createWeaponKit.sqf": {
+      "source_sha256": "65ab921689b42c259b79a872cd20a07cb3e71c11fe5e5832804d79497b0c310a",
+      "mission_sha256": "65ab921689b42c259b79a872cd20a07cb3e71c11fe5e5832804d79497b0c310a",
+      "identical": true
+    },
+    "functions/kit/fn_deleteWeaponKit.sqf": {
+      "source_sha256": "7497b24d033b2b212f7a90fd0cdf7c78efb2c77178e0216b3a0ef882b6fc640e",
+      "mission_sha256": "7497b24d033b2b212f7a90fd0cdf7c78efb2c77178e0216b3a0ef882b6fc640e",
+      "identical": true
+    },
+    "functions/kit/fn_duplicateWeaponKit.sqf": {
+      "source_sha256": "e02a5ebb81d3b2fac9071519edc4add73b1168bd9853c9da14a124ed4c70c3cd",
+      "mission_sha256": "e02a5ebb81d3b2fac9071519edc4add73b1168bd9853c9da14a124ed4c70c3cd",
+      "identical": true
+    },
+    "functions/kit/fn_getWeaponKit.sqf": {
+      "source_sha256": "fd45af356f7ccd5dc3c0589b80f4060294b4732cd989cf6f0ea443ae4295369d",
+      "mission_sha256": "fd45af356f7ccd5dc3c0589b80f4060294b4732cd989cf6f0ea443ae4295369d",
+      "identical": true
+    },
+    "functions/kit/fn_getWeaponKitContentFingerprint.sqf": {
+      "source_sha256": "8563baed4d1c52dd00b36a4c36ca888733bf69d4cd8f5d45991173da409b0436",
+      "mission_sha256": "8563baed4d1c52dd00b36a4c36ca888733bf69d4cd8f5d45991173da409b0436",
+      "identical": true
+    },
+    "functions/kit/fn_initializeWeaponKitStore.sqf": {
+      "source_sha256": "97aa3d8e00c93602988b53851445da0fce30f7d1b020d41245455d03e72de4c5",
+      "mission_sha256": "97aa3d8e00c93602988b53851445da0fce30f7d1b020d41245455d03e72de4c5",
+      "identical": true
+    },
+    "functions/kit/fn_listWeaponKits.sqf": {
+      "source_sha256": "458182503b72bb5bc56e84ab49c858c5127300db4f3d069d7aba0e1e96e002a2",
+      "mission_sha256": "458182503b72bb5bc56e84ab49c858c5127300db4f3d069d7aba0e1e96e002a2",
+      "identical": true
+    },
+    "functions/kit/fn_normalizeWeaponKit.sqf": {
+      "source_sha256": "8d6be934a1256f7f1d34cbfb3a1df39e8b844e11414051f1c3eb0c4acac3fd85",
+      "mission_sha256": "8d6be934a1256f7f1d34cbfb3a1df39e8b844e11414051f1c3eb0c4acac3fd85",
+      "identical": true
+    },
+    "functions/kit/fn_normalizeWeaponKitName.sqf": {
+      "source_sha256": "5e7cd2674a76ce96b8ee8570d4abcf6c6690780fc7bfcdce68475a1638373b13",
+      "mission_sha256": "5e7cd2674a76ce96b8ee8570d4abcf6c6690780fc7bfcdce68475a1638373b13",
+      "identical": true
+    },
+    "functions/kit/fn_renameWeaponKit.sqf": {
+      "source_sha256": "ac812ab59b5d31b7b3f2f7e264e7ca1a034779b1b038ba14624711e6c253dd9e",
+      "mission_sha256": "ac812ab59b5d31b7b3f2f7e264e7ca1a034779b1b038ba14624711e6c253dd9e",
+      "identical": true
+    },
+    "functions/kit/fn_updateWeaponKitRecipe.sqf": {
+      "source_sha256": "638454e3ba078432d6362cb981d604eaf1c476dbdd80e85464a2cda7f2fca52b",
+      "mission_sha256": "638454e3ba078432d6362cb981d604eaf1c476dbdd80e85464a2cda7f2fca52b",
+      "identical": true
+    },
+    "functions/kit/fn_validateWeaponKitSemantic.sqf": {
+      "source_sha256": "de63d6b3e6f3552032903cf8205bb5edf9106823f09196fbc301ff013f4dfb1c",
+      "mission_sha256": "de63d6b3e6f3552032903cf8205bb5edf9106823f09196fbc301ff013f4dfb1c",
+      "identical": true
+    },
+    "functions/kit/fn_validateWeaponKitStructural.sqf": {
+      "source_sha256": "608570c10c705a37f17cc342bef2630871f9710999d50edfaebfec8f185145c1",
+      "mission_sha256": "608570c10c705a37f17cc342bef2630871f9710999d50edfaebfec8f185145c1",
+      "identical": true
+    },
+    "functions/lifecycle/fn_getBuildInfo.sqf": {
+      "source_sha256": "89423845e7dcd1d81195e465b6e1567fd6ff571f1e8287bb0462c125fecfcf4f",
+      "mission_sha256": "89423845e7dcd1d81195e465b6e1567fd6ff571f1e8287bb0462c125fecfcf4f",
+      "identical": true
+    },
+    "functions/lifecycle/fn_initialize.sqf": {
+      "source_sha256": "8bf2ae355eddf0272ed42c52c1c4de031a74e75921d66f3e6d1be251fd099b9a",
+      "mission_sha256": "8bf2ae355eddf0272ed42c52c1c4de031a74e75921d66f3e6d1be251fd099b9a",
+      "identical": true
+    },
+    "functions/recipe/fn_compareWeaponRecipes.sqf": {
+      "source_sha256": "ef831a9e44ded92de0fd9bf0d6b521195621bdb805984248be24520e41ad8d96",
+      "mission_sha256": "ef831a9e44ded92de0fd9bf0d6b521195621bdb805984248be24520e41ad8d96",
+      "identical": true
+    },
+    "functions/recipe/fn_createWeaponRecipe.sqf": {
+      "source_sha256": "03343355e8f75c8dbccf98497914618b47c8f35511a3d7eebec1fefa019ff34c",
+      "mission_sha256": "03343355e8f75c8dbccf98497914618b47c8f35511a3d7eebec1fefa019ff34c",
+      "identical": true
+    },
+    "functions/recipe/fn_getWeaponRecipeFingerprint.sqf": {
+      "source_sha256": "59456bc00cbd793e450d861a1f51109a5c8e0b2a4afa8ccec01b27997568b689",
+      "mission_sha256": "59456bc00cbd793e450d861a1f51109a5c8e0b2a4afa8ccec01b27997568b689",
+      "identical": true
+    },
+    "functions/recipe/fn_normalizeWeaponRecipe.sqf": {
+      "source_sha256": "14a5403b79919976e9d706a01c2af26897de24de28171a55e84bd2743b207498",
+      "mission_sha256": "14a5403b79919976e9d706a01c2af26897de24de28171a55e84bd2743b207498",
+      "identical": true
+    },
+    "functions/recipe/fn_validateWeaponRecipeSemantic.sqf": {
+      "source_sha256": "8933ee067b61419fdf3074628b3421234904dbc9f83a821e38e9ef267e69d74b",
+      "mission_sha256": "8933ee067b61419fdf3074628b3421234904dbc9f83a821e38e9ef267e69d74b",
+      "identical": true
+    },
+    "functions/recipe/fn_validateWeaponRecipeStructural.sqf": {
+      "source_sha256": "ebba9ac7bec5bccfd6c21326817e3a58b93de65b2bc21f4c9708811e102eb3a2",
+      "mission_sha256": "ebba9ac7bec5bccfd6c21326817e3a58b93de65b2bc21f4c9708811e102eb3a2",
+      "identical": true
+    },
+    "functions/runtime/fn_getRuntimeStatus.sqf": {
+      "source_sha256": "b28d4f06a97e27542cec42a8f189c7d5769bcbafe025be40859aa10c4b9e064e",
+      "mission_sha256": "b28d4f06a97e27542cec42a8f189c7d5769bcbafe025be40859aa10c4b9e064e",
+      "identical": true
+    },
+    "functions/tests/fn_captureLiveLifecycleBefore.sqf": {
+      "source_sha256": "d8554f15a28e2592fb5d0e6c0d9e038a53178f2fd95f7731a1dcc8752ea27188",
+      "mission_sha256": "d8554f15a28e2592fb5d0e6c0d9e038a53178f2fd95f7731a1dcc8752ea27188",
+      "identical": true
+    },
+    "functions/tests/fn_clientReceiveLabResult.sqf": {
+      "source_sha256": "899387168d1db08f4d4aa7b18aeaab1b7ed12f4936c69c7051a70d52622779f4",
+      "mission_sha256": "899387168d1db08f4d4aa7b18aeaab1b7ed12f4936c69c7051a70d52622779f4",
+      "identical": true
+    },
+    "functions/tests/fn_dispatchLabRequest.sqf": {
+      "source_sha256": "a84dfbb1b080882126baa899d4f41532941ef78b6e3cba85bdfb6a6a0579c8d3",
+      "mission_sha256": "a84dfbb1b080882126baa899d4f41532941ef78b6e3cba85bdfb6a6a0579c8d3",
+      "identical": true
+    },
+    "functions/tests/fn_getLiveLifecycleStatus.sqf": {
+      "source_sha256": "4371cd1d5d4c627c6760a0b9d2e65d64b54fed1679201dc68291c4b207e7d848",
+      "mission_sha256": "4371cd1d5d4c627c6760a0b9d2e65d64b54fed1679201dc68291c4b207e7d848",
+      "identical": true
+    },
+    "functions/tests/fn_handleLiveLifecycleEvent.sqf": {
+      "source_sha256": "8fb1eea700005ed6b5c31bab6bce21bd4d53be49c2e0d0907ff5e3d72999bb74",
+      "mission_sha256": "8fb1eea700005ed6b5c31bab6bce21bd4d53be49c2e0d0907ff5e3d72999bb74",
+      "identical": true
+    },
+    "functions/tests/fn_initializeLiveLifecycleTest.sqf": {
+      "source_sha256": "10ce978d379a85a05db4ddb20f8c4ae55a225f42b598ab3bce734636d16b9fe0",
+      "mission_sha256": "10ce978d379a85a05db4ddb20f8c4ae55a225f42b598ab3bce734636d16b9fe0",
+      "identical": true
+    },
+    "functions/tests/fn_installLabActions.sqf": {
+      "source_sha256": "cde7c730de700bd2f12e08b4cc775a0847a5bbcbb22a52413ebc057ce869285b",
+      "mission_sha256": "cde7c730de700bd2f12e08b4cc775a0847a5bbcbb22a52413ebc057ce869285b",
+      "identical": true
+    },
+    "functions/tests/fn_resetLiveLifecycleTest.sqf": {
+      "source_sha256": "e67c0cc6074f70797650e7a34ad4d6670c1ef2305737e5bf62ff601540e7c76b",
+      "mission_sha256": "e67c0cc6074f70797650e7a34ad4d6670c1ef2305737e5bf62ff601540e7c76b",
+      "identical": true
+    },
+    "functions/tests/fn_runDelivery0_3Tests.sqf": {
+      "source_sha256": "eaec70aafe7ba08299622092de203013473ae0bb022d095bf243ff61c0f90d94",
+      "mission_sha256": "eaec70aafe7ba08299622092de203013473ae0bb022d095bf243ff61c0f90d94",
+      "identical": true
+    },
+    "functions/tests/fn_runDelivery0_4Tests.sqf": {
+      "source_sha256": "e809a23952abd8dff178ebf19573775ce0551ec4bcdc88a219c80d4d00b54d6a",
+      "mission_sha256": "e809a23952abd8dff178ebf19573775ce0551ec4bcdc88a219c80d4d00b54d6a",
+      "identical": true
+    },
+    "functions/tests/fn_runDelivery0_5Tests.sqf": {
+      "source_sha256": "fabc48074119b939f49ff69279a8b078454007a84871e680ab2aacbe294273f5",
+      "mission_sha256": "fabc48074119b939f49ff69279a8b078454007a84871e680ab2aacbe294273f5",
+      "identical": true
+    },
+    "functions/tests/fn_runDelivery0_6_ATests.sqf": {
+      "source_sha256": "117491769fcd6e41d9137f6161d86b6680fcd1da22d85026dba668d31b17ae21",
+      "mission_sha256": "117491769fcd6e41d9137f6161d86b6680fcd1da22d85026dba668d31b17ae21",
+      "identical": true
+    },
+    "functions/tests/fn_runDelivery0_6_BTests.sqf": {
+      "source_sha256": "510ddbcaccf7fb3c386bf1aa9cc8617d6606379ed2fbaf7ede7502a0ce914eaf",
+      "mission_sha256": "510ddbcaccf7fb3c386bf1aa9cc8617d6606379ed2fbaf7ede7502a0ce914eaf",
+      "identical": true
+    },
+    "functions/tests/fn_runDelivery0_6_CTests.sqf": {
+      "source_sha256": "b3951697400f46506213eb38d9d2c89047b5f08b810405726c1edcdbdd02333f",
+      "mission_sha256": "b3951697400f46506213eb38d9d2c89047b5f08b810405726c1edcdbdd02333f",
+      "identical": true
+    },
+    "functions/tests/fn_runDelivery0_6_DR2Tests.sqf": {
+      "source_sha256": "851e5052ccf817789f947008170e3e0d5b0b705672270a0cfdda64434d1b4aa8",
+      "mission_sha256": "851e5052ccf817789f947008170e3e0d5b0b705672270a0cfdda64434d1b4aa8",
+      "identical": true
+    },
+    "functions/tests/fn_runDelivery0_6_DR3Tests.sqf": {
+      "source_sha256": "2356758fa0375ec87bb533edaf9117a500ce08f90239aded96c52945ba5f1264",
+      "mission_sha256": "2356758fa0375ec87bb533edaf9117a500ce08f90239aded96c52945ba5f1264",
+      "identical": true
+    },
+    "functions/tests/fn_runDelivery0_6_DTests.sqf": {
+      "source_sha256": "402f81365afa2610474c00917f070a79d55b4531c3282abfe3baf9b99550ae25",
+      "mission_sha256": "402f81365afa2610474c00917f070a79d55b4531c3282abfe3baf9b99550ae25",
+      "identical": true
+    },
+    "functions/tests/fn_runDelivery0_6_ETests.sqf": {
+      "source_sha256": "ba2f172e65366b690ed3c2309421bacbee8f6d2972ab312c6938159734a10c22",
+      "mission_sha256": "ba2f172e65366b690ed3c2309421bacbee8f6d2972ab312c6938159734a10c22",
+      "identical": true
+    },
+    "functions/tests/fn_serverHandleLabRequest.sqf": {
+      "source_sha256": "b9444f5b0e1354c325257be13cd39254e43ecab72ea58a80b2d010c3605bdf37",
+      "mission_sha256": "b9444f5b0e1354c325257be13cd39254e43ecab72ea58a80b2d010c3605bdf37",
+      "identical": true
+    },
+    "functions/ui/fn_buildCompatibilitySelectorModel.sqf": {
+      "source_sha256": "8e944462e796ce823e1735a869df512b8b25b2bf5f53c69bc61e47db33323d0a",
+      "mission_sha256": "8e944462e796ce823e1735a869df512b8b25b2bf5f53c69bc61e47db33323d0a",
+      "identical": true
+    },
+    "functions/ui/fn_buildUIViewModel.sqf": {
+      "source_sha256": "dabdb1fa481c5fbc9e76822fb2f3804726056264fb38e36d5948086e70c679d1",
+      "mission_sha256": "dabdb1fa481c5fbc9e76822fb2f3804726056264fb38e36d5948086e70c679d1",
+      "identical": true
+    },
+    "functions/ui/fn_createUIState.sqf": {
+      "source_sha256": "36ae108b3a99c3cfff831a06745fe4821914387b2396508ff5832c6a68db9fdb",
+      "mission_sha256": "36ae108b3a99c3cfff831a06745fe4821914387b2396508ff5832c6a68db9fdb",
+      "identical": true
+    },
+    "functions/ui/fn_createWeaponKitFromCatalogWeapon.sqf": {
+      "source_sha256": "62ca818c71f1df989f23921db36516dd5f422d69fcbc94e041a70042aa722042",
+      "mission_sha256": "62ca818c71f1df989f23921db36516dd5f422d69fcbc94e041a70042aa722042",
+      "identical": true
+    },
+    "functions/ui/fn_discardWeaponKitDraft.sqf": {
+      "source_sha256": "30f6d0465e0a4c86df61fe01d3bf832fae9091b2619cdeab276dc159589aa842",
+      "mission_sha256": "30f6d0465e0a4c86df61fe01d3bf832fae9091b2619cdeab276dc159589aa842",
+      "identical": true
+    },
+    "functions/ui/fn_escapeStructuredText.sqf": {
+      "source_sha256": "2802900be0dcbda34471ab00636469c0dd99baf4cb38c7a80beb1177226b3bc4",
+      "mission_sha256": "2802900be0dcbda34471ab00636469c0dd99baf4cb38c7a80beb1177226b3bc4",
+      "identical": true
+    },
+    "functions/ui/fn_getClassPresentationInfo.sqf": {
+      "source_sha256": "4b24a447dcdd9af0044b06049fcca879583e81c2bcbc6398f727ce2da912a6c0",
+      "mission_sha256": "4b24a447dcdd9af0044b06049fcca879583e81c2bcbc6398f727ce2da912a6c0",
+      "identical": true
+    },
+    "functions/ui/fn_getEquipmentSlotSnapshot.sqf": {
+      "source_sha256": "8fe326a8cb39267985316b0167e3579e249732dcef369c05086e288fdef96e16",
+      "mission_sha256": "8fe326a8cb39267985316b0167e3579e249732dcef369c05086e288fdef96e16",
+      "identical": true
+    },
+    "functions/ui/fn_getOrCreateWeaponKitDraft.sqf": {
+      "source_sha256": "01beba3983953ff99206efcee1005e23fe770c43d4ee5b1eb3f26ec9c9574542",
+      "mission_sha256": "01beba3983953ff99206efcee1005e23fe770c43d4ee5b1eb3f26ec9c9574542",
+      "identical": true
+    },
+    "functions/ui/fn_getUICatalogWindow.sqf": {
+      "source_sha256": "3cea93aed1a1037efa32c2c2c46c2a7c75f0f5ba8babaf4d29d80b220702b3ef",
+      "mission_sha256": "3cea93aed1a1037efa32c2c2c46c2a7c75f0f5ba8babaf4d29d80b220702b3ef",
+      "identical": true
+    },
+    "functions/ui/fn_getUISlotLabel.sqf": {
+      "source_sha256": "80bc77261eedf66dbb9a89ce4aa6219b7b269de8ce0f50ade99da714c6a0a02c",
+      "mission_sha256": "80bc77261eedf66dbb9a89ce4aa6219b7b269de8ce0f50ade99da714c6a0a02c",
+      "identical": true
+    },
+    "functions/ui/fn_getUIState.sqf": {
+      "source_sha256": "4bf142ecfb883cf4c2d1a31b43b5499f6e9ac0c5abfc48ff22c56b2df6fad290",
+      "mission_sha256": "4bf142ecfb883cf4c2d1a31b43b5499f6e9ac0c5abfc48ff22c56b2df6fad290",
+      "identical": true
+    },
+    "functions/ui/fn_getUniqueWeaponKitName.sqf": {
+      "source_sha256": "0bb3498dd0ab90ec9135192621d4f5f92df1824f0f5b42166296e47b94ea6176",
+      "mission_sha256": "0bb3498dd0ab90ec9135192621d4f5f92df1824f0f5b42166296e47b94ea6176",
+      "identical": true
+    },
+    "functions/ui/fn_getWeaponPresentationInfo.sqf": {
+      "source_sha256": "d343431723f2d969992d58303cdfe42d615f1266301a617e4a36599cb6d46f7f",
+      "mission_sha256": "d343431723f2d969992d58303cdfe42d615f1266301a617e4a36599cb6d46f7f",
+      "identical": true
+    },
+    "functions/ui/fn_handleUIEvent.sqf": {
+      "source_sha256": "c034bddab298ffe3b36d036fac44fc604cbbc2323fc3f515746d50f32fa93ab5",
+      "mission_sha256": "c034bddab298ffe3b36d036fac44fc604cbbc2323fc3f515746d50f32fa93ab5",
+      "identical": true
+    },
+    "functions/ui/fn_handleUIWheel.sqf": {
+      "source_sha256": "778758ce2e43d95f958eddaf8fc8244dc07a10735f7600a91ebe02e67495bdf5",
+      "mission_sha256": "778758ce2e43d95f958eddaf8fc8244dc07a10735f7600a91ebe02e67495bdf5",
+      "identical": true
+    },
+    "functions/ui/fn_onInterfaceLoad.sqf": {
+      "source_sha256": "9ac1b266bb4f0c9cc7d3a61e7acc665874f8a049fe0685817c16238ac6eee207",
+      "mission_sha256": "9ac1b266bb4f0c9cc7d3a61e7acc665874f8a049fe0685817c16238ac6eee207",
+      "identical": true
+    },
+    "functions/ui/fn_onInterfaceUnload.sqf": {
+      "source_sha256": "828de68ad292e5cf834fe5e1c0abdefed48fe5bdcb70e4a982a0053cf90957a0",
+      "mission_sha256": "828de68ad292e5cf834fe5e1c0abdefed48fe5bdcb70e4a982a0053cf90957a0",
+      "identical": true
+    },
+    "functions/ui/fn_openInterface.sqf": {
+      "source_sha256": "3db2eaf785fc8d65fb276bb53566850bd023506ceb525a3df0b73e6838f9d9da",
+      "mission_sha256": "3db2eaf785fc8d65fb276bb53566850bd023506ceb525a3df0b73e6838f9d9da",
+      "identical": true
+    },
+    "functions/ui/fn_pushUIFeedback.sqf": {
+      "source_sha256": "8cffecb89f51b239369af0cb750813db415fc46b1d824d1a4716b81158faca52",
+      "mission_sha256": "8cffecb89f51b239369af0cb750813db415fc46b1d824d1a4716b81158faca52",
+      "identical": true
+    },
+    "functions/ui/fn_refreshCatalogWindowUI.sqf": {
+      "source_sha256": "470e19a2c0196caafed083d70ee5c67bd8852dae71d24c00850e0cf04d190098",
+      "mission_sha256": "470e19a2c0196caafed083d70ee5c67bd8852dae71d24c00850e0cf04d190098",
+      "identical": true
+    },
+    "functions/ui/fn_refreshDraftUI.sqf": {
+      "source_sha256": "04aa727d6311d126dbe1e6e0eac2da9457ad2ba3dc799d151b4e9e037046309e",
+      "mission_sha256": "04aa727d6311d126dbe1e6e0eac2da9457ad2ba3dc799d151b4e9e037046309e",
+      "identical": true
+    },
+    "functions/ui/fn_refreshEquipmentViewUI.sqf": {
+      "source_sha256": "35ea98c1075c7f1ec47d5f7c870830417334f4ed8a0054d6364f19b7a18e048b",
+      "mission_sha256": "35ea98c1075c7f1ec47d5f7c870830417334f4ed8a0054d6364f19b7a18e048b",
+      "identical": true
+    },
+    "functions/ui/fn_refreshInterface.sqf": {
+      "source_sha256": "2d7efefeec5591cea6b69e58edff571fbf29a15fe08fff72e4fc010adce72ab8",
+      "mission_sha256": "2d7efefeec5591cea6b69e58edff571fbf29a15fe08fff72e4fc010adce72ab8",
+      "identical": true
+    },
+    "functions/ui/fn_saveWeaponKitDraft.sqf": {
+      "source_sha256": "a4a56e2b6aacccdf331569c5e5340cd63f7e9c44f4b7dc6dba6404ba16bdf634",
+      "mission_sha256": "a4a56e2b6aacccdf331569c5e5340cd63f7e9c44f4b7dc6dba6404ba16bdf634",
+      "identical": true
+    },
+    "functions/ui/fn_setWeaponKitDraftSelection.sqf": {
+      "source_sha256": "0bbbd4a610c5d142536df9284f3e84367c6fc9f5b9ae533a81615e6fabbb05ac",
+      "mission_sha256": "0bbbd4a610c5d142536df9284f3e84367c6fc9f5b9ae533a81615e6fabbb05ac",
+      "identical": true
+    },
+    "functions/ui/fn_setWeaponKitDraftWeapon.sqf": {
+      "source_sha256": "526797a23fce74e7c630b8c025b16d08745c4d23d145d9fda5f2cd898a9908d1",
+      "mission_sha256": "526797a23fce74e7c630b8c025b16d08745c4d23d145d9fda5f2cd898a9908d1",
+      "identical": true
+    },
+    "script_version.hpp": {
+      "source_sha256": "f73117682144e38d2313073a9faa4867d89556c93dfc95177b87ddc2d511cc36",
+      "mission_sha256": "f73117682144e38d2313073a9faa4867d89556c93dfc95177b87ddc2d511cc36",
+      "identical": true
+    },
+    "ui/weapons_dialog.hpp": {
+      "source_sha256": "ec55a2769f5eb9e6b3636457bf4e2688a6c899ff3ccbfaad4baf18987448a712",
+      "mission_sha256": "ec55a2769f5eb9e6b3636457bf4e2688a6c899ff3ccbfaad4baf18987448a712",
+      "identical": true
+    }
+  }
+}

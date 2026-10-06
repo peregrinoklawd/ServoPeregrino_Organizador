@@ -5,11 +5,12 @@ params [
  ["_recipe",false]
 ];
 
-private _init = [] call ServoPeregrino_Organizador_Weapons_fnc_initializeWeaponKitStore;
-if !(_init get "success") exitWith {_init};
 if !(_recipe isEqualType createHashMap) exitWith {
  [false,"WEAPONS_KIT_RECIPE_TYPE_INVALID","createWeaponKit expects a WeaponRecipe HashMap."] call ServoPeregrino_Organizador_Nexus_fnc_createResult
 };
+
+private _init = [] call ServoPeregrino_Organizador_Weapons_fnc_initializeWeaponKitStore;
+if !(_init get "success") exitWith {_init};
 
 private _nameResult = [_name] call ServoPeregrino_Organizador_Weapons_fnc_normalizeWeaponKitName;
 if !(_nameResult get "success") exitWith {_nameResult};
@@ -20,19 +21,20 @@ private _kits = _store get "kits";
 private _nameKey = toLowerANSI _normalizedName;
 private _collision = false;
 {
- private _candidate = _kits get _x;
- if ((toLowerANSI (_candidate get "name")) isEqualTo _nameKey) exitWith {_collision = true};
+ private _existing = _kits get _x;
+ if ((toLowerANSI (_existing get "name")) isEqualTo _nameKey) exitWith {_collision = true};
 } forEach (keys _kits);
 if (_collision) exitWith {
- [false,"WEAPONS_KIT_NAME_EXISTS","WeaponKit name already exists case-insensitively in this session."] call ServoPeregrino_Organizador_Nexus_fnc_createResult
+ [false,"WEAPONS_KIT_NAME_EXISTS","WeaponKit names are unique case-insensitively within the session repository."] call ServoPeregrino_Organizador_Nexus_fnc_createResult
 };
 
 private _counter = (_store get "counter") + 1;
 if (_counter > 9999999) exitWith {
- [false,"WEAPONS_KIT_SESSION_EXHAUSTED","Session WeaponKit sequence exhausted."] call ServoPeregrino_Organizador_Nexus_fnc_createResult
+ [false,"WEAPONS_KIT_STORE_EXHAUSTED","Session WeaponKit sequence exhausted."] call ServoPeregrino_Organizador_Nexus_fnc_createResult
 };
 _store set ["counter",_counter];
-private _kitId = format ["WKIT-%1-%2",_store get "session",_counter toFixed 0];
+
+private _kitId = format ["WKT-%1-%2",_store get "session",_counter toFixed 0];
 private _candidate = createHashMapFromArray [
  ["schemaVersion","0.5-kit-candidate"],
  ["kitId",_kitId],

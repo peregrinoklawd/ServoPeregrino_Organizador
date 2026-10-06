@@ -55,6 +55,7 @@ private _loadedBefore = (_beforeResult get "data") get "loadedState";
 private _diff = [_before,_target] call ServoPeregrino_Organizador_Weapons_fnc_diffWeaponConfigurations;
 if !(_diff get "success") exitWith {_diff};
 
+// No-op must be observational only. Avoid touching engine inventory state.
 if (((_diff get "data") get "changedCount") isEqualTo 0 && {_classEquivalentBefore}) exitWith {
  [true,"WEAPONS_CONFIGURATION_ALREADY_APPLIED","WeaponConfiguration already matches engine state; no mutation performed.",createHashMapFromArray [
   ["slot",_slotName],

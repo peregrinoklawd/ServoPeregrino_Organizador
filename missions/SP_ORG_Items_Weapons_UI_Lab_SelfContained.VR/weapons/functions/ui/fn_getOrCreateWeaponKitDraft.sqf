@@ -19,6 +19,12 @@ private _drafts = _state getOrDefault ["draftsByKitId",createHashMap];
 private _draft = _drafts getOrDefault [_kitId,createHashMap];
 
 if ((count _draft) > 0) exitWith {
+ if ((_draft getOrDefault ["baseTargetSlot",""]) isEqualTo "") then {
+  _draft set ["baseTargetSlot",_kit getOrDefault ["targetSlot",""]];
+  _drafts set [_kitId,_draft];
+  _state set ["draftsByKitId",_drafts];
+  missionNamespace setVariable [SP_ORG_WEAPONS_UI_STATE,_state];
+ };
  [true,"WEAPONS_UI_DRAFT_FOUND","Existing session-local WeaponKit draft returned.",createHashMapFromArray [
   ["draft",[_draft] call ServoPeregrino_Organizador_Weapons_fnc_deepCopy]
  ]] call ServoPeregrino_Organizador_Nexus_fnc_createResult
@@ -32,6 +38,7 @@ _draft = createHashMapFromArray [
  ["sourceKitId",_kitId],
  ["sourceName",_kit getOrDefault ["name",""]],
  ["targetSlot",_kit getOrDefault ["targetSlot",""]],
+ ["baseTargetSlot",_kit getOrDefault ["targetSlot",""]],
  ["baseRecipe",_baseRecipe],
  ["recipe",_recipe],
  ["dirty",false],

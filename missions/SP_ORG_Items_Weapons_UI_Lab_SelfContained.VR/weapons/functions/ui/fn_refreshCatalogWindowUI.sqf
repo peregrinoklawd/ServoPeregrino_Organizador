@@ -35,18 +35,20 @@ private _kindValue = {
  }
 };
 
+private _query = _state getOrDefault ["catalogQuery",""];
+private _catalogSearchGlobal = _query isNotEqualTo "";
 private _catalogType = toUpperANSI (_state getOrDefault ["catalogTypeFilter","ALL"]);
 {
  _x params ["_idc","_value"];
- (_display displayCtrl _idc) ctrlSetBackgroundColor (if (_value isEqualTo _catalogType) then {[0.12,0.32,0.38,0.76]} else {[0.08,0.11,0.12,0.58]});
+ (_display displayCtrl _idc) ctrlSetBackgroundColor (if (!_catalogSearchGlobal && {_value isEqualTo _catalogType}) then {[0.12,0.32,0.38,0.76]} else {[0.08,0.11,0.12,0.58]});
 } forEach [[3111,"ALL"],[3112,"PRIMARY"],[3113,"HANDGUN"],[3114,"SECONDARY"]];
 private _catalogKind = toUpperANSI (_state getOrDefault ["catalogCategoryFilter","ALL"]);
 {
  _x params ["_idc","_value"];
- (_display displayCtrl _idc) ctrlSetBackgroundColor (if (_value isEqualTo _catalogKind) then {[0.08,0.38,0.30,0.76]} else {[0.08,0.11,0.12,0.58]});
+ (_display displayCtrl _idc) ctrlSetBackgroundColor (if (!_catalogSearchGlobal && {_value isEqualTo _catalogKind}) then {[0.08,0.38,0.30,0.76]} else {[0.08,0.11,0.12,0.58]});
 } forEach [[3132,"ALL"],[3133,"WEAPON"],[3134,"OPTIC"],[3135,"POINTER"],[3136,"BIPOD"],[3137,"MAGAZINE"],[3138,"GRIP"]];
 private _searchCtrl = _display displayCtrl 3100;
-if ((ctrlText _searchCtrl) isNotEqualTo (_state getOrDefault ["catalogQuery",""])) then {_searchCtrl ctrlSetText (_state getOrDefault ["catalogQuery",""])};
+if ((ctrlText _searchCtrl) isNotEqualTo _query) then {_searchCtrl ctrlSetText _query};
 
 private _catCtrl = _display displayCtrl 3120;
 lbClear _catCtrl;
@@ -57,7 +59,7 @@ private _selIndex = -1;
  private _kind = _x getOrDefault ["catalogKind",""];
  private _kindLabel = _x getOrDefault ["catalogKindLabel",""];
  private _class = _x getOrDefault ["catalogClass",""];
- private _idx = _catCtrl lbAdd format ["%1  |  %2",_kindLabel,_x getOrDefault ["displayName",_class]];
+ private _idx = _catCtrl lbAdd format ["←  %1  |  %2  →",_kindLabel,_x getOrDefault ["displayName",_class]];
  _catCtrl lbSetData [_idx,_class];
  _catCtrl lbSetValue [_idx,[_kind] call _kindValue];
  private _picture = _x getOrDefault ["picture",""];
@@ -76,7 +78,14 @@ private _rendered = count (_data getOrDefault ["rows",[]]);
 private _maxOffset = _data getOrDefault ["catalogMaxOffset",0];
 private _windowSize = _data getOrDefault ["catalogWindowSize",SP_ORG_WEAPONS_UI_CATALOG_WINDOW_SIZE];
 private _lastShown = (_offset+_rendered) min _matchCount;
-(_display displayCtrl 3122) ctrlSetText (if (_matchCount isEqualTo 0) then {"Nenhum resultado"} else {format ["Mostrando %1 a %2 de %3",_offset+1,_lastShown,_matchCount]});
+private _globalSearch = _data getOrDefault ["filtersIgnoredBySearch",_catalogSearchGlobal];
+(_display displayCtrl 3122) ctrlSetText (
+ if (_matchCount isEqualTo 0) then {
+  if (_globalSearch) then {"Nenhum resultado · busca global (filtros ignorados)"} else {"Nenhum resultado"}
+ } else {
+  format ["Mostrando %1 a %2 de %3%4",_offset+1,_lastShown,_matchCount,if (_globalSearch) then {" · busca global"} else {""}]
+ }
+);
 private _slider = _display displayCtrl 3124;
 _slider sliderSetRange [0,(_maxOffset max 1)];
 _slider sliderSetSpeed [6,(_windowSize max 12)];
@@ -84,7 +93,7 @@ _slider sliderSetPosition _offset;
 _slider ctrlEnable (_maxOffset>0);
 
 private _selected = _data getOrDefault ["selectedCatalog",createHashMap];
-private _details = "Selecione um item. Filtros de acessórios usam compatibilidade da arma do Kit Selecionado.";
+private _details = "Selecione um item. ← envia para ARMAS DO KIT; → permanece reservado para aplicação física em 0.7.";
 if ((count _selected)>0) then {
  private _dn = [_selected getOrDefault ["displayName",""]] call ServoPeregrino_Organizador_Weapons_fnc_escapeStructuredText;
  private _kindSafe = [_selected getOrDefault ["catalogKindLabel",""]] call ServoPeregrino_Organizador_Weapons_fnc_escapeStructuredText;
@@ -95,6 +104,10 @@ if ((count _selected)>0) then {
  _details = format ["<t size='1.05' color='#CDE7E1'>%1</t><br/>%2 · Classe: %3%4%5",_dn,_kindSafe,_classSafe,_compatLine,if (_descSafe isEqualTo "") then {""} else {format ["<br/>%1",_descSafe]}];
 };
 (_display displayCtrl 3130) ctrlSetStructuredText parseText _details;
+private _hasSelection = (count _selected)>0;
+(_display displayCtrl 3150) ctrlEnable _hasSelection;
+(_display displayCtrl 3151) ctrlEnable false;
+(_display displayCtrl 3151) ctrlSetTooltip "Aplicação física slot-safe será habilitada em Weapons 0.7.";
 
 _state = missionNamespace getVariable [SP_ORG_WEAPONS_UI_STATE,createHashMap];
 _state set ["selectedCatalogClass",_selectedClass];
@@ -114,11 +127,11 @@ _state set ["lastRefreshTick",diag_tickTime];
 missionNamespace setVariable [SP_ORG_WEAPONS_UI_STATE,_state];
 
 private _kitName = _state getOrDefault ["selectedKitName","Nenhum"];
-if (_kitName isEqualTo "") then {_kitName="Nenhum"};
+if (_kitName isEqualTo "") then {_kitName=if (_state getOrDefault ["pendingNewKit",false]) then {_state getOrDefault ["pendingNewName","Novo Kit"]} else {"Nenhum"}};
 private _kitSlot = _state getOrDefault ["selectedKitSlot",""];
-private _draftState = if (_state getOrDefault ["selectedKitDraftDirty",false]) then {"ALTERADO"} else {if (_kitSlot isEqualTo "") then {"-"} else {"SALVO"}};
+private _draftState = if (_state getOrDefault ["pendingNewKit",false]) then {"NOVO"} else {if (_state getOrDefault ["selectedKitIsNew",false]) then {"NOVO"} else {if (_state getOrDefault ["selectedKitDraftDirty",false]) then {"ALTERADO"} else {if (_kitSlot isEqualTo "") then {"-"} else {"SALVO"}}}};
 private _equipmentSlot = _state getOrDefault ["equipmentSlotView","PRIMARY"];
-private _context = format ["Kit: %1 | Tipo: %2 | Rascunho: %3 | Catálogo: %4/%5 | Equipamento: %6",_kitName,if (_kitSlot isEqualTo "") then {"-"} else {[_kitSlot] call _slotLabel},_draftState,_catalogType,_catalogKind,[_equipmentSlot] call _slotLabel];
+private _context = format ["Kit: %1 | Tipo: %2 | Rascunho: %3 | Catálogo: %4/%5%6 | Equipamento: %7",_kitName,if (_kitSlot isEqualTo "") then {"-"} else {[_kitSlot] call _slotLabel},_draftState,_catalogType,_catalogKind,if (_globalSearch) then {" (filtros pausados pela busca)"} else {""},[_equipmentSlot] call _slotLabel];
 (_display displayCtrl 5000) ctrlSetStructuredText parseText format ["<t color='#6FCBB8'>CONTEXTO</t><t color='#BFEADF'>  •  %1</t>",[_context] call ServoPeregrino_Organizador_Weapons_fnc_escapeStructuredText];
 
 // Message/history are intentionally not rebuilt from domain state; they remain the feedback channel.
@@ -127,7 +140,7 @@ private _history = _state getOrDefault ["history",[]];
 private _historyText="";
 {if (_historyText isNotEqualTo "") then {_historyText=_historyText+"   •   "};_historyText=_historyText+_x} forEach (_history select [((count _history)-3) max 0,(3 min (count _history))]);
 (_display displayCtrl 5001) ctrlSetStructuredText parseText format ["<t color='#7EC8FF'>RESULTADO</t><t color='#DFE6E6'>  •  %1</t>",[_message] call ServoPeregrino_Organizador_Weapons_fnc_escapeStructuredText];
-(_display displayCtrl 5002) ctrlSetStructuredText parseText format ["<t color='#81918E'>HISTÓRICO  •  %1</t>",[_historyText] call ServoPeregrino_Organizador_Weapons_fnc_escapeStructuredText];
+(_display displayCtrl 5002) ctrlSetStructuredText parseText format ["<t color='#9FB5B1'>HISTÓRICO</t><t color='#C3CECC'>  •  %1</t>",[_historyText] call ServoPeregrino_Organizador_Weapons_fnc_escapeStructuredText];
 
 diag_log format ["[SP_ORG] [WEAPONS] [UI_PERF] mode=CATALOG_FOCUSED reason=%1 totalMs=%2 projectionBuilt=%3 projectionMs=%4 filterBuilt=%5 filterMs=%6 matched=%7 offset=%8/%9 rows=%10 fullRefresh=false",toUpperANSI _reason,_elapsed,_data getOrDefault ["projectionBuiltNow",false],_data getOrDefault ["projectionBuildMs",0],_data getOrDefault ["filterBuiltNow",false],_data getOrDefault ["filterMs",0],_matchCount,_offset,_maxOffset,_rendered];
 

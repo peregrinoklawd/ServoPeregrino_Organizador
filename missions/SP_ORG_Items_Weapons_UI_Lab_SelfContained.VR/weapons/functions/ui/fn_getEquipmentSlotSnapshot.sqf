@@ -64,10 +64,10 @@ private _resolve = {
   ["configuration",[_cfg] call ServoPeregrino_Organizador_Weapons_fnc_deepCopy],
   ["loadedState",[_loaded] call ServoPeregrino_Organizador_Weapons_fnc_deepCopy],
   ["magazineClass",_magClass],
-  ["opticInfo",[_cfg getOrDefault ["optic",""],"ITEM"] call _resolve],
-  ["muzzleInfo",[_cfg getOrDefault ["muzzle",""],"ITEM"] call _resolve],
-  ["pointerInfo",[_cfg getOrDefault ["pointer",""],"ITEM"] call _resolve],
-  ["bipodInfo",[_cfg getOrDefault ["bipod",""],"ITEM"] call _resolve],
+  ["opticInfo",[_cfg getOrDefault ["optic",""],"OPTIC"] call _resolve],
+  ["muzzleInfo",[_cfg getOrDefault ["muzzle",""],"MUZZLE"] call _resolve],
+  ["pointerInfo",[_cfg getOrDefault ["pointer",""],"POINTER"] call _resolve],
+  ["bipodInfo",[_cfg getOrDefault ["bipod",""],"BIPOD"] call _resolve],
   ["magazineInfo",[_magClass,"MAGAZINE"] call _resolve]
  ]
 ]]] call ServoPeregrino_Organizador_Nexus_fnc_createResult

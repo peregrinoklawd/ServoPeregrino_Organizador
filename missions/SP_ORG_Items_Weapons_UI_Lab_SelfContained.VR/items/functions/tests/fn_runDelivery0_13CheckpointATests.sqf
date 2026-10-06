@@ -20,18 +20,34 @@ private _authorityBefore=[missionNamespace getVariable [SERVO_PEREGRINO_ORGANIZA
 private _uiBefore=[missionNamespace getVariable [SERVO_PEREGRINO_ORGANIZADOR_ITEMS_UI_STATE_VAR,createHashMap]] call ServoPeregrino_Organizador_Items_fnc_deepCopy;
 private _loadoutBefore=([player] call ServoPeregrino_Organizador_Items_fnc_getLoadoutFingerprint) getOrDefault ["data",createHashMap];
 
+// The same checkpoint runs in the addon/PBO lab and in the fully self-contained
+// mission-first lab. Resolve source paths without emitting false "Script ... not found"
+// warnings when the addon virtual root is intentionally absent.
+private _missionFirstSource = isClass (missionConfigFile >> "CfgFunctions" >> "ServoPeregrino_Organizador_Items");
+private _sourcePrefix = if (_missionFirstSource) then {"items"} else {"ServoPeregrino_Organizador_Items"};
 private _srcDesc=preprocessFileLineNumbers "description.ext";
-private _srcCfg=preprocessFileLineNumbers "ServoPeregrino_Organizador_Items\config.cpp";
-private _srcPublish=preprocessFileLineNumbers "ServoPeregrino_Organizador_Items\functions\library\fn_publishKitToPublic.sqf";
-private _srcRequest=preprocessFileLineNumbers "ServoPeregrino_Organizador_Items\functions\library\fn_requestPublicKitPublish.sqf";
-private _srcServer=preprocessFileLineNumbers "ServoPeregrino_Organizador_Items\functions\library\fn_serverHandlePublicLibraryRequest.sqf";
-private _srcCommit=preprocessFileLineNumbers "ServoPeregrino_Organizador_Items\functions\library\fn_commitPublicKitSnapshotServer.sqf";
-private _srcCallback=preprocessFileLineNumbers "ServoPeregrino_Organizador_Items\functions\library\fn_clientReceivePublicLibraryResult.sqf";
+private _srcCfg=if (_missionFirstSource) then {_srcDesc} else {preprocessFileLineNumbers (_sourcePrefix + "\config.cpp")};
+private _srcPublish=preprocessFileLineNumbers (_sourcePrefix + "\functions\library\fn_publishKitToPublic.sqf");
+private _srcRequest=preprocessFileLineNumbers (_sourcePrefix + "\functions\library\fn_requestPublicKitPublish.sqf");
+private _srcServer=preprocessFileLineNumbers (_sourcePrefix + "\functions\library\fn_serverHandlePublicLibraryRequest.sqf");
+private _srcCommit=preprocessFileLineNumbers (_sourcePrefix + "\functions\library\fn_commitPublicKitSnapshotServer.sqf");
+private _srcCallback=preprocessFileLineNumbers (_sourcePrefix + "\functions\library\fn_clientReceivePublicLibraryResult.sqf");
 
-private _gate655=(SERVO_PEREGRINO_ORGANIZADOR_ITEMS_DISPLAY_VERSION isEqualTo "0.13-A") && {SERVO_PEREGRINO_ORGANIZADOR_ITEMS_SEMANTIC_VERSION isEqualTo "0.13.0.1"} && {SERVO_PEREGRINO_ORGANIZADOR_ITEMS_DELIVERY_0_13_A_GATE_COUNT isEqualTo 10} && {(_srcDesc find "class runDelivery0_13CheckpointATests {}")>=0} && {(_srcCfg find "class runDelivery0_13CheckpointATests {}")>=0};
+private _runnerRegistered = !isNil "ServoPeregrino_Organizador_Items_fnc_runDelivery0_13CheckpointATests";
+private _gate655=(SERVO_PEREGRINO_ORGANIZADOR_ITEMS_DISPLAY_VERSION isEqualTo "0.13-A") && {SERVO_PEREGRINO_ORGANIZADOR_ITEMS_SEMANTIC_VERSION isEqualTo "0.13.0.1"} && {SERVO_PEREGRINO_ORGANIZADOR_ITEMS_DELIVERY_0_13_A_GATE_COUNT isEqualTo 10} && {_runnerRegistered};
 ["ITEMS-0.13-655",_gate655,"0.13-A está versionada sobre a 0.12 FINAL e registra um checkpoint aditivo próprio sem renumerar gates históricos."] call _assert;
 
-private _gate656=(_srcDesc find "fnc_serverHandlePublicLibraryRequest {allowedTargets = 2")>=0 && {(_srcDesc find "fnc_clientReceivePublicLibraryResult {allowedTargets = 1")>=0} && {(_srcCfg find "fnc_serverHandlePublicLibraryRequest {allowedTargets = 2")>=0} && {(_srcCfg find "fnc_clientReceivePublicLibraryResult {allowedTargets = 1")>=0};
+// Inspect the materialized runtime config instead of depending on formatting in config.cpp.
+// This keeps the security contract identical in addon and self-contained mission modes.
+private _remoteRoot = if (_missionFirstSource) then {missionConfigFile} else {configFile};
+private _serverRemoteCfg = _remoteRoot >> "CfgRemoteExec" >> "Functions" >> "ServoPeregrino_Organizador_Items_fnc_serverHandlePublicLibraryRequest";
+private _clientRemoteCfg = _remoteRoot >> "CfgRemoteExec" >> "Functions" >> "ServoPeregrino_Organizador_Items_fnc_clientReceivePublicLibraryResult";
+private _gate656=isClass _serverRemoteCfg
+ && {getNumber (_serverRemoteCfg >> "allowedTargets") isEqualTo 2}
+ && {isClass _clientRemoteCfg}
+ && {getNumber (_clientRemoteCfg >> "allowedTargets") isEqualTo 1}
+ && {(_srcDesc find "class BIS_fnc_call") < 0}
+ && {(_srcDesc find "class BIS_fnc_spawn") < 0};
 ["ITEMS-0.13-656",_gate656,"CfgRemoteExec libera apenas o endpoint server-only e o callback client-only do contrato público; nenhuma execução genérica call/spawn é adicionada."] call _assert;
 
 private _auth1=[] call ServoPeregrino_Organizador_Items_fnc_initializePublicLibraryAuthority;

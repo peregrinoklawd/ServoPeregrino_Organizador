@@ -1,0 +1,17 @@
+{
+  "delivery": "Weapons 0.6-F R5 — Dynamic Draft Authoring",
+  "semantic": "0.6.5.5",
+  "build": "0.6.5.5-dynamic-draft-weapon-autocreate-friendly-feedback-uicommon-mission-first",
+  "date": "2026-10-05",
+  "scope": [
+    "auto-create draft kit from Catalog weapon when no kit selected",
+    "allow supported base weapon replacement across PRIMARY/HANDGUN/SECONDARY",
+    "keep target slot internal to player-facing draft UI",
+    "friendly player-facing feedback without internal error codes",
+    "fix R4 CatalogSearch config syntax",
+    "remove mission-wide CfgRemoteExec mode/jip policy",
+    "correct stale compact-filter assertions"
+  ],
+  "applicationGate": "DEFERRED_0_7",
+  "mpGate": "DEFERRED_0_8"
+}

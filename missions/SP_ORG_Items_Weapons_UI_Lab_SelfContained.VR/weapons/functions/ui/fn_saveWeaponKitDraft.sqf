@@ -17,13 +17,15 @@ if !(_draft getOrDefault ["dirty",false]) exitWith {
 };
 
 private _recipe = [_draft getOrDefault ["recipe",createHashMap]] call ServoPeregrino_Organizador_Weapons_fnc_deepCopy;
-private _saveR = [_kitId,_recipe] call ServoPeregrino_Organizador_Weapons_fnc_updateWeaponKitRecipe;
+private _targetSlot = _draft getOrDefault ["targetSlot",""];
+private _saveR = [_kitId,_targetSlot,_recipe] call ServoPeregrino_Organizador_Weapons_fnc_updateWeaponKitDefinition;
 if !(_saveR get "success") exitWith {_saveR};
 private _kit = (_saveR get "data") get "kit";
 private _savedRecipe = [_kit getOrDefault ["recipe",createHashMap]] call ServoPeregrino_Organizador_Weapons_fnc_deepCopy;
 
 _draft set ["sourceName",_kit getOrDefault ["name",""]];
 _draft set ["targetSlot",_kit getOrDefault ["targetSlot",""]];
+_draft set ["baseTargetSlot",_kit getOrDefault ["targetSlot",""]];
 _draft set ["baseRecipe",[_savedRecipe] call ServoPeregrino_Organizador_Weapons_fnc_deepCopy];
 _draft set ["recipe",[_savedRecipe] call ServoPeregrino_Organizador_Weapons_fnc_deepCopy];
 _draft set ["dirty",false];
@@ -37,7 +39,7 @@ _state set ["draftsByKitId",_drafts];
 _state set ["activeDraftKitId",_kitId];
 missionNamespace setVariable [SP_ORG_WEAPONS_UI_STATE,_state];
 
-[true,"WEAPONS_UI_DRAFT_SAVED","Draft persisted into the session-local WeaponKit repository. Physical loadout was not changed.",createHashMapFromArray [
+[true,"WEAPONS_UI_DRAFT_SAVED","Alterações do kit salvas nesta sessão. O equipamento real do jogador não foi alterado.",createHashMapFromArray [
  ["changed",true],
  ["kit",[_kit] call ServoPeregrino_Organizador_Weapons_fnc_deepCopy],
  ["draft",[_draft] call ServoPeregrino_Organizador_Weapons_fnc_deepCopy],

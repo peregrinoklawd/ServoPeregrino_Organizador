@@ -5,5 +5,5 @@ if ((count _state) > 0) then {
  _state set ["revision",(_state getOrDefault ["revision",0]) + 1];
  missionNamespace setVariable [SP_ORG_WEAPONS_UI_STATE,_state];
 };
-diag_log "[SP_ORG] [WEAPONS] [UI] 0.6-E R1 interface closed; session-local drafts preserved.";
+diag_log "[SP_ORG] [WEAPONS] [UI] 0.6-F R6 interface closed; session-local drafts preserved.";
 true

@@ -1,0 +1,378 @@
+{
+  "delivery": "Weapons 0.6-F R2",
+  "passed": 69,
+  "failed": 0,
+  "total": 69,
+  "runnerAssertionSites": 545,
+  "changedFiles": [
+    "LEIA_PRIMEIRO.txt",
+    "README.md",
+    "description.ext",
+    "initPlayerLocal.sqf",
+    "weapons/functions/lifecycle/fn_getBuildInfo.sqf",
+    "weapons/functions/lifecycle/fn_initialize.sqf",
+    "weapons/functions/tests/fn_installLabActions.sqf",
+    "weapons/functions/ui/fn_onInterfaceUnload.sqf",
+    "weapons/functions/ui/fn_openInterface.sqf",
+    "weapons/functions/ui/fn_refreshDraftUI.sqf",
+    "weapons/script_version.hpp",
+    "weapons/ui/weapons_dialog.hpp"
+  ],
+  "addedFiles": [
+    "DELIVERY_METADATA_WEAPONS_0_6_F_R2.json",
+    "STATIC_VALIDATION_WEAPONS_0_6_F_R2.json",
+    "WEAPONS_0_6_F_R2_NOTES.md",
+    "weapons/functions/tests/fn_runDelivery0_6_FR2Tests.sqf",
+    "weapons/functions/ui/fn_getDraftChangedFields.sqf"
+  ],
+  "removedFiles": [
+    "SHA256_MANIFEST.json"
+  ],
+  "checks": [
+    {
+      "name": "items byte-identical to F R1",
+      "pass": true,
+      "detail": "257 files"
+    },
+    {
+      "name": "nexus byte-identical to F R1",
+      "pass": true,
+      "detail": "22 files"
+    },
+    {
+      "name": "uicommon byte-identical to F R1",
+      "pass": true,
+      "detail": "10 files"
+    },
+    {
+      "name": "historical 0.6-F R1 runner preserved",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "display version R2",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "semantic 0.6.5.2",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "build marker changed rows preview ready",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "changed row background idc 2060",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "changed row background idc 2061",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "changed row background idc 2062",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "changed row background idc 2063",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "changed row background idc 2064",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "changed row background idc 2065",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapon class idc 2032",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "title ARMAS DO KIT",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "preview tooltip mentions future 3D",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "R2 header",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "P2/P4 picture y",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "P2 name y",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "P2 class y",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "diff helper field weaponClass",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "diff helper field optic",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "diff helper field muzzle",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "diff helper field pointer",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "diff helper field bipod",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "diff helper field magazineClass",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "diff helper compares baseRecipe",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "diff helper case folds",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "refresh calls diff helper",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "altered RGB semantic",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "refresh paints row 2060",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "refresh paints row 2061",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "refresh paints row 2062",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "refresh paints row 2063",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "refresh paints row 2064",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "refresh paints row 2065",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "refresh stores changed fields diagnostics",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "refresh renders weapon class",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "hint reports alterations",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "hint says reversion removes highlight",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "helper registered",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "R2 runner registered",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "lab R2 action label",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "lab calls R2 runner",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "runtime marker diff highlight 44",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "runtime marker preview layout 45",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "runtime marker diff highlight 46",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "runtime marker preview layout 47",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "getBuildInfo checkpoint 0.6-F",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "runner has changed optic test",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "runner has reversion test",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "runner has P2/P4 align tests",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "runner has bg control test",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "runner summary R2",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "runner runtime markers",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "no physical mutation fnc_applyWeaponConfiguration",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "no physical mutation setUnitLoadout",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "no physical mutation addPrimaryWeaponItem",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "no physical mutation removePrimaryWeaponItem",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "no physical mutation addWeapon",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "no physical mutation removeWeapon",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "balanced weapons/functions/ui/fn_getDraftChangedFields.sqf",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "balanced weapons/functions/ui/fn_refreshDraftUI.sqf",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "balanced weapons/functions/tests/fn_runDelivery0_6_FR2Tests.sqf",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "balanced weapons/ui/weapons_dialog.hpp",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "balanced description.ext",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "no removed baseline files except regenerated manifest",
+      "pass": true,
+      "detail": "['SHA256_MANIFEST.json']"
+    },
+    {
+      "name": "all changed files scoped",
+      "pass": true,
+      "detail": "['LEIA_PRIMEIRO.txt', 'README.md', 'description.ext', 'initPlayerLocal.sqf', 'weapons/functions/lifecycle/fn_getBuildInfo.sqf', 'weapons/functions/lifecycle/fn_initialize.sqf', 'weapons/functions/tests/fn_installLabActions.sqf', 'weapons/functions/ui/fn_onInterfaceUnload.sqf', 'weapons/functions/ui/fn_openInterface.sqf', 'weapons/functions/ui/fn_refreshDraftUI.sqf', 'weapons/script_version.hpp', 'weapons/ui/weapons_dialog.hpp']"
+    },
+    {
+      "name": "added files scoped",
+      "pass": true,
+      "detail": "['DELIVERY_METADATA_WEAPONS_0_6_F_R2.json', 'STATIC_VALIDATION_WEAPONS_0_6_F_R2.json', 'WEAPONS_0_6_F_R2_NOTES.md', 'weapons/functions/tests/fn_runDelivery0_6_FR2Tests.sqf', 'weapons/functions/ui/fn_getDraftChangedFields.sqf']"
+    }
+  ]
+}

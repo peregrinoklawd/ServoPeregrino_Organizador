@@ -1,0 +1,32 @@
+{
+  "delivery": "Weapons 0.6-F R1 + UICommon",
+  "date": "2026-10-04",
+  "mission": "SP_ORG_Items_Weapons_UI_Lab_Weapons_0_6_F_R1_UICommon.VR",
+  "sourceCandidate": "Weapons 0.6-E R2 Hotfix 1 + UICommon",
+  "sourceCandidateRuntime": {
+    "passed": 557,
+    "failed": 1,
+    "total": 558
+  },
+  "weaponsSemanticVersion": "0.6.5.1",
+  "weaponsBuild": "0.6.5.1-final-visual-regression-uicommon-mission-first",
+  "uiCommonBuild": "0.1.1-items-equivalence-r1",
+  "itemsBaseline": "0.13.0.1-a-server-authority-foundation-uicommon-equivalence-r1",
+  "itemsDelta": "NONE",
+  "fRunnerExplicitAssertionSites": 537,
+  "runtimeCountIsAuthoritativeOnlyFromRPT": true,
+  "includedHotfix": "NOVO_DISCARD_RESTORES_PREVIOUS_SELECTED_KIT_WITHOUT_CREATING_WEAPONKIT",
+  "visualFreeze": [
+    "FOUR_PANEL_FINAL_0_6_F",
+    "ARMAS_DO_KIT",
+    "INLINE_NAME_AND_STATE",
+    "CONTINUOUS_CATALOG_FOCUSED_REFRESH",
+    "READ_ONLY_EQUIPMENT_PANEL",
+    "THREE_BAND_FOOTER"
+  ],
+  "physicalApplicationGate": "DEFERRED_0_7",
+  "multiplayerAuthorityGate": "DEFERRED_0_8",
+  "fHomologation": "PENDING_RUNTIME_MANUAL_PERFORMANCE",
+  "itemsVisualConvergence": "SEPARATE_FUTURE_ROUND",
+  "bgdDevelopmentAudit": "IMPORTANT_TIMING_UNDER_EVALUATION_NOT_CURRENT_GATE"
+}

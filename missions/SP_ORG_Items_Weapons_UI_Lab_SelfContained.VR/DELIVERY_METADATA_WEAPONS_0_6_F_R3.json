@@ -1,0 +1,18 @@
+{
+  "delivery": "Weapons 0.6-F R3 — Search Isolation / Name Editing",
+  "date": "2026-10-04",
+  "displayVersion": "0.6-F R3",
+  "semanticVersion": "0.6.5.3",
+  "build": "0.6.5.3-search-isolation-global-catalog-query-name-edit-hotfix-uicommon-mission-first",
+  "staticValidation": {
+    "passed": 36,
+    "failed": 0,
+    "total": 36
+  },
+  "runnerAssertionSites": 555,
+  "physicalApplication": "DEFERRED_0_7",
+  "multiplayerAuthority": "DEFERRED_0_8",
+  "itemsChanged": false,
+  "uiCommonChanged": false,
+  "nexusChanged": false
+}

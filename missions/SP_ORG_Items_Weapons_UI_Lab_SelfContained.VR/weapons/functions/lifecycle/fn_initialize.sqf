@@ -1,14 +1,23 @@
 #include "..\..\script_version.hpp"
-private _nexus = [] call ServoPeregrino_Organizador_Weapons_fnc_validateNexus;
-if !(_nexus getOrDefault ["success",false]) exitWith {_nexus};
-private _authority = if (isServer) then {[] call ServoPeregrino_Organizador_Weapons_fnc_initializeAuthority} else {[true,"WEAPONS_CLIENT_MODE","Server owns SESSION logical registry."] call ServoPeregrino_Organizador_Nexus_fnc_createResult};
-if (isServer && {!(_authority get "success")}) exitWith {_authority};
-private _kitStore = [] call ServoPeregrino_Organizador_Weapons_fnc_initializeWeaponKitStore;
-if !(_kitStore getOrDefault ["success",false]) exitWith {_kitStore};
-private _uiState = [] call ServoPeregrino_Organizador_Weapons_fnc_createUIState;
-missionNamespace setVariable [SP_ORG_WEAPONS_RUNTIME,createHashMapFromArray [
+private _check = [] call ServoPeregrino_Organizador_Weapons_fnc_validateNexus;
+if !(_check get "success") exitWith {_check};
+
+if (isNil "ServoPeregrino_Organizador_UICommon_fnc_initialize" || {isNil "ServoPeregrino_Organizador_UICommon_fnc_getBuildInfo"}) exitWith {
+ [false,"WEAPONS_UICOMMON_REQUIRED","SP_ORG_Weapons 0.6-F R5 requer UICommon 0.1.1.",createHashMapFromArray [["minimumVersion",SP_ORG_WEAPONS_UICOMMON_MIN_VERSION]]] call ServoPeregrino_Organizador_Nexus_fnc_createResult
+};
+private _uiCommonInit = [] call ServoPeregrino_Organizador_UICommon_fnc_initialize;
+if !(_uiCommonInit getOrDefault ["success",false]) exitWith {_uiCommonInit};
+private _uiCommonBuild = [] call ServoPeregrino_Organizador_UICommon_fnc_getBuildInfo;
+
+private _old = missionNamespace getVariable [SP_ORG_WEAPONS_RUNTIME,createHashMap];
+if (_old getOrDefault ["ready",false]) exitWith {
+ [true,"WEAPONS_ALREADY_INITIALIZED","Runtime preservado."] call ServoPeregrino_Organizador_Nexus_fnc_createResult
+};
+
+private _cap = ["weapons.runtime",1,"ServoPeregrino_Organizador_Weapons",createHashMapFromArray [
  ["ready",true],
- ["scope","SESSION"],
+ ["entryPoint","ServoPeregrino_Organizador_Weapons_fnc_getRuntimeStatus"],
+ ["build",SERVO_PEREGRINO_ORGANIZADOR_WEAPONS_BUILD],
  ["identityGate","OPEN"],
  ["identityStrategy","EVENT_DELTA_EVIDENCE_CANDIDATE"],
  ["configurationSchema","0.2-candidate"],
@@ -19,26 +28,94 @@ missionNamespace setVariable [SP_ORG_WEAPONS_RUNTIME,createHashMapFromArray [
  ["recipeSchema","0.4-recipe-candidate"],
  ["recipeStrategy","DESIRED_BUILD_MODEL"],
  ["kitSchema","0.5-kit-candidate"],
- ["kitUI","PLAYER_UI_0_6_E_R1_AUTHORING_LIFECYCLE_CANDIDATE"],
- ["uiCheckpoint","0.6-E"],
- ["uiRevision","R1"],
+ ["kitRepositoryMode","SESSION_LOCAL_CANDIDATE"],
+ ["kitApplication","DEFERRED_0_7"],
+ ["kitUI","PLAYER_UI_0_6_E_R2_UX_CONVERGENCE_DIRECT_DRAFT_EQUIP_UICOMMON"],
+ ["uiCheckpoint","0.6-F"],
+ ["uiRevision","R6"],
  ["uiLayout","FOUR_PANEL_ITEMS_CONVERGENCE"],
+ ["uiVisualFreeze","FINAL_0_6_F_R6_COMPACT_FILTER_SPACING_TEST_CONTRACT_HOTFIX"],
+ ["uiDraftDiffHighlight","BASE_RECIPE_FIELD_DIFF_AMBER"],
+ ["uiDraftPreviewLayout","EQUIPMENT_MIRRORED_KEEP_ASPECT_PREVIEW_READY"],
+ ["uiSearchMode","INDEPENDENT_P2_P3_P4"],
+ ["uiCatalogSearchMode","GLOBAL_QUERY_IGNORES_STORED_FILTERS"],
+ ["uiNameEditingMode","EMPTY_ALLOWED_UNTIL_SAVE"],
+ ["uiPreviewScaleMode","KEEP_ASPECT_CENTERED_2D"],
+ ["uiCatalogFilterGrammar","UNIFORM_TEXT_BUTTONS_R6_COMPACT_LABEL_GAPS"],
+ ["uiDraftAutoCreate","WEAPON_FROM_CATALOG_WHEN_NO_KIT"],
+ ["uiDraftSlotVisibility","INTERNAL_ONLY"],
+ ["uiPlayerFeedback","FRIENDLY_NO_INTERNAL_CODES"],
  ["uiCatalogMode","CONTINUOUS_WINDOW_VISIBLE_SLIDER_FOCUSED_REFRESH"],
  ["uiEquipmentView","READ_ONLY_CURRENT_WEAPON"],
+ ["uiSlotLabels",createHashMapFromArray [["PRIMARY","Principal"],["HANDGUN","Porte"],["SECONDARY","Secundária"]]],
  ["uiInformationMode","DRAFT_PLUS_CATALOG_PLUS_EQUIPMENT_PRESENTATION"],
- ["uiCompatibilityMode","DRAFT_EDITABLE_COMPATIBILITY_SELECTORS"],
-    ["uiWeaponBaseEditing","SAME_TARGET_SLOT_DRAFT_ONLY"],
-    ["uiNameAuthoring","INLINE_EDIT_EXPLICIT_COMMIT"],
- ["uiDraft","LOCAL_WEAPONKIT_DRAFT_WITH_AUTHORING_CANDIDATE"],
- ["uiAuthoring","SESSION_LOCAL_ENABLED_0_6_E"],
- ["kitApplication","DEFERRED_0_7"],
- ["stableContracts",[]],
+    ["uiCompatibilityMode","DRAFT_EDITABLE_COMPATIBILITY_SELECTORS"],
+    ["uiWeaponBaseEditing","ANY_SUPPORTED_WEAPON_DYNAMIC_INTERNAL_SLOT"],
+    ["uiNameAuthoring","INLINE_EDIT_SAVE_COMMIT"],
+ ["uiCommonRequired",true],
+ ["uiCommonMinimumVersion",SP_ORG_WEAPONS_UICOMMON_MIN_VERSION],
+ ["uiCommonBuild",_uiCommonBuild],
+ ["uiDirectDraftEquip",true],
+ ["uiPhysicalApplication","DEFERRED_0_7"],
+    ["uiDraft","LOCAL_WEAPONKIT_DRAFT_WITH_AUTHORING_CANDIDATE"],
+    ["uiAuthoring","SESSION_LOCAL_DIRECT_CATALOG_TO_DRAFT_0_6_E_R2"],
  ["physicalIdentityProven",false],
- ["conditionOwned",false],
+ ["models","INTERNAL_CANDIDATES"],
+ ["executionMode","MISSION_FIRST"]
+]] call ServoPeregrino_Organizador_Nexus_fnc_registerCapability;
+if !(_cap get "success") exitWith {_cap};
+
+missionNamespace setVariable [SP_ORG_WEAPONS_RUNTIME,createHashMapFromArray [
+ ["ready",true],
+ ["status","WEAPONS_PLAYER_UI_0_6_F_R5_DYNAMIC_DRAFT_AUTHORING_PENDING_RUNTIME_VALIDATION"],
+ ["build",[] call ServoPeregrino_Organizador_Weapons_fnc_getBuildInfo],
+ ["physicalIdentityProven",false],
+ ["identityStrategy","EVENT_DELTA_EVIDENCE_CANDIDATE"],
+ ["configurationSchema","0.2-candidate"],
+ ["configurationApply","ENGINE_ROUNDTRIP_CANDIDATE"],
+ ["catalogSchema","0.3-catalog-candidate"],
+ ["catalogStrategy","CFGWEAPONS_ENGINE_DISCOVERY"],
+ ["compatibilityStrategy","ON_DEMAND_ENGINE_QUERY"],
+ ["recipeSchema","0.4-recipe-candidate"],
+ ["recipeStrategy","DESIRED_BUILD_MODEL"],
+ ["kitSchema","0.5-kit-candidate"],
+ ["kitRepositoryMode","SESSION_LOCAL_CANDIDATE"],
+ ["kitApplication","DEFERRED_0_7"],
+ ["kitUI","PLAYER_UI_0_6_E_R2_UX_CONVERGENCE_DIRECT_DRAFT_EQUIP_UICOMMON"],
+ ["uiCheckpoint","0.6-F"],
+ ["uiRevision","R6"],
+ ["uiLayout","FOUR_PANEL_ITEMS_CONVERGENCE"],
+ ["uiVisualFreeze","FINAL_0_6_F_R6_COMPACT_FILTER_SPACING_TEST_CONTRACT_HOTFIX"],
+ ["uiDraftDiffHighlight","BASE_RECIPE_FIELD_DIFF_AMBER"],
+ ["uiDraftPreviewLayout","EQUIPMENT_MIRRORED_KEEP_ASPECT_PREVIEW_READY"],
+ ["uiSearchMode","INDEPENDENT_P2_P3_P4"],
+ ["uiCatalogSearchMode","GLOBAL_QUERY_IGNORES_STORED_FILTERS"],
+ ["uiNameEditingMode","EMPTY_ALLOWED_UNTIL_SAVE"],
+ ["uiPreviewScaleMode","KEEP_ASPECT_CENTERED_2D"],
+ ["uiCatalogFilterGrammar","UNIFORM_TEXT_BUTTONS_R6_COMPACT_LABEL_GAPS"],
+ ["uiDraftAutoCreate","WEAPON_FROM_CATALOG_WHEN_NO_KIT"],
+ ["uiDraftSlotVisibility","INTERNAL_ONLY"],
+ ["uiPlayerFeedback","FRIENDLY_NO_INTERNAL_CODES"],
+ ["uiCatalogMode","CONTINUOUS_WINDOW_VISIBLE_SLIDER_FOCUSED_REFRESH"],
+ ["uiEquipmentView","READ_ONLY_CURRENT_WEAPON"],
+ ["uiSlotLabels",createHashMapFromArray [["PRIMARY","Principal"],["HANDGUN","Porte"],["SECONDARY","Secundária"]]],
+ ["uiInformationMode","DRAFT_PLUS_CATALOG_PLUS_EQUIPMENT_PRESENTATION"],
+    ["uiCompatibilityMode","DRAFT_EDITABLE_COMPATIBILITY_SELECTORS"],
+    ["uiWeaponBaseEditing","ANY_SUPPORTED_WEAPON_DYNAMIC_INTERNAL_SLOT"],
+    ["uiNameAuthoring","INLINE_EDIT_SAVE_COMMIT"],
+ ["uiCommonRequired",true],
+ ["uiCommonMinimumVersion",SP_ORG_WEAPONS_UICOMMON_MIN_VERSION],
+ ["uiCommonBuild",_uiCommonBuild],
+ ["uiDirectDraftEquip",true],
+ ["uiPhysicalApplication","DEFERRED_0_7"],
+    ["uiDraft","LOCAL_WEAPONKIT_DRAFT_WITH_AUTHORING_CANDIDATE"],
+    ["uiAuthoring","SESSION_LOCAL_DIRECT_CATALOG_TO_DRAFT_0_6_E_R2"],
  ["executionMode","MISSION_FIRST"],
- ["pboGate","DEFERRED"],
- ["build",SERVO_PEREGRINO_ORGANIZADOR_WEAPONS_BUILD]
+ ["pboGate","DEFERRED"]
 ]];
-["weapons.runtime",1,"ServoPeregrino_Organizador_Weapons",createHashMapFromArray [["scope","SESSION"],["identityGate","OPEN"],["configurationSchema","0.2-candidate"],["configurationApply","ENGINE_ROUNDTRIP_CANDIDATE"],["catalogSchema","0.3-catalog-candidate"],["catalogStrategy","CFGWEAPONS_ENGINE_DISCOVERY"],["compatibilityStrategy","ON_DEMAND_ENGINE_QUERY"],["recipeSchema","0.4-recipe-candidate"],["recipeStrategy","DESIRED_BUILD_MODEL"],["kitSchema","0.5-kit-candidate"],["kitUI","PLAYER_UI_0_6_E_R1_AUTHORING_LIFECYCLE_CANDIDATE"],["uiCheckpoint","0.6-E"],["uiRevision","R1"],["uiLayout","FOUR_PANEL_ITEMS_CONVERGENCE"],["uiCatalogMode","CONTINUOUS_WINDOW_VISIBLE_SLIDER_FOCUSED_REFRESH"],["uiEquipmentView","READ_ONLY_CURRENT_WEAPON"],["uiInformationMode","DRAFT_PLUS_CATALOG_PLUS_EQUIPMENT_PRESENTATION"],["uiCompatibilityMode","DRAFT_EDITABLE_COMPATIBILITY_SELECTORS"],["uiDraft","LOCAL_WEAPONKIT_DRAFT_WITH_AUTHORING_CANDIDATE"],["uiAuthoring","SESSION_LOCAL_ENABLED_0_6_E"],["kitApplication","DEFERRED_0_7"],["physicalIdentityProven",false],["executionMode","MISSION_FIRST"],["pboGate","DEFERRED"]]] call ServoPeregrino_Organizador_Nexus_fnc_registerCapability;
-diag_log "[SP_ORG] [WEAPONS] [INFO] WEAPONS 0.6-E R1 INITIALIZED - Session-local WeaponKit authoring enabled over the homologated R3 focused-refresh/four-panel baseline.";
-[true,"WEAPONS_INITIALIZED","0.6-E R1 mission-first pronta; Novo/Renomear/Duplicar/Excluir/Salvar/Salvar como novo e troca da arma-base no rascunho estão habilitados no repositório session-local. Aplicação física continua em 0.7."] call ServoPeregrino_Organizador_Nexus_fnc_createResult
+
+private _kitStoreInit = [] call ServoPeregrino_Organizador_Weapons_fnc_initializeWeaponKitStore;
+if !(_kitStoreInit get "success") exitWith {_kitStoreInit};
+
+["WEAPONS","INFO","WEAPONS 0.6-F R6 INITIALIZED - R5 behavior preserved + compact Tipo/Acessório filter spacing + regression-test contract hotfix; physical application remains deferred to 0.7."] call ServoPeregrino_Organizador_Nexus_fnc_log;
+[true,"WEAPONS_INITIALIZED","0.6-F R6 mission-first pronta; comportamento R5 preservado, espaçamento dos filtros Tipo/Acessório compactado e contratos dos testes alinhados ao authoring dinâmico. Aplicação física continua em 0.7."] call ServoPeregrino_Organizador_Nexus_fnc_createResult

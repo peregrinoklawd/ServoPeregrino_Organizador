@@ -1,0 +1,35 @@
+{
+  "delivery": "Weapons 0.6-F R4 — Keep Aspect / Uniform Catalog Filters",
+  "date": "2026-10-05",
+  "mission": "SP_ORG_Items_Weapons_UI_Lab_Weapons_0_6_F_R4_UICommon.VR",
+  "weaponsDisplay": "0.6-F R4",
+  "weaponsSemantic": "0.6.5.4",
+  "weaponsBuild": "0.6.5.4-keep-aspect-uniform-catalog-filters-regression-fix-uicommon-mission-first",
+  "staticValidation": {
+    "passed": 86,
+    "failed": 0,
+    "total": 86
+  },
+  "runnerAssertionSites": 560,
+  "preserved": {
+    "items": "byte-identical to 0.6-F R3 package",
+    "nexus": "byte-identical to 0.6-F R3 package",
+    "uicommon": "byte-identical to 0.6-F R3 package",
+    "historicalR3Runner": "byte-identical"
+  },
+  "scope": [
+    "fix header revision marker",
+    "replace obsolete synchronized-search regression expectations",
+    "keep-aspect centered 2D weapon previews",
+    "uniform compact text-button grammar for Catalog Type and Accessory filters",
+    "single-row accessory filter grammar",
+    "larger Catalog list area recovered from removed second accessory-filter row"
+  ],
+  "deferred": {
+    "iconButtons": "future UI evolution",
+    "real3DPreview": "future evolution",
+    "physicalWeaponApplication": "0.7",
+    "multiplayerAuthorityJIP": "0.8",
+    "itemsVisualConvergence": "separate"
+  }
+}

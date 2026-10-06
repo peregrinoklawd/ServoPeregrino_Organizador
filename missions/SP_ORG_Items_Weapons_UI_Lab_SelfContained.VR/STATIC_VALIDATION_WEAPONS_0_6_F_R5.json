@@ -1,0 +1,1811 @@
+{
+  "delivery": "Weapons 0.6-F R5",
+  "validationType": "STATIC",
+  "passed": 360,
+  "failed": 0,
+  "total": 360,
+  "runnerAssertionSites": 570,
+  "note": "Runtime Arma validation remains required.",
+  "checks": [
+    {
+      "name": "display version R5",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "semantic version 0.6.5.5",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "CatalogSearch semicolon fixed",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "R5 header",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "keep-aspect preview preserved",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "uniform Catalog filters preserved",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "auto-create no-kit flow present",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "legacy no-kit blocker removed",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "cross-slot blocker removed",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "draft target slot changes internally",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "atomic slot+recipe save",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "draft type hidden from P2",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "draft type hidden from footer",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "friendly direct-draft fallback",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "global RemoteExec mode absent",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "global RemoteExec jip absent",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "R5 test registered",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "R5 dynamic runtime marker",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "R5 auto-create runtime marker",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "R5 player feedback runtime marker",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "R5 runner fixes compact labels",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "R5 runner tests cross-slot",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "R5 runner tests auto-create",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/catalog/fn_buildWeaponCatalog.sqf braces",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/catalog/fn_buildWeaponCatalog.sqf brackets",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/catalog/fn_buildWeaponCatalog.sqf parens",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/catalog/fn_getWeaponCatalog.sqf braces",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/catalog/fn_getWeaponCatalog.sqf brackets",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/catalog/fn_getWeaponCatalog.sqf parens",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/catalog/fn_getWeaponCatalogEntry.sqf braces",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/catalog/fn_getWeaponCatalogEntry.sqf brackets",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/catalog/fn_getWeaponCatalogEntry.sqf parens",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/catalog/fn_getWeaponCompatibility.sqf braces",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/catalog/fn_getWeaponCompatibility.sqf brackets",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/catalog/fn_getWeaponCompatibility.sqf parens",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/domain/fn_applyWeaponConfiguration.sqf braces",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/domain/fn_applyWeaponConfiguration.sqf brackets",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/domain/fn_applyWeaponConfiguration.sqf parens",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/domain/fn_areWeaponClassesEquivalentForSlot.sqf braces",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/domain/fn_areWeaponClassesEquivalentForSlot.sqf brackets",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/domain/fn_areWeaponClassesEquivalentForSlot.sqf parens",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/domain/fn_captureWeaponConfiguration.sqf braces",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/domain/fn_captureWeaponConfiguration.sqf brackets",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/domain/fn_captureWeaponConfiguration.sqf parens",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/domain/fn_compareWeaponConfigurations.sqf braces",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/domain/fn_compareWeaponConfigurations.sqf brackets",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/domain/fn_compareWeaponConfigurations.sqf parens",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/domain/fn_configurationFromWeaponArray.sqf braces",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/domain/fn_configurationFromWeaponArray.sqf brackets",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/domain/fn_configurationFromWeaponArray.sqf parens",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/domain/fn_createWeaponConfiguration.sqf braces",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/domain/fn_createWeaponConfiguration.sqf brackets",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/domain/fn_createWeaponConfiguration.sqf parens",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/domain/fn_deepCopy.sqf braces",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/domain/fn_deepCopy.sqf brackets",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/domain/fn_deepCopy.sqf parens",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/domain/fn_diffWeaponConfigurations.sqf braces",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/domain/fn_diffWeaponConfigurations.sqf brackets",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/domain/fn_diffWeaponConfigurations.sqf parens",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/domain/fn_getConfigurationFingerprint.sqf braces",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/domain/fn_getConfigurationFingerprint.sqf brackets",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/domain/fn_getConfigurationFingerprint.sqf parens",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/domain/fn_getConfigurationSlotDefinitions.sqf braces",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/domain/fn_getConfigurationSlotDefinitions.sqf brackets",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/domain/fn_getConfigurationSlotDefinitions.sqf parens",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/domain/fn_isValidIdentityToken.sqf braces",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/domain/fn_isValidIdentityToken.sqf brackets",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/domain/fn_isValidIdentityToken.sqf parens",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/domain/fn_normalizeWeaponConfiguration.sqf braces",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/domain/fn_normalizeWeaponConfiguration.sqf brackets",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/domain/fn_normalizeWeaponConfiguration.sqf parens",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/domain/fn_validateWeaponConfigurationSemantic.sqf braces",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/domain/fn_validateWeaponConfigurationSemantic.sqf brackets",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/domain/fn_validateWeaponConfigurationSemantic.sqf parens",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/domain/fn_validateWeaponConfigurationStructural.sqf braces",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/domain/fn_validateWeaponConfigurationStructural.sqf brackets",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/domain/fn_validateWeaponConfigurationStructural.sqf parens",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/domain/fn_validateWeaponInstance.sqf braces",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/domain/fn_validateWeaponInstance.sqf brackets",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/domain/fn_validateWeaponInstance.sqf parens",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/identity/fn_analyzeLifecycleTransition.sqf braces",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/identity/fn_analyzeLifecycleTransition.sqf brackets",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/identity/fn_analyzeLifecycleTransition.sqf parens",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/identity/fn_createLifecycleEvidence.sqf braces",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/identity/fn_createLifecycleEvidence.sqf brackets",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/identity/fn_createLifecycleEvidence.sqf parens",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/identity/fn_createWeaponInstance.sqf braces",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/identity/fn_createWeaponInstance.sqf brackets",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/identity/fn_createWeaponInstance.sqf parens",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/identity/fn_detectLifecycleDelta.sqf braces",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/identity/fn_detectLifecycleDelta.sqf brackets",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/identity/fn_detectLifecycleDelta.sqf parens",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/identity/fn_getFingerprintMultiplicity.sqf braces",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/identity/fn_getFingerprintMultiplicity.sqf brackets",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/identity/fn_getFingerprintMultiplicity.sqf parens",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/identity/fn_getIdentityDiagnostics.sqf braces",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/identity/fn_getIdentityDiagnostics.sqf brackets",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/identity/fn_getIdentityDiagnostics.sqf parens",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/identity/fn_getWeaponInstance.sqf braces",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/identity/fn_getWeaponInstance.sqf brackets",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/identity/fn_getWeaponInstance.sqf parens",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/identity/fn_initializeAuthority.sqf braces",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/identity/fn_initializeAuthority.sqf brackets",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/identity/fn_initializeAuthority.sqf parens",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/identity/fn_inspectWeaponCarrier.sqf braces",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/identity/fn_inspectWeaponCarrier.sqf brackets",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/identity/fn_inspectWeaponCarrier.sqf parens",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/identity/fn_updateWeaponInstanceConfiguration.sqf braces",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/identity/fn_updateWeaponInstanceConfiguration.sqf brackets",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/identity/fn_updateWeaponInstanceConfiguration.sqf parens",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/integration/fn_validateNexus.sqf braces",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/integration/fn_validateNexus.sqf brackets",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/integration/fn_validateNexus.sqf parens",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/kit/fn_compareWeaponKits.sqf braces",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/kit/fn_compareWeaponKits.sqf brackets",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/kit/fn_compareWeaponKits.sqf parens",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/kit/fn_createWeaponKit.sqf braces",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/kit/fn_createWeaponKit.sqf brackets",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/kit/fn_createWeaponKit.sqf parens",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/kit/fn_deleteWeaponKit.sqf braces",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/kit/fn_deleteWeaponKit.sqf brackets",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/kit/fn_deleteWeaponKit.sqf parens",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/kit/fn_duplicateWeaponKit.sqf braces",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/kit/fn_duplicateWeaponKit.sqf brackets",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/kit/fn_duplicateWeaponKit.sqf parens",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/kit/fn_getWeaponKit.sqf braces",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/kit/fn_getWeaponKit.sqf brackets",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/kit/fn_getWeaponKit.sqf parens",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/kit/fn_getWeaponKitContentFingerprint.sqf braces",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/kit/fn_getWeaponKitContentFingerprint.sqf brackets",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/kit/fn_getWeaponKitContentFingerprint.sqf parens",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/kit/fn_initializeWeaponKitStore.sqf braces",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/kit/fn_initializeWeaponKitStore.sqf brackets",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/kit/fn_initializeWeaponKitStore.sqf parens",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/kit/fn_listWeaponKits.sqf braces",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/kit/fn_listWeaponKits.sqf brackets",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/kit/fn_listWeaponKits.sqf parens",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/kit/fn_normalizeWeaponKit.sqf braces",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/kit/fn_normalizeWeaponKit.sqf brackets",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/kit/fn_normalizeWeaponKit.sqf parens",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/kit/fn_normalizeWeaponKitName.sqf braces",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/kit/fn_normalizeWeaponKitName.sqf brackets",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/kit/fn_normalizeWeaponKitName.sqf parens",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/kit/fn_renameWeaponKit.sqf braces",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/kit/fn_renameWeaponKit.sqf brackets",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/kit/fn_renameWeaponKit.sqf parens",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/kit/fn_updateWeaponKitDefinition.sqf braces",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/kit/fn_updateWeaponKitDefinition.sqf brackets",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/kit/fn_updateWeaponKitDefinition.sqf parens",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/kit/fn_updateWeaponKitRecipe.sqf braces",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/kit/fn_updateWeaponKitRecipe.sqf brackets",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/kit/fn_updateWeaponKitRecipe.sqf parens",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/kit/fn_validateWeaponKitSemantic.sqf braces",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/kit/fn_validateWeaponKitSemantic.sqf brackets",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/kit/fn_validateWeaponKitSemantic.sqf parens",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/kit/fn_validateWeaponKitStructural.sqf braces",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/kit/fn_validateWeaponKitStructural.sqf brackets",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/kit/fn_validateWeaponKitStructural.sqf parens",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/lifecycle/fn_getBuildInfo.sqf braces",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/lifecycle/fn_getBuildInfo.sqf brackets",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/lifecycle/fn_getBuildInfo.sqf parens",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/lifecycle/fn_initialize.sqf braces",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/lifecycle/fn_initialize.sqf brackets",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/lifecycle/fn_initialize.sqf parens",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/recipe/fn_compareWeaponRecipes.sqf braces",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/recipe/fn_compareWeaponRecipes.sqf brackets",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/recipe/fn_compareWeaponRecipes.sqf parens",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/recipe/fn_createWeaponRecipe.sqf braces",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/recipe/fn_createWeaponRecipe.sqf brackets",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/recipe/fn_createWeaponRecipe.sqf parens",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/recipe/fn_getWeaponRecipeFingerprint.sqf braces",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/recipe/fn_getWeaponRecipeFingerprint.sqf brackets",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/recipe/fn_getWeaponRecipeFingerprint.sqf parens",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/recipe/fn_normalizeWeaponRecipe.sqf braces",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/recipe/fn_normalizeWeaponRecipe.sqf brackets",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/recipe/fn_normalizeWeaponRecipe.sqf parens",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/recipe/fn_validateWeaponRecipeSemantic.sqf braces",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/recipe/fn_validateWeaponRecipeSemantic.sqf brackets",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/recipe/fn_validateWeaponRecipeSemantic.sqf parens",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/recipe/fn_validateWeaponRecipeStructural.sqf braces",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/recipe/fn_validateWeaponRecipeStructural.sqf brackets",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/recipe/fn_validateWeaponRecipeStructural.sqf parens",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/runtime/fn_getRuntimeStatus.sqf braces",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/runtime/fn_getRuntimeStatus.sqf brackets",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/runtime/fn_getRuntimeStatus.sqf parens",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/tests/fn_captureLiveLifecycleBefore.sqf braces",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/tests/fn_captureLiveLifecycleBefore.sqf brackets",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/tests/fn_captureLiveLifecycleBefore.sqf parens",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/tests/fn_clientReceiveLabResult.sqf braces",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/tests/fn_clientReceiveLabResult.sqf brackets",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/tests/fn_clientReceiveLabResult.sqf parens",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/tests/fn_dispatchLabRequest.sqf braces",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/tests/fn_dispatchLabRequest.sqf brackets",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/tests/fn_dispatchLabRequest.sqf parens",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/tests/fn_getLiveLifecycleStatus.sqf braces",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/tests/fn_getLiveLifecycleStatus.sqf brackets",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/tests/fn_getLiveLifecycleStatus.sqf parens",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/tests/fn_handleLiveLifecycleEvent.sqf braces",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/tests/fn_handleLiveLifecycleEvent.sqf brackets",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/tests/fn_handleLiveLifecycleEvent.sqf parens",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/tests/fn_initializeLiveLifecycleTest.sqf braces",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/tests/fn_initializeLiveLifecycleTest.sqf brackets",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/tests/fn_initializeLiveLifecycleTest.sqf parens",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/tests/fn_installLabActions.sqf braces",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/tests/fn_installLabActions.sqf brackets",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/tests/fn_installLabActions.sqf parens",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/tests/fn_resetLiveLifecycleTest.sqf braces",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/tests/fn_resetLiveLifecycleTest.sqf brackets",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/tests/fn_resetLiveLifecycleTest.sqf parens",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/tests/fn_runDelivery0_3Tests.sqf braces",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/tests/fn_runDelivery0_3Tests.sqf brackets",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/tests/fn_runDelivery0_3Tests.sqf parens",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/tests/fn_runDelivery0_4Tests.sqf braces",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/tests/fn_runDelivery0_4Tests.sqf brackets",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/tests/fn_runDelivery0_4Tests.sqf parens",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/tests/fn_runDelivery0_5Tests.sqf braces",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/tests/fn_runDelivery0_5Tests.sqf brackets",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/tests/fn_runDelivery0_5Tests.sqf parens",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/tests/fn_runDelivery0_6_ATests.sqf braces",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/tests/fn_runDelivery0_6_ATests.sqf brackets",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/tests/fn_runDelivery0_6_ATests.sqf parens",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/tests/fn_runDelivery0_6_BTests.sqf braces",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/tests/fn_runDelivery0_6_BTests.sqf brackets",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/tests/fn_runDelivery0_6_BTests.sqf parens",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/tests/fn_runDelivery0_6_CTests.sqf braces",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/tests/fn_runDelivery0_6_CTests.sqf brackets",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/tests/fn_runDelivery0_6_CTests.sqf parens",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/tests/fn_runDelivery0_6_DR2Tests.sqf braces",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/tests/fn_runDelivery0_6_DR2Tests.sqf brackets",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/tests/fn_runDelivery0_6_DR2Tests.sqf parens",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/tests/fn_runDelivery0_6_DR3Tests.sqf braces",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/tests/fn_runDelivery0_6_DR3Tests.sqf brackets",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/tests/fn_runDelivery0_6_DR3Tests.sqf parens",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/tests/fn_runDelivery0_6_DTests.sqf braces",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/tests/fn_runDelivery0_6_DTests.sqf brackets",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/tests/fn_runDelivery0_6_DTests.sqf parens",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/tests/fn_runDelivery0_6_ER2Tests.sqf braces",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/tests/fn_runDelivery0_6_ER2Tests.sqf brackets",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/tests/fn_runDelivery0_6_ER2Tests.sqf parens",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/tests/fn_runDelivery0_6_ETests.sqf braces",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/tests/fn_runDelivery0_6_ETests.sqf brackets",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/tests/fn_runDelivery0_6_ETests.sqf parens",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/tests/fn_runDelivery0_6_FR2Tests.sqf braces",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/tests/fn_runDelivery0_6_FR2Tests.sqf brackets",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/tests/fn_runDelivery0_6_FR2Tests.sqf parens",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/tests/fn_runDelivery0_6_FR3Tests.sqf braces",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/tests/fn_runDelivery0_6_FR3Tests.sqf brackets",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/tests/fn_runDelivery0_6_FR3Tests.sqf parens",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/tests/fn_runDelivery0_6_FR4Tests.sqf braces",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/tests/fn_runDelivery0_6_FR4Tests.sqf brackets",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/tests/fn_runDelivery0_6_FR4Tests.sqf parens",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/tests/fn_runDelivery0_6_FR5Tests.sqf braces",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/tests/fn_runDelivery0_6_FR5Tests.sqf brackets",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/tests/fn_runDelivery0_6_FR5Tests.sqf parens",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/tests/fn_runDelivery0_6_FTests.sqf braces",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/tests/fn_runDelivery0_6_FTests.sqf brackets",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/tests/fn_runDelivery0_6_FTests.sqf parens",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/tests/fn_serverHandleLabRequest.sqf braces",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/tests/fn_serverHandleLabRequest.sqf brackets",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/tests/fn_serverHandleLabRequest.sqf parens",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/ui/fn_applyCatalogSelectionToDraft.sqf braces",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/ui/fn_applyCatalogSelectionToDraft.sqf brackets",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/ui/fn_applyCatalogSelectionToDraft.sqf parens",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/ui/fn_buildCompatibilitySelectorModel.sqf braces",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/ui/fn_buildCompatibilitySelectorModel.sqf brackets",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/ui/fn_buildCompatibilitySelectorModel.sqf parens",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/ui/fn_buildUIViewModel.sqf braces",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/ui/fn_buildUIViewModel.sqf brackets",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/ui/fn_buildUIViewModel.sqf parens",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/ui/fn_clearWeaponKitDraft.sqf braces",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/ui/fn_clearWeaponKitDraft.sqf brackets",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/ui/fn_clearWeaponKitDraft.sqf parens",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/ui/fn_createUIState.sqf braces",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/ui/fn_createUIState.sqf brackets",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/ui/fn_createUIState.sqf parens",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/ui/fn_createWeaponKitFromCatalogWeapon.sqf braces",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/ui/fn_createWeaponKitFromCatalogWeapon.sqf brackets",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/ui/fn_createWeaponKitFromCatalogWeapon.sqf parens",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/ui/fn_discardWeaponKitDraft.sqf braces",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/ui/fn_discardWeaponKitDraft.sqf brackets",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/ui/fn_discardWeaponKitDraft.sqf parens",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/ui/fn_escapeStructuredText.sqf braces",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/ui/fn_escapeStructuredText.sqf brackets",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/ui/fn_escapeStructuredText.sqf parens",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/ui/fn_getClassPresentationInfo.sqf braces",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/ui/fn_getClassPresentationInfo.sqf brackets",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/ui/fn_getClassPresentationInfo.sqf parens",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/ui/fn_getDraftChangedFields.sqf braces",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/ui/fn_getDraftChangedFields.sqf brackets",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/ui/fn_getDraftChangedFields.sqf parens",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/ui/fn_getEquipmentSlotSnapshot.sqf braces",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/ui/fn_getEquipmentSlotSnapshot.sqf brackets",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/ui/fn_getEquipmentSlotSnapshot.sqf parens",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/ui/fn_getOrCreateWeaponKitDraft.sqf braces",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/ui/fn_getOrCreateWeaponKitDraft.sqf brackets",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/ui/fn_getOrCreateWeaponKitDraft.sqf parens",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/ui/fn_getUICatalogWindow.sqf braces",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/ui/fn_getUICatalogWindow.sqf brackets",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/ui/fn_getUICatalogWindow.sqf parens",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/ui/fn_getUISlotLabel.sqf braces",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/ui/fn_getUISlotLabel.sqf brackets",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/ui/fn_getUISlotLabel.sqf parens",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/ui/fn_getUIState.sqf braces",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/ui/fn_getUIState.sqf brackets",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/ui/fn_getUIState.sqf parens",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/ui/fn_getUniqueWeaponKitName.sqf braces",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/ui/fn_getUniqueWeaponKitName.sqf brackets",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/ui/fn_getUniqueWeaponKitName.sqf parens",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/ui/fn_getWeaponPresentationInfo.sqf braces",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/ui/fn_getWeaponPresentationInfo.sqf brackets",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/ui/fn_getWeaponPresentationInfo.sqf parens",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/ui/fn_handleUIEvent.sqf braces",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/ui/fn_handleUIEvent.sqf brackets",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/ui/fn_handleUIEvent.sqf parens",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/ui/fn_handleUIWheel.sqf braces",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/ui/fn_handleUIWheel.sqf brackets",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/ui/fn_handleUIWheel.sqf parens",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/ui/fn_onInterfaceLoad.sqf braces",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/ui/fn_onInterfaceLoad.sqf brackets",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/ui/fn_onInterfaceLoad.sqf parens",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/ui/fn_onInterfaceUnload.sqf braces",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/ui/fn_onInterfaceUnload.sqf brackets",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/ui/fn_onInterfaceUnload.sqf parens",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/ui/fn_openInterface.sqf braces",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/ui/fn_openInterface.sqf brackets",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/ui/fn_openInterface.sqf parens",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/ui/fn_pushUIFeedback.sqf braces",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/ui/fn_pushUIFeedback.sqf brackets",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/ui/fn_pushUIFeedback.sqf parens",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/ui/fn_refreshCatalogWindowUI.sqf braces",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/ui/fn_refreshCatalogWindowUI.sqf brackets",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/ui/fn_refreshCatalogWindowUI.sqf parens",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/ui/fn_refreshDraftUI.sqf braces",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/ui/fn_refreshDraftUI.sqf brackets",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/ui/fn_refreshDraftUI.sqf parens",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/ui/fn_refreshEquipmentViewUI.sqf braces",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/ui/fn_refreshEquipmentViewUI.sqf brackets",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/ui/fn_refreshEquipmentViewUI.sqf parens",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/ui/fn_refreshInterface.sqf braces",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/ui/fn_refreshInterface.sqf brackets",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/ui/fn_refreshInterface.sqf parens",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/ui/fn_saveWeaponKitDraft.sqf braces",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/ui/fn_saveWeaponKitDraft.sqf brackets",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/ui/fn_saveWeaponKitDraft.sqf parens",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/ui/fn_setWeaponKitDraftSelection.sqf braces",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/ui/fn_setWeaponKitDraftSelection.sqf brackets",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/ui/fn_setWeaponKitDraftSelection.sqf parens",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/ui/fn_setWeaponKitDraftWeapon.sqf braces",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/ui/fn_setWeaponKitDraftWeapon.sqf brackets",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/functions/ui/fn_setWeaponKitDraftWeapon.sqf parens",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "description.ext braces",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "description.ext brackets",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "description.ext parens",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/ui/weapons_dialog.hpp braces",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/ui/weapons_dialog.hpp brackets",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "weapons/ui/weapons_dialog.hpp parens",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "items byte-identical to R4",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "nexus byte-identical to R4",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "uicommon byte-identical to R4",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "historical R4 runner byte-identical",
+      "pass": true,
+      "detail": ""
+    }
+  ]
+}

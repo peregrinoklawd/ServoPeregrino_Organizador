@@ -1,0 +1,16 @@
+SP_ORG — TESTE WEAPONS 0.6-F R6
+
+1. Extraia a pasta SP_ORG_Items_Weapons_UI_Lab_Weapons_0_6_F_R6_UICommon.VR em sua pasta de missões.
+2. NÃO carregue PBOs do Servo Peregrino neste teste. Nexus, UICommon, Items e Weapons estão dentro da missão.
+3. Abra a missão em VR.
+4. Teste manualmente Items e Weapons normalmente.
+5. Em Weapons, observe o alinhamento compacto:
+   - MEUS KITS DE ARMAS: "Tipo:" fica próximo dos filtros.
+   - CATÁLOGO DE ARMAS: "Tipo:" fica próximo dos filtros.
+   - CATÁLOGO DE ARMAS: "Acessório:" fica próximo dos filtros.
+6. Confirme que o comportamento R5 continua igual: auto-criação de kit, troca livre de categoria de arma, buscas independentes e feedback amigável.
+7. Rode: SP_ORG LAB - TESTAR WEAPONS 0.6-F R6.
+8. Esperado para esta candidata: 0 FAIL.
+9. Os erros CBA_fnc_addPerFrameHandler vistos no RPT anterior não são chamados pelo source desta missão; tratá-los separadamente como ruído/integração de mod externo salvo nova evidência.
+
+Weapons continua sem aplicação física nesta fase; isso permanece reservado para 0.7.

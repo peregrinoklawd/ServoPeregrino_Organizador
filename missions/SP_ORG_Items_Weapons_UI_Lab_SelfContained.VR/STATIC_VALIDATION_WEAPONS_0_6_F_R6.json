@@ -1,0 +1,143 @@
+{
+  "delivery": "Weapons 0.6-F R6",
+  "checks": [
+    {
+      "check": "version R6",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "semantic 0.6.5.6",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "R6 runner registered",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "R6 action calls R6 runner",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "old pending result expectation removed",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "new base weapon result expected",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "save-as source check not hardcoded MXC",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "save-as source compare present",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "P1 compact spacing test",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "P3 type compact spacing test",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "P3 accessory compact spacing test",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "runtime filter marker R6",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "no global RemoteExec mode",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "no mission CBA PFH calls",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "physical application remains deferred",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "P1 Tipo config gap <= 0.003 safeZoneW",
+      "pass": true,
+      "detail": "gap=0.0020*safeZoneW"
+    },
+    {
+      "check": "P3 Tipo config gap <= 0.003 safeZoneW",
+      "pass": true,
+      "detail": "gap=0.0020*safeZoneW"
+    },
+    {
+      "check": "P3 Acessório config gap <= 0.003 safeZoneW",
+      "pass": true,
+      "detail": "gap=0.0020*safeZoneW"
+    },
+    {
+      "check": "Catalog type SEC remains inside panel",
+      "pass": true,
+      "detail": "right=0.7640"
+    },
+    {
+      "check": "Catalog accessory EMPUNH remains inside panel",
+      "pass": true,
+      "detail": "right=0.7648"
+    },
+    {
+      "check": "weapons/functions/tests/fn_runDelivery0_6_FR6Tests.sqf braces balanced",
+      "pass": true,
+      "detail": "463/463"
+    },
+    {
+      "check": "weapons/functions/tests/fn_runDelivery0_6_FR6Tests.sqf brackets balanced",
+      "pass": true,
+      "detail": "1871/1871"
+    },
+    {
+      "check": "weapons/ui/weapons_dialog.hpp braces balanced",
+      "pass": true,
+      "detail": "239/239"
+    },
+    {
+      "check": "weapons/ui/weapons_dialog.hpp brackets balanced",
+      "pass": true,
+      "detail": "157/157"
+    },
+    {
+      "check": "description.ext braces balanced",
+      "pass": true,
+      "detail": "459/459"
+    },
+    {
+      "check": "description.ext brackets balanced",
+      "pass": true,
+      "detail": "11/11"
+    }
+  ],
+  "passed": 26,
+  "failed": 0,
+  "assertionSites": 573,
+  "configGapsSafeZoneW": {
+    "P1 Tipo": 0.0020000000000000018,
+    "P3 Tipo": 0.0019999999999999463,
+    "P3 Acessório": 0.0020000000000000018
+  }
+}

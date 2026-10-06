@@ -1,6 +1,6 @@
-#define SERVO_PEREGRINO_ORGANIZADOR_WEAPONS_DISPLAY_VERSION "0.6-E R1"
-#define SERVO_PEREGRINO_ORGANIZADOR_WEAPONS_SEMANTIC_VERSION "0.6.4.1"
-#define SERVO_PEREGRINO_ORGANIZADOR_WEAPONS_BUILD "0.6.4.1-authoring-lifecycle-session-local-mission-first"
+#define SERVO_PEREGRINO_ORGANIZADOR_WEAPONS_DISPLAY_VERSION "0.6-F R6"
+#define SERVO_PEREGRINO_ORGANIZADOR_WEAPONS_SEMANTIC_VERSION "0.6.5.6"
+#define SERVO_PEREGRINO_ORGANIZADOR_WEAPONS_BUILD "0.6.5.6-compact-filter-spacing-test-contract-hotfix-uicommon-mission-first"
 #define SP_ORG_WEAPONS_RUNTIME "ServoPeregrino_Organizador_Weapons_runtime"
 #define SP_ORG_WEAPONS_AUTHORITY "ServoPeregrino_Organizador_Weapons_authority"
 #define SP_ORG_WEAPONS_LIVE_TEST "ServoPeregrino_Organizador_Weapons_liveLifecycleTest"
@@ -14,3 +14,5 @@
 
 #define SP_ORG_WEAPONS_UI_CATALOG_PROJECTION_VAR "ServoPeregrino_Organizador_Weapons_uiCatalogProjection"
 #define SP_ORG_WEAPONS_UI_BASE_CATALOG_ROWS_VAR "ServoPeregrino_Organizador_Weapons_uiBaseCatalogRows"
+
+#define SP_ORG_WEAPONS_UICOMMON_MIN_VERSION "0.1.1"

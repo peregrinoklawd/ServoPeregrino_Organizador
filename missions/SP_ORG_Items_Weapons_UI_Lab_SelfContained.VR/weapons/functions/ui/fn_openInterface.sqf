@@ -10,7 +10,7 @@ private _existing = findDisplay SP_ORG_WEAPONS_UI_DISPLAY_IDD;
 if (!isNull _existing) exitWith {
  [true,"WEAPONS_UI_ALREADY_OPEN","A interface de Weapons já está aberta.",createHashMapFromArray [
   ["idd",SP_ORG_WEAPONS_UI_DISPLAY_IDD],
-  ["checkpoint","0.6-E R1"],
+  ["checkpoint","0.6-F R6"],
   ["mutatesInventory",false]
  ]] call ServoPeregrino_Organizador_Nexus_fnc_createResult
 };
@@ -23,9 +23,9 @@ if (!_ok) exitWith {
  ]] call ServoPeregrino_Organizador_Nexus_fnc_createResult
 };
 
-[true,"WEAPONS_UI_OPENED","Weapons 0.6-E R1 abriu a UI de quatro painéis com authoring session-local habilitado e aplicação física ainda bloqueada para 0.7.",createHashMapFromArray [
+[true,"WEAPONS_UI_OPENED","Weapons 0.6-F R6 abriu a UI de quatro painéis com authoring direto pelo Catálogo, destaque semântico de linhas alteradas e layout preview-ready sobre UICommon; aplicação física ainda bloqueada para 0.7.",createHashMapFromArray [
  ["idd",SP_ORG_WEAPONS_UI_DISPLAY_IDD],
- ["checkpoint","0.6-E R1"],
+ ["checkpoint","0.6-F R6"],
  ["panels",["WEAPON_KITS","SELECTED_KIT_DRAFT","WEAPON_CATALOG","EQUIPMENT_CONTENT"]],
  ["footer",["CONTEXT","RESULT","HISTORY"]],
  ["visualGrammar","ITEMS_MULTIPLAYER_LAB_R3_CONVERGENCE"],

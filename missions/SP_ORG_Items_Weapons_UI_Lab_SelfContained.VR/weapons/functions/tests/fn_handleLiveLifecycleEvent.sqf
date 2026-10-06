@@ -15,6 +15,7 @@ if !(_direction in ["TAKE","PUT"]) exitWith {
  [false,"WEAPONS_LIVE_EVENT_INVALID","Expected TAKE or PUT."] call ServoPeregrino_Organizador_Nexus_fnc_createResult
 };
 
+// Ignore magazines/accessories/items: this gate tracks weapon rows only.
 private _weaponType = getNumber (configFile >> "CfgWeapons" >> _item >> "type");
 if !(_weaponType in [1,2,4]) exitWith {
  [true,"WEAPONS_LIVE_NON_WEAPON_IGNORED","Non-weapon inventory event ignored."] call ServoPeregrino_Organizador_Nexus_fnc_createResult
@@ -55,6 +56,7 @@ switch (_phase) do {
   _expectedContainer = _duplicates;
   _expectedStatus = "AMBIGUOUS";
   _expectedCandidates = 2;
+  // Critical invariant: NEVER choose one of the duplicate logical IDs.
   _evidenceInstanceId = "";
  };
  default {};
@@ -74,6 +76,8 @@ if (_state getOrDefault ["activeContainer",""] != netId _container) then {
  _beforeCaptured = false;
 };
 
+// [] is a VALID snapshot when the container is empty.
+// Snapshot presence is tracked explicitly instead of inferred from observation count.
 if (!_beforeCaptured) exitWith {
  private _msg = "Missing BEFORE snapshot. Close/reopen the correct box or reset the manual test.";
  _state set ["failed",(_state get "failed") + 1];

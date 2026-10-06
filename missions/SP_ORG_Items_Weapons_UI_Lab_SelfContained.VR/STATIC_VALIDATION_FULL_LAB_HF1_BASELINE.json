@@ -1,0 +1,182 @@
+{
+  "passed": 35,
+  "failed": 0,
+  "total": 35,
+  "checks": [
+    {
+      "name": "NO_CFGPATCHES",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "NO_SPORG_REQUIREDADDONS",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "NEXUS_RELATIVE",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "UICOMMON_RELATIVE",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "ITEMS_RELATIVE",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "WEAPONS_RELATIVE",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "ITEMS_UI_INCLUDED",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "WEAPONS_UI_INCLUDED",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "ITEMS_REMOTEEXEC_SERVER",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "ITEMS_REMOTEEXEC_CLIENT",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "WEAPONS_REMOTEEXEC_SERVER",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "WEAPONS_REMOTEEXEC_CLIENT",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "MISSION_REMOTEEXEC_POLICY",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "ITEMS_OPEN_PRESENT",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "WEAPONS_OPEN_PRESENT",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "WEAPONS_E_TEST_PRESENT",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "UICOMMON_TEST_PRESENT",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "ITEMS_DIALOG_PRESENT",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "WEAPONS_DIALOG_PRESENT",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "INIT_ITEMS",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "INIT_WEAPONS",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "INIT_UICOMMON",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "ACTION_ITEMS",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "ACTION_WEAPONS",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "ACTION_UICOMMON",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "WEAPONS_LAB_ACTIONS",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "ITEMS_TEST_ACTIONS",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "EIGHT_PLAYABLE_SLOTS",
+      "pass": true,
+      "detail": "8"
+    },
+    {
+      "name": "NO_ABSOLUTE_FUNCTION_PATHS",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "ITEMS_0_13_A",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "WEAPONS_0_6_E_R1",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "DISPLAY_IDD_DISTINCT",
+      "pass": true,
+      "detail": "items=7700, weapons=7800"
+    },
+    {
+      "name": "WEAPONS_101_EXACT",
+      "pass": true,
+      "detail": "101/101"
+    },
+    {
+      "name": "WEAPONS_ZIP_SHA",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "TOTAL_FILES",
+      "pass": true,
+      "detail": "396"
+    }
+  ]
+}

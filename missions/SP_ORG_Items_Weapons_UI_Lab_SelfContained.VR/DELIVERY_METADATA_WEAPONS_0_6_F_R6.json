@@ -1,0 +1,14 @@
+{
+  "delivery": "Weapons 0.6-F R6",
+  "semanticVersion": "0.6.5.6",
+  "build": "0.6.5.6-compact-filter-spacing-test-contract-hotfix-uicommon-mission-first",
+  "base": "Weapons 0.6-F R5",
+  "scope": [
+    "compact P1 Tipo label/filter gap",
+    "compact P3 Tipo label/filter gap",
+    "compact P3 Acessório label/filter gap",
+    "align two stale automated assertions to R5 dynamic-authoring contract"
+  ],
+  "physicalApplication": "DEFERRED_0_7",
+  "multiplayerAuthority": "DEFERRED_0_8"
+}

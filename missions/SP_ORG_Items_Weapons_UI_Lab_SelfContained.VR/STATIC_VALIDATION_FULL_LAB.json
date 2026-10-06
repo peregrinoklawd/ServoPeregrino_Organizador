@@ -1,0 +1,130 @@
+{
+  "artifact": "SP_ORG_Items_Weapons_UI_Lab_Weapons_0_6_F_R1_UICommon",
+  "date": "2026-10-04",
+  "scope": "STATIC_ONLY_NOT_ARMA_RUNTIME",
+  "passed": 24,
+  "failed": 0,
+  "total": 24,
+  "checks": [
+    {
+      "name": "NO_CFGPATCHES",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "NO_REQUIREDADDONS",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "EIGHT_SLOT_HEADER",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "DIR_NEXUS",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "DIR_UICOMMON",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "DIR_ITEMS",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "DIR_WEAPONS",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "ITEMS_UI_INCLUDED",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "WEAPONS_UI_INCLUDED",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "ITEMS_SERVER_REMOTEEXEC",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "ITEMS_CLIENT_REMOTEEXEC",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "MISSION_REMOTEEXEC_POLICY",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "OPEN_ITEMS_ACTION",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "OPEN_WEAPONS_ACTION",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "UICOMMON_TEST_ACTION",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "ITEMS_UICOMMON_TEST_ACTION",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "WEAPONS_F_TEST_ACTION",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "F_RUNNER_REGISTERED",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "ITEMS_RUNNER_REGISTERED",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "UICOMMON_RUNNER_REGISTERED",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "NO_SPORG_PBO_HINT",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "MISSION_HAS_8_TESTERS",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "WEAPONS_APPLICATION_DEFERRED_0_7",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "WEAPONS_MP_DEFERRED_0_8",
+      "pass": true,
+      "detail": ""
+    }
+  ]
+}

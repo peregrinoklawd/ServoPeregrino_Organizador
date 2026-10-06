@@ -1,7 +1,7 @@
 author = "Claudio Malta Telhada";
-onLoadName = "SP_ORG Items + Weapons UI Lab - Self Contained";
-onLoadMission = "Laboratorio mission-first sem dependencia de PBO do Servo Peregrino.";
-overviewText = "Nexus + UICommon + Items carregados diretamente pela missao. Weapons 0.6 sera incorporado quando a candidata correta for recuperada/reconstruida.";
+onLoadName = "SP_ORG Items + Weapons UI Lab - Weapons 0.6-F R1 + UICommon";
+onLoadMission = "Weapons 0.6-F R1: final visual/regression da linha 0.6, incluindo retorno do DESCARTAR de NOVO ao kit anterior.";
+overviewText = "Items Equivalence R1 preservado; Weapons 0.6-F R1 fecha a UI 0.6 e preserva focused refresh, compatibilidade e authoring direto.";
 enableDebugConsole = 1;
 disabledAI = 1;
 respawn = 3;
@@ -116,6 +116,12 @@ class ServoPeregrino_Organizador_UICommon
             class getVirtualWindow {};
         };
 
+        class Text
+        {
+            file = "uicommon\functions\text";
+            class escapeStructuredText {};
+        };
+
         class Tests
         {
             file = "uicommon\functions\tests";
@@ -137,8 +143,163 @@ class ServoPeregrino_Organizador_Items
         class Application {file="items\functions\application"; class getEntryUnitMass {}; class simulateApplicationEntries {}; class createApplicationPlan {}; class validateApplicationPlan {}; class captureContainerSnapshot {}; class mutateContainerEntry {}; class restoreContainerSnapshot {}; class rollbackApplication {}; class executeApplicationPlan {}; class executeSingleOperation {}; class createWholeKitApplicationPlan {}; class createReplaceApplicationPlan {}; class createClearApplicationPlan {}; class acquireApplicationLock {}; class releaseApplicationLock {}; class executeContentOperation {}; class chooseApplicationTarget {}; class resolveApplicationTarget {}; class getDraftApplicationSource {}; class getSavedKitApplicationSource {}; class executeDraftApplication {}; class executeSavedKitApplication {}; class getApplicationStatus {};};
         class Draft {file="items\functions\draft"; class createCaptureDraft {}; class getDraftState {}; class createNewDraft {}; class loadDraftFromKit {}; class openCaptureDraft {}; class setDraftName {}; class setDraftPreferredTarget {}; class addEntryToDraft {}; class addCatalogItemToDraft {}; class incrementDraftEntry {}; class decrementDraftEntry {}; class setDraftEntryQuantity {}; class removeDraftEntry {}; class clearDraftEntries {}; class mergeEntriesIntoDraft {}; class mergeKitIntoDraft {}; class saveDraft {}; class saveDraftAsNew {}; class discardDraft {}; class detachDraftFromPersistedKit {}; class deleteKitPreservingDraft {};};
         class UI {file="items\functions\ui"; class createUIState {}; class getUIState {}; class pushUIFeedback {}; class getUIFeedbackPalette {}; class classifyUIOutcome {}; class playUIFeedbackSound {}; class getUIMovementSoundProfile {}; class playUIMovementSound {}; class scanVanillaInventorySounds {}; class presentLogicalMutationResult {}; class presentUIResult {}; class escapeStructuredText {}; class refreshCatalogSelectionDetails {}; class resolveUIItemMetadata {}; class getUIEntryAwareness {}; class getUIItemKitAwareness {}; class formatUIMass {}; class getUITargetLabel {}; class refreshHeaderUI {}; class refreshHeaderStatusUI {}; class renderCatalogRowsUI {}; class renderEquipmentRowsUI {}; class captureEquipmentRowToDraft {}; class buildUIViewModel {}; class refreshInterface {}; class handleUIEvent {}; class handleDraftRowAction {}; class commitDraftQuantityFromControl {}; class handleUITransferToDraft {}; class getUIPhysicalReadiness {}; class refreshPhysicalMutationUI {}; class refreshDraftMutationUI {}; class refreshKitSwitchUI {}; class reconcilePrivateKitSelectionAfterDelete {}; class clearKitLibraryActionStatus {}; class refreshPhysicalTargetUI {}; class getUICatalogWindow {}; class refreshCatalogWindowUI {}; class refreshEquipmentViewUI {}; class createUIDragSnapshot {}; class createUIPhysicalRowCommand {}; class executeUITransferCommand {}; class executeEquipmentClear {}; class captureEquipmentToDraft {}; class handleUIDragEvent {}; class resolveUIPointerSource {}; class resolveUIPanelDropTarget {}; class finalizeUIPointerDrop {}; class updateUIDragVisualProxy {}; class updateUIItemTooltip {}; class cancelUIDrag {}; class handleDraftQuantityKeyDown {}; class getResponsiveCatalogLabels {}; class requestDraftTransition {}; class handleUIKeyDown {}; class handleUIWheel {}; class refreshEquipmentSelectionControls {}; class executeEquipmentRowAction {}; class requestEquipmentRowAction {}; class commitEquipmentQuantityFromControl {}; class handleEquipmentQuantityKeyDown {}; class onInterfaceLoad {}; class onInterfaceUnload {}; class openInterface {};};
-        class Tests {file="items\functions\tests"; class resetRuntimeForTests {}; class runDelivery0_1Tests {}; class runDelivery0_2Tests {}; class runDelivery0_3Tests {}; class runDelivery0_4Tests {}; class runDelivery0_4_1Tests {}; class runDelivery0_4_2Tests {}; class runDelivery0_4_3Tests {}; class runDelivery0_5Tests {}; class runDelivery0_5_1Tests {}; class runDelivery0_6Tests {}; class runDelivery0_6_1Tests {}; class runDelivery0_7Tests {}; class runDelivery0_7_1Tests {}; class runDelivery0_7_2Tests {}; class runDelivery0_8Tests {}; class runDelivery0_8_1Tests {}; class runDelivery0_8_2Tests {}; class runDelivery0_8_3Tests {}; class runDelivery0_9Tests {}; class runDelivery0_9_1Tests {}; class runDelivery0_9_2Tests {}; class runDelivery0_9_3Tests {}; class getDelivery0_10TestContract {}; class runDelivery0_10CheckpointATests {}; class runDelivery0_10CheckpointBTests {}; class runDelivery0_10CheckpointCTests {}; class prepareCumulativeTestRun {}; class runDelivery0_10CheckpointDTests {}; class runDelivery0_10_0_7HotfixTests {}; class runDelivery0_11CheckpointATests {}; class runDelivery0_11CheckpointBTests {}; class runDelivery0_11CheckpointB1Tests {}; class runDelivery0_11CheckpointB2Tests {}; class runDelivery0_11CheckpointB3Tests {}; class runDelivery0_11CheckpointB4Tests {}; class runDelivery0_11CheckpointB5Tests {}; class runDelivery0_11CheckpointB6Tests {}; class runDelivery0_11CheckpointB61Tests {}; class runDelivery0_11CheckpointB7Tests {}; class runDelivery0_11CheckpointCTests {}; class runDelivery0_11CheckpointDTests {}; class runDelivery0_12CheckpointATests {}; class runDelivery0_12CheckpointBTests {}; class runDelivery0_12CheckpointCTests {}; class runDelivery0_12CheckpointC2Tests {}; class runDelivery0_12CheckpointC3Tests {}; class runDelivery0_12CheckpointC4Tests {}; class runDelivery0_12CheckpointC5Tests {}; class runDelivery0_12CheckpointC6Tests {}; class runDelivery0_12CheckpointC7Tests {}; class runDelivery0_12CheckpointC8Tests {}; class runDelivery0_12CheckpointC81Tests {}; class runDelivery0_12CheckpointD1Tests {}; class runDelivery0_12CheckpointD2Tests {}; class runDelivery0_12CheckpointD3Tests {}; class runDelivery0_12CheckpointD4Tests {}; class runDelivery0_12CheckpointD5Tests {}; class runDelivery0_12CheckpointD6Tests {}; class runDelivery0_12CheckpointD61Tests {}; class runDelivery0_12CheckpointD62Tests {}; class runDelivery0_12CheckpointD63Tests {}; class runDelivery0_12CheckpointD64Tests {}; class runDelivery0_12CheckpointD70Tests {}; class runDelivery0_12CheckpointD71Tests {}; class runDelivery0_12CheckpointD72Tests {}; class runDelivery0_12CheckpointD73Tests {}; class runDelivery0_12CheckpointD74Tests {}; class runDelivery0_13CheckpointATests {}; class captureProductionRepositorySnapshot {}; class restoreProductionRepositorySnapshot {}; class classifyLeakedTestKit {}; class findLeakedTestKits {}; class cleanupLeakedTestKits {}; class installTestActions {};};
+        class Tests {file="items\functions\tests"; class resetRuntimeForTests {}; class runDelivery0_1Tests {}; class runDelivery0_2Tests {}; class runDelivery0_3Tests {}; class runDelivery0_4Tests {}; class runDelivery0_4_1Tests {}; class runDelivery0_4_2Tests {}; class runDelivery0_4_3Tests {}; class runDelivery0_5Tests {}; class runDelivery0_5_1Tests {}; class runDelivery0_6Tests {}; class runDelivery0_6_1Tests {}; class runDelivery0_7Tests {}; class runDelivery0_7_1Tests {}; class runDelivery0_7_2Tests {}; class runDelivery0_8Tests {}; class runDelivery0_8_1Tests {}; class runDelivery0_8_2Tests {}; class runDelivery0_8_3Tests {}; class runDelivery0_9Tests {}; class runDelivery0_9_1Tests {}; class runDelivery0_9_2Tests {}; class runDelivery0_9_3Tests {}; class getDelivery0_10TestContract {}; class runDelivery0_10CheckpointATests {}; class runDelivery0_10CheckpointBTests {}; class runDelivery0_10CheckpointCTests {}; class prepareCumulativeTestRun {}; class runDelivery0_10CheckpointDTests {}; class runDelivery0_10_0_7HotfixTests {}; class runDelivery0_11CheckpointATests {}; class runDelivery0_11CheckpointBTests {}; class runDelivery0_11CheckpointB1Tests {}; class runDelivery0_11CheckpointB2Tests {}; class runDelivery0_11CheckpointB3Tests {}; class runDelivery0_11CheckpointB4Tests {}; class runDelivery0_11CheckpointB5Tests {}; class runDelivery0_11CheckpointB6Tests {}; class runDelivery0_11CheckpointB61Tests {}; class runDelivery0_11CheckpointB7Tests {}; class runDelivery0_11CheckpointCTests {}; class runDelivery0_11CheckpointDTests {}; class runDelivery0_12CheckpointATests {}; class runDelivery0_12CheckpointBTests {}; class runDelivery0_12CheckpointCTests {}; class runDelivery0_12CheckpointC2Tests {}; class runDelivery0_12CheckpointC3Tests {}; class runDelivery0_12CheckpointC4Tests {}; class runDelivery0_12CheckpointC5Tests {}; class runDelivery0_12CheckpointC6Tests {}; class runDelivery0_12CheckpointC7Tests {}; class runDelivery0_12CheckpointC8Tests {}; class runDelivery0_12CheckpointC81Tests {}; class runDelivery0_12CheckpointD1Tests {}; class runDelivery0_12CheckpointD2Tests {}; class runDelivery0_12CheckpointD3Tests {}; class runDelivery0_12CheckpointD4Tests {}; class runDelivery0_12CheckpointD5Tests {}; class runDelivery0_12CheckpointD6Tests {}; class runDelivery0_12CheckpointD61Tests {}; class runDelivery0_12CheckpointD62Tests {}; class runDelivery0_12CheckpointD63Tests {}; class runDelivery0_12CheckpointD64Tests {}; class runDelivery0_12CheckpointD70Tests {}; class runDelivery0_12CheckpointD71Tests {}; class runDelivery0_12CheckpointD72Tests {}; class runDelivery0_12CheckpointD73Tests {}; class runDelivery0_12CheckpointD74Tests {}; class runDelivery0_13CheckpointATests {}; class runUICommonEquivalenceTests {}; class captureProductionRepositorySnapshot {}; class restoreProductionRepositorySnapshot {}; class classifyLeakedTestKit {}; class findLeakedTestKits {}; class cleanupLeakedTestKits {}; class installTestActions {};};
     };
+
+class ServoPeregrino_Organizador_Weapons
+ {
+  tag="ServoPeregrino_Organizador_Weapons";
+  class Domain
+  {
+   file="weapons\functions\domain";
+   class captureWeaponConfiguration {};
+   class compareWeaponConfigurations {};
+   class areWeaponClassesEquivalentForSlot {};
+   class configurationFromWeaponArray {};
+   class createWeaponConfiguration {};
+   class deepCopy {};
+   class getConfigurationFingerprint {};
+   class getConfigurationSlotDefinitions {};
+   class diffWeaponConfigurations {};
+   class applyWeaponConfiguration {};
+   class isValidIdentityToken {};
+   class normalizeWeaponConfiguration {};
+   class validateWeaponConfigurationSemantic {};
+   class validateWeaponConfigurationStructural {};
+   class validateWeaponInstance {};
+  };
+  class Catalog
+  {
+   file="weapons\functions\catalog";
+   class getWeaponCompatibility {};
+   class getWeaponCatalogEntry {};
+   class buildWeaponCatalog {};
+   class getWeaponCatalog {};
+  };
+  class Recipe
+  {
+   file="weapons\functions\recipe";
+   class createWeaponRecipe {};
+   class normalizeWeaponRecipe {};
+   class validateWeaponRecipeStructural {};
+   class validateWeaponRecipeSemantic {};
+   class getWeaponRecipeFingerprint {};
+   class compareWeaponRecipes {};
+  };
+  class Kit
+  {
+   file="weapons\functions\kit";
+   class initializeWeaponKitStore {};
+   class normalizeWeaponKitName {};
+   class normalizeWeaponKit {};
+   class validateWeaponKitStructural {};
+   class validateWeaponKitSemantic {};
+   class createWeaponKit {};
+   class getWeaponKit {};
+   class listWeaponKits {};
+   class getWeaponKitContentFingerprint {};
+   class compareWeaponKits {};
+   class renameWeaponKit {};
+   class updateWeaponKitRecipe {};
+   class updateWeaponKitDefinition {};
+   class duplicateWeaponKit {};
+   class deleteWeaponKit {};
+  };
+  class UI
+  {
+   file="weapons\functions\ui";
+   class createUIState {};
+   class getUIState {};
+   class getUISlotLabel {};
+   class getWeaponPresentationInfo {};
+   class getClassPresentationInfo {};
+   class getEquipmentSlotSnapshot {};
+   class buildCompatibilitySelectorModel {};
+   class getOrCreateWeaponKitDraft {};
+            class getDraftChangedFields {};
+   class setWeaponKitDraftSelection {};
+   class discardWeaponKitDraft {};
+   class getUniqueWeaponKitName {};
+   class createWeaponKitFromCatalogWeapon {};
+   class setWeaponKitDraftWeapon {};
+   class saveWeaponKitDraft {};
+   class applyCatalogSelectionToDraft {};
+   class clearWeaponKitDraft {};
+   class escapeStructuredText {};
+   class pushUIFeedback {};
+   class getUICatalogWindow {};
+   class buildUIViewModel {};
+   class refreshCatalogWindowUI {};
+   class refreshDraftUI {};
+   class refreshEquipmentViewUI {};
+   class refreshInterface {};
+   class handleUIEvent {};
+   class handleUIWheel {};
+   class onInterfaceLoad {};
+   class onInterfaceUnload {};
+   class openInterface {};
+  };
+  class Identity
+  {
+   file="weapons\functions\identity";
+   class createWeaponInstance {};
+   class getIdentityDiagnostics {};
+   class getWeaponInstance {};
+   class initializeAuthority {};
+   class inspectWeaponCarrier {};
+   class getFingerprintMultiplicity {};
+   class createLifecycleEvidence {};
+   class analyzeLifecycleTransition {};
+   class detectLifecycleDelta {};
+   class updateWeaponInstanceConfiguration {};
+  };
+  class Integration
+  {
+   file="weapons\functions\integration";
+   class validateNexus {};
+  };
+  class Lifecycle
+  {
+   file="weapons\functions\lifecycle";
+   class getBuildInfo {};
+   class initialize {};
+  };
+  class Runtime
+  {
+   file="weapons\functions\runtime";
+   class getRuntimeStatus {};
+  };
+  class Tests
+  {
+   file="weapons\functions\tests";
+   class clientReceiveLabResult {};
+   class installLabActions {};
+   class initializeLiveLifecycleTest {};
+   class captureLiveLifecycleBefore {};
+   class handleLiveLifecycleEvent {};
+   class resetLiveLifecycleTest {};
+   class getLiveLifecycleStatus {};
+   class dispatchLabRequest {};
+   class runDelivery0_3Tests {};
+   class runDelivery0_4Tests {};
+   class runDelivery0_5Tests {};
+   class runDelivery0_6_ATests {};
+   class runDelivery0_6_BTests {};
+   class runDelivery0_6_CTests {};
+   class runDelivery0_6_DTests {};
+   class runDelivery0_6_DR2Tests {};
+   class runDelivery0_6_DR3Tests {};
+   class runDelivery0_6_ETests {};
+   class runDelivery0_6_ER2Tests {};
+   class runDelivery0_6_FTests {};
+            class runDelivery0_6_FR2Tests {};
+            class runDelivery0_6_FR3Tests {};
+            class runDelivery0_6_FR4Tests {};
+            class runDelivery0_6_FR5Tests {};
+            class runDelivery0_6_FR6Tests {};
+   class serverHandleLabRequest {};
+  };
+ };
 };
 
 class CfgSounds
@@ -152,12 +313,21 @@ class CfgSounds
 };
 
 #include "items\ui\items_dialog.hpp"
+#include "weapons\ui\weapons_dialog.hpp"
 
 class CfgRemoteExec
 {
     class Functions
     {
+        class BIS_fnc_effectKilledAirDestruction {allowedTargets=0; jip=0;};
+        class BIS_fnc_effectKilledSecondaries {allowedTargets=0; jip=0;};
+        class BIS_fnc_fire {allowedTargets=0; jip=0;};
+        class BIS_fnc_objectVar {allowedTargets=0; jip=0;};
+        class BIS_fnc_setCustomSoundController {allowedTargets=0; jip=0;};
+        class BIS_fnc_debugConsoleExec {allowedTargets=0; jip=0;};
         class ServoPeregrino_Organizador_Items_fnc_serverHandlePublicLibraryRequest {allowedTargets=2; jip=0;};
         class ServoPeregrino_Organizador_Items_fnc_clientReceivePublicLibraryResult {allowedTargets=1; jip=0;};
+        class ServoPeregrino_Organizador_Weapons_fnc_serverHandleLabRequest {allowedTargets=2; jip=0;};
+        class ServoPeregrino_Organizador_Weapons_fnc_clientReceiveLabResult {allowedTargets=0; jip=0;};
     };
 };

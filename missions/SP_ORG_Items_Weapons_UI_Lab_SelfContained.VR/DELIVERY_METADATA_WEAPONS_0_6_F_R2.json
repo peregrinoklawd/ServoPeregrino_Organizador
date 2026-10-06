@@ -1,0 +1,30 @@
+{
+  "delivery": "Weapons 0.6-F R2 + UICommon",
+  "date": "2026-10-04",
+  "mission": "SP_ORG_Items_Weapons_UI_Lab_Weapons_0_6_F_R2_UICommon.VR",
+  "base": "0.6-F R1",
+  "weaponsBuild": "0.6.5.2-final-visual-regression-changed-rows-preview-ready-uicommon-mission-first",
+  "scope": [
+    "semantic changed-row highlight in ARMAS DO KIT",
+    "P2/P4 vertical layout convergence",
+    "preview-ready larger P2 area",
+    "regression only; no physical application"
+  ],
+  "itemsFrozen": true,
+  "uiCommonFrozen": true,
+  "nexusFrozen": true,
+  "physicalApplication": "DEFERRED_0_7",
+  "multiplayerAuthority": "DEFERRED_0_8",
+  "staticValidationWeapons": {
+    "passed": 69,
+    "failed": 0,
+    "total": 69
+  },
+  "staticValidationFullLab": {
+    "passed": 30,
+    "failed": 0,
+    "total": 30
+  },
+  "runnerAssertionSites": 545,
+  "runtimeCountAuthoritativeFromRPT": true
+}

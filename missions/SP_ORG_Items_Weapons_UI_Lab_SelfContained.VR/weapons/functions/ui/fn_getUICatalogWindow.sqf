@@ -11,6 +11,11 @@ private _state = [] call ServoPeregrino_Organizador_Weapons_fnc_getUIState;
 private _query = toLowerANSI (_state getOrDefault ["catalogQuery",""]);
 private _typeFilter = toUpperANSI (_state getOrDefault ["catalogTypeFilter","ALL"]);
 private _kindFilter = toUpperANSI (_state getOrDefault ["catalogCategoryFilter","ALL"]);
+// 0.6-F R3: a non-empty Catalog query is a temporary global-search mode.
+// Stored filters are preserved, but ignored until the query becomes empty again.
+private _filtersIgnoredBySearch = _query isNotEqualTo "";
+private _effectiveTypeFilter = if (_filtersIgnoredBySearch) then {"ALL"} else {_typeFilter};
+private _effectiveKindFilter = if (_filtersIgnoredBySearch) then {"ALL"} else {_kindFilter};
 private _offset = (_state getOrDefault ["catalogOffset",0]) max 0;
 private _windowSize = ((_state getOrDefault ["catalogWindowSize",SP_ORG_WEAPONS_UI_CATALOG_WINDOW_SIZE]) max 8) min 100;
 
@@ -54,9 +59,10 @@ private _selectedKitSlot = "";
 private _selectedWeaponClass = "";
 private _projection = missionNamespace getVariable [SP_ORG_WEAPONS_UI_CATALOG_PROJECTION_VAR,createHashMap];
 
-// Fast path for wheel/slider navigation: 0.6-D does not edit the base weapon.
-// If the projection already belongs to the selected kit, its weapon/slot are authoritative
-// for the catalog projection and there is no reason to re-read the repository/draft.
+// Fast path for wheel/slider navigation. In 0.6-E the draft base weapon can change,
+// therefore every base-weapon mutation/discard explicitly invalidates this projection.
+// While the projection remains valid for the selected kit, its weapon/slot can be reused
+// without re-reading repository/draft on every wheel/slider tick.
 private _projectionSourceKitId = _projection getOrDefault ["sourceKitId",""];
 private _canReuseProjectionSource = (
  _sourceKitId isNotEqualTo ""
@@ -165,7 +171,7 @@ if ((_projection getOrDefault ["sourceKey",""]) isNotEqualTo _sourceKey) then {
 };
 
 private _rows = _projection getOrDefault ["rows",[]];
-private _filterKey = format ["%1|%2|%3",_typeFilter,_kindFilter,_query];
+private _filterKey = format ["%1|%2|%3",_effectiveTypeFilter,_effectiveKindFilter,_query];
 private _filterBuiltNow = false;
 private _filterMs = _projection getOrDefault ["filterMs",0];
 if ((_projection getOrDefault ["filterKey",""]) isNotEqualTo _filterKey) then {
@@ -177,8 +183,8 @@ if ((_projection getOrDefault ["filterKey",""]) isNotEqualTo _filterKey) then {
   private _dn = toLowerANSI (_x getOrDefault ["displayName",""]);
   private _cl = toLowerANSI (_x getOrDefault ["catalogClass",""]);
   if (
-   (_typeFilter isEqualTo "ALL" || {_slot isEqualTo _typeFilter})
-   && {(_kindFilter isEqualTo "ALL" || {_kind isEqualTo _kindFilter})}
+   (_effectiveTypeFilter isEqualTo "ALL" || {_slot isEqualTo _effectiveTypeFilter})
+   && {(_effectiveKindFilter isEqualTo "ALL" || {_kind isEqualTo _effectiveKindFilter})}
    && {(_query isEqualTo "" || {_dn find _query >= 0 || {_cl find _query >= 0}})}
   ) then {_indices pushBack _forEachIndex};
  } forEach _rows;
@@ -193,7 +199,7 @@ if ((_projection getOrDefault ["filterKey",""]) isNotEqualTo _filterKey) then {
 private _indices = _projection getOrDefault ["filteredIndices",[]];
 private _matchCount = count _indices;
 private _maxOffset = (_matchCount-_windowSize) max 0;
-if (_offset > _maxOffset) then {_offset = _maxOffset};
+_offset = [_offset,_matchCount,_windowSize] call ServoPeregrino_Organizador_UICommon_fnc_clampVirtualOffset;
 private _take = (_matchCount-_offset) min _windowSize;
 private _windowIndices = if (_take>0) then {_indices select [_offset,_take]} else {[]};
 private _windowRows = [];
@@ -229,5 +235,9 @@ private _totalMs = round ((diag_tickTime-_startedAt)*1000);
  ["projectionBuildCount",_projection getOrDefault ["projectionBuildCount",0]],
  ["baseRowsBuiltNow",_baseRowsBuiltNow],["baseRowsBuildMs",_baseRowsBuildMs],
  ["filterBuiltNow",_filterBuiltNow],["filterMs",if (_filterBuiltNow) then {_filterMs} else {0}],
- ["filterBuildCount",_projection getOrDefault ["filterBuildCount",0]],["totalMs",_totalMs]
+ ["filterBuildCount",_projection getOrDefault ["filterBuildCount",0]],
+ ["filtersIgnoredBySearch",_filtersIgnoredBySearch],
+ ["storedTypeFilter",_typeFilter],["storedCategoryFilter",_kindFilter],
+ ["effectiveTypeFilter",_effectiveTypeFilter],["effectiveCategoryFilter",_effectiveKindFilter],
+ ["totalMs",_totalMs]
 ]] call ServoPeregrino_Organizador_Nexus_fnc_createResult

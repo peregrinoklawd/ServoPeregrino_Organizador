@@ -1,0 +1,135 @@
+{
+  "delivery": "Items + UICommon Equivalence R1",
+  "passed": 23,
+  "failed": 0,
+  "checks": [
+    {
+      "name": "WEAPONS_BYTE_IDENTICAL_TO_HOTFIX1",
+      "pass": true,
+      "detail": "101 files"
+    },
+    {
+      "name": "NEXUS_BYTE_IDENTICAL_TO_HOTFIX1",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "UICOMMON_DELTA_EXACT",
+      "pass": true,
+      "detail": "['functions/tests/fn_runFoundationTests.sqf', 'functions/text/fn_escapeStructuredText.sqf', 'script_version.hpp']"
+    },
+    {
+      "name": "ITEMS_DELTA_EXACT",
+      "pass": true,
+      "detail": "['functions/lifecycle/fn_initialize.sqf', 'functions/tests/fn_runUICommonEquivalenceTests.sqf', 'functions/ui/fn_escapeStructuredText.sqf', 'functions/ui/fn_getUICatalogWindow.sqf', 'script_version.hpp']"
+    },
+    {
+      "name": "UICOMMON_12_ASSERTIONS",
+      "pass": true,
+      "detail": "12"
+    },
+    {
+      "name": "ITEMS_EQ_12_ASSERTIONS",
+      "pass": true,
+      "detail": "12"
+    },
+    {
+      "name": "SHARED_TEXT_REGISTERED",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "ITEMS_EQ_TEST_REGISTERED",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "ITEMS_WRAPPER_SHARED",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "CATALOG_SHARED_CLAMP",
+      "pass": true,
+      "detail": "2"
+    },
+    {
+      "name": "ITEMS_LIFECYCLE_REQUIRES_SHARED",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "ITEMS_RUNTIME_SHARED_METADATA",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "LAB_ACTION_UICOMMON",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "LAB_ACTION_ITEMS_UICOMMON",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "LAB_ACTION_ITEMS",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "LAB_ACTION_WEAPONS",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "NO_CFGPATCHES",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "NO_REQUIREDADDONS",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "ALL_MODULES_REGISTERED",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "WEAPONS_HOTFIX_PRESERVED",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "ITEMS_CAPACITY_HOTFIX_PRESERVED",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "ITEMS_CLOSE_HOTFIX_PRESERVED",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "PLAYER_CATALOG_TEXT_DEFERRED",
+      "pass": true,
+      "detail": ""
+    }
+  ],
+  "itemsDelta": [
+    "functions/lifecycle/fn_initialize.sqf",
+    "functions/tests/fn_runUICommonEquivalenceTests.sqf",
+    "functions/ui/fn_escapeStructuredText.sqf",
+    "functions/ui/fn_getUICatalogWindow.sqf",
+    "script_version.hpp"
+  ],
+  "uiCommonDelta": [
+    "functions/tests/fn_runFoundationTests.sqf",
+    "functions/text/fn_escapeStructuredText.sqf",
+    "script_version.hpp"
+  ],
+  "note": "Static audit only; Arma runtime is authoritative."
+}

@@ -18,7 +18,11 @@ private _hadDraft = _kitId in _drafts;
 if (_hadDraft) then {_drafts deleteAt _kitId};
 _state set ["draftsByKitId",_drafts];
 _state set ["activeDraftKitId",_kitId];
+_state set ["catalogOffset",0];
 missionNamespace setVariable [SP_ORG_WEAPONS_UI_STATE,_state];
+// Discard may restore a different saved base weapon than the current draft.
+// Force the next catalog projection to be rebuilt from that restored weapon.
+missionNamespace setVariable [SP_ORG_WEAPONS_UI_CATALOG_PROJECTION_VAR,createHashMap];
 
 private _freshResult = [_kitId] call ServoPeregrino_Organizador_Weapons_fnc_getOrCreateWeaponKitDraft;
 if !(_freshResult get "success") exitWith {_freshResult};

@@ -33,8 +33,14 @@ private _changed = [];
 if (count _changed isEqualTo 0) exitWith {
  [false,"WEAPONS_LIFECYCLE_DELTA_NOT_FOUND","No single-weapon lifecycle delta detected.",createHashMapFromArray [["changed",[]]]] call ServoPeregrino_Organizador_Nexus_fnc_createResult
 };
+
 if (count _changed > 1) exitWith {
- [false,"WEAPONS_LIFECYCLE_DELTA_MULTI","More than one fingerprint changed; event evidence is insufficient.",createHashMapFromArray [["changed",_changed]]] call ServoPeregrino_Organizador_Nexus_fnc_createResult
+ [false,"WEAPONS_LIFECYCLE_MULTIPLE_DELTAS","More than one weapon configuration changed; refusing correlation.",createHashMapFromArray [["changed",_changed]]] call ServoPeregrino_Organizador_Nexus_fnc_createResult
 };
 
-[true,"WEAPONS_LIFECYCLE_DELTA_DETECTED","Exactly one fingerprint multiplicity changed by one.",createHashMapFromArray [["changed",_changed]]] call ServoPeregrino_Organizador_Nexus_fnc_createResult
+private _row = _changed select 0;
+[true,"WEAPONS_LIFECYCLE_DELTA_FOUND","Exactly one configuration fingerprint changed by one.",createHashMapFromArray [
+ ["fingerprint",_row get "fingerprint"],
+ ["beforeCount",_row get "beforeCount"],
+ ["afterCount",_row get "afterCount"]
+]] call ServoPeregrino_Organizador_Nexus_fnc_createResult

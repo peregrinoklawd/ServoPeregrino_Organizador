@@ -1,0 +1,158 @@
+{
+  "delivery": "Weapons 0.6-F R2 full lab",
+  "passed": 30,
+  "failed": 0,
+  "total": 30,
+  "checks": [
+    {
+      "name": "no CfgPatches mission",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "no requiredAddons mission",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "no absolute SP_ORG addon paths",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "Nexus relative CfgFunctions path",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "UICommon relative CfgFunctions path",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "Items relative CfgFunctions path",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "Weapons relative CfgFunctions path",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "Items dialog included",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "Weapons dialog included",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "Weapons helper registered",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "Weapons R2 runner registered",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "mission owns explicit RemoteExec whitelist",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "Items remoteexec endpoints",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "Weapons remoteexec endpoints",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "action ABRIR ITEMS",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "action ABRIR WEAPONS",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "action TESTAR UICOMMON",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "action TESTAR ITEMS + UICOMMON",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "action TESTAR WEAPONS 0.6-F R2",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "server init Nexus",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "server init UICommon",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "server init Items",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "server init Weapons",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "8 playable slots",
+      "pass": true,
+      "detail": "isPlayable=8"
+    },
+    {
+      "name": "Weapons R2 display",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "Weapons 0.6.5.2",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "UICommon baseline",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "Items equivalence baseline",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "R2 changed runtime has no applyWeaponConfiguration",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "R2 changed runtime has no setUnitLoadout",
+      "pass": true,
+      "detail": ""
+    }
+  ]
+}

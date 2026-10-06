@@ -1,9 +1,10 @@
 #include "..\..\script_version.hpp"
 disableSerialization;
 params [["_reason","EQUIPMENT_FOCUSED",[""]]];
-private _display=findDisplay SP_ORG_WEAPONS_UI_DISPLAY_IDD;
-if(isNull _display) exitWith {[false,"WEAPONS_UI_NOT_OPEN","Cannot refresh Equipment because the interface is not open."] call ServoPeregrino_Organizador_Nexus_fnc_createResult};
-private _state=missionNamespace getVariable [SP_ORG_WEAPONS_UI_STATE,createHashMap];
+
+private _display = findDisplay SP_ORG_WEAPONS_UI_DISPLAY_IDD;
+if (isNull _display) exitWith {[false,"WEAPONS_UI_NOT_OPEN","Weapons UI is not open."] call ServoPeregrino_Organizador_Nexus_fnc_createResult};
+private _state = missionNamespace getVariable [SP_ORG_WEAPONS_UI_STATE,createHashMap];
 if (_state getOrDefault ["equipmentRefreshInProgress",false]) exitWith {[true,"WEAPONS_UI_EQUIPMENT_REFRESH_REENTRANT_SKIPPED","Nested equipment-focused refresh ignored."] call ServoPeregrino_Organizador_Nexus_fnc_createResult};
 _state set ["equipmentRefreshInProgress",true];
 missionNamespace setVariable [SP_ORG_WEAPONS_UI_STATE,_state];
@@ -11,6 +12,9 @@ private _startedAt = diag_tickTime;
 private _slot = toUpperANSI (_state getOrDefault ["equipmentSlotView","PRIMARY"]);
 if !(_slot in ["PRIMARY","HANDGUN","SECONDARY"]) then {_slot="PRIMARY"};
 private _slotLabel = {params ["_s"];[_s] call ServoPeregrino_Organizador_Weapons_fnc_getUISlotLabel};
+private _query = _state getOrDefault ["equipmentQuery",""];
+private _equipmentSearchCtrl = _display displayCtrl 4100;
+if ((ctrlText _equipmentSearchCtrl) isNotEqualTo _query) then {_equipmentSearchCtrl ctrlSetText _query};
 
 private _snapshotResult = [player,_slot] call ServoPeregrino_Organizador_Weapons_fnc_getEquipmentSlotSnapshot;
 private _eq = if (_snapshotResult get "success") then {(_snapshotResult get "data") get "snapshot"} else {createHashMap};
@@ -42,6 +46,31 @@ if ((count _eq) isEqualTo 0 || {!(_eq getOrDefault ["equipped",false])}) then {
  private _ammoText = if (_mag isEqualType [] && {count _mag>=2}) then {format ["%1 munição(ões) observada(s)",_mag#1]} else {"Estado de munição não informado"};
  (_display displayCtrl 4040) ctrlSetStructuredText parseText format ["<t color='#CDE7E1'>EQUIPADO · %1</t><br/><t color='#8FB7B0'>%2</t><br/><br/>%3<br/>Comparação/aplicação física continua reservada para 0.7.",[_slot] call _slotLabel,[_eq getOrDefault ["weaponClass",""]] call ServoPeregrino_Organizador_Weapons_fnc_escapeStructuredText,_ammoText];
 };
+
+// Local P4 search filters only fields rendered in CONTEÚDO DO EQUIPAMENTO.
+private _equipmentQueryLower = toLowerANSI _query;
+private _weaponInfoNow = _eq getOrDefault ["weaponInfo",createHashMap];
+private _weaponHaystack = format ["arma %1 %2",
+ _weaponInfoNow getOrDefault ["displayName",_eq getOrDefault ["weaponClass",""]],
+ _eq getOrDefault ["weaponClass",""]
+];
+private _weaponVisible = _equipmentQueryLower isEqualTo "" || {(toLowerANSI _weaponHaystack) find _equipmentQueryLower >= 0};
+{(_display displayCtrl _x) ctrlShow _weaponVisible} forEach [4020,4021,4022];
+
+private _eqRows = [
+ [[4030,4031],"mira optic ótica","opticInfo"],
+ [[4032,4033],"boca muzzle","muzzleInfo"],
+ [[4034,4035],"apontador pointer laser","pointerInfo"],
+ [[4036,4037],"bipé bipe empunhadura grip","bipodInfo"],
+ [[4038,4039],"carregador magazine","magazineInfo"]
+];
+{
+ _x params ["_idcs","_keywords","_infoKey"];
+ private _info = _eq getOrDefault [_infoKey,createHashMap];
+ private _haystack = format ["%1 %2 %3",_keywords,_info getOrDefault ["displayName",""],_info getOrDefault ["className",""]];
+ private _visible = _equipmentQueryLower isEqualTo "" || {(toLowerANSI _haystack) find _equipmentQueryLower >= 0};
+ {(_display displayCtrl _x) ctrlShow _visible} forEach _idcs;
+} forEach _eqRows;
 
 _state = missionNamespace getVariable [SP_ORG_WEAPONS_UI_STATE,createHashMap];
 private _elapsed=round ((diag_tickTime-_startedAt)*1000);

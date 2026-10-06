@@ -4,50 +4,51 @@ params [
  ["_weaponClass","",[""]]
 ];
 
-if (_kitId isEqualTo "" || {_weaponClass isEqualTo ""}) exitWith {
- [false,"WEAPONS_UI_DRAFT_WEAPON_INPUT_INVALID","WeaponKit id and weapon class are required."] call ServoPeregrino_Organizador_Nexus_fnc_createResult
+if (_kitId isEqualTo "") exitWith {
+ [false,"WEAPONS_UI_DRAFT_KIT_ID_EMPTY","Nenhum kit está aberto para receber a arma."] call ServoPeregrino_Organizador_Nexus_fnc_createResult
+};
+
+private _kitR = [_kitId] call ServoPeregrino_Organizador_Weapons_fnc_getWeaponKit;
+if !(_kitR get "success") exitWith {_kitR};
+private _kit = (_kitR get "data") get "kit";
+
+private _entryR = [_weaponClass,false] call ServoPeregrino_Organizador_Weapons_fnc_getWeaponCatalogEntry;
+if !(_entryR get "success") exitWith {_entryR};
+private _entry = (_entryR get "data") get "entry";
+private _selectedSlot = toUpperANSI (_entry getOrDefault ["category",""]);
+if !(_selectedSlot in ["PRIMARY","HANDGUN","SECONDARY"]) exitWith {
+ [false,"WEAPONS_UI_DRAFT_WEAPON_TYPE_UNSUPPORTED","Esta arma não pode ser usada em um kit de armas do jogador."] call ServoPeregrino_Organizador_Nexus_fnc_createResult
 };
 
 private _draftR = [_kitId] call ServoPeregrino_Organizador_Weapons_fnc_getOrCreateWeaponKitDraft;
 if !(_draftR get "success") exitWith {_draftR};
 private _draft = (_draftR get "data") get "draft";
-private _targetSlot = toUpperANSI (_draft getOrDefault ["targetSlot",""]);
+private _currentRecipe = _draft getOrDefault ["recipe",createHashMap];
+private _currentCfg = _currentRecipe getOrDefault ["configuration",createHashMap];
+private _currentWeapon = _currentCfg getOrDefault ["weaponClass",""];
+private _currentSlot = toUpperANSI (_draft getOrDefault ["targetSlot",_kit getOrDefault ["targetSlot",""]]);
+private _canonicalWeapon = _entry getOrDefault ["weaponClass",_weaponClass];
 
-private _entryR = [_weaponClass,false] call ServoPeregrino_Organizador_Weapons_fnc_getWeaponCatalogEntry;
-if !(_entryR get "success") exitWith {_entryR};
-private _entry = (_entryR get "data") get "entry";
-private _weaponSlot = toUpperANSI (_entry getOrDefault ["category",""]);
-if !(_weaponSlot isEqualTo _targetSlot) exitWith {
- [false,"WEAPONS_UI_DRAFT_WEAPON_SLOT_MISMATCH","The selected weapon belongs to another target slot. Create a new WeaponKit for another slot.",createHashMapFromArray [
-  ["targetSlot",_targetSlot],
-  ["weaponSlot",_weaponSlot],
-  ["weaponClass",_weaponClass]
+if ((toLowerANSI _currentWeapon) isEqualTo (toLowerANSI _canonicalWeapon) && {_currentSlot isEqualTo _selectedSlot}) exitWith {
+ [true,"WEAPONS_UI_DRAFT_WEAPON_UNCHANGED","A arma selecionada já está no rascunho.",createHashMapFromArray [
+  ["draft",[_draft] call ServoPeregrino_Organizador_Weapons_fnc_deepCopy],["changed",false],["loadoutMutation",false]
  ]] call ServoPeregrino_Organizador_Nexus_fnc_createResult
 };
 
-private _cfgR = [_entry getOrDefault ["weaponClass",_weaponClass]] call ServoPeregrino_Organizador_Weapons_fnc_createWeaponConfiguration;
+private _cfgR = [_canonicalWeapon] call ServoPeregrino_Organizador_Weapons_fnc_createWeaponConfiguration;
 if !(_cfgR get "success") exitWith {_cfgR};
-private _oldRecipe = _draft getOrDefault ["recipe",createHashMap];
-private _oldMag = _oldRecipe getOrDefault ["magazineClass",""];
-private _newWeaponClass = ((_cfgR get "data") get "configuration") getOrDefault ["weaponClass",_weaponClass];
-
-// Weapon-base replacement intentionally starts from a clean configuration. Attachment selectors
-// will be rebuilt from engine compatibility for the new class. Preserve the preferred magazine
-// only when the engine reports that it is still compatible.
-private _compatR = [_newWeaponClass] call ServoPeregrino_Organizador_Weapons_fnc_getWeaponCompatibility;
-if !(_compatR get "success") exitWith {_compatR};
-private _allowedMags = ((_compatR get "data") getOrDefault ["magazines",[]]) apply {toLowerANSI _x};
-private _newMag = if (_oldMag isNotEqualTo "" && {(toLowerANSI _oldMag) in _allowedMags}) then {_oldMag} else {""};
-
-private _recipeR = [(_cfgR get "data") get "configuration",_newMag] call ServoPeregrino_Organizador_Weapons_fnc_createWeaponRecipe;
+private _recipeR = [(_cfgR get "data") get "configuration",""] call ServoPeregrino_Organizador_Weapons_fnc_createWeaponRecipe;
 if !(_recipeR get "success") exitWith {_recipeR};
-private _newRecipe = (_recipeR get "data") get "recipe";
-private _baseRecipe = _draft getOrDefault ["baseRecipe",createHashMap];
-private _cmp = [_baseRecipe,_newRecipe] call ServoPeregrino_Organizador_Weapons_fnc_compareWeaponRecipes;
-private _dirty = true;
-if (_cmp get "success") then {_dirty = !((_cmp get "data") getOrDefault ["equal",false])};
+private _recipe = (_recipeR get "data") get "recipe";
 
-_draft set ["recipe",[_newRecipe] call ServoPeregrino_Organizador_Weapons_fnc_deepCopy];
+private _baseRecipe = _draft getOrDefault ["baseRecipe",createHashMap];
+private _baseSlot = toUpperANSI (_draft getOrDefault ["baseTargetSlot",_kit getOrDefault ["targetSlot",""]]);
+private _cmp = [_baseRecipe,_recipe] call ServoPeregrino_Organizador_Weapons_fnc_compareWeaponRecipes;
+if !(_cmp get "success") exitWith {_cmp};
+private _dirty = !(((_cmp get "data") getOrDefault ["equal",false])) || {!(_selectedSlot isEqualTo _baseSlot)};
+
+_draft set ["recipe",[_recipe] call ServoPeregrino_Organizador_Weapons_fnc_deepCopy];
+_draft set ["targetSlot",_selectedSlot];
 _draft set ["dirty",_dirty];
 _draft set ["revision",(_draft getOrDefault ["revision",0]) + 1];
 _draft set ["updatedAtTick",diag_tickTime];
@@ -57,12 +58,17 @@ private _drafts = _state getOrDefault ["draftsByKitId",createHashMap];
 _drafts set [_kitId,_draft];
 _state set ["draftsByKitId",_drafts];
 _state set ["activeDraftKitId",_kitId];
+_state set ["catalogOffset",0];
 missionNamespace setVariable [SP_ORG_WEAPONS_UI_STATE,_state];
+missionNamespace setVariable [SP_ORG_WEAPONS_UI_CATALOG_PROJECTION_VAR,createHashMap];
 
-[true,"WEAPONS_UI_DRAFT_WEAPON_CHANGED","Weapon base changed in the local draft for the same target slot. Attachments and magazine were reset/revalidated; repository and loadout remain unchanged.",createHashMapFromArray [
+[true,"WEAPONS_UI_DRAFT_WEAPON_UPDATED","Arma do rascunho substituída. Os acessórios e o carregador foram limpos para recalcular a compatibilidade. Nenhum equipamento físico foi alterado.",createHashMapFromArray [
  ["draft",[_draft] call ServoPeregrino_Organizador_Weapons_fnc_deepCopy],
- ["weaponClass",_newWeaponClass],
- ["targetSlot",_targetSlot],
+ ["weaponClass",_canonicalWeapon],
+ ["targetSlot",_selectedSlot],
+ ["previousTargetSlot",_currentSlot],
+ ["dirty",_dirty],
+ ["changed",true],
  ["weaponKitMutation",false],
  ["loadoutMutation",false]
 ]] call ServoPeregrino_Organizador_Nexus_fnc_createResult
