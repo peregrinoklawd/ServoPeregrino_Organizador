@@ -122,7 +122,7 @@ private _details=if ((count _sel)>0) then {
     private _massValue=_sel getOrDefault ["massEstimate",0]; private _massLabel=if (_massValue>0) then {[_massValue,true,2] call ServoPeregrino_Organizador_Items_fnc_formatUIMass} else {"n/d"};
     private _magCapacity=_sel getOrDefault ["magazineCapacity",0]; private _capacityLine=if (_magCapacity>0) then {format [" · Capacidade: %1",_magCapacity]} else {""};
     format ["<t size='1.05' color='#CDE7E1'>%1</t><br/>%2 · Peso: %3%4<br/><t color='#8FB7B0'>Botão da esquerda: adicionar ao Kit Selecionado · Botão da direita: adicionar ao equipamento exibido em Mostrar</t>",_displayNameSafe,_categorySafe,_massLabel,_capacityLine]
-} else {if (_catalog getOrDefault ["cacheBuilt",false]) then {"Selecione um item. Use o botão da esquerda para adicionar ao Kit Selecionado ou o botão da direita para adicionar ao equipamento exibido em Mostrar."} else {"A UI abriu antes do scan. O catálogo será preenchido quando o cache terminar."}};
+} else {if (_catalog getOrDefault ["cacheBuilt",false]) then {"Selecione um item. Use o botão da esquerda para adicionar ao Kit Selecionado ou o botão da direita para adicionar ao equipamento exibido em Mostrar."} else {"Vasculhando inventário e catalogando itens..."}};
 (_display displayCtrl 3130) ctrlSetStructuredText parseText _details; [3100,_ui getOrDefault ["catalogQuery",""]] call _setEditIfDifferent;
 _ui set ["catalogOffset",_offset]; _ui set ["catalogTotalFiltered",_total]; _ui set ["catalogMaxOffset",_maxOffset]; _ui set ["catalogScrollRatio",_scrollRatio];
 missionNamespace setVariable [SERVO_PEREGRINO_ORGANIZADOR_ITEMS_UI_STATE_VAR,_ui];

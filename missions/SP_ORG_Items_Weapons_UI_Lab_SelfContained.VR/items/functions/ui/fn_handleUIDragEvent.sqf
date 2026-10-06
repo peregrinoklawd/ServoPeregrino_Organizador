@@ -6,7 +6,9 @@ private _display=uiNamespace getVariable [SERVO_PEREGRINO_ORGANIZADOR_ITEMS_UI_D
 private _draftDrop=if (isNull _display) then {controlNull} else {_display displayCtrl 2103};
 private _physicalDrop=if (isNull _display) then {controlNull} else {_display displayCtrl 4113};
 private _draftPanel=if (isNull _display) then {controlNull} else {_display displayCtrl SERVO_PEREGRINO_ORGANIZADOR_ITEMS_UI_DRAFT_PANEL_IDC};
+private _draftPanelVisual=if (isNull _display) then {controlNull} else {_display displayCtrl SERVO_PEREGRINO_ORGANIZADOR_ITEMS_UI_DRAFT_PANEL_VISUAL_IDC};
 private _equipmentPanel=if (isNull _display) then {controlNull} else {_display displayCtrl SERVO_PEREGRINO_ORGANIZADOR_ITEMS_UI_EQUIPMENT_PANEL_IDC};
+private _equipmentPanelVisual=if (isNull _display) then {controlNull} else {_display displayCtrl SERVO_PEREGRINO_ORGANIZADOR_ITEMS_UI_EQUIPMENT_PANEL_VISUAL_IDC};
 
 private _logStart={
     params ["_drag"];
@@ -24,13 +26,13 @@ private _setDropVisuals={
     private _physicalAllowed=_target getOrDefault ["physicalAllowed",false];
     private _physicalReady=_target getOrDefault ["physicalReady",false];
 
-    if (!isNull _draftPanel) then {
+    if (!isNull _draftPanelVisual) then {
         private _hover=_area isEqualTo "DRAFT_PANEL";
-        _draftPanel ctrlSetBackgroundColor (if (_hover && {_draftAllowed}) then {[0.025,0.16,0.13,0.62]} else {if (_draftAllowed) then {[0.018,0.055,0.050,0.52]} else {[0.015,0.02,0.022,0.44]}});
+        _draftPanelVisual ctrlSetTextColor (if (_hover && {_draftAllowed}) then {[0.025,0.16,0.13,0.62]} else {if (_draftAllowed) then {[0.018,0.055,0.050,0.52]} else {[0.015,0.02,0.022,0.44]}});
     };
-    if (!isNull _equipmentPanel) then {
+    if (!isNull _equipmentPanelVisual) then {
         private _hover=_area isEqualTo "EQUIPMENT_PANEL";
-        _equipmentPanel ctrlSetBackgroundColor (if (_hover && {_physicalAllowed} && {_physicalReady}) then {[0.18,0.095,0.025,0.64]} else {if (_physicalAllowed && {_physicalReady}) then {[0.065,0.042,0.025,0.52]} else {[0.015,0.02,0.022,0.44]}});
+        _equipmentPanelVisual ctrlSetTextColor (if (_hover && {_physicalAllowed} && {_physicalReady}) then {[0.18,0.095,0.025,0.64]} else {if (_physicalAllowed && {_physicalReady}) then {[0.065,0.042,0.025,0.52]} else {[0.015,0.02,0.022,0.44]}});
     };
     if (!isNull _draftDrop) then {
         private _draftStateForDrop=missionNamespace getVariable [SERVO_PEREGRINO_ORGANIZADOR_ITEMS_DRAFT_STATE_VAR,createHashMap];

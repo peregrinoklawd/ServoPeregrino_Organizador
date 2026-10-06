@@ -66,12 +66,21 @@ class SPORG_Items_Text: SPORG_UICommon_Text {};
 class SPORG_Items_Title: SPORG_UICommon_Title {};
 class SPORG_Items_Picture: SPORG_UICommon_Picture {};
 class SPORG_Items_SearchIcon: SPORG_UICommon_SearchIcon {};
+class SPORG_Items_RoundedSurface: SPORG_UICommon_RoundedSurface {};
+class SPORG_Items_SearchSurface: SPORG_UICommon_SearchSurface {};
+class SPORG_Items_ProgressTrack: SPORG_UICommon_ProgressTrack {};
+class SPORG_Items_ProgressFill: SPORG_UICommon_ProgressFill {};
 
 class SPORG_Items_Button: SPORG_UICommon_Button {};
+class SPORG_Items_ButtonFlat: SPORG_UICommon_ButtonFlat {};
+class SPORG_Items_ButtonFlatDanger: SPORG_UICommon_ButtonFlatDanger {};
 class SPORG_Items_ButtonDanger: SPORG_UICommon_ButtonDanger {};
 class SPORG_Items_IconButton: SPORG_UICommon_IconButton {};
 class SPORG_Items_Edit: SPORG_UICommon_Edit {};
+class SPORG_Items_SearchEdit: SPORG_UICommon_SearchEdit {};
+class SPORG_Items_SearchClear: SPORG_UICommon_SearchClear {};
 class SPORG_Items_List: SPORG_UICommon_List {};
+class SPORG_Items_KitList: SPORG_UICommon_KitList {};
 class SPORG_Items_VSlider: SPORG_UICommon_VSlider {};
 class SPORG_Items_Structured: SPORG_UICommon_Structured {};
 class SPORG_Items_FooterContext: SPORG_UICommon_FooterContext {};
@@ -83,8 +92,8 @@ class SPORG_Items_FooterHistory: SPORG_UICommon_FooterHistory {};
 class SPORG_Items_DraftRowBackground: SPORG_Items_Text {colorBackground[] = {0.01,0.015,0.017,0.16};};
 class SPORG_Items_DraftRowPicture: SPORG_Items_Picture {colorBackground[] = {0,0,0,0};};
 class SPORG_Items_DraftRowText: SPORG_Items_Text {sizeEx = 0.015 * safeZoneH;};
-class SPORG_Items_DraftRowButton: SPORG_Items_Button {sizeEx = 0.015 * safeZoneH; colorBackground[] = {0.06,0.09,0.10,0.52};};
-class SPORG_Items_DraftRowDelete: SPORG_Items_ButtonDanger {sizeEx = 0.014 * safeZoneH;};
+class SPORG_Items_DraftRowButton: SPORG_Items_ButtonFlat {sizeEx = 0.015 * safeZoneH; colorBackground[] = {0.06,0.09,0.10,0.52};};
+class SPORG_Items_DraftRowDelete: SPORG_Items_ButtonFlatDanger {sizeEx = 0.014 * safeZoneH;};
 class SPORG_Items_DraftRowEdit: SPORG_Items_Edit {style = 2; sizeEx = 0.015 * safeZoneH; colorBackground[] = {0.02,0.03,0.032,0.48};};
 class SPORG_Items_ScrollBar
 {
@@ -125,11 +134,11 @@ class SPORG_Items_DraftTable
 };
 
 class SPORG_Items_EquipmentRowBackground: SPORG_Items_Text {colorBackground[] = {0.01,0.015,0.017,0.16};};
-class SPORG_Items_EquipmentRowCapture: SPORG_Items_Button {sizeEx = 0.014 * safeZoneH; colorText[] = {0.55,0.90,0.82,1}; colorBackground[] = {0.04,0.09,0.09,0.42};};
+class SPORG_Items_EquipmentRowCapture: SPORG_Items_ButtonFlat {sizeEx = 0.014 * safeZoneH; colorText[] = {0.55,0.90,0.82,1}; colorBackground[] = {0.04,0.09,0.09,0.42};};
 class SPORG_Items_EquipmentRowPicture: SPORG_Items_Picture {colorBackground[] = {0,0,0,0};};
 class SPORG_Items_EquipmentRowText: SPORG_Items_Text {sizeEx = 0.014 * safeZoneH;};
-class SPORG_Items_EquipmentRowButton: SPORG_Items_Button {sizeEx = 0.014 * safeZoneH; colorBackground[] = {0.06,0.09,0.10,0.52};};
-class SPORG_Items_EquipmentRowDelete: SPORG_Items_ButtonDanger {sizeEx = 0.0135 * safeZoneH;};
+class SPORG_Items_EquipmentRowButton: SPORG_Items_ButtonFlat {sizeEx = 0.014 * safeZoneH; colorBackground[] = {0.06,0.09,0.10,0.52};};
+class SPORG_Items_EquipmentRowDelete: SPORG_Items_ButtonFlatDanger {sizeEx = 0.0135 * safeZoneH;};
 class SPORG_Items_EquipmentRowEdit: SPORG_Items_Edit {style = 2; sizeEx = 0.014 * safeZoneH; colorBackground[] = {0.02,0.03,0.032,0.48};};
 class SPORG_Items_EquipmentTable
 {
@@ -206,11 +215,16 @@ class SP_ORG_Items_Dialog
         class Shade: SPORG_Items_Text {idc=-1; x=safeZoneX; y=safeZoneY; w=safeZoneW; h=safeZoneH; colorBackground[]={0.01,0.015,0.017,0.12};};
         class Header: SPORG_Items_Text {idc=-1; x=safeZoneX; y=safeZoneY; w=safeZoneW; h=0.049*safeZoneH; colorBackground[]={0.015,0.09,0.105,0.80};};
         class HeaderDivider: SPORG_Items_Text {idc=-1; x=safeZoneX; y=safeZoneY+0.048*safeZoneH; w=safeZoneW; h=0.0012*safeZoneH; colorBackground[]={0.22,0.46,0.43,0.42};};
-        class P1: SPORG_Items_Text {idc=-1; x=safeZoneX+0.012*safeZoneW; y=safeZoneY+0.052*safeZoneH; w=0.176*safeZoneW; h=0.815*safeZoneH; colorBackground[]={0.015,0.02,0.022,0.44};};
-        class P2: SPORG_Items_Text {idc=SERVO_PEREGRINO_ORGANIZADOR_ITEMS_UI_DRAFT_PANEL_IDC; x=SERVO_PEREGRINO_ORGANIZADOR_ITEMS_UI_DRAFT_PANEL_X; y=SERVO_PEREGRINO_ORGANIZADOR_ITEMS_UI_DRAFT_PANEL_Y; w=SERVO_PEREGRINO_ORGANIZADOR_ITEMS_UI_DRAFT_PANEL_W; h=SERVO_PEREGRINO_ORGANIZADOR_ITEMS_UI_DRAFT_PANEL_H; colorBackground[]={0.015,0.02,0.022,0.44};};
-        class P3: SPORG_Items_Text {idc=-1; x=safeZoneX+0.456*safeZoneW; y=safeZoneY+0.052*safeZoneH; w=0.330*safeZoneW; h=0.815*safeZoneH; colorBackground[]={0.015,0.02,0.022,0.44};};
-        class P4: SPORG_Items_Text {idc=SERVO_PEREGRINO_ORGANIZADOR_ITEMS_UI_EQUIPMENT_PANEL_IDC; x=SERVO_PEREGRINO_ORGANIZADOR_ITEMS_UI_EQUIPMENT_PANEL_X; y=SERVO_PEREGRINO_ORGANIZADOR_ITEMS_UI_EQUIPMENT_PANEL_Y; w=SERVO_PEREGRINO_ORGANIZADOR_ITEMS_UI_EQUIPMENT_PANEL_W; h=SERVO_PEREGRINO_ORGANIZADOR_ITEMS_UI_EQUIPMENT_PANEL_H; colorBackground[]={0.015,0.02,0.022,0.44};};
-        class FooterBg: SPORG_Items_Text {idc=-1; x=safeZoneX+0.012*safeZoneW; y=safeZoneY+0.878*safeZoneH; w=0.976*safeZoneW; h=0.105*safeZoneH; colorBackground[]={0.015,0.02,0.022,0.44};};
+        class P1: SPORG_Items_RoundedSurface {idc=-1; x=safeZoneX+0.012*safeZoneW; y=safeZoneY+0.052*safeZoneH; w=0.176*safeZoneW; h=0.815*safeZoneH; colorText[]={0.015,0.02,0.022,0.44};};
+        class P2Visual: SPORG_Items_RoundedSurface {idc=SERVO_PEREGRINO_ORGANIZADOR_ITEMS_UI_DRAFT_PANEL_VISUAL_IDC; x=SERVO_PEREGRINO_ORGANIZADOR_ITEMS_UI_DRAFT_PANEL_X; y=SERVO_PEREGRINO_ORGANIZADOR_ITEMS_UI_DRAFT_PANEL_Y; w=SERVO_PEREGRINO_ORGANIZADOR_ITEMS_UI_DRAFT_PANEL_W; h=SERVO_PEREGRINO_ORGANIZADOR_ITEMS_UI_DRAFT_PANEL_H; colorText[]={0.015,0.02,0.022,0.44};};
+        class P2: SPORG_Items_Text {idc=SERVO_PEREGRINO_ORGANIZADOR_ITEMS_UI_DRAFT_PANEL_IDC; x=SERVO_PEREGRINO_ORGANIZADOR_ITEMS_UI_DRAFT_PANEL_X; y=SERVO_PEREGRINO_ORGANIZADOR_ITEMS_UI_DRAFT_PANEL_Y; w=SERVO_PEREGRINO_ORGANIZADOR_ITEMS_UI_DRAFT_PANEL_W; h=SERVO_PEREGRINO_ORGANIZADOR_ITEMS_UI_DRAFT_PANEL_H; colorBackground[]={0,0,0,0};};
+        class P3: SPORG_Items_RoundedSurface {idc=-1; x=safeZoneX+0.456*safeZoneW; y=safeZoneY+0.052*safeZoneH; w=0.330*safeZoneW; h=0.815*safeZoneH; colorText[]={0.015,0.02,0.022,0.44};};
+        class P4Visual: SPORG_Items_RoundedSurface {idc=SERVO_PEREGRINO_ORGANIZADOR_ITEMS_UI_EQUIPMENT_PANEL_VISUAL_IDC; x=SERVO_PEREGRINO_ORGANIZADOR_ITEMS_UI_EQUIPMENT_PANEL_X; y=SERVO_PEREGRINO_ORGANIZADOR_ITEMS_UI_EQUIPMENT_PANEL_Y; w=SERVO_PEREGRINO_ORGANIZADOR_ITEMS_UI_EQUIPMENT_PANEL_W; h=SERVO_PEREGRINO_ORGANIZADOR_ITEMS_UI_EQUIPMENT_PANEL_H; colorText[]={0.015,0.02,0.022,0.44};};
+        class P4: SPORG_Items_Text {idc=SERVO_PEREGRINO_ORGANIZADOR_ITEMS_UI_EQUIPMENT_PANEL_IDC; x=SERVO_PEREGRINO_ORGANIZADOR_ITEMS_UI_EQUIPMENT_PANEL_X; y=SERVO_PEREGRINO_ORGANIZADOR_ITEMS_UI_EQUIPMENT_PANEL_Y; w=SERVO_PEREGRINO_ORGANIZADOR_ITEMS_UI_EQUIPMENT_PANEL_W; h=SERVO_PEREGRINO_ORGANIZADOR_ITEMS_UI_EQUIPMENT_PANEL_H; colorBackground[]={0,0,0,0};};
+        class FooterBg: SPORG_Items_Text {idc=-1; x=safeZoneX+0.012*safeZoneW; y=safeZoneY+0.878*safeZoneH; w=0.976*safeZoneW; h=0.105*safeZoneH; colorBackground[]={0,0,0,0};};
+        class FooterContextBg: SPORG_Items_RoundedSurface {idc=-1; x=safeZoneX+0.012*safeZoneW; y=safeZoneY+0.884*safeZoneH; w=0.976*safeZoneW; h=0.027*safeZoneH; colorText[]={0.02,0.055,0.055,0.25};};
+        class FooterMessageBg: SPORG_Items_RoundedSurface {idc=-1; x=safeZoneX+0.012*safeZoneW; y=safeZoneY+0.914*safeZoneH; w=0.976*safeZoneW; h=0.027*safeZoneH; colorText[]={0.025,0.035,0.040,0.28};};
+        class FooterHistoryBg: SPORG_Items_RoundedSurface {idc=-1; x=safeZoneX+0.012*safeZoneW; y=safeZoneY+0.944*safeZoneH; w=0.976*safeZoneW; h=0.027*safeZoneH; colorText[]={0.020,0.030,0.032,0.16};};
     };
 
     class controls
@@ -218,8 +232,8 @@ class SP_ORG_Items_Dialog
         // D.6.3: header anchored from Close toward the left, matching the APM visual rhythm.
         class HeaderTitle: SPORG_Items_Title {idc=100; text="SP_ORG — ORGANIZADOR DE ITENS  |  0.13-A"; x=safeZoneX+0.012*safeZoneW; y=safeZoneY+0.010*safeZoneH; w=0.330*safeZoneW; h=0.026*safeZoneH; sizeEx=0.0165*safeZoneH;};
         class HeaderWeightText: SPORG_Items_Text {idc=104; style=1; text="Carga: -"; tooltip="Carga global do jogador: inclui armas, itens vinculados e conteúdo de Uniforme/Colete/Mochila"; x=SPORG_ITEMS_UI_HEADER_LOAD_X; y=safeZoneY+0.006*safeZoneH; w=SPORG_ITEMS_UI_HEADER_LOAD_W; h=0.018*safeZoneH; sizeEx=0.0109*safeZoneH;};
-        class HeaderWeightBarBg: SPORG_Items_Text {idc=105; x=SPORG_ITEMS_UI_HEADER_LOAD_X; y=safeZoneY+0.029*safeZoneH; w=SPORG_ITEMS_UI_HEADER_LOAD_W; h=0.006*safeZoneH; colorBackground[]={0.03,0.05,0.055,0.86};};
-        class HeaderWeightBarFill: SPORG_Items_Text {idc=106; x=SPORG_ITEMS_UI_HEADER_LOAD_X; y=safeZoneY+0.029*safeZoneH; w=0.001*safeZoneW; h=0.006*safeZoneH; colorBackground[]={0.15,0.62,0.48,0.92};};
+        class HeaderWeightBarBg: SPORG_Items_ProgressTrack {idc=105; x=SPORG_ITEMS_UI_HEADER_LOAD_X; y=safeZoneY+0.029*safeZoneH; w=SPORG_ITEMS_UI_HEADER_LOAD_W; h=0.006*safeZoneH; colorText[]={0.03,0.05,0.055,0.86};};
+        class HeaderWeightBarFill: SPORG_Items_ProgressFill {idc=106; x=SPORG_ITEMS_UI_HEADER_LOAD_X; y=safeZoneY+0.029*safeZoneH; w=0.001*safeZoneW; h=0.006*safeZoneH; colorText[]={0.15,0.62,0.48,0.92};};
         class HeaderIdentity: SPORG_Items_Text {idc=103; style=1; text="Operador: -"; tooltip="Jogador que está usando o Organizador"; x=SPORG_ITEMS_UI_HEADER_ID_X; y=safeZoneY+0.005*safeZoneH; w=SPORG_ITEMS_UI_HEADER_ID_W; h=0.018*safeZoneH; sizeEx=0.0109*safeZoneH;};
         class HeaderUnit: SPORG_Items_Text {idc=108; style=1; text="Unidade: -"; tooltip="Grupo atual do jogador"; x=SPORG_ITEMS_UI_HEADER_ID_X; y=safeZoneY+0.024*safeZoneH; w=SPORG_ITEMS_UI_HEADER_ID_W; h=0.018*safeZoneH; sizeEx=0.0109*safeZoneH;};
         class FutureIconSlot: SPORG_Items_Text {idc=107; text=""; tooltip="Espaço reservado para uma integração futura"; x=SPORG_ITEMS_UI_HEADER_FUTURE_X; y=safeZoneY+0.009*safeZoneH; w=SPORG_ITEMS_UI_ICON_W; h=SPORG_ITEMS_UI_ICON_H; colorBackground[]={0.04,0.08,0.085,0.14};};
@@ -230,12 +244,13 @@ class SP_ORG_Items_Dialog
         // Panel 1 — Kits persistidos
         class KitsTitle: SPORG_Items_Title {idc=1000; text="MEUS KITS DE ITENS"; x=safeZoneX+0.022*safeZoneW; y=safeZoneY+0.064*safeZoneH; w=0.100*safeZoneW; h=0.026*safeZoneH;};
         class KitsActionStatus: SPORG_Items_Text {idc=1001; style=1; text=""; tooltip="Última ação concluída na biblioteca de kits"; x=safeZoneX+0.126*safeZoneW; y=safeZoneY+0.064*safeZoneH; w=0.052*safeZoneW; h=0.026*safeZoneH;};
-        class KitsSearchIcon: SPORG_Items_SearchIcon {idc=1090; x=safeZoneX+0.022*safeZoneW; y=safeZoneY+0.102*safeZoneH; w=SPORG_ITEMS_UI_SEARCH_W; h=SPORG_ITEMS_UI_SEARCH_H;};
-        class KitsSearch: SPORG_Items_Edit {idc=1100; tooltip="Pesquisar kits na aba atual por nome; em PÚBLICOS também busca autor e origem"; x=safeZoneX+0.022*safeZoneW+SPORG_ITEMS_UI_SEARCH_W+SPORG_ITEMS_UI_SEARCH_GAP_W; y=safeZoneY+0.099*safeZoneH; w=0.156*safeZoneW-SPORG_ITEMS_UI_CLEAR_W-SPORG_ITEMS_UI_SEARCH_W-SPORG_ITEMS_UI_SEARCH_GAP_W-0.004*safeZoneW; h=SPORG_ITEMS_UI_CLEAR_H; onKeyUp="['KIT_SEARCH',ctrlText (_this#0)] call ServoPeregrino_Organizador_Items_fnc_handleUIEvent";};
-        class KitsClear: SPORG_Items_IconButton {idc=1101; text="x"; tooltip="Limpar busca de kits"; x=safeZoneX+0.178*safeZoneW-SPORG_ITEMS_UI_CLEAR_W; y=safeZoneY+0.099*safeZoneH; w=SPORG_ITEMS_UI_CLEAR_W; h=SPORG_ITEMS_UI_CLEAR_H; action="['KIT_SEARCH',''] call ServoPeregrino_Organizador_Items_fnc_handleUIEvent";};
+        class KitsSearchBg: SPORG_Items_SearchSurface {idc=-1; x=safeZoneX+0.022*safeZoneW; y=safeZoneY+0.099*safeZoneH; w=0.156*safeZoneW; h=SPORG_UICOMMON_UI_SEARCH_BAR_H;};
+        class KitsSearchIcon: SPORG_Items_SearchIcon {idc=1090; x=safeZoneX+0.022*safeZoneW+SPORG_UICOMMON_UI_SEARCH_PAD_W; y=safeZoneY+0.1055*safeZoneH; w=SPORG_UICOMMON_UI_SEARCH_ICON_W; h=SPORG_UICOMMON_UI_SEARCH_ICON_H;};
+        class KitsSearch: SPORG_Items_SearchEdit {idc=1100; tooltip="Pesquisar kits na aba atual por nome; em PÚBLICOS também busca autor e origem"; x=safeZoneX+0.022*safeZoneW+SPORG_UICOMMON_UI_SEARCH_PAD_W+SPORG_UICOMMON_UI_SEARCH_ICON_W+SPORG_UICOMMON_UI_SEARCH_PAD_W; y=safeZoneY+0.099*safeZoneH; w=0.156*safeZoneW-SPORG_UICOMMON_UI_SEARCH_ICON_W-SPORG_UICOMMON_UI_SEARCH_CLEAR_W-(4*SPORG_UICOMMON_UI_SEARCH_PAD_W); h=SPORG_UICOMMON_UI_SEARCH_BAR_H; onKeyUp="['KIT_SEARCH',ctrlText (_this#0)] call ServoPeregrino_Organizador_Items_fnc_handleUIEvent";};
+        class KitsClear: SPORG_Items_SearchClear {idc=1101; text="x"; tooltip="Limpar busca de kits"; x=safeZoneX+0.178*safeZoneW-SPORG_UICOMMON_UI_SEARCH_CLEAR_W-SPORG_UICOMMON_UI_SEARCH_PAD_W; y=safeZoneY+0.1025*safeZoneH; w=SPORG_UICOMMON_UI_SEARCH_CLEAR_W; h=SPORG_UICOMMON_UI_SEARCH_CLEAR_H; action="['KIT_SEARCH',''] call ServoPeregrino_Organizador_Items_fnc_handleUIEvent";};
         class KitsPrivateTab: SPORG_Items_Button {idc=1104; text="PRIVADOS"; tooltip="Kits salvos no seu perfil"; x=safeZoneX+0.022*safeZoneW; y=safeZoneY+0.139*safeZoneH; w=0.076*safeZoneW; h=0.032*safeZoneH; action="['KIT_LIBRARY_MODE','PRIVATE'] call ServoPeregrino_Organizador_Items_fnc_handleUIEvent";};
         class KitsPublicTab: SPORG_Items_Button {idc=1105; text="PÚBLICOS"; tooltip="Snapshots compartilhados nesta sessão pelo servidor ou jogadores"; x=safeZoneX+0.102*safeZoneW; y=safeZoneY+0.139*safeZoneH; w=0.076*safeZoneW; h=0.032*safeZoneH; action="['KIT_LIBRARY_MODE','PUBLIC'] call ServoPeregrino_Organizador_Items_fnc_handleUIEvent";};
-        class KitsList: SPORG_Items_List
+        class KitsList: SPORG_Items_KitList
         {
             idc=1102; tooltip="Privados: clique para editar e arraste para combinar. Públicos: selecione para consultar e salvar uma cópia privada."; x=safeZoneX+0.022*safeZoneW; y=safeZoneY+0.181*safeZoneH; w=0.156*safeZoneW; h=0.534*safeZoneH; canDrag=1;
             onLBSelChanged="['KIT_SELECT',_this#1] call ServoPeregrino_Organizador_Items_fnc_handleUIEvent";
@@ -251,12 +266,13 @@ class SP_ORG_Items_Dialog
         class KitsStatus: SPORG_Items_Structured {idc=1103; x=safeZoneX+0.022*safeZoneW; y=safeZoneY+0.768*safeZoneH; w=0.156*safeZoneW; h=0.082*safeZoneH;};
 
         // Panel 2 — Draft. Nome agora fica no cabeçalho entre título e estado; busca alinha em Y=.099 com os outros painéis.
-        class DraftTitle: SPORG_Items_Title {idc=2000; text="KIT SELECIONADO"; x=safeZoneX+0.206*safeZoneW; y=safeZoneY+0.064*safeZoneH; w=0.074*safeZoneW; h=0.026*safeZoneH;};
+        class DraftTitle: SPORG_Items_Title {idc=2000; text="ITENS DO KIT"; x=safeZoneX+0.206*safeZoneW; y=safeZoneY+0.064*safeZoneH; w=0.074*safeZoneW; h=0.026*safeZoneH;};
         class DraftName: SPORG_Items_Edit {idc=2100; x=safeZoneX+0.283*safeZoneW; y=safeZoneY+0.062*safeZoneH; w=0.096*safeZoneW; h=0.030*safeZoneH; tooltip="Nome do Kit Selecionado; só é gravado ao Salvar"; onKillFocus="['DRAFT_NAME',ctrlText (_this#0)] call ServoPeregrino_Organizador_Items_fnc_handleUIEvent";};
         class DraftDirty: SPORG_Items_Text {idc=2001; style=1; text="SEM KIT"; x=safeZoneX+0.382*safeZoneW; y=safeZoneY+0.064*safeZoneH; w=0.052*safeZoneW; h=0.026*safeZoneH;};
-        class DraftSearchIcon: SPORG_Items_SearchIcon {idc=2090; x=safeZoneX+0.206*safeZoneW; y=safeZoneY+0.102*safeZoneH; w=SPORG_ITEMS_UI_SEARCH_W; h=SPORG_ITEMS_UI_SEARCH_H;};
-        class DraftSearch: SPORG_Items_Edit {idc=2101; tooltip="Pesquisar nos itens do Kit Selecionado"; x=safeZoneX+0.206*safeZoneW+SPORG_ITEMS_UI_SEARCH_W+SPORG_ITEMS_UI_SEARCH_GAP_W; y=safeZoneY+0.099*safeZoneH; w=0.228*safeZoneW-SPORG_ITEMS_UI_CLEAR_W-SPORG_ITEMS_UI_SEARCH_W-SPORG_ITEMS_UI_SEARCH_GAP_W-0.004*safeZoneW; h=SPORG_ITEMS_UI_CLEAR_H; onKeyUp="['DRAFT_SEARCH',ctrlText (_this#0)] call ServoPeregrino_Organizador_Items_fnc_handleUIEvent";};
-        class DraftClear: SPORG_Items_IconButton {idc=2102; text="x"; tooltip="Limpar busca do Kit Selecionado"; x=safeZoneX+0.434*safeZoneW-SPORG_ITEMS_UI_CLEAR_W; y=safeZoneY+0.099*safeZoneH; w=SPORG_ITEMS_UI_CLEAR_W; h=SPORG_ITEMS_UI_CLEAR_H; action="['DRAFT_SEARCH',''] call ServoPeregrino_Organizador_Items_fnc_handleUIEvent";};
+        class DraftSearchBg: SPORG_Items_SearchSurface {idc=-1; x=safeZoneX+0.206*safeZoneW; y=safeZoneY+0.099*safeZoneH; w=0.228*safeZoneW; h=SPORG_UICOMMON_UI_SEARCH_BAR_H;};
+        class DraftSearchIcon: SPORG_Items_SearchIcon {idc=2090; x=safeZoneX+0.206*safeZoneW+SPORG_UICOMMON_UI_SEARCH_PAD_W; y=safeZoneY+0.1055*safeZoneH; w=SPORG_UICOMMON_UI_SEARCH_ICON_W; h=SPORG_UICOMMON_UI_SEARCH_ICON_H;};
+        class DraftSearch: SPORG_Items_SearchEdit {idc=2101; tooltip="Pesquisar nos itens do Kit Selecionado"; x=safeZoneX+0.206*safeZoneW+SPORG_UICOMMON_UI_SEARCH_PAD_W+SPORG_UICOMMON_UI_SEARCH_ICON_W+SPORG_UICOMMON_UI_SEARCH_PAD_W; y=safeZoneY+0.099*safeZoneH; w=0.228*safeZoneW-SPORG_UICOMMON_UI_SEARCH_ICON_W-SPORG_UICOMMON_UI_SEARCH_CLEAR_W-(4*SPORG_UICOMMON_UI_SEARCH_PAD_W); h=SPORG_UICOMMON_UI_SEARCH_BAR_H; onKeyUp="['DRAFT_SEARCH',ctrlText (_this#0)] call ServoPeregrino_Organizador_Items_fnc_handleUIEvent";};
+        class DraftClear: SPORG_Items_SearchClear {idc=2102; text="x"; tooltip="Limpar busca do Kit Selecionado"; x=safeZoneX+0.434*safeZoneW-SPORG_UICOMMON_UI_SEARCH_CLEAR_W-SPORG_UICOMMON_UI_SEARCH_PAD_W; y=safeZoneY+0.1025*safeZoneH; w=SPORG_UICOMMON_UI_SEARCH_CLEAR_W; h=SPORG_UICOMMON_UI_SEARCH_CLEAR_H; action="['DRAFT_SEARCH',''] call ServoPeregrino_Organizador_Items_fnc_handleUIEvent";};
         class DraftDrop: SPORG_Items_Button
         {
             idc=2103; text="ARRASTE ITENS PARA ADICIONAR AO KIT"; tooltip="Arraste um item ou outro kit e solte em qualquer lugar deste painel para adicioná-lo ao Kit Selecionado."; x=safeZoneX+0.206*safeZoneW; y=safeZoneY+0.181*safeZoneH; w=0.228*safeZoneW; h=0.034*safeZoneH;
@@ -283,9 +299,10 @@ class SP_ORG_Items_Dialog
 
         // Panel 3 — Catalog. Lista contínua virtualizada com botões reais por linha; navegação visível simplificada para wheel + slider.
         class CatalogTitle: SPORG_Items_Title {idc=3000; text="CATÁLOGO DE ITENS"; x=safeZoneX+0.466*safeZoneW; y=safeZoneY+0.064*safeZoneH; w=0.20*safeZoneW; h=0.026*safeZoneH;};
-        class CatalogSearchIcon: SPORG_Items_SearchIcon {idc=3090; x=safeZoneX+0.466*safeZoneW; y=safeZoneY+0.102*safeZoneH; w=SPORG_ITEMS_UI_SEARCH_W; h=SPORG_ITEMS_UI_SEARCH_H;};
-        class CatalogSearch: SPORG_Items_Edit {idc=3100; tooltip="Pesquisar no catálogo local já indexado"; x=safeZoneX+0.466*safeZoneW+SPORG_ITEMS_UI_SEARCH_W+SPORG_ITEMS_UI_SEARCH_GAP_W; y=safeZoneY+0.099*safeZoneH; w=0.310*safeZoneW-SPORG_ITEMS_UI_CLEAR_W-SPORG_ITEMS_UI_SEARCH_W-SPORG_ITEMS_UI_SEARCH_GAP_W-0.004*safeZoneW; h=SPORG_ITEMS_UI_CLEAR_H; onKeyUp="['CATALOG_SEARCH',ctrlText (_this#0)] call ServoPeregrino_Organizador_Items_fnc_handleUIEvent";};
-        class CatalogClear: SPORG_Items_IconButton {idc=3101; text="x"; tooltip="Limpar busca do catálogo"; x=safeZoneX+0.776*safeZoneW-SPORG_ITEMS_UI_CLEAR_W; y=safeZoneY+0.099*safeZoneH; w=SPORG_ITEMS_UI_CLEAR_W; h=SPORG_ITEMS_UI_CLEAR_H; action="['CATALOG_SEARCH',''] call ServoPeregrino_Organizador_Items_fnc_handleUIEvent";};
+        class CatalogSearchBg: SPORG_Items_SearchSurface {idc=-1; x=safeZoneX+0.466*safeZoneW; y=safeZoneY+0.099*safeZoneH; w=0.310*safeZoneW; h=SPORG_UICOMMON_UI_SEARCH_BAR_H;};
+        class CatalogSearchIcon: SPORG_Items_SearchIcon {idc=3090; x=safeZoneX+0.466*safeZoneW+SPORG_UICOMMON_UI_SEARCH_PAD_W; y=safeZoneY+0.1055*safeZoneH; w=SPORG_UICOMMON_UI_SEARCH_ICON_W; h=SPORG_UICOMMON_UI_SEARCH_ICON_H;};
+        class CatalogSearch: SPORG_Items_SearchEdit {idc=3100; tooltip="Pesquisar no catálogo local já indexado"; x=safeZoneX+0.466*safeZoneW+SPORG_UICOMMON_UI_SEARCH_PAD_W+SPORG_UICOMMON_UI_SEARCH_ICON_W+SPORG_UICOMMON_UI_SEARCH_PAD_W; y=safeZoneY+0.099*safeZoneH; w=0.310*safeZoneW-SPORG_UICOMMON_UI_SEARCH_ICON_W-SPORG_UICOMMON_UI_SEARCH_CLEAR_W-(4*SPORG_UICOMMON_UI_SEARCH_PAD_W); h=SPORG_UICOMMON_UI_SEARCH_BAR_H; onKeyUp="['CATALOG_SEARCH',ctrlText (_this#0)] call ServoPeregrino_Organizador_Items_fnc_handleUIEvent";};
+        class CatalogClear: SPORG_Items_SearchClear {idc=3101; text="x"; tooltip="Limpar busca do catálogo"; x=safeZoneX+0.776*safeZoneW-SPORG_UICOMMON_UI_SEARCH_CLEAR_W-SPORG_UICOMMON_UI_SEARCH_PAD_W; y=safeZoneY+0.1025*safeZoneH; w=SPORG_UICOMMON_UI_SEARCH_CLEAR_W; h=SPORG_UICOMMON_UI_SEARCH_CLEAR_H; action="['CATALOG_SEARCH',''] call ServoPeregrino_Organizador_Items_fnc_handleUIEvent";};
         class CatAll: SPORG_Items_Button {tooltip="Mostrar todas as categorias"; idc=3110; text="TODOS"; x=safeZoneX+0.466*safeZoneW; y=safeZoneY+0.139*safeZoneH; w=0.035*safeZoneW; h=0.029*safeZoneH; action="['CATALOG_CATEGORY','ALL'] call ServoPeregrino_Organizador_Items_fnc_handleUIEvent";};
         class CatMag: SPORG_Items_Button {tooltip="Filtrar munições"; idc=3111; text="MUNI"; x=safeZoneX+0.504*safeZoneW; y=safeZoneY+0.139*safeZoneH; w=0.035*safeZoneW; h=0.029*safeZoneH; action="['CATALOG_CATEGORY','MAGAZINES'] call ServoPeregrino_Organizador_Items_fnc_handleUIEvent";};
         class CatGren: SPORG_Items_Button {tooltip="Filtrar granadas"; idc=3112; text="GRAN"; x=safeZoneX+0.542*safeZoneW; y=safeZoneY+0.139*safeZoneH; w=0.035*safeZoneW; h=0.029*safeZoneH; action="['CATALOG_CATEGORY','GRENADES'] call ServoPeregrino_Organizador_Items_fnc_handleUIEvent";};
@@ -317,10 +334,11 @@ class SP_ORG_Items_Dialog
 
         // Panel 4 — Equipment: linhas físicas com controles por linha + capacidade dedicada.
         class EquipmentTitle: SPORG_Items_Title {idc=4000; text="CONTEÚDO DO EQUIPAMENTO"; x=safeZoneX+0.804*safeZoneW; y=safeZoneY+0.064*safeZoneH; w=0.17*safeZoneW; h=0.026*safeZoneH;};
-        class EquipmentSearchIcon: SPORG_Items_SearchIcon {idc=4090; x=safeZoneX+0.804*safeZoneW; y=safeZoneY+0.102*safeZoneH; w=SPORG_ITEMS_UI_SEARCH_W; h=SPORG_ITEMS_UI_SEARCH_H;};
-        class EquipmentSearch: SPORG_Items_Edit {idc=4100; tooltip="Pesquisar no conteúdo do container visualizado"; x=safeZoneX+0.804*safeZoneW+SPORG_ITEMS_UI_SEARCH_W+SPORG_ITEMS_UI_SEARCH_GAP_W; y=safeZoneY+0.099*safeZoneH; w=0.164*safeZoneW-SPORG_ITEMS_UI_CLEAR_W-SPORG_ITEMS_UI_SEARCH_W-SPORG_ITEMS_UI_SEARCH_GAP_W-0.004*safeZoneW; h=SPORG_ITEMS_UI_CLEAR_H; onKeyUp="['EQUIPMENT_SEARCH',ctrlText (_this#0)] call ServoPeregrino_Organizador_Items_fnc_handleUIEvent";};
-        class EquipmentClear: SPORG_Items_IconButton {idc=4101; text="x"; tooltip="Limpar busca do equipamento"; x=safeZoneX+0.968*safeZoneW-SPORG_ITEMS_UI_CLEAR_W; y=safeZoneY+0.099*safeZoneH; w=SPORG_ITEMS_UI_CLEAR_W; h=SPORG_ITEMS_UI_CLEAR_H; action="['EQUIPMENT_SEARCH',''] call ServoPeregrino_Organizador_Items_fnc_handleUIEvent";};
-        class EquipLabel: SPORG_Items_Text {idc=4102; text="Mostrar:"; x=safeZoneX+0.804*safeZoneW; y=safeZoneY+0.139*safeZoneH; w=0.036*safeZoneW; h=0.030*safeZoneH; sizeEx=0.014*safeZoneH;};
+        class EquipmentSearchBg: SPORG_Items_SearchSurface {idc=-1; x=safeZoneX+0.804*safeZoneW; y=safeZoneY+0.099*safeZoneH; w=0.164*safeZoneW; h=SPORG_UICOMMON_UI_SEARCH_BAR_H;};
+        class EquipmentSearchIcon: SPORG_Items_SearchIcon {idc=4090; x=safeZoneX+0.804*safeZoneW+SPORG_UICOMMON_UI_SEARCH_PAD_W; y=safeZoneY+0.1055*safeZoneH; w=SPORG_UICOMMON_UI_SEARCH_ICON_W; h=SPORG_UICOMMON_UI_SEARCH_ICON_H;};
+        class EquipmentSearch: SPORG_Items_SearchEdit {idc=4100; tooltip="Pesquisar no conteúdo do container visualizado"; x=safeZoneX+0.804*safeZoneW+SPORG_UICOMMON_UI_SEARCH_PAD_W+SPORG_UICOMMON_UI_SEARCH_ICON_W+SPORG_UICOMMON_UI_SEARCH_PAD_W; y=safeZoneY+0.099*safeZoneH; w=0.164*safeZoneW-SPORG_UICOMMON_UI_SEARCH_ICON_W-SPORG_UICOMMON_UI_SEARCH_CLEAR_W-(4*SPORG_UICOMMON_UI_SEARCH_PAD_W); h=SPORG_UICOMMON_UI_SEARCH_BAR_H; onKeyUp="['EQUIPMENT_SEARCH',ctrlText (_this#0)] call ServoPeregrino_Organizador_Items_fnc_handleUIEvent";};
+        class EquipmentClear: SPORG_Items_SearchClear {idc=4101; text="x"; tooltip="Limpar busca do equipamento"; x=safeZoneX+0.968*safeZoneW-SPORG_UICOMMON_UI_SEARCH_CLEAR_W-SPORG_UICOMMON_UI_SEARCH_PAD_W; y=safeZoneY+0.1025*safeZoneH; w=SPORG_UICOMMON_UI_SEARCH_CLEAR_W; h=SPORG_UICOMMON_UI_SEARCH_CLEAR_H; action="['EQUIPMENT_SEARCH',''] call ServoPeregrino_Organizador_Items_fnc_handleUIEvent";};
+        class EquipLabel: SPORG_Items_Text {idc=4102; text="Visualizar:"; x=safeZoneX+0.804*safeZoneW; y=safeZoneY+0.139*safeZoneH; w=0.036*safeZoneW; h=0.030*safeZoneH; sizeEx=0.014*safeZoneH;};
         class EquipU: SPORG_Items_Button {idc=4110; text="UNIFORME"; sizeEx=0.0125*safeZoneH; tooltip="Mostrar o conteúdo do Uniforme"; x=safeZoneX+0.842*safeZoneW; y=safeZoneY+0.139*safeZoneH; w=0.041*safeZoneW; h=SPORG_ITEMS_UI_COMPACT_H; action="['EQUIPMENT_VIEW','U'] call ServoPeregrino_Organizador_Items_fnc_handleUIEvent";};
         class EquipC: SPORG_Items_Button {idc=4111; text="COLETE"; sizeEx=0.0125*safeZoneH; tooltip="Mostrar o conteúdo do Colete"; x=safeZoneX+0.885*safeZoneW; y=safeZoneY+0.139*safeZoneH; w=0.036*safeZoneW; h=SPORG_ITEMS_UI_COMPACT_H; action="['EQUIPMENT_VIEW','C'] call ServoPeregrino_Organizador_Items_fnc_handleUIEvent";};
         class EquipM: SPORG_Items_Button {idc=4112; text="MOCHILA"; sizeEx=0.0125*safeZoneH; tooltip="Mostrar o conteúdo da Mochila"; x=safeZoneX+0.923*safeZoneW; y=safeZoneY+0.139*safeZoneH; w=0.045*safeZoneW; h=SPORG_ITEMS_UI_COMPACT_H; action="['EQUIPMENT_VIEW','M'] call ServoPeregrino_Organizador_Items_fnc_handleUIEvent";};
@@ -335,8 +353,8 @@ class SP_ORG_Items_Dialog
 
         // D.6.2: APM-like single capacity row: label | bar | kg text.
         class EquipmentCapacityLabel: SPORG_Items_Text {idc=4141; text="CAPACIDADE"; x=safeZoneX+0.804*safeZoneW; y=safeZoneY+0.713*safeZoneH; w=0.042*safeZoneW; h=0.024*safeZoneH; sizeEx=0.0125*safeZoneH; colorText[]={0.70,0.84,0.81,1};};
-        class EquipmentCapacityBarBg: SPORG_Items_Text {idc=4142; x=safeZoneX+0.847*safeZoneW; y=safeZoneY+0.721*safeZoneH; w=0.072*safeZoneW; h=0.008*safeZoneH; colorBackground[]={0.03,0.05,0.055,0.88};};
-        class EquipmentCapacityBarFill: SPORG_Items_Text {idc=4143; x=safeZoneX+0.847*safeZoneW; y=safeZoneY+0.721*safeZoneH; w=0.001*safeZoneW; h=0.008*safeZoneH; colorBackground[]={0.15,0.62,0.48,0.92};};
+        class EquipmentCapacityBarBg: SPORG_Items_ProgressTrack {idc=4142; x=safeZoneX+0.847*safeZoneW; y=safeZoneY+0.721*safeZoneH; w=0.072*safeZoneW; h=0.008*safeZoneH; colorText[]={0.03,0.05,0.055,0.88};};
+        class EquipmentCapacityBarFill: SPORG_Items_ProgressFill {idc=4143; x=safeZoneX+0.847*safeZoneW; y=safeZoneY+0.721*safeZoneH; w=0.001*safeZoneW; h=0.008*safeZoneH; colorText[]={0.15,0.62,0.48,0.92};};
         class EquipmentCapacityText: SPORG_Items_Text {idc=4144; style=1; text="n/d"; x=safeZoneX+0.922*safeZoneW; y=safeZoneY+0.713*safeZoneH; w=0.046*safeZoneW; h=0.024*safeZoneH; sizeEx=0.0125*safeZoneH; colorText[]={0.78,0.84,0.83,1};};
 
         // Controles legados CP-D permanecem fora da tela apenas para compatibilidade dos gates e fallbacks antigos.
