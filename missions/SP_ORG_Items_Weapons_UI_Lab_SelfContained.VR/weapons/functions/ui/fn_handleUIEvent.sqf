@@ -14,6 +14,7 @@ if ((count _state) isEqualTo 0) then {
 
 private _refresh = true;
 private _focusedRefresh = "";
+private _focusedRefreshSecondary = "";
 private _focusedReason = _eventName;
 
 // Programmatic lbSetCurSel / sliderSetPosition calls fire UI callbacks while a refresh
@@ -467,7 +468,12 @@ switch (_eventName) do {
       _state = missionNamespace getVariable [SP_ORG_WEAPONS_UI_STATE,createHashMap];
       _state set ["catalogOffset",0];
       missionNamespace setVariable [SP_ORG_WEAPONS_UI_STATE,_state];
-      _refresh = true;
+      // A base-weapon swap changes P2 plus the compatibility projection in P3.
+      // P1 repository rows and P4 physical equipment are unchanged.
+      _refresh = false;
+      _focusedRefresh = "DRAFT";
+      _focusedRefreshSecondary = "CATALOG";
+      _focusedReason = "DRAFT_WEAPON";
      } else {
       ["A arma selecionada já é a arma-base do rascunho.","INFO",true] call ServoPeregrino_Organizador_Weapons_fnc_pushUIFeedback;
       _focusedRefresh = "DRAFT";
@@ -642,7 +648,26 @@ switch (_eventName) do {
     "Seleção enviada para ARMAS DO KIT. O equipamento real do jogador não foi alterado."
    };
    [_msg,"SUCCESS",true] call ServoPeregrino_Organizador_Weapons_fnc_pushUIFeedback;
-   _refresh=true;
+
+   if (_code isEqualTo "WEAPONS_UI_DRAFT_AUTO_CREATED") then {
+    // Auto-create materializes a new session WeaponKit, so P1 really changed.
+    _refresh=true;
+   } else {
+    private _appliedData=_applyR getOrDefault ["data",createHashMap];
+    private _appliedKind=toUpperANSI (_appliedData getOrDefault ["kind",_state getOrDefault ["selectedCatalogKind",""]]);
+    private _sourceResult=_appliedData getOrDefault ["sourceResult",createHashMap];
+    private _changed=_sourceResult getOrDefault ["changed",true];
+
+    _refresh=false;
+    _focusedRefresh="DRAFT";
+    _focusedReason="CATALOG_TO_DRAFT";
+
+    // Only a changed base weapon invalidates the Catalog compatibility projection.
+    // Accessory edits alter P2 only; the compatible option universe remains stable.
+    if (_appliedKind isEqualTo "WEAPON" && {_changed}) then {
+     _focusedRefreshSecondary="CATALOG";
+    };
+   };
   } else {
    private _code=_applyR getOrDefault ["code","ERRO"];
    private _msg=switch _code do {
@@ -695,6 +720,9 @@ if (!isNull (findDisplay SP_ORG_WEAPONS_UI_DISPLAY_IDD)) then {
  if (_focusedRefresh isEqualTo "CATALOG") then {[_focusedReason] call ServoPeregrino_Organizador_Weapons_fnc_refreshCatalogWindowUI};
  if (_focusedRefresh isEqualTo "DRAFT") then {[_focusedReason] call ServoPeregrino_Organizador_Weapons_fnc_refreshDraftUI};
  if (_focusedRefresh isEqualTo "EQUIPMENT") then {[_focusedReason] call ServoPeregrino_Organizador_Weapons_fnc_refreshEquipmentViewUI};
+ if (_focusedRefreshSecondary isEqualTo "CATALOG") then {[_focusedReason] call ServoPeregrino_Organizador_Weapons_fnc_refreshCatalogWindowUI};
+ if (_focusedRefreshSecondary isEqualTo "DRAFT") then {[_focusedReason] call ServoPeregrino_Organizador_Weapons_fnc_refreshDraftUI};
+ if (_focusedRefreshSecondary isEqualTo "EQUIPMENT") then {[_focusedReason] call ServoPeregrino_Organizador_Weapons_fnc_refreshEquipmentViewUI};
  if (_refresh) then {[] call ServoPeregrino_Organizador_Weapons_fnc_refreshInterface};
 };
 true

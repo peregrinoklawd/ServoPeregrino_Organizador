@@ -2317,14 +2317,24 @@ if (!isNull _display06A) then {
   private _replaceStateE = [] call ServoPeregrino_Organizador_Weapons_fnc_getUIState;
   _replaceStateE set ["selectedCatalogClass","arifle_MXC_F"];
   _replaceStateE set ["selectedCatalogKind","WEAPON"];
+  private _baseSwapFullBeforeE = _replaceStateE getOrDefault ["refreshAppliedCount",0];
+  private _baseSwapDraftBeforeE = _replaceStateE getOrDefault ["draftFocusedRefreshCount",0];
+  private _baseSwapCatalogBeforeE = _replaceStateE getOrDefault ["catalogFocusedRefreshCount",0];
   missionNamespace setVariable [SP_ORG_WEAPONS_UI_STATE,_replaceStateE];
   ["CATALOG_TO_DRAFT"] call ServoPeregrino_Organizador_Weapons_fnc_handleUIEvent;
-  private _draftAfterWeaponE = ((([] call ServoPeregrino_Organizador_Weapons_fnc_getUIState) getOrDefault ["draftsByKitId",createHashMap]) getOrDefault [_authoringKitIdE,createHashMap]);
+  private _stateAfterBaseSwapE = [] call ServoPeregrino_Organizador_Weapons_fnc_getUIState;
+  private _draftAfterWeaponE = ((_stateAfterBaseSwapE getOrDefault ["draftsByKitId",createHashMap]) getOrDefault [_authoringKitIdE,createHashMap]);
   private _draftRecipeAfterWeaponE = _draftAfterWeaponE getOrDefault ["recipe",createHashMap];
   private _draftCfgAfterWeaponE = _draftRecipeAfterWeaponE getOrDefault ["configuration",createHashMap];
   ["0.6-E R2 direct base weapon changes only draft",
    _draftAfterWeaponE getOrDefault ["dirty",false]
    && {(toLowerANSI (_draftCfgAfterWeaponE getOrDefault ["weaponClass",""])) isEqualTo "arifle_mxc_f"}
+  ] call _assert;
+  ["0.6-C2 base-weapon swap avoids FULL and refreshes only Draft+Catalog",
+   (_stateAfterBaseSwapE getOrDefault ["refreshAppliedCount",0]) isEqualTo _baseSwapFullBeforeE
+   && {(_stateAfterBaseSwapE getOrDefault ["draftFocusedRefreshCount",0]) isEqualTo (_baseSwapDraftBeforeE + 1)}
+   && {(_stateAfterBaseSwapE getOrDefault ["catalogFocusedRefreshCount",0]) isEqualTo (_baseSwapCatalogBeforeE + 1)}
+   && {(_stateAfterBaseSwapE getOrDefault ["lastRefreshMode",""]) isEqualTo "CATALOG_FOCUSED"}
   ] call _assert;
   private _projectionAfterBaseSwapE = missionNamespace getVariable [SP_ORG_WEAPONS_UI_CATALOG_PROJECTION_VAR,createHashMap];
   ["0.6-E R2 HF1 base-weapon swap rebuilds catalog compatibility projection",
