@@ -41,26 +41,45 @@ SHA-256:
 
 A baseline mission-first avançada deve ser preservada.
 
-## ATENÇÃO — GitHub ainda não é runtime avançado completo
+## Source mission-first R6 agora está sincronizado
 
-Branch documental ativa:
+Branch ativa:
 `feature/uicommon-0.1-foundation`
 
-O repositório contém documentação avançada, mas a missão canônica/source Weapons no GitHub ainda não deve ser assumida como byte-equivalente à R6 executável.
+Missão canônica:
+`missions/SP_ORG_Items_Weapons_UI_Lab_SelfContained.VR`
 
-Antes da primeira implementação 0.7:
-1. recuperar/materializar a R6;
-2. comparar hashes;
-3. sincronizar o source avançado para o repositório;
-4. somente então criar a nova baseline 0.7.
+Provas:
+- 432 arquivos;
+- Weapons `0.6-F R6 / 0.6.5.6`;
+- Git subtree `91dae966c4239b3984d21a24916d8e12f811fd2e`;
+- ZIP de origem SHA-256 `9ef4374ddf34c8ba5a07f220139ec4e7bd420d9039465226d84faff97ec89bdf`;
+- commit de materialização `ddd9a53afcbffe827a5a663c96f1531623db655f`.
 
-Nunca reconstruir a R6 de memória.
+Registro:
+`docs/47_WEAPONS_0_6_F_R6_SOURCE_SYNC.md`.
+
+Atenção:
+o addon/PBO `addons/ServoPeregrino_Organizador_Weapons` ainda NÃO é equivalente à R6; a sincronização concluída é da baseline mission-first.
 
 ## Próximo checkpoint
 
-**Weapons 0.7 — Slot-Safe Weapon Application**
+Antes da Weapons 0.7, executar:
+**UICommon 0.2-A — Shared Infrastructure Inventory**.
 
-Antes de mutar loadout:
+Ler:
+`docs/48_UICOMMON_0_2_SHARED_INFRASTRUCTURE_PLAN.md`.
+
+A 0.2-A deve:
+- comparar Items e Weapons R6 diretamente no Git;
+- classificar infraestrutura `SHARED / CANDIDATE-SHARED / DOMAIN-SPECIFIC / DEFERRED`;
+- propor a menor extração de baixo risco;
+- não alterar runtime antes da revisão da matriz.
+
+Depois do gate de equivalência UICommon 0.2, retomar:
+**Weapons 0.7 — Slot-Safe Weapon Application**.
+
+Antes de mutar loadout na 0.7:
 - estudar `docs/44_WEAPONS_0_7_APM_APPLICATION_CASE_STUDY.md`;
 - implementar Plan/Snapshot/Validation primeiro;
 - manter 0.7-A dry-run sem mutação;
@@ -142,7 +161,9 @@ SHA-256 9ef4374ddf34c8ba5a07f220139ec4e7bd420d9039465226d84faff97ec89bdf.
 AUTO 595/597, com 2 FAILs apenas de harness/version-text e manual aprovado.
 
 Não crie R7.
-Primeiro sincronize o source R6 no repositório sem reconstruir de memória.
-Depois inicie 0.7-A Plan/Snapshot/Dry-Run usando o estudo APM como referência de contrato, não como código para copiar.
+A R6 mission-first já está sincronizada no Git em missions/SP_ORG_Items_Weapons_UI_Lab_SelfContained.VR.
+Antes da 0.7, execute UICommon 0.2-A Inventory/Classification conforme docs/48_UICOMMON_0_2_SHARED_INFRASTRUCTURE_PLAN.md.
+Não altere runtime durante o inventário.
+Depois do gate UICommon 0.2, inicie 0.7-A Plan/Snapshot/Dry-Run usando o estudo APM como referência de contrato, não como código para copiar.
 Preview 3D é estudo separado e não deve contaminar o primeiro gate de aplicação física.
 ```
