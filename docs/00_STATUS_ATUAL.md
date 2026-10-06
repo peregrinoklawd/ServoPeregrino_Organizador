@@ -702,3 +702,37 @@ Próximo passo real:
 - preservar R6;
 - sincronizar source avançado mission-first no repositório;
 - iniciar 0.7-A Plan / Snapshot / Dry-Run sem mutação.
+
+
+## Atualização 05/10/2026 — R6 source sincronizado / foco volta ao UICommon
+
+A dívida de source mission-first foi encerrada.
+
+Baseline canônica:
+- missão: `missions/SP_ORG_Items_Weapons_UI_Lab_SelfContained.VR`;
+- Weapons: `0.6-F R6`;
+- semantic: `0.6.5.6`;
+- arquivos: **432**;
+- Git subtree: `91dae966c4239b3984d21a24916d8e12f811fd2e`;
+- ZIP executável de origem SHA-256: `9ef4374ddf34c8ba5a07f220139ec4e7bd420d9039465226d84faff97ec89bdf`;
+- commit de materialização: `ddd9a53afcbffe827a5a663c96f1531623db655f`.
+
+A sincronização partiu da baseline executável preservada; não houve reconstrução por memória.
+
+Limite:
+- source **mission-first R6**: sincronizado;
+- addon/PBO `addons/ServoPeregrino_Organizador_Weapons`: ainda pertence à integração antiga e NÃO deve ser tratado como R6.
+
+Registro completo:
+`docs/47_WEAPONS_0_6_F_R6_SOURCE_SYNC.md`.
+
+### Próxima frente ativa
+
+Antes da mutação física Weapons 0.7, o foco volta para:
+**UICommon 0.2 — Shared Infrastructure Consolidation**.
+
+Ação imediata:
+**0.2-A — Inventory / Classification**, sem alteração de runtime.
+
+Documento:
+`docs/48_UICOMMON_0_2_SHARED_INFRASTRUCTURE_PLAN.md`.
