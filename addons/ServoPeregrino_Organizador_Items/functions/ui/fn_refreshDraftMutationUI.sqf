@@ -117,7 +117,7 @@ private _hist=_state getOrDefault ["history",[]]; private _histText="";
     [
         [5000,"CONTEXTO",_context,"#6FCBB8","#A8C9C2","  •  "],
         [5001,"RESULTADO",_state getOrDefault ["temporaryMessage",""],_feedbackPalette getOrDefault ["labelColor","#7EC8FF"],_feedbackPalette getOrDefault ["messageColor","#D7EEFF"],"  •  "],
-        [5002,"HISTÓRICO",_histText,"#81918E","#81918E","  •  "]
+        [5002,"HISTÓRICO",_histText,"#93A7A4","#A8B7B5","  •  "]
     ]
 ] call ServoPeregrino_Organizador_UICommon_fnc_renderFooter;
 
