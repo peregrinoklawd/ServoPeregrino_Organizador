@@ -1,6 +1,6 @@
 {
   "project": "Servo Peregrino Organizador / SP_ORG",
-  "snapshot_date": "2026-10-05",
+  "snapshot_date": "2026-10-06",
   "state_schema_version": 2,
   "source_of_truth": {
     "repository_role": "MONOREPO",
@@ -22,8 +22,8 @@
     "hub_rule": "Hub is an optional player-facing integration/orchestration layer. No domain module may require Hub in order to function.",
     "independent_core_development": true
   },
-  "global_next_gate": "Rerun the hardened C2 mission in real Arma. Acceptance requires UICommon 31/31, Items+UICommon 16/16 and Weapons 594/594 with 0 FAIL; release/version/header metadata must appear only as observations.",
-  "global_after_gate": "If the hardened runner is 0 FAIL and manual behavior remains approved: freeze UICommon 0.2-C, then start UICommon 0.2-D Shared Visual Foundation/HPP.",
+  "global_next_gate": "UICommon 0.2-D — Shared Visual Foundation / HPP. Preserve 0.2-C runtime behavior, 0 FAIL functional-test policy and focused-refresh performance.",
+  "global_after_gate": "After 0.2-D real-Arma equivalence, continue UICommon 0.2-E Performance Instrumentation, then 0.2-F Equivalence + Cleanup before Weapons 0.7-A.",
   "modules": [
     {
       "id": "Nexus",
@@ -61,7 +61,11 @@
       "id": "UICommon",
       "addon": "ServoPeregrino_Organizador_UICommon",
       "mandatory": false,
-      "stable_version": null,
+      "stable_version": {
+        "display": "0.2",
+        "semantic": "0.2.0.2",
+        "build": "0.2.0.2-virtual-navigation-footer-c2"
+      },
       "development_version": {
         "display": "0.2",
         "semantic": "0.2.0.2",
@@ -86,10 +90,10 @@
         "required": [],
         "optional": []
       },
-      "status": "0_2_C_C2_RUNTIME_BEHAVIOR_APPROVED_HARDENED_TEST_RERUN_PENDING",
-      "next_gate": "Real Arma rerun after test-contract hardening: Foundation 31/31, Items/UICommon 16/16, Weapons 594/594, 0 FAIL. Residual compatibility-projection stutter is accepted for this gate.",
-      "homologated_artifact": "UICommon 0.2-B pure shared primitives; real Arma 24/24 + 12/12.",
-      "current_candidate_artifact": "0.2-C C2 runtime route validated: existing-kit base swap uses Draft+Catalog focused refresh with no FULL. Test harness hardened at 7933fbb8a1838bf817c0b809834b8cf105eb6932; clean rerun pending."
+      "status": "0_2_C_HOMOLOGATED_FROZEN",
+      "next_gate": "UICommon 0.2-D Shared Visual Foundation/HPP. Extract only generic compile-time visual infrastructure; no domain behavior.",
+      "homologated_artifact": "UICommon 0.2-C C2 homologated in real Arma: Foundation 31/31, Items+UICommon 16/16, Weapons 594/594 with 0 FAIL and 6 release observations. Existing-kit base-weapon Catalog-to-Draft avoids FULL refresh.",
+      "current_candidate_artifact": null
     },
     {
       "id": "Items",
@@ -233,10 +237,10 @@
           "persistence.provider.v1"
         ]
       },
-      "status": "MISSION_FIRST_0_6_F_R6_C2_RUNTIME_FUNCTIONAL_APPROVED_TEST_HARNESS_HARDENED_RERUN_PENDING",
-      "next_gate": "Rerun automatic suite after removing release-label assertions from blocking checks. Require 0 FAIL before accepting/finalizing the gate.",
-      "homologated_artifact": "Through 0.6-D R3 fully green. 0.6-F R6/C2 functional and manual behavior approved, but final gate remains pending until the hardened runner returns 0 FAIL.",
-      "current_candidate_artifact": "Canonical mission-first source + C2 focused Catalog-to-Draft routing; test harness hardening commit 7933fbb8a1838bf817c0b809834b8cf105eb6932.",
+      "status": "MISSION_FIRST_0_6_F_R6_C2_HOMOLOGATED_594_OF_594",
+      "next_gate": "Remain frozen through UICommon 0.2-D/0.2-E/0.2-F equivalence gates; then start Weapons 0.7-A Plan/Snapshot/Dry-Run before physical mutation.",
+      "homologated_artifact": "Weapons 0.6-F R6 + UICommon C2 integration: real Arma 594/594, 0 FAIL, 6 non-blocking release observations; manual behavior approved; physical application remains deferred to 0.7.",
+      "current_candidate_artifact": "Canonical mission-first source remains synchronized; C2 focused Catalog-to-Draft route and hardened test contract are now runtime-approved.",
       "mission_first_validation": {
         "0.1-B": {
           "status": "APPROVED_SP",
@@ -659,16 +663,16 @@
           "info_rectangles": "P2_P3_P4_VERTICALLY_ALIGNED"
         },
         "0.6-F": {
-          "status": "R6_FUNCTIONAL_MANUAL_APPROVED_2_HARNESS_ONLY_NON_BLOCKING",
+          "status": "R6_C2_HOMOLOGATED_594_OF_594_ZERO_FAIL",
           "final_candidate": "R6",
           "semantic": "0.6.5.6",
           "build": "0.6.5.6-compact-filter-spacing-test-contract-hotfix-uicommon-mission-first",
           "auto_test": {
-            "passed": 595,
-            "failed": 2,
-            "total": 597
+            "passed": 594,
+            "failed": 0,
+            "total": 594
           },
-          "failure_classification": "HARNESS_ONLY_VERSION_TEXT_NON_FUNCTIONAL",
+          "failure_classification": "NONE",
           "manual_gate": "APPROVED",
           "source_sync": "CANONICAL_MISSION_SYNCED",
           "canonical_mission": "missions/SP_ORG_Items_Weapons_UI_Lab_SelfContained.VR",
@@ -676,7 +680,12 @@
           "git_subtree_sha": "91dae966c4239b3984d21a24916d8e12f811fd2e",
           "executable_zip_sha256": "9ef4374ddf34c8ba5a07f220139ec4e7bd420d9039465226d84faff97ec89bdf",
           "physical_application": "DEFERRED_0_7",
-          "multiplayer": "DEFERRED_0_8"
+          "multiplayer": "DEFERRED_0_8",
+          "observations": 6,
+          "uicommon_c2_gate": "APPROVED_31_OF_31_ITEMS_EQUIVALENCE_16_OF_16",
+          "focused_base_weapon_swap": "APPROVED_NO_FULL_REFRESH",
+          "residual_stutter": "ACCEPTED_COMPATIBILITY_PROJECTION_COST",
+          "test_policy": "FUNCTIONAL_FAILURES_ONLY_RELEASE_METADATA_OBSERVATION"
         }
       }
     },

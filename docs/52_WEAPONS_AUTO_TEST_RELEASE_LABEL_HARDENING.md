@@ -53,3 +53,13 @@ Com base no último runtime de 598 checks e quatro markers convertidos para obse
 - 6 observations.
 
 O número total é informativo. O requisito de aceitação é **0 FAIL em checks funcionais**.
+
+## Resultado real do runner endurecido
+
+RPT de 06/10/2026:
+- **594 PASS**;
+- **0 FAIL**;
+- **594 checks**;
+- **6 observations**.
+
+A política de 0 FAIL está, portanto, validada em runtime. Nenhum release/version/header marker participa mais do resultado funcional.

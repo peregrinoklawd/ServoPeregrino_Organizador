@@ -131,3 +131,23 @@ Próximo resultado esperado:
 - **6 observations**;
 - UICommon 31/31;
 - Items + UICommon 16/16.
+
+## Homologação final C2 — 06/10/2026
+
+RPT real da missão de reteste confirmou:
+- UICommon Foundation: **31/31 PASS**;
+- Items + UICommon Equivalence: **16/16 PASS**;
+- Weapons: **594/594 PASS, 0 FAIL**;
+- release metadata: **6 observations**, fora do gate;
+- regressão C2 de base-weapon swap: PASS;
+- `fullRefresh=false` no roteamento Draft + Catalog focused.
+
+Conclusão:
+**UICommon 0.2-C C2 — HOMOLOGADA / CONGELADA.**
+
+O stutter residual continua associado ao custo de reconstrução da projeção de compatibilidade. Ele não será perseguido dentro da 0.2-C.
+
+Os erros de `CBA_fnc_addPerFrameHandler` vistos durante PostInit não são chamados pelo source executável da missão canônica e continuam tratados como ruído/integração externa, salvo nova evidência.
+
+Próximo gate:
+**UICommon 0.2-D — Shared Visual Foundation / HPP.**

@@ -908,3 +908,21 @@ Runtime esperado da C2:
 - Dois FAILs de versão/header foram removidos do conjunto bloqueante.
 - Commit de hardening: `7933fbb8a1838bf817c0b809834b8cf105eb6932`.
 - Próximo gate: Weapons **594/594, 0 FAIL**, com 6 observações não bloqueantes.
+
+## 06/10/2026 — UICommon 0.2-C homologada
+
+Runtime real:
+- UICommon: **31/31**;
+- Items + UICommon: **16/16**;
+- Weapons: **594/594**, **0 FAIL**, 6 observações;
+- C2 base-weapon Catalog-to-Draft sem FULL refresh;
+- stutter residual de projection rebuild aceito para este gate.
+
+Estado:
+**UICommon 0.2-C — HOMOLOGADA / CONGELADA.**
+
+Próxima entrega:
+**UICommon 0.2-D — Shared Visual Foundation / HPP.**
+
+Nova regra de pacote de teste:
+a missão distribuída deve ter nome próprio por entrega/revisão. O source canônico permanece único no Git; o workflow renomeia a pasta somente no pacote.

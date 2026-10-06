@@ -1,6 +1,6 @@
 {
   "generated_from": "machine/PROJECT_STATE.json",
-  "snapshot_date": "2026-10-05",
+  "snapshot_date": "2026-10-06",
   "repository": "peregrinoklawd/ServoPeregrino_Organizador",
   "modules": [
     {
@@ -40,8 +40,12 @@
       "id": "UICommon",
       "addon": "ServoPeregrino_Organizador_UICommon",
       "mandatory": false,
-      "status": "0_2_C_C2_RUNTIME_BEHAVIOR_APPROVED_HARDENED_TEST_RERUN_PENDING",
-      "stable_version": null,
+      "status": "0_2_C_HOMOLOGATED_FROZEN",
+      "stable_version": {
+        "display": "0.2",
+        "semantic": "0.2.0.2",
+        "build": "0.2.0.2-virtual-navigation-footer-c2"
+      },
       "development_version": {
         "display": "0.2",
         "semantic": "0.2.0.2",
@@ -66,9 +70,9 @@
         "required": [],
         "optional": []
       },
-      "next_gate": "Real Arma hardened rerun: 31/31 + 16/16 + Weapons 594/594, 0 FAIL.",
-      "homologated_artifact": "UICommon 0.2-B pure shared primitives; real Arma 24/24 + 12/12.",
-      "current_candidate_artifact": "0.2-C C2 runtime focused-refresh behavior validated; hardened test contract pending rerun."
+      "next_gate": "UICommon 0.2-D Shared Visual Foundation/HPP.",
+      "homologated_artifact": "0.2-C C2: 31/31 + Items/UICommon 16/16 + Weapons 594/594, 0 FAIL.",
+      "current_candidate_artifact": null
     },
     {
       "id": "Items",
@@ -171,7 +175,7 @@
       "id": "Weapons",
       "addon": "ServoPeregrino_Organizador_Weapons",
       "mandatory": false,
-      "status": "MISSION_FIRST_0_6_F_R6_C2_RUNTIME_FUNCTIONAL_APPROVED_TEST_HARNESS_HARDENED_RERUN_PENDING",
+      "status": "MISSION_FIRST_0_6_F_R6_C2_HOMOLOGATED_594_OF_594",
       "stable_version": null,
       "development_version": {
         "display": "0.6-F R6 mission-first / addon source remains 0.1-A",
@@ -214,9 +218,9 @@
           "persistence.provider.v1"
         ]
       },
-      "next_gate": "Hardened automatic test rerun must return 0 FAIL before final acceptance.",
-      "homologated_artifact": "Through 0.6-D R3 fully green; 0.6-F R6/C2 awaits hardened 0-FAIL rerun.",
-      "current_candidate_artifact": "C2 focused Catalog-to-Draft runtime validated; test harness hardening commit 7933fbb8a1838bf817c0b809834b8cf105eb6932.",
+      "next_gate": "Frozen through UICommon 0.2-D/0.2-E/0.2-F; then Weapons 0.7-A dry-run.",
+      "homologated_artifact": "0.6-F R6 + C2 runtime approved at 594/594, 0 FAIL; manual approved.",
+      "current_candidate_artifact": "Canonical mission-first R6 source; no physical application yet.",
       "mission_first_validation": {
         "lifecycle_0_1_b": "APPROVED_SP",
         "weapon_configuration_0_2": "APPROVED_SP",

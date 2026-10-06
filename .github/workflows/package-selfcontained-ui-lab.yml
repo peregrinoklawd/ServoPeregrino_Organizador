@@ -6,6 +6,7 @@ on:
       - feature/uicommon-0.1-foundation
     paths:
       - "missions/SP_ORG_Items_Weapons_UI_Lab_SelfContained.VR/**"
+      - "missions/PACKAGE_MISSION_NAME.txt"
       - ".github/workflows/package-selfcontained-ui-lab.yml"
   workflow_dispatch:
 
@@ -19,18 +20,34 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Package mission
+      - name: Resolve mission package identity
+        shell: bash
         run: |
-          mkdir -p dist
-          cd missions
-          zip -r "../dist/SP_ORG_Items_Weapons_UI_Lab_SelfContained.zip" "SP_ORG_Items_Weapons_UI_Lab_SelfContained.VR"
-          cd ..
-          sha256sum dist/SP_ORG_Items_Weapons_UI_Lab_SelfContained.zip | tee dist/SHA256.txt
+          MISSION_NAME="$(tr -d '\r\n' < missions/PACKAGE_MISSION_NAME.txt)"
+          if [[ -z "$MISSION_NAME" || "$MISSION_NAME" != *.VR ]]; then
+            echo "Invalid mission package name: '$MISSION_NAME'"
+            exit 1
+          fi
+          echo "MISSION_NAME=$MISSION_NAME" >> "$GITHUB_ENV"
+          echo "ARCHIVE_NAME=${MISSION_NAME%.VR}.zip" >> "$GITHUB_ENV"
+
+      - name: Package mission with delivery-specific name
+        shell: bash
+        run: |
+          rm -rf dist .mission-package
+          mkdir -p "dist" ".mission-package/$MISSION_NAME"
+          cp -a "missions/SP_ORG_Items_Weapons_UI_Lab_SelfContained.VR/." ".mission-package/$MISSION_NAME/"
+          (
+            cd .mission-package
+            zip -r "../dist/$ARCHIVE_NAME" "$MISSION_NAME"
+          )
+          rm -rf .mission-package
+          sha256sum "dist/$ARCHIVE_NAME" | tee dist/SHA256.txt
 
       - name: Upload mission artifact
         uses: actions/upload-artifact@v4
         with:
-          name: SP_ORG_Items_Weapons_UI_Lab_SelfContained
+          name: SP_ORG_UI_Lab
           path: dist/
           if-no-files-found: error
           retention-days: 30
