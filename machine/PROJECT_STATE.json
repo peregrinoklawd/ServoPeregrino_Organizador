@@ -22,8 +22,8 @@
     "hub_rule": "Hub is an optional player-facing integration/orchestration layer. No domain module may require Hub in order to function.",
     "independent_core_development": true
   },
-  "global_next_gate": "UICommon 0.2-D — Shared Visual Foundation / HPP. Preserve 0.2-C runtime behavior, 0 FAIL functional-test policy and focused-refresh performance.",
-  "global_after_gate": "After 0.2-D real-Arma equivalence, continue UICommon 0.2-E Performance Instrumentation, then 0.2-F Equivalence + Cleanup before Weapons 0.7-A.",
+  "global_next_gate": "UICommon 0.2-D R1 real-Arma equivalence gate: UICommon 31/31, Items/UICommon 16/16, Weapons 594/594 with 0 FAIL; manual visual parity in Items and Weapons.",
+  "global_after_gate": "If 0.2-D R1 passes: UICommon 0.2-E Performance Instrumentation -> 0.2-F Equivalence + Cleanup -> Weapons 0.7-A.",
   "modules": [
     {
       "id": "Nexus",
@@ -68,8 +68,8 @@
       },
       "development_version": {
         "display": "0.2",
-        "semantic": "0.2.0.2",
-        "build": "0.2.0.2-virtual-navigation-footer-c2"
+        "semantic": "0.2.0.3",
+        "build": "0.2.0.3-shared-visual-hpp-d1"
       },
       "dependencies": [
         "Nexus"
@@ -90,10 +90,10 @@
         "required": [],
         "optional": []
       },
-      "status": "0_2_C_HOMOLOGATED_FROZEN",
-      "next_gate": "UICommon 0.2-D Shared Visual Foundation/HPP. Extract only generic compile-time visual infrastructure; no domain behavior.",
-      "homologated_artifact": "UICommon 0.2-C C2 homologated in real Arma: Foundation 31/31, Items+UICommon 16/16, Weapons 594/594 with 0 FAIL and 6 release observations. Existing-kit base-weapon Catalog-to-Draft avoids FULL refresh.",
-      "current_candidate_artifact": null
+      "status": "0_2_D_R1_STATIC_READY_RUNTIME_PENDING",
+      "next_gate": "Real Arma: 31/31 Foundation, 16/16 Items equivalence, Weapons 594/594 0 FAIL; manual Items/Weapons visual parity.",
+      "homologated_artifact": "UICommon 0.2-C C2 remains frozen fallback: 31/31 + 16/16 + Weapons 594/594, 0 FAIL.",
+      "current_candidate_artifact": "UICommon 0.2-D R1; shared_controls.hpp owns generic metrics and base controls; consumer dialog bodies byte-identical to 0.2-C; technical commit 7f2d86e406826087a0421282f89b130cf62891d4."
     },
     {
       "id": "Items",

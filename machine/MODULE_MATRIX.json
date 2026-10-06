@@ -40,7 +40,7 @@
       "id": "UICommon",
       "addon": "ServoPeregrino_Organizador_UICommon",
       "mandatory": false,
-      "status": "0_2_C_HOMOLOGATED_FROZEN",
+      "status": "0_2_D_R1_STATIC_READY_RUNTIME_PENDING",
       "stable_version": {
         "display": "0.2",
         "semantic": "0.2.0.2",
@@ -48,8 +48,8 @@
       },
       "development_version": {
         "display": "0.2",
-        "semantic": "0.2.0.2",
-        "build": "0.2.0.2-virtual-navigation-footer-c2"
+        "semantic": "0.2.0.3",
+        "build": "0.2.0.3-shared-visual-hpp-d1"
       },
       "dependencies": [
         "Nexus"
@@ -70,9 +70,9 @@
         "required": [],
         "optional": []
       },
-      "next_gate": "UICommon 0.2-D Shared Visual Foundation/HPP.",
-      "homologated_artifact": "0.2-C C2: 31/31 + Items/UICommon 16/16 + Weapons 594/594, 0 FAIL.",
-      "current_candidate_artifact": null
+      "next_gate": "Real Arma equivalence: 31/31 + 16/16 + Weapons 594/594, 0 FAIL; manual visual parity.",
+      "homologated_artifact": "0.2-C C2 frozen fallback.",
+      "current_candidate_artifact": "0.2-D R1 shared visual HPP; technical commit 7f2d86e406826087a0421282f89b130cf62891d4."
     },
     {
       "id": "Items",
