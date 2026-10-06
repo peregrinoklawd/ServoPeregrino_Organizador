@@ -570,3 +570,15 @@ R4 restaura integralmente o baseline visual/controles da R2 e reaplica somente:
 
 Rounded panels/buttons foram abandonados nesta fase.
 Gate: 36/36 + 16/16 + 594/594, 0 FAIL, sem erro SQF responsive.
+
+
+## 06/10/2026 — UICommon 0.2-D R5
+
+R4 homologada em Arma real: 36/36 + 16/16 + Weapons 594/594, 0 FAIL, testes manuais aprovados.
+
+R5 é somente polish:
+- nome + status do rascunho mais próximos do título em Items/Weapons;
+- Items: `Onde aplicar o kit?` -> `Qual o destino?`;
+- Histórico em roxo claro (`#B9A3E8` / `#D1C2F0`);
+- Items P1/P3 com surface alpha 0.32 para compensar as camadas internas mais escuras.
+- handlers funcionais permanecem idênticos à R4.

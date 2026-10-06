@@ -57,3 +57,16 @@ Nenhuma referência RoundCorner/RoundFill/RoundButton permanece nos dialogs ou s
 - 16:9/16:10: `profile=STANDARD`;
 - DnD Items preservado;
 - visual dos botões deve voltar ao padrão aprovado na R2.
+
+
+## Resultado real — HOMOLOGADA
+
+Teste real em 06/10/2026:
+- UICommon Foundation: **36/36**;
+- Items + UICommon: **16/16**;
+- Weapons 0.6-F R6: **594/594**, 0 FAIL;
+- perfil responsivo em 5120x1440: **WIDE**;
+- nenhum erro de `fn_applyResponsiveVisualLayout.sqf`;
+- testes manuais aprovados.
+
+A R4 passa a ser o fallback visual/funcional homologado para a próxima rodada.

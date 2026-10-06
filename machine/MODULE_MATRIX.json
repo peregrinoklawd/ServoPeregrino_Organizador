@@ -40,16 +40,16 @@
       "id": "UICommon",
       "addon": "ServoPeregrino_Organizador_UICommon",
       "mandatory": false,
-      "status": "0_2_D_R4_STATIC_READY_RUNTIME_PENDING",
+      "status": "0_2_D_R5_STATIC_READY_RUNTIME_PENDING",
       "stable_version": {
-        "display": "0.2",
-        "semantic": "0.2.0.2",
-        "build": "0.2.0.2-virtual-navigation-footer-c2"
-      },
-      "development_version": {
         "display": "0.2",
         "semantic": "0.2.0.6",
         "build": "0.2.0.6-safe-responsive-polish-d4"
+      },
+      "development_version": {
+        "display": "0.2",
+        "semantic": "0.2.0.7",
+        "build": "0.2.0.7-hierarchy-opacity-polish-d5"
       },
       "dependencies": [
         "Nexus"
@@ -70,9 +70,9 @@
         "required": [],
         "optional": []
       },
-      "next_gate": "R4 real Arma: 36/36 + 16/16 + Weapons 594/594 0 FAIL, no responsive SQF errors, manual visual/search/DnD review.",
-      "homologated_artifact": "0.2-C C2 frozen fallback; R1 runtime-green; R2 functional-green; R3 rejected.",
-      "current_candidate_artifact": "0.2-D R4 safe responsive polish over restored R2 visual baseline."
+      "next_gate": "R5 real Arma: 36/36 + 16/16 + Weapons 594/594 0 FAIL; manual visual review of draft spacing, destination text, purple Histórico and Items panel opacity.",
+      "homologated_artifact": "0.2-D R4 real-Arma approved: 36/36 + 16/16 + 594/594, manual tests approved.",
+      "current_candidate_artifact": "0.2-D R5 hierarchy/wording/footer-color/Items-opacity polish over homologated R4."
     },
     {
       "id": "Items",

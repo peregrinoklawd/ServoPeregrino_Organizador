@@ -1,7 +1,7 @@
 author = "Claudio Malta Telhada";
-onLoadName = "SP_ORG UI Lab - UICommon 0.2-D R4";
-onLoadMission = "UICommon 0.2-D R4: base visual R2 restaurada, polish seguro preservado e busca responsiva corrigida; sem cantos arredondados compostos.";
-overviewText = "Items + Weapons preservados; R4 abandona arredondamento complexo e mantém apenas melhorias visuais de baixo risco sobre a R2.";
+onLoadName = "SP_ORG UI Lab - UICommon 0.2-D R5";
+onLoadMission = "UICommon 0.2-D R5: hierarquia do rascunho mais compacta, destino renomeado, Histórico em roxo claro e transparência de Items rebalanceada.";
+overviewText = "R4 homologada; R5 aplica somente polimento visual de baixo risco em Items e Weapons, sem alterar handlers ou contratos funcionais.";
 enableDebugConsole = 1;
 disabledAI = 1;
 respawn = 3;
