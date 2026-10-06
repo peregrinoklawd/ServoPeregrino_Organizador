@@ -102,8 +102,9 @@ class SPORG_UICommon_ButtonFlatDanger: SPORG_UICommon_ButtonFlat
 class SPORG_UICommon_Button
 {
     type = 16; idc = -1; style = 2; text = ""; x = 0; y = 0; w = 0; h = 0;
-    default = 0; shadow = 0;
+    default = 0; shadow = 0; shortcuts[] = {}; url = "";
     font = "RobotoCondensed"; size = 0.016 * safeZoneH; sizeEx = 0.016 * safeZoneH;
+    fontSecondary = "RobotoCondensed"; sizeExSecondary = 0.014 * safeZoneH;
     colorText[] = {0.88,0.91,0.91,1}; colorDisabled[] = {0.40,0.43,0.43,1};
     color[] = {1,1,1,1}; color2[] = {1,1,1,1}; colorFocused[] = {1,1,1,1};
     colorBackground[] = {0.08,0.11,0.12,0.58}; colorBackgroundDisabled[] = {0.04,0.05,0.05,0.34};
@@ -119,6 +120,7 @@ class SPORG_UICommon_Button
     animTexturePressed = "\A3\ui_f\data\GUI\RscCommon\RscShortcutButton\down_ca.paa";
     periodFocus = 1.2; periodOver = 0.8; period = 0.4;
     textureNoShortcut = "#(argb,8,8,3)color(0,0,0,0)";
+    tooltipColorText[] = {1,1,1,1}; tooltipColorBox[] = {0,0,0,0}; tooltipColorShade[] = {0,0,0,0.72};
     textSecondary = "";
     class HitZone {left = 0; top = 0; right = 0; bottom = 0;};
     class ShortcutPos {left = 0; top = 0; w = 0; h = 0;};

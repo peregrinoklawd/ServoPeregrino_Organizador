@@ -519,3 +519,20 @@ Gate:
 - abrir Items e Weapons e comparar visualmente com a entrega anterior;
 - nenhum erro de config/HPP;
 - wheel/slider/focused refresh sem regressão.
+
+
+## 06/10/2026 — UICommon 0.2-D R2 visual polish candidata
+
+R1 runtime-green: 31/31 + 16/16 + Weapons 594/594.
+
+R2:
+- build `0.2.0.4-shared-visual-polish-d2`;
+- buscas compactas com lupa/X internos;
+- superfícies/botões/barras suavizados sem decoração por linha virtualizada;
+- MEUS KITS visualmente convergente;
+- Items `ITENS DO KIT` + `Visualizar:`;
+- footer Items/Weapons alinhado no span completo;
+- zero mudança nos eventos dos dialogs contra R1;
+- Items DnD mantém hit-test original com visual layer separado.
+
+Gate real: 35/35 + 16/16 + 594/594 0 FAIL + smoke visual/DnD.

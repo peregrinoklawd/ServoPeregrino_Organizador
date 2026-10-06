@@ -1,7 +1,7 @@
 author = "Claudio Malta Telhada";
-onLoadName = "SP_ORG UI Lab - UICommon 0.2-D R1";
-onLoadMission = "UICommon 0.2-D R1: base visual/HPP compartilhada, sem alterar dominio, geometria ou IDs funcionais.";
-overviewText = "Items + Weapons R6 preservados; UICommon 0.2-D R1 compartilha controles-base e metricas visuais em HPP mantendo equivalencia.";
+onLoadName = "SP_ORG UI Lab - UICommon 0.2-D R2";
+onLoadMission = "UICommon 0.2-D R2: polish visual compartilhado com buscas compactas, superficies suaves e convergencia de footer/Meus Kits sem alterar comportamento.";
+overviewText = "Items + Weapons preservados; UICommon 0.2-D R2 aplica polish visual compartilhado mantendo IDs, eventos, DnD, buscas e refresh contracts.";
 enableDebugConsole = 1;
 disabledAI = 1;
 respawn = 3;

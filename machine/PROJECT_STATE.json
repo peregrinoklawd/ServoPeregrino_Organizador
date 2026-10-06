@@ -22,8 +22,8 @@
     "hub_rule": "Hub is an optional player-facing integration/orchestration layer. No domain module may require Hub in order to function.",
     "independent_core_development": true
   },
-  "global_next_gate": "UICommon 0.2-D R2 Shared Visual Polish: visual-only convergence, preserve all current Items/Weapons behavior and require 0 functional FAIL.",
-  "global_after_gate": "If 0.2-D R1 passes: UICommon 0.2-E Performance Instrumentation -> 0.2-F Equivalence + Cleanup -> Weapons 0.7-A.",
+  "global_next_gate": "UICommon 0.2-D R2 real-Arma visual/equivalence gate: UICommon 35/35, Items/UICommon 16/16, Weapons 594/594 0 FAIL, plus manual visual/search/DnD review.",
+  "global_after_gate": "If R2 passes automatic + manual visual gates: freeze UICommon 0.2-D, then start 0.2-E Performance Instrumentation.",
   "modules": [
     {
       "id": "Nexus",
@@ -68,8 +68,8 @@
       },
       "development_version": {
         "display": "0.2",
-        "semantic": "0.2.0.3",
-        "build": "0.2.0.3-shared-visual-hpp-d1"
+        "semantic": "0.2.0.4",
+        "build": "0.2.0.4-shared-visual-polish-d2"
       },
       "dependencies": [
         "Nexus"
@@ -90,10 +90,10 @@
         "required": [],
         "optional": []
       },
-      "status": "0_2_D_R1_RUNTIME_GREEN_R2_VISUAL_SCOPE_LOCKED",
-      "next_gate": "Implement 0.2-D R2 visual-only polish, then real-Arma 31/31 + 16/16 + Weapons 594/594 0 FAIL plus manual visual review.",
-      "homologated_artifact": "UICommon 0.2-C C2 remains frozen fallback: 31/31 + 16/16 + Weapons 594/594, 0 FAIL.",
-      "current_candidate_artifact": "0.2-D R2 scope locked in docs/55_UICOMMON_0_2_D_R2_VISUAL_POLISH_CONTRACT.md; implementation next."
+      "status": "0_2_D_R2_STATIC_READY_RUNTIME_PENDING",
+      "next_gate": "Real Arma R2: Foundation 35/35, Items/UICommon 16/16, Weapons 594/594 0 FAIL; manual rounded surfaces/buttons/search, footer, Meus Kits and Items DnD.",
+      "homologated_artifact": "0.2-C C2 remains frozen fallback; 0.2-D R1 was runtime-green and is the technical baseline for R2.",
+      "current_candidate_artifact": "0.2-D R2 visual polish; scope contract 1230edac8af190e831aa38483c121db10c4a1221; primitives 559b5fb7dc5f308ef797b2c4ed87b35f36f5ec00; consumer polish 002ae145ec94defa59a66d17e775861823c91033; runtime pending."
     },
     {
       "id": "Items",

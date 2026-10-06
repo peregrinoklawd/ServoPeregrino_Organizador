@@ -159,3 +159,30 @@ A R2 só pode ser congelada se:
 5. footer tiver largura e hierarquia coerentes;
 6. qualquer arredondamento não gerar stutter/queda perceptível;
 7. todas as suítes automáticas terminarem com 0 FAIL.
+
+
+## Implementação candidata
+
+Commits:
+- escopo: `1230edac8af190e831aa38483c121db10c4a1221`;
+- primitives UICommon: `559b5fb7dc5f308ef797b2c4ed87b35f36f5ec00`;
+- consumers Items/Weapons: `002ae145ec94defa59a66d17e775861823c91033`.
+
+Build:
+`0.2.0.4-shared-visual-polish-d2`.
+
+Static invariants confirmados:
+- UICommon HPP addon/mission parity;
+- UICommon tests addon/mission parity;
+- Items HPP/script/DnD/refresh addon/mission parity;
+- zero domínio Items/Weapons no HPP compartilhado;
+- CT_CONTROLS_TABLE usa ButtonFlat, sem arredondamento por linha;
+- hit-test Items continua nos IDCs 2088/4088;
+- visual arredondado Items usa IDCs separados 2089/4089;
+- todos os IDCs de busca/clear foram preservados;
+- comparação de eventos contra R1: **52/52 Items** e **47/47 Weapons** sem mudança de action/onKeyUp/onLBSelChanged/onLBDblClick;
+- footer Weapons passa a ocupar x=.012 / w=.976, igual ao span dos quatro painéis;
+- P4 Weapons move somente a apresentação: busca no topo e Visualizar abaixo;
+- nenhuma busca global de header foi criada.
+
+Runtime continua pendente.

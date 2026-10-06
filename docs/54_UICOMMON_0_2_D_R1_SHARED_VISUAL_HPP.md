@@ -53,3 +53,14 @@ A candidata só pode ser homologada com RPT real:
 - smoke visual manual dos dois módulos.
 
 A 0.2-C continua sendo fallback congelado até esse gate.
+
+
+## Resultado real R1 — 06/10/2026
+
+RPT real:
+- UICommon Foundation: **31/31**;
+- Items + UICommon: **16/16**;
+- Weapons: **594/594**, 0 FAIL;
+- nenhum erro novo de HPP/config relacionado ao SP_ORG.
+
+A R1 está runtime-green como baseline técnica da R2. Ela não é congelada como fim da 0.2-D porque o polish visual coordenado foi aprovado para R2.
