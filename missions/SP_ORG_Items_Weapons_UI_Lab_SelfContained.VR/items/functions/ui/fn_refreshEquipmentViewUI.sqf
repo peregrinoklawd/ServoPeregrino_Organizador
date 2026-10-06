@@ -74,15 +74,17 @@ private _enabled=_state getOrDefault ["physicalCommandEnabled",false];
 [_display,_enabled,_resolved,_view,_state getOrDefault ["lastPhysicalCapacity",createHashMap]] call ServoPeregrino_Organizador_Items_fnc_refreshHeaderStatusUI;
 
 private _context=format ["Mostrando: %1  •  Adicionar em: %2  •  Conteúdo %3",_viewLabel,[_resolved] call ServoPeregrino_Organizador_Items_fnc_getUITargetLabel,if (_captured) then {"atualizado"} else {"já estava atualizado"}];
-private _contextSafe=[_context] call ServoPeregrino_Organizador_Items_fnc_escapeStructuredText;
-private _messageSafe=[_state getOrDefault ["temporaryMessage",""]] call ServoPeregrino_Organizador_Items_fnc_escapeStructuredText;
 private _feedbackPalette=[_state getOrDefault ["lastFeedbackKind","INFO"]] call ServoPeregrino_Organizador_Items_fnc_getUIFeedbackPalette;
-(_display displayCtrl 5000) ctrlSetStructuredText parseText format ["<t color='#6FCBB8'>CONTEXTO</t><t color='#A8C9C2'>  •  %1</t>",_contextSafe];
-(_display displayCtrl 5001) ctrlSetStructuredText parseText format ["<t color='%1'>RESULTADO</t><t color='%2'>  •  %3</t>",_feedbackPalette getOrDefault ["labelColor","#7EC8FF"],_feedbackPalette getOrDefault ["messageColor","#D7EEFF"],_messageSafe];
 private _hist=_state getOrDefault ["history",[]]; private _histText="";
 {private _entry=_x; _histText=_histText + (if (_histText isEqualTo "") then {""} else {"  |  "}) + format ["%1: %2",_entry#0,_entry#1];} forEach (_hist select [((count _hist)-3) max 0,(3 min (count _hist))]);
-private _histSafe=[_histText] call ServoPeregrino_Organizador_Items_fnc_escapeStructuredText;
-(_display displayCtrl 5002) ctrlSetStructuredText parseText format ["<t color='#81918E'>HISTÓRICO  •  %1</t>",_histSafe];
+[
+    _display,
+    [
+        [5000,"CONTEXTO",_context,"#6FCBB8","#A8C9C2","  •  "],
+        [5001,"RESULTADO",_state getOrDefault ["temporaryMessage",""],_feedbackPalette getOrDefault ["labelColor","#7EC8FF"],_feedbackPalette getOrDefault ["messageColor","#D7EEFF"],"  •  "],
+        [5002,"HISTÓRICO",_histText,"#81918E","#81918E","  •  "]
+    ]
+] call ServoPeregrino_Organizador_UICommon_fnc_renderFooter;
 
 private _totalMs=round ((diag_tickTime-_startedAt)*1000);
 _state=missionNamespace getVariable [SERVO_PEREGRINO_ORGANIZADOR_ITEMS_UI_STATE_VAR,createHashMap];

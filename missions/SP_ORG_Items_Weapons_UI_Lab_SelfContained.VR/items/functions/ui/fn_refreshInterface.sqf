@@ -111,13 +111,8 @@ private _total=_catalog getOrDefault ["totalFiltered",0]; private _offset=_catal
 private _maxOffset=(_total-_window) max 0; private _scrollRatio=if (_maxOffset>0) then {(_offset/_maxOffset) max 0 min 1} else {0};
 private _catalogPageText=if !(_catalog getOrDefault ["cacheBuilt",false]) then {if (_catalog getOrDefault ["buildInProgress",false]) then {private _root=_catalog getOrDefault ["buildCurrentRoot",""]; format ["Catalogando %1... %2 configs · %3 itens",if (_root isEqualTo "") then {"CONFIG_ALL"} else {_root},_catalog getOrDefault ["buildVisitedCount",0],_catalog getOrDefault ["buildPartialItemCount",0]]} else {"Preparando catálogo CONFIG_ALL..."}} else {if (_total isEqualTo 0) then {"Nenhum item encontrado"} else {if (_total isEqualTo 1) then {"Mostrando 1 item"} else {format ["Mostrando %1 a %2 de %3 itens",_offset+1,_last,_total]}}};
 (_display displayCtrl 3122) ctrlSetText _catalogPageText;
-private _catalogSlider=_display displayCtrl 3124; if (!isNull _catalogSlider) then {
-    _catalogSlider sliderSetRange [0,(_maxOffset max 1)];
-    _catalogSlider sliderSetSpeed [6,(_window max 12)];
-    _catalogSlider sliderSetPosition _offset;
-    _catalogSlider ctrlEnable (_maxOffset>0);
-    _catalogSlider ctrlShow true;
-};
+private _catalogSlider=_display displayCtrl 3124;
+[_catalogSlider,_offset,_total,_window,6,12,true] call ServoPeregrino_Organizador_UICommon_fnc_syncVirtualSlider;
 private _scrollUp=_display displayCtrl 3121; if (!isNull _scrollUp) then {_scrollUp ctrlShow true; _scrollUp ctrlEnable (_offset>0);};
 private _scrollDown=_display displayCtrl 3123; if (!isNull _scrollDown) then {_scrollDown ctrlShow true; _scrollDown ctrlEnable (_offset<_maxOffset);};
 private _sel=_catalog getOrDefault ["selected",createHashMap];
@@ -166,14 +161,17 @@ private _pref=toUpper (_draft getOrDefault ["preferredTarget","ANY"]); if (_pref
 private _catMap=[[3110,"ALL"],[3111,"MAGAZINES"],[3112,"GRENADES"],[3113,"EXPLOSIVES"],[3114,"TOOLS"],[3115,"FOOD"],[3116,"MEDICAL"],[3117,"OTHER"]]; {private _ctrl=_display displayCtrl (_x#0); _ctrl ctrlSetBackgroundColor (if ((_x#1) isEqualTo (_ui getOrDefault ["catalogCategory","ALL"])) then {[0.08,0.38,0.30,0.76]} else {[0.08,0.11,0.12,0.58]});} forEach _catMap;
 {(_display displayCtrl _x) ctrlEnable _hasDraft;} forEach [2140,2141,2142];
 
-private _contextSafe=[_vm getOrDefault ["context",""]] call ServoPeregrino_Organizador_Items_fnc_escapeStructuredText;
-private _messageSafe=[_vm getOrDefault ["message",""]] call ServoPeregrino_Organizador_Items_fnc_escapeStructuredText;
 private _feedbackPalette=[_ui getOrDefault ["lastFeedbackKind","INFO"]] call ServoPeregrino_Organizador_Items_fnc_getUIFeedbackPalette;
-(_display displayCtrl 5000) ctrlSetStructuredText parseText format ["<t color='#6FCBB8'>CONTEXTO</t><t color='#A8C9C2'>  •  %1</t>",_contextSafe];
-(_display displayCtrl 5001) ctrlSetStructuredText parseText format ["<t color='%1'>RESULTADO</t><t color='%2'>  •  %3</t>",_feedbackPalette getOrDefault ["labelColor","#7EC8FF"],_feedbackPalette getOrDefault ["messageColor","#D7EEFF"],_messageSafe];
-private _hist=_vm getOrDefault ["history",[]]; private _histText=""; {private _entry=_x; _histText=_histText + (if (_histText isEqualTo "") then {""} else {"  |  "}) + format ["%1: %2",_entry#0,_entry#1];} forEach (_hist select [((count _hist)-3) max 0,(3 min (count _hist))]);
-private _histSafe=[_histText] call ServoPeregrino_Organizador_Items_fnc_escapeStructuredText;
-(_display displayCtrl 5002) ctrlSetStructuredText parseText format ["<t color='#81918E'>HISTÓRICO  •  %1</t>",_histSafe];
+private _hist=_vm getOrDefault ["history",[]]; private _histText="";
+{private _entry=_x; _histText=_histText + (if (_histText isEqualTo "") then {""} else {"  |  "}) + format ["%1: %2",_entry#0,_entry#1];} forEach (_hist select [((count _hist)-3) max 0,(3 min (count _hist))]);
+[
+    _display,
+    [
+        [5000,"CONTEXTO",_vm getOrDefault ["context",""],"#6FCBB8","#A8C9C2","  •  "],
+        [5001,"RESULTADO",_vm getOrDefault ["message",""],_feedbackPalette getOrDefault ["labelColor","#7EC8FF"],_feedbackPalette getOrDefault ["messageColor","#D7EEFF"],"  •  "],
+        [5002,"HISTÓRICO",_histText,"#81918E","#81918E","  •  "]
+    ]
+] call ServoPeregrino_Organizador_UICommon_fnc_renderFooter;
 [player] call ServoPeregrino_Organizador_Items_fnc_refreshHeaderUI;
 private _totalDurationMs=round ((diag_tickTime-_refreshStartedAt)*1000);
 private _renderDurationMs=(_totalDurationMs-_vmDurationMs) max 0;

@@ -15,7 +15,7 @@ private _overCatalog = false;
 {
  if (!isNull _x) then {
   private _p = ctrlPosition _x;
-  if (_mx >= (_p#0) && {_mx <= ((_p#0)+(_p#2))} && {_my >= (_p#1)} && {_my <= ((_p#1)+(_p#3))}) exitWith {
+  if ([_mx,_my,_p] call ServoPeregrino_Organizador_UICommon_fnc_pointInRect) exitWith {
    _overCatalog = true;
   };
  };

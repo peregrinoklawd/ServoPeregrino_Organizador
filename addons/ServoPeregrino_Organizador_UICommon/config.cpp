@@ -45,6 +45,7 @@ class CfgFunctions
             class clampVirtualOffset {};
             class getVirtualWindow {};
             class getVirtualScrollState {};
+            class syncVirtualSlider {};
         };
 
         class Geometry
@@ -57,6 +58,13 @@ class CfgFunctions
         {
             file = "\ServoPeregrino_Organizador_UICommon\functions\text";
             class escapeStructuredText {};
+        };
+
+        class Footer
+        {
+            file = "\ServoPeregrino_Organizador_UICommon\functions\footer";
+            class buildFooterBandStructuredText {};
+            class renderFooter {};
         };
 
         class Tests

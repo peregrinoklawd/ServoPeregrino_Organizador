@@ -28,6 +28,13 @@ private _runtime=missionNamespace getVariable [SERVO_PEREGRINO_ORGANIZADOR_ITEMS
 private _sharedBuild=[] call ServoPeregrino_Organizador_UICommon_fnc_getBuildInfo;
 ["shared-build-identifies-uicommon",(_sharedBuild getOrDefault ["component",""]) isEqualTo "UICommon"] call _assert;
 
+
+["uicommon-scroll-sync-loaded",!(isNil "ServoPeregrino_Organizador_UICommon_fnc_syncVirtualSlider")] call _assert;
+["uicommon-footer-builder-loaded",!(isNil "ServoPeregrino_Organizador_UICommon_fnc_buildFooterBandStructuredText")] call _assert;
+["uicommon-footer-renderer-loaded",!(isNil "ServoPeregrino_Organizador_UICommon_fnc_renderFooter")] call _assert;
+private _sharedFooterSample=["RESULTADO","A&B","#7EC8FF","#D7EEFF","  •  "] call ServoPeregrino_Organizador_UICommon_fnc_buildFooterBandStructuredText;
+["shared-footer-structured-escape",(_sharedFooterSample find "A&amp;B") >= 0] call _assert;
+
 private _ok=_failed isEqualTo 0;
 [_ok,"ITEMS_UICOMMON_EQUIVALENCE_TESTS",format ["Items + UICommon Equivalence: %1 PASS / %2 FAIL.",_passed,_failed],createHashMapFromArray [
     ["passed",_passed],["failed",_failed],["checks",_passed+_failed],["details",_details],

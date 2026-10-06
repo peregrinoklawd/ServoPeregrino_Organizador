@@ -168,8 +168,18 @@ _state set ["draftChangedFields",+_changedFields]; _state set ["draftChangedFiel
 
 private _contextState=if (_pendingNew && {(count _kit) isEqualTo 0}) then {"NOVO"} else {if ((count _kit)>0) then {if (_isNew) then {"NOVO"} else {if (_draft getOrDefault ["dirty",false]) then {"ALTERADO"} else {"SALVO"}}} else {"-"}};
 private _context=format ["Kit: %1 | Rascunho: %2 | Catálogo: %3/%4 | Equipamento: %5",if ((count _kit)>0) then {_kit getOrDefault ["name","Sem nome"]} else {if (_pendingNew) then {_state getOrDefault ["pendingNewName","Novo Kit"]} else {"Nenhum"}},_contextState,_state getOrDefault ["catalogTypeFilter","ALL"],_state getOrDefault ["catalogCategoryFilter","ALL"],[(_state getOrDefault ["equipmentSlotView","PRIMARY"])] call _slotLabel];
-(_display displayCtrl 5000) ctrlSetStructuredText parseText format ["<t color='#6FCBB8'>CONTEXTO</t><t color='#BFEADF'>  •  %1</t>",[_context] call ServoPeregrino_Organizador_Weapons_fnc_escapeStructuredText];
-private _message=_state getOrDefault ["temporaryMessage",""]; private _history=_state getOrDefault ["history",[]]; private _historyText=""; {if (_historyText isNotEqualTo "") then {_historyText=_historyText+"   •   "};_historyText=_historyText+_x} forEach (_history select [((count _history)-3) max 0,(3 min (count _history))]); (_display displayCtrl 5001) ctrlSetStructuredText parseText format ["<t color='#7EC8FF'>RESULTADO</t><t color='#DFE6E6'>  •  %1</t>",[_message] call ServoPeregrino_Organizador_Weapons_fnc_escapeStructuredText]; (_display displayCtrl 5002) ctrlSetStructuredText parseText format ["<t color='#9FB5B1'>HISTÓRICO</t><t color='#C3CECC'>  •  %1</t>",[_historyText] call ServoPeregrino_Organizador_Weapons_fnc_escapeStructuredText];
+private _message=_state getOrDefault ["temporaryMessage",""];
+private _history=_state getOrDefault ["history",[]];
+private _historyText="";
+{if (_historyText isNotEqualTo "") then {_historyText=_historyText+"   •   "};_historyText=_historyText+_x} forEach (_history select [((count _history)-3) max 0,(3 min (count _history))]);
+[
+ _display,
+ [
+  [5000,"CONTEXTO",_context,"#6FCBB8","#BFEADF","  •  "],
+  [5001,"RESULTADO",_message,"#7EC8FF","#DFE6E6","  •  "],
+  [5002,"HISTÓRICO",_historyText,"#9FB5B1","#C3CECC","  •  "]
+ ]
+] call ServoPeregrino_Organizador_UICommon_fnc_renderFooter;
 
 diag_log format ["[SP_ORG] [WEAPONS] [UI_PERF] mode=DRAFT_FOCUSED reason=%1 totalMs=%2 kitId=%3 pendingNew=%4 fullRefresh=false",toUpperANSI _reason,_elapsed,_selectedKitId,_pendingNew];
 [true,"WEAPONS_UI_DRAFT_FOCUSED_REFRESHED","ARMAS DO KIT atualizado sem reconstruir Catálogo/Equipamento.",createHashMapFromArray [["refreshMs",_elapsed],["kitId",_selectedKitId],["pendingNew",_pendingNew],["fullRefresh",false]]] call ServoPeregrino_Organizador_Nexus_fnc_createResult

@@ -115,6 +115,7 @@ class ServoPeregrino_Organizador_UICommon
             class clampVirtualOffset {};
             class getVirtualWindow {};
             class getVirtualScrollState {};
+            class syncVirtualSlider {};
         };
 
         class Geometry
@@ -127,6 +128,13 @@ class ServoPeregrino_Organizador_UICommon
         {
             file = "uicommon\functions\text";
             class escapeStructuredText {};
+        };
+
+        class Footer
+        {
+            file = "uicommon\functions\footer";
+            class buildFooterBandStructuredText {};
+            class renderFooter {};
         };
 
         class Tests

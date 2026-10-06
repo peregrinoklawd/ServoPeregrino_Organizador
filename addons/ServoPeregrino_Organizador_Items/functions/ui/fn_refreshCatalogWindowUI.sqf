@@ -49,13 +49,7 @@ private _catalogRows=_data getOrDefault ["rows",[]];
 private _last=(_offset+count (_data getOrDefault ["rows",[]])) min _total;
 (_display displayCtrl 3122) ctrlSetText (if (_total isEqualTo 0) then {"Nenhum item encontrado"} else {if (_total isEqualTo 1) then {"Mostrando 1 item"} else {format ["Mostrando %1 a %2 de %3 itens",_offset+1,_last,_total]}});
 private _slider=_display displayCtrl 3124;
-if (!isNull _slider) then {
-    _slider sliderSetRange [0,(_maxOffset max 1)];
-    _slider sliderSetSpeed [6,(_windowSize max 12)];
-    _slider sliderSetPosition _offset;
-    _slider ctrlEnable (_maxOffset>0);
-    _slider ctrlShow true;
-};
+[_slider,_offset,_total,_windowSize,6,12,true] call ServoPeregrino_Organizador_UICommon_fnc_syncVirtualSlider;
 private _scrollUp=_display displayCtrl 3121; if (!isNull _scrollUp) then {_scrollUp ctrlShow true; _scrollUp ctrlEnable (_offset>0);};
 private _scrollDown=_display displayCtrl 3123; if (!isNull _scrollDown) then {_scrollDown ctrlShow true; _scrollDown ctrlEnable (_offset<_maxOffset);};
 
@@ -80,15 +74,17 @@ private _catMap=[[3110,"ALL"],[3111,"MAGAZINES"],[3112,"GRENADES"],[3113,"EXPLOS
 {private _ctrl=_display displayCtrl (_x#0); _ctrl ctrlSetBackgroundColor (if ((_x#1) isEqualTo (_state getOrDefault ["catalogCategory","ALL"])) then {[0.08,0.38,0.30,0.76]} else {[0.08,0.11,0.12,0.58]});} forEach _catMap;
 
 private _context=format ["catálogo contínuo | categoria: %1 | busca: %2 | %3/%4 | offset %5/%6 | destino: %7 | view: %8",_state getOrDefault ["catalogCategory","ALL"],if ((_state getOrDefault ["catalogQuery",""]) isEqualTo "") then {"-"} else {_state getOrDefault ["catalogQuery",""]},_total,_data getOrDefault ["baseCount",0],_offset,_maxOffset,_state getOrDefault ["applicationTarget","ANY"],_state getOrDefault ["equipmentView","U"]];
-private _contextSafe=[_context] call ServoPeregrino_Organizador_Items_fnc_escapeStructuredText;
-private _messageSafe=[_state getOrDefault ["temporaryMessage",""]] call ServoPeregrino_Organizador_Items_fnc_escapeStructuredText;
 private _feedbackPalette=[_state getOrDefault ["lastFeedbackKind","INFO"]] call ServoPeregrino_Organizador_Items_fnc_getUIFeedbackPalette;
-(_display displayCtrl 5000) ctrlSetStructuredText parseText format ["<t color='#6FCBB8'>CONTEXTO</t><t color='#A8C9C2'>  •  %1</t>",_contextSafe];
-(_display displayCtrl 5001) ctrlSetStructuredText parseText format ["<t color='%1'>RESULTADO</t><t color='%2'>  •  %3</t>",_feedbackPalette getOrDefault ["labelColor","#7EC8FF"],_feedbackPalette getOrDefault ["messageColor","#D7EEFF"],_messageSafe];
 private _hist=_state getOrDefault ["history",[]]; private _histText="";
-{private _entry=_x; _histText=_histText+(if (_histText isEqualTo "") then {""} else {"  |  "})+format ["%1: %2",_entry#0,_entry#1];} forEach (_hist select [((count _hist)-3) max 0,(3 min (count _hist))]);
-private _histSafe=[_histText] call ServoPeregrino_Organizador_Items_fnc_escapeStructuredText;
-(_display displayCtrl 5002) ctrlSetStructuredText parseText format ["<t color='#81918E'>HISTÓRICO  •  %1</t>",_histSafe];
+{private _entry=_x; _histText=_histText + (if (_histText isEqualTo "") then {""} else {"  |  "}) + format ["%1: %2",_entry#0,_entry#1];} forEach (_hist select [((count _hist)-3) max 0,(3 min (count _hist))]);
+[
+    _display,
+    [
+        [5000,"CONTEXTO",_context,"#6FCBB8","#A8C9C2","  •  "],
+        [5001,"RESULTADO",_state getOrDefault ["temporaryMessage",""],_feedbackPalette getOrDefault ["labelColor","#7EC8FF"],_feedbackPalette getOrDefault ["messageColor","#D7EEFF"],"  •  "],
+        [5002,"HISTÓRICO",_histText,"#81918E","#81918E","  •  "]
+    ]
+] call ServoPeregrino_Organizador_UICommon_fnc_renderFooter;
 private _renderMs=round ((diag_tickTime-_renderStartedAt)*1000);
 private _totalMs=round ((diag_tickTime-_startedAt)*1000);
 

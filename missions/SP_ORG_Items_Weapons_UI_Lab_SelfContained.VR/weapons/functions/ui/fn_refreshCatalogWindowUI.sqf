@@ -87,10 +87,7 @@ private _globalSearch = _data getOrDefault ["filtersIgnoredBySearch",_catalogSea
  }
 );
 private _slider = _display displayCtrl 3124;
-_slider sliderSetRange [0,(_maxOffset max 1)];
-_slider sliderSetSpeed [6,(_windowSize max 12)];
-_slider sliderSetPosition _offset;
-_slider ctrlEnable (_maxOffset>0);
+[_slider,_offset,_matchCount,_windowSize,6,12,true] call ServoPeregrino_Organizador_UICommon_fnc_syncVirtualSlider;
 
 private _selected = _data getOrDefault ["selectedCatalog",createHashMap];
 private _details = "Selecione um item. ← envia para ARMAS DO KIT; → permanece reservado para aplicação física em 0.7.";
@@ -132,15 +129,19 @@ private _kitSlot = _state getOrDefault ["selectedKitSlot",""];
 private _draftState = if (_state getOrDefault ["pendingNewKit",false]) then {"NOVO"} else {if (_state getOrDefault ["selectedKitIsNew",false]) then {"NOVO"} else {if (_state getOrDefault ["selectedKitDraftDirty",false]) then {"ALTERADO"} else {if (_kitSlot isEqualTo "") then {"-"} else {"SALVO"}}}};
 private _equipmentSlot = _state getOrDefault ["equipmentSlotView","PRIMARY"];
 private _context = format ["Kit: %1 | Tipo: %2 | Rascunho: %3 | Catálogo: %4/%5%6 | Equipamento: %7",_kitName,if (_kitSlot isEqualTo "") then {"-"} else {[_kitSlot] call _slotLabel},_draftState,_catalogType,_catalogKind,if (_globalSearch) then {" (filtros pausados pela busca)"} else {""},[_equipmentSlot] call _slotLabel];
-(_display displayCtrl 5000) ctrlSetStructuredText parseText format ["<t color='#6FCBB8'>CONTEXTO</t><t color='#BFEADF'>  •  %1</t>",[_context] call ServoPeregrino_Organizador_Weapons_fnc_escapeStructuredText];
-
 // Message/history are intentionally not rebuilt from domain state; they remain the feedback channel.
-private _message = _state getOrDefault ["temporaryMessage",""];
-private _history = _state getOrDefault ["history",[]];
+private _message=_state getOrDefault ["temporaryMessage",""];
+private _history=_state getOrDefault ["history",[]];
 private _historyText="";
 {if (_historyText isNotEqualTo "") then {_historyText=_historyText+"   •   "};_historyText=_historyText+_x} forEach (_history select [((count _history)-3) max 0,(3 min (count _history))]);
-(_display displayCtrl 5001) ctrlSetStructuredText parseText format ["<t color='#7EC8FF'>RESULTADO</t><t color='#DFE6E6'>  •  %1</t>",[_message] call ServoPeregrino_Organizador_Weapons_fnc_escapeStructuredText];
-(_display displayCtrl 5002) ctrlSetStructuredText parseText format ["<t color='#9FB5B1'>HISTÓRICO</t><t color='#C3CECC'>  •  %1</t>",[_historyText] call ServoPeregrino_Organizador_Weapons_fnc_escapeStructuredText];
+[
+ _display,
+ [
+  [5000,"CONTEXTO",_context,"#6FCBB8","#BFEADF","  •  "],
+  [5001,"RESULTADO",_message,"#7EC8FF","#DFE6E6","  •  "],
+  [5002,"HISTÓRICO",_historyText,"#9FB5B1","#C3CECC","  •  "]
+ ]
+] call ServoPeregrino_Organizador_UICommon_fnc_renderFooter;
 
 diag_log format ["[SP_ORG] [WEAPONS] [UI_PERF] mode=CATALOG_FOCUSED reason=%1 totalMs=%2 projectionBuilt=%3 projectionMs=%4 filterBuilt=%5 filterMs=%6 matched=%7 offset=%8/%9 rows=%10 fullRefresh=false",toUpperANSI _reason,_elapsed,_data getOrDefault ["projectionBuiltNow",false],_data getOrDefault ["projectionBuildMs",0],_data getOrDefault ["filterBuiltNow",false],_data getOrDefault ["filterMs",0],_matchCount,_offset,_maxOffset,_rendered];
 

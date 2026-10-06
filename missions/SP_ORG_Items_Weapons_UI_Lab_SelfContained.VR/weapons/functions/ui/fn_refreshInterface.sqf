@@ -200,10 +200,7 @@ private _lastShown = (_catalogOffset + _catalogRenderedCount) min _catalogMatchC
  }
 );
 private _slider = _display displayCtrl 3124;
-_slider sliderSetRange [0,(_catalogMaxOffset max 1)];
-_slider sliderSetSpeed [6,(_catalogWindowSize max 12)];
-_slider sliderSetPosition _catalogOffset;
-_slider ctrlEnable (_catalogMaxOffset > 0);
+[_slider,_catalogOffset,_catalogMatchCount,_catalogWindowSize,6,12,true] call ServoPeregrino_Organizador_UICommon_fnc_syncVirtualSlider;
 
 private _selectedCatalog = _vm getOrDefault ["selectedCatalog",createHashMap];
 private _catalogDetails = "Selecione um item. ← envia para ARMAS DO KIT; → permanece reservado para aplicação física em 0.7.";
@@ -300,9 +297,18 @@ private _historyText = "";
  _historyText = _historyText + _x;
 } forEach (_history select [((count _history)-3) max 0,(3 min (count _history))]);
 
-(_display displayCtrl 5000) ctrlSetStructuredText parseText format ["<t color='#6FCBB8'>CONTEXTO</t><t color='#BFEADF'>  •  %1</t>",[_context] call ServoPeregrino_Organizador_Weapons_fnc_escapeStructuredText];
-(_display displayCtrl 5001) ctrlSetStructuredText parseText format ["<t color='#7EC8FF'>RESULTADO</t><t color='#DFE6E6'>  •  %1</t>",[_message] call ServoPeregrino_Organizador_Weapons_fnc_escapeStructuredText];
-(_display displayCtrl 5002) ctrlSetStructuredText parseText format ["<t color='#9FB5B1'>HISTÓRICO</t><t color='#C3CECC'>  •  %1</t>",[_historyText] call ServoPeregrino_Organizador_Weapons_fnc_escapeStructuredText];
+private _message=_message;
+private _history=_history;
+private _historyText="";
+{if (_historyText isNotEqualTo "") then {_historyText=_historyText+"   •   "};_historyText=_historyText+_x} forEach (_history select [((count _history)-3) max 0,(3 min (count _history))]);
+[
+ _display,
+ [
+  [5000,"CONTEXTO",_context,"#6FCBB8","#BFEADF","  •  "],
+  [5001,"RESULTADO",_message,"#7EC8FF","#DFE6E6","  •  "],
+  [5002,"HISTÓRICO",_historyText,"#9FB5B1","#C3CECC","  •  "]
+ ]
+] call ServoPeregrino_Organizador_UICommon_fnc_renderFooter;
 
 private _refreshMs = round ((diag_tickTime - _refreshStarted) * 1000);
 _state = missionNamespace getVariable [SP_ORG_WEAPONS_UI_STATE,createHashMap];

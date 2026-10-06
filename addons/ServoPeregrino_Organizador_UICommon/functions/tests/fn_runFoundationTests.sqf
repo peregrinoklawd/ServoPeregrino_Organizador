@@ -53,6 +53,18 @@ private _scrollEmpty = [10, 0, 32] call ServoPeregrino_Organizador_UICommon_fnc_
 ["point-in-rect-outside", !([0.401, 0.30, [0.10, 0.20, 0.30, 0.40]] call ServoPeregrino_Organizador_UICommon_fnc_pointInRect)] call _assert;
 ["point-in-rect-invalid-negative-size", !([0.10, 0.20, [0.10, 0.20, -0.30, 0.40]] call ServoPeregrino_Organizador_UICommon_fnc_pointInRect)] call _assert;
 
+
+private _sliderState = [controlNull, 999, 100, 32, 6, 12, true] call ServoPeregrino_Organizador_UICommon_fnc_syncVirtualSlider;
+["virtual-slider-null-control-offset", (_sliderState get "offset") isEqualTo 68] call _assert;
+["virtual-slider-null-control-max", (_sliderState get "maxOffset") isEqualTo 68] call _assert;
+["virtual-slider-null-control-ratio", abs ((_sliderState get "scrollRatio") - 1) < 0.0001] call _assert;
+
+private _footerBand = ["A&B", "C<D>E", "#111111", "#222222", " :: "] call ServoPeregrino_Organizador_UICommon_fnc_buildFooterBandStructuredText;
+["footer-band-label-escaped", (_footerBand find "A&amp;B") >= 0] call _assert;
+["footer-band-text-escaped", (_footerBand find "C&lt;D&gt;E") >= 0] call _assert;
+["footer-band-colors-preserved", (_footerBand find "#111111") >= 0 && {(_footerBand find "#222222") >= 0}] call _assert;
+["footer-null-display-safe", ([findDisplay -99999, []] call ServoPeregrino_Organizador_UICommon_fnc_renderFooter) isEqualTo 0] call _assert;
+
 private _ok = _failed isEqualTo 0;
 [_ok, "UICOMMON_FOUNDATION_TESTS", format ["UICommon foundation: %1 PASS / %2 FAIL.", _passed, _failed], createHashMapFromArray [
     ["passed", _passed],

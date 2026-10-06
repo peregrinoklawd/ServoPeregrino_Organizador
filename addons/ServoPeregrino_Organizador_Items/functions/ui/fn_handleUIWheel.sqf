@@ -13,7 +13,7 @@ private _hovered=controlNull;
     private _c=_display displayCtrl _x;
     if (!isNull _c) then {
         private _p=ctrlPosition _c;
-        if (_mx>=(_p#0) && {_mx<=((_p#0)+(_p#2))} && {_my>=(_p#1)} && {_my<=((_p#1)+(_p#3))}) exitWith {_hovered=_c;};
+        if ([_mx,_my,_p] call ServoPeregrino_Organizador_UICommon_fnc_pointInRect) exitWith {_hovered=_c;};
     };
 } forEach [1102,2104,SERVO_PEREGRINO_ORGANIZADOR_ITEMS_UI_CATALOG_TABLE_IDC,4140,4120];
 
