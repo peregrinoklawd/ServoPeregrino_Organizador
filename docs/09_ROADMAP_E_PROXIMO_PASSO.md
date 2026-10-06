@@ -768,3 +768,39 @@ Timing padrão:
 
 Handoff:
 `docs/46_NEXT_CHAT_HANDOFF_WEAPONS_0_7.md`.
+
+
+## Atualização 05/10/2026 — checkpoint ativo UICommon 0.2-A
+
+A sincronização do source mission-first Weapons R6 foi concluída.
+
+Portanto, o próximo passo NÃO é abrir imediatamente a mutação física 0.7.
+
+Checkpoint ativo:
+**UICommon 0.2-A — Shared Infrastructure Inventory**.
+
+Objetivo:
+- comparar Items e Weapons R6 diretamente no Git;
+- mapear infraestrutura genérica duplicada;
+- classificar `SHARED / CANDIDATE-SHARED / DOMAIN-SPECIFIC / DEFERRED`;
+- definir testes de equivalência;
+- não alterar runtime antes de revisar a matriz.
+
+Prioridades candidatas:
+1. Footer Contexto/Resultado/Histórico;
+2. keep-aspect/preview surface genérico;
+3. focused invalidation + performance instrumentation;
+4. virtual list/window/wheel/slider;
+5. search plumbing;
+6. theme/generic controls;
+7. tooltip/pointer/DnD visual em rodada posterior.
+
+Depois da consolidação/equivalência UICommon 0.2:
+- Weapons 0.7-A Plan/Snapshot/Dry-Run;
+- 0.7-B Slot-Safe Apply;
+- 0.7-C Validation/Rollback;
+- 0.7-D UI Integration/Undo candidate;
+- 0.8 Multiplayer Authority/Reconciliation.
+
+Referência:
+`docs/48_UICOMMON_0_2_SHARED_INFRASTRUCTURE_PLAN.md`.
