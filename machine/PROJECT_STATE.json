@@ -22,8 +22,8 @@
     "hub_rule": "Hub is an optional player-facing integration/orchestration layer. No domain module may require Hub in order to function.",
     "independent_core_development": true
   },
-  "global_next_gate": "UICommon 0.2-D R3 real-Arma gate: UICommon 39/39, Items/UICommon 16/16, Weapons 594/594 0 FAIL; true-rounded visual gate, footer readability, Weapons typography/alignment and responsive layout verification.",
-  "global_after_gate": "If R3 passes functional + visual + smaller-display checks: freeze UICommon 0.2-D and start 0.2-E Performance Instrumentation.",
+  "global_next_gate": "UICommon 0.2-D R4 real-Arma gate: UICommon 36/36, Items/UICommon 16/16, Weapons 594/594 0 FAIL; manual visual/search/DnD review on ultrawide and smaller display.",
+  "global_after_gate": "If R4 passes: freeze UICommon 0.2-D and proceed to 0.2-E Performance Instrumentation.",
   "modules": [
     {
       "id": "Nexus",
@@ -68,8 +68,8 @@
       },
       "development_version": {
         "display": "0.2",
-        "semantic": "0.2.0.5",
-        "build": "0.2.0.5-true-rounded-responsive-d3"
+        "semantic": "0.2.0.6",
+        "build": "0.2.0.6-safe-responsive-polish-d4"
       },
       "dependencies": [
         "Nexus"
@@ -90,10 +90,10 @@
         "required": [],
         "optional": []
       },
-      "status": "0_2_D_R3_STATIC_READY_RUNTIME_PENDING",
-      "next_gate": "Real Arma R3: Foundation 39/39, Items/UICommon 16/16, Weapons 594/594 0 FAIL; visible true corners on panels/action buttons; responsive log WIDE on ultrawide; visual review.",
-      "homologated_artifact": "0.2-C C2 remains frozen fallback. 0.2-D R1 runtime-green. R2 functional gate green but visual gate rejected because corners were not truly rounded.",
-      "current_candidate_artifact": "0.2-D R3: true-rounded composite surfaces, rounded action buttons, ultrawide search header with STANDARD fallback, title/accessory/footer/lower-card alignment; technical HEAD d887813b58d965d9aebc85e64425649ab18677b4."
+      "status": "0_2_D_R4_STATIC_READY_RUNTIME_PENDING",
+      "next_gate": "R4 real Arma: Foundation 36/36, Items/UICommon 16/16, Weapons 594/594 0 FAIL; no SQF error in responsive layout; manual search/title/footer/alignment/DnD checks.",
+      "homologated_artifact": "0.2-C C2 frozen fallback; 0.2-D R1 runtime-green. R2 functional-green. R3 rejected due visual regression and responsive SQF error.",
+      "current_candidate_artifact": "0.2-D R4: R2 visual/control baseline restored; rounded composite experiment removed; responsive title-line search fixed; Weapons typography/lower-card alignment and footer-history contrast retained."
     },
     {
       "id": "Items",

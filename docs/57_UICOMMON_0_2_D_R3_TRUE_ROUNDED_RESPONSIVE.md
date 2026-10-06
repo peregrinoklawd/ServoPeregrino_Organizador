@@ -128,3 +128,17 @@ Manual resolução padrão/menor:
 3. nenhum clipping/overlap;
 4. ações continuam acessíveis;
 5. footer permanece dentro da safeZone.
+
+
+## Resultado real — REJEITADA
+
+A R3 não será corrigida incrementalmente.
+
+O teste real mostrou:
+- Foundation 39/39;
+- Items + UICommon 16/16;
+- Weapons 594/594;
+- porém a composição de cantos deformou visualmente painéis/botões;
+- e o novo `fn_applyResponsiveVisualLayout.sqf` de Weapons gerou erro porque usava `SP_ORG_WEAPONS_UI_STATE` sem incluir `script_version.hpp`.
+
+Decisão: voltar ao baseline visual R2 e reaplicar apenas os deltas seguros. O experimento de arredondamento composto foi abandonado por relação custo/benefício desfavorável.

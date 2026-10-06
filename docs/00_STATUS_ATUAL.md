@@ -1015,3 +1015,16 @@ R3:
 - eventos Items 51/51 e Weapons 47/47 idênticos à R2.
 
 Gate: 39/39 + 16/16 + 594/594 0 FAIL + avaliação visual ultrawide e resolução padrão.
+
+
+## 06/10/2026 — UICommon 0.2-D R4
+
+R3 rejeitada apesar de 39/39 + 16/16 + 594/594: a tentativa de rounded geometry degradou a interface e o responsive Weapons tinha erro por macro não preprocessada.
+
+R4 restaura integralmente o baseline visual/controles da R2 e reaplica somente:
+- search-on-title WIDE + fallback STANDARD;
+- títulos/acessórios/lower cards Weapons;
+- contraste do Histórico.
+
+Rounded panels/buttons foram abandonados nesta fase.
+Gate: 36/36 + 16/16 + 594/594, 0 FAIL, sem erro SQF responsive.

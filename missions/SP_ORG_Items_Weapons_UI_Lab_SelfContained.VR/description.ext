@@ -1,7 +1,7 @@
 author = "Claudio Malta Telhada";
-onLoadName = "SP_ORG UI Lab - UICommon 0.2-D R2";
-onLoadMission = "UICommon 0.2-D R2: polish visual compartilhado com buscas compactas, superficies suaves e convergencia de footer/Meus Kits sem alterar comportamento.";
-overviewText = "Items + Weapons preservados; UICommon 0.2-D R2 aplica polish visual compartilhado mantendo IDs, eventos, DnD, buscas e refresh contracts.";
+onLoadName = "SP_ORG UI Lab - UICommon 0.2-D R4";
+onLoadMission = "UICommon 0.2-D R4: base visual R2 restaurada, polish seguro preservado e busca responsiva corrigida; sem cantos arredondados compostos.";
+overviewText = "Items + Weapons preservados; R4 abandona arredondamento complexo e mantém apenas melhorias visuais de baixo risco sobre a R2.";
 enableDebugConsole = 1;
 disabledAI = 1;
 respawn = 3;
