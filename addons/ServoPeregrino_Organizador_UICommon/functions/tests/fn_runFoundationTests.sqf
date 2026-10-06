@@ -65,6 +65,11 @@ private _footerBand = ["A&B", "C<D>E", "#111111", "#222222", " :: "] call ServoP
 ["footer-band-colors-preserved", (_footerBand find "#111111") >= 0 && {(_footerBand find "#222222") >= 0}] call _assert;
 ["footer-null-display-safe", ([findDisplay -99999, []] call ServoPeregrino_Organizador_UICommon_fnc_renderFooter) isEqualTo 0] call _assert;
 
+["visual-rounded-surface-class", isClass (missionConfigFile >> "SPORG_UICommon_RoundedSurface")] call _assert;
+["visual-search-edit-class", isClass (missionConfigFile >> "SPORG_UICommon_SearchEdit")] call _assert;
+["visual-search-clear-class", isClass (missionConfigFile >> "SPORG_UICommon_SearchClear")] call _assert;
+["visual-kit-list-class", isClass (missionConfigFile >> "SPORG_UICommon_KitList")] call _assert;
+
 private _ok = _failed isEqualTo 0;
 [_ok, "UICOMMON_FOUNDATION_TESTS", format ["UICommon foundation: %1 PASS / %2 FAIL.", _passed, _failed], createHashMapFromArray [
     ["passed", _passed],
