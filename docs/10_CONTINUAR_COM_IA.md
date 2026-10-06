@@ -411,3 +411,33 @@ Resumo:
 - antes, sincronizar source R6 no repositório;
 - Preview 3D é estudo separado;
 - não reconstruir R6 de memória.
+
+
+## Checkpoint autoritativo — R6 sincronizada / UICommon 0.2-A
+
+O aviso anterior de que a missão canônica ainda estava atrás da R6 está SUPERADO.
+
+Source mission-first atual no Git:
+`missions/SP_ORG_Items_Weapons_UI_Lab_SelfContained.VR`
+
+Identidade:
+- Weapons 0.6-F R6;
+- semantic 0.6.5.6;
+- 432 arquivos;
+- subtree `91dae966c4239b3984d21a24916d8e12f811fd2e`;
+- ZIP de origem SHA-256 `9ef4374ddf34c8ba5a07f220139ec4e7bd420d9039465226d84faff97ec89bdf`.
+
+Leia:
+- `docs/47_WEAPONS_0_6_F_R6_SOURCE_SYNC.md`;
+- `docs/48_UICOMMON_0_2_SHARED_INFRASTRUCTURE_PLAN.md`.
+
+Próxima ação:
+**UICommon 0.2-A Inventory / Classification**.
+
+Não iniciar alteração física Weapons 0.7 antes de:
+1. inventariar duplicações reais Items x Weapons;
+2. revisar a matriz de ownership compartilhado;
+3. definir a primeira extração de baixo risco;
+4. preservar equivalência e performance.
+
+Addon/PBO Weapons ainda NÃO foi promovido à R6; esta afirmação vale para o source mission-first canônico.
