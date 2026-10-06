@@ -19,7 +19,7 @@ missionNamespace setVariable [SERVO_PEREGRINO_ORGANIZADOR_UICOMMON_INITIALIZED_V
     "ServoPeregrino_Organizador_UICommon",
     createHashMapFromArray [
         ["description", "Infraestrutura compartilhada de UI sem ownership de domínio."],
-        ["stability", "EXPERIMENTAL_0_1"]
+        ["stability", "EXPERIMENTAL_0_2"]
     ]
 ] call ServoPeregrino_Organizador_Nexus_fnc_registerCapability;
 

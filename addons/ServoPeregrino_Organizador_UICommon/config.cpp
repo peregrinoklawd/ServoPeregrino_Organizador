@@ -44,6 +44,13 @@ class CfgFunctions
             file = "\ServoPeregrino_Organizador_UICommon\functions\lists";
             class clampVirtualOffset {};
             class getVirtualWindow {};
+            class getVirtualScrollState {};
+        };
+
+        class Geometry
+        {
+            file = "\ServoPeregrino_Organizador_UICommon\functions\geometry";
+            class pointInRect {};
         };
 
         class Text

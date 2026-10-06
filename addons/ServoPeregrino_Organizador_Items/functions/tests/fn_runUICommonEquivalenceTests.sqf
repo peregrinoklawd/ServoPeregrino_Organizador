@@ -26,10 +26,10 @@ private _tail=[[0,1,2,3,4,5],99,3] call ServoPeregrino_Organizador_UICommon_fnc_
 private _runtime=missionNamespace getVariable [SERVO_PEREGRINO_ORGANIZADOR_ITEMS_RUNTIME_VAR,createHashMap];
 ["items-runtime-uicommon-ready",_runtime getOrDefault ["uiCommonReady",false]] call _assert;
 private _sharedBuild=[] call ServoPeregrino_Organizador_UICommon_fnc_getBuildInfo;
-["shared-build-equivalence-r1",(_sharedBuild getOrDefault ["build",""]) isEqualTo "0.1.1-items-equivalence-r1"] call _assert;
+["shared-build-identifies-uicommon",(_sharedBuild getOrDefault ["component",""]) isEqualTo "UICommon"] call _assert;
 
 private _ok=_failed isEqualTo 0;
-[_ok,"ITEMS_UICOMMON_EQUIVALENCE_TESTS",format ["Items + UICommon Equivalence R1: %1 PASS / %2 FAIL.",_passed,_failed],createHashMapFromArray [
+[_ok,"ITEMS_UICOMMON_EQUIVALENCE_TESTS",format ["Items + UICommon Equivalence: %1 PASS / %2 FAIL.",_passed,_failed],createHashMapFromArray [
     ["passed",_passed],["failed",_failed],["checks",_passed+_failed],["details",_details],
     ["itemsBuild",SERVO_PEREGRINO_ORGANIZADOR_ITEMS_BUILD],["uiCommonBuild",_sharedBuild getOrDefault ["build",""]]
 ]] call ServoPeregrino_Organizador_Nexus_fnc_createResult

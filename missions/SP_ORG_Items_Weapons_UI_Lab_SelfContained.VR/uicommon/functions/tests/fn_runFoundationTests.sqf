@@ -33,6 +33,26 @@ private _theme = [] call ServoPeregrino_Organizador_UICommon_fnc_getThemeTokens;
 ["structured-text-pass-through", (["Alpha 123"] call ServoPeregrino_Organizador_UICommon_fnc_escapeStructuredText) isEqualTo "Alpha 123"] call _assert;
 ["structured-text-escapes-reserved", (["A&B<C>D"] call ServoPeregrino_Organizador_UICommon_fnc_escapeStructuredText) isEqualTo "A&amp;B&lt;C&gt;D"] call _assert;
 
+
+private _scrollTail = [999, 100, 32] call ServoPeregrino_Organizador_UICommon_fnc_getVirtualScrollState;
+["scroll-state-tail-offset", (_scrollTail get "offset") isEqualTo 68] call _assert;
+["scroll-state-tail-max", (_scrollTail get "maxOffset") isEqualTo 68] call _assert;
+["scroll-state-tail-visible", (_scrollTail get "visibleCount") isEqualTo 32] call _assert;
+["scroll-state-tail-indices", (_scrollTail get "firstIndex") isEqualTo 68 && {(_scrollTail get "lastIndex") isEqualTo 99}] call _assert;
+["scroll-state-tail-ratio", abs ((_scrollTail get "scrollRatio") - 1) < 0.0001] call _assert;
+
+private _scrollSmall = [10, 3, 32] call ServoPeregrino_Organizador_UICommon_fnc_getVirtualScrollState;
+["scroll-state-small-clamps", (_scrollSmall get "offset") isEqualTo 0 && {(_scrollSmall get "maxOffset") isEqualTo 0}] call _assert;
+["scroll-state-small-visible", (_scrollSmall get "visibleCount") isEqualTo 3 && {(_scrollSmall get "firstIndex") isEqualTo 0} && {(_scrollSmall get "lastIndex") isEqualTo 2}] call _assert;
+
+private _scrollEmpty = [10, 0, 32] call ServoPeregrino_Organizador_UICommon_fnc_getVirtualScrollState;
+["scroll-state-empty", (_scrollEmpty get "visibleCount") isEqualTo 0 && {(_scrollEmpty get "firstIndex") isEqualTo -1} && {(_scrollEmpty get "lastIndex") isEqualTo -1}] call _assert;
+
+["point-in-rect-inside", [0.20, 0.30, [0.10, 0.20, 0.30, 0.40]] call ServoPeregrino_Organizador_UICommon_fnc_pointInRect] call _assert;
+["point-in-rect-inclusive-edge", [0.40, 0.60, [0.10, 0.20, 0.30, 0.40]] call ServoPeregrino_Organizador_UICommon_fnc_pointInRect] call _assert;
+["point-in-rect-outside", !([0.401, 0.30, [0.10, 0.20, 0.30, 0.40]] call ServoPeregrino_Organizador_UICommon_fnc_pointInRect)] call _assert;
+["point-in-rect-invalid-negative-size", !([0.10, 0.20, [0.10, 0.20, -0.30, 0.40]] call ServoPeregrino_Organizador_UICommon_fnc_pointInRect)] call _assert;
+
 private _ok = _failed isEqualTo 0;
 [_ok, "UICOMMON_FOUNDATION_TESTS", format ["UICommon foundation: %1 PASS / %2 FAIL.", _passed, _failed], createHashMapFromArray [
     ["passed", _passed],
