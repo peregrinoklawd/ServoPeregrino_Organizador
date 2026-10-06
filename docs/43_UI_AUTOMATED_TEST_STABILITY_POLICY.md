@@ -43,11 +43,22 @@ Mas não são, por si só, um gate de comportamento de UI.
 
 ## Aplicação imediata
 
-Weapons 0.6-F R6 terminou 595/597.
-Os 2 FAILs restantes são classificados como:
-**HARNESS_ONLY / NON_FUNCTIONAL / NON_BLOCKING**.
+A regra passa a ser aplicada agora, antes da Weapons 0.7.
 
-Eles serão removidos ou convertidos em checks estáveis no início da Weapons 0.7.
+No RPT C2 de 06/10/2026, Weapons terminou 596/598 porque dois checks antigos ainda comparavam:
+- o texto exato de `UI state version`;
+- a presença literal de `0.6-F R6` no header.
+
+Esses checks não representam comportamento e foram corrigidos no commit
+`7933fbb8a1838bf817c0b809834b8cf105eb6932`.
+
+A partir desse commit:
+- estrutura/comportamento continuam em `_assert` e podem falhar;
+- versão, revisão, header de release e identificadores de apresentação usam `_observe`;
+- observações são registradas como `AUTO_TEST_INFO`, não entram em PASS/FAIL;
+- o resultado automático só pode ser aceito com **0 FAIL**.
+
+O runner também deixou de bloquear por `uiCheckpoint`, `uiRevision`, `uiVisualFreeze` e pelo nome textual do grammar de filtros. A geometria e o comportamento reais desses filtros continuam cobertos por asserts funcionais.
 
 ## Escopo
 

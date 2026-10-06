@@ -22,8 +22,8 @@
     "hub_rule": "Hub is an optional player-facing integration/orchestration layer. No domain module may require Hub in order to function.",
     "independent_core_development": true
   },
-  "global_next_gate": "UICommon 0.2-C C2 real-Arma performance gate: 31/31 + 16/16 + Weapons 596/598 with only 2 known harness FAILs; base-weapon Catalog-to-Draft must avoid FULL refresh.",
-  "global_after_gate": "If C2 passes manual/perf: freeze UICommon 0.2-C -> UICommon 0.2-D Shared Visual Foundation/HPP.",
+  "global_next_gate": "Rerun the hardened C2 mission in real Arma. Acceptance requires UICommon 31/31, Items+UICommon 16/16 and Weapons 594/594 with 0 FAIL; release/version/header metadata must appear only as observations.",
+  "global_after_gate": "If the hardened runner is 0 FAIL and manual behavior remains approved: freeze UICommon 0.2-C, then start UICommon 0.2-D Shared Visual Foundation/HPP.",
   "modules": [
     {
       "id": "Nexus",
@@ -86,10 +86,10 @@
         "required": [],
         "optional": []
       },
-      "status": "0_2_C_C2_PERFORMANCE_FIX_STATIC_READY_RUNTIME_PENDING",
-      "next_gate": "Real Arma C2: Foundation 31/31, Items/UICommon 16/16, Weapons 596/598 only known harness FAILs, manual Catalog-to-Draft stutter recheck.",
+      "status": "0_2_C_C2_RUNTIME_BEHAVIOR_APPROVED_HARDENED_TEST_RERUN_PENDING",
+      "next_gate": "Real Arma rerun after test-contract hardening: Foundation 31/31, Items/UICommon 16/16, Weapons 594/594, 0 FAIL. Residual compatibility-projection stutter is accepted for this gate.",
       "homologated_artifact": "UICommon 0.2-B pure shared primitives; real Arma 24/24 + 12/12.",
-      "current_candidate_artifact": "0.2-C C2; focused Draft+Catalog routing for existing-kit base weapon swap; technical commit 0d584e3a4b874418de171a753b68292184737a22; runtime pending."
+      "current_candidate_artifact": "0.2-C C2 runtime route validated: existing-kit base swap uses Draft+Catalog focused refresh with no FULL. Test harness hardened at 7933fbb8a1838bf817c0b809834b8cf105eb6932; clean rerun pending."
     },
     {
       "id": "Items",
@@ -233,10 +233,10 @@
           "persistence.provider.v1"
         ]
       },
-      "status": "MISSION_FIRST_0_6_F_R6_SOURCE_SYNCED_FUNCTIONAL_MANUAL_APPROVED_2_HARNESS_ONLY",
-      "next_gate": "Do not mutate physical loadout yet. First complete UICommon 0.2-A shared-infrastructure inventory/equivalence. Then start Weapons 0.7-A Plan/Snapshot/Dry-Run using the APM application case study.",
-      "homologated_artifact": "0.1-B 128/128 + 3/3; 0.2 175/175; 0.3 R2 213/213; 0.4 R5 251/251; 0.5 301/301; 0.6-A R4 362/362; 0.6-B R4 397/397; 0.6-C R1 445/445; 0.6-D R1 471/471; 0.6-D R3 512/512 + manual performance; 0.6-F R6 manual approved with 595/597 where 2 failures are harness/version-text only.",
-      "current_candidate_artifact": "0.6-F R6 canonical mission-first source synced at missions/SP_ORG_Items_Weapons_UI_Lab_SelfContained.VR; 432 files; Git subtree 91dae966c4239b3984d21a24916d8e12f811fd2e; executable ZIP SHA-256 9ef4374ddf34c8ba5a07f220139ec4e7bd420d9039465226d84faff97ec89bdf.",
+      "status": "MISSION_FIRST_0_6_F_R6_C2_RUNTIME_FUNCTIONAL_APPROVED_TEST_HARNESS_HARDENED_RERUN_PENDING",
+      "next_gate": "Rerun automatic suite after removing release-label assertions from blocking checks. Require 0 FAIL before accepting/finalizing the gate.",
+      "homologated_artifact": "Through 0.6-D R3 fully green. 0.6-F R6/C2 functional and manual behavior approved, but final gate remains pending until the hardened runner returns 0 FAIL.",
+      "current_candidate_artifact": "Canonical mission-first source + C2 focused Catalog-to-Draft routing; test harness hardening commit 7933fbb8a1838bf817c0b809834b8cf105eb6932.",
       "mission_first_validation": {
         "0.1-B": {
           "status": "APPROVED_SP",

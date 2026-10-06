@@ -91,3 +91,43 @@ Esperado:
 - avaliar percepção manual de stutter novamente.
 
 A reconstrução de compatibilidade de P3 continua necessária. Se ainda houver stutter perceptível após remover o full refresh, o próximo estudo deve mirar exclusivamente o custo de projection rebuild, não o restante da interface.
+
+
+## RPT C2 real — 06/10/2026
+
+A correção de roteamento foi confirmada em Arma real.
+
+Gates:
+- UICommon: **31/31**;
+- Items + UICommon: **16/16**;
+- o novo check de performance `base-weapon swap avoids FULL and refreshes only Draft+Catalog` passou;
+- a troca de arma-base não provocou mais `mode=FULL`.
+
+No teste manual, o custo residual ficou concentrado em P3:
+- Draft focused variou de poucos ms até ~142 ms conforme a arma;
+- Catalog focused com `projectionBuilt=true` variou aproximadamente de **64 ms a 286 ms**;
+- `projectionMs` ficou aproximadamente entre **41 ms e 242 ms** nos exemplos manuais;
+- nenhum desses eventos registrou `fullRefresh=true`.
+
+Conclusão atual:
+- o desperdício de reconstruir P1/P4 foi removido;
+- o stutter remanescente acompanha a reconstrução da projeção de compatibilidade derivada da engine/modset;
+- não será introduzida nova otimização de runtime dentro da 0.2-C;
+- um cache de compatibilidade por arma poderá ser estudado futuramente, separado deste gate.
+
+## Test harness hardening
+
+O mesmo RPT ainda apresentou **596/598**, exclusivamente por dois checks de identificação textual:
+- UI state schema/release label;
+- header contendo literalmente `0.6-F R6`.
+
+Como o projeto exige 0 FAIL para uma entrega aceita, o harness foi corrigido no commit:
+`7933fbb8a1838bf817c0b809834b8cf105eb6932`.
+
+Release/version/header metadata agora são observações e não gates.
+
+Próximo resultado esperado:
+- **594 PASS / 0 FAIL / 594 checks**;
+- **6 observations**;
+- UICommon 31/31;
+- Items + UICommon 16/16.

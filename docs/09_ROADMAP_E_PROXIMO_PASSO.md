@@ -966,3 +966,13 @@ Runtime esperado da C2:
 - Items + UICommon: **16/16**;
 - Weapons R6+C2: **596 PASS / 2 FAIL / 598 total**, mantendo apenas os dois harness-only conhecidos;
 - durante troca de arma-base em kit existente devem aparecer `DRAFT_FOCUSED reason=CATALOG_TO_DRAFT` e `CATALOG_FOCUSED reason=CATALOG_TO_DRAFT`, sem `mode=FULL` provocado por essa operação.
+
+
+## 06/10/2026 — C2 runtime confirmado; harness endurecido para 0 FAIL
+
+- C2 removeu o FULL refresh do base-weapon Catalog-to-Draft.
+- O regression check de Draft+Catalog focused passou no RPT real.
+- Stutter residual acompanha a projeção de compatibilidade; aceito para este gate.
+- Dois FAILs de versão/header foram removidos do conjunto bloqueante.
+- Commit de hardening: `7933fbb8a1838bf817c0b809834b8cf105eb6932`.
+- Próximo gate: Weapons **594/594, 0 FAIL**, com 6 observações não bloqueantes.
