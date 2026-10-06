@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "snapshot_date": "2026-10-01",
+  "snapshot_date": "2026-10-05",
   "repository": "peregrinoklawd/ServoPeregrino_Organizador",
   "rule": "Every domain feature has one owning module. Hub may coordinate and present features, but it must delegate domain execution to the owning module through Nexus contracts/capabilities/events.",
   "modules": {
@@ -139,6 +139,18 @@
       "integrated-action-orchestration",
       "shared-navigation-shell",
       "player-facing-cross-module-notifications"
+    ],
+    "UICommon": [
+      "generic-ui-theme-tokens",
+      "structured-text-escaping",
+      "virtual-list-windowing",
+      "generic-ui-controls",
+      "generic-search-plumbing",
+      "generic-focus-selection",
+      "generic-tooltip-pointer-drag-visuals",
+      "generic-feedback-footer",
+      "generic-focused-refresh-invalidation",
+      "ui-performance-instrumentation"
     ]
   },
   "sensitive_ownership": [
@@ -280,12 +292,24 @@
       "consumers": [
         "Player/UI"
       ]
+    },
+    {
+      "feature": "Shared generic UI infrastructure",
+      "owner": "UICommon",
+      "consumers": [
+        "Items",
+        "Weapons",
+        "Armorer",
+        "Hub",
+        "other player-facing modules"
+      ],
+      "rule": "UICommon may own presentation infrastructure only; domain state, semantics and mutations remain with their owning modules."
     }
   ],
   "implementation_notes": {
     "Weapons": {
-      "delivery": "0.6-E R2 mission-first UX convergence/direct-draft-equip candidate / addon source 0.1-A",
-      "status": "MISSION_FIRST_0_6_E_R2_UX_CONVERGENCE_CANDIDATE_RUNTIME_PENDING_ADDON_SOURCE_INTEGRATION_PENDING",
+      "delivery": "0.6-F R6 mission-first source synced / addon source remains 0.1-A",
+      "status": "MISSION_FIRST_R6_SOURCE_SYNCED_FUNCTIONAL_MANUAL_APPROVED_2_HARNESS_ONLY",
       "homologated": {
         "lifecycle_0_1_b": "128/128 AUTO + 3/3 live Take/Put",
         "configuration_0_2": "175/175 AUTO",
@@ -304,7 +328,7 @@
       "apm_reference_rule": "Historical APM weapon UI is a UX/lessons-learned source. Review KEEP/ADAPT/DROP/NEW before freezing Weapons UI 0.6.",
       "physical_identity_proven": false,
       "addon_source_integrated_through": "0.1-A",
-      "next": "Validate 0.6-E R2 in Arma; projected ~545 checks plus manual flow/layout/no-loadout/performance regression. Require green gate before 0.6-F.",
+      "next": "UICommon 0.2-A shared-infrastructure inventory/equivalence, then Weapons 0.7-A Plan/Snapshot/Dry-Run.",
       "recipe_rule": "WeaponRecipe is frozen as configuration + optional magazineClass; targetSlot/name/identity/ammoCount remain outside Recipe.",
       "secondary_runtime_rule": "PRIMARY/HANDGUN class guards are strict. SECONDARY type=4 runtime/base variants may be equivalent only inside the same baseWeapon family.",
       "weapon_kit_candidate": {
@@ -334,44 +358,17 @@
         "status": "FROZEN_MISSION_FIRST"
       },
       "weapon_ui_candidate": {
-        "checkpoint": "0.6-E R2",
-        "final_candidate": "R2",
-        "build": "0.6.4.2-ux-convergence-direct-draft-equip-mission-first",
-        "static_validation": "296/296",
-        "runner_source_assertions": 518,
-        "runtime": "PENDING_ARMA_PROJECTED_APPROX_545",
-        "runtime_truth": "RPT_REQUIRED",
-        "baseline": "0.6-D R3 APPROVED 512/512; 0.6-E R1 AUTHORING AUTO 536/536",
-        "ux_reason": "R1 manual flow required catalog preselection then P1 NEW; superseded",
-        "new_kit_flow": "NEW_PENDING_THEN_CATALOG_TO_DRAFT",
-        "p1_actions": [
-          "NEW",
-          "DUPLICATE",
-          "DELETE",
-          "PUBLISH_RESERVED"
-        ],
-        "rename": "P2_INLINE_NAME_COMMITTED_BY_SAVE",
-        "p2_search": "SYNCED_CATALOG_QUERY_SHORTCUT",
-        "p4_search": "SYNCED_CATALOG_QUERY_SHORTCUT",
-        "draft_actions": [
-          "SAVE",
-          "SAVE_AS_NEW",
-          "DISCARD",
-          "CLEAR"
-        ],
-        "catalog_row_actions": {
-          "left": "DRAFT_ACTIVE",
-          "right": "PHYSICAL_RESERVED_0_7"
-        },
-        "catalog_big_action": "EQUIPAR_NO_RASCUNHO",
-        "catalog_filter_underbarrel": "BIPOD_PLUS_GRIP",
-        "equipment_vocabulary": "VISUALIZAR",
-        "footer": "THREE_BANDS_NO_OUTER_FRAME_HIGHER_HISTORY_CONTRAST",
-        "info_alignment": "P2_P3_P4_ALIGNED",
-        "loadout_mutation": false,
+        "checkpoint": "0.6-F R6",
+        "semantic": "0.6.5.6",
+        "build": "0.6.5.6-compact-filter-spacing-test-contract-hotfix-uicommon-mission-first",
+        "runtime": "595/597; two failures classified HARNESS_ONLY_VERSION_TEXT_NON_FUNCTIONAL",
+        "manual": "APPROVED",
+        "canonical_mission": "missions/SP_ORG_Items_Weapons_UI_Lab_SelfContained.VR",
+        "source_files": 432,
+        "git_subtree_sha": "91dae966c4239b3984d21a24916d8e12f811fd2e",
+        "executable_zip_sha256": "9ef4374ddf34c8ba5a07f220139ec4e7bd420d9039465226d84faff97ec89bdf",
         "application": "DEFERRED_0_7",
-        "multiplayer": "DEFERRED_0_8",
-        "convergence_backlog": "docs/29_SHARED_UI_ITEMS_WEAPONS.md"
+        "multiplayer": "DEFERRED_0_8"
       },
       "player_ui_0_6_a": {
         "r1": "REJECTED_CFGFUNCTIONS_PATH",
@@ -443,6 +440,19 @@
         "mode": "SESSION_LOCAL_AUTHORING_PLUS_UX_CONVERGENCE_DIRECT_DRAFT_EQUIP_NO_PHYSICAL_APPLICATION",
         "status": "ACTIVE_R2_CANDIDATE"
       }
+    },
+    "UICommon": {
+      "delivery": "0.1.1-items-equivalence-r1",
+      "status": "FOUNDATION_EQUIVALENCE_APPROVED_0_2_SHARED_INFRASTRUCTURE_INVENTORY_NEXT",
+      "implemented": [
+        "uicommon.runtime",
+        "theme tokens",
+        "escapeStructuredText",
+        "clampVirtualOffset",
+        "getVirtualWindow"
+      ],
+      "runtime_regression": "12/12 repeatedly green in joint lab",
+      "next": "UICommon 0.2-A inventory duplicated generic UI infrastructure across Items and Weapons R6 before further Weapons physical-application work."
     }
   }
 }
