@@ -301,7 +301,7 @@ private _historyText = "";
  [
   [5000,"CONTEXTO",_context,"#6FCBB8","#BFEADF","  •  "],
   [5001,"RESULTADO",_message,"#7EC8FF","#DFE6E6","  •  "],
-  [5002,"HISTÓRICO",_historyText,"#81918E","#81918E","  •  "]
+  [5002,"HISTÓRICO",_historyText,"#93A7A4","#A8B7B5","  •  "]
  ]
 ] call ServoPeregrino_Organizador_UICommon_fnc_renderFooter;
 
