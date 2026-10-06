@@ -481,3 +481,29 @@ Próximo gate:
 1. UICommon Foundation 0.2-B no Arma;
 2. Items + UICommon Equivalence;
 3. se verdes, iniciar 0.2-C Virtual Navigation + Footer sem alterar domínio.
+
+
+## Handoff — UICommon 0.2-B homologada
+
+RPT real do Arma recebido para a missão canônica.
+
+Build executado:
+`0.2.0.1-pure-shared-primitives-b1`.
+
+Resultado runtime:
+- UICommon Foundation: **24 PASS / 0 FAIL**;
+- Items + UICommon Equivalence: **12 PASS / 0 FAIL**;
+- UICommon inicializou corretamente;
+- Items inicializou corretamente;
+- Weapons 0.6-F R6 permaneceu inicializando na mesma missão;
+- nenhuma regressão SP_ORG foi observada neste gate.
+
+Conclusão:
+**UICommon 0.2-B — HOMOLOGADA / CONGELADA.**
+
+Observação ambiental:
+o RPT contém erros de parâmetro em `CBA_fnc_addPerFrameHandler` durante PostInit.
+A missão canônica empacotada não contém chamada a `CBA_fnc_addPerFrameHandler`, e os erros não impediram inicialização nem os gates 24/24 e 12/12. Portanto, não são atribuídos à 0.2-B neste checkpoint.
+
+Próximo gate:
+**UICommon 0.2-C — Virtual Navigation + Footer Rendering**, preservando focused refresh e sem mover regra de domínio para UICommon.

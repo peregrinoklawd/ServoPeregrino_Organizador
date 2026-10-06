@@ -22,8 +22,8 @@
     "hub_rule": "Hub is an optional player-facing integration/orchestration layer. No domain module may require Hub in order to function.",
     "independent_core_development": true
   },
-  "global_next_gate": "UICommon 0.2-B runtime gate: run UICommon Foundation (24 checks expected from source) and Items + UICommon Equivalence (12 checks) in real Arma RPT; then continue 0.2-C Virtual Navigation + Footer.",
-  "global_after_gate": "UICommon 0.2-C/0.2-F consolidation + Items/Weapons equivalence -> Weapons 0.7-A Plan/Snapshot/Dry-Run -> 0.7-B Slot-Safe Apply.",
+  "global_next_gate": "UICommon 0.2-C Virtual Navigation + Footer Rendering; preserve focused refresh and domain ownership.",
+  "global_after_gate": "UICommon 0.2-D Shared Visual Foundation/HPP -> 0.2-E Performance Instrumentation -> 0.2-F Equivalence/Cleanup -> Weapons 0.7-A Plan/Snapshot/Dry-Run.",
   "modules": [
     {
       "id": "Nexus",
@@ -86,10 +86,10 @@
         "required": [],
         "optional": []
       },
-      "status": "0_2_B_PURE_SHARED_PRIMITIVES_STATIC_READY_RUNTIME_PENDING",
-      "next_gate": "Run UICommon 0.2-B Foundation and Items + UICommon Equivalence in the canonical Arma lab; do not claim runtime approval before RPT.",
-      "homologated_artifact": "UICommon 0.1.1 foundation + Items equivalence; runtime regression repeatedly 12/12.",
-      "current_candidate_artifact": "0.2-B pure shared primitives; technical commit 7fbc103093fedf583ed10c94cc8bb717ea9ba0f4; runtime pending."
+      "status": "0_2_B_RUNTIME_APPROVED_FROZEN_0_2_C_NEXT",
+      "next_gate": "UICommon 0.2-C: migrate only generic virtual navigation/footer mechanisms under equivalence tests; keep event-to-surface decisions in consumers.",
+      "homologated_artifact": "UICommon 0.2-B pure shared primitives; real Arma runtime 24/24 Foundation + 12/12 Items/UICommon Equivalence.",
+      "current_candidate_artifact": "0.2-B approved; next candidate not yet implemented."
     },
     {
       "id": "Items",
