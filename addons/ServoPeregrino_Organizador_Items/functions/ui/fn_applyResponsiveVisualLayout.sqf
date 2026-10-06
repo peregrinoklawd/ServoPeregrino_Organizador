@@ -3,12 +3,12 @@ disableSerialization;
 params [["_display",displayNull,[displayNull]]];
 if (isNull _display) exitWith {createHashMapFromArray [["profile","NONE"]]};
 
-private _barH=SPORG_UICOMMON_UI_SEARCH_BAR_H;
-private _iconH=SPORG_UICOMMON_UI_SEARCH_ICON_H;
-private _iconW=SPORG_UICOMMON_UI_SEARCH_ICON_W;
-private _clearH=SPORG_UICOMMON_UI_SEARCH_CLEAR_H;
-private _clearW=SPORG_UICOMMON_UI_SEARCH_CLEAR_W;
-private _pad=SPORG_UICOMMON_UI_SEARCH_PAD_W;
+private _barH=0.027*safeZoneH;
+private _iconH=0.014*safeZoneH;
+private _iconW=_iconH*pixelW/pixelH;
+private _clearH=0.020*safeZoneH;
+private _clearW=_clearH*pixelW/pixelH;
+private _pad=0.0035*safeZoneH*pixelW/pixelH;
 private _layouts=[];
 
 private _addSearch={
