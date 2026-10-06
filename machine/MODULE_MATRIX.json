@@ -40,7 +40,7 @@
       "id": "UICommon",
       "addon": "ServoPeregrino_Organizador_UICommon",
       "mandatory": false,
-      "status": "0_2_D_R1_STATIC_READY_RUNTIME_PENDING",
+      "status": "0_2_D_R1_RUNTIME_GREEN_R2_VISUAL_SCOPE_LOCKED",
       "stable_version": {
         "display": "0.2",
         "semantic": "0.2.0.2",
@@ -70,9 +70,9 @@
         "required": [],
         "optional": []
       },
-      "next_gate": "Real Arma equivalence: 31/31 + 16/16 + Weapons 594/594, 0 FAIL; manual visual parity.",
+      "next_gate": "Implement R2 visual-only polish and preserve all behavior; then runtime 0 FAIL + manual visual review.",
       "homologated_artifact": "0.2-C C2 frozen fallback.",
-      "current_candidate_artifact": "0.2-D R1 shared visual HPP; technical commit 7f2d86e406826087a0421282f89b130cf62891d4."
+      "current_candidate_artifact": "0.2-D R2 scope locked; implementation next."
     },
     {
       "id": "Items",

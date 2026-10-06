@@ -22,7 +22,7 @@
     "hub_rule": "Hub is an optional player-facing integration/orchestration layer. No domain module may require Hub in order to function.",
     "independent_core_development": true
   },
-  "global_next_gate": "UICommon 0.2-D R1 real-Arma equivalence gate: UICommon 31/31, Items/UICommon 16/16, Weapons 594/594 with 0 FAIL; manual visual parity in Items and Weapons.",
+  "global_next_gate": "UICommon 0.2-D R2 Shared Visual Polish: visual-only convergence, preserve all current Items/Weapons behavior and require 0 functional FAIL.",
   "global_after_gate": "If 0.2-D R1 passes: UICommon 0.2-E Performance Instrumentation -> 0.2-F Equivalence + Cleanup -> Weapons 0.7-A.",
   "modules": [
     {
@@ -90,10 +90,10 @@
         "required": [],
         "optional": []
       },
-      "status": "0_2_D_R1_STATIC_READY_RUNTIME_PENDING",
-      "next_gate": "Real Arma: 31/31 Foundation, 16/16 Items equivalence, Weapons 594/594 0 FAIL; manual Items/Weapons visual parity.",
+      "status": "0_2_D_R1_RUNTIME_GREEN_R2_VISUAL_SCOPE_LOCKED",
+      "next_gate": "Implement 0.2-D R2 visual-only polish, then real-Arma 31/31 + 16/16 + Weapons 594/594 0 FAIL plus manual visual review.",
       "homologated_artifact": "UICommon 0.2-C C2 remains frozen fallback: 31/31 + 16/16 + Weapons 594/594, 0 FAIL.",
-      "current_candidate_artifact": "UICommon 0.2-D R1; shared_controls.hpp owns generic metrics and base controls; consumer dialog bodies byte-identical to 0.2-C; technical commit 7f2d86e406826087a0421282f89b130cf62891d4."
+      "current_candidate_artifact": "0.2-D R2 scope locked in docs/55_UICOMMON_0_2_D_R2_VISUAL_POLISH_CONTRACT.md; implementation next."
     },
     {
       "id": "Items",
