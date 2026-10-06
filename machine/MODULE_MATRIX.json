@@ -40,12 +40,12 @@
       "id": "UICommon",
       "addon": "ServoPeregrino_Organizador_UICommon",
       "mandatory": false,
-      "status": "0_2_C_C1_STATIC_READY_RUNTIME_PENDING",
+      "status": "0_2_C_C2_PERFORMANCE_FIX_STATIC_READY_RUNTIME_PENDING",
       "stable_version": null,
       "development_version": {
         "display": "0.2",
         "semantic": "0.2.0.2",
-        "build": "0.2.0.2-virtual-navigation-footer-c1"
+        "build": "0.2.0.2-virtual-navigation-footer-c2"
       },
       "dependencies": [
         "Nexus"
@@ -66,9 +66,9 @@
         "required": [],
         "optional": []
       },
-      "next_gate": "Real Arma: Foundation 31/31 + Items/UICommon 16/16 + Weapons R6 no new functional FAIL + manual footer/wheel/slider/performance.",
+      "next_gate": "Real Arma C2: 31/31, 16/16, Weapons 596/598 only 2 known harness FAILs; no FULL on existing-kit base swap.",
       "homologated_artifact": "UICommon 0.2-B pure shared primitives; real Arma 24/24 + 12/12.",
-      "current_candidate_artifact": "0.2-C C1 mission-first; runtime pending."
+      "current_candidate_artifact": "0.2-C C2 performance fix; runtime pending."
     },
     {
       "id": "Items",

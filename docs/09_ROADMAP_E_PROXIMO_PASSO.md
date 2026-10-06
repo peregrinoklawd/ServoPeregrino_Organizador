@@ -926,3 +926,43 @@ Gate esperado:
 5. wheel/slider de catálogo sem stutter e com `fullRefresh=false` no RPT.
 
 Não iniciar 0.2-D antes deste gate.
+
+
+## Checkpoint — UICommon 0.2-C C2 performance
+
+RPT real da C1:
+- UICommon Foundation: **31 PASS / 0 FAIL**;
+- Items + UICommon Equivalence: **16 PASS / 0 FAIL**;
+- Weapons R6: **595 PASS / 2 FAIL / 597**, exatamente os dois FAILs harness/version-text já conhecidos;
+- wheel do Weapons: aproximadamente **6–10 ms**, `projectionBuilt=false`, `fullRefresh=false`;
+- wheel do Items: aproximadamente **13–14 ms**, sem projection rebuild e sem equipment recapture.
+
+Manual:
+- footer e navegação aprovados;
+- foi percebido stutter ao enviar/trocar arma-base do Catálogo para o rascunho.
+
+Diagnóstico do RPT:
+- após a seleção/equip da arma, o caminho executava `mode=FULL`;
+- exemplos manuais: **298 ms**, **246 ms**, **110 ms**, **97 ms**, **281 ms**, **346 ms**;
+- nesses eventos `projectionBuilt=true`;
+- o custo não vem de autosave nem de mutação física: em kit existente a arma é alterada somente no draft de sessão;
+- a persistência real continua acontecendo apenas em SALVAR;
+- o excesso era `_refresh=true` em `CATALOG_TO_DRAFT` / `SET_DRAFT_WEAPON`.
+
+C2:
+- build `0.2.0.2-virtual-navigation-footer-c2`;
+- commit técnico `0d584e3a4b874418de171a753b68292184737a22`;
+- base-weapon swap em kit existente agora atualiza somente **P2 Draft + P3 Catalog**;
+- P1 e P4 não são reconstruídos;
+- accessory Catalog-to-Draft atualiza somente P2;
+- auto-create sem kit selecionado mantém FULL porque cria um novo WeaponKit de sessão e P1 realmente muda;
+- nova regressão automática garante zero incremento de full refresh e +1 Draft/+1 Catalog focused no base swap.
+
+C1 não é congelada como 0.2-C final por causa do gate de performance manual.
+C2 aguarda RPT real.
+
+Runtime esperado da C2:
+- UICommon: **31/31**;
+- Items + UICommon: **16/16**;
+- Weapons R6+C2: **596 PASS / 2 FAIL / 598 total**, mantendo apenas os dois harness-only conhecidos;
+- durante troca de arma-base em kit existente devem aparecer `DRAFT_FOCUSED reason=CATALOG_TO_DRAFT` e `CATALOG_FOCUSED reason=CATALOG_TO_DRAFT`, sem `mode=FULL` provocado por essa operação.

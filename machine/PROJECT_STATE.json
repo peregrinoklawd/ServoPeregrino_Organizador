@@ -22,8 +22,8 @@
     "hub_rule": "Hub is an optional player-facing integration/orchestration layer. No domain module may require Hub in order to function.",
     "independent_core_development": true
   },
-  "global_next_gate": "UICommon 0.2-C C1 real-Arma gate: Foundation 31/31 + Items/UICommon 16/16 + Weapons R6 no-new-functional-fail + manual footer/wheel/slider/performance.",
-  "global_after_gate": "If 0.2-C passes: UICommon 0.2-D Shared Visual Foundation/HPP -> 0.2-E Performance Instrumentation -> 0.2-F Equivalence/Cleanup -> Weapons 0.7-A.",
+  "global_next_gate": "UICommon 0.2-C C2 real-Arma performance gate: 31/31 + 16/16 + Weapons 596/598 with only 2 known harness FAILs; base-weapon Catalog-to-Draft must avoid FULL refresh.",
+  "global_after_gate": "If C2 passes manual/perf: freeze UICommon 0.2-C -> UICommon 0.2-D Shared Visual Foundation/HPP.",
   "modules": [
     {
       "id": "Nexus",
@@ -65,7 +65,7 @@
       "development_version": {
         "display": "0.2",
         "semantic": "0.2.0.2",
-        "build": "0.2.0.2-virtual-navigation-footer-c1"
+        "build": "0.2.0.2-virtual-navigation-footer-c2"
       },
       "dependencies": [
         "Nexus"
@@ -86,10 +86,10 @@
         "required": [],
         "optional": []
       },
-      "status": "0_2_C_C1_STATIC_READY_RUNTIME_PENDING",
-      "next_gate": "Real Arma: UICommon 31/31, Items/UICommon 16/16, Weapons R6 no new functional FAIL, manual footer/wheel/slider and UI_PERF focused refresh.",
+      "status": "0_2_C_C2_PERFORMANCE_FIX_STATIC_READY_RUNTIME_PENDING",
+      "next_gate": "Real Arma C2: Foundation 31/31, Items/UICommon 16/16, Weapons 596/598 only known harness FAILs, manual Catalog-to-Draft stutter recheck.",
       "homologated_artifact": "UICommon 0.2-B pure shared primitives; real Arma 24/24 + 12/12.",
-      "current_candidate_artifact": "UICommon 0.2-C C1 mission-first; technical commits 70f54e6fad35d775938bd9f0d15c45d488f550cf + df0b75ba732397c56536e02b72cf447889ab841e; runtime pending."
+      "current_candidate_artifact": "0.2-C C2; focused Draft+Catalog routing for existing-kit base weapon swap; technical commit 0d584e3a4b874418de171a753b68292184737a22; runtime pending."
     },
     {
       "id": "Items",
