@@ -122,6 +122,8 @@ class ServoPeregrino_Organizador_UICommon
         {
             file = "uicommon\functions\geometry";
             class pointInRect {};
+            class applyResponsiveControlLayout {};
+            class setCompositeControlColor {};
         };
 
         class Text

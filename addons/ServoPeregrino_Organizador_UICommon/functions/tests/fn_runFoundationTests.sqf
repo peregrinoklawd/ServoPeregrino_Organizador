@@ -73,6 +73,10 @@ private _hasUIClass = {
 ["visual-search-edit-class", ["SPORG_UICommon_SearchEdit"] call _hasUIClass] call _assert;
 ["visual-search-clear-class", ["SPORG_UICommon_SearchClear"] call _hasUIClass] call _assert;
 ["visual-kit-list-class", ["SPORG_UICommon_KitList"] call _hasUIClass] call _assert;
+["visual-round-corner-class", ["SPORG_UICommon_RoundCorner"] call _hasUIClass] call _assert;
+["visual-round-fill-class", ["SPORG_UICommon_RoundFill"] call _hasUIClass] call _assert;
+["responsive-layout-function-loaded", !(isNil "ServoPeregrino_Organizador_UICommon_fnc_applyResponsiveControlLayout")] call _assert;
+["composite-color-function-loaded", !(isNil "ServoPeregrino_Organizador_UICommon_fnc_setCompositeControlColor")] call _assert;
 
 private _ok = _failed isEqualTo 0;
 [_ok, "UICOMMON_FOUNDATION_TESTS", format ["UICommon foundation: %1 PASS / %2 FAIL.", _passed, _failed], createHashMapFromArray [
