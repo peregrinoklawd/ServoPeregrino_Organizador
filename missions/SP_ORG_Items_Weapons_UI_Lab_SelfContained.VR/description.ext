@@ -1,7 +1,7 @@
 author = "Claudio Malta Telhada";
-onLoadName = "SP_ORG Items + Weapons UI Lab - Weapons 0.6-F R6 + UICommon 0.2-C C2";
-onLoadMission = "UICommon 0.2-C C1: virtual navigation/footer compartilhados + Catalog-to-Draft focused performance fix sobre Weapons 0.6-F R6.";
-overviewText = "Items + Weapons R6 preservados; UICommon 0.2-C C1 consolida slider, footer e hit testing mantendo focused refresh local.";
+onLoadName = "SP_ORG UI Lab - UICommon 0.2-D R1";
+onLoadMission = "UICommon 0.2-D R1: base visual/HPP compartilhada, sem alterar dominio, geometria ou IDs funcionais.";
+overviewText = "Items + Weapons R6 preservados; UICommon 0.2-D R1 compartilha controles-base e metricas visuais em HPP mantendo equivalencia.";
 enableDebugConsole = 1;
 disabledAI = 1;
 respawn = 3;
@@ -327,6 +327,7 @@ class CfgSounds
     class SP_ORG_Items_UI_Blocked  {name="SP_ORG_Items_UI_Blocked";  sound[]={"items\sounds\ui_blocked.ogg",0.48,1}; titles[]={};};
 };
 
+#include "uicommon\ui\shared_controls.hpp"
 #include "items\ui\items_dialog.hpp"
 #include "weapons\ui\weapons_dialog.hpp"
 

@@ -1,4 +1,5 @@
 #include "script_version.hpp"
+#include "ui\shared_controls.hpp"
 
 class CfgPatches
 {
