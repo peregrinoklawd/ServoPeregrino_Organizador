@@ -22,8 +22,8 @@
     "hub_rule": "Hub is an optional player-facing integration/orchestration layer. No domain module may require Hub in order to function.",
     "independent_core_development": true
   },
-  "global_next_gate": "UICommon 0.2-D R2 real-Arma visual/equivalence gate: UICommon 35/35, Items/UICommon 16/16, Weapons 594/594 0 FAIL, plus manual visual/search/DnD review.",
-  "global_after_gate": "If R2 passes automatic + manual visual gates: freeze UICommon 0.2-D, then start 0.2-E Performance Instrumentation.",
+  "global_next_gate": "UICommon 0.2-D R3 real-Arma gate: UICommon 39/39, Items/UICommon 16/16, Weapons 594/594 0 FAIL; true-rounded visual gate, footer readability, Weapons typography/alignment and responsive layout verification.",
+  "global_after_gate": "If R3 passes functional + visual + smaller-display checks: freeze UICommon 0.2-D and start 0.2-E Performance Instrumentation.",
   "modules": [
     {
       "id": "Nexus",
@@ -68,8 +68,8 @@
       },
       "development_version": {
         "display": "0.2",
-        "semantic": "0.2.0.4",
-        "build": "0.2.0.4-shared-visual-polish-d2"
+        "semantic": "0.2.0.5",
+        "build": "0.2.0.5-true-rounded-responsive-d3"
       },
       "dependencies": [
         "Nexus"
@@ -90,10 +90,10 @@
         "required": [],
         "optional": []
       },
-      "status": "0_2_D_R2_STATIC_READY_RUNTIME_PENDING",
-      "next_gate": "Real Arma R2: Foundation 35/35, Items/UICommon 16/16, Weapons 594/594 0 FAIL; manual rounded surfaces/buttons/search, footer, Meus Kits and Items DnD.",
-      "homologated_artifact": "0.2-C C2 remains frozen fallback; 0.2-D R1 was runtime-green and is the technical baseline for R2.",
-      "current_candidate_artifact": "0.2-D R2 visual polish; scope contract 1230edac8af190e831aa38483c121db10c4a1221; primitives 559b5fb7dc5f308ef797b2c4ed87b35f36f5ec00; consumer polish 002ae145ec94defa59a66d17e775861823c91033; runtime pending."
+      "status": "0_2_D_R3_STATIC_READY_RUNTIME_PENDING",
+      "next_gate": "Real Arma R3: Foundation 39/39, Items/UICommon 16/16, Weapons 594/594 0 FAIL; visible true corners on panels/action buttons; responsive log WIDE on ultrawide; visual review.",
+      "homologated_artifact": "0.2-C C2 remains frozen fallback. 0.2-D R1 runtime-green. R2 functional gate green but visual gate rejected because corners were not truly rounded.",
+      "current_candidate_artifact": "0.2-D R3: true-rounded composite surfaces, rounded action buttons, ultrawide search header with STANDARD fallback, title/accessory/footer/lower-card alignment; technical HEAD d887813b58d965d9aebc85e64425649ab18677b4."
     },
     {
       "id": "Items",

@@ -699,3 +699,24 @@ R2:
 - Items DnD mantém hit-test original com visual layer separado.
 
 Gate real: 35/35 + 16/16 + 594/594 0 FAIL + smoke visual/DnD.
+
+
+## 06/10/2026 — UICommon 0.2-D R3 candidata
+
+R2: funcional 35/35 + 16/16 + Weapons 594/594, porém visual gate de cantos reprovado.
+
+R3:
+- build `0.2.0.5-true-rounded-responsive-d3`;
+- rounded rect real = 4 círculos alpha + 2 fills;
+- painéis/footer/action buttons;
+- zero decoração por linha virtualizada;
+- acessórios Weapons menores;
+- títulos padronizados;
+- lower cards P2/P3/P4 alinhados;
+- Histórico com contraste recuperado;
+- busca na linha do título somente em aspect >=2.0;
+- fallback STANDARD preserva layout de duas linhas;
+- RPT registra resolução/profile;
+- eventos Items 51/51 e Weapons 47/47 idênticos à R2.
+
+Gate: 39/39 + 16/16 + 594/594 0 FAIL + avaliação visual ultrawide e resolução padrão.

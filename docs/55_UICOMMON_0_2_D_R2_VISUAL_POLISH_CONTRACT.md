@@ -186,3 +186,25 @@ Static invariants confirmados:
 - nenhuma busca global de header foi criada.
 
 Runtime continua pendente.
+
+
+## Resultado real da R2 — 06/10/2026
+
+Automático:
+- UICommon 35/35;
+- Items + UICommon 16/16;
+- Weapons 594/594, 0 FAIL.
+
+Manual:
+- buscas: aprovadas;
+- linhas MEUS KITS: convergência aprovada;
+- funções/DnD/barras: aprovados;
+- footer: estrutura aprovada, Histórico com contraste insuficiente;
+- acessórios Weapons: grandes demais;
+- títulos Weapons: inconsistentes;
+- cartões inferiores Weapons: desalinhados;
+- cantos: **REPROVADOS**.
+
+A textura `RscShortcutButton\normal_ca.paa` apenas criou sombra/gradiente. Não produziu recorte geométrico transparente perceptível nos painéis ou botões.
+
+Conclusão: R2 funcionalmente verde, mas não homologada como fim da 0.2-D.

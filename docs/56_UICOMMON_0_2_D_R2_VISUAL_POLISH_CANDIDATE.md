@@ -56,3 +56,15 @@ Manual:
 10. nenhuma regressão perceptível em ultrawide.
 
 Se a textura de painel ficar visualmente deformada por stretch, a R2 deve recuar o arredondamento de grandes painéis e mantê-lo somente em controles menores. Não mascarar esse defeito.
+
+
+## Gate real
+
+R2 concluiu 35/35 + 16/16 + 594/594, 0 FAIL.
+
+Visualmente:
+- approved: search, Meus Kits convergence, footer structure, functions;
+- rejected: actual rounded corners;
+- follow-up: footer history contrast, Weapons accessory font/title/lower-card alignment, responsive title-line search.
+
+Superseded by R3 candidate.

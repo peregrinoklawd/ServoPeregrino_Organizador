@@ -40,7 +40,7 @@
       "id": "UICommon",
       "addon": "ServoPeregrino_Organizador_UICommon",
       "mandatory": false,
-      "status": "0_2_D_R2_STATIC_READY_RUNTIME_PENDING",
+      "status": "0_2_D_R3_STATIC_READY_RUNTIME_PENDING",
       "stable_version": {
         "display": "0.2",
         "semantic": "0.2.0.2",
@@ -48,8 +48,8 @@
       },
       "development_version": {
         "display": "0.2",
-        "semantic": "0.2.0.4",
-        "build": "0.2.0.4-shared-visual-polish-d2"
+        "semantic": "0.2.0.5",
+        "build": "0.2.0.5-true-rounded-responsive-d3"
       },
       "dependencies": [
         "Nexus"
@@ -70,9 +70,9 @@
         "required": [],
         "optional": []
       },
-      "next_gate": "R2 real Arma: 35/35 + 16/16 + Weapons 594/594 0 FAIL, manual visual/search/DnD review.",
-      "homologated_artifact": "0.2-C C2 frozen fallback; R1 runtime-green technical baseline.",
-      "current_candidate_artifact": "0.2-D R2 visual polish; runtime pending."
+      "next_gate": "R3 real Arma: 39/39 + 16/16 + Weapons 594/594 0 FAIL, true-rounded + responsive visual review.",
+      "homologated_artifact": "0.2-C C2 frozen fallback; R1 runtime-green; R2 functional-green visual-rejected.",
+      "current_candidate_artifact": "0.2-D R3 true-rounded/responsive candidate; runtime pending."
     },
     {
       "id": "Items",
