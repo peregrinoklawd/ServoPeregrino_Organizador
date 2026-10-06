@@ -29,3 +29,18 @@ Items and Weapons do not depend on this addon yet.
 - virtual catalog offset clamp is shared;
 - no Items/Weapons domain ownership moved into UICommon;
 - API remains experimental.
+
+
+## 0.2-B — Pure Shared Primitives
+- `getVirtualScrollState`;
+- `pointInRect`;
+- runtime real aprovado: Foundation 24/24, Items Equivalence 12/12.
+
+## 0.2-C C1 — Virtual Navigation + Footer Rendering
+- `syncVirtualSlider`;
+- `buildFooterBandStructuredText`;
+- `renderFooter`;
+- Items e Weapons começam a consumir os mesmos mecanismos de slider/footer;
+- wheel hit testing passa a reutilizar `pointInRect`;
+- contexto, histórico, filtros e invalidation continuam pertencendo aos consumidores;
+- runtime real ainda pendente.

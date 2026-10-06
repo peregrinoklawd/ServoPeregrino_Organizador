@@ -802,3 +802,59 @@ A missão canônica empacotada não contém chamada a `CBA_fnc_addPerFrameHandle
 
 Próximo gate:
 **UICommon 0.2-C — Virtual Navigation + Footer Rendering**, preservando focused refresh e sem mover regra de domínio para UICommon.
+
+
+## Atualização 06/10/2026 — UICommon 0.2-C C1 preparada
+
+A 0.2-B permanece homologada como fallback.
+
+Candidata:
+- display: `0.2`;
+- semantic: `0.2.0.2`;
+- build: `0.2.0.2-virtual-navigation-footer-c1`;
+- commit técnico base: `70f54e6fad35d775938bd9f0d15c45d488f550cf`;
+- correção de revisão: `df0b75ba732397c56536e02b72cf447889ab841e`.
+
+Escopo implementado:
+- novo `syncVirtualSlider`, baseado em `getVirtualScrollState`;
+- novo `buildFooterBandStructuredText`;
+- novo `renderFooter`;
+- Items Full/Catalog focused usam slider compartilhado;
+- Weapons Full/Catalog focused usam slider compartilhado;
+- Items Full/Catalog/Draft/Equipment usam renderer de footer compartilhado;
+- Weapons Full/Catalog/Draft usam renderer de footer compartilhado;
+- wheel hit testing de Items e Weapons passa a usar `pointInRect`.
+
+Ownership preservado:
+- Items/Weapons continuam construindo contexto, mensagem, histórico, filtros, seleção e regras de evento;
+- UICommon não conhece ItemKit, WeaponKit, catálogo de domínio, targetSlot ou aplicação física;
+- wheel continua chamando `CATALOG_SCROLL` do módulo consumidor;
+- nenhuma chamada global de refresh foi introduzida.
+
+Performance contract:
+- `CATALOG_SCROLL -> offset -> refreshCatalogWindowUI`;
+- focused refresh continua registrando `fullRefresh=false`;
+- slider/footer não podem causar recapture de Equipment ou rebuild global por si próprios.
+
+Static gate:
+- addon/missão UICommon: paridade preservada;
+- addon/missão Items nos arquivos migrados: paridade preservada;
+- novas funções UICommon: zero referências de domínio;
+- blocos antigos de footer direto removidos dos refreshers migrados;
+- blocos manuais de `sliderSetRange` removidos dos refreshers migrados;
+- balanceamento estrutural dos arquivos alterados: OK;
+- UICommon Foundation: **31 assertion sites**;
+- Items + UICommon Equivalence: **16 assertion sites**;
+- runner Weapons R6 não foi modificado.
+
+Runtime:
+**PENDENTE DE RPT REAL DO ARMA.**
+
+Gate esperado:
+1. UICommon Foundation: **31/31**;
+2. Items + UICommon Equivalence: **16/16**;
+3. regressão Weapons R6 deve manter no máximo os mesmos **2 FAILs NON_FUNCTIONAL/HARNESS-ONLY** já conhecidos; qualquer FAIL novo é bloqueador;
+4. abrir Items e Weapons e validar footer CONTEXTO/RESULTADO/HISTÓRICO;
+5. wheel/slider de catálogo sem stutter e com `fullRefresh=false` no RPT.
+
+Não iniciar 0.2-D antes deste gate.

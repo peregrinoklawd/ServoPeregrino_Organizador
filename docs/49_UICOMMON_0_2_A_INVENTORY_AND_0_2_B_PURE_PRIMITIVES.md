@@ -202,3 +202,9 @@ A missão canônica empacotada não contém chamada a `CBA_fnc_addPerFrameHandle
 
 Próximo gate:
 **UICommon 0.2-C — Virtual Navigation + Footer Rendering**, preservando focused refresh e sem mover regra de domínio para UICommon.
+
+
+## Continuidade
+
+0.2-B foi homologada em runtime real com 24/24 + 12/12 e permanece fallback congelado.
+A candidata seguinte é 0.2-C C1, documentada em `docs/50_UICOMMON_0_2_C_VIRTUAL_NAVIGATION_FOOTER.md`.

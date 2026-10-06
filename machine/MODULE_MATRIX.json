@@ -40,12 +40,12 @@
       "id": "UICommon",
       "addon": "ServoPeregrino_Organizador_UICommon",
       "mandatory": false,
-      "status": "0_2_B_RUNTIME_APPROVED_FROZEN_0_2_C_NEXT",
+      "status": "0_2_C_C1_STATIC_READY_RUNTIME_PENDING",
       "stable_version": null,
       "development_version": {
         "display": "0.2",
-        "semantic": "0.2.0.1",
-        "build": "0.2.0.1-pure-shared-primitives-b1"
+        "semantic": "0.2.0.2",
+        "build": "0.2.0.2-virtual-navigation-footer-c1"
       },
       "dependencies": [
         "Nexus"
@@ -66,9 +66,9 @@
         "required": [],
         "optional": []
       },
-      "next_gate": "UICommon 0.2-C Virtual Navigation + Footer Rendering under equivalence/performance gate.",
-      "homologated_artifact": "0.2-B pure shared primitives; real Arma runtime 24/24 Foundation + 12/12 Items/UICommon Equivalence.",
-      "current_candidate_artifact": "0.2-B approved; 0.2-C not yet implemented."
+      "next_gate": "Real Arma: Foundation 31/31 + Items/UICommon 16/16 + Weapons R6 no new functional FAIL + manual footer/wheel/slider/performance.",
+      "homologated_artifact": "UICommon 0.2-B pure shared primitives; real Arma 24/24 + 12/12.",
+      "current_candidate_artifact": "0.2-C C1 mission-first; runtime pending."
     },
     {
       "id": "Items",

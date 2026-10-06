@@ -22,7 +22,7 @@
     missionNamespace setVariable ["SP_ORG_FullLab_fnc_testUICommon", {
         private _r = [] call ServoPeregrino_Organizador_UICommon_fnc_runFoundationTests;
         private _d = _r getOrDefault ["data",createHashMap];
-        hint format ["UICommon 0.2-B Foundation: %1 PASS / %2 FAIL",_d getOrDefault ["passed",0],_d getOrDefault ["failed",0]];
+        hint format ["UICommon 0.2-C C1 Foundation: %1 PASS / %2 FAIL",_d getOrDefault ["passed",0],_d getOrDefault ["failed",0]];
         diag_log format ["[SP_ORG] [FULL_UI_LAB] UICOMMON_TEST result=%1",_r];
     }];
 
@@ -110,5 +110,5 @@
     }];
 
     diag_log format ["[SP_ORG] [FULL_UI_LAB] CLIENT_READY player=%1 owner=%2",name player,clientOwner];
-    hint parseText "<t size='1.2'>SP_ORG - WEAPONS 0.6-F R6 + UICOMMON</t><br/><br/>Nexus + UICommon 0.2-B + Items Equivalence + Weapons 0.6-F R6 estao dentro desta missao.<br/><br/><t color='#7FD9D0'>ITEMS</t> permanece baseline funcional. <t color='#D7C27D'>WEAPONS</t> preserva a R5 e compacta o espaçamento dos filtros Tipo/Acessório, mantendo preview sem distorção, linhas alteradas em âmbar, authoring dinâmico e focused refresh.<br/><br/>Aplicacao fisica de Weapons continua reservada para 0.7. Nao carregue PBOs do Servo Peregrino neste teste.";
+    hint parseText "<t size='1.2'>SP_ORG - WEAPONS 0.6-F R6 + UICOMMON</t><br/><br/>Nexus + UICommon 0.2-C C1 + Items Equivalence + Weapons 0.6-F R6 estao dentro desta missao.<br/><br/><t color='#7FD9D0'>ITEMS</t> permanece baseline funcional. <t color='#D7C27D'>WEAPONS</t> preserva a R5 e compacta o espaçamento dos filtros Tipo/Acessório, mantendo preview sem distorção, linhas alteradas em âmbar, authoring dinâmico e focused refresh.<br/><br/>Aplicacao fisica de Weapons continua reservada para 0.7. Nao carregue PBOs do Servo Peregrino neste teste.";
 };
