@@ -22,8 +22,8 @@
     "hub_rule": "Hub is an optional player-facing integration/orchestration layer. No domain module may require Hub in order to function.",
     "independent_core_development": true
   },
-  "global_next_gate": "UICommon 0.2-A Shared Infrastructure Inventory/Consolidation before new Weapons 0.7 physical mutation.",
-  "global_after_gate": "UICommon 0.2 equivalence gate across Items + Weapons -> Weapons 0.7 Slot-Safe Weapon Application -> 0.8 Multiplayer Authority/Reconciliation.",
+  "global_next_gate": "UICommon 0.2-B runtime gate: run UICommon Foundation (24 checks expected from source) and Items + UICommon Equivalence (12 checks) in real Arma RPT; then continue 0.2-C Virtual Navigation + Footer.",
+  "global_after_gate": "UICommon 0.2-C/0.2-F consolidation + Items/Weapons equivalence -> Weapons 0.7-A Plan/Snapshot/Dry-Run -> 0.7-B Slot-Safe Apply.",
   "modules": [
     {
       "id": "Nexus",
@@ -63,9 +63,9 @@
       "mandatory": false,
       "stable_version": null,
       "development_version": {
-        "display": "0.1",
-        "semantic": "0.1.1",
-        "build": "0.1.1-items-equivalence-r1"
+        "display": "0.2",
+        "semantic": "0.2.0.1",
+        "build": "0.2.0.1-pure-shared-primitives-b1"
       },
       "dependencies": [
         "Nexus"
@@ -86,10 +86,10 @@
         "required": [],
         "optional": []
       },
-      "status": "FOUNDATION_0_1_1_EQUIVALENCE_APPROVED_SHARED_INFRASTRUCTURE_0_2_NEXT",
-      "next_gate": "UICommon 0.2-A: inventory duplicated generic UI infrastructure across Items and Weapons R6, classify SHARED / DOMAIN-SPECIFIC / CANDIDATE-SHARED, then extract only low-risk primitives under equivalence tests.",
+      "status": "0_2_B_PURE_SHARED_PRIMITIVES_STATIC_READY_RUNTIME_PENDING",
+      "next_gate": "Run UICommon 0.2-B Foundation and Items + UICommon Equivalence in the canonical Arma lab; do not claim runtime approval before RPT.",
       "homologated_artifact": "UICommon 0.1.1 foundation + Items equivalence; runtime regression repeatedly 12/12.",
-      "current_candidate_artifact": "0.1.1-items-equivalence-r1"
+      "current_candidate_artifact": "0.2-B pure shared primitives; technical commit 7fbc103093fedf583ed10c94cc8bb717ea9ba0f4; runtime pending."
     },
     {
       "id": "Items",
@@ -107,7 +107,8 @@
         "build": "0.13.0.1-a-server-authority-foundation"
       },
       "dependencies": [
-        "Nexus"
+        "Nexus",
+        "UICommon"
       ],
       "capabilities_provided": {
         "implemented": [

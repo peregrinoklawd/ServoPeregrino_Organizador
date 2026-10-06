@@ -265,3 +265,84 @@ evitar criar mais infraestrutura local em Weapons que depois precise ser extraí
 5. apontar duplicações reais por arquivo/função;
 6. propor a menor primeira extração;
 7. **não alterar código runtime até a matriz ser revisada**.
+
+
+## Resultado da 0.2-A — inventário concluído
+
+A comparação foi executada sobre o HEAD canônico com Weapons 0.6-F R6 sincronizada.
+
+Classificação congelada para início da consolidação:
+
+### SHARED / primeira linha
+- theme/tokens e controles-base;
+- structured text;
+- footer como mecanismo de render;
+- virtual offset/window/scroll state;
+- slider synchronization;
+- geometry/hit testing puro;
+- performance instrumentation.
+
+### CANDIDATE-SHARED
+- feedback history contract;
+- focused invalidation;
+- search normalization/plumbing;
+- selection/focus;
+- keep-aspect/centralização;
+- geometria interna além das métricas comprovadamente equivalentes.
+
+### DOMAIN-SPECIFIC
+- UI state completo;
+- view-model;
+- projeção/cache de Item catalog;
+- projeção/cache de Weapon catalog;
+- regras de filtro;
+- selection fallback;
+- refreshers que conhecem ItemKit/WeaponKit/Equipment;
+- aplicação física.
+
+### DEFERRED
+- row pool;
+- tooltip overlay avançado;
+- drag snapshot/ghost;
+- DnD compartilhado;
+- Preview 3D.
+
+Correções de hipótese:
+- keep-aspect só está provado em Weapons;
+- Items usa CT_CONTROLS_TABLE e Weapons ListBox, portanto não existe row pool comum real hoje;
+- focused refresh está correto nos dois módulos e não deve virar dispatcher global;
+- UICommon precisa no futuro de infraestrutura HPP/compile-time, não apenas tokens SQF runtime.
+
+## Sequência revisada após o inventário
+
+A hipótese anterior de sequência foi refinada pela evidência real:
+
+```text
+0.2-A  Inventory / Classification            CONCLUÍDO
+0.2-B  Pure Shared Primitives                CANDIDATA ESTÁTICA
+0.2-C  Virtual Navigation + Footer Rendering PRÓXIMO APÓS RUNTIME
+0.2-D  Shared Visual Foundation / HPP
+0.2-E  Performance Instrumentation
+0.2-F  Equivalence + Cleanup
+```
+
+### 0.2-B — candidata atual
+
+Implementado sem migrar consumidores:
+- `getVirtualScrollState(offset,totalCount,windowSize)`;
+- `pointInRect(x,y,rect)`.
+
+A candidata não altera regra de domínio, UI state, view-model, wheel routing ou refresh routing.
+
+Identidade:
+- display `0.2`;
+- semantic `0.2.0.1`;
+- build `0.2.0.1-pure-shared-primitives-b1`;
+- commit técnico `7fbc103093fedf583ed10c94cc8bb717ea9ba0f4`.
+
+Test policy:
+- o assert de Items que exigia literalmente `0.1.1-items-equivalence-r1` foi substituído por identificação funcional do componente;
+- build/revisão continuam registrados, mas não são gate cosmético.
+
+Runtime:
+**PENDENTE DE RPT REAL.**

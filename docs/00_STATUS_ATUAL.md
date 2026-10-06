@@ -736,3 +736,43 @@ Ação imediata:
 
 Documento:
 `docs/48_UICOMMON_0_2_SHARED_INFRASTRUCTURE_PLAN.md`.
+
+
+## Atualização 05/10/2026 — UICommon 0.2-A concluída / 0.2-B candidata estática
+
+O inventário comparativo real Items x Weapons R6 x UICommon foi concluído antes de qualquer refatoração.
+
+Decisões principais:
+- compartilhar mecanismo, nunca regra de domínio;
+- controles/tokens/footer/virtual navigation/perf são os maiores alvos reais;
+- focused refresh permanece decidido por cada consumidor;
+- keep-aspect é CANDIDATE-SHARED porque hoje só Weapons o prova;
+- row pool, tooltip overlay e drag ghost ficam DEFERRED;
+- UI state/view-model/projeção de catálogo continuam DOMAIN-SPECIFIC.
+
+Primeira extração implementada:
+- UICommon display `0.2`;
+- semantic `0.2.0.1`;
+- build `0.2.0.1-pure-shared-primitives-b1`;
+- novo `getVirtualScrollState`;
+- novo `pointInRect`;
+- foundation source agora possui 24 assertion sites;
+- Items + UICommon mantém 12 assertion sites, mas não depende mais do texto literal do build.
+
+Commit técnico:
+`7fbc103093fedf583ed10c94cc8bb717ea9ba0f4`.
+
+Static:
+- addon/mission parity das novas primitivas: OK;
+- referências de domínio nas novas primitivas: 0;
+- registros CfgFunctions/description.ext: OK;
+- balanceamento estrutural dos arquivos alterados: OK.
+
+Importante:
+**24/24 em runtime ainda NÃO foi declarado.**
+É necessário RPT real do Arma para homologar a candidata 0.2-B.
+
+Próximo gate:
+1. UICommon Foundation 0.2-B no Arma;
+2. Items + UICommon Equivalence;
+3. se verdes, iniciar 0.2-C Virtual Navigation + Footer sem alterar domínio.

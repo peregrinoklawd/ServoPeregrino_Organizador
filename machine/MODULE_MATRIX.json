@@ -40,12 +40,12 @@
       "id": "UICommon",
       "addon": "ServoPeregrino_Organizador_UICommon",
       "mandatory": false,
-      "status": "FOUNDATION_0_1_1_EQUIVALENCE_APPROVED_SHARED_INFRASTRUCTURE_0_2_NEXT",
+      "status": "0_2_B_PURE_SHARED_PRIMITIVES_STATIC_READY_RUNTIME_PENDING",
       "stable_version": null,
       "development_version": {
-        "display": "0.1",
-        "semantic": "0.1.1",
-        "build": "0.1.1-items-equivalence-r1"
+        "display": "0.2",
+        "semantic": "0.2.0.1",
+        "build": "0.2.0.1-pure-shared-primitives-b1"
       },
       "dependencies": [
         "Nexus"
@@ -66,9 +66,9 @@
         "required": [],
         "optional": []
       },
-      "next_gate": "UICommon 0.2-A inventory: compare Items and Weapons R6 generic UI infrastructure, classify SHARED / DOMAIN-SPECIFIC / CANDIDATE-SHARED, then extract low-risk primitives under equivalence gates.",
+      "next_gate": "Real Arma RPT: UICommon Foundation candidate (24 source assertion sites) + Items/UICommon Equivalence (12); then 0.2-C.",
       "homologated_artifact": "UICommon 0.1.1 foundation + Items equivalence; runtime regression 12/12.",
-      "current_candidate_artifact": "0.1.1-items-equivalence-r1"
+      "current_candidate_artifact": "0.2-B pure shared primitives; technical commit 7fbc103093fedf583ed10c94cc8bb717ea9ba0f4; runtime pending."
     },
     {
       "id": "Items",
@@ -87,7 +87,8 @@
         "build": "0.13.0.1-a-server-authority-foundation"
       },
       "dependencies": [
-        "Nexus"
+        "Nexus",
+        "UICommon"
       ],
       "capabilities_provided": {
         "implemented": [
