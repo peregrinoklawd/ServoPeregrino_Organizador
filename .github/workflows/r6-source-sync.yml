@@ -44,7 +44,7 @@ jobs:
           git commit -m "sync(weapons): materialize exact 0.6-F R6 mission baseline"
 
           ACTUAL="$(git rev-parse HEAD:"$TARGET")"
-          EXPECTED="eb85b4466f69c2a9b54894ff9075e6d48d6a6435"
+          EXPECTED="91dae966c4239b3984d21a24916d8e12f811fd2e"
           echo "R6 subtree: $ACTUAL"
           test "$ACTUAL" = "$EXPECTED"
 
