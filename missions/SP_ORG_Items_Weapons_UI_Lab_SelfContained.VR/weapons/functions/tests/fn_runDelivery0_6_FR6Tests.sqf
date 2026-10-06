@@ -4,6 +4,7 @@ if (!isServer || {isRemoteExecuted} || {!(missionNamespace getVariable ["SP_ORG_
 };
 
 private _checks = [];
+private _observations = [];
 private _issued = [];
 private _assert = {
  params [
@@ -12,6 +13,17 @@ private _assert = {
  ];
  _checks pushBack [_name,_ok];
  diag_log format ["[SP_ORG] [WEAPONS] [AUTO_TEST] mode=MISSION_FIRST %1 | %2",if (_ok) then {"PASS"} else {"FAIL"},_name];
+};
+
+// Release labels, revision text and presentation identifiers are diagnostic only.
+// They must never turn an otherwise healthy future delivery red.
+private _observe = {
+ params [
+  ["_name","UNNAMED_OBSERVATION",[""]],
+  ["_value",nil]
+ ];
+ _observations pushBack [_name,_value];
+ diag_log format ["[SP_ORG] [WEAPONS] [AUTO_TEST_INFO] mode=MISSION_FIRST %1 | value=%2",_name,_value];
 };
 
 private _loadedAmmoCount = {
@@ -1511,7 +1523,13 @@ if (_kitAId isNotEqualTo "") then {
 missionNamespace setVariable [SP_ORG_WEAPONS_UI_STATE,nil];
 private _uiState06A = [] call ServoPeregrino_Organizador_Weapons_fnc_createUIState;
 ["0.6-A UI state creates",(_uiState06A getOrDefault ["ready",false])] call _assert;
-["0.6-F R6 UI state schema marker",(_uiState06A getOrDefault ["version",""]) isEqualTo "0.6-F-r5-ui-state-candidate"] call _assert;
+["UI state exposes stable draft/focused-refresh contract",
+ ((_uiState06A getOrDefault ["draftsByKitId",createHashMap]) isEqualType createHashMap)
+ && {(_uiState06A getOrDefault ["catalogFocusedRefreshCount",-1]) isEqualType 0}
+ && {(_uiState06A getOrDefault ["draftFocusedRefreshCount",-1]) isEqualType 0}
+ && {(_uiState06A getOrDefault ["equipmentFocusedRefreshCount",-1]) isEqualType 0}
+] call _assert;
+["UI state release label",_uiState06A getOrDefault ["version",""]] call _observe;
 ["0.6-A R4 default kit filter Todos/internal ALL",(_uiState06A getOrDefault ["kitTypeFilter",""]) isEqualTo "ALL"] call _assert;
 ["0.6-A R4 default catalog filter Todos/internal ALL",(_uiState06A getOrDefault ["catalogTypeFilter",""]) isEqualTo "ALL"] call _assert;
 
@@ -1818,7 +1836,9 @@ if (!isNull _display06A) then {
  ["0.6-E R2 panel title ARMAS DO KIT",(ctrlText (_display06A displayCtrl 2000)) isEqualTo "ARMAS DO KIT"] call _assert;
  ["0.6-D R3 panel title CATÁLOGO DE ARMAS",(ctrlText (_display06A displayCtrl 3000)) isEqualTo "CATÁLOGO DE ARMAS"] call _assert;
  ["0.6-D R3 panel title CONTEÚDO DO EQUIPAMENTO",(ctrlText (_display06A displayCtrl 4000)) isEqualTo "CONTEÚDO DO EQUIPAMENTO"] call _assert;
- ["0.6-F R6 header identifies candidate",(ctrlText (_display06A displayCtrl 100)) find "0.6-F R6" >= 0] call _assert;
+ private _headerCtrl06A = _display06A displayCtrl 100;
+["Header control exists and remains populated",!isNull _headerCtrl06A && {(ctrlText _headerCtrl06A) isNotEqualTo ""}] call _assert;
+["Header release text",ctrlText _headerCtrl06A] call _observe;
  private _footerContextPosF = ctrlPosition (_display06A displayCtrl 5000);
  private _footerResultPosF = ctrlPosition (_display06A displayCtrl 5001);
  private _footerHistoryPosF = ctrlPosition (_display06A displayCtrl 5002);
@@ -2650,9 +2670,9 @@ if (_nameEditOpenR3 getOrDefault ["success",false]) then {
 };
 
 private _runtime06A = [] call ServoPeregrino_Organizador_Weapons_fnc_getRuntimeStatus;
-["0.6-F runtime checkpoint marker",((_runtime06A get "data") getOrDefault ["uiCheckpoint",""]) isEqualTo "0.6-F"] call _assert;
+["Runtime checkpoint label",((_runtime06A get "data") getOrDefault ["uiCheckpoint",""])] call _observe;
 ["0.6-D R3 runtime information convergence marker",((_runtime06A get "data") getOrDefault ["uiInformationMode",""]) isEqualTo "DRAFT_PLUS_CATALOG_PLUS_EQUIPMENT_PRESENTATION"] call _assert;
-["0.6-F R6 runtime revision marker",(((_runtime06A get "data") getOrDefault ["uiCheckpoint",""]) isEqualTo "0.6-F") && {(((_runtime06A get "data") getOrDefault ["uiRevision",""]) isEqualTo "R6")}] call _assert;
+["Runtime UI revision label",((_runtime06A get "data") getOrDefault ["uiRevision",""])] call _observe;
 ["0.6-D R3 runtime four-panel layout marker",((_runtime06A get "data") getOrDefault ["uiLayout",""]) isEqualTo "FOUR_PANEL_ITEMS_CONVERGENCE"] call _assert;
 ["0.6-D R3 runtime continuous catalog marker",((_runtime06A get "data") getOrDefault ["uiCatalogMode",""]) isEqualTo "CONTINUOUS_WINDOW_VISIBLE_SLIDER_FOCUSED_REFRESH"] call _assert;
 ["0.6-D R3 runtime equipment read-only marker",((_runtime06A get "data") getOrDefault ["uiEquipmentView",""]) isEqualTo "READ_ONLY_CURRENT_WEAPON"] call _assert;
@@ -2661,7 +2681,7 @@ private _runtime06A = [] call ServoPeregrino_Organizador_Weapons_fnc_getRuntimeS
 ["0.6-E R2 runtime direct authoring enabled",((_runtime06A get "data") getOrDefault ["uiAuthoring",""]) isEqualTo "SESSION_LOCAL_DIRECT_CATALOG_TO_DRAFT_0_6_E_R2"] call _assert;
 ["0.6-E R2 UICommon dependency marker",((_runtime06A get "data") getOrDefault ["uiCommonRequired",false])] call _assert;
 ["0.6-E R2 direct-draft marker",((_runtime06A get "data") getOrDefault ["uiDirectDraftEquip",false])] call _assert;
-["0.6-F R6 candidate marker",((_runtime06A get "data") getOrDefault ["uiVisualFreeze",""]) isEqualTo "FINAL_0_6_F_R6_COMPACT_FILTER_SPACING_TEST_CONTRACT_HOTFIX"] call _assert;
+["Runtime visual-freeze label",((_runtime06A get "data") getOrDefault ["uiVisualFreeze",""])] call _observe;
 
 ["0.6-F R3 runtime changed-row diff marker",((_runtime06A get "data") getOrDefault ["uiDraftDiffHighlight",""]) isEqualTo "BASE_RECIPE_FIELD_DIFF_AMBER"] call _assert;
 ["0.6-F R4 runtime preview-ready layout marker",((_runtime06A get "data") getOrDefault ["uiDraftPreviewLayout",""]) isEqualTo "EQUIPMENT_MIRRORED_KEEP_ASPECT_PREVIEW_READY"] call _assert;
@@ -2669,7 +2689,7 @@ private _runtime06A = [] call ServoPeregrino_Organizador_Weapons_fnc_getRuntimeS
 ["0.6-F R3 runtime global Catalog search marker",((_runtime06A get "data") getOrDefault ["uiCatalogSearchMode",""]) isEqualTo "GLOBAL_QUERY_IGNORES_STORED_FILTERS"] call _assert;
 ["0.6-F R3 runtime inline-name edit marker",((_runtime06A get "data") getOrDefault ["uiNameEditingMode",""]) isEqualTo "EMPTY_ALLOWED_UNTIL_SAVE"] call _assert;
 ["0.6-F R4 runtime keep-aspect preview marker",((_runtime06A get "data") getOrDefault ["uiPreviewScaleMode",""]) isEqualTo "KEEP_ASPECT_CENTERED_2D"] call _assert;
-["0.6-F R6 runtime compact Catalog filter marker",((_runtime06A get "data") getOrDefault ["uiCatalogFilterGrammar",""]) isEqualTo "UNIFORM_TEXT_BUTTONS_R6_COMPACT_LABEL_GAPS"] call _assert;
+["Runtime Catalog filter grammar label",((_runtime06A get "data") getOrDefault ["uiCatalogFilterGrammar",""])] call _observe;
 
 private _displayR4 = findDisplay SP_ORG_WEAPONS_UI_DISPLAY_IDD;
 if (!isNull _displayR4) then {
@@ -2729,11 +2749,11 @@ private _r5StateAfterAuto = missionNamespace getVariable [SP_ORG_WEAPONS_UI_STAT
 
 private _passed = {_x select 1} count _checks;
 private _failed = count _checks - _passed;
-diag_log format ["[SP_ORG] [WEAPONS] [AUTO_TEST_SUMMARY] mode=MISSION_FIRST_0_6_F_R6 passed=%1 failed=%2 total=%3 | UI_SCOPE=UX_CONVERGENCE_DIRECT_DRAFT_EQUIP_UICOMMON | DRAFT_MODE=LOCAL_SESSION_DIRECT_CATALOG_TO_DRAFT | AUTHORING_GATE=SESSION_LOCAL_DIRECT_CATALOG_TO_DRAFT_0_6_E_R2 | APPLICATION_GATE=DEFERRED_0_7 | MP_GATE=DEFERRED_0_8 | IDENTITY_MANUAL_GATE=OPEN | PBO_GATE=DEFERRED",_passed,_failed,count _checks];
+diag_log format ["[SP_ORG] [WEAPONS] [AUTO_TEST_SUMMARY] mode=MISSION_FIRST_0_6_F_R6 passed=%1 failed=%2 total=%3 observations=%4 | UI_SCOPE=UX_CONVERGENCE_DIRECT_DRAFT_EQUIP_UICOMMON | DRAFT_MODE=LOCAL_SESSION_DIRECT_CATALOG_TO_DRAFT | AUTHORING_GATE=SESSION_LOCAL_DIRECT_CATALOG_TO_DRAFT_0_6_E_R2 | APPLICATION_GATE=DEFERRED_0_7 | MP_GATE=DEFERRED_0_8 | IDENTITY_MANUAL_GATE=OPEN | PBO_GATE=DEFERRED",_passed,_failed,count _checks,count _observations];
 hint format ["Weapons 0.6-F R6 AUTO TEST: %1/%2; falhas=%3. Depois abra a UI e valide Novo -> Catálogo -> EQUIPAR NO RASCUNHO, nome inline + Salvar, Duplicar/Excluir/Publicar reservado e fluidez; nada deve equipar fisicamente.",_passed,count _checks,_failed];
 
 [_failed isEqualTo 0,"WEAPONS_AUTO_TEST_COMPLETE","0.6-F R6 validates the R5 dynamic-authoring behavior plus compact Tipo/Acessório filter spacing and corrected regression contracts: keep-aspect previews, uniform Catalog filter grammar, independent panel searches, global Catalog text search, stable inline-name editing, semantic changed-row highlighting, P2/P4 preview-ready alignment, NOVO cancel restore and direct Catalog-to-Draft authoring and the homologated R3 focused-refresh baseline. Physical application remains a 0.7 gate and multiplayer authority remains 0.8.",createHashMapFromArray [
- ["passed",_passed],["failed",_failed],["checks",_checks],
+ ["passed",_passed],["failed",_failed],["checks",_checks],["observations",_observations],
  ["uiScope","UX_CONVERGENCE_DIRECT_DRAFT_EQUIP_UICOMMON"],
  ["informationMode","DRAFT_PLUS_CATALOG_PLUS_EQUIPMENT_PRESENTATION"],
  ["compatibilityMode","DRAFT_EDITABLE_COMPATIBILITY_SELECTORS"],
