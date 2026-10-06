@@ -2,6 +2,7 @@
 disableSerialization;
 params [["_display",displayNull,[displayNull]]];
 uiNamespace setVariable [SERVO_PEREGRINO_ORGANIZADOR_ITEMS_UI_DISPLAY_VAR,_display];
+[_display] call ServoPeregrino_Organizador_Items_fnc_applyResponsiveVisualLayout;
 ["HIDE",createHashMap,_display,-1000,-1000,false] call ServoPeregrino_Organizador_Items_fnc_updateUIDragVisualProxy;
 ["HIDE",controlNull,_display] call ServoPeregrino_Organizador_Items_fnc_updateUIItemTooltip;
 // C.4: o ListBox histórico continua existindo para a suíte, mas jamais pode renderizar/capturar mouse no jogador.
