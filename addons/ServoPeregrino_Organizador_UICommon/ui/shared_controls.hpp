@@ -27,16 +27,6 @@
 #define SPORG_UICOMMON_UI_SEARCH_CLEAR_W (SPORG_UICOMMON_UI_SEARCH_CLEAR_H * pixelW / pixelH)
 #define SPORG_UICOMMON_UI_SEARCH_PAD_W (0.0035 * safeZoneH * pixelW / pixelH)
 
-// R3 true-rounded geometry. Corners are real alpha circles, not stretched button art.
-#define SPORG_UICOMMON_UI_PANEL_CORNER_H (0.024 * safeZoneH)
-#define SPORG_UICOMMON_UI_PANEL_CORNER_W (SPORG_UICOMMON_UI_PANEL_CORNER_H * pixelW / pixelH)
-#define SPORG_UICOMMON_UI_PANEL_RADIUS_H (SPORG_UICOMMON_UI_PANEL_CORNER_H / 2)
-#define SPORG_UICOMMON_UI_PANEL_RADIUS_W (SPORG_UICOMMON_UI_PANEL_CORNER_W / 2)
-#define SPORG_UICOMMON_UI_BUTTON_CORNER_H (0.014 * safeZoneH)
-#define SPORG_UICOMMON_UI_BUTTON_CORNER_W (SPORG_UICOMMON_UI_BUTTON_CORNER_H * pixelW / pixelH)
-#define SPORG_UICOMMON_UI_BUTTON_RADIUS_H (SPORG_UICOMMON_UI_BUTTON_CORNER_H / 2)
-#define SPORG_UICOMMON_UI_BUTTON_RADIUS_W (SPORG_UICOMMON_UI_BUTTON_CORNER_W / 2)
-
 class SPORG_UICommon_Text
 {
     type = 0; idc = -1; style = 0; text = ""; x = 0; y = 0; w = 0; h = 0;
@@ -45,7 +35,7 @@ class SPORG_UICommon_Text
 };
 class SPORG_UICommon_Title: SPORG_UICommon_Text
 {
-    sizeEx = 0.017 * safeZoneH; colorText[] = {0.75,0.92,0.88,1};
+    sizeEx = 0.019 * safeZoneH; colorText[] = {0.75,0.92,0.88,1};
 };
 class SPORG_UICommon_Picture: SPORG_UICommon_Text
 {
@@ -56,7 +46,8 @@ class SPORG_UICommon_PictureKeepAspect: SPORG_UICommon_Text
     style = 2096; colorText[] = {1,1,1,1};
 };
 
-// R2 legacy soft surfaces remain for search/progress controls that were visually approved.
+// Vanilla shortcut-button alpha texture gives static surfaces soft/rounded corners
+// without shipping extra assets. R2 uses it only for a small, fixed number of controls.
 class SPORG_UICommon_RoundedSurface: SPORG_UICommon_Picture
 {
     text = "\A3\ui_f\data\GUI\RscCommon\RscShortcutButton\normal_ca.paa";
@@ -74,36 +65,6 @@ class SPORG_UICommon_ProgressTrack: SPORG_UICommon_RoundedSurface
 class SPORG_UICommon_ProgressFill: SPORG_UICommon_RoundedSurface
 {
     colorText[] = {0.15,0.62,0.48,0.92};
-};
-
-// R3 actual rounded-rectangle primitives.
-// A rounded rect is composed from 4 alpha circles + 2 rectangular fills.
-class SPORG_UICommon_RoundCorner: SPORG_UICommon_Picture
-{
-    text = "\A3\ui_f\data\map\markers\military\dot_CA.paa";
-    colorText[] = {0.015,0.02,0.022,0.44};
-    colorBackground[] = {0,0,0,0};
-};
-class SPORG_UICommon_RoundFill: SPORG_UICommon_Text
-{
-    colorText[] = {0,0,0,0};
-    colorBackground[] = {0.015,0.02,0.022,0.44};
-};
-class SPORG_UICommon_RoundCornerAction: SPORG_UICommon_RoundCorner
-{
-    colorText[] = {0.08,0.11,0.12,0.72};
-};
-class SPORG_UICommon_RoundFillAction: SPORG_UICommon_RoundFill
-{
-    colorBackground[] = {0.08,0.11,0.12,0.72};
-};
-class SPORG_UICommon_RoundCornerDanger: SPORG_UICommon_RoundCorner
-{
-    colorText[] = {0.32,0.07,0.07,0.70};
-};
-class SPORG_UICommon_RoundFillDanger: SPORG_UICommon_RoundFill
-{
-    colorBackground[] = {0.32,0.07,0.07,0.70};
 };
 
 class SPORG_UICommon_SearchIcon: SPORG_UICommon_Picture
@@ -134,15 +95,6 @@ class SPORG_UICommon_ButtonFlatDanger: SPORG_UICommon_ButtonFlat
 {
     colorText[] = {1,0.76,0.76,1}; colorBackground[] = {0.32,0.07,0.07,0.62};
     colorBackgroundActive[] = {0.55,0.08,0.08,0.82}; colorFocused[] = {0.55,0.08,0.08,0.82};
-};
-class SPORG_UICommon_RoundButton: SPORG_UICommon_ButtonFlat
-{
-    colorBackground[] = {0,0,0,0}; colorBackgroundDisabled[] = {0,0,0,0};
-    colorBackgroundActive[] = {0,0,0,0}; colorFocused[] = {0,0,0,0};
-};
-class SPORG_UICommon_RoundButtonDanger: SPORG_UICommon_RoundButton
-{
-    colorText[] = {1,0.76,0.76,1};
 };
 
 // Player-facing static/action buttons use the vanilla shortcut-button texture.

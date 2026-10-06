@@ -54,7 +54,6 @@ class CfgFunctions
             file = "\ServoPeregrino_Organizador_UICommon\functions\geometry";
             class pointInRect {};
             class applyResponsiveControlLayout {};
-            class setCompositeControlColor {};
         };
 
         class Text

@@ -1,7 +1,7 @@
 author = "Claudio Malta Telhada";
-onLoadName = "SP_ORG UI Lab - UICommon 0.2-D R3";
-onLoadMission = "UICommon 0.2-D R3: cantos geometricamente arredondados, tipografia/alinhamento refinados e busca no header em ultrawide com fallback padrao.";
-overviewText = "Items + Weapons preservados; UICommon 0.2-D R3 corrige o arredondamento real e adiciona layout responsivo sem alterar contratos funcionais.";
+onLoadName = "SP_ORG UI Lab - UICommon 0.2-D R2";
+onLoadMission = "UICommon 0.2-D R2: polish visual compartilhado com buscas compactas, superficies suaves e convergencia de footer/Meus Kits sem alterar comportamento.";
+overviewText = "Items + Weapons preservados; UICommon 0.2-D R2 aplica polish visual compartilhado mantendo IDs, eventos, DnD, buscas e refresh contracts.";
 enableDebugConsole = 1;
 disabledAI = 1;
 respawn = 3;
@@ -123,7 +123,6 @@ class ServoPeregrino_Organizador_UICommon
             file = "uicommon\functions\geometry";
             class pointInRect {};
             class applyResponsiveControlLayout {};
-            class setCompositeControlColor {};
         };
 
         class Text

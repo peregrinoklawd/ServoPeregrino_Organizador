@@ -21,8 +21,10 @@ private _display = uiNamespace getVariable [SERVO_PEREGRINO_ORGANIZADOR_ITEMS_UI
 if (!isNull _display) then {
     ["HIDE",createHashMap,_display,-1000,-1000,false] call ServoPeregrino_Organizador_Items_fnc_updateUIDragVisualProxy;
 
-    [_display,SERVO_PEREGRINO_ORGANIZADOR_ITEMS_UI_DRAFT_PANEL_VISUAL_IDCS,[0.015,0.02,0.022,0.44]] call ServoPeregrino_Organizador_UICommon_fnc_setCompositeControlColor;
-    [_display,SERVO_PEREGRINO_ORGANIZADOR_ITEMS_UI_EQUIPMENT_PANEL_VISUAL_IDCS,[0.015,0.02,0.022,0.44]] call ServoPeregrino_Organizador_UICommon_fnc_setCompositeControlColor;
+    private _draftPanelVisual=_display displayCtrl SERVO_PEREGRINO_ORGANIZADOR_ITEMS_UI_DRAFT_PANEL_VISUAL_IDC;
+    if (!isNull _draftPanelVisual) then {_draftPanelVisual ctrlSetTextColor [0.015,0.02,0.022,0.44];};
+    private _equipmentPanelVisual=_display displayCtrl SERVO_PEREGRINO_ORGANIZADOR_ITEMS_UI_EQUIPMENT_PANEL_VISUAL_IDC;
+    if (!isNull _equipmentPanelVisual) then {_equipmentPanelVisual ctrlSetTextColor [0.015,0.02,0.022,0.44];};
     private _draftDrop = _display displayCtrl 2103;
     if (!isNull _draftDrop) then {
         _draftDrop ctrlSetText "ARRASTE ITENS PARA ADICIONAR AO KIT";
