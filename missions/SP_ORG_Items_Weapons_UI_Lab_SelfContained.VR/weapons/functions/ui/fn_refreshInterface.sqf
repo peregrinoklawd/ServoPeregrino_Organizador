@@ -296,11 +296,6 @@ private _historyText = "";
  if (_historyText isNotEqualTo "") then {_historyText = _historyText + "   •   "};
  _historyText = _historyText + _x;
 } forEach (_history select [((count _history)-3) max 0,(3 min (count _history))]);
-
-private _message=_message;
-private _history=_history;
-private _historyText="";
-{if (_historyText isNotEqualTo "") then {_historyText=_historyText+"   •   "};_historyText=_historyText+_x} forEach (_history select [((count _history)-3) max 0,(3 min (count _history))]);
 [
  _display,
  [
