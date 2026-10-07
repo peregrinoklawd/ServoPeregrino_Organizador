@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "snapshot_date": "2026-10-05",
+  "snapshot_date": "2026-10-07",
   "repository": "peregrinoklawd/ServoPeregrino_Organizador",
   "rule": "Every domain feature has one owning module. Hub may coordinate and present features, but it must delegate domain execution to the owning module through Nexus contracts/capabilities/events.",
   "modules": {
@@ -308,8 +308,8 @@
   ],
   "implementation_notes": {
     "Weapons": {
-      "delivery": "0.6-F R6 mission-first source synced / addon source remains 0.1-A",
-      "status": "MISSION_FIRST_R6_SOURCE_SYNCED_FUNCTIONAL_MANUAL_APPROVED_2_HARNESS_ONLY",
+      "delivery": "0.7-A mission-first Plan/Snapshot/Dry-Run candidate / addon source remains pre-0.7",
+      "status": "MISSION_FIRST_0_7_A_STATIC_READY_RUNTIME_PENDING",
       "homologated": {
         "lifecycle_0_1_b": "128/128 AUTO + 3/3 live Take/Put",
         "configuration_0_2": "175/175 AUTO",
@@ -328,7 +328,7 @@
       "apm_reference_rule": "Historical APM weapon UI is a UX/lessons-learned source. Review KEEP/ADAPT/DROP/NEW before freezing Weapons UI 0.6.",
       "physical_identity_proven": false,
       "addon_source_integrated_through": "0.1-A",
-      "next": "UICommon 0.2-A shared-infrastructure inventory/equivalence, then Weapons 0.7-A Plan/Snapshot/Dry-Run.",
+      "next": "Run cumulative real-Arma 0.7-A gate; physical mutation remains forbidden until 0.7-B.",
       "recipe_rule": "WeaponRecipe is frozen as configuration + optional magazineClass; targetSlot/name/identity/ammoCount remain outside Recipe.",
       "secondary_runtime_rule": "PRIMARY/HANDGUN class guards are strict. SECONDARY type=4 runtime/base variants may be equivalent only inside the same baseWeapon family.",
       "weapon_kit_candidate": {
@@ -439,6 +439,15 @@
         "r2": "CANDIDATE_STATIC_296_OF_296_RUNNER_518_RUNTIME_PENDING_PROJECTED_APPROX_545",
         "mode": "SESSION_LOCAL_AUTHORING_PLUS_UX_CONVERGENCE_DIRECT_DRAFT_EQUIP_NO_PHYSICAL_APPLICATION",
         "status": "ACTIVE_R2_CANDIDATE"
+      },
+      "application_0_7_a": {
+        "schema_plan": "0.7-A-application-plan-candidate",
+        "schema_snapshot": "0.7-A-application-snapshot-candidate",
+        "strategy": "FULL_LOADOUT_CLONE_SETUNITLOADOUT_FALSE_CANDIDATE",
+        "physical_mutation": false,
+        "full_magazines": false,
+        "regression_baseline": "0.6-F R6 594/594",
+        "gate": "RUNTIME_PENDING"
       }
     },
     "UICommon": {
