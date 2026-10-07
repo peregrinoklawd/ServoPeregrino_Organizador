@@ -69,6 +69,13 @@ class CfgFunctions
             class renderFooter {};
         };
 
+        class Performance
+        {
+            file = "\ServoPeregrino_Organizador_UICommon\functions\performance";
+            class elapsedMs {};
+            class appendPerfHistory {};
+        };
+
         class Tests
         {
             file = "\ServoPeregrino_Organizador_UICommon\functions\tests";

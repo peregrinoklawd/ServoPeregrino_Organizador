@@ -65,6 +65,19 @@ private _footerBand = ["A&B", "C<D>E", "#111111", "#222222", " :: "] call ServoP
 ["footer-band-colors-preserved", (_footerBand find "#111111") >= 0 && {(_footerBand find "#222222") >= 0}] call _assert;
 ["footer-null-display-safe", ([findDisplay -99999, []] call ServoPeregrino_Organizador_UICommon_fnc_renderFooter) isEqualTo 0] call _assert;
 
+private _elapsedFixed = [10,10.125] call ServoPeregrino_Organizador_UICommon_fnc_elapsedMs;
+["perf-elapsed-fixed", _elapsedFixed isEqualTo 125] call _assert;
+["perf-elapsed-invalid-start", ([-1,10] call ServoPeregrino_Organizador_UICommon_fnc_elapsedMs) isEqualTo -1] call _assert;
+["perf-elapsed-negative-delta-clamps-zero", ([10,9] call ServoPeregrino_Organizador_UICommon_fnc_elapsedMs) isEqualTo 0] call _assert;
+
+private _perfSource = [["A",1],["B",2]];
+private _perfAdded = [_perfSource,["C",3],3] call ServoPeregrino_Organizador_UICommon_fnc_appendPerfHistory;
+["perf-history-adds-sample", (count _perfAdded) isEqualTo 3 && {(_perfAdded#2) isEqualTo ["C",3]}] call _assert;
+["perf-history-source-immutable", (count _perfSource) isEqualTo 2 && {(_perfSource#0) isEqualTo ["A",1]}] call _assert;
+private _perfCapped = [_perfAdded,["D",4],3] call ServoPeregrino_Organizador_UICommon_fnc_appendPerfHistory;
+["perf-history-cap-drops-oldest", (count _perfCapped) isEqualTo 3 && {(_perfCapped#0) isEqualTo ["B",2]} && {(_perfCapped#2) isEqualTo ["D",4]}] call _assert;
+["perf-history-zero-cap", ([_perfCapped,["E",5],0] call ServoPeregrino_Organizador_UICommon_fnc_appendPerfHistory) isEqualTo []] call _assert;
+
 private _hasUIClass = {
     params ["_name"];
     isClass (missionConfigFile >> _name) || {isClass (configFile >> _name)}

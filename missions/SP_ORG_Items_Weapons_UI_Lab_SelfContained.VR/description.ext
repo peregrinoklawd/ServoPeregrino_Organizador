@@ -138,6 +138,13 @@ class ServoPeregrino_Organizador_UICommon
             class renderFooter {};
         };
 
+        class Performance
+        {
+            file = "uicommon\functions\performance";
+            class elapsedMs {};
+            class appendPerfHistory {};
+        };
+
         class Tests
         {
             file = "uicommon\functions\tests";
