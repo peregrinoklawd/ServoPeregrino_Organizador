@@ -1,7 +1,7 @@
 author = "Claudio Malta Telhada";
-onLoadName = "SP_ORG UI Lab - Weapons 0.7-A";
-onLoadMission = "Weapons 0.7-A: ApplicationPlan, Snapshot, fingerprints de preservação e Dry-Run slot-safe sem mutação física.";
-overviewText = "UICommon 0.2 está congelada. Weapons 0.7-A preserva a UI 0.6-F R6 e valida planejamento/snapshot de aplicação antes de habilitar mutação física em 0.7-B.";
+onLoadName = "SP_ORG UI Lab - Weapons 0.7-B";
+onLoadMission = "Weapons 0.7-B: primeira aplicação física slot-safe sobre os contratos Plan/Snapshot homologados na 0.7-A.";
+overviewText = "UICommon 0.2 e Weapons 0.7-A estão congeladas. Weapons 0.7-B habilita mutação física controlada apenas no slot alvo, com fullMagazines=false e pós-validação dos domínios protegidos.";
 enableDebugConsole = 1;
 disabledAI = 1;
 respawn = 3;
@@ -236,7 +236,7 @@ class ServoPeregrino_Organizador_Weapons
    class validateApplicationPlan {};
    class captureApplicationSnapshot {};
    class validateApplicationSnapshot {};
-   class simulateApplicationPlan {};
+   class simulateApplicationPlan {};\n   class buildApplicationTargetLoadout {};\n   class validateAppliedApplicationState {};\n   class applyApplicationPlan {};
   };
   class UI
   {
@@ -331,7 +331,7 @@ class ServoPeregrino_Organizador_Weapons
             class runDelivery0_6_FR4Tests {};
             class runDelivery0_6_FR5Tests {};
             class runDelivery0_6_FR6Tests {};
-            class runDelivery0_7_ATests {};
+            class runDelivery0_7_ATests {};\n            class runDelivery0_7_BTests {};
    class serverHandleLabRequest {};
   };
  };
