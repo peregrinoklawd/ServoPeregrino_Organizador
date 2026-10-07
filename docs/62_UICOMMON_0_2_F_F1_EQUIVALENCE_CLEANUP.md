@@ -82,3 +82,27 @@ Congelar **UICommon 0.2**.
 
 Próxima frente:
 **Weapons 0.7-A — Plan / Snapshot / Dry-Run**, ainda sem mutação física até o gate específico.
+
+## Runtime final homologado
+
+RPT real recebido em 07/10/2026.
+
+Resultado:
+- Foundation: **43/43**;
+- Items + UICommon: **16/16**;
+- Weapons 0.6-F R6: **594/594**, 0 FAIL;
+- equivalência manual aprovada;
+- refresh focused preservado em Items e Weapons;
+- nenhum novo erro SP_ORG.
+
+Performance observada na validação manual:
+- Items catalog scroll: aproximadamente **12–20 ms**, sem FULL e sem equipment recapture;
+- Weapons catalog scroll: aproximadamente **4–12 ms** na maior parte das amostras, sem rebuild de projection/filter e sem FULL;
+- operações de Draft/Kit switch continuaram focais.
+
+Conclusão:
+**0.2-F F1 HOMOLOGADA.**
+**UICommon 0.2 encerrada e congelada em 0.2.0.10.**
+
+Próximo desenvolvimento:
+**Weapons 0.7-A — Plan / Snapshot / Dry-Run**.
