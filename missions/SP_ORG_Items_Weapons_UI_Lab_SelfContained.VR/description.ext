@@ -1,7 +1,7 @@
 author = "Claudio Malta Telhada";
-onLoadName = "SP_ORG UI Lab - UICommon 0.2-D R6";
-onLoadMission = "UICommon 0.2-D R6: review fix da R5; status do rascunho alinhado ao nome e buscas sintéticas de Weapons limpas após testes.";
-overviewText = "R4 permanece homologada; R6 corrige apenas higiene do harness e alinhamento visual do status, preservando a funcionalidade da R5.";
+onLoadName = "SP_ORG UI Lab - UICommon 0.2-E E1";
+onLoadMission = "UICommon 0.2-E E1: instrumentação de performance compartilhada, sem alterar ownership de refresh ou regras de domínio.";
+overviewText = "R6 permanece homologada; E1 extrai medição de tempo e histórico limitado para UICommon preservando logs, focused refresh e comportamento de Items/Weapons.";
 enableDebugConsole = 1;
 disabledAI = 1;
 respawn = 3;

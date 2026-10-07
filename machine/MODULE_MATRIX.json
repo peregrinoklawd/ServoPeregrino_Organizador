@@ -40,7 +40,7 @@
       "id": "UICommon",
       "addon": "ServoPeregrino_Organizador_UICommon",
       "mandatory": false,
-      "status": "0_2_D_R6_HOMOLOGATED_FROZEN",
+      "status": "0_2_E_E1_STATIC_READY_RUNTIME_PENDING",
       "stable_version": {
         "display": "0.2",
         "semantic": "0.2.0.8",
@@ -48,8 +48,8 @@
       },
       "development_version": {
         "display": "0.2",
-        "semantic": "0.2.0.8",
-        "build": "0.2.0.8-status-search-hygiene-d6"
+        "semantic": "0.2.0.9",
+        "build": "0.2.0.9-performance-instrumentation-e1"
       },
       "dependencies": [
         "Nexus"
@@ -70,9 +70,9 @@
         "required": [],
         "optional": []
       },
-      "next_gate": "0.2-E Performance Instrumentation; generic helpers only, no domain dispatcher or refresh-policy migration.",
-      "homologated_artifact": "0.2-D R6 real-Arma approved: 36/36 + 16/16 + Weapons 594/594, 0 FAIL; manual approved.",
-      "current_candidate_artifact": null
+      "next_gate": "E1 real-Arma: 43/43 + 16/16 + 594/594, with focused UI_PERF behavior preserved.",
+      "homologated_artifact": "0.2-D R6 frozen real-Arma baseline.",
+      "current_candidate_artifact": "0.2-E E1 performance primitives migrated into Items/Weapons without domain ownership changes."
     },
     {
       "id": "Items",

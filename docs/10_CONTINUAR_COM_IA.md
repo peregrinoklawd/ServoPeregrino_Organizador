@@ -767,3 +767,22 @@ R6 homologada e congelada:
 
 Próxima frente: **0.2-E Performance Instrumentation**.
 A extração deve compartilhar somente mecanismo genérico de medição/histórico; a decisão de FULL vs focused refresh continua pertencendo a Items/Weapons.
+
+
+## 07/10/2026 — UICommon 0.2-E E1
+
+Candidata aberta após congelamento da 0.2-D R6.
+
+Escopo:
+- `elapsedMs(start,end?)`: medição genérica em ms;
+- `appendPerfHistory(history,sample,max)`: histórico limitado e imutável para o chamador;
+- Items migra FULL, Catalog, Draft, Equipment, Kit Switch e Physical Focused;
+- Weapons migra FULL, Catalog, Draft e Equipment;
+- formatos existentes de `[UI_PERF]`, contadores e decisão FULL/focused permanecem nos módulos consumidores.
+
+Gate esperado:
+- UICommon **43/43**;
+- Items+UICommon **16/16**;
+- Weapons **594/594**;
+- wheel/slider continuam `fullRefresh=false`;
+- nenhuma recaptura/rebuild adicional causada pela instrumentação.

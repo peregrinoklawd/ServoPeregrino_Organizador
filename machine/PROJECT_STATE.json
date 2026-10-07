@@ -22,8 +22,8 @@
     "hub_rule": "Hub is an optional player-facing integration/orchestration layer. No domain module may require Hub in order to function.",
     "independent_core_development": true
   },
-  "global_next_gate": "UICommon 0.2-E Performance Instrumentation: extract only generic timing/history primitives, migrate Items/Weapons without changing refresh ownership or performance semantics.",
-  "global_after_gate": "After 0.2-E runtime approval: UICommon 0.2-F Equivalence + Cleanup, final Items+Weapons equivalence gate, then Weapons 0.7-A Plan/Snapshot/Dry-Run.",
+  "global_next_gate": "UICommon 0.2-E E1 real-Arma gate: UICommon 43/43, Items/UICommon 16/16, Weapons 594/594 0 FAIL; compare UI_PERF focused paths with R6 and confirm no refresh-policy regression.",
+  "global_after_gate": "If E1 passes: freeze UICommon 0.2-E, execute 0.2-F Equivalence + Cleanup, final Items+Weapons equivalence gate, then Weapons 0.7-A.",
   "modules": [
     {
       "id": "Nexus",
@@ -68,8 +68,8 @@
       },
       "development_version": {
         "display": "0.2",
-        "semantic": "0.2.0.8",
-        "build": "0.2.0.8-status-search-hygiene-d6"
+        "semantic": "0.2.0.9",
+        "build": "0.2.0.9-performance-instrumentation-e1"
       },
       "dependencies": [
         "Nexus"
@@ -90,10 +90,10 @@
         "required": [],
         "optional": []
       },
-      "status": "0_2_D_R6_HOMOLOGATED_FROZEN",
-      "next_gate": "Start 0.2-E Performance Instrumentation. Preserve all domain refresh routing and existing UI_PERF semantics.",
-      "homologated_artifact": "UICommon 0.2-D R6 HOMOLOGATED in real Arma: Foundation 36/36, Items+UICommon 16/16, Weapons 594/594 0 FAIL; manual tests approved; synthetic search leakage fixed; status placement approved.",
-      "current_candidate_artifact": null
+      "status": "0_2_E_E1_STATIC_READY_RUNTIME_PENDING",
+      "next_gate": "Real Arma: Foundation 43/43, Items+UICommon 16/16, Weapons 594/594; wheel/slider/catalog/draft/equipment remain focused, no new FULL refresh.",
+      "homologated_artifact": "UICommon 0.2-D R6 frozen fallback: 36/36 + 16/16 + 594/594, manual approved.",
+      "current_candidate_artifact": "0.2-E E1: pure elapsedMs + appendPerfHistory in UICommon; Items six instrumented refresh paths consume both helpers; Weapons four refresh paths consume elapsedMs; existing sample schemas, counters and UI_PERF log formats preserved."
     },
     {
       "id": "Items",
