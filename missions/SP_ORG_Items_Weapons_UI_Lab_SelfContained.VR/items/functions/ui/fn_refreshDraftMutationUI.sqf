@@ -121,7 +121,7 @@ private _hist=_state getOrDefault ["history",[]]; private _histText="";
     ]
 ] call ServoPeregrino_Organizador_UICommon_fnc_renderFooter;
 
-private _durationMs=round ((diag_tickTime-_startedAt)*1000);
+private _durationMs=[_startedAt] call ServoPeregrino_Organizador_UICommon_fnc_elapsedMs;
 _state=missionNamespace getVariable [SERVO_PEREGRINO_ORGANIZADOR_ITEMS_UI_STATE_VAR,createHashMap];
 _state set ["lastRefreshTick",diag_tickTime];
 _state set ["lastRefreshMode","DRAFT_FOCUSED"];
@@ -130,9 +130,7 @@ _state set ["lastDraftFocusedRefreshDurationMs",_durationMs];
 _state set ["lastDraftFocusedRefreshReason",toUpper _reason];
 _state set ["lastDraftTotalMass",_draftTotalMass];
 _state set ["lastDraftUnknownMassCount",_draftUnknownMassCount];
-private _perf=+(_state getOrDefault ["uiPerfHistory",[]]);
-_perf pushBack ["DRAFT_FOCUSED",toUpper _reason,_durationMs,count _rows,diag_tickTime];
-while {(count _perf)>24} do {_perf deleteAt 0;};
+private _perf=[_state getOrDefault ["uiPerfHistory",[]],["DRAFT_FOCUSED",toUpper _reason,_durationMs,count _rows,diag_tickTime],24] call ServoPeregrino_Organizador_UICommon_fnc_appendPerfHistory;
 _state set ["uiPerfHistory",_perf];
 _state set ["refreshing",false];
 missionNamespace setVariable [SERVO_PEREGRINO_ORGANIZADOR_ITEMS_UI_STATE_VAR,_state];

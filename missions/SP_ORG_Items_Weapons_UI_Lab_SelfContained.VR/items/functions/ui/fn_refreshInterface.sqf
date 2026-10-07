@@ -7,7 +7,7 @@ private _guardState = missionNamespace getVariable [SERVO_PEREGRINO_ORGANIZADOR_
 _guardState set ["refreshing", true]; missionNamespace setVariable [SERVO_PEREGRINO_ORGANIZADOR_ITEMS_UI_STATE_VAR, _guardState];
 private _vmStartedAt=diag_tickTime;
 private _vmR = [player] call ServoPeregrino_Organizador_Items_fnc_buildUIViewModel;
-private _vmDurationMs=round ((diag_tickTime-_vmStartedAt)*1000);
+private _vmDurationMs=[_vmStartedAt] call ServoPeregrino_Organizador_UICommon_fnc_elapsedMs;
 if !(_vmR getOrDefault ["success",false]) exitWith {_guardState set ["refreshing",false]; missionNamespace setVariable [SERVO_PEREGRINO_ORGANIZADOR_ITEMS_UI_STATE_VAR,_guardState]; false};
 private _vm = _vmR getOrDefault ["data",createHashMap];
 private _uiR=[] call ServoPeregrino_Organizador_Items_fnc_getUIState; private _ui=((_uiR getOrDefault ["data",createHashMap]) getOrDefault ["state",createHashMap]);
@@ -173,7 +173,7 @@ private _hist=_vm getOrDefault ["history",[]]; private _histText="";
     ]
 ] call ServoPeregrino_Organizador_UICommon_fnc_renderFooter;
 [player] call ServoPeregrino_Organizador_Items_fnc_refreshHeaderUI;
-private _totalDurationMs=round ((diag_tickTime-_refreshStartedAt)*1000);
+private _totalDurationMs=[_refreshStartedAt] call ServoPeregrino_Organizador_UICommon_fnc_elapsedMs;
 private _renderDurationMs=(_totalDurationMs-_vmDurationMs) max 0;
 private _state=missionNamespace getVariable [SERVO_PEREGRINO_ORGANIZADOR_ITEMS_UI_STATE_VAR,createHashMap];
 _state set ["physicalMutationEnabled",false];
@@ -191,9 +191,7 @@ _state set ["lastRefreshTick",diag_tickTime];
 _state set ["lastRefreshMode","FULL"];
 _state set ["fullRefreshCount",(_state getOrDefault ["fullRefreshCount",0])+1];
 _state set ["lastFullRefreshDurationMs",_totalDurationMs];
-private _perf=+(_state getOrDefault ["uiPerfHistory",[]]);
-_perf pushBack ["FULL","FULL_REFRESH",_totalDurationMs,count (_draft getOrDefault ["rows",[]]),diag_tickTime];
-while {(count _perf)>24} do {_perf deleteAt 0;};
+private _perf=[_state getOrDefault ["uiPerfHistory",[]],["FULL","FULL_REFRESH",_totalDurationMs,count (_draft getOrDefault ["rows",[]]),diag_tickTime],24] call ServoPeregrino_Organizador_UICommon_fnc_appendPerfHistory;
 _state set ["uiPerfHistory",_perf];
 _state set ["refreshing",false];
 missionNamespace setVariable [SERVO_PEREGRINO_ORGANIZADOR_ITEMS_UI_STATE_VAR,_state];

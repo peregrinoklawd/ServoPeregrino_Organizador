@@ -85,8 +85,8 @@ private _hist=_state getOrDefault ["history",[]]; private _histText="";
         [5002,"HISTÓRICO",_histText,"#B9A3E8","#D1C2F0","  •  "]
     ]
 ] call ServoPeregrino_Organizador_UICommon_fnc_renderFooter;
-private _renderMs=round ((diag_tickTime-_renderStartedAt)*1000);
-private _totalMs=round ((diag_tickTime-_startedAt)*1000);
+private _renderMs=[_renderStartedAt] call ServoPeregrino_Organizador_UICommon_fnc_elapsedMs;
+private _totalMs=[_startedAt] call ServoPeregrino_Organizador_UICommon_fnc_elapsedMs;
 
 _state=missionNamespace getVariable [SERVO_PEREGRINO_ORGANIZADOR_ITEMS_UI_STATE_VAR,createHashMap];
 _state set ["catalogOffset",_offset];
@@ -100,9 +100,7 @@ _state set ["lastCatalogFocusedRefreshDurationMs",_totalMs];
 _state set ["lastCatalogFocusedFilterDurationMs",_data getOrDefault ["filterMs",0]];
 _state set ["lastCatalogProjectionBuildDurationMs",_data getOrDefault ["projectionBuildMs",0]];
 _state set ["catalogProjectionBuildCount",_data getOrDefault ["projectionBuildCount",0]];
-private _perf=+(_state getOrDefault ["uiPerfHistory",[]]);
-_perf pushBack ["CATALOG_FOCUSED",toUpper _reason,_totalMs,_data getOrDefault ["filterMs",0],_renderMs,diag_tickTime];
-while {(count _perf)>24} do {_perf deleteAt 0;};
+private _perf=[_state getOrDefault ["uiPerfHistory",[]],["CATALOG_FOCUSED",toUpper _reason,_totalMs,_data getOrDefault ["filterMs",0],_renderMs,diag_tickTime],24] call ServoPeregrino_Organizador_UICommon_fnc_appendPerfHistory;
 _state set ["uiPerfHistory",_perf];
 _state set ["refreshing",false];
 missionNamespace setVariable [SERVO_PEREGRINO_ORGANIZADOR_ITEMS_UI_STATE_VAR,_state];
