@@ -1237,3 +1237,20 @@ O primeiro gate de mutação continua sendo **0.7-B Slot-Safe Apply**.
 
 Documento:
 `docs/63_WEAPONS_0_7_A_PLAN_SNAPSHOT_DRY_RUN.md`.
+
+## 07/10/2026 — Backlog Items: confirmação no CAPTURAR
+
+Registrar para entrega futura de Items:
+
+- o botão **CAPTURAR** do painel **CONTEÚDO DO EQUIPAMENTO** deve abrir confirmação;
+- a confirmação deve explicar que o conteúdo atual de **ITENS DO KIT** será limpo;
+- confirmar deve substituir o rascunho pelo conteúdo atualmente exibido em **CONTEÚDO DO EQUIPAMENTO**;
+- não fazer merge com o rascunho anterior;
+- cancelar não altera rascunho, kit persistido ou inventário;
+- a captura continua sendo somente rascunho até **Salvar**;
+- falha de captura não pode destruir o rascunho anterior.
+
+Especificação:
+`docs/64_ITEMS_FUTURE_CAPTURE_CONFIRMATION.md`.
+
+Não implementar durante Weapons 0.7-A/0.7-B.
