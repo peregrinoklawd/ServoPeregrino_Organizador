@@ -305,7 +305,7 @@ private _historyText = "";
  ]
 ] call ServoPeregrino_Organizador_UICommon_fnc_renderFooter;
 
-private _refreshMs = round ((diag_tickTime - _refreshStarted) * 1000);
+private _refreshMs = [_refreshStarted] call ServoPeregrino_Organizador_UICommon_fnc_elapsedMs;
 _state = missionNamespace getVariable [SP_ORG_WEAPONS_UI_STATE,createHashMap];
 _state set ["selectedKitId",_selectedKitId];
 _state set ["selectedCatalogClass",_selectedCatalogClass];

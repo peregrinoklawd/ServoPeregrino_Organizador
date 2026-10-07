@@ -73,7 +73,7 @@ private _eqRows = [
 } forEach _eqRows;
 
 _state = missionNamespace getVariable [SP_ORG_WEAPONS_UI_STATE,createHashMap];
-private _elapsed=round ((diag_tickTime-_startedAt)*1000);
+private _elapsed=[_startedAt] call ServoPeregrino_Organizador_UICommon_fnc_elapsedMs;
 _state set ["equipmentSlotView",_slot];
 _state set ["equipmentRefreshInProgress",false];
 _state set ["equipmentFocusedRefreshCount",(_state getOrDefault ["equipmentFocusedRefreshCount",0])+1];

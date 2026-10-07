@@ -163,7 +163,7 @@ private _rowDefs = [
  {(_display displayCtrl _x) ctrlShow _visible} forEach _controlIdcs;
 } forEach _rowDefs;
 
-_state=missionNamespace getVariable [SP_ORG_WEAPONS_UI_STATE,createHashMap]; private _elapsed=round ((diag_tickTime-_startedAt)*1000);
+_state=missionNamespace getVariable [SP_ORG_WEAPONS_UI_STATE,createHashMap]; private _elapsed=[_startedAt] call ServoPeregrino_Organizador_UICommon_fnc_elapsedMs;
 _state set ["draftChangedFields",+_changedFields]; _state set ["draftChangedFieldCount",count _changedFields]; _state set ["selectedKitName",if ((count _kit)>0) then {_kit getOrDefault ["name",""]} else {if (_pendingNew) then {_state getOrDefault ["pendingNewName",""]} else {""}}]; _state set ["selectedKitSlot",if ((count _draft)>0) then {_draft getOrDefault ["targetSlot",_kit getOrDefault ["targetSlot",""]]} else {if ((count _kit)>0) then {_kit getOrDefault ["targetSlot",""]} else {""}}]; _state set ["selectedKitDraftDirty",_effectiveDirtyForState]; _state set ["draftRefreshInProgress",false]; _state set ["draftFocusedRefreshCount",(_state getOrDefault ["draftFocusedRefreshCount",0])+1]; _state set ["lastDraftFocusedRefreshDurationMs",_elapsed]; _state set ["lastRefreshMode","DRAFT_FOCUSED"]; _state set ["lastRefreshTick",diag_tickTime]; missionNamespace setVariable [SP_ORG_WEAPONS_UI_STATE,_state];
 
 private _contextState=if (_pendingNew && {(count _kit) isEqualTo 0}) then {"NOVO"} else {if ((count _kit)>0) then {if (_isNew) then {"NOVO"} else {if (_draft getOrDefault ["dirty",false]) then {"ALTERADO"} else {"SALVO"}}} else {"-"}};

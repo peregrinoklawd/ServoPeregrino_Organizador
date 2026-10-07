@@ -113,7 +113,7 @@ _state set ["catalogOffset",_offset];
 _state set ["catalogTotalFiltered",_matchCount];
 _state set ["catalogMaxOffset",_maxOffset];
 _state set ["catalogScrollRatio",if (_maxOffset>0) then {_offset/_maxOffset} else {0}];
-private _elapsed = round ((diag_tickTime-_startedAt)*1000);
+private _elapsed = [_startedAt] call ServoPeregrino_Organizador_UICommon_fnc_elapsedMs;
 _state set ["catalogRefreshInProgress",false];
 _state set ["catalogFocusedRefreshCount",(_state getOrDefault ["catalogFocusedRefreshCount",0])+1];
 _state set ["lastCatalogFocusedRefreshDurationMs",_elapsed];
