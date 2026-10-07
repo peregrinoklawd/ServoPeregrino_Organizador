@@ -69,7 +69,7 @@ private _runScenario = {
  private _plan = (_planResult get "data") get "plan";
  [format ["0.7-A %1 plan schema",_label],(_plan getOrDefault ["schemaVersion",""]) isEqualTo "0.7-A-application-plan-candidate"] call _assert;
  [format ["0.7-A %1 plan target slot",_label],(_plan getOrDefault ["targetSlot",""]) isEqualTo _slot] call _assert;
- [format ["0.7-A %1 plan forbids mutation",_plan getOrDefault ["dryRunOnly",false] && {!(_plan getOrDefault ["mutationAuthorized",true])}] call _assert;
+ [format ["0.7-A %1 plan forbids mutation",_label],_plan getOrDefault ["dryRunOnly",false] && {!(_plan getOrDefault ["mutationAuthorized",true])}] call _assert;
  [format ["0.7-A %1 plan freezes fullMagazines=false",_label],!(_plan getOrDefault ["fullMagazines",true])] call _assert;
  [format ["0.7-A %1 plan validates",_label],([_plan] call ServoPeregrino_Organizador_Weapons_fnc_validateApplicationPlan) getOrDefault ["success",false]] call _assert;
 
