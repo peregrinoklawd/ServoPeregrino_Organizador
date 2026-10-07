@@ -1261,7 +1261,7 @@ private _runtime05 = [] call ServoPeregrino_Organizador_Weapons_fnc_getRuntimeSt
 ["0.5 runtime kit schema marker",((_runtime05 get "data") getOrDefault ["kitSchema",""]) isEqualTo "0.5-kit-candidate"] call _assert;
 ["0.5 runtime repository mode marker",((_runtime05 get "data") getOrDefault ["kitRepositoryMode",""]) isEqualTo "SESSION_LOCAL_CANDIDATE"] call _assert;
 ["0.6-D runtime UI draft marker",((_runtime05 get "data") getOrDefault ["kitUI",""]) isEqualTo "PLAYER_UI_0_6_E_R2_UX_CONVERGENCE_DIRECT_DRAFT_EQUIP_UICOMMON"] call _assert;
-["0.5 runtime application deferred marker",((_runtime05 get "data") getOrDefault ["kitApplication",""]) isEqualTo "DEFERRED_0_7"] call _assert;
+["0.5 runtime application remains non-physical",((_runtime05 get "data") getOrDefault ["kitApplication",""]) in ["DEFERRED_0_7","DRY_RUN_ONLY_0_7_A"]] call _assert;
 
 
 // -----------------------------------------------------------------------------
@@ -2744,7 +2744,7 @@ private _r5Auto = [""] call ServoPeregrino_Organizador_Weapons_fnc_applyCatalogS
 private _r5StateAfterAuto = missionNamespace getVariable [SP_ORG_WEAPONS_UI_STATE,createHashMap];
 ["0.6-F R6 auto-created kit becomes selected and NOVO",(_r5StateAfterAuto getOrDefault ["selectedKitId",""]) isNotEqualTo "" && {_r5StateAfterAuto getOrDefault ["selectedKitIsNew",false]}] call _assert;
 
-["0.6-A runtime application still deferred",((_runtime06A get "data") getOrDefault ["kitApplication",""]) isEqualTo "DEFERRED_0_7"] call _assert;
+["0.6-A runtime application remains non-physical",((_runtime06A get "data") getOrDefault ["kitApplication",""]) in ["DEFERRED_0_7","DRY_RUN_ONLY_0_7_A"]] call _assert;
 
 
 } else {
