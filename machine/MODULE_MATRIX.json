@@ -183,16 +183,16 @@
       "id": "Weapons",
       "addon": "ServoPeregrino_Organizador_Weapons",
       "mandatory": false,
-      "status": "MISSION_FIRST_0_7_A_HOMOLOGATED_FROZEN",
+      "status": "MISSION_FIRST_0_7_B_B1_STATIC_CANDIDATE_RUNTIME_PENDING",
       "stable_version": {
         "display": "0.7-A mission-first",
         "semantic": "0.7.0.1 mission-first",
         "build": "0.7.0.1-plan-snapshot-dry-run-mission-first"
       },
       "development_version": {
-        "display": "0.7-A mission-first",
-        "semantic": "0.7.0.1 mission-first",
-        "build": "0.7.0.1-plan-snapshot-dry-run-mission-first"
+        "display": "0.7-B mission-first",
+        "semantic": "0.7.1.1 mission-first",
+        "build": "0.7.1.1-slot-safe-apply-b1-mission-first"
       },
       "dependencies": [
         "Nexus",
@@ -230,9 +230,9 @@
           "persistence.provider.v1"
         ]
       },
-      "next_gate": "Weapons 0.7-B Slot-Safe Apply — first controlled physical mutation with target-slot isolation and rollback/post-validation.",
-      "homologated_artifact": "0.7-A runtime 673/673, 0 FAIL; legacy 594/594 + local 79/79; exact loadout unchanged in Dry-Run.",
-      "current_candidate_artifact": null,
+      "next_gate": "0.7-B B1 real-Arma target-slot-only physical apply; post-validate target + magazine/ammo + preservation fingerprint.",
+      "homologated_artifact": "0.7-A: 673/673, 0 FAIL.",
+      "current_candidate_artifact": "0.7-B B1 Slot-Safe Apply",
       "mission_first_validation": {
         "lifecycle_0_1_b": "APPROVED_SP",
         "weapon_configuration_0_2": "APPROVED_SP",
