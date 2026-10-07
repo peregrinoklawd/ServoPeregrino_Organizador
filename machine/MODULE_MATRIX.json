@@ -1,6 +1,6 @@
 {
   "generated_from": "machine/PROJECT_STATE.json",
-  "snapshot_date": "2026-10-06",
+  "snapshot_date": "2026-10-07",
   "repository": "peregrinoklawd/ServoPeregrino_Organizador",
   "modules": [
     {
@@ -40,16 +40,16 @@
       "id": "UICommon",
       "addon": "ServoPeregrino_Organizador_UICommon",
       "mandatory": false,
-      "status": "0_2_E_E1_STATIC_READY_RUNTIME_PENDING",
+      "status": "0_2_F_F1_STATIC_READY_RUNTIME_PENDING",
       "stable_version": {
-        "display": "0.2",
-        "semantic": "0.2.0.8",
-        "build": "0.2.0.8-status-search-hygiene-d6"
-      },
-      "development_version": {
         "display": "0.2",
         "semantic": "0.2.0.9",
         "build": "0.2.0.9-performance-instrumentation-e1"
+      },
+      "development_version": {
+        "display": "0.2",
+        "semantic": "0.2.0.10",
+        "build": "0.2.0.10-equivalence-cleanup-f1"
       },
       "dependencies": [
         "Nexus"
@@ -70,9 +70,9 @@
         "required": [],
         "optional": []
       },
-      "next_gate": "E1 real-Arma: 43/43 + 16/16 + 594/594, with focused UI_PERF behavior preserved.",
-      "homologated_artifact": "0.2-D R6 frozen real-Arma baseline.",
-      "current_candidate_artifact": "0.2-E E1 performance primitives migrated into Items/Weapons without domain ownership changes."
+      "next_gate": "F1 final real-Arma equivalence: 43/43 + 16/16 + 594/594, preserving focused UI_PERF behavior and manual UI.",
+      "homologated_artifact": "0.2-E E1 frozen real-Arma baseline: 43/43 + 16/16 + 594/594, 0 FAIL.",
+      "current_candidate_artifact": "0.2-F F1 final equivalence + non-functional harness cleanup; no runtime policy changes."
     },
     {
       "id": "Items",
@@ -218,7 +218,7 @@
           "persistence.provider.v1"
         ]
       },
-      "next_gate": "Frozen through UICommon 0.2-D/0.2-E/0.2-F; then Weapons 0.7-A dry-run.",
+      "next_gate": "Frozen through UICommon 0.2-F final equivalence; then Weapons 0.7-A Plan/Snapshot/Dry-Run.",
       "homologated_artifact": "0.6-F R6 + C2 runtime approved at 594/594, 0 FAIL; manual approved.",
       "current_candidate_artifact": "Canonical mission-first R6 source; no physical application yet.",
       "mission_first_validation": {
@@ -233,7 +233,7 @@
         "weapon_kit": "ONE_CONFIGURED_WEAPON_PER_TARGET_SLOT",
         "weapon_kit_repository": "SESSION_LOCAL_CANDIDATE",
         "slot_isolation": "PRESERVE_ALL_NON_TARGET_LOADOUT_DOMAINS",
-        "next": "UICommon 0.2-A inventory/equivalence, then Weapons 0.7-A dry-run",
+        "next": "UICommon 0.2-F final equivalence, then Weapons 0.7-A Plan/Snapshot/Dry-Run",
         "weapon_kit_specific_checks": "50_OF_50",
         "weapon_kit_slots": "PRIMARY_HANDGUN_SECONDARY",
         "weapon_kit_loadout_mutation": "NONE",
