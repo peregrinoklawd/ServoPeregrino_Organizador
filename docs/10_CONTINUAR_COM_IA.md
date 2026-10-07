@@ -817,3 +817,18 @@ Gate final:
 
 Após aprovação:
 **congelar UICommon 0.2 e iniciar Weapons 0.7-A Plan/Snapshot/Dry-Run**.
+
+## Regra operacional — entrega sempre acompanhada de missão para download
+
+Sempre que uma entrega mission-first/testável for preparada para validação em conversa:
+
+1. atualizar o GitHub como Source of Truth;
+2. preparar a pasta de missão a partir do estado atual do GitHub, sem reconstrução manual de memória;
+3. usar o nome registrado em `missions/PACKAGE_MISSION_NAME.txt`;
+4. gerar um arquivo ZIP da missão;
+5. disponibilizar o ZIP para download na mesma resposta em que a entrega é apresentada;
+6. somente então solicitar o RPT/teste manual ao usuário.
+
+Essa regra existe para manter o fluxo de desenvolvimento dinâmico: **entrega -> download -> teste no Arma -> RPT -> homologação**.
+
+Não considerar uma entrega pronta para teste em conversa se o artefato de missão para download ainda não foi gerado.
