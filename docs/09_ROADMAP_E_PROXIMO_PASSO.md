@@ -1180,3 +1180,34 @@ Gate final:
 
 Após aprovação:
 **congelar UICommon 0.2 e iniciar Weapons 0.7-A Plan/Snapshot/Dry-Run**.
+
+## 07/10/2026 — UICommon 0.2-F F1 homologada / linha 0.2 congelada
+
+Runtime final aprovado em Arma real:
+- UICommon Foundation: **43/43 PASS**;
+- Items + UICommon Equivalence: **16/16 PASS**;
+- Weapons 0.6-F R6: **594/594 PASS**, 0 FAIL;
+- Items: catalog scroll permaneceu focused, `fullRefresh=false`, sem equipment recapture e sem rebuild de projeção durante scroll;
+- Weapons: catalog scroll permaneceu focused, `fullRefresh=false`, sem rebuild de projeção/filtro durante scroll;
+- Draft/Equipment focused preservados;
+- nenhuma regressão funcional SP_ORG observada.
+
+Identidade final congelada:
+- display: `0.2`;
+- semantic: `0.2.0.10`;
+- build: `0.2.0.10-equivalence-cleanup-f1`.
+
+Artefato mission-first efetivamente testado:
+- package: `SP_ORG_UI_Lab_UICommon_0_2_F_F1.VR`;
+- commit de empacotamento testado: `4e87ce134c117a0a1586a4f82c41ffbaaf6a5890`.
+
+Ruído externo não bloqueante observado no RPT:
+- chamadas inválidas em `CBA_fnc_addPerFrameHandler` durante inicialização, sem stack SP_ORG identificado;
+- duas localization strings externas ausentes;
+- warning ACE refuel sobre Camera.
+
+Conclusão:
+**UICommon 0.2 — HOMOLOGADA / CONGELADA.**
+
+Próxima frente:
+**Weapons 0.7-A — Plan / Snapshot / Dry-Run**.
