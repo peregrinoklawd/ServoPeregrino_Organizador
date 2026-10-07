@@ -614,3 +614,30 @@ Gate esperado:
 - Weapons **594/594**;
 - wheel/slider continuam `fullRefresh=false`;
 - nenhuma recaptura/rebuild adicional causada pela instrumentação.
+
+## 07/10/2026 — 0.2-E encerrada / 0.2-F atual
+
+A etapa 0.2-E foi homologada em Arma real em **43/43 + 16/16 + 594/594, 0 FAIL**.
+
+A sequência atual fica:
+
+```text
+0.2-A  Inventory / Classification            CONCLUÍDO
+0.2-B  Pure Shared Primitives                HOMOLOGADO
+0.2-C  Virtual Navigation + Footer Rendering HOMOLOGADO
+0.2-D  Shared Visual Foundation / HPP        HOMOLOGADO
+0.2-E  Performance Instrumentation           HOMOLOGADO / CONGELADO
+0.2-F  Equivalence + Cleanup                 F1 ATUAL
+```
+
+0.2-F não deve adicionar infraestrutura nova.
+Seu papel é provar equivalência final, limpar rastreabilidade/harness e encerrar a linha UICommon 0.2.
+
+Depois do gate final:
+```text
+UICommon 0.2 frozen
+      ↓
+Weapons 0.7-A Plan/Snapshot/Dry-Run
+      ↓
+0.7-B Slot-Safe Apply
+```
