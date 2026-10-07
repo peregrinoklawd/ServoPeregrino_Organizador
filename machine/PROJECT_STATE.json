@@ -22,8 +22,8 @@
     "hub_rule": "Hub is an optional player-facing integration/orchestration layer. No domain module may require Hub in order to function.",
     "independent_core_development": true
   },
-  "global_next_gate": "Weapons 0.7-A real-Arma gate: cumulative 0.6-F R6 regression + ApplicationPlan/Snapshot/preservation fingerprint/Dry-Run; physical loadout must remain exactly unchanged.",
-  "global_after_gate": "If 0.7-A passes: freeze Plan/Snapshot/Dry-Run contract and proceed to Weapons 0.7-B Slot-Safe Apply with physical mutation + post-validation/rollback protections.",
+  "global_next_gate": "Weapons 0.7-B Slot-Safe Apply: first controlled physical mutation using the homologated 0.7-A Plan/Snapshot contracts; mutate only target slot, post-validate target + preservation fingerprint, rollback/abort on divergence.",
+  "global_after_gate": "After 0.7-B real-Arma approval, reassess remaining 0.7 physical-application hardening before opening Weapons 0.8 multiplayer/authority; do not skip directly to multiplayer.",
   "modules": [
     {
       "id": "Nexus",
@@ -210,9 +210,9 @@
       "addon": "ServoPeregrino_Organizador_Weapons",
       "mandatory": false,
       "stable_version": {
-        "display": "0.6-F R6 mission-first",
-        "semantic": "0.6.5.6 mission-first",
-        "build": "0.6.5.6-compact-filter-spacing-test-contract-hotfix-uicommon-mission-first"
+        "display": "0.7-A mission-first",
+        "semantic": "0.7.0.1 mission-first",
+        "build": "0.7.0.1-plan-snapshot-dry-run-mission-first"
       },
       "development_version": {
         "display": "0.7-A mission-first",
@@ -255,10 +255,10 @@
           "persistence.provider.v1"
         ]
       },
-      "status": "MISSION_FIRST_0_7_A_STATIC_READY_RUNTIME_PENDING",
-      "next_gate": "Run Weapons 0.7-A cumulative real-Arma test and confirm exact loadout unchanged across PRIMARY/HANDGUN/SECONDARY dry-run scenarios.",
-      "homologated_artifact": "Weapons 0.6-F R6 + UICommon C2 integration: real Arma 594/594, 0 FAIL, 6 non-blocking release observations; manual behavior approved; physical application remains deferred to 0.7.",
-      "current_candidate_artifact": "0.7-A Plan/Snapshot/Dry-Run: six read-only application functions + cumulative 0.6-F R6 regression gate; mutation forbidden.",
+      "status": "MISSION_FIRST_0_7_A_HOMOLOGATED_FROZEN",
+      "next_gate": "Weapons 0.7-B Slot-Safe Apply — first controlled physical mutation; target-slot only + post-validation + rollback/abort protection.",
+      "homologated_artifact": "0.7-A real-Arma approved: 673/673, 0 FAIL = legacy R6 594/594 + local 79/79; Plan/Snapshot/Dry-Run and exact unchanged loadout proven.",
+      "current_candidate_artifact": null,
       "mission_first_validation": {
         "0.1-B": {
           "status": "APPROVED_SP",
@@ -330,7 +330,7 @@
           "modded_provenance": true,
           "session_cache": true
         },
-        "next": "Weapons 0.7-A real-Arma cumulative gate",
+        "next": "Weapons 0.7-B Slot-Safe Apply",
         "0.4": {
           "status": "APPROVED_SP_FROZEN",
           "final_candidate": "R5",
@@ -729,7 +729,11 @@
           ],
           "regression_baseline": "0.6-F R6 594/594",
           "next": "Real-Arma cumulative gate; then 0.7-B Slot-Safe Apply"
-        }
+        },
+        "application_0_7_a": "APPROVED_673_OF_673_LEGACY_594_LOCAL_79_DRY_RUN_NO_MUTATION",
+        "application": "PLAN_SNAPSHOT_DRY_RUN_APPROVED_0_7_A",
+        "loadout_mutation": false,
+        "application_plan_snapshot_baseline": "baseline/weapons-0.7-a-homologated"
       }
     },
     {
