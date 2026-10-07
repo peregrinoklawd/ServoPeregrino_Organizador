@@ -40,11 +40,11 @@
       "id": "UICommon",
       "addon": "ServoPeregrino_Organizador_UICommon",
       "mandatory": false,
-      "status": "0_2_F_F1_STATIC_READY_RUNTIME_PENDING",
+      "status": "0_2_FINAL_HOMOLOGATED_FROZEN",
       "stable_version": {
         "display": "0.2",
-        "semantic": "0.2.0.9",
-        "build": "0.2.0.9-performance-instrumentation-e1"
+        "semantic": "0.2.0.10",
+        "build": "0.2.0.10-equivalence-cleanup-f1"
       },
       "development_version": {
         "display": "0.2",
@@ -70,9 +70,9 @@
         "required": [],
         "optional": []
       },
-      "next_gate": "F1 final real-Arma equivalence: 43/43 + 16/16 + 594/594, preserving focused UI_PERF behavior and manual UI.",
-      "homologated_artifact": "0.2-E E1 frozen real-Arma baseline: 43/43 + 16/16 + 594/594, 0 FAIL.",
-      "current_candidate_artifact": "0.2-F F1 final equivalence + non-functional harness cleanup; no runtime policy changes."
+      "next_gate": "Frozen baseline; preserve compatibility while Weapons 0.7 consumes UICommon.",
+      "homologated_artifact": "0.2-F F1 final real-Arma baseline: 43/43 + 16/16 + 594/594, 0 FAIL.",
+      "current_candidate_artifact": null
     },
     {
       "id": "Items",
@@ -218,7 +218,7 @@
           "persistence.provider.v1"
         ]
       },
-      "next_gate": "Frozen through UICommon 0.2-F final equivalence; then Weapons 0.7-A Plan/Snapshot/Dry-Run.",
+      "next_gate": "Weapons 0.7-A Plan/Snapshot/Dry-Run.",
       "homologated_artifact": "0.6-F R6 + C2 runtime approved at 594/594, 0 FAIL; manual approved.",
       "current_candidate_artifact": "Canonical mission-first R6 source; no physical application yet.",
       "mission_first_validation": {
@@ -233,7 +233,7 @@
         "weapon_kit": "ONE_CONFIGURED_WEAPON_PER_TARGET_SLOT",
         "weapon_kit_repository": "SESSION_LOCAL_CANDIDATE",
         "slot_isolation": "PRESERVE_ALL_NON_TARGET_LOADOUT_DOMAINS",
-        "next": "UICommon 0.2-F final equivalence, then Weapons 0.7-A Plan/Snapshot/Dry-Run",
+        "next": "Weapons 0.7-A Plan/Snapshot/Dry-Run",
         "weapon_kit_specific_checks": "50_OF_50",
         "weapon_kit_slots": "PRIMARY_HANDGUN_SECONDARY",
         "weapon_kit_loadout_mutation": "NONE",
