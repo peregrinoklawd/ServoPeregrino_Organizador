@@ -54,3 +54,22 @@ Esperado:
 4. gate de equivalência Items + Weapons;
 5. Weapons 0.7-A — Plan / Snapshot / Dry-Run;
 6. depois, 0.7-B Slot-Safe Apply e 0.7-C Post-Validation/Rollback.
+
+
+## Resultado real — HOMOLOGADA / CONGELADA
+
+O usuário confirmou em 07/10/2026 que a R6 foi testada e aprovada.
+
+Gate final:
+- UICommon Foundation: **36/36**;
+- Items + UICommon: **16/16**;
+- Weapons 0.6-F R6: **594/594**, **0 FAIL**;
+- buscas sintéticas P2/P4 não permanecem na UI manual;
+- status `NOVO / ALTERADO / SALVO / SEM KIT` aprovado junto da caixa de nome;
+- testes manuais aprovados.
+
+Decisão:
+**UICommon 0.2-D está encerrada e congelada na R6.**
+
+Próxima etapa:
+**UICommon 0.2-E — Performance Instrumentation**.

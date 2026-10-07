@@ -754,3 +754,16 @@ Review fix da R5:
 - runner Weapons substitui `mira/laser` por tokens sintéticos e limpa P2/P4 antes de reabrir a UI;
 - gate automático permanece 36/36 + 16/16 + 594/594.
 - após aprovação, 0.2-D será congelada e o fluxo segue para 0.2-E, 0.2-F e então Weapons 0.7-A.
+
+
+## 07/10/2026 — UICommon 0.2-D encerrada
+
+R6 homologada e congelada:
+- build `0.2.0.8-status-search-hygiene-d6`;
+- Foundation 36/36;
+- Items+UICommon 16/16;
+- Weapons 594/594, 0 FAIL;
+- manual aprovado.
+
+Próxima frente: **0.2-E Performance Instrumentation**.
+A extração deve compartilhar somente mecanismo genérico de medição/histórico; a decisão de FULL vs focused refresh continua pertencendo a Items/Weapons.

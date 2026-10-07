@@ -40,11 +40,11 @@
       "id": "UICommon",
       "addon": "ServoPeregrino_Organizador_UICommon",
       "mandatory": false,
-      "status": "0_2_D_R6_STATIC_READY_RUNTIME_PENDING",
+      "status": "0_2_D_R6_HOMOLOGATED_FROZEN",
       "stable_version": {
         "display": "0.2",
-        "semantic": "0.2.0.6",
-        "build": "0.2.0.6-safe-responsive-polish-d4"
+        "semantic": "0.2.0.8",
+        "build": "0.2.0.8-status-search-hygiene-d6"
       },
       "development_version": {
         "display": "0.2",
@@ -70,9 +70,9 @@
         "required": [],
         "optional": []
       },
-      "next_gate": "R6 real Arma: 36/36 + 16/16 + 594/594; no leaked test queries; status text grouped with kit-name box.",
-      "homologated_artifact": "0.2-D R4 real-Arma approved; R5 automated-green but visually superseded.",
-      "current_candidate_artifact": "0.2-D R6 review fix: left-aligned draft status + Weapons test-search cleanup."
+      "next_gate": "0.2-E Performance Instrumentation; generic helpers only, no domain dispatcher or refresh-policy migration.",
+      "homologated_artifact": "0.2-D R6 real-Arma approved: 36/36 + 16/16 + Weapons 594/594, 0 FAIL; manual approved.",
+      "current_candidate_artifact": null
     },
     {
       "id": "Items",

@@ -582,3 +582,16 @@ R5 é somente polish:
 - Histórico em roxo claro (`#B9A3E8` / `#D1C2F0`);
 - Items P1/P3 com surface alpha 0.32 para compensar as camadas internas mais escuras.
 - handlers funcionais permanecem idênticos à R4.
+
+
+## 07/10/2026 — UICommon 0.2-D encerrada
+
+R6 homologada e congelada:
+- build `0.2.0.8-status-search-hygiene-d6`;
+- Foundation 36/36;
+- Items+UICommon 16/16;
+- Weapons 594/594, 0 FAIL;
+- manual aprovado.
+
+Próxima frente: **0.2-E Performance Instrumentation**.
+A extração deve compartilhar somente mecanismo genérico de medição/histórico; a decisão de FULL vs focused refresh continua pertencendo a Items/Weapons.
