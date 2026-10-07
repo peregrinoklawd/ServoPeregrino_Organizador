@@ -35,33 +35,44 @@ private _currentMagazineClass = "";
 private _classEquivalent = false;
 private _changedFields = [];
 private _operation = "INSERT";
+private _nestedError = createHashMap;
 
 if (_occupied) then {
  private _capture = [_row] call ServoPeregrino_Organizador_Weapons_fnc_configurationFromWeaponArray;
- if !(_capture getOrDefault ["success",false]) exitWith {_capture};
- _currentConfiguration = ((_capture get "data") get "configuration");
- _currentLoadedState = ((_capture get "data") get "loadedState");
- private _mag = _currentLoadedState getOrDefault ["primaryMagazine",[]];
- if (_mag isEqualType [] && {count _mag >= 1}) then {_currentMagazineClass = _mag param [0,""]};
-
- private _equiv = [
-  _currentConfiguration getOrDefault ["weaponClass",""],
-  _desiredConfiguration getOrDefault ["weaponClass",""],
-  _slot
- ] call ServoPeregrino_Organizador_Weapons_fnc_areWeaponClassesEquivalentForSlot;
- _classEquivalent = _equiv getOrDefault ["success",false] && {((_equiv get "data") getOrDefault ["equivalent",false])};
-
- if (_classEquivalent) then {
-  private _diff = [_currentConfiguration,_desiredConfiguration] call ServoPeregrino_Organizador_Weapons_fnc_diffWeaponConfigurations;
-  if !(_diff getOrDefault ["success",false]) exitWith {_diff};
-  _changedFields = +(((_diff get "data") getOrDefault ["changedFields",[]]));
-  private _magDiff = _desiredMagazineClass != "" && {!((toLowerANSI _desiredMagazineClass) isEqualTo (toLowerANSI _currentMagazineClass))};
-  if ((count _changedFields) isEqualTo 0 && {!_magDiff}) then {_operation = "NO_OP"} else {_operation = "RECONFIGURE"};
+ if !(_capture getOrDefault ["success",false]) then {
+  _nestedError = _capture;
  } else {
-  _operation = "REPLACE";
-  _changedFields = ["weaponClass","muzzle","pointer","optic","bipod"];
+  _currentConfiguration = ((_capture get "data") get "configuration");
+  _currentLoadedState = ((_capture get "data") get "loadedState");
+  private _mag = _currentLoadedState getOrDefault ["primaryMagazine",[]];
+  if (_mag isEqualType [] && {count _mag >= 1}) then {_currentMagazineClass = _mag param [0,""]};
+
+  private _equiv = [
+   _currentConfiguration getOrDefault ["weaponClass",""],
+   _desiredConfiguration getOrDefault ["weaponClass",""],
+   _slot
+  ] call ServoPeregrino_Organizador_Weapons_fnc_areWeaponClassesEquivalentForSlot;
+  if !(_equiv getOrDefault ["success",false]) then {
+   _nestedError = _equiv;
+  } else {
+   _classEquivalent = ((_equiv get "data") getOrDefault ["equivalent",false]);
+   if (_classEquivalent) then {
+    private _diff = [_currentConfiguration,_desiredConfiguration] call ServoPeregrino_Organizador_Weapons_fnc_diffWeaponConfigurations;
+    if !(_diff getOrDefault ["success",false]) then {
+     _nestedError = _diff;
+    } else {
+     _changedFields = +(((_diff get "data") getOrDefault ["changedFields",[]]));
+     private _magDiff = _desiredMagazineClass != "" && {!((toLowerANSI _desiredMagazineClass) isEqualTo (toLowerANSI _currentMagazineClass))};
+     if ((count _changedFields) isEqualTo 0 && {!_magDiff}) then {_operation = "NO_OP"} else {_operation = "RECONFIGURE"};
+    };
+   } else {
+    _operation = "REPLACE";
+    _changedFields = ["weaponClass","muzzle","pointer","optic","bipod"];
+   };
+  };
  };
 };
+if (count _nestedError > 0) exitWith {_nestedError};
 
 private _plan = createHashMapFromArray [
  ["schemaVersion","0.7-A-application-plan-candidate"],
