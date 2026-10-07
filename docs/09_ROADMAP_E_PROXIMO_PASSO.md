@@ -1211,3 +1211,29 @@ Conclusão:
 
 Próxima frente:
 **Weapons 0.7-A — Plan / Snapshot / Dry-Run**.
+
+## 07/10/2026 — Weapons 0.7-A aberta
+
+UICommon 0.2 está homologada/congelada.
+
+Candidata atual:
+- branch: `feature/weapons-0.7-a-plan-snapshot-dry-run`;
+- display `0.7-A`;
+- semantic `0.7.0.1`;
+- build `0.7.0.1-plan-snapshot-dry-run-mission-first`.
+
+Escopo:
+- ApplicationPlan;
+- ApplicationSnapshot;
+- fingerprint explícito dos domínios não alvo;
+- pre-validation;
+- Dry-Run;
+- regressão cumulativa 0.6-F R6.
+
+Regra absoluta:
+**0.7-A não pode mutar o loadout físico.**
+
+O primeiro gate de mutação continua sendo **0.7-B Slot-Safe Apply**.
+
+Documento:
+`docs/63_WEAPONS_0_7_A_PLAN_SNAPSHOT_DRY_RUN.md`.
