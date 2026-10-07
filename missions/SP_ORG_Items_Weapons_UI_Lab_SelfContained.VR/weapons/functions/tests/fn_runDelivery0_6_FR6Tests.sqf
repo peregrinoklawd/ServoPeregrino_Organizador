@@ -2621,17 +2621,17 @@ _stateR3 set ["catalogTypeFilter","PRIMARY"];
 _stateR3 set ["catalogCategoryFilter","OPTIC"];
 missionNamespace setVariable [SP_ORG_WEAPONS_UI_STATE,_stateR3];
 
-["P2_SEARCH","mira"] call ServoPeregrino_Organizador_Weapons_fnc_handleUIEvent;
+["P2_SEARCH","__P2_ISOLATION_TEST__"] call ServoPeregrino_Organizador_Weapons_fnc_handleUIEvent;
 private _afterP2R3 = missionNamespace getVariable [SP_ORG_WEAPONS_UI_STATE,createHashMap];
-["0.6-F R3 P2 search is local",(_afterP2R3 getOrDefault ["draftQuery",""]) isEqualTo "mira" && {(_afterP2R3 getOrDefault ["catalogQuery",""]) isEqualTo ""} && {(_afterP2R3 getOrDefault ["equipmentQuery",""]) isEqualTo ""}] call _assert;
+["0.6-F R3 P2 search is local",(_afterP2R3 getOrDefault ["draftQuery",""]) isEqualTo "__P2_ISOLATION_TEST__" && {(_afterP2R3 getOrDefault ["catalogQuery",""]) isEqualTo ""} && {(_afterP2R3 getOrDefault ["equipmentQuery",""]) isEqualTo ""}] call _assert;
 
-["P4_SEARCH","laser"] call ServoPeregrino_Organizador_Weapons_fnc_handleUIEvent;
+["P4_SEARCH","__P4_ISOLATION_TEST__"] call ServoPeregrino_Organizador_Weapons_fnc_handleUIEvent;
 private _afterP4R3 = missionNamespace getVariable [SP_ORG_WEAPONS_UI_STATE,createHashMap];
-["0.6-F R3 P4 search is local",(_afterP4R3 getOrDefault ["draftQuery",""]) isEqualTo "mira" && {(_afterP4R3 getOrDefault ["catalogQuery",""]) isEqualTo ""} && {(_afterP4R3 getOrDefault ["equipmentQuery",""]) isEqualTo "laser"}] call _assert;
+["0.6-F R3 P4 search is local",(_afterP4R3 getOrDefault ["draftQuery",""]) isEqualTo "__P2_ISOLATION_TEST__" && {(_afterP4R3 getOrDefault ["catalogQuery",""]) isEqualTo ""} && {(_afterP4R3 getOrDefault ["equipmentQuery",""]) isEqualTo "__P4_ISOLATION_TEST__"}] call _assert;
 
 ["CATALOG_SEARCH","mx"] call ServoPeregrino_Organizador_Weapons_fnc_handleUIEvent;
 private _afterCatalogSearchR3 = missionNamespace getVariable [SP_ORG_WEAPONS_UI_STATE,createHashMap];
-["0.6-F R3 Catalog search does not overwrite P2/P4",(_afterCatalogSearchR3 getOrDefault ["catalogQuery",""]) isEqualTo "mx" && {(_afterCatalogSearchR3 getOrDefault ["draftQuery",""]) isEqualTo "mira"} && {(_afterCatalogSearchR3 getOrDefault ["equipmentQuery",""]) isEqualTo "laser"}] call _assert;
+["0.6-F R3 Catalog search does not overwrite P2/P4",(_afterCatalogSearchR3 getOrDefault ["catalogQuery",""]) isEqualTo "mx" && {(_afterCatalogSearchR3 getOrDefault ["draftQuery",""]) isEqualTo "__P2_ISOLATION_TEST__"} && {(_afterCatalogSearchR3 getOrDefault ["equipmentQuery",""]) isEqualTo "__P4_ISOLATION_TEST__"}] call _assert;
 
 private _globalWindowR3 = [] call ServoPeregrino_Organizador_Weapons_fnc_getUICatalogWindow;
 private _globalDataR3 = _globalWindowR3 getOrDefault ["data",createHashMap];
@@ -2641,6 +2641,10 @@ private _globalDataR3 = _globalWindowR3 getOrDefault ["data",createHashMap];
 private _filteredWindowR3 = [] call ServoPeregrino_Organizador_Weapons_fnc_getUICatalogWindow;
 private _filteredDataR3 = _filteredWindowR3 getOrDefault ["data",createHashMap];
 ["0.6-F R3 clearing Catalog search restores stored filters",_filteredWindowR3 getOrDefault ["success",false] && {!(_filteredDataR3 getOrDefault ["filtersIgnoredBySearch",true])} && {(_filteredDataR3 getOrDefault ["effectiveTypeFilter",""]) isEqualTo "PRIMARY"} && {(_filteredDataR3 getOrDefault ["effectiveCategoryFilter",""]) isEqualTo "OPTIC"}] call _assert;
+
+// Test hygiene: P2/P4 queries are synthetic test data and must never leak into the next UI opening.
+["P2_SEARCH",""] call ServoPeregrino_Organizador_Weapons_fnc_handleUIEvent;
+["P4_SEARCH",""] call ServoPeregrino_Organizador_Weapons_fnc_handleUIEvent;
 
 // Name field must be allowed to become temporarily blank while editing.
 private _nameEditOpenR3 = [] call ServoPeregrino_Organizador_Weapons_fnc_openInterface;
