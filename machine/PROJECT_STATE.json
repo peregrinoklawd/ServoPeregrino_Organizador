@@ -22,8 +22,8 @@
     "hub_rule": "Hub is an optional player-facing integration/orchestration layer. No domain module may require Hub in order to function.",
     "independent_core_development": true
   },
-  "global_next_gate": "Weapons 0.7-A Plan/Snapshot/Dry-Run: define slot-safe physical application contract and validate plans/snapshots without mutating player loadout.",
-  "global_after_gate": "If 0.7-A passes: proceed to Weapons 0.7-B Slot-Safe Apply with explicit rollback/validation gate before multiplayer authority work.",
+  "global_next_gate": "Weapons 0.7-A real-Arma gate: cumulative 0.6-F R6 regression + ApplicationPlan/Snapshot/preservation fingerprint/Dry-Run; physical loadout must remain exactly unchanged.",
+  "global_after_gate": "If 0.7-A passes: freeze Plan/Snapshot/Dry-Run contract and proceed to Weapons 0.7-B Slot-Safe Apply with physical mutation + post-validation/rollback protections.",
   "modules": [
     {
       "id": "Nexus",
@@ -195,11 +195,15 @@
       "id": "Weapons",
       "addon": "ServoPeregrino_Organizador_Weapons",
       "mandatory": false,
-      "stable_version": null,
-      "development_version": {
-        "display": "0.6-F R6 mission-first / addon source remains 0.1-A",
+      "stable_version": {
+        "display": "0.6-F R6 mission-first",
         "semantic": "0.6.5.6 mission-first",
         "build": "0.6.5.6-compact-filter-spacing-test-contract-hotfix-uicommon-mission-first"
+      },
+      "development_version": {
+        "display": "0.7-A mission-first",
+        "semantic": "0.7.0.1 mission-first",
+        "build": "0.7.0.1-plan-snapshot-dry-run-mission-first"
       },
       "dependencies": [
         "Nexus",
@@ -237,10 +241,10 @@
           "persistence.provider.v1"
         ]
       },
-      "status": "MISSION_FIRST_0_6_F_R6_C2_HOMOLOGATED_594_OF_594",
-      "next_gate": "Weapons 0.7-A Plan/Snapshot/Dry-Run: design and test slot-safe physical application without mutating loadout.",
+      "status": "MISSION_FIRST_0_7_A_STATIC_READY_RUNTIME_PENDING",
+      "next_gate": "Run Weapons 0.7-A cumulative real-Arma test and confirm exact loadout unchanged across PRIMARY/HANDGUN/SECONDARY dry-run scenarios.",
       "homologated_artifact": "Weapons 0.6-F R6 + UICommon C2 integration: real Arma 594/594, 0 FAIL, 6 non-blocking release observations; manual behavior approved; physical application remains deferred to 0.7.",
-      "current_candidate_artifact": "Canonical mission-first source remains synchronized; C2 focused Catalog-to-Draft route and hardened test contract are now runtime-approved.",
+      "current_candidate_artifact": "0.7-A Plan/Snapshot/Dry-Run: six read-only application functions + cumulative 0.6-F R6 regression gate; mutation forbidden.",
       "mission_first_validation": {
         "0.1-B": {
           "status": "APPROVED_SP",
@@ -312,7 +316,7 @@
           "modded_provenance": true,
           "session_cache": true
         },
-        "next": "Weapons 0.7-A Plan/Snapshot/Dry-Run after UICommon 0.2 final freeze",
+        "next": "Weapons 0.7-A real-Arma cumulative gate",
         "0.4": {
           "status": "APPROVED_SP_FROZEN",
           "final_candidate": "R5",
@@ -686,6 +690,31 @@
           "focused_base_weapon_swap": "APPROVED_NO_FULL_REFRESH",
           "residual_stutter": "ACCEPTED_COMPATIBILITY_PROJECTION_COST",
           "test_policy": "FUNCTIONAL_FAILURES_ONLY_RELEASE_METADATA_OBSERVATION"
+        },
+        "0.7-A": {
+          "status": "STATIC_READY_RUNTIME_PENDING",
+          "application_plan_schema": "0.7-A-application-plan-candidate",
+          "application_snapshot_schema": "0.7-A-application-snapshot-candidate",
+          "strategy": "FULL_LOADOUT_CLONE_SETUNITLOADOUT_FALSE_CANDIDATE",
+          "physical_mutation": false,
+          "full_magazines": false,
+          "target_slots": [
+            "PRIMARY",
+            "HANDGUN",
+            "SECONDARY"
+          ],
+          "preservation_scope": [
+            "non-target weapon slots",
+            "uniform",
+            "vest",
+            "backpack",
+            "headgear",
+            "goggles",
+            "binocular",
+            "assignedItems"
+          ],
+          "regression_baseline": "0.6-F R6 594/594",
+          "next": "Real-Arma cumulative gate; then 0.7-B Slot-Safe Apply"
         }
       }
     },
