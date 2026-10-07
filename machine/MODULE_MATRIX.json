@@ -123,7 +123,15 @@
       },
       "next_gate": "Packaging R2 load gate, UI smoke, then multiplayer authority/revision smoke.",
       "homologated_artifact": "0.12 FINAL — Integration Freeze",
-      "current_candidate_artifact": "Packaging R2 + Multiplayer Lab R3"
+      "current_candidate_artifact": "Packaging R2 + Multiplayer Lab R3",
+      "backlog": [
+        {
+          "id": "ITEMS_CAPTURE_EQUIPMENT_CONFIRM_REPLACE_DRAFT",
+          "status": "RECORDED_NOT_IMPLEMENTED",
+          "doc": "docs/64_ITEMS_FUTURE_CAPTURE_CONFIRMATION.md",
+          "summary": "CAPTURAR from Equipment asks confirmation and replaces draft content instead of merging."
+        }
+      ]
     },
     {
       "id": "Hub",
