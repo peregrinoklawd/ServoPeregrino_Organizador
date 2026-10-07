@@ -1,7 +1,7 @@
 author = "Claudio Malta Telhada";
-onLoadName = "SP_ORG UI Lab - UICommon 0.2-F F1";
-onLoadMission = "UICommon 0.2-F F1: equivalência final e limpeza não funcional, preservando comportamento, ownership de refresh e regras de domínio.";
-overviewText = "UICommon 0.2-E E1 está homologada; F1 valida equivalência final, limpa nomenclatura histórica do harness e preserva Items/Weapons sem mudança funcional.";
+onLoadName = "SP_ORG UI Lab - Weapons 0.7-A";
+onLoadMission = "Weapons 0.7-A: ApplicationPlan, Snapshot, fingerprints de preservação e Dry-Run slot-safe sem mutação física.";
+overviewText = "UICommon 0.2 está congelada. Weapons 0.7-A preserva a UI 0.6-F R6 e valida planejamento/snapshot de aplicação antes de habilitar mutação física em 0.7-B.";
 enableDebugConsole = 1;
 disabledAI = 1;
 respawn = 3;
@@ -321,6 +321,7 @@ class ServoPeregrino_Organizador_Weapons
             class runDelivery0_6_FR4Tests {};
             class runDelivery0_6_FR5Tests {};
             class runDelivery0_6_FR6Tests {};
+            class runDelivery0_7_ATests {};
    class serverHandleLabRequest {};
   };
  };
