@@ -54,7 +54,7 @@ if (_refreshEquipment) then {
     };
     [_rows,_view,_equipmentCapacity,_equipmentContentMass,_equipmentUnknownMassCount,if (_captureOk) then {"OK"} else {"INDISPONÍVEL"},"PHYSICAL_FOCUSED"] call ServoPeregrino_Organizador_Items_fnc_renderEquipmentRowsUI;
     (_display displayCtrl 4123) ctrlEnable _captureOk;
-    _captureDurationMs=round ((diag_tickTime-_captureStartedAt)*1000);
+    _captureDurationMs=[_captureStartedAt] call ServoPeregrino_Organizador_UICommon_fnc_elapsedMs;
 };
 
 private _readiness = _options getOrDefault ["readinessOverride", createHashMap];
@@ -111,12 +111,10 @@ _state set ["lastRefreshTick",diag_tickTime];
 _state set ["lastRefreshMode","PHYSICAL_FOCUSED"];
 _state set ["focusedRefreshCount",(_state getOrDefault ["focusedRefreshCount",0])+1];
 _state set ["lastFocusedRefreshTarget",_changedTarget];
-private _perfDurationMs=round ((diag_tickTime-_perfStartedAt)*1000);
+private _perfDurationMs=[_perfStartedAt] call ServoPeregrino_Organizador_UICommon_fnc_elapsedMs;
 _state set ["lastPhysicalFocusedRefreshDurationMs",_perfDurationMs];
 _state set ["lastPhysicalFocusedCaptureDurationMs",_captureDurationMs];
-private _perf=+(_state getOrDefault ["uiPerfHistory",[]]);
-_perf pushBack ["PHYSICAL_FOCUSED",_changedTarget,_perfDurationMs,_captureDurationMs,diag_tickTime];
-while {(count _perf)>24} do {_perf deleteAt 0;};
+private _perf=[_state getOrDefault ["uiPerfHistory",[]],["PHYSICAL_FOCUSED",_changedTarget,_perfDurationMs,_captureDurationMs,diag_tickTime],24] call ServoPeregrino_Organizador_UICommon_fnc_appendPerfHistory;
 _state set ["uiPerfHistory",_perf];
 _state set ["refreshing",false];
 missionNamespace setVariable [SERVO_PEREGRINO_ORGANIZADOR_ITEMS_UI_STATE_VAR,_state];

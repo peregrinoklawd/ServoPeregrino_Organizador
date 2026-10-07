@@ -60,7 +60,7 @@ private _catalogUntouched=(lbSize _catalogCtrl) isEqualTo _catalogSizeBefore
 private _equipmentUntouched=(lbSize _equipmentCtrl) isEqualTo _equipmentSizeBefore
     && {(lbCurSel _equipmentCtrl) isEqualTo _equipmentSelBefore}
     && {(ctrlScrollValues _equipmentCtrl) isEqualTo _equipmentScrollBefore};
-private _durationMs=round ((diag_tickTime-_startedAt)*1000);
+private _durationMs=[_startedAt] call ServoPeregrino_Organizador_UICommon_fnc_elapsedMs;
 
 _stateAfter set ["lastRefreshTick",diag_tickTime];
 _stateAfter set ["lastRefreshMode","KIT_SWITCH_FOCUSED"];
@@ -74,9 +74,7 @@ _stateAfter set ["lastKitSwitchEquipmentCaptureDelta",_equipmentCaptureAfter-_eq
 _stateAfter set ["lastKitSwitchTargetRefreshDelta",_targetAfter-_targetBefore];
 _stateAfter set ["lastKitSwitchCatalogUntouched",_catalogUntouched];
 _stateAfter set ["lastKitSwitchEquipmentUntouched",_equipmentUntouched];
-private _perf=+(_stateAfter getOrDefault ["uiPerfHistory",[]]);
-_perf pushBack ["KIT_SWITCH_FOCUSED",toUpper _reason,_durationMs,_fullAfter-_fullBefore,_equipmentCaptureAfter-_equipmentCaptureBefore,diag_tickTime];
-while {(count _perf)>24} do {_perf deleteAt 0;};
+private _perf=[_stateAfter getOrDefault ["uiPerfHistory",[]],["KIT_SWITCH_FOCUSED",toUpper _reason,_durationMs,_fullAfter-_fullBefore,_equipmentCaptureAfter-_equipmentCaptureBefore,diag_tickTime],24] call ServoPeregrino_Organizador_UICommon_fnc_appendPerfHistory;
 _stateAfter set ["uiPerfHistory",_perf];
 _stateAfter set ["refreshing",false];
 missionNamespace setVariable [SERVO_PEREGRINO_ORGANIZADOR_ITEMS_UI_STATE_VAR,_stateAfter];

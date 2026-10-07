@@ -25,7 +25,7 @@ private _capacity=_state getOrDefault ["lastEquipmentCapacity",createHashMapFrom
 if (!_sameView) then {
     private _captureStartedAt=diag_tickTime;
     private _cap=[player,_view] call ServoPeregrino_Organizador_Items_fnc_capturePlayerContainer;
-    _captureMs=round ((diag_tickTime-_captureStartedAt)*1000);
+    _captureMs=[_captureStartedAt] call ServoPeregrino_Organizador_UICommon_fnc_elapsedMs;
     _captureOk=_cap getOrDefault ["success",false];
     private _rows=[];
     if (_captureOk) then {
@@ -47,7 +47,7 @@ if (!_sameView) then {
     private _renderStartedAt=diag_tickTime;
     private _renderR=[_rows,_view,_capacity,_contentMass,_unknownMassCount,if (_captureOk) then {"OK"} else {"INDISPONÍVEL"},_reason] call ServoPeregrino_Organizador_Items_fnc_renderEquipmentRowsUI;
     _rowCount=_renderR getOrDefault ["rowCount",count _rows];
-    _renderMs=round ((diag_tickTime-_renderStartedAt)*1000);
+    _renderMs=[_renderStartedAt] call ServoPeregrino_Organizador_UICommon_fnc_elapsedMs;
     _captured=true;
 };
 
@@ -86,7 +86,7 @@ private _hist=_state getOrDefault ["history",[]]; private _histText="";
     ]
 ] call ServoPeregrino_Organizador_UICommon_fnc_renderFooter;
 
-private _totalMs=round ((diag_tickTime-_startedAt)*1000);
+private _totalMs=[_startedAt] call ServoPeregrino_Organizador_UICommon_fnc_elapsedMs;
 _state=missionNamespace getVariable [SERVO_PEREGRINO_ORGANIZADOR_ITEMS_UI_STATE_VAR,createHashMap];
 _state set ["lastRefreshTick",diag_tickTime];
 _state set ["lastRefreshMode","EQUIPMENT_FOCUSED"];
@@ -101,9 +101,7 @@ _state set ["lastEquipmentUnknownMassCount",_unknownMassCount];
 _state set ["lastEquipmentCapacity",_capacity];
 _state set ["equipmentViewCommandEnabled",_equipmentEnabled];
 _state set ["resolvedEquipmentViewTarget",_equipmentResolved];
-private _perf=+(_state getOrDefault ["uiPerfHistory",[]]);
-_perf pushBack ["EQUIPMENT_FOCUSED",_reason,_totalMs,_captureMs,_renderMs,_captured,diag_tickTime];
-while {(count _perf)>24} do {_perf deleteAt 0;};
+private _perf=[_state getOrDefault ["uiPerfHistory",[]],["EQUIPMENT_FOCUSED",_reason,_totalMs,_captureMs,_renderMs,_captured,diag_tickTime],24] call ServoPeregrino_Organizador_UICommon_fnc_appendPerfHistory;
 _state set ["uiPerfHistory",_perf];
 _state set ["refreshing",false];
 missionNamespace setVariable [SERVO_PEREGRINO_ORGANIZADOR_ITEMS_UI_STATE_VAR,_state];
