@@ -376,3 +376,39 @@ A estratégia A permanece apenas hipótese declarada para 0.7-B. 0.7-A não cham
 
 Detalhes e gate:
 `docs/63_WEAPONS_0_7_A_PLAN_SNAPSHOT_DRY_RUN.md`.
+
+## 07/10/2026 — Weapons 0.7-B B1 aberta
+
+Baseline:
+- UICommon 0.2 congelada;
+- Weapons 0.7-A homologada: 673/673, 0 FAIL;
+- marker: `baseline/weapons-0.7-a-homologated`.
+
+Candidata:
+- branch: `feature/weapons-0.7-b-slot-safe-apply`;
+- display: `0.7-B`;
+- semantic: `0.7.1.1`;
+- build: `0.7.1.1-slot-safe-apply-b1-mission-first`.
+
+Escopo B1:
+- consumir Plan/Snapshot congelados da 0.7-A;
+- build do target loadout;
+- primeira mutação física via `setUnitLoadout [loadout,false]`;
+- somente target slot pode mudar;
+- pós-validar configuração, magazine/ammo e preservation fingerprint;
+- stale Snapshot aborta antes da mutação;
+- NO_OP não toca no engine;
+- safety rollback imediato se pós-validação divergir;
+- runner usa unidade isolada e não altera o player.
+
+Política candidata:
+- mesmo magazine observado -> preservar ammo observado;
+- magazine novo/diferente -> capacidade cheia de CfgMagazines;
+- sem magazine na Recipe -> target sem primary magazine.
+
+UI física continua deferred para 0.7-D.
+Rollback/fault-injection formal continua 0.7-C.
+Multiplayer continua 0.8.
+
+Documento:
+`docs/65_WEAPONS_0_7_B_SLOT_SAFE_APPLY.md`.
