@@ -34,10 +34,10 @@
         diag_log format ["[SP_ORG] [FULL_UI_LAB] ITEMS_UICOMMON_EQUIVALENCE result=%1",_r];
     }];
 
-    missionNamespace setVariable ["SP_ORG_FullLab_fnc_testWeapons07A", {
+    missionNamespace setVariable ["SP_ORG_FullLab_fnc_testWeapons07B", {
         [] spawn {
-            private _r=[] call ServoPeregrino_Organizador_Weapons_fnc_runDelivery0_7_ATests;
-            diag_log format ["[SP_ORG] [FULL_UI_LAB] WEAPONS_0_7_A_TEST result=%1",_r];
+            private _r=[] call ServoPeregrino_Organizador_Weapons_fnc_runDelivery0_7_BTests;
+            diag_log format ["[SP_ORG] [FULL_UI_LAB] WEAPONS_0_7_B_TEST result=%1",_r];
         };
     }];
 
@@ -47,7 +47,7 @@
         {
             private _id = _unit getVariable [_x,-1];
             if (_id >= 0) then {_unit removeAction _id;};
-        } forEach ["SPORG_FL_Items","SPORG_FL_Weapons","SPORG_FL_UICommon","SPORG_FL_ItemsUICommon","SPORG_FL_WeaponsR6","SPORG_FL_Weapons07A"];
+        } forEach ["SPORG_FL_Items","SPORG_FL_Weapons","SPORG_FL_UICommon","SPORG_FL_ItemsUICommon","SPORG_FL_WeaponsR6","SPORG_FL_Weapons07B"];
 
         _unit setVariable ["SPORG_FL_Items", _unit addAction [
             "<t color='#7FD9D0' size='1.12'>SP_ORG LAB - ABRIR ITEMS</t>",
@@ -65,9 +65,9 @@
             "<t color='#A8D7FF'>SP_ORG LAB - TESTAR ITEMS + UICOMMON</t>",
             {[] call (missionNamespace getVariable ["SP_ORG_FullLab_fnc_testItemsUICommon",{}]);},nil,14.5,true,true,"","alive _this",50
         ]];
-        _unit setVariable ["SPORG_FL_Weapons07A", _unit addAction [
-            "<t color='#F0D98C'>SP_ORG LAB - TESTAR WEAPONS 0.7-A</t>",
-            {[] call (missionNamespace getVariable ["SP_ORG_FullLab_fnc_testWeapons07A",{}]);},nil,14,true,true,"","alive _this && isServer",50
+        _unit setVariable ["SPORG_FL_Weapons07B", _unit addAction [
+            "<t color='#F0D98C'>SP_ORG LAB - TESTAR WEAPONS 0.7-B</t>",
+            {[] call (missionNamespace getVariable ["SP_ORG_FullLab_fnc_testWeapons07B",{}]);},nil,14,true,true,"","alive _this && isServer",50
         ]];
     }];
 
@@ -110,5 +110,5 @@
     }];
 
     diag_log format ["[SP_ORG] [FULL_UI_LAB] CLIENT_READY player=%1 owner=%2",name player,clientOwner];
-    hint parseText "<t size='1.2'>SP_ORG - WEAPONS 0.7-A + UICOMMON 0.2</t><br/><br/>Weapons 0.7-A adiciona Plan, Snapshot, fingerprint de preservacao e Dry-Run sobre a UI 0.6-F R6 congelada.<br/><br/><t color='#F0D98C'>IMPORTANTE:</t> esta entrega NAO equipa armas fisicamente. O teste deve provar que o loadout permanece identico antes/depois. Mutacao real fica para 0.7-B.<br/><br/>Nao carregue PBOs do Servo Peregrino neste teste.";
+    hint parseText "<t size='1.2'>SP_ORG - WEAPONS 0.7-B + UICOMMON 0.2</t><br/><br/>Weapons 0.7-B habilita a primeira aplicacao fisica slot-safe no core, sobre Plan/Snapshot homologados na 0.7-A.<br/><br/><t color='#F0D98C'>IMPORTANTE:</t> o AUTO TEST executa as mutacoes em uma unidade isolada criada pelo harness. O loadout do jogador nao deve ser alterado. Integracao fisica com a UI fica para 0.7-D.<br/><br/>Nao carregue PBOs do Servo Peregrino neste teste.";
 };
