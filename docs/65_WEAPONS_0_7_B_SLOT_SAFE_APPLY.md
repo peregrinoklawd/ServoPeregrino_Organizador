@@ -4,7 +4,7 @@ Data: 2026-10-07.
 
 ## Status
 
-**STATIC CANDIDATE / RUNTIME PENDING**
+**STATIC READY / RUNTIME PENDING**
 
 Branch:
 
@@ -295,3 +295,25 @@ Objetivo:
 - restauração comprovada;
 - nenhum estado parcial;
 - preparar o core para integração player-facing na 0.7-D.
+
+
+## Static/package gate B1
+
+Static review:
+- 3 novas funções Application registradas em CfgFunctions;
+- runner 0.7-B registrado;
+- delimitadores estruturais balanceados nos novos SQF, lifecycle, harness e description.ext;
+- nenhum escape literal `\\n` nos registros novos do mission config;
+- estratégia física aparece somente no executor 0.7-B e no harness;
+- runner saudável esperado: **673 legacy + 118 local = 791/791, 0 FAIL**.
+
+Pacote canônico:
+- workflow: `Package self-contained UI lab`;
+- run: `37680788721`;
+- packaged source commit: `172c24010dcdd1d0490806750b8c83c773df9725`;
+- artifact id: `11508728504`;
+- artifact digest: `sha256:262c623c154b4eaa9224cf33c29661cecbb43f01eca12fd52907eb036f61ae3b`;
+- mission ZIP SHA256: `d21fe5f35ce9d1d7794fe1b6c2c4a9889ae1096dff957c48ef2d4dd0f69efc1b`;
+- mission: `SP_ORG_Weapons_0_7_B_Slot_Safe_Apply_B1.VR`.
+
+Runtime Arma continua pendente.
