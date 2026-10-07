@@ -22,8 +22,8 @@
     "hub_rule": "Hub is an optional player-facing integration/orchestration layer. No domain module may require Hub in order to function.",
     "independent_core_development": true
   },
-  "global_next_gate": "UICommon 0.2-F F1 final real-Arma equivalence gate: UICommon 43/43, Items/UICommon 16/16, Weapons 594/594 0 FAIL; focused refresh/performance and manual UI behavior must remain unchanged.",
-  "global_after_gate": "If 0.2-F F1 passes: freeze UICommon 0.2 as consolidated baseline, then start Weapons 0.7-A Plan/Snapshot/Dry-Run before any physical mutation.",
+  "global_next_gate": "Weapons 0.7-A Plan/Snapshot/Dry-Run: define slot-safe physical application contract and validate plans/snapshots without mutating player loadout.",
+  "global_after_gate": "If 0.7-A passes: proceed to Weapons 0.7-B Slot-Safe Apply with explicit rollback/validation gate before multiplayer authority work.",
   "modules": [
     {
       "id": "Nexus",
@@ -63,8 +63,8 @@
       "mandatory": false,
       "stable_version": {
         "display": "0.2",
-        "semantic": "0.2.0.9",
-        "build": "0.2.0.9-performance-instrumentation-e1"
+        "semantic": "0.2.0.10",
+        "build": "0.2.0.10-equivalence-cleanup-f1"
       },
       "development_version": {
         "display": "0.2",
@@ -90,10 +90,10 @@
         "required": [],
         "optional": []
       },
-      "status": "0_2_F_F1_STATIC_READY_RUNTIME_PENDING",
-      "next_gate": "Real Arma final equivalence: Foundation 43/43, Items+UICommon 16/16, Weapons 594/594; wheel/slider/catalog/draft/equipment remain focused; no visual/manual regression.",
-      "homologated_artifact": "UICommon 0.2-E E1 frozen real-Arma baseline: 43/43 + 16/16 + 594/594, 0 FAIL; focused refresh and manual performance accepted.",
-      "current_candidate_artifact": "0.2-F F1: equivalence + non-functional cleanup only; candidate identity 0.2.0.10; stale Weapons harness R1/R2 labels aligned to R6; no consumer refreshers or domain behavior changed."
+      "status": "0_2_FINAL_HOMOLOGATED_FROZEN",
+      "next_gate": "Frozen. Preserve compatibility while Weapons 0.7 consumes the shared UICommon baseline.",
+      "homologated_artifact": "UICommon 0.2-F F1 final real-Arma baseline: Foundation 43/43, Items+UICommon 16/16, Weapons 594/594 0 FAIL; focused refresh/manual equivalence approved.",
+      "current_candidate_artifact": null
     },
     {
       "id": "Items",
@@ -238,7 +238,7 @@
         ]
       },
       "status": "MISSION_FIRST_0_6_F_R6_C2_HOMOLOGATED_594_OF_594",
-      "next_gate": "Remain frozen through UICommon 0.2-F final equivalence gate; then start Weapons 0.7-A Plan/Snapshot/Dry-Run before physical mutation.",
+      "next_gate": "Weapons 0.7-A Plan/Snapshot/Dry-Run: design and test slot-safe physical application without mutating loadout.",
       "homologated_artifact": "Weapons 0.6-F R6 + UICommon C2 integration: real Arma 594/594, 0 FAIL, 6 non-blocking release observations; manual behavior approved; physical application remains deferred to 0.7.",
       "current_candidate_artifact": "Canonical mission-first source remains synchronized; C2 focused Catalog-to-Draft route and hardened test contract are now runtime-approved.",
       "mission_first_validation": {
@@ -312,7 +312,7 @@
           "modded_provenance": true,
           "session_cache": true
         },
-        "next": "UICommon 0.2-F final equivalence, then Weapons 0.7-A Plan/Snapshot/Dry-Run",
+        "next": "Weapons 0.7-A Plan/Snapshot/Dry-Run after UICommon 0.2 final freeze",
         "0.4": {
           "status": "APPROVED_SP_FROZEN",
           "final_candidate": "R5",
