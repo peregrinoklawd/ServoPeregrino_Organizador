@@ -227,3 +227,17 @@ Somente depois de 0.7-A verde:
 - abortar/rollback diante de divergência;
 - preservar os contratos Plan/Snapshot homologados em 0.7-A.
 
+## Compatibilidade do harness R6
+
+O runner 0.6-F R6 possuía duas assertions que exigiam literalmente
+`kitApplication=DEFERRED_0_7`.
+
+Para permitir regressão cumulativa legítima na 0.7-A, essas duas assertions
+foram tornadas forward-compatible com:
+
+- `DEFERRED_0_7`;
+- `DRY_RUN_ONLY_0_7_A`.
+
+A mudança é somente de contrato do harness: ambos os valores significam
+**ausência de aplicação física**. A quantidade e o comportamento funcional
+dos 594 checks R6 permanecem preservados.
