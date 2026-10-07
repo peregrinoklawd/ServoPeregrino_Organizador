@@ -3,8 +3,8 @@ if (!hasInterface || {isNull _unit} || {!local _unit}) exitWith {false};
 if (_unit getVariable ["SP_ORG_Weapons_labActionsInstalled",false]) exitWith {true};
 _unit setVariable ["SP_ORG_Weapons_labActionsInstalled",true];
 
-_unit addAction ["Weapons | AUTO TEST 0.7-A - Plan/Snapshot/Dry-Run",{
- [] spawn ServoPeregrino_Organizador_Weapons_fnc_runDelivery0_7_ATests
+_unit addAction ["Weapons | AUTO TEST 0.7-B - Slot-Safe Apply",{
+ [] spawn ServoPeregrino_Organizador_Weapons_fnc_runDelivery0_7_BTests
 },nil,1.5,true,true,"","isServer"];
 
 _unit addAction ["Weapons | ABRIR UI 0.6-F R6",{
@@ -30,8 +30,8 @@ _unit addAction ["Weapons | Compatibilidade MX - RPT",{
  hint "Compatibilidade da MX gravada no RPT.";
 }];
 
-_unit addAction ["Weapons | Sobre o teste 0.7-A",{
- hint "0.7-A preserva integralmente a UI 0.6-F R6 e introduz somente o core de planejamento: ApplicationPlan, Snapshot, fingerprint dos domínios não alvo e Dry-Run. O teste cumulativo deve permanecer verde e o loadout físico não pode mudar. Aplicação real começa apenas em 0.7-B.";
+_unit addAction ["Weapons | Sobre o teste 0.7-B",{
+ hint "0.7-B mantém a UI 0.6-F R6 congelada e executa a primeira mutação física slot-safe no core. O AUTO TEST usa uma unidade isolada, valida PRIMARY/HANDGUN/SECONDARY, partial ammo, NO_OP e stale Snapshot. Integração do botão físico da UI continua deferred para 0.7-D.";
 }];
 
 _unit addEventHandler ["Respawn",{params ["_new"];[_new] call ServoPeregrino_Organizador_Weapons_fnc_installLabActions}];
