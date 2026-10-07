@@ -40,7 +40,7 @@
       "id": "UICommon",
       "addon": "ServoPeregrino_Organizador_UICommon",
       "mandatory": false,
-      "status": "0_2_D_R5_STATIC_READY_RUNTIME_PENDING",
+      "status": "0_2_D_R6_STATIC_READY_RUNTIME_PENDING",
       "stable_version": {
         "display": "0.2",
         "semantic": "0.2.0.6",
@@ -48,8 +48,8 @@
       },
       "development_version": {
         "display": "0.2",
-        "semantic": "0.2.0.7",
-        "build": "0.2.0.7-hierarchy-opacity-polish-d5"
+        "semantic": "0.2.0.8",
+        "build": "0.2.0.8-status-search-hygiene-d6"
       },
       "dependencies": [
         "Nexus"
@@ -70,9 +70,9 @@
         "required": [],
         "optional": []
       },
-      "next_gate": "R5 real Arma: 36/36 + 16/16 + Weapons 594/594 0 FAIL; manual visual review of draft spacing, destination text, purple Histórico and Items panel opacity.",
-      "homologated_artifact": "0.2-D R4 real-Arma approved: 36/36 + 16/16 + 594/594, manual tests approved.",
-      "current_candidate_artifact": "0.2-D R5 hierarchy/wording/footer-color/Items-opacity polish over homologated R4."
+      "next_gate": "R6 real Arma: 36/36 + 16/16 + 594/594; no leaked test queries; status text grouped with kit-name box.",
+      "homologated_artifact": "0.2-D R4 real-Arma approved; R5 automated-green but visually superseded.",
+      "current_candidate_artifact": "0.2-D R6 review fix: left-aligned draft status + Weapons test-search cleanup."
     },
     {
       "id": "Items",

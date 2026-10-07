@@ -1,7 +1,7 @@
 author = "Claudio Malta Telhada";
-onLoadName = "SP_ORG UI Lab - UICommon 0.2-D R5";
-onLoadMission = "UICommon 0.2-D R5: hierarquia do rascunho mais compacta, destino renomeado, Histórico em roxo claro e transparência de Items rebalanceada.";
-overviewText = "R4 homologada; R5 aplica somente polimento visual de baixo risco em Items e Weapons, sem alterar handlers ou contratos funcionais.";
+onLoadName = "SP_ORG UI Lab - UICommon 0.2-D R6";
+onLoadMission = "UICommon 0.2-D R6: review fix da R5; status do rascunho alinhado ao nome e buscas sintéticas de Weapons limpas após testes.";
+overviewText = "R4 permanece homologada; R6 corrige apenas higiene do harness e alinhamento visual do status, preservando a funcionalidade da R5.";
 enableDebugConsole = 1;
 disabledAI = 1;
 respawn = 3;

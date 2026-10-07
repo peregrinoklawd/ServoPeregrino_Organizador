@@ -22,8 +22,8 @@
     "hub_rule": "Hub is an optional player-facing integration/orchestration layer. No domain module may require Hub in order to function.",
     "independent_core_development": true
   },
-  "global_next_gate": "UICommon 0.2-D R5 real-Arma gate: UICommon 36/36, Items/UICommon 16/16, Weapons 594/594 0 FAIL; manual review of draft header spacing, destination label, purple history and Items P1/P3 visual opacity.",
-  "global_after_gate": "If R5 passes: freeze UICommon 0.2-D visual polish and proceed to 0.2-E Performance Instrumentation.",
+  "global_next_gate": "UICommon 0.2-D R6 real-Arma gate: UICommon 36/36, Items/UICommon 16/16, Weapons 594/594 0 FAIL; confirm no synthetic P2/P4 search text survives auto tests and draft status visually attaches to the kit-name field.",
+  "global_after_gate": "If R6 passes: freeze UICommon 0.2-D, then execute 0.2-E Performance Instrumentation, 0.2-F Equivalence/Cleanup, the Items+Weapons equivalence gate, and only then Weapons 0.7-A Plan/Snapshot/Dry-Run.",
   "modules": [
     {
       "id": "Nexus",
@@ -68,8 +68,8 @@
       },
       "development_version": {
         "display": "0.2",
-        "semantic": "0.2.0.7",
-        "build": "0.2.0.7-hierarchy-opacity-polish-d5"
+        "semantic": "0.2.0.8",
+        "build": "0.2.0.8-status-search-hygiene-d6"
       },
       "dependencies": [
         "Nexus"
@@ -90,10 +90,10 @@
         "required": [],
         "optional": []
       },
-      "status": "0_2_D_R5_STATIC_READY_RUNTIME_PENDING",
-      "next_gate": "R5 real Arma: Foundation 36/36, Items/UICommon 16/16, Weapons 594/594 0 FAIL; manual visual review of compact draft header, Qual o destino?, purple Histórico and Items P1/P3 opacity.",
-      "homologated_artifact": "UICommon 0.2-D R4 homologated in real Arma: Foundation 36/36, Items+UICommon 16/16, Weapons 594/594 0 FAIL; manual tests approved; responsive WIDE confirmed at 5120x1440.",
-      "current_candidate_artifact": "0.2-D R5: R4 functional baseline preserved; draft name/status spacing tightened, Items destination wording corrected, footer history changed to light purple, Items P1/P3 visual opacity reduced to compensate darker list/table layering."
+      "status": "0_2_D_R6_STATIC_READY_RUNTIME_PENDING",
+      "next_gate": "R6 real Arma: 36/36 + 16/16 + Weapons 594/594; after auto tests P2/P4 search boxes must be empty; NOVO/ALTERADO/SALVO/SEM KIT must render immediately after the kit-name box.",
+      "homologated_artifact": "UICommon 0.2-D R4 remains the homologated fallback. R5 passed automated gates but remains visually superseded by R6 review fixes.",
+      "current_candidate_artifact": "0.2-D R6: R5 visual polish preserved; DraftDirty/SelectedDirty are left-aligned so status visually belongs to the name field; Weapons search-isolation test uses synthetic tokens and clears P2/P4 before reopening UI."
     },
     {
       "id": "Items",

@@ -745,3 +745,12 @@ R5 é somente polish:
 - Histórico em roxo claro (`#B9A3E8` / `#D1C2F0`);
 - Items P1/P3 com surface alpha 0.32 para compensar as camadas internas mais escuras.
 - handlers funcionais permanecem idênticos à R4.
+
+
+## 07/10/2026 — UICommon 0.2-D R6
+
+Review fix da R5:
+- status do rascunho passa a alinhar à esquerda do próprio controle, ficando visualmente junto da caixa de nome;
+- runner Weapons substitui `mira/laser` por tokens sintéticos e limpa P2/P4 antes de reabrir a UI;
+- gate automático permanece 36/36 + 16/16 + 594/594.
+- após aprovação, 0.2-D será congelada e o fluxo segue para 0.2-E, 0.2-F e então Weapons 0.7-A.

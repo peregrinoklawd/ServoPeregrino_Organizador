@@ -65,3 +65,17 @@ P2/P4, linhas, botões e lógica de DnD permanecem intactos.
   - Histórico em roxo claro;
   - P1/P3 de Items visualmente equilibrados com P2/P4;
   - DnD e demais interações preservados.
+
+
+## Resultado da R5
+
+Gate automático em Arma real:
+- UICommon 36/36;
+- Items + UICommon 16/16;
+- Weapons 594/594.
+
+A R5 não foi congelada visualmente porque a revisão manual identificou:
+1. os termos sintéticos de teste P2/P4 permaneciam no estado após o runner;
+2. o status do rascunho era geometricamente adjacente ao nome, porém `style=1` o desenhava no extremo direito do controle, fazendo-o parecer associado à busca.
+
+Esses dois pontos são tratados na R6.
