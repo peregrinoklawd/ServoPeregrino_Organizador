@@ -183,11 +183,11 @@
       "id": "Weapons",
       "addon": "ServoPeregrino_Organizador_Weapons",
       "mandatory": false,
-      "status": "MISSION_FIRST_0_7_A_STATIC_READY_RUNTIME_PENDING",
+      "status": "MISSION_FIRST_0_7_A_HOMOLOGATED_FROZEN",
       "stable_version": {
-        "display": "0.6-F R6 mission-first",
-        "semantic": "0.6.5.6 mission-first",
-        "build": "0.6.5.6-compact-filter-spacing-test-contract-hotfix-uicommon-mission-first"
+        "display": "0.7-A mission-first",
+        "semantic": "0.7.0.1 mission-first",
+        "build": "0.7.0.1-plan-snapshot-dry-run-mission-first"
       },
       "development_version": {
         "display": "0.7-A mission-first",
@@ -230,9 +230,9 @@
           "persistence.provider.v1"
         ]
       },
-      "next_gate": "Real-Arma Plan/Snapshot/Dry-Run gate; exact physical loadout unchanged.",
-      "homologated_artifact": "0.6-F R6 + C2 runtime approved at 594/594, 0 FAIL; manual approved.",
-      "current_candidate_artifact": "0.7-A read-only slot-safe application planning; 0.7-B remains first physical mutation gate.",
+      "next_gate": "Weapons 0.7-B Slot-Safe Apply — first controlled physical mutation with target-slot isolation and rollback/post-validation.",
+      "homologated_artifact": "0.7-A runtime 673/673, 0 FAIL; legacy 594/594 + local 79/79; exact loadout unchanged in Dry-Run.",
+      "current_candidate_artifact": null,
       "mission_first_validation": {
         "lifecycle_0_1_b": "APPROVED_SP",
         "weapon_configuration_0_2": "APPROVED_SP",
