@@ -93,3 +93,31 @@ Esperado:
 
 Após aprovação:
 **0.2-F — Equivalence + Cleanup**.
+
+## Runtime homologado
+
+RPT real recebido em 07/10/2026.
+
+Resultado:
+- UICommon Foundation: **43/43 PASS**;
+- Items + UICommon Equivalence: **16/16 PASS**;
+- Weapons 0.6-F R6: **594/594 PASS**, 0 FAIL;
+- Catalog scroll de Items permaneceu focused, com `fullRefresh=false`, sem equipment recapture e sem rebuild de projeção durante wheel;
+- Catalog scroll de Weapons permaneceu focused, com `fullRefresh=false`, sem rebuild de projeção/filtro durante wheel;
+- Equipment e Draft permaneceram em refresh focal;
+- nenhuma regressão funcional ou de refresh policy foi atribuída à instrumentação.
+
+Observação:
+- o primeiro build CONFIG_ALL de Items permaneceu um custo separado de catálogo e não é classificado como regressão da E1;
+- erros ambientais em `CBA_fnc_addPerFrameHandler` ocorreram fora do stack SP_ORG e não bloquearam os gates.
+
+Conclusão:
+**UICommon 0.2-E E1 — HOMOLOGADA / CONGELADA.**
+
+Baseline congelada:
+- display: `0.2`;
+- semantic: `0.2.0.9`;
+- build: `0.2.0.9-performance-instrumentation-e1`.
+
+Próximo gate:
+**0.2-F — Equivalence + Cleanup**.
