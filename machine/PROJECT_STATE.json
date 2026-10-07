@@ -22,8 +22,8 @@
     "hub_rule": "Hub is an optional player-facing integration/orchestration layer. No domain module may require Hub in order to function.",
     "independent_core_development": true
   },
-  "global_next_gate": "Weapons 0.7-B Slot-Safe Apply: first controlled physical mutation using the homologated 0.7-A Plan/Snapshot contracts; mutate only target slot, post-validate target + preservation fingerprint, rollback/abort on divergence.",
-  "global_after_gate": "After 0.7-B real-Arma approval, reassess remaining 0.7 physical-application hardening before opening Weapons 0.8 multiplayer/authority; do not skip directly to multiplayer.",
+  "global_next_gate": "Weapons 0.7-B B1 real-Arma slot-safe physical apply gate: frozen 0.7-A Plan/Snapshot -> target-only setUnitLoadout false -> post-validation; isolated test unit; player loadout untouched.",
+  "global_after_gate": "If 0.7-B B1 passes: freeze successful apply semantics and proceed to Weapons 0.7-C Post-Validation / Rollback with controlled fault injection. UI integration remains 0.7-D; multiplayer remains 0.8.",
   "modules": [
     {
       "id": "Nexus",
@@ -215,9 +215,9 @@
         "build": "0.7.0.1-plan-snapshot-dry-run-mission-first"
       },
       "development_version": {
-        "display": "0.7-A mission-first",
-        "semantic": "0.7.0.1 mission-first",
-        "build": "0.7.0.1-plan-snapshot-dry-run-mission-first"
+        "display": "0.7-B mission-first",
+        "semantic": "0.7.1.1 mission-first",
+        "build": "0.7.1.1-slot-safe-apply-b1-mission-first"
       },
       "dependencies": [
         "Nexus",
@@ -255,10 +255,10 @@
           "persistence.provider.v1"
         ]
       },
-      "status": "MISSION_FIRST_0_7_A_HOMOLOGATED_FROZEN",
-      "next_gate": "Weapons 0.7-B Slot-Safe Apply — first controlled physical mutation; target-slot only + post-validation + rollback/abort protection.",
-      "homologated_artifact": "0.7-A real-Arma approved: 673/673, 0 FAIL = legacy R6 594/594 + local 79/79; Plan/Snapshot/Dry-Run and exact unchanged loadout proven.",
-      "current_candidate_artifact": null,
+      "status": "MISSION_FIRST_0_7_B_B1_STATIC_CANDIDATE_RUNTIME_PENDING",
+      "next_gate": "Real-Arma 0.7-B B1: controlled target-slot physical apply on isolated unit; target/config/ammo + non-target preservation fingerprint must pass with 0 FAIL.",
+      "homologated_artifact": "0.7-A real-Arma approved: 673/673, 0 FAIL; baseline/weapons-0.7-a-homologated.",
+      "current_candidate_artifact": "0.7-B B1 Slot-Safe Apply — first physical mutation; UI integration still deferred.",
       "mission_first_validation": {
         "0.1-B": {
           "status": "APPROVED_SP",
@@ -330,7 +330,7 @@
           "modded_provenance": true,
           "session_cache": true
         },
-        "next": "Weapons 0.7-B Slot-Safe Apply",
+        "next": "Weapons 0.7-C Post-Validation / Rollback after B1 runtime approval",
         "0.4": {
           "status": "APPROVED_SP_FROZEN",
           "final_candidate": "R5",
@@ -731,9 +731,14 @@
           "next": "Real-Arma cumulative gate; then 0.7-B Slot-Safe Apply"
         },
         "application_0_7_a": "APPROVED_673_OF_673_LEGACY_594_LOCAL_79_DRY_RUN_NO_MUTATION",
-        "application": "PLAN_SNAPSHOT_DRY_RUN_APPROVED_0_7_A",
-        "loadout_mutation": false,
-        "application_plan_snapshot_baseline": "baseline/weapons-0.7-a-homologated"
+        "application": "SLOT_SAFE_APPLY_0_7_B_B1",
+        "loadout_mutation": "TARGET_SLOT_ONLY_TEST_UNIT",
+        "application_plan_snapshot_baseline": "baseline/weapons-0.7-a-homologated",
+        "application_0_7_b": "STATIC_CANDIDATE_RUNTIME_PENDING",
+        "application_strategy": "FULL_LOADOUT_CLONE_SETUNITLOADOUT_FALSE",
+        "application_post_validation": "TARGET_PLUS_PRESERVATION_FINGERPRINT",
+        "application_rollback": "SAFETY_FALLBACK_PRESENT_HARDEN_0_7_C",
+        "ui_physical_application": "DEFERRED_0_7_D"
       }
     },
     {
