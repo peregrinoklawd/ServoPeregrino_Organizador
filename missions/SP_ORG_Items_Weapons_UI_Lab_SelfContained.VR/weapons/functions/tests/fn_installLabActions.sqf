@@ -3,8 +3,8 @@ if (!hasInterface || {isNull _unit} || {!local _unit}) exitWith {false};
 if (_unit getVariable ["SP_ORG_Weapons_labActionsInstalled",false]) exitWith {true};
 _unit setVariable ["SP_ORG_Weapons_labActionsInstalled",true];
 
-_unit addAction ["Weapons | AUTO TEST 0.6-F R6 - Compact Filter Regression",{
- [] spawn ServoPeregrino_Organizador_Weapons_fnc_runDelivery0_6_FR6Tests
+_unit addAction ["Weapons | AUTO TEST 0.7-A - Plan/Snapshot/Dry-Run",{
+ [] spawn ServoPeregrino_Organizador_Weapons_fnc_runDelivery0_7_ATests
 },nil,1.5,true,true,"","isServer"];
 
 _unit addAction ["Weapons | ABRIR UI 0.6-F R6",{
@@ -30,8 +30,8 @@ _unit addAction ["Weapons | Compatibilidade MX - RPT",{
  hint "Compatibilidade da MX gravada no RPT.";
 }];
 
-_unit addAction ["Weapons | Sobre o teste 0.6-F R6",{
- hint "0.6-F R6 preserva o authoring dinâmico da R5 e compacta o espaço entre Tipo/Acessório e seus filtros: se não houver kit, enviar uma ARMA do Catálogo cria um novo kit automaticamente; uma arma de outra categoria pode substituir a arma do rascunho sem bloqueio; o tipo interno não é exibido ao jogador; mensagens do fluxo de rascunho são explicativas e não mostram códigos WEAPONS_UI_*. Aplicação física continua reservada para 0.7.";
+_unit addAction ["Weapons | Sobre o teste 0.7-A",{
+ hint "0.7-A preserva integralmente a UI 0.6-F R6 e introduz somente o core de planejamento: ApplicationPlan, Snapshot, fingerprint dos domínios não alvo e Dry-Run. O teste cumulativo deve permanecer verde e o loadout físico não pode mudar. Aplicação real começa apenas em 0.7-B.";
 }];
 
 _unit addEventHandler ["Respawn",{params ["_new"];[_new] call ServoPeregrino_Organizador_Weapons_fnc_installLabActions}];
