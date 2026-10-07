@@ -361,3 +361,18 @@ Testar com:
 **APM é referência de contrato para 0.7, não fonte para cópia.**
 
 O core transacional deve ser recriado em Weapons com contratos próprios e testes de preservação explícitos.
+
+## Execução iniciada — 0.7-A
+
+A primeira etapa recomendada neste estudo foi implementada como candidata mission-first:
+
+- Plan;
+- Snapshot;
+- preservation fingerprint;
+- Dry-Run;
+- mutation forbidden.
+
+A estratégia A permanece apenas hipótese declarada para 0.7-B. 0.7-A não chama `setUnitLoadout`.
+
+Detalhes e gate:
+`docs/63_WEAPONS_0_7_A_PLAN_SNAPSHOT_DRY_RUN.md`.
