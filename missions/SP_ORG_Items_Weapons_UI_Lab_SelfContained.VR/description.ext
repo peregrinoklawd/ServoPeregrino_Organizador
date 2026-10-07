@@ -228,6 +228,16 @@ class ServoPeregrino_Organizador_Weapons
    class duplicateWeaponKit {};
    class deleteWeaponKit {};
   };
+  class Application
+  {
+   file="weapons\functions\application";
+   class getApplicationPreservationFingerprint {};
+   class createApplicationPlan {};
+   class validateApplicationPlan {};
+   class captureApplicationSnapshot {};
+   class validateApplicationSnapshot {};
+   class simulateApplicationPlan {};
+  };
   class UI
   {
    file="weapons\functions\ui";
