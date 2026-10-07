@@ -4,7 +4,7 @@ Data: 2026-10-07.
 
 ## Status
 
-**STATIC READY / RUNTIME PENDING**
+**HOMOLOGATED / FROZEN**
 
 Branch:
 
@@ -241,3 +241,38 @@ foram tornadas forward-compatible com:
 A mudança é somente de contrato do harness: ambos os valores significam
 **ausência de aplicação física**. A quantidade e o comportamento funcional
 dos 594 checks R6 permanecem preservados.
+
+## 07/10/2026 — Weapons 0.7-A homologada
+
+RPT real da missão `SP_ORG_Weapons_0_7_A_Plan_Snapshot_DryRun.VR` aprovado.
+
+Resultado:
+- regressão congelada 0.6-F R6: **594/594 PASS**;
+- checks locais 0.7-A: **79/79 PASS**;
+- total cumulativo: **673/673 PASS / 0 FAIL**;
+- PRIMARY, HANDGUN e SECONDARY: Dry-Run aprovado;
+- `mutationPerformed=false`;
+- loadout físico exatamente inalterado;
+- preservation fingerprint validado para domínios não alvo;
+- ApplicationPlan e ApplicationSnapshot aprovados;
+- mutação física permaneceu proibida conforme contrato.
+
+Identidade homologada:
+- display: `0.7-A`;
+- semantic: `0.7.0.1`;
+- build: `0.7.0.1-plan-snapshot-dry-run-mission-first`;
+- código testado/empacotado: `9f1b4a4e3195a4fb93beb6bee7cf50efa5e31198`;
+- baseline marker: `baseline/weapons-0.7-a-homologated`.
+
+Ruído externo conhecido no RPT:
+- erros recorrentes em `CBA_fnc_addPerFrameHandler.sqf`, sem stack SP_ORG identificado;
+- localization strings externas ausentes.
+Esses eventos não bloquearam o gate SP_ORG.
+
+Conclusão:
+**Weapons 0.7-A — HOMOLOGADA / CONGELADA.**
+
+Próximo gate formal:
+**Weapons 0.7-B — Slot-Safe Apply**.
+
+0.7-B será a primeira entrega autorizada a executar mutação física controlada, preservando os contratos Plan/Snapshot homologados em 0.7-A. Multiplayer/authority continua reservado para a linha 0.8.
