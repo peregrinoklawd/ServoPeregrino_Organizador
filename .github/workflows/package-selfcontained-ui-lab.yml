@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - feature/uicommon-0.1-foundation
+      - feature/weapons-0.7-a-plan-snapshot-dry-run
     paths:
       - "missions/SP_ORG_Items_Weapons_UI_Lab_SelfContained.VR/**"
       - "missions/PACKAGE_MISSION_NAME.txt"
