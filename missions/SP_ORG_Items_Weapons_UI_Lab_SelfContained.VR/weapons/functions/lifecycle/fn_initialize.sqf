@@ -3,7 +3,7 @@ private _check = [] call ServoPeregrino_Organizador_Weapons_fnc_validateNexus;
 if !(_check get "success") exitWith {_check};
 
 if (isNil "ServoPeregrino_Organizador_UICommon_fnc_initialize" || {isNil "ServoPeregrino_Organizador_UICommon_fnc_getBuildInfo"}) exitWith {
- [false,"WEAPONS_UICOMMON_REQUIRED","SP_ORG_Weapons 0.6-F R5 requer UICommon 0.1.1.",createHashMapFromArray [["minimumVersion",SP_ORG_WEAPONS_UICOMMON_MIN_VERSION]]] call ServoPeregrino_Organizador_Nexus_fnc_createResult
+ [false,"WEAPONS_UICOMMON_REQUIRED","SP_ORG_Weapons 0.7-A requer UICommon 0.1.1.",createHashMapFromArray [["minimumVersion",SP_ORG_WEAPONS_UICOMMON_MIN_VERSION]]] call ServoPeregrino_Organizador_Nexus_fnc_createResult
 };
 private _uiCommonInit = [] call ServoPeregrino_Organizador_UICommon_fnc_initialize;
 if !(_uiCommonInit getOrDefault ["success",false]) exitWith {_uiCommonInit};
@@ -29,7 +29,11 @@ private _cap = ["weapons.runtime",1,"ServoPeregrino_Organizador_Weapons",createH
  ["recipeStrategy","DESIRED_BUILD_MODEL"],
  ["kitSchema","0.5-kit-candidate"],
  ["kitRepositoryMode","SESSION_LOCAL_CANDIDATE"],
- ["kitApplication","DEFERRED_0_7"],
+ ["kitApplication","DRY_RUN_ONLY_0_7_A"],
+ ["applicationPlanSchema","0.7-A-application-plan-candidate"],
+ ["applicationSnapshotSchema","0.7-A-application-snapshot-candidate"],
+ ["applicationStrategy","FULL_LOADOUT_CLONE_SETUNITLOADOUT_FALSE_CANDIDATE"],
+ ["applicationMutation","FORBIDDEN_0_7_A"],
  ["kitUI","PLAYER_UI_0_6_E_R2_UX_CONVERGENCE_DIRECT_DRAFT_EQUIP_UICOMMON"],
  ["uiCheckpoint","0.6-F"],
  ["uiRevision","R6"],
@@ -56,7 +60,7 @@ private _cap = ["weapons.runtime",1,"ServoPeregrino_Organizador_Weapons",createH
  ["uiCommonMinimumVersion",SP_ORG_WEAPONS_UICOMMON_MIN_VERSION],
  ["uiCommonBuild",_uiCommonBuild],
  ["uiDirectDraftEquip",true],
- ["uiPhysicalApplication","DEFERRED_0_7"],
+ ["uiPhysicalApplication","DEFERRED_0_7_B"],
     ["uiDraft","LOCAL_WEAPONKIT_DRAFT_WITH_AUTHORING_CANDIDATE"],
     ["uiAuthoring","SESSION_LOCAL_DIRECT_CATALOG_TO_DRAFT_0_6_E_R2"],
  ["physicalIdentityProven",false],
@@ -67,7 +71,7 @@ if !(_cap get "success") exitWith {_cap};
 
 missionNamespace setVariable [SP_ORG_WEAPONS_RUNTIME,createHashMapFromArray [
  ["ready",true],
- ["status","WEAPONS_PLAYER_UI_0_6_F_R5_DYNAMIC_DRAFT_AUTHORING_PENDING_RUNTIME_VALIDATION"],
+ ["status","WEAPONS_0_7_A_PLAN_SNAPSHOT_DRY_RUN_PENDING_RUNTIME_VALIDATION"],
  ["build",[] call ServoPeregrino_Organizador_Weapons_fnc_getBuildInfo],
  ["physicalIdentityProven",false],
  ["identityStrategy","EVENT_DELTA_EVIDENCE_CANDIDATE"],
@@ -80,7 +84,11 @@ missionNamespace setVariable [SP_ORG_WEAPONS_RUNTIME,createHashMapFromArray [
  ["recipeStrategy","DESIRED_BUILD_MODEL"],
  ["kitSchema","0.5-kit-candidate"],
  ["kitRepositoryMode","SESSION_LOCAL_CANDIDATE"],
- ["kitApplication","DEFERRED_0_7"],
+ ["kitApplication","DRY_RUN_ONLY_0_7_A"],
+ ["applicationPlanSchema","0.7-A-application-plan-candidate"],
+ ["applicationSnapshotSchema","0.7-A-application-snapshot-candidate"],
+ ["applicationStrategy","FULL_LOADOUT_CLONE_SETUNITLOADOUT_FALSE_CANDIDATE"],
+ ["applicationMutation","FORBIDDEN_0_7_A"],
  ["kitUI","PLAYER_UI_0_6_E_R2_UX_CONVERGENCE_DIRECT_DRAFT_EQUIP_UICOMMON"],
  ["uiCheckpoint","0.6-F"],
  ["uiRevision","R6"],
@@ -107,7 +115,7 @@ missionNamespace setVariable [SP_ORG_WEAPONS_RUNTIME,createHashMapFromArray [
  ["uiCommonMinimumVersion",SP_ORG_WEAPONS_UICOMMON_MIN_VERSION],
  ["uiCommonBuild",_uiCommonBuild],
  ["uiDirectDraftEquip",true],
- ["uiPhysicalApplication","DEFERRED_0_7"],
+ ["uiPhysicalApplication","DEFERRED_0_7_B"],
     ["uiDraft","LOCAL_WEAPONKIT_DRAFT_WITH_AUTHORING_CANDIDATE"],
     ["uiAuthoring","SESSION_LOCAL_DIRECT_CATALOG_TO_DRAFT_0_6_E_R2"],
  ["executionMode","MISSION_FIRST"],
@@ -117,5 +125,5 @@ missionNamespace setVariable [SP_ORG_WEAPONS_RUNTIME,createHashMapFromArray [
 private _kitStoreInit = [] call ServoPeregrino_Organizador_Weapons_fnc_initializeWeaponKitStore;
 if !(_kitStoreInit get "success") exitWith {_kitStoreInit};
 
-["WEAPONS","INFO","WEAPONS 0.6-F R6 INITIALIZED - R5 behavior preserved + compact Tipo/Acessório filter spacing + regression-test contract hotfix; physical application remains deferred to 0.7."] call ServoPeregrino_Organizador_Nexus_fnc_log;
-[true,"WEAPONS_INITIALIZED","0.6-F R6 mission-first pronta; comportamento R5 preservado, espaçamento dos filtros Tipo/Acessório compactado e contratos dos testes alinhados ao authoring dinâmico. Aplicação física continua em 0.7."] call ServoPeregrino_Organizador_Nexus_fnc_createResult
+["WEAPONS","INFO","WEAPONS 0.7-A INITIALIZED - 0.6-F R6 UI frozen; ApplicationPlan + Snapshot + preservation fingerprint + Dry-Run enabled; physical mutation forbidden until 0.7-B."] call ServoPeregrino_Organizador_Nexus_fnc_log;
+[true,"WEAPONS_INITIALIZED","0.7-A mission-first pronta: UI 0.6-F R6 preservada e aplicação restrita a Plan/Snapshot/Dry-Run. Nenhuma mutação física é autorizada nesta entrega."] call ServoPeregrino_Organizador_Nexus_fnc_createResult
