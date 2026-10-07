@@ -176,8 +176,8 @@ if (count _primarySnapshot > 0) then {
 
 private _runtime = [] call ServoPeregrino_Organizador_Weapons_fnc_getRuntimeStatus;
 private _runtimeData = _runtime getOrDefault ["data",createHashMap];
-["0.7-A runtime application gate is dry-run",(_runtimeData getOrDefault ["kitApplication",""]) isEqualTo "DRY_RUN_ONLY_0_7_A"] call _assert;
-["0.7-A runtime physical mutation remains deferred",(_runtimeData getOrDefault ["uiPhysicalApplication",""]) isEqualTo "DEFERRED_0_7_B"] call _assert;
+["0.7-A planning contract remains available in forward runtimes",(_runtimeData getOrDefault ["kitApplication",""]) in ["DRY_RUN_ONLY_0_7_A","SLOT_SAFE_APPLY_0_7_B"]] call _assert;
+["0.7-A planning remains isolated from player-facing physical UI",(_runtimeData getOrDefault ["uiPhysicalApplication",""]) in ["DEFERRED_0_7_B","DEFERRED_0_7_D"]] call _assert;
 ["0.7-A runtime plan schema marker",(_runtimeData getOrDefault ["applicationPlanSchema",""]) isEqualTo "0.7-A-application-plan-candidate"] call _assert;
 ["0.7-A runtime snapshot schema marker",(_runtimeData getOrDefault ["applicationSnapshotSchema",""]) isEqualTo "0.7-A-application-snapshot-candidate"] call _assert;
 
