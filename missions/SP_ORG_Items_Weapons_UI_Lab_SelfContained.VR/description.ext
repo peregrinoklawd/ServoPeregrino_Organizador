@@ -1,7 +1,7 @@
 author = "Claudio Malta Telhada";
-onLoadName = "SP_ORG UI Lab - UICommon 0.2-E E1";
-onLoadMission = "UICommon 0.2-E E1: instrumentação de performance compartilhada, sem alterar ownership de refresh ou regras de domínio.";
-overviewText = "R6 permanece homologada; E1 extrai medição de tempo e histórico limitado para UICommon preservando logs, focused refresh e comportamento de Items/Weapons.";
+onLoadName = "SP_ORG UI Lab - UICommon 0.2-F F1";
+onLoadMission = "UICommon 0.2-F F1: equivalência final e limpeza não funcional, preservando comportamento, ownership de refresh e regras de domínio.";
+overviewText = "UICommon 0.2-E E1 está homologada; F1 valida equivalência final, limpa nomenclatura histórica do harness e preserva Items/Weapons sem mudança funcional.";
 enableDebugConsole = 1;
 disabledAI = 1;
 respawn = 3;
