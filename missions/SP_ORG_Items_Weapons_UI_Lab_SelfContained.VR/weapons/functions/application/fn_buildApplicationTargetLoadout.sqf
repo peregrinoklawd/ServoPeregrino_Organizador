@@ -23,15 +23,20 @@ private _desiredMagazineClass = _plan getOrDefault ["desiredMagazineClass",""];
 
 private _beforeWeaponClass = if (_beforeRow isEqualType [] && {count _beforeRow >= 1}) then {_beforeRow param [0,""]} else {""};
 private _classEquivalent = false;
+private _buildError = createHashMap;
 if !(_beforeWeaponClass isEqualTo "") then {
  private _equiv = [
   _beforeWeaponClass,
   _desired getOrDefault ["weaponClass",""],
   _slot
  ] call ServoPeregrino_Organizador_Weapons_fnc_areWeaponClassesEquivalentForSlot;
- if !(_equiv getOrDefault ["success",false]) exitWith {_equiv};
- _classEquivalent = ((_equiv get "data") getOrDefault ["equivalent",false]);
+ if !(_equiv getOrDefault ["success",false]) then {
+  _buildError = _equiv;
+ } else {
+  _classEquivalent = ((_equiv get "data") getOrDefault ["equivalent",false]);
+ };
 };
+if (count _buildError > 0) exitWith {_buildError};
 
 private _beforePrimaryMagazine = if (_beforeRow isEqualType [] && {count _beforeRow >= 5}) then {
  [(_beforeRow param [4,[]])] call ServoPeregrino_Organizador_Weapons_fnc_deepCopy
@@ -43,7 +48,6 @@ private _beforeSecondaryMagazine = if (_beforeRow isEqualType [] && {count _befo
 private _primaryMagazine = [];
 private _secondaryMagazine = [];
 private _ammoPolicy = "NO_RECIPE_MAGAZINE";
-private _buildError = createHashMap;
 
 if !(_desiredMagazineClass isEqualTo "") then {
  private _beforeMagClass = if (_beforePrimaryMagazine isEqualType [] && {count _beforePrimaryMagazine >= 1}) then {
