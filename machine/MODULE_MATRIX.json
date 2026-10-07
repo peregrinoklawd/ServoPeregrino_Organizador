@@ -175,12 +175,16 @@
       "id": "Weapons",
       "addon": "ServoPeregrino_Organizador_Weapons",
       "mandatory": false,
-      "status": "MISSION_FIRST_0_6_F_R6_C2_HOMOLOGATED_594_OF_594",
-      "stable_version": null,
-      "development_version": {
-        "display": "0.6-F R6 mission-first / addon source remains 0.1-A",
+      "status": "MISSION_FIRST_0_7_A_STATIC_READY_RUNTIME_PENDING",
+      "stable_version": {
+        "display": "0.6-F R6 mission-first",
         "semantic": "0.6.5.6 mission-first",
         "build": "0.6.5.6-compact-filter-spacing-test-contract-hotfix-uicommon-mission-first"
+      },
+      "development_version": {
+        "display": "0.7-A mission-first",
+        "semantic": "0.7.0.1 mission-first",
+        "build": "0.7.0.1-plan-snapshot-dry-run-mission-first"
       },
       "dependencies": [
         "Nexus",
@@ -218,9 +222,9 @@
           "persistence.provider.v1"
         ]
       },
-      "next_gate": "Weapons 0.7-A Plan/Snapshot/Dry-Run.",
+      "next_gate": "Real-Arma Plan/Snapshot/Dry-Run gate; exact physical loadout unchanged.",
       "homologated_artifact": "0.6-F R6 + C2 runtime approved at 594/594, 0 FAIL; manual approved.",
-      "current_candidate_artifact": "Canonical mission-first R6 source; no physical application yet.",
+      "current_candidate_artifact": "0.7-A read-only slot-safe application planning; 0.7-B remains first physical mutation gate.",
       "mission_first_validation": {
         "lifecycle_0_1_b": "APPROVED_SP",
         "weapon_configuration_0_2": "APPROVED_SP",
