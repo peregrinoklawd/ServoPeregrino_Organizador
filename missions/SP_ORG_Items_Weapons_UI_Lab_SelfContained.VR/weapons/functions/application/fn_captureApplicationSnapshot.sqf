@@ -19,12 +19,17 @@ private _targetRow = [(_loadout param [_slotIndex,[]])] call ServoPeregrino_Orga
 private _occupied = _targetRow isEqualType [] && {count _targetRow >= 1} && {(_targetRow param [0,""]) != ""};
 private _targetConfiguration = createHashMap;
 private _targetLoadedState = createHashMap;
+private _captureError = createHashMap;
 if (_occupied) then {
  private _capture = [_targetRow] call ServoPeregrino_Organizador_Weapons_fnc_configurationFromWeaponArray;
- if !(_capture getOrDefault ["success",false]) exitWith {_capture};
- _targetConfiguration = ((_capture get "data") get "configuration");
- _targetLoadedState = ((_capture get "data") get "loadedState");
+ if !(_capture getOrDefault ["success",false]) then {
+  _captureError = _capture;
+ } else {
+  _targetConfiguration = ((_capture get "data") get "configuration");
+  _targetLoadedState = ((_capture get "data") get "loadedState");
+ };
 };
+if (count _captureError > 0) exitWith {_captureError};
 
 private _snapshot = createHashMapFromArray [
  ["schemaVersion","0.7-A-application-snapshot-candidate"],
