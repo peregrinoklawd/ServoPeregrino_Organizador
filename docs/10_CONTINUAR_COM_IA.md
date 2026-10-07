@@ -786,3 +786,34 @@ Gate esperado:
 - Weapons **594/594**;
 - wheel/slider continuam `fullRefresh=false`;
 - nenhuma recaptura/rebuild adicional causada pela instrumentação.
+
+## 07/10/2026 — UICommon 0.2-E homologada / 0.2-F F1 aberta
+
+0.2-E E1 foi aprovada em Arma real:
+- UICommon Foundation: **43/43**;
+- Items + UICommon Equivalence: **16/16**;
+- Weapons 0.6-F R6: **594/594**, 0 FAIL;
+- focused refresh preservado em Items e Weapons;
+- nenhuma regressão funcional atribuída à instrumentação.
+
+Baseline congelada:
+- semantic `0.2.0.9`;
+- build `0.2.0.9-performance-instrumentation-e1`;
+- branch marcador: `baseline/uicommon-0.2-e-e1-homologated`.
+
+Candidata atual:
+- **UICommon 0.2-F F1 — Equivalence + Cleanup**;
+- semantic `0.2.0.10`;
+- build `0.2.0.10-equivalence-cleanup-f1`;
+- missão `SP_ORG_UI_Lab_UICommon_0_2_F_F1.VR`.
+
+F1 é não funcional:
+- limpa nomenclaturas históricas do harness;
+- consolida rastreabilidade;
+- não altera regras, eventos, UI visual ou refresh routing.
+
+Gate final:
+**43/43 + 16/16 + 594/594, 0 FAIL**, com focused refresh/manual preservados.
+
+Após aprovação:
+**congelar UICommon 0.2 e iniciar Weapons 0.7-A Plan/Snapshot/Dry-Run**.
