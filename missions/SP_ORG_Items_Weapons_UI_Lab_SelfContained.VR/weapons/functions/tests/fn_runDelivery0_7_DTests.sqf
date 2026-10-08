@@ -148,7 +148,7 @@ private _uiTests={
  ["D no draft rebuild",(_after get "draftFocusedRefreshCount") isEqualTo (_s get "draftFocusedRefreshCount")] call _assert;
  ["D equipment focused refresh once",(_after get "equipmentFocusedRefreshCount") isEqualTo ((_s get "equipmentFocusedRefreshCount")+1)] call _assert;
  ["D equipment panel reflects observed row",(ctrlText (_display displayCtrl 4022)) isEqualTo ((_loadout select _si) select 0)] call _assert;
- ["D feedback footer and state human readable",(_after get "temporaryMessage") find "Nada" >= 0 && {(str (ctrlStructuredText (_display displayCtrl 5001))) find "Nada" >= 0 && {(str (ctrlStructuredText (_display displayCtrl 5001))) find "WEAPONS_" < 0}}] call _assert;
+ ["D feedback footer and state human readable",(_after get "temporaryMessage") find "Nada" >= 0 && {(ctrlText (_display displayCtrl 5001)) find "Nada" >= 0 && {(ctrlText (_display displayCtrl 5001)) find "WEAPONS_" < 0}}] call _assert;
  ["D undo explicitly deferred",((_result getOrDefault ["data",createHashMap]) getOrDefault ["undo",""]) isEqualTo "UNDO_DEFERRED"] call _assert;
 };
 private _uiStart=count _checks;[] call _uiTests;[_uiStart,14,"actual UI"] call _blockTo;
