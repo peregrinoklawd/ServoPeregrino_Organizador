@@ -42,6 +42,8 @@ createHashMapFromArray [
  ["uiDraft","LOCAL_WEAPONKIT_DRAFT_WITH_AUTHORING_CANDIDATE"],
  ["uiAuthoring","SESSION_LOCAL_DIRECT_CATALOG_TO_DRAFT_0_6_E_R2"],
  ["kitApplication","SLOT_SAFE_APPLY_0_7_B"],
+ ["rollbackGate","EXPLICIT_VERIFIED_0_7_C"],
+ ["faultInjection","ISOLATED_LAB_ONLY"],
  ["applicationPlanSchema","0.7-A-application-plan-candidate"],
  ["applicationSnapshotSchema","0.7-A-application-snapshot-candidate"],
  ["applicationStrategy","FULL_LOADOUT_CLONE_SETUNITLOADOUT_FALSE_ACTIVE_0_7_B"],

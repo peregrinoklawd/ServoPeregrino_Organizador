@@ -80,7 +80,8 @@ private _expectedSecondary = _expectedRow param [5,[]];
 private _observedSecondary = if (_observedOccupied) then {_observedRow param [5,[]]} else {[]};
 private _secondaryMagazineMatched = [_expectedSecondary,_observedSecondary] call _magEqual;
 
-private _success = _preservationMatched && {_configurationMatched} && {_primaryMagazineMatched} && {_secondaryMagazineMatched};
+private _animMatched = (getAnimSpeedCoef _unit) isEqualTo (_snapshot get "animSpeedCoef");
+private _success = _animMatched && {_preservationMatched} && {_configurationMatched} && {_primaryMagazineMatched} && {_secondaryMagazineMatched};
 
 [
  _success,
@@ -90,6 +91,7 @@ private _success = _preservationMatched && {_configurationMatched} && {_primaryM
   ["targetSlot",_slot],
   ["targetSlotIndex",_slotIndex],
   ["preservationMatched",_preservationMatched],
+  ["animSpeedMatched",_animMatched],
   ["expectedPreservationFingerprint",_snapshot get "preservationFingerprint"],
   ["observedPreservationFingerprint",_afterFingerprint],
   ["configurationMatched",_configurationMatched],

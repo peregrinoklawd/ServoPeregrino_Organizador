@@ -240,6 +240,8 @@ class ServoPeregrino_Organizador_Weapons
    class buildApplicationTargetLoadout {};
    class validateAppliedApplicationState {};
    class applyApplicationPlan {};
+   class rollbackApplicationSnapshot {};
+   class validateApplicationRollback {};
   };
   class UI
   {
@@ -336,6 +338,7 @@ class ServoPeregrino_Organizador_Weapons
             class runDelivery0_6_FR6Tests {};
             class runDelivery0_7_ATests {};
             class runDelivery0_7_BTests {};
+            class runDelivery0_7_CTests {};
    class serverHandleLabRequest {};
   };
  };

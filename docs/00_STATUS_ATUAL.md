@@ -1270,3 +1270,10 @@ Dependentes são BLOCKED; total esperado estável 890 = 673 legacy + 217 local, 
 Branch `feature/weapons-0.7-b-slot-safe-apply`; semantic `0.7.1.2`.
 Executar `SP_ORG LAB - TESTAR WEAPONS 0.7-B`; entregar RPT completo. UI física segue deferred.
 B2 não homologada. C/D podem ser preparadas encadeadas, mas gates reais são sequenciais B2 -> C -> D. Não merge main.
+
+
+## 08/10/2026 — Weapons 0.7-C candidata
+
+**STATIC READY / RUNTIME PENDING**. Branch `feature/weapons-0.7-c-post-validation-rollback`; semantic `0.7.2.1`; build `0.7.2.1-post-validation-rollback-c1-mission-first`.
+B2 -> C -> D são candidatas encadeadas. Gate real obrigatório sequencial; nenhum merge main, nenhum freeze/homologação sem RPT.
+UICommon 0.2 e Items funcionalmente intocados. Plan/Snapshot 0.7-A congelados; fullMagazines=false. Multiplayer 0.8 deferred.

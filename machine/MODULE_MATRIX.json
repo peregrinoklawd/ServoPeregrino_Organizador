@@ -1,6 +1,6 @@
 {
   "generated_from": "machine/PROJECT_STATE.json",
-  "snapshot_date": "2026-10-07",
+  "snapshot_date": "2026-10-08",
   "repository": "peregrinoklawd/ServoPeregrino_Organizador",
   "modules": [
     {
@@ -183,16 +183,16 @@
       "id": "Weapons",
       "addon": "ServoPeregrino_Organizador_Weapons",
       "mandatory": false,
-      "status": "MISSION_FIRST_0_7_B_B2_STATIC_CANDIDATE_RUNTIME_PENDING",
+      "status": "MISSION_FIRST_CANDIDATE_STATIC_READY_RUNTIME_PENDING",
       "stable_version": {
         "display": "0.7-A mission-first",
         "semantic": "0.7.0.1 mission-first",
         "build": "0.7.0.1-plan-snapshot-dry-run-mission-first"
       },
       "development_version": {
-        "display": "0.7-B mission-first",
-        "semantic": "0.7.1.2 mission-first",
-        "build": "0.7.1.2-slot-safe-apply-b2-mission-first"
+        "display": "0.7-C mission-first",
+        "semantic": "0.7.2.1 mission-first",
+        "build": "0.7.2.1-post-validation-rollback-c1-mission-first"
       },
       "dependencies": [
         "Nexus",
@@ -230,9 +230,9 @@
           "persistence.provider.v1"
         ]
       },
-      "next_gate": "0.7-B B2 real-Arma target-slot-only physical apply; post-validate target + magazine/ammo + preservation fingerprint.",
+      "next_gate": "Sequential real-Arma RPT B2 -> C -> D; 0 FAIL / 0 BLOCKED",
       "homologated_artifact": "0.7-A: 673/673, 0 FAIL.",
-      "current_candidate_artifact": "0.7-B B2 Slot-Safe Apply",
+      "current_candidate_artifact": "0.7-C candidate; B2/C/D runtime pending",
       "mission_first_validation": {
         "lifecycle_0_1_b": "APPROVED_SP",
         "weapon_configuration_0_2": "APPROVED_SP",
@@ -594,5 +594,24 @@
       "homologated_artifact": null,
       "current_candidate_artifact": null
     }
-  ]
+  ],
+  "weapons_07_candidate_chain": {
+    "B2": {
+      "branch": "feature/weapons-0.7-b-slot-safe-apply",
+      "status": "STATIC_READY_RUNTIME_PENDING",
+      "semantic": "0.7.1.2",
+      "expected_checks": 890
+    },
+    "C": {
+      "branch": "feature/weapons-0.7-c-post-validation-rollback",
+      "status": "STATIC_READY_RUNTIME_PENDING",
+      "semantic": "0.7.2.1",
+      "expected_checks": 978
+    },
+    "D": {
+      "branch": "feature/weapons-0.7-d-ui-integration",
+      "status": "NOT_IMPLEMENTED",
+      "undo": "UNDO_DEFERRED"
+    }
+  }
 }

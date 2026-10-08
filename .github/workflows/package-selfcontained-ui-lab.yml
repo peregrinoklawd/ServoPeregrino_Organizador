@@ -6,6 +6,8 @@ on:
       - feature/uicommon-0.1-foundation
       - feature/weapons-0.7-a-plan-snapshot-dry-run
       - feature/weapons-0.7-b-slot-safe-apply
+      - feature/weapons-0.7-c-post-validation-rollback
+      - feature/weapons-0.7-d-ui-integration
     paths:
       - "missions/SP_ORG_Items_Weapons_UI_Lab_SelfContained.VR/**"
       - "missions/PACKAGE_MISSION_NAME.txt"
