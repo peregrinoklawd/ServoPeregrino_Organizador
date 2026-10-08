@@ -600,19 +600,34 @@
       "branch": "feature/weapons-0.7-b-slot-safe-apply",
       "status": "STATIC_READY_RUNTIME_PENDING",
       "semantic": "0.7.1.2",
-      "expected_checks": 890
+      "expected_checks": 890,
+      "code_commit": "599c62c12cb7211d1c82c24986195dcfa1660db8",
+      "workflow_run": 37722533910,
+      "artifact_id": 11526219044,
+      "zip_sha256": "cfce85b1d61b681989fe474697e4d063c4df185c8870c63ae53e10553ec13531",
+      "static_checks": "139/139"
     },
     "C": {
       "branch": "feature/weapons-0.7-c-post-validation-rollback",
       "status": "STATIC_READY_RUNTIME_PENDING",
       "semantic": "0.7.2.1",
-      "expected_checks": 978
+      "expected_checks": 978,
+      "code_commit": "1ebffc47c125c50f4c69f321662101b3bf49c9f7",
+      "workflow_run": 37722928050,
+      "artifact_id": 11525519646,
+      "zip_sha256": "881bb254b19fbb218d6231e29c7a2189e16a269b26b52310ad34a232d6fe0be7",
+      "static_checks": "144/144"
     },
     "D": {
       "branch": "feature/weapons-0.7-d-ui-integration",
       "status": "STATIC_READY_RUNTIME_PENDING",
       "undo": "UNDO_DEFERRED",
-      "expected_checks": 1109
+      "expected_checks": 1109,
+      "code_commit": "1997ef420d11313882322f931b771c18c69c26e5",
+      "workflow_run": 37723653489,
+      "artifact_id": 11527480050,
+      "zip_sha256": "19a146c56b552cf0c17db1c25cf2a7e7fd84af3c40045d140e85f8e9547dc3c1",
+      "static_checks": "148/148"
     }
   }
 }
