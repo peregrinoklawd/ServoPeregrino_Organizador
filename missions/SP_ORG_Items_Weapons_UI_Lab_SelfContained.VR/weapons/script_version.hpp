@@ -1,6 +1,6 @@
 #define SERVO_PEREGRINO_ORGANIZADOR_WEAPONS_DISPLAY_VERSION "0.7-B"
-#define SERVO_PEREGRINO_ORGANIZADOR_WEAPONS_SEMANTIC_VERSION "0.7.1.1"
-#define SERVO_PEREGRINO_ORGANIZADOR_WEAPONS_BUILD "0.7.1.1-slot-safe-apply-b1-mission-first"
+#define SERVO_PEREGRINO_ORGANIZADOR_WEAPONS_SEMANTIC_VERSION "0.7.1.2"
+#define SERVO_PEREGRINO_ORGANIZADOR_WEAPONS_BUILD "0.7.1.2-slot-safe-apply-b2-mission-first"
 #define SP_ORG_WEAPONS_RUNTIME "ServoPeregrino_Organizador_Weapons_runtime"
 #define SP_ORG_WEAPONS_AUTHORITY "ServoPeregrino_Organizador_Weapons_authority"
 #define SP_ORG_WEAPONS_LIVE_TEST "ServoPeregrino_Organizador_Weapons_liveLifecycleTest"

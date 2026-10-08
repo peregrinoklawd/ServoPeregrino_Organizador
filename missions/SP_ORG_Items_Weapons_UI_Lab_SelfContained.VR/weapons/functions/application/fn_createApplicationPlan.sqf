@@ -61,8 +61,8 @@ if (_occupied) then {
     if !(_diff getOrDefault ["success",false]) then {
      _nestedError = _diff;
     } else {
-     _changedFields = +(((_diff get "data") getOrDefault ["changedFields",[]]));
-     private _magDiff = _desiredMagazineClass != "" && {!((toLowerANSI _desiredMagazineClass) isEqualTo (toLowerANSI _currentMagazineClass))};
+     _changedFields = (((_diff get "data") getOrDefault ["changes",[]]) apply {_x get "field"});
+     private _magDiff = !((toLowerANSI _desiredMagazineClass) isEqualTo (toLowerANSI _currentMagazineClass));
      if ((count _changedFields) isEqualTo 0 && {!_magDiff}) then {_operation = "NO_OP"} else {_operation = "RECONFIGURE"};
     };
    } else {

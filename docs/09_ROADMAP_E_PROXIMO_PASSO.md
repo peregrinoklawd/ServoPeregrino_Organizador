@@ -1325,3 +1325,16 @@ Multiplayer continua 0.8.
 
 Documento:
 `docs/65_WEAPONS_0_7_B_SLOT_SAFE_APPLY.md`.
+
+
+## 08/10/2026 — B2 candidata (STATIC READY / RUNTIME PENDING)
+
+B1 real: 779 PASS / 3 FAIL / 782 executados; 9 checks dependentes não executados.
+Causa confirmada no source dos dois FAILs PRIMARY: diff expõe `changes` (objetos com `field`), consumidor buscava `changedFields`; RECONFIGURE virava NO_OP e pós-validação recusava óptica ausente.
+B2 adapta somente o consumidor, preservando schema/diff e a força da pós-validação.
+Magazine removido também conta como delta. Added same-class optic/muzzle/pointer/bipod/magazine regressions; partial ammo continua 17 -> 17.
+Cleanup: scheduler obrigatório, espera bounded de 5s e gate de objeto ausente em allUnits/allMissionObjects. B1 só provou falha da observação imediata, não vazamento; a confirmação do cleanup corrigido depende do RPT B2.
+Dependentes são BLOCKED; total esperado estável 890 = 673 legacy + 217 local, aprovação exige zero FAIL/BLOCKED.
+Branch `feature/weapons-0.7-b-slot-safe-apply`; semantic `0.7.1.2`.
+Executar `SP_ORG LAB - TESTAR WEAPONS 0.7-B`; entregar RPT completo. UI física segue deferred.
+B2 não homologada. C/D podem ser preparadas encadeadas, mas gates reais são sequenciais B2 -> C -> D. Não merge main.

@@ -3,6 +3,10 @@ if (!isServer || {isRemoteExecuted} || {!(missionNamespace getVariable ["SP_ORG_
  [false,"WEAPONS_TEST_SERVER_LAB_ONLY","Run locally on mission-first lab server/host."] call ServoPeregrino_Organizador_Nexus_fnc_createResult
 };
 
+if (!canSuspend) exitWith {
+ [false,"WEAPONS_TEST_SCHEDULED_ONLY","Use the scheduled LAB action."] call ServoPeregrino_Organizador_Nexus_fnc_createResult
+};
+
 private _legacy = [] call ServoPeregrino_Organizador_Weapons_fnc_runDelivery0_7_ATests;
 private _legacyData = _legacy getOrDefault ["data",createHashMap];
 private _legacyPassed = _legacyData getOrDefault ["passed",0];
@@ -10,6 +14,16 @@ private _legacyFailed = _legacyData getOrDefault ["failed",1];
 private _legacyObservations = _legacyData getOrDefault ["legacyObservations",[]];
 
 private _checks = [];
+private _blocked = 0;
+private _blockTo = {
+ params ["_start","_expected","_label"];
+ private _missing = _expected - (count _checks - _start);
+ for "_i" from 1 to _missing do {
+  _checks pushBack [format ["%1 dependent check %2",_label,_i],false,"BLOCKED"];
+  _blocked = _blocked + 1;
+  diag_log format ["[SP_ORG] [WEAPONS] [AUTO_TEST] BLOCKED | %1 dependent check %2; prerequisite failed",_label,_i];
+ };
+};
 private _assert = {
  params [
   ["_name","UNNAMED_CHECK",[""]],
@@ -64,6 +78,7 @@ private _runScenario = {
   ["_expectedAmmoPolicy","",[""]]
  ];
 
+ private _checkStart = count _checks;
  private _slotIndex = ["PRIMARY","SECONDARY","HANDGUN"] find _slot;
  private _baselineLoadout = [_baseUnitLoadout] call ServoPeregrino_Organizador_Weapons_fnc_deepCopy;
  _baselineLoadout set [_slotIndex,[_baselineRow] call ServoPeregrino_Organizador_Weapons_fnc_deepCopy];
@@ -113,6 +128,9 @@ private _runScenario = {
 
       if (_planResult getOrDefault ["success",false]) then {
        private _plan = (_planResult get "data") get "plan";
+       if !((_plan getOrDefault ["operation",""]) isEqualTo _expectedOperation) then {
+        diag_log format ["[SP_ORG] [WEAPONS] [PLAN_DIAGNOSTIC] scenario=%1 operation=%2 changedFields=%3 currentConfiguration=%4 desiredConfiguration=%5 currentMagazineClass=%6 desiredMagazineClass=%7",_label,_plan get "operation",_plan get "changedFields",_plan get "currentConfiguration",_plan get "desiredConfiguration",_plan get "currentMagazineClass",_plan get "desiredMagazineClass"];
+       };
        [format ["0.7-B %1 operation=%2",_label,_expectedOperation],(_plan getOrDefault ["operation",""]) isEqualTo _expectedOperation] call _assert;
        [format ["0.7-B %1 plan schema remains frozen",_label],(_plan getOrDefault ["schemaVersion",""]) isEqualTo "0.7-A-application-plan-candidate"] call _assert;
 
@@ -133,6 +151,11 @@ private _runScenario = {
 
          private _beforeApply = [getUnitLoadout _unit] call ServoPeregrino_Organizador_Weapons_fnc_deepCopy;
          private _apply = [_unit,_plan,_snapshot] call ServoPeregrino_Organizador_Weapons_fnc_applyApplicationPlan;
+         if !(_apply getOrDefault ["success",false]) then {
+          private _d = _apply getOrDefault ["data",createHashMap];
+          private _p = _d getOrDefault ["postValidation",createHashMap];
+          diag_log format ["[SP_ORG] [WEAPONS] [APPLY_DIAGNOSTIC] scenario=%1 code=%2 message=%3 data=%4 postValidationCode=%5 postValidation=%6 rollbackAttempted=%7 rollbackRestoredExactly=%8 expectedTargetRow=%9 observedTargetRow=%10",_label,_apply getOrDefault ["code",""],_apply getOrDefault ["message",""],_d,_d getOrDefault ["postValidationCode",""],_p,_d getOrDefault ["rollbackAttempted",false],_d getOrDefault ["rollbackRestoredExactly",false],_p getOrDefault ["expectedTargetRow",[]],_p getOrDefault ["observedTargetRow",[]]];
+         };
          [format ["0.7-B %1 physical apply succeeds",_label],_apply getOrDefault ["success",false]] call _assert;
 
          if (_apply getOrDefault ["success",false]) then {
@@ -178,6 +201,7 @@ private _runScenario = {
   };
  };
 
+ [_checkStart,23 + (if (_expectedAmmoPolicy isEqualTo "PRESERVE_OBSERVED_AMMO") then {1} else {0}),_label] call _blockTo;
  [_kitId] call _cleanupKit;
  _unit setUnitLoadout [[_baseUnitLoadout] call ServoPeregrino_Organizador_Weapons_fnc_deepCopy,false];
  _unit setAnimSpeedCoef _baseAnimSpeed;
@@ -236,6 +260,15 @@ private _runScenario = {
  "PRESERVE_OBSERVED_AMMO"
 ] call _runScenario;
 
+{
+ _x params ["_field","_value","_mag"];
+ [format ["PRIMARY_%1_CHANGED",toUpperANSI _field],"PRIMARY",
+ ["arifle_MX_F","","","",["30Rnd_65x39_caseless_mag",17],[],""],
+ "arifle_MX_F",_mag,_field,_value,"RECONFIGURE",true,
+ if (_field isEqualTo "") then {"NEW_MAGAZINE_FULL_CAPACITY"} else {"PRESERVE_OBSERVED_AMMO"}] call _runScenario;
+} forEach [["muzzle","muzzle_snds_H","30Rnd_65x39_caseless_mag"],["pointer","acc_pointer_IR","30Rnd_65x39_caseless_mag"],["bipod","bipod_01_F_snd","30Rnd_65x39_caseless_mag"],["","","30Rnd_65x39_caseless_mag_Tracer"]];
+
+private _staleStart = count _checks;
 // Stale-snapshot guard: mutate a protected domain after Snapshot and prove apply refuses
 // before executing any additional physical mutation.
 private _staleBaseline = [_baseUnitLoadout] call ServoPeregrino_Organizador_Weapons_fnc_deepCopy;
@@ -291,13 +324,17 @@ if (_staleCfgResult getOrDefault ["success",false]) then {
  };
 };
 
+[_staleStart,7,"STALE_SNAPSHOT"] call _blockTo;
 _unit setUnitLoadout [[_baseUnitLoadout] call ServoPeregrino_Organizador_Weapons_fnc_deepCopy,false];
 _unit setAnimSpeedCoef _baseAnimSpeed;
 ["0.7-B isolated test unit final restoration",(getUnitLoadout _unit) isEqualTo _baseUnitLoadout] call _assert;
 
 deleteVehicle _unit;
+private _cleanupDeadline = diag_tickTime + 5;
+waitUntil {sleep 0.01; isNull _unit || {diag_tickTime >= _cleanupDeadline}};
+private _removed = isNull _unit && {!(_unit in allUnits)} && {!(_unit in (allMissionObjects "CAManBase"))};
 deleteGroup _group;
-["0.7-B isolated test unit deleted",isNull _unit] call _assert;
+["0.7-B isolated test unit deleted",_removed] call _assert;
 
 private _runtime = [] call ServoPeregrino_Organizador_Weapons_fnc_getRuntimeStatus;
 private _runtimeData = _runtime getOrDefault ["data",createHashMap];
@@ -308,14 +345,14 @@ private _runtimeData = _runtime getOrDefault ["data",createHashMap];
 ["0.7-B frozen Snapshot schema retained",(_runtimeData getOrDefault ["applicationSnapshotSchema",""]) isEqualTo "0.7-A-application-snapshot-candidate"] call _assert;
 
 private _localPassed = {_x select 1} count _checks;
-private _localFailed = count _checks - _localPassed;
+private _localFailed = count _checks - _localPassed - _blocked;
 private _passed = _legacyPassed + _localPassed;
 private _failed = _legacyFailed + _localFailed;
 private _total = _legacyPassed + _legacyFailed + count _checks;
 
 diag_log format [
- "[SP_ORG] [WEAPONS] [AUTO_TEST_SUMMARY] mode=MISSION_FIRST_0_7_B passed=%1 failed=%2 total=%3 legacy=%4/%5 local=%6/%7 | APPLICATION_GATE=SLOT_SAFE_APPLY | STRATEGY=FULL_LOADOUT_CLONE_SETUNITLOADOUT_FALSE | POST_VALIDATION=TARGET_PLUS_PRESERVATION_FINGERPRINT | ROLLBACK=SAFETY_FALLBACK_0_7_B_HARDEN_0_7_C | UI_GATE=DEFERRED_0_7_D | MP_GATE=DEFERRED_0_8",
- _passed,_failed,_total,_legacyPassed,_legacyPassed+_legacyFailed,_localPassed,count _checks
+ "[SP_ORG] [WEAPONS] [AUTO_TEST_SUMMARY] mode=MISSION_FIRST_0_7_B passed=%1 failed=%2 total=%3 blocked=%8 expected=890 legacy=%4/%5 local=%6/%7 | APPLICATION_GATE=SLOT_SAFE_APPLY | STRATEGY=FULL_LOADOUT_CLONE_SETUNITLOADOUT_FALSE | POST_VALIDATION=TARGET_PLUS_PRESERVATION_FINGERPRINT | ROLLBACK=SAFETY_FALLBACK_0_7_B_HARDEN_0_7_C | UI_GATE=DEFERRED_0_7_D | MP_GATE=DEFERRED_0_8",
+ _passed,_failed,_total,_legacyPassed,_legacyPassed+_legacyFailed,_localPassed,count _checks,_blocked
 ];
 
 hint format [
@@ -323,10 +360,12 @@ hint format [
  _passed,_total,_failed
 ];
 
-[_failed isEqualTo 0,"WEAPONS_0_7_B_AUTO_TEST_COMPLETE","0.7-B validates the first controlled physical slot-safe apply using frozen 0.7-A Plan/Snapshot contracts, target-only mutation, fullMagazines=false and post-validation of protected domains.",createHashMapFromArray [
+[_failed isEqualTo 0 && {_blocked isEqualTo 0} && {_total isEqualTo 890},"WEAPONS_0_7_B_AUTO_TEST_COMPLETE","0.7-B validates the first controlled physical slot-safe apply using frozen 0.7-A Plan/Snapshot contracts, target-only mutation, fullMagazines=false and post-validation of protected domains.",createHashMapFromArray [
  ["passed",_passed],
  ["failed",_failed],
  ["total",_total],
+ ["expected",890],
+ ["blocked",_blocked],
  ["legacyPassed",_legacyPassed],
  ["legacyFailed",_legacyFailed],
  ["localPassed",_localPassed],
