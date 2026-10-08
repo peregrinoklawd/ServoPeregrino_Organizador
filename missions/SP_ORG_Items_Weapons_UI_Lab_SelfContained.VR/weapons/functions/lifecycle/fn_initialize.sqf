@@ -32,6 +32,7 @@ private _cap = ["weapons.runtime",1,"ServoPeregrino_Organizador_Weapons",createH
  ["kitApplication","SLOT_SAFE_APPLY_0_7_B"],
  ["rollbackGate","EXPLICIT_VERIFIED_0_7_C"],
  ["faultInjection","ISOLATED_LAB_ONLY"],
+ ["undo","UNDO_DEFERRED"],
  ["applicationPlanSchema","0.7-A-application-plan-candidate"],
  ["applicationSnapshotSchema","0.7-A-application-snapshot-candidate"],
  ["applicationStrategy","FULL_LOADOUT_CLONE_SETUNITLOADOUT_FALSE_ACTIVE_0_7_B"],
@@ -64,7 +65,7 @@ private _cap = ["weapons.runtime",1,"ServoPeregrino_Organizador_Weapons",createH
  ["uiCommonMinimumVersion",SP_ORG_WEAPONS_UICOMMON_MIN_VERSION],
  ["uiCommonBuild",_uiCommonBuild],
  ["uiDirectDraftEquip",true],
- ["uiPhysicalApplication","DEFERRED_0_7_D"],
+ ["uiPhysicalApplication","LOCAL_DRAFT_APPLY_0_7_D"],
     ["uiDraft","LOCAL_WEAPONKIT_DRAFT_WITH_AUTHORING_CANDIDATE"],
     ["uiAuthoring","SESSION_LOCAL_DIRECT_CATALOG_TO_DRAFT_0_6_E_R2"],
  ["physicalIdentityProven",false],
@@ -91,6 +92,7 @@ missionNamespace setVariable [SP_ORG_WEAPONS_RUNTIME,createHashMapFromArray [
  ["kitApplication","SLOT_SAFE_APPLY_0_7_B"],
  ["rollbackGate","EXPLICIT_VERIFIED_0_7_C"],
  ["faultInjection","ISOLATED_LAB_ONLY"],
+ ["undo","UNDO_DEFERRED"],
  ["applicationPlanSchema","0.7-A-application-plan-candidate"],
  ["applicationSnapshotSchema","0.7-A-application-snapshot-candidate"],
  ["applicationStrategy","FULL_LOADOUT_CLONE_SETUNITLOADOUT_FALSE_ACTIVE_0_7_B"],
@@ -123,7 +125,7 @@ missionNamespace setVariable [SP_ORG_WEAPONS_RUNTIME,createHashMapFromArray [
  ["uiCommonMinimumVersion",SP_ORG_WEAPONS_UICOMMON_MIN_VERSION],
  ["uiCommonBuild",_uiCommonBuild],
  ["uiDirectDraftEquip",true],
- ["uiPhysicalApplication","DEFERRED_0_7_D"],
+ ["uiPhysicalApplication","LOCAL_DRAFT_APPLY_0_7_D"],
     ["uiDraft","LOCAL_WEAPONKIT_DRAFT_WITH_AUTHORING_CANDIDATE"],
     ["uiAuthoring","SESSION_LOCAL_DIRECT_CATALOG_TO_DRAFT_0_6_E_R2"],
  ["executionMode","MISSION_FIRST"],
@@ -133,5 +135,5 @@ missionNamespace setVariable [SP_ORG_WEAPONS_RUNTIME,createHashMapFromArray [
 private _kitStoreInit = [] call ServoPeregrino_Organizador_Weapons_fnc_initializeWeaponKitStore;
 if !(_kitStoreInit get "success") exitWith {_kitStoreInit};
 
-["WEAPONS","INFO","WEAPONS 0.7-B INITIALIZED - frozen 0.7-A Plan/Snapshot contracts; controlled target-slot physical apply enabled; UI integration remains deferred to 0.7-D."] call ServoPeregrino_Organizador_Nexus_fnc_log;
-[true,"WEAPONS_INITIALIZED","0.7-B mission-first pronta: primeira aplicação física slot-safe habilitada no core; Plan/Snapshot 0.7-A preservados e UI física ainda deferred para 0.7-D."] call ServoPeregrino_Organizador_Nexus_fnc_createResult
+["WEAPONS","INFO","WEAPONS 0.7-D INITIALIZED - current draft local apply without autosave; explicit verified rollback; Undo deferred."] call ServoPeregrino_Organizador_Nexus_fnc_log;
+[true,"WEAPONS_INITIALIZED","0.7-D candidata pronta para teste real: EQUIPAR RASCUNHO sem salvar; Plan/Snapshot preservados e rollback verificado."] call ServoPeregrino_Organizador_Nexus_fnc_createResult

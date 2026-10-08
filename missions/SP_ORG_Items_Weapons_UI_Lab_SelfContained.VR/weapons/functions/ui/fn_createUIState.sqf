@@ -57,7 +57,7 @@ private _state = createHashMapFromArray [
  ["refreshAppliedCount",0],
  ["wheelConsumeCount",0],
  ["wheelCatalogScrollCount",0],
- ["temporaryMessage","Organizador de Armas pronto. 0.6-F R6: buscas independentes, edição de nome estável e busca global do Catálogo; aplicação física continua em 0.7."],
+ ["temporaryMessage","Organizador de Armas pronto. EQUIPAR RASCUNHO aplica sua configuração; SALVAR atualiza o kit."],
  ["lastFeedbackKind","INFO"],
  ["history",[]],
  ["revision",0],

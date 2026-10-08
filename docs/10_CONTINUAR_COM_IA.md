@@ -1,5 +1,7 @@
 # Como continuar com outra IA / outro chat
 
+> Checkpoint ativo 08/10/2026: Weapons D1 `feature/weapons-0.7-d-ui-integration`; candidatas B2 (890), C (978), D (1109) aguardam RPT sequencial. UICommon 0.2 congelada; Items intocado. Detalhes canônicos: docs/65, docs/66, docs/67. Nenhum merge main/homologação desta cadeia.
+
 ## Source of Truth
 
 Use o repositório **`peregrinoklawd/ServoPeregrino_Organizador`**. Para esta frente, use a branch candidata indicada no checkpoint mais recente; `main` não contém a cadeia ativa Weapons 0.7.
@@ -995,5 +997,12 @@ B2 não homologada. C/D podem ser preparadas encadeadas, mas gates reais são se
 ## 08/10/2026 — Weapons 0.7-C candidata
 
 **STATIC READY / RUNTIME PENDING**. Branch `feature/weapons-0.7-c-post-validation-rollback`; semantic `0.7.2.1`; build `0.7.2.1-post-validation-rollback-c1-mission-first`.
+B2 -> C -> D são candidatas encadeadas. Gate real obrigatório sequencial; nenhum merge main, nenhum freeze/homologação sem RPT.
+UICommon 0.2 e Items funcionalmente intocados. Plan/Snapshot 0.7-A congelados; fullMagazines=false. Multiplayer 0.8 deferred.
+
+
+## 08/10/2026 — Weapons 0.7-D candidata
+
+**STATIC READY / RUNTIME PENDING**. Branch `feature/weapons-0.7-d-ui-integration`; semantic `0.7.3.1`; build `0.7.3.1-ui-integration-d1-mission-first`.
 B2 -> C -> D são candidatas encadeadas. Gate real obrigatório sequencial; nenhum merge main, nenhum freeze/homologação sem RPT.
 UICommon 0.2 e Items funcionalmente intocados. Plan/Snapshot 0.7-A congelados; fullMagazines=false. Multiplayer 0.8 deferred.

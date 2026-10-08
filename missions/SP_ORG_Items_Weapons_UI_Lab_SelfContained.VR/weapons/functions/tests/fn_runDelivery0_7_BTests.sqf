@@ -340,7 +340,7 @@ private _runtime = [] call ServoPeregrino_Organizador_Weapons_fnc_getRuntimeStat
 private _runtimeData = _runtime getOrDefault ["data",createHashMap];
 ["0.7-B runtime application gate active",(_runtimeData getOrDefault ["kitApplication",""]) isEqualTo "SLOT_SAFE_APPLY_0_7_B"] call _assert;
 ["0.7-B runtime target-slot mutation marker",(_runtimeData getOrDefault ["applicationMutation",""]) isEqualTo "TARGET_SLOT_ONLY_0_7_B"] call _assert;
-["0.7-B runtime UI integration remains deferred",(_runtimeData getOrDefault ["uiPhysicalApplication",""]) isEqualTo "DEFERRED_0_7_D"] call _assert;
+["0.7-B runtime UI gate is explicitly staged",(_runtimeData getOrDefault ["uiPhysicalApplication",""]) in ["DEFERRED_0_7_D","LOCAL_DRAFT_APPLY_0_7_D"]] call _assert;
 ["0.7-B frozen Plan schema retained",(_runtimeData getOrDefault ["applicationPlanSchema",""]) isEqualTo "0.7-A-application-plan-candidate"] call _assert;
 ["0.7-B frozen Snapshot schema retained",(_runtimeData getOrDefault ["applicationSnapshotSchema",""]) isEqualTo "0.7-A-application-snapshot-candidate"] call _assert;
 

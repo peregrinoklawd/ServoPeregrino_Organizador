@@ -29,7 +29,7 @@ if ((count _eq) isEqualTo 0 || {!(_eq getOrDefault ["equipped",false])}) then {
  (_display displayCtrl 4021) ctrlSetText "Nenhuma arma equipada";
  (_display displayCtrl 4022) ctrlSetText "-";
  {(_display displayCtrl _x) ctrlSetText "Nenhum"} forEach [4031,4033,4035,4037,4039];
- (_display displayCtrl 4040) ctrlSetStructuredText parseText format ["<t color='#8FAAA4'>%1 sem arma equipada.<br/><br/>Este painel é somente leitura; aplicação física permanece em 0.7.</t>",[_slot] call _slotLabel];
+ (_display displayCtrl 4040) ctrlSetStructuredText parseText format ["<t color='#8FAAA4'>%1 sem arma equipada.<br/><br/>Use EQUIPAR RASCUNHO em ARMAS DO KIT para equipar sua configuração.</t>",[_slot] call _slotLabel];
 } else {
  private _weaponInfo = _eq getOrDefault ["weaponInfo",createHashMap];
  (_display displayCtrl 4020) ctrlSetText (_weaponInfo getOrDefault ["picture",""]);
@@ -44,7 +44,7 @@ if ((count _eq) isEqualTo 0 || {!(_eq getOrDefault ["equipped",false])}) then {
  private _loaded = _eq getOrDefault ["loadedState",createHashMap];
  private _mag = _loaded getOrDefault ["primaryMagazine",[]];
  private _ammoText = if (_mag isEqualType [] && {count _mag>=2}) then {format ["%1 munição(ões) observada(s)",_mag#1]} else {"Estado de munição não informado"};
- (_display displayCtrl 4040) ctrlSetStructuredText parseText format ["<t color='#CDE7E1'>EQUIPADO · %1</t><br/><t color='#8FB7B0'>%2</t><br/><br/>%3<br/>Comparação/aplicação física continua reservada para 0.7.",[_slot] call _slotLabel,[_eq getOrDefault ["weaponClass",""]] call ServoPeregrino_Organizador_Weapons_fnc_escapeStructuredText,_ammoText];
+ (_display displayCtrl 4040) ctrlSetStructuredText parseText format ["<t color='#CDE7E1'>EQUIPADO · %1</t><br/><t color='#8FB7B0'>%2</t><br/><br/>%3<br/>Aplicar o rascunho não salva alterações no kit.",[_slot] call _slotLabel,[_eq getOrDefault ["weaponClass",""]] call ServoPeregrino_Organizador_Weapons_fnc_escapeStructuredText,_ammoText];
 };
 
 // Local P4 search filters only fields rendered in CONTEÚDO DO EQUIPAMENTO.
@@ -73,6 +73,12 @@ private _eqRows = [
 } forEach _eqRows;
 
 _state = missionNamespace getVariable [SP_ORG_WEAPONS_UI_STATE,createHashMap];
+if (toUpperANSI _reason isEqualTo "APPLY_DRAFT") then {
+ private _history = _state getOrDefault ["history",[]];
+ private _historyText = (_history select [((count _history)-3) max 0,3 min count _history]) joinString "   •   ";
+ private _context = format ["Kit: %1 | Rascunho: %2 | Equipamento: %3",_state getOrDefault ["selectedKitName","Nenhum"],if (_state getOrDefault ["selectedKitDraftDirty",false]) then {"ALTERADO"} else {if (_state getOrDefault ["selectedKitIsNew",false]) then {"NOVO"} else {"SALVO"}},[_slot] call _slotLabel];
+ [_display,[[5000,"CONTEXTO",_context,"#6FCBB8","#BFEADF","  •  "],[5001,"RESULTADO",_state getOrDefault ["temporaryMessage",""],"#7EC8FF","#DFE6E6","  •  "],[5002,"HISTÓRICO",_historyText,"#B9A3E8","#D1C2F0","  •  "]]] call ServoPeregrino_Organizador_UICommon_fnc_renderFooter;
+};
 private _elapsed=[_startedAt] call ServoPeregrino_Organizador_UICommon_fnc_elapsedMs;
 _state set ["equipmentSlotView",_slot];
 _state set ["equipmentRefreshInProgress",false];

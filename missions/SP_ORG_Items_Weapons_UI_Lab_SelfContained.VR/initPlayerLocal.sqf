@@ -48,13 +48,19 @@
         };
     }];
 
+    missionNamespace setVariable ["SP_ORG_FullLab_fnc_testWeapons07D", {
+        [] spawn {
+            private _r=[] call ServoPeregrino_Organizador_Weapons_fnc_runDelivery0_7_DTests;
+            diag_log format ["[SP_ORG] [FULL_UI_LAB] WEAPONS_0_7_D_TEST result=%1",_r];
+        };
+    }];
     missionNamespace setVariable ["SP_ORG_FullLab_fnc_installCoreActions", {
         params [["_unit",objNull,[objNull]]];
         if (isNull _unit || {!local _unit}) exitWith {};
         {
             private _id = _unit getVariable [_x,-1];
             if (_id >= 0) then {_unit removeAction _id;};
-        } forEach ["SPORG_FL_Items","SPORG_FL_Weapons","SPORG_FL_UICommon","SPORG_FL_ItemsUICommon","SPORG_FL_WeaponsR6","SPORG_FL_Weapons07B","SPORG_FL_Weapons07C"];
+        } forEach ["SPORG_FL_Items","SPORG_FL_Weapons","SPORG_FL_UICommon","SPORG_FL_ItemsUICommon","SPORG_FL_WeaponsR6","SPORG_FL_Weapons07B","SPORG_FL_Weapons07C","SPORG_FL_Weapons07D"];
 
         _unit setVariable ["SPORG_FL_Items", _unit addAction [
             "<t color='#7FD9D0' size='1.12'>SP_ORG LAB - ABRIR ITEMS</t>",
@@ -71,6 +77,10 @@
         _unit setVariable ["SPORG_FL_ItemsUICommon", _unit addAction [
             "<t color='#A8D7FF'>SP_ORG LAB - TESTAR ITEMS + UICOMMON</t>",
             {[] call (missionNamespace getVariable ["SP_ORG_FullLab_fnc_testItemsUICommon",{}]);},nil,14.5,true,true,"","alive _this",50
+        ]];
+        _unit setVariable ["SPORG_FL_Weapons07D", _unit addAction [
+            "<t color='#F0D98C'>SP_ORG LAB - TESTAR WEAPONS 0.7-D</t>",
+            {[] call (missionNamespace getVariable ["SP_ORG_FullLab_fnc_testWeapons07D",{}]);},nil,14.2,true,true,"","alive _this && isServer",50
         ]];
         _unit setVariable ["SPORG_FL_Weapons07C", _unit addAction [
             "<t color='#F0D98C'>SP_ORG LAB - TESTAR WEAPONS 0.7-C</t>",
@@ -121,5 +131,5 @@
     }];
 
     diag_log format ["[SP_ORG] [FULL_UI_LAB] CLIENT_READY player=%1 owner=%2",name player,clientOwner];
-    hint parseText "<t size='1.2'>SP_ORG - WEAPONS 0.7-C + UICOMMON 0.2</t><br/><br/>Weapons 0.7-B habilita a primeira aplicacao fisica slot-safe no core, sobre Plan/Snapshot homologados na 0.7-A.<br/><br/><t color='#F0D98C'>IMPORTANTE:</t> o AUTO TEST executa as mutacoes em uma unidade isolada criada pelo harness. O loadout do jogador nao deve ser alterado. Integracao fisica com a UI fica para 0.7-D.<br/><br/>Nao carregue PBOs do Servo Peregrino neste teste.";
+    hint parseText "<t size='1.2'>SP_ORG - WEAPONS 0.7-D + UICOMMON 0.2</t><br/><br/>Weapons 0.7-D integra EQUIPAR RASCUNHO sem salvar, com Plan/Snapshot e rollback slot-safe.<br/><br/><t color='#F0D98C'>IMPORTANTE:</t> o AUTO TEST executa as mutacoes em uma unidade isolada criada pelo harness. O loadout do jogador nao deve ser alterado. UI: EQUIPAR RASCUNHO aplica sem salvar. Undo deferred.<br/><br/>Nao carregue PBOs do Servo Peregrino neste teste.";
 };

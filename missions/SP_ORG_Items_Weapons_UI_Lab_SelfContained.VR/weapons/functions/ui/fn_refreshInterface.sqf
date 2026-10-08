@@ -226,7 +226,7 @@ if ((count _eq) isEqualTo 0 || {!(_eq getOrDefault ["equipped",false])}) then {
  (_display displayCtrl 4021) ctrlSetText "Nenhuma arma equipada";
  (_display displayCtrl 4022) ctrlSetText "-";
  {(_display displayCtrl _x) ctrlSetText "Nenhum"} forEach [4031,4033,4035,4037,4039];
- (_display displayCtrl 4040) ctrlSetStructuredText parseText format ["<t color='#8FAAA4'>%1 sem arma equipada.<br/><br/>Este painel é somente leitura; aplicação física permanece em 0.7.</t>",[_equipmentSlot] call _slotLabel];
+ (_display displayCtrl 4040) ctrlSetStructuredText parseText format ["<t color='#8FAAA4'>%1 sem arma equipada.<br/><br/>Este painel é somente leitura; use EQUIPAR RASCUNHO para aplicar.</t>",[_equipmentSlot] call _slotLabel];
 } else {
  private _weaponInfo = _eq getOrDefault ["weaponInfo",createHashMap];
  private _weaponName = _weaponInfo getOrDefault ["displayName",_eq getOrDefault ["weaponClass",""]];
@@ -244,7 +244,7 @@ if ((count _eq) isEqualTo 0 || {!(_eq getOrDefault ["equipped",false])}) then {
  private _mag = _loaded getOrDefault ["primaryMagazine",[]];
  private _ammoText = if (_mag isEqualType [] && {count _mag >= 2}) then {format ["%1 munição(ões) observada(s)",_mag#1]} else {"Estado de munição não informado"};
  (_display displayCtrl 4040) ctrlSetStructuredText parseText format [
-  "<t color='#CDE7E1'>EQUIPADO · %1</t><br/><t color='#8FB7B0'>%2</t><br/><br/>%3<br/>Comparação/aplicação física continua reservada para 0.7.",
+  "<t color='#CDE7E1'>EQUIPADO · %1</t><br/><t color='#8FB7B0'>%2</t><br/><br/>%3<br/>Use EQUIPAR RASCUNHO; SALVAR continua separado.",
   [_equipmentSlot] call _slotLabel,
   [_eq getOrDefault ["weaponClass",""]] call ServoPeregrino_Organizador_Weapons_fnc_escapeStructuredText,
   _ammoText

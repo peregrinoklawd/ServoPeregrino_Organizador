@@ -681,6 +681,21 @@ switch (_eventName) do {
   };
  };
 
+ case "APPLY_DRAFT": {
+  _refresh=false;
+  private _kitId = _state getOrDefault ["selectedKitId",""];
+  private _draft = (_state getOrDefault ["draftsByKitId",createHashMap]) getOrDefault [_kitId,createHashMap];
+  private _result = [player,_draft] call ServoPeregrino_Organizador_Weapons_fnc_executeDraftApplication;
+  private _d = _result getOrDefault ["data",createHashMap];
+  _state set ["lastApplicationResult",_result];
+  if ((_d getOrDefault ["targetSlot",""]) in ["PRIMARY","HANDGUN","SECONDARY"]) then {_state set ["equipmentSlotView",_d get "targetSlot"]};
+  missionNamespace setVariable [SP_ORG_WEAPONS_UI_STATE,_state];
+  private _feedback = [_result] call ServoPeregrino_Organizador_Weapons_fnc_getApplicationFeedback;
+  [_feedback get "message",_feedback get "kind",true] call ServoPeregrino_Organizador_Weapons_fnc_pushUIFeedback;
+  diag_log format ["[SP_ORG] [WEAPONS] [DRAFT_APPLY] result=%1",_result];
+  _focusedRefresh="EQUIPMENT";
+ };
+
  case "CATALOG_TO_EQUIPMENT": {
   _refresh=false;
   ["Aplicação física pelo Catálogo permanece reservada para Weapons 0.7. Use ← / EQUIPAR NO RASCUNHO para editar o WeaponKit.","INFO",true] call ServoPeregrino_Organizador_Weapons_fnc_pushUIFeedback;

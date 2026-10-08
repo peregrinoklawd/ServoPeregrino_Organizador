@@ -215,9 +215,9 @@
         "build": "0.7.0.1-plan-snapshot-dry-run-mission-first"
       },
       "development_version": {
-        "display": "0.7-C mission-first",
-        "semantic": "0.7.2.1 mission-first",
-        "build": "0.7.2.1-post-validation-rollback-c1-mission-first"
+        "display": "0.7-D mission-first",
+        "semantic": "0.7.3.1 mission-first",
+        "build": "0.7.3.1-ui-integration-d1-mission-first"
       },
       "dependencies": [
         "Nexus",
@@ -258,7 +258,7 @@
       "status": "MISSION_FIRST_CANDIDATE_STATIC_READY_RUNTIME_PENDING",
       "next_gate": "Sequential real-Arma RPT B2 -> C -> D; 0 FAIL / 0 BLOCKED",
       "homologated_artifact": "0.7-A real-Arma approved: 673/673, 0 FAIL; baseline/weapons-0.7-a-homologated.",
-      "current_candidate_artifact": "0.7-C candidate; B2/C/D runtime pending",
+      "current_candidate_artifact": "0.7-D candidate; B2/C/D runtime pending",
       "mission_first_validation": {
         "0.1-B": {
           "status": "APPROVED_SP",
@@ -1315,8 +1315,9 @@
     },
     "D": {
       "branch": "feature/weapons-0.7-d-ui-integration",
-      "status": "NOT_IMPLEMENTED",
-      "undo": "UNDO_DEFERRED"
+      "status": "STATIC_READY_RUNTIME_PENDING",
+      "undo": "UNDO_DEFERRED",
+      "expected_checks": 1109
     }
   }
 }

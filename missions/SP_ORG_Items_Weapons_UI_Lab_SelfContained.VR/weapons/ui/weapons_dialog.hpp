@@ -166,6 +166,7 @@ class SP_ORG_Weapons_Dialog
   class BipodValue: SPORG_Weapons_Combo {idc=2029; tooltip="Bipés/empunhaduras compatíveis; altera somente o rascunho local."; x=safeZoneX+0.266*safeZoneW; y=safeZoneY+0.510*safeZoneH; w=0.168*safeZoneW; h=0.033*safeZoneH; onLBSelChanged="['COMPAT_SELECT',['bipod',_this#1]] call ServoPeregrino_Organizador_Weapons_fnc_handleUIEvent"; sizeEx=0.0145*safeZoneH;};
   class MagazineLabel: SPORG_Weapons_Text {idc=2030; text="Carregador"; x=safeZoneX+0.216*safeZoneW; y=safeZoneY+0.550*safeZoneH; w=0.047*safeZoneW; h=0.027*safeZoneH; sizeEx=0.0145*safeZoneH;};
   class MagazineValue: SPORG_Weapons_Combo {idc=2031; tooltip="Carregadores compatíveis; altera somente o rascunho local."; x=safeZoneX+0.266*safeZoneW; y=safeZoneY+0.547*safeZoneH; w=0.168*safeZoneW; h=0.033*safeZoneH; onLBSelChanged="['COMPAT_SELECT',['magazineClass',_this#1]] call ServoPeregrino_Organizador_Weapons_fnc_handleUIEvent"; sizeEx=0.0145*safeZoneH;};
+  class SelectedEquipDraft: SPORG_Weapons_Button {idc=2144; text="EQUIPAR RASCUNHO"; tooltip="Equipar fisicamente a arma de ARMAS DO KIT, inclusive ALTERADO. Não salva nem publica o kit."; x=safeZoneX+0.216*safeZoneW; y=safeZoneY+0.615*safeZoneH; w=0.218*safeZoneW; h=0.034*safeZoneH; action="['APPLY_DRAFT'] call ServoPeregrino_Organizador_Weapons_fnc_handleUIEvent";};
   class SelectedHint: SPORG_Weapons_Structured {idc=2040; x=safeZoneX+0.216*safeZoneW; y=safeZoneY+0.657*safeZoneH; w=0.218*safeZoneW; h=0.148*safeZoneH; colorBackground[]={0.01,0.015,0.017,0.20};};
 
   class CatalogTitle: SPORG_Weapons_Title {idc=3000; text="CATÁLOGO DE ARMAS"; x=safeZoneX+0.466*safeZoneW; y=safeZoneY+0.064*safeZoneH; w=0.200*safeZoneW; h=0.026*safeZoneH; sizeEx=0.017*safeZoneH;};
@@ -218,7 +219,7 @@ class SP_ORG_Weapons_Dialog
   class EqMagazineLabel: SPORG_Weapons_Text {idc=4038; text="Carregador"; x=safeZoneX+0.804*safeZoneW; y=safeZoneY+0.533*safeZoneH; w=0.048*safeZoneW; h=0.027*safeZoneH; sizeEx=0.0145*safeZoneH;};
   class EqMagazineValue: SPORG_Weapons_Text {idc=4039; text="Nenhum"; x=safeZoneX+0.853*safeZoneW; y=safeZoneY+0.533*safeZoneH; w=0.125*safeZoneW; h=0.027*safeZoneH; sizeEx=0.0145*safeZoneH;};
   class EquipmentStatus: SPORG_Weapons_Structured {idc=4040; x=safeZoneX+0.804*safeZoneW; y=safeZoneY+0.657*safeZoneH; w=0.174*safeZoneW; h=0.148*safeZoneH; colorBackground[]={0.01,0.015,0.017,0.20};};
-  class EquipmentReadOnly: SPORG_Weapons_Text {idc=4041; style=2; text="SOMENTE LEITURA — APLICAÇÃO EM 0.7"; x=safeZoneX+0.804*safeZoneW; y=safeZoneY+0.812*safeZoneH; w=0.174*safeZoneW; h=0.032*safeZoneH; sizeEx=0.0115*safeZoneH; colorText[]={0.55,0.75,0.71,1};};
+  class EquipmentReadOnly: SPORG_Weapons_Text {idc=4041; style=2; text="ESTADO ATUAL DO EQUIPAMENTO"; x=safeZoneX+0.804*safeZoneW; y=safeZoneY+0.812*safeZoneH; w=0.174*safeZoneW; h=0.032*safeZoneH; sizeEx=0.0115*safeZoneH; colorText[]={0.55,0.75,0.71,1};};
 
   class FooterContext: SPORG_Weapons_FooterContext {idc=5000; x=safeZoneX+0.022*safeZoneW; y=safeZoneY+0.887*safeZoneH; w=0.956*safeZoneW; h=0.023*safeZoneH;};
   class FooterMessage: SPORG_Weapons_FooterMessage {idc=5001; x=safeZoneX+0.022*safeZoneW; y=safeZoneY+0.917*safeZoneH; w=0.956*safeZoneW; h=0.023*safeZoneH;};
