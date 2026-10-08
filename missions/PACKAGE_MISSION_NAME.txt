@@ -1,1 +1,1 @@
-SP_ORG_Weapons_0_7_D_UI_Integration_D1.VR
+SP_ORG_Weapons_0_7_D2_Consolidated_Runtime_Hardening.VR

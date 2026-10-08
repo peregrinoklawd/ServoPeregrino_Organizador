@@ -8,6 +8,7 @@ on:
       - feature/weapons-0.7-b-slot-safe-apply
       - feature/weapons-0.7-c-post-validation-rollback
       - feature/weapons-0.7-d-ui-integration
+      - feature/weapons-0.7-d2-consolidated-runtime-hardening
     paths:
       - "missions/SP_ORG_Items_Weapons_UI_Lab_SelfContained.VR/**"
       - "missions/PACKAGE_MISSION_NAME.txt"
@@ -23,12 +24,18 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Validate D2 static mission contracts
+        if: github.ref == 'refs/heads/feature/weapons-0.7-d2-consolidated-runtime-hardening'
+        run: python3 tools/validate_weapons_0_7.py
 
       - name: Resolve mission package identity
         shell: bash
         run: |
           MISSION_NAME="$(tr -d '\r\n' < missions/PACKAGE_MISSION_NAME.txt)"
-          if [[ -z "$MISSION_NAME" || "$MISSION_NAME" != *.VR ]]; then
+          if [[ ! "$MISSION_NAME" =~ ^[A-Za-z0-9_]+\.VR$ ]]; then
             echo "Invalid mission package name: '$MISSION_NAME'"
             exit 1
           fi
