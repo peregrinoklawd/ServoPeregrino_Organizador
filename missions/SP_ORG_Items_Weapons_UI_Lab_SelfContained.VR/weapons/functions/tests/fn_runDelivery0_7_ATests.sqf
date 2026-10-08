@@ -177,7 +177,18 @@ if (count _primarySnapshot > 0) then {
 private _runtime = [] call ServoPeregrino_Organizador_Weapons_fnc_getRuntimeStatus;
 private _runtimeData = _runtime getOrDefault ["data",createHashMap];
 ["0.7-A planning contract remains available in forward runtimes",(_runtimeData getOrDefault ["kitApplication",""]) in ["DRY_RUN_ONLY_0_7_A","SLOT_SAFE_APPLY_0_7_B"]] call _assert;
-["0.7-A planning remains isolated from player-facing physical UI",(_runtimeData getOrDefault ["uiPhysicalApplication",""]) in ["DEFERRED_0_7_B","DEFERRED_0_7_D"]] call _assert;
+// Authority belongs to the later executor, never to this descriptive Plan.
+private _forwardBefore = [getUnitLoadout _unit] call ServoPeregrino_Organizador_Weapons_fnc_deepCopy;
+private _forwardDry = [_unit,_primaryPlan,_primarySnapshot] call ServoPeregrino_Organizador_Weapons_fnc_simulateApplicationPlan;
+["0.7-A descriptive Plan and dry-run remain non-mutating in forward runtimes",
+ (_primaryPlan getOrDefault ["schemaVersion",""]) isEqualTo "0.7-A-application-plan-candidate"
+ && {(_primarySnapshot getOrDefault ["schemaVersion",""]) isEqualTo "0.7-A-application-snapshot-candidate"}
+ && {_primaryPlan getOrDefault ["dryRunOnly",false]}
+ && {!(_primaryPlan getOrDefault ["mutationAuthorized",true])}
+ && {_forwardDry getOrDefault ["success",false]}
+ && {!((_forwardDry getOrDefault ["data",createHashMap]) getOrDefault ["mutationPerformed",true])}
+ && {(getUnitLoadout _unit) isEqualTo _forwardBefore}
+] call _assert;
 ["0.7-A runtime plan schema marker",(_runtimeData getOrDefault ["applicationPlanSchema",""]) isEqualTo "0.7-A-application-plan-candidate"] call _assert;
 ["0.7-A runtime snapshot schema marker",(_runtimeData getOrDefault ["applicationSnapshotSchema",""]) isEqualTo "0.7-A-application-snapshot-candidate"] call _assert;
 
