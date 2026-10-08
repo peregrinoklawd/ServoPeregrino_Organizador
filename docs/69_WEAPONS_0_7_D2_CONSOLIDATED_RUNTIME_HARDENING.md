@@ -112,4 +112,14 @@ Static **169/169**, incluindo todos CfgFunctions paths, ownership, delimitadores
 
 Missão: `SP_ORG_Weapons_0_7_D2_Consolidated_Runtime_Hardening.VR`.
 ZIP: `SP_ORG_Weapons_0_7_D2_Consolidated_Runtime_Hardening.zip`.
-Workflow `.github/workflows/package-selfcontained-ui-lab.yml`, com trigger D2. Identidade mantém newline real, sem literal \n. Artifact, commit empacotado e SHA256 serão acrescentados após workflow GREEN e validação exata contra source GitHub.
+Workflow `.github/workflows/package-selfcontained-ui-lab.yml`, com trigger D2. Identidade mantém newline real, sem literal \n. Empacotamento oficial **GREEN**:
+- commit source: `ecee6ee23cb0018c699c8047d7dc8fce3589cba5`;
+- workflow: https://github.com/peregrinoklawd/ServoPeregrino_Organizador/actions/runs/37730110664 ;
+- run `37730110664`, artifact `11529253605`, nome `SP_ORG_UI_Lab`;
+- artifact outer digest: `9467011575f50fe6a744f88ec0f7acecfc15d855e895c080dfb5bc870f527b89`;
+- missão ZIP SHA256: `7fcac528f8d23245f1cbc2b736aa8e18ba35a9d20a0f7d3360937cf3e1e465a1`;
+- 462 arquivos; CRC íntegro; um root mission; file-list exata e bytes iguais ao source desse commit, admitindo somente CRLF/LF textual;
+- static workflow e checkout remoto local: **169/169 PASS**;
+- commit posterior apenas docs/machine não modifica a missão testável nem gera outro artifact.
+
+Revisão do diff: Items/UICommon/addons/backlog Items intocados; única correção no registro Items elimina a função alheia. Nenhum merge main/tag homologation. Gate final continua STATIC READY / RUNTIME PENDING.

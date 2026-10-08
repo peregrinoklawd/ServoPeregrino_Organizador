@@ -336,7 +336,13 @@
           "mission": "SP_ORG_Weapons_0_7_D2_Consolidated_Runtime_Hardening.VR",
           "test_action": "SP_ORG LAB - TESTAR WEAPONS 0.7-D2",
           "ammo_runtime_measurement": "PENDING_D2_RPT_CONFIG_COUNT_IMMEDIATE_POST_RETURN_NEXT_FRAME",
-          "homologated": false
+          "homologated": false,
+          "code_commit": "ecee6ee23cb0018c699c8047d7dc8fce3589cba5",
+          "workflow_run": 37730110664,
+          "artifact_id": 11529253605,
+          "zip_sha256": "7fcac528f8d23245f1cbc2b736aa8e18ba35a9d20a0f7d3360937cf3e1e465a1",
+          "package_validation": "462_FILES_CRC_SOURCE_MATCH_ONE_MISSION",
+          "workflow_conclusion": "success"
         }
       }
     },
@@ -672,6 +678,12 @@
     "mission": "SP_ORG_Weapons_0_7_D2_Consolidated_Runtime_Hardening.VR",
     "test_action": "SP_ORG LAB - TESTAR WEAPONS 0.7-D2",
     "ammo_runtime_measurement": "PENDING_D2_RPT_CONFIG_COUNT_IMMEDIATE_POST_RETURN_NEXT_FRAME",
-    "homologated": false
+    "homologated": false,
+    "code_commit": "ecee6ee23cb0018c699c8047d7dc8fce3589cba5",
+    "workflow_run": 37730110664,
+    "artifact_id": 11529253605,
+    "zip_sha256": "7fcac528f8d23245f1cbc2b736aa8e18ba35a9d20a0f7d3360937cf3e1e465a1",
+    "package_validation": "462_FILES_CRC_SOURCE_MATCH_ONE_MISSION",
+    "workflow_conclusion": "success"
   }
 }
