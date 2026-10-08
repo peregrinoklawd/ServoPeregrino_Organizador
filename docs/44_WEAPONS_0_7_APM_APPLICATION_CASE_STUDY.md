@@ -439,3 +439,9 @@ UICommon 0.2 e Items funcionalmente intocados. Plan/Snapshot 0.7-A congelados; f
 **STATIC READY / RUNTIME PENDING**. Branch `feature/weapons-0.7-d-ui-integration`; semantic `0.7.3.1`; build `0.7.3.1-ui-integration-d1-mission-first`.
 B2 -> C -> D são candidatas encadeadas. Gate real obrigatório sequencial; nenhum merge main, nenhum freeze/homologação sem RPT.
 UICommon 0.2 e Items funcionalmente intocados. Plan/Snapshot 0.7-A congelados; fullMagazines=false. Multiplayer 0.8 deferred.
+
+## 08/10/2026 — Candidata consolidada D2
+
+> Checkpoint ativo 08/10/2026: **Weapons 0.7-D2 — Consolidated Runtime Hardening**, `feature/weapons-0.7-d2-consolidated-runtime-hardening`. Uma missão, um ZIP e uma ação principal: `SP_ORG LAB - TESTAR WEAPONS 0.7-D2`. AUTO cumulativo esperado **1348 PASS / 0 FAIL / 0 BLOCKED**. **STATIC READY / RUNTIME PENDING**. D1 real: 1104 PASS / 5 FAIL / 0 BLOCKED; esta candidata substitui a experiência de três pacotes B/C/D. Contratos internos A/B/C/D preservados. Ver docs/69. UICommon 0.2 congelada, Items funcionalmente intocado, UNDO_DEFERRED, MP_DEFERRED_0_8. Sem merge main e sem homologação antecipada.
+
+Catálogo direto aplica uma intenção transitória ao core Plan/Snapshot/B/C; não usa o draft físico como fonte, não salva/publica. Magazine novo mantém capacidade da configuração ativa, sem literal vanilla; mesmo magazine preserva ammo. A confirmação de estabilidade do engine pertence ao único RPT D2.

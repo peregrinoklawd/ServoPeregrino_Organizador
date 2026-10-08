@@ -1,6 +1,7 @@
 # Estado atual do projeto
 
-> Checkpoint ativo 08/10/2026: Weapons D1 `feature/weapons-0.7-d-ui-integration`; candidatas B2 (890), C (978), D (1109) aguardam RPT sequencial. UICommon 0.2 congelada; Items intocado. Detalhes canônicos: docs/65, docs/66, docs/67. Nenhum merge main/homologação desta cadeia.
+> Checkpoint ativo 08/10/2026: **Weapons 0.7-D2 — Consolidated Runtime Hardening**, `feature/weapons-0.7-d2-consolidated-runtime-hardening`. Uma missão, um ZIP e uma ação principal: `SP_ORG LAB - TESTAR WEAPONS 0.7-D2`. AUTO cumulativo esperado **1348 PASS / 0 FAIL / 0 BLOCKED**. **STATIC READY / RUNTIME PENDING**. D1 real: 1104 PASS / 5 FAIL / 0 BLOCKED; esta candidata substitui a experiência de três pacotes B/C/D. Contratos internos A/B/C/D preservados. Ver docs/69. UICommon 0.2 congelada, Items funcionalmente intocado, UNDO_DEFERRED, MP_DEFERRED_0_8. Sem merge main e sem homologação antecipada.
+
 
 Data do snapshot: **01/10/2026**.
 

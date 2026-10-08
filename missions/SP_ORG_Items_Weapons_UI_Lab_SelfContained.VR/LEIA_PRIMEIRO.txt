@@ -1,16 +1,19 @@
-SP_ORG — TESTE WEAPONS 0.6-F R6
+SP_ORG — WEAPONS 0.7-D2 — STATIC READY / RUNTIME PENDING
 
-1. Extraia a pasta SP_ORG_Items_Weapons_UI_Lab_Weapons_0_6_F_R6_UICommon.VR em sua pasta de missões.
-2. NÃO carregue PBOs do Servo Peregrino neste teste. Nexus, UICommon, Items e Weapons estão dentro da missão.
-3. Abra a missão em VR.
-4. Teste manualmente Items e Weapons normalmente.
-5. Em Weapons, observe o alinhamento compacto:
-   - MEUS KITS DE ARMAS: "Tipo:" fica próximo dos filtros.
-   - CATÁLOGO DE ARMAS: "Tipo:" fica próximo dos filtros.
-   - CATÁLOGO DE ARMAS: "Acessório:" fica próximo dos filtros.
-6. Confirme que o comportamento R5 continua igual: auto-criação de kit, troca livre de categoria de arma, buscas independentes e feedback amigável.
-7. Rode: SP_ORG LAB - TESTAR WEAPONS 0.6-F R6.
-8. Esperado para esta candidata: 0 FAIL.
-9. Os erros CBA_fnc_addPerFrameHandler vistos no RPT anterior não são chamados pelo source desta missão; tratá-los separadamente como ruído/integração de mod externo salvo nova evidência.
+1. Extraia SP_ORG_Weapons_0_7_D2_Consolidated_Runtime_Hardening.VR na pasta de missões do Arma.
+2. Não carregue PBOs SP_ORG; Nexus, UICommon, Items e Weapons já estão na missão.
+3. Abra em VR e execute somente: SP_ORG LAB - TESTAR WEAPONS 0.7-D2.
+4. Gate esperado: 1348 PASS / 0 FAIL / 0 BLOCKED. As regressões R6/A/B2/C/D são internas.
+5. Abrir Weapons -> selecionar kit -> editar acessórios sem salvar -> EQUIPAR RASCUNHO.
+   Conferir arma/P4, ALTERADO preservado, kit salvo intacto; repetir para NO_OP.
+6. Catálogo -> pistola -> EQUIPAMENTO →. Conferir HANDGUN/PORTE em P4, draft/kit intactos.
+7. P4 PRIMARY -> óptica compatível -> EQUIPAMENTO →. Conferir arma física e draft intacto.
+8. Acessório incompatível ou destino vazio: nenhuma mutação e feedback claro.
+9. Magazine igual: partial ammo preservado; novo: capacidade de CfgMagazines ativo.
+10. Fechar/reabrir UI: equipamento observado e drafts session-local preservados.
+11. Enviar RPT completo com SUMMARY 0_7_D2 e AMMO_D2 por etapa; não homologar só por CI.
 
-Weapons continua sem aplicação física nesta fase; isso permanece reservado para 0.7.
+Visual baseline: 0.6-F R6. Aplicação local: 0.7-D2 (rascunho + Catálogo).
+Rollback automático C preservado. UNDO_DEFERRED; MP_DEFERRED_0_8.
+Erros CBA addPerFrameHandler: o source executável não contém invocação dessa função;
+o RPT anterior não identifica stack SP_ORG responsável. Reavaliar se houver nova evidência.

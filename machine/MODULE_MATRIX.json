@@ -190,9 +190,9 @@
         "build": "0.7.0.1-plan-snapshot-dry-run-mission-first"
       },
       "development_version": {
-        "display": "0.7-D mission-first",
-        "semantic": "0.7.3.1 mission-first",
-        "build": "0.7.3.1-ui-integration-d1-mission-first"
+        "display": "0.7-D2 mission-first",
+        "semantic": "0.7.3.2 mission-first",
+        "build": "0.7.3.2-consolidated-runtime-hardening-d2-mission-first"
       },
       "dependencies": [
         "Nexus",
@@ -230,9 +230,9 @@
           "persistence.provider.v1"
         ]
       },
-      "next_gate": "Sequential real-Arma RPT B2 -> C -> D; 0 FAIL / 0 BLOCKED",
+      "next_gate": "One real-Arma D2 cumulative RPT: 1348 PASS, 0 FAIL, 0 BLOCKED; then manual draft/catalog checks",
       "homologated_artifact": "0.7-A: 673/673, 0 FAIL.",
-      "current_candidate_artifact": "0.7-D candidate; B2/C/D runtime pending",
+      "current_candidate_artifact": "SP_ORG_Weapons_0_7_D2_Consolidated_Runtime_Hardening.VR",
       "mission_first_validation": {
         "lifecycle_0_1_b": "APPROVED_SP",
         "weapon_configuration_0_2": "APPROVED_SP",
@@ -245,7 +245,7 @@
         "weapon_kit": "ONE_CONFIGURED_WEAPON_PER_TARGET_SLOT",
         "weapon_kit_repository": "SESSION_LOCAL_CANDIDATE",
         "slot_isolation": "PRESERVE_ALL_NON_TARGET_LOADOUT_DOMAINS",
-        "next": "Weapons 0.7-A Plan/Snapshot/Dry-Run",
+        "next": "D2 real RPT and manual gate; no 0.8",
         "weapon_kit_specific_checks": "50_OF_50",
         "weapon_kit_slots": "PRIMARY_HANDGUN_SECONDARY",
         "weapon_kit_loadout_mutation": "NONE",
@@ -273,7 +273,7 @@
         "compatibility_selectors": "APPROVED_R1_445_OF_445",
         "draft": "ACTIVE_0_6_D_R1_BEHAVIOR_PRESERVED",
         "authoring": "ACTIVE_0_6_E_R2_UX_CONVERGENCE_SESSION_LOCAL",
-        "application": "DEFERRED_0_7",
+        "application": "LOCAL_DRAFT_AND_CATALOG_APPLY_0_7_D2",
         "compatibility_selector_mode": "READ_ONLY_COMPATIBILITY_SELECTORS_FROZEN_0_6_C",
         "compatibility_selector_source": "WEAPONS_0_3_ENGINE_QUERY",
         "compatibility_selector_expected_runtime": "445",
@@ -316,7 +316,28 @@
         "footer": "NO_OUTER_FRAME_THREE_BANDS_HIGHER_HISTORY_CONTRAST",
         "player_ui_0_6_f_r6": "SOURCE_SYNCED_MANUAL_APPROVED_AUTO_595_OF_597_2_HARNESS_ONLY",
         "canonical_mission": "missions/SP_ORG_Items_Weapons_UI_Lab_SelfContained.VR",
-        "canonical_mission_git_subtree": "91dae966c4239b3984d21a24916d8e12f811fd2e"
+        "canonical_mission_git_subtree": "91dae966c4239b3984d21a24916d8e12f811fd2e",
+        "ui_physical_application": "LOCAL_DRAFT_AND_CATALOG_APPLY_0_7_D2",
+        "application_rollback": "EXPLICIT_VERIFIED_0_7_C",
+        "loadout_mutation": "TARGET_SLOT_ONLY_LOCAL_APPLY",
+        "current_candidate_0_7_d2": {
+          "branch": "feature/weapons-0.7-d2-consolidated-runtime-hardening",
+          "status": "STATIC_READY_RUNTIME_PENDING",
+          "display": "0.7-D2",
+          "semantic": "0.7.3.2",
+          "build": "0.7.3.2-consolidated-runtime-hardening-d2-mission-first",
+          "origin_head": "8c177c4a05b4018231bd0c11538bcfa2cc81f53a",
+          "expected_checks": 1348,
+          "local_checks": 239,
+          "static_checks": "169/169",
+          "ui_physical_application": "LOCAL_DRAFT_AND_CATALOG_APPLY_0_7_D2",
+          "undo": "UNDO_DEFERRED",
+          "multiplayer": "MP_DEFERRED_0_8",
+          "mission": "SP_ORG_Weapons_0_7_D2_Consolidated_Runtime_Hardening.VR",
+          "test_action": "SP_ORG LAB - TESTAR WEAPONS 0.7-D2",
+          "ammo_runtime_measurement": "PENDING_D2_RPT_CONFIG_COUNT_IMMEDIATE_POST_RETURN_NEXT_FRAME",
+          "homologated": false
+        }
       }
     },
     {
@@ -620,14 +641,37 @@
     },
     "D": {
       "branch": "feature/weapons-0.7-d-ui-integration",
-      "status": "STATIC_READY_RUNTIME_PENDING",
+      "status": "RUNTIME_REJECTED_1104_PASS_5_FAIL_0_BLOCKED",
       "undo": "UNDO_DEFERRED",
       "expected_checks": 1109,
       "code_commit": "1997ef420d11313882322f931b771c18c69c26e5",
       "workflow_run": 37723653489,
       "artifact_id": 11527480050,
       "zip_sha256": "19a146c56b552cf0c17db1c25cf2a7e7fd84af3c40045d140e85f8e9547dc3c1",
-      "static_checks": "148/148"
+      "static_checks": "148/148",
+      "runtime_rpt": "Texto colado(20261008-040823).txt",
+      "failure_causes": [
+        "A_UI_MARKER_ASSERT_CASCADE_4_FAILS",
+        "D_HANDGUN_AMMO_LITERAL_9_VS_ACTIVE_CFG_CAPACITY"
+      ]
     }
+  },
+  "weapons_07_current_candidate": {
+    "branch": "feature/weapons-0.7-d2-consolidated-runtime-hardening",
+    "status": "STATIC_READY_RUNTIME_PENDING",
+    "display": "0.7-D2",
+    "semantic": "0.7.3.2",
+    "build": "0.7.3.2-consolidated-runtime-hardening-d2-mission-first",
+    "origin_head": "8c177c4a05b4018231bd0c11538bcfa2cc81f53a",
+    "expected_checks": 1348,
+    "local_checks": 239,
+    "static_checks": "169/169",
+    "ui_physical_application": "LOCAL_DRAFT_AND_CATALOG_APPLY_0_7_D2",
+    "undo": "UNDO_DEFERRED",
+    "multiplayer": "MP_DEFERRED_0_8",
+    "mission": "SP_ORG_Weapons_0_7_D2_Consolidated_Runtime_Hardening.VR",
+    "test_action": "SP_ORG LAB - TESTAR WEAPONS 0.7-D2",
+    "ammo_runtime_measurement": "PENDING_D2_RPT_CONFIG_COUNT_IMMEDIATE_POST_RETURN_NEXT_FRAME",
+    "homologated": false
   }
 }

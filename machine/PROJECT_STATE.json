@@ -22,8 +22,8 @@
     "hub_rule": "Hub is an optional player-facing integration/orchestration layer. No domain module may require Hub in order to function.",
     "independent_core_development": true
   },
-  "global_next_gate": "Real Arma: B2 -> C -> D. Stop at any FAIL/BLOCKED. No merge main, no runtime approval inferred from CI.",
-  "global_after_gate": "Review all real RPTs before homologating any 0.7 candidate. Weapons 0.8 remains deferred.",
+  "global_next_gate": "Single D2 real-Arma AUTO + manual RPT. Stop at FAIL/BLOCKED; no merge main.",
+  "global_after_gate": "Review D2 ammo stage values and manual evidence before homologation. 0.8 remains deferred.",
   "modules": [
     {
       "id": "Nexus",
@@ -215,9 +215,9 @@
         "build": "0.7.0.1-plan-snapshot-dry-run-mission-first"
       },
       "development_version": {
-        "display": "0.7-D mission-first",
-        "semantic": "0.7.3.1 mission-first",
-        "build": "0.7.3.1-ui-integration-d1-mission-first"
+        "display": "0.7-D2 mission-first",
+        "semantic": "0.7.3.2 mission-first",
+        "build": "0.7.3.2-consolidated-runtime-hardening-d2-mission-first"
       },
       "dependencies": [
         "Nexus",
@@ -256,9 +256,9 @@
         ]
       },
       "status": "MISSION_FIRST_CANDIDATE_STATIC_READY_RUNTIME_PENDING",
-      "next_gate": "Sequential real-Arma RPT B2 -> C -> D; 0 FAIL / 0 BLOCKED",
+      "next_gate": "One real-Arma D2 cumulative RPT: 1348 PASS, 0 FAIL, 0 BLOCKED; then manual draft/catalog checks",
       "homologated_artifact": "0.7-A real-Arma approved: 673/673, 0 FAIL; baseline/weapons-0.7-a-homologated.",
-      "current_candidate_artifact": "0.7-D candidate; B2/C/D runtime pending",
+      "current_candidate_artifact": "SP_ORG_Weapons_0_7_D2_Consolidated_Runtime_Hardening.VR",
       "mission_first_validation": {
         "0.1-B": {
           "status": "APPROVED_SP",
@@ -330,7 +330,7 @@
           "modded_provenance": true,
           "session_cache": true
         },
-        "next": "Weapons 0.7-C Post-Validation / Rollback after B1 runtime approval",
+        "next": "D2 real RPT and manual gate; no 0.8",
         "0.4": {
           "status": "APPROVED_SP_FROZEN",
           "final_candidate": "R5",
@@ -731,14 +731,32 @@
           "next": "Real-Arma cumulative gate; then 0.7-B Slot-Safe Apply"
         },
         "application_0_7_a": "APPROVED_673_OF_673_LEGACY_594_LOCAL_79_DRY_RUN_NO_MUTATION",
-        "application": "SLOT_SAFE_APPLY_0_7_B_B2",
-        "loadout_mutation": "TARGET_SLOT_ONLY_TEST_UNIT",
+        "application": "LOCAL_DRAFT_AND_CATALOG_APPLY_0_7_D2",
+        "loadout_mutation": "TARGET_SLOT_ONLY_LOCAL_APPLY",
         "application_plan_snapshot_baseline": "baseline/weapons-0.7-a-homologated",
         "application_0_7_b": "STATIC_CANDIDATE_RUNTIME_PENDING",
         "application_strategy": "FULL_LOADOUT_CLONE_SETUNITLOADOUT_FALSE",
         "application_post_validation": "TARGET_PLUS_PRESERVATION_FINGERPRINT",
-        "application_rollback": "SAFETY_FALLBACK_PRESENT_HARDEN_0_7_C",
-        "ui_physical_application": "DEFERRED_0_7_D"
+        "application_rollback": "EXPLICIT_VERIFIED_0_7_C",
+        "ui_physical_application": "LOCAL_DRAFT_AND_CATALOG_APPLY_0_7_D2",
+        "current_candidate_0_7_d2": {
+          "branch": "feature/weapons-0.7-d2-consolidated-runtime-hardening",
+          "status": "STATIC_READY_RUNTIME_PENDING",
+          "display": "0.7-D2",
+          "semantic": "0.7.3.2",
+          "build": "0.7.3.2-consolidated-runtime-hardening-d2-mission-first",
+          "origin_head": "8c177c4a05b4018231bd0c11538bcfa2cc81f53a",
+          "expected_checks": 1348,
+          "local_checks": 239,
+          "static_checks": "169/169",
+          "ui_physical_application": "LOCAL_DRAFT_AND_CATALOG_APPLY_0_7_D2",
+          "undo": "UNDO_DEFERRED",
+          "multiplayer": "MP_DEFERRED_0_8",
+          "mission": "SP_ORG_Weapons_0_7_D2_Consolidated_Runtime_Hardening.VR",
+          "test_action": "SP_ORG LAB - TESTAR WEAPONS 0.7-D2",
+          "ammo_runtime_measurement": "PENDING_D2_RPT_CONFIG_COUNT_IMMEDIATE_POST_RETURN_NEXT_FRAME",
+          "homologated": false
+        }
       }
     },
     {
@@ -1325,14 +1343,37 @@
     },
     "D": {
       "branch": "feature/weapons-0.7-d-ui-integration",
-      "status": "STATIC_READY_RUNTIME_PENDING",
+      "status": "RUNTIME_REJECTED_1104_PASS_5_FAIL_0_BLOCKED",
       "undo": "UNDO_DEFERRED",
       "expected_checks": 1109,
       "code_commit": "1997ef420d11313882322f931b771c18c69c26e5",
       "workflow_run": 37723653489,
       "artifact_id": 11527480050,
       "zip_sha256": "19a146c56b552cf0c17db1c25cf2a7e7fd84af3c40045d140e85f8e9547dc3c1",
-      "static_checks": "148/148"
+      "static_checks": "148/148",
+      "runtime_rpt": "Texto colado(20261008-040823).txt",
+      "failure_causes": [
+        "A_UI_MARKER_ASSERT_CASCADE_4_FAILS",
+        "D_HANDGUN_AMMO_LITERAL_9_VS_ACTIVE_CFG_CAPACITY"
+      ]
     }
+  },
+  "weapons_07_current_candidate": {
+    "branch": "feature/weapons-0.7-d2-consolidated-runtime-hardening",
+    "status": "STATIC_READY_RUNTIME_PENDING",
+    "display": "0.7-D2",
+    "semantic": "0.7.3.2",
+    "build": "0.7.3.2-consolidated-runtime-hardening-d2-mission-first",
+    "origin_head": "8c177c4a05b4018231bd0c11538bcfa2cc81f53a",
+    "expected_checks": 1348,
+    "local_checks": 239,
+    "static_checks": "169/169",
+    "ui_physical_application": "LOCAL_DRAFT_AND_CATALOG_APPLY_0_7_D2",
+    "undo": "UNDO_DEFERRED",
+    "multiplayer": "MP_DEFERRED_0_8",
+    "mission": "SP_ORG_Weapons_0_7_D2_Consolidated_Runtime_Hardening.VR",
+    "test_action": "SP_ORG LAB - TESTAR WEAPONS 0.7-D2",
+    "ammo_runtime_measurement": "PENDING_D2_RPT_CONFIG_COUNT_IMMEDIATE_POST_RETURN_NEXT_FRAME",
+    "homologated": false
   }
 }
