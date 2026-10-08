@@ -1921,7 +1921,7 @@ if (!isNull _display06A) then {
  ["0.6-E R2 direct draft controls present",
   (ctrlText (_display06A displayCtrl 3150)) isEqualTo "← EQUIPAR NO RASCUNHO"
   && {(ctrlText (_display06A displayCtrl 3151)) isEqualTo "EQUIPAMENTO →"}
-  && {!ctrlEnabled (_display06A displayCtrl 3151)}
+  && {(getText (missionConfigFile >> "SP_ORG_Weapons_Dialog" >> "controls" >> "CatalogToEquipment" >> "action")) find "CATALOG_TO_EQUIPMENT" >= 0}
  ] call _assert;
 
  ["0.6-A selected kit fields present",

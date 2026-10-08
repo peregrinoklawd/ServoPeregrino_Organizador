@@ -3,9 +3,6 @@ if (!hasInterface || {isNull _unit} || {!local _unit}) exitWith {false};
 if (_unit getVariable ["SP_ORG_Weapons_labActionsInstalled",false]) exitWith {true};
 _unit setVariable ["SP_ORG_Weapons_labActionsInstalled",true];
 
-_unit addAction ["Weapons | AUTO TEST 0.7-B - Slot-Safe Apply",{
- [] spawn ServoPeregrino_Organizador_Weapons_fnc_runDelivery0_7_BTests
-},nil,1.5,true,true,"","isServer"];
 
 _unit addAction ["Weapons | ABRIR UI 0.6-F R6",{
  private _result = [] call ServoPeregrino_Organizador_Weapons_fnc_openInterface;
@@ -30,8 +27,8 @@ _unit addAction ["Weapons | Compatibilidade MX - RPT",{
  hint "Compatibilidade da MX gravada no RPT.";
 }];
 
-_unit addAction ["Weapons | Sobre o teste 0.7-B",{
- hint "0.7-B mantém a UI 0.6-F R6 congelada e executa a primeira mutação física slot-safe no core. O AUTO TEST usa uma unidade isolada, valida PRIMARY/HANDGUN/SECONDARY, partial ammo, NO_OP e stale Snapshot. Integração do botão físico da UI continua deferred para 0.7-D.";
+_unit addAction ["Weapons | Sobre o teste 0.7-D2",{
+ hint "Visual baseline 0.6-F R6; aplicação local 0.7-D2 para rascunho e Catálogo. Use SP_ORG LAB - TESTAR WEAPONS 0.7-D2. Undo deferred. Sem salvar automaticamente.";
 }];
 
 _unit addEventHandler ["Respawn",{params ["_new"];[_new] call ServoPeregrino_Organizador_Weapons_fnc_installLabActions}];

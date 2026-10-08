@@ -203,7 +203,7 @@ private _slider = _display displayCtrl 3124;
 [_slider,_catalogOffset,_catalogMatchCount,_catalogWindowSize,6,12,true] call ServoPeregrino_Organizador_UICommon_fnc_syncVirtualSlider;
 
 private _selectedCatalog = _vm getOrDefault ["selectedCatalog",createHashMap];
-private _catalogDetails = "Selecione um item. ← envia para ARMAS DO KIT; → permanece reservado para aplicação física em 0.7.";
+private _catalogDetails = "Selecione um item. ← envia para ARMAS DO KIT; → equipa diretamente no equipamento físico, sem alterar o rascunho.";
 if ((count _selectedCatalog)>0) then {
  private _dn = [_selectedCatalog getOrDefault ["displayName",""]] call ServoPeregrino_Organizador_Weapons_fnc_escapeStructuredText;
  private _kindLabelSafe = [_selectedCatalog getOrDefault ["catalogKindLabel",""]] call ServoPeregrino_Organizador_Weapons_fnc_escapeStructuredText;
@@ -216,8 +216,8 @@ if ((count _selectedCatalog)>0) then {
 (_display displayCtrl 3130) ctrlSetStructuredText parseText _catalogDetails;
 private _hasCatalogSelection=(count _selectedCatalog)>0;
 (_display displayCtrl 3150) ctrlEnable _hasCatalogSelection;
-(_display displayCtrl 3151) ctrlEnable false;
-(_display displayCtrl 3151) ctrlSetTooltip "Aplicação física slot-safe será habilitada em Weapons 0.7.";
+(_display displayCtrl 3151) ctrlEnable true;
+(_display displayCtrl 3151) ctrlSetTooltip "Equipa a seleção no equipamento físico. Não altera o rascunho nem salva o kit. Sem seleção, clique para receber orientação.";
 
 // CONTEÚDO DO EQUIPAMENTO — read-only current physical state.
 private _eq = _vm getOrDefault ["equipmentSnapshot",createHashMap];

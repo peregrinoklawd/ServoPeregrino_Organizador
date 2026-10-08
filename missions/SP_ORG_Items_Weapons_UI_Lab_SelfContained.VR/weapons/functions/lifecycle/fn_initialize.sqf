@@ -65,7 +65,7 @@ private _cap = ["weapons.runtime",1,"ServoPeregrino_Organizador_Weapons",createH
  ["uiCommonMinimumVersion",SP_ORG_WEAPONS_UICOMMON_MIN_VERSION],
  ["uiCommonBuild",_uiCommonBuild],
  ["uiDirectDraftEquip",true],
- ["uiPhysicalApplication","LOCAL_DRAFT_APPLY_0_7_D"],
+ ["uiPhysicalApplication","LOCAL_DRAFT_AND_CATALOG_APPLY_0_7_D2"],
     ["uiDraft","LOCAL_WEAPONKIT_DRAFT_WITH_AUTHORING_CANDIDATE"],
     ["uiAuthoring","SESSION_LOCAL_DIRECT_CATALOG_TO_DRAFT_0_6_E_R2"],
  ["physicalIdentityProven",false],
@@ -125,7 +125,7 @@ missionNamespace setVariable [SP_ORG_WEAPONS_RUNTIME,createHashMapFromArray [
  ["uiCommonMinimumVersion",SP_ORG_WEAPONS_UICOMMON_MIN_VERSION],
  ["uiCommonBuild",_uiCommonBuild],
  ["uiDirectDraftEquip",true],
- ["uiPhysicalApplication","LOCAL_DRAFT_APPLY_0_7_D"],
+ ["uiPhysicalApplication","LOCAL_DRAFT_AND_CATALOG_APPLY_0_7_D2"],
     ["uiDraft","LOCAL_WEAPONKIT_DRAFT_WITH_AUTHORING_CANDIDATE"],
     ["uiAuthoring","SESSION_LOCAL_DIRECT_CATALOG_TO_DRAFT_0_6_E_R2"],
  ["executionMode","MISSION_FIRST"],
@@ -135,5 +135,5 @@ missionNamespace setVariable [SP_ORG_WEAPONS_RUNTIME,createHashMapFromArray [
 private _kitStoreInit = [] call ServoPeregrino_Organizador_Weapons_fnc_initializeWeaponKitStore;
 if !(_kitStoreInit get "success") exitWith {_kitStoreInit};
 
-["WEAPONS","INFO","WEAPONS 0.7-D INITIALIZED - current draft local apply without autosave; explicit verified rollback; Undo deferred."] call ServoPeregrino_Organizador_Nexus_fnc_log;
-[true,"WEAPONS_INITIALIZED","0.7-D candidata pronta para teste real: EQUIPAR RASCUNHO sem salvar; Plan/Snapshot preservados e rollback verificado."] call ServoPeregrino_Organizador_Nexus_fnc_createResult
+["WEAPONS","INFO","WEAPONS 0.7-D2 INITIALIZED - local draft and catalog apply; no autosave; verified rollback; Undo deferred."] call ServoPeregrino_Organizador_Nexus_fnc_log;
+[true,"WEAPONS_INITIALIZED","0.7-D2 candidata: rascunho e Catálogo equipam localmente sem salvar; rollback verificado."] call ServoPeregrino_Organizador_Nexus_fnc_createResult

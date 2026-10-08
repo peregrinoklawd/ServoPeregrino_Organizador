@@ -698,7 +698,16 @@ switch (_eventName) do {
 
  case "CATALOG_TO_EQUIPMENT": {
   _refresh=false;
-  ["Aplicação física pelo Catálogo permanece reservada para Weapons 0.7. Use ← / EQUIPAR NO RASCUNHO para editar o WeaponKit.","INFO",true] call ServoPeregrino_Organizador_Weapons_fnc_pushUIFeedback;
+  private _result=[player,_state getOrDefault ["selectedCatalogClass",""],_state getOrDefault ["selectedCatalogKind",""],_state getOrDefault ["equipmentSlotView","PRIMARY"]] call ServoPeregrino_Organizador_Weapons_fnc_executeCatalogApplication;
+  private _d=_result getOrDefault ["data",createHashMap];
+  _state set ["lastApplicationResult",_result];
+  if ((_d getOrDefault ["targetSlot",""]) in ["PRIMARY","HANDGUN","SECONDARY"]) then {_state set ["equipmentSlotView",_d get "targetSlot"]};
+  missionNamespace setVariable [SP_ORG_WEAPONS_UI_STATE,_state];
+  private _feedback=[_result] call ServoPeregrino_Organizador_Weapons_fnc_getApplicationFeedback;
+  [_feedback get "message",_feedback get "kind",true] call ServoPeregrino_Organizador_Weapons_fnc_pushUIFeedback;
+  diag_log format ["[SP_ORG] [WEAPONS] [CATALOG_APPLY] code=%1 slot=%2 mutation=%3 rollback=%4",_result getOrDefault ["code",""],_d getOrDefault ["targetSlot",""],_d getOrDefault ["mutationPerformed",false],_d getOrDefault ["rollbackAttempted",false]];
+  _focusedRefresh="EQUIPMENT";
+  _focusedReason="CATALOG_TO_EQUIPMENT";
  };
 
  case "DRAFT_CLEAR": {

@@ -73,7 +73,7 @@ private _eqRows = [
 } forEach _eqRows;
 
 _state = missionNamespace getVariable [SP_ORG_WEAPONS_UI_STATE,createHashMap];
-if (toUpperANSI _reason isEqualTo "APPLY_DRAFT") then {
+if (toUpperANSI _reason in ["APPLY_DRAFT","CATALOG_TO_EQUIPMENT"]) then {
  private _history = _state getOrDefault ["history",[]];
  private _historyText = (_history select [((count _history)-3) max 0,3 min count _history]) joinString "   •   ";
  private _context = format ["Kit: %1 | Rascunho: %2 | Equipamento: %3",_state getOrDefault ["selectedKitName","Nenhum"],if (_state getOrDefault ["selectedKitDraftDirty",false]) then {"ALTERADO"} else {if (_state getOrDefault ["selectedKitIsNew",false]) then {"NOVO"} else {"SALVO"}},[_slot] call _slotLabel];

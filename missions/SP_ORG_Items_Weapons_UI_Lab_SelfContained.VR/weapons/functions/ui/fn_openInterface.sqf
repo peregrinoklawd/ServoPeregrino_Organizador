@@ -11,6 +11,7 @@ if (!isNull _existing) exitWith {
  [true,"WEAPONS_UI_ALREADY_OPEN","A interface de Weapons já está aberta.",createHashMapFromArray [
   ["idd",SP_ORG_WEAPONS_UI_DISPLAY_IDD],
   ["checkpoint","0.6-F R6"],
+  ["applicationGate","LOCAL_DRAFT_AND_CATALOG_APPLY_0_7_D2"],
   ["mutatesInventory",false]
  ]] call ServoPeregrino_Organizador_Nexus_fnc_createResult
 };
@@ -23,7 +24,7 @@ if (!_ok) exitWith {
  ]] call ServoPeregrino_Organizador_Nexus_fnc_createResult
 };
 
-[true,"WEAPONS_UI_OPENED","Weapons 0.6-F R6 abriu a UI de quatro painéis com authoring direto pelo Catálogo, destaque semântico de linhas alteradas e layout preview-ready sobre UICommon; aplicação física ainda bloqueada para 0.7.",createHashMapFromArray [
+[true,"WEAPONS_UI_OPENED","Visual baseline 0.6-F R6 sobre UICommon; aplicação física local 0.7-D2 habilitada para rascunho e Catálogo.",createHashMapFromArray [
  ["idd",SP_ORG_WEAPONS_UI_DISPLAY_IDD],
  ["checkpoint","0.6-F R6"],
  ["panels",["WEAPON_KITS","SELECTED_KIT_DRAFT","WEAPON_CATALOG","EQUIPMENT_CONTENT"]],
@@ -38,5 +39,5 @@ if (!_ok) exitWith {
  ["authoringGate","SESSION_LOCAL_ENABLED_0_6_E"],
  ["slotLabels",createHashMapFromArray [["PRIMARY","Principal"],["HANDGUN","Porte"],["SECONDARY","Secundária"]]],
  ["mutatesInventory",false],
- ["applicationGate","DEFERRED_0_7"]
+ ["applicationGate","LOCAL_DRAFT_AND_CATALOG_APPLY_0_7_D2"]
 ]] call ServoPeregrino_Organizador_Nexus_fnc_createResult

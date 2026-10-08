@@ -38,7 +38,7 @@ createHashMapFromArray [
  ["uiCommonRequired",true],
  ["uiCommonMinimumVersion",SP_ORG_WEAPONS_UICOMMON_MIN_VERSION],
  ["uiDirectDraftEquip",true],
- ["uiPhysicalApplication","LOCAL_DRAFT_APPLY_0_7_D"],
+ ["uiPhysicalApplication","LOCAL_DRAFT_AND_CATALOG_APPLY_0_7_D2"],
  ["uiDraft","LOCAL_WEAPONKIT_DRAFT_WITH_AUTHORING_CANDIDATE"],
  ["uiAuthoring","SESSION_LOCAL_DIRECT_CATALOG_TO_DRAFT_0_6_E_R2"],
  ["kitApplication","SLOT_SAFE_APPLY_0_7_B"],
