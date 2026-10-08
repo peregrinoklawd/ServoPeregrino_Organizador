@@ -73,7 +73,13 @@ private _run={
  ["D protected domains "+_label,_post getOrDefault ["preservationMatched",false]] call _assert;
  ["D fullMagazines false "+_label,!(_d getOrDefault ["fullMagazines",true])] call _assert;
  ["D mutation flag "+_label,(_d getOrDefault ["mutationPerformed",!_mutation]) isEqualTo _mutation] call _assert;
- ["D observed ammo "+_label,((((getUnitLoadout _unit) param [_si,[]]) param [4,[]]) param [1,-1]) isEqualTo _ammo] call _assert;
+ private _observedRow=(getUnitLoadout _unit) param [_si,[]];
+ private _capacity=getNumber (configFile >> "CfgMagazines" >> _mag >> "count");
+ private _expectedAmmo=if ((_d getOrDefault ["ammoPolicy",""]) isEqualTo "NEW_MAGAZINE_FULL_CAPACITY") then {_capacity} else {_ammo};
+ ["D observed ammo "+_label,(_observedRow param [4,[]]) isEqualTo [_mag,_expectedAmmo]] call _assert;
+ diag_log format ["[SP_ORG] [WEAPONS] [AMMO_D2_RETURN] scenario=%1 configCount=%2 oldRunnerLiteral=%3 expectedAmmo=%4 observedMagazine=%5 currentWeapon=%6 currentMuzzle=%7",_label,_capacity,_ammo,_expectedAmmo,_observedRow param [4,[]],currentWeapon _unit,currentMuzzle _unit];
+ diag_log format ["[SP_ORG] [WEAPONS] [AMMO_D2_ROW] stage=AFTER_EXECUTE scenario=%1 row=%2",_label,_observedRow];
+ diag_log format ["[SP_ORG] [WEAPONS] [AMMO_D2_DETAIL] scenario=%1 magazines=%2",_label,magazinesAmmoFull _unit];
  ["D strict or SECONDARY family class "+_label,_post getOrDefault ["classEquivalent",false]] call _assert;
  private _feedback=[_result] call ServoPeregrino_Organizador_Weapons_fnc_getApplicationFeedback;
  ["D feedback human readable "+_label,(_feedback get "kind") isEqualTo "SUCCESS" && {(_feedback get "message") find "WEAPONS_" < 0}] call _assert;

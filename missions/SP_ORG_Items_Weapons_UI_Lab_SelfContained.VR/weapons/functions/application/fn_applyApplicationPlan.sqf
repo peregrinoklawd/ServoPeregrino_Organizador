@@ -65,7 +65,15 @@ if (_operation isEqualTo "NO_OP") exitWith {
  ]] call ServoPeregrino_Organizador_Nexus_fnc_createResult
 };
 
+private _ammoTrace = {
+ params ["_stage","_row"];
+ private _magClass=_plan getOrDefault ["desiredMagazineClass",""];
+ diag_log format ["[SP_ORG] [WEAPONS] [AMMO_D2] stage=%1 slot=%2 desiredMagazineClass=%3 configCount=%4 policy=%5",_stage,_plan get "targetSlot",_magClass,getNumber (configFile >> "CfgMagazines" >> _magClass >> "count"),_builtData get "ammoPolicy"];
+ diag_log format ["[SP_ORG] [WEAPONS] [AMMO_D2_ROW] stage=%1 row=%2",_stage,_row];
+};
+["EXPECTED",_builtData get "targetRow"] call _ammoTrace;
 _unit setUnitLoadout [_targetLoadout,false];
+["IMMEDIATE_AFTER_SET",(getUnitLoadout _unit) param [_plan get "targetSlotIndex",[]]] call _ammoTrace;
 _unit setAnimSpeedCoef (_snapshot getOrDefault ["animSpeedCoef",1]);
 
 private _mutatedBeforeFault = [getUnitLoadout _unit] call ServoPeregrino_Organizador_Weapons_fnc_deepCopy;
@@ -87,6 +95,7 @@ if !(_labFault isEqualTo "") then {
 };
 
 private _validation = [_unit,_plan,_snapshot] call ServoPeregrino_Organizador_Weapons_fnc_validateAppliedApplicationState;
+["POST_VALIDATION",(_validation getOrDefault ["data",createHashMap]) getOrDefault ["observedTargetRow",[]]] call _ammoTrace;
 if !(_validation getOrDefault ["success",false]) exitWith {
  private _rollback = [_unit,_snapshot] call ServoPeregrino_Organizador_Weapons_fnc_rollbackApplicationSnapshot;
  private _rollbackData = _rollback getOrDefault ["data",createHashMap];
