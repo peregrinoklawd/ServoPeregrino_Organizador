@@ -2410,8 +2410,20 @@ if (!isNull _display06A) then {
   ["0.6-E R2 PUBLICAR does not mutate loadout",_loadoutBeforePublishE isEqualTo (getUnitLoadout player)] call _assert;
 
   private _loadoutBeforeRightE = getUnitLoadout player;
+  private _rightStateE=[] call ServoPeregrino_Organizador_Weapons_fnc_getUIState;
+  private _rightClassE=_rightStateE getOrDefault ["selectedCatalogClass",""];
+  private _rightKindE=_rightStateE getOrDefault ["selectedCatalogKind",""];
+  // Forward runtime: invalid input must remain non-mutating. Valid physical apply
+  // belongs to the isolated D2 gate; legacy authoring must never equip the player.
+  _rightStateE set ["selectedCatalogClass",""];_rightStateE set ["selectedCatalogKind",""];
+  missionNamespace setVariable [SP_ORG_WEAPONS_UI_STATE,_rightStateE];
   ["CATALOG_TO_EQUIPMENT"] call ServoPeregrino_Organizador_Weapons_fnc_handleUIEvent;
-  ["0.6-E R2 right/catalog physical action remains non-mutating",_loadoutBeforeRightE isEqualTo (getUnitLoadout player)] call _assert;
+  private _rightAfterE=[] call ServoPeregrino_Organizador_Weapons_fnc_getUIState;
+  ["0.6-E R2 invalid catalog action remains non-mutating",_loadoutBeforeRightE isEqualTo (getUnitLoadout player)
+   && {((_rightAfterE getOrDefault ["lastApplicationResult",createHashMap]) getOrDefault ["code",""]) isEqualTo "WEAPONS_UI_CATALOG_SELECTION_REQUIRED"}
+  ] call _assert;
+  _rightAfterE set ["selectedCatalogClass",_rightClassE];_rightAfterE set ["selectedCatalogKind",_rightKindE];
+  missionNamespace setVariable [SP_ORG_WEAPONS_UI_STATE,_rightAfterE];
 
   private _stateBeforeDupE = [] call ServoPeregrino_Organizador_Weapons_fnc_getUIState;
   _stateBeforeDupE set ["selectedKitId",_authoringKitIdE];

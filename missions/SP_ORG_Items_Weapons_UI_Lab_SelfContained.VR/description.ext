@@ -1,6 +1,6 @@
 author = "Claudio Malta Telhada";
-onLoadName = "SP_ORG UI Lab - Weapons 0.7-D";
-onLoadMission = "Weapons 0.7-D: equipar o rascunho atual sem salvar, com aplicação slot-safe e rollback validado.";
+onLoadName = "SP_ORG UI Lab - Weapons 0.7-D2";
+onLoadMission = "Weapons 0.7-D2: rascunho e Catálogo equipam localmente sem salvar, com aplicação slot-safe e rollback validado.";
 overviewText = "Candidata D1. B2/C/D aguardam RPT real sequencial. Items e UICommon congelados. Undo deferred; multiplayer 0.8 deferred.";
 enableDebugConsole = 1;
 disabledAI = 1;

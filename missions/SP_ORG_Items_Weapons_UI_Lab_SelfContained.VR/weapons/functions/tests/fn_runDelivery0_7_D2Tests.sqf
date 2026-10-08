@@ -39,9 +39,9 @@ private _run={
  if (_draftRoute) then {
   private _c=[_class] call ServoPeregrino_Organizador_Weapons_fnc_createWeaponConfiguration;
   if !(_c getOrDefault ["success",false]) exitWith {};
-  private _rr=[(_c get "data") get "configuration","30Rnd_65x39_caseless_mag"] call ServoPeregrino_Organizador_Weapons_fnc_createWeaponRecipe;
+  private _rr=[(_c get "data") get "configuration",if (_expectedSlot isEqualTo "HANDGUN") then {"9Rnd_45ACP_Mag"} else {"30Rnd_65x39_caseless_mag"}] call ServoPeregrino_Organizador_Weapons_fnc_createWeaponRecipe;
   if !(_rr getOrDefault ["success",false]) exitWith {};
-  _r=[_unit,createHashMapFromArray [["targetSlot","PRIMARY"],["recipe",(_rr get "data") get "recipe"],["dirty",true]]] call ServoPeregrino_Organizador_Weapons_fnc_executeDraftApplication;
+  _r=[_unit,createHashMapFromArray [["targetSlot",_expectedSlot],["recipe",(_rr get "data") get "recipe"],["dirty",true]]] call ServoPeregrino_Organizador_Weapons_fnc_executeDraftApplication;
  } else {_r=[_unit,_class,_kind,_slot,_fault] call ServoPeregrino_Organizador_Weapons_fnc_executeCatalogApplication};
  private _d=_r getOrDefault ["data",createHashMap];private _post=_d getOrDefault ["postValidation",createHashMap];
  private _ok=_expectedCode in ["WEAPONS_APPLICATION_APPLIED","WEAPONS_APPLICATION_ALREADY_APPLIED"];
@@ -93,6 +93,7 @@ private _p07=["hgun_P07_F","","","",["16Rnd_9x21_Mag",7],[],""];
  ["EMPTY_DESTINATION","optic_Hamr","OPTIC","PRIMARY",[],"PRIMARY","WEAPONS_UI_CATALOG_EMPTY_DESTINATION","",false],
  ["UNSUPPORTED","optic_Hamr","UNKNOWN","PRIMARY",_mx,"PRIMARY","WEAPONS_UI_CATALOG_KIND_UNSUPPORTED","",false],
  ["CATALOG_C_ROLLBACK","optic_Hamr","OPTIC","PRIMARY",_mx,"PRIMARY","WEAPONS_APPLICATION_APPLY_VERIFY_FAILED","PROTECTED_DIVERGENCE",false],
+ ["DRAFT_HANDGUN_REPLACE_STABLE","hgun_ACPC2_F","WEAPON","HANDGUN",_p07,"HANDGUN","WEAPONS_APPLICATION_APPLIED","",true],
  ["DRAFT_PRIMARY_REPLACE","arifle_MX_F","WEAPON","PRIMARY",["arifle_Katiba_F","","","",["30Rnd_65x39_caseless_green",13],[],""],"PRIMARY","WEAPONS_APPLICATION_APPLIED","",true]
 ];
 private _uiTests={
@@ -132,6 +133,6 @@ if (!isNull _unit) then {deleteVehicle _unit};private _deadline=diag_tickTime+5;
 missionNamespace setVariable [SP_ORG_WEAPONS_UI_STATE,_stateBefore];missionNamespace setVariable [SP_ORG_WEAPONS_KIT_STORE,_storeBefore];[] call ServoPeregrino_Organizador_Weapons_fnc_refreshInterface;
 private _lp={_x select 1} count _checks;private _lb={(_x param [2,""]) isEqualTo "BLOCKED"} count _checks;
 private _passed=(_ld getOrDefault ["passed",0])+_lp;private _failed=(_ld getOrDefault ["failed",1])+count _checks-_lp-_lb;private _total=(_ld getOrDefault ["total",0])+count _checks;
-diag_log format ["[SP_ORG] [WEAPONS] [AUTO_TEST_SUMMARY] mode=MISSION_FIRST_0_7_D2 passed=%1 failed=%2 blocked=%3 total=%4 expected=1336 UNDO=UNDO_DEFERRED MP=MP_DEFERRED_0_8",_passed,_failed,_blocked,_total];
+diag_log format ["[SP_ORG] [WEAPONS] [AUTO_TEST_SUMMARY] mode=MISSION_FIRST_0_7_D2 passed=%1 failed=%2 blocked=%3 total=%4 expected=1348 UNDO=UNDO_DEFERRED MP=MP_DEFERRED_0_8",_passed,_failed,_blocked,_total];
 hint format ["Weapons 0.7-D2: %1/%2; falhas=%3; bloqueados=%4. Envie o RPT completo.",_passed,_total,_failed,_blocked];
-[_failed isEqualTo 0 && {_blocked isEqualTo 0} && {_total isEqualTo 1336},"WEAPONS_0_7_D2_AUTO_TEST_COMPLETE","Consolidated runtime gate; real Arma approval required.",createHashMapFromArray [["passed",_passed],["failed",_failed],["blocked",_blocked],["total",_total],["expected",1336],["checks",_checks],["undo","UNDO_DEFERRED"]]] call ServoPeregrino_Organizador_Nexus_fnc_createResult
+[_failed isEqualTo 0 && {_blocked isEqualTo 0} && {_total isEqualTo 1348},"WEAPONS_0_7_D2_AUTO_TEST_COMPLETE","Consolidated runtime gate; real Arma approval required.",createHashMapFromArray [["passed",_passed],["failed",_failed],["blocked",_blocked],["total",_total],["expected",1348],["checks",_checks],["undo","UNDO_DEFERRED"]]] call ServoPeregrino_Organizador_Nexus_fnc_createResult
