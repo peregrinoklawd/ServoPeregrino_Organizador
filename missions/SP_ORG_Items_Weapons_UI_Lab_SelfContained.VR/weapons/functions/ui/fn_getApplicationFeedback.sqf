@@ -16,6 +16,7 @@ if (((_result getOrDefault ["data",createHashMap]) getOrDefault ["sourceKind",""
  if (_result getOrDefault ["success",false]) then {
   _message=if (_code isEqualTo "WEAPONS_APPLICATION_ALREADY_APPLIED") then {"O item já está equipado. Nada foi alterado."} else {"Item equipado diretamente. O rascunho e o kit salvo continuam intactos."};
  } else {
+  if !(_code in ["WEAPONS_APPLICATION_APPLY_STALE_SNAPSHOT","WEAPONS_APPLICATION_APPLY_VERIFY_FAILED","WEAPONS_APPLICATION_ROLLBACK_FAILED"]) then {_message="Não foi possível equipar a seleção. Revise o item e a compatibilidade com a arma física."};
   if (_code in ["WEAPONS_UI_CATALOG_SELECTION_REQUIRED","WEAPONS_UI_CATALOG_EMPTY_DESTINATION","WEAPONS_UI_CATALOG_KIND_UNSUPPORTED","WEAPONS_UI_CATALOG_SELECTION_INCOMPATIBLE","WEAPONS_UI_CATALOG_DESTINATION_INVALID"]) then {_message=_result getOrDefault ["message",_message]};
   if (_code find "INCOMPATIBLE" >= 0) then {_message="Esse item não é compatível com a arma física visualizada."};
  };

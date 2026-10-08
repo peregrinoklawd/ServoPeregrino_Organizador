@@ -4,7 +4,7 @@ private _reject = {
  params ["_code","_message"];
  [false,_code,_message,createHashMapFromArray [["failurePhase","PRE_MUTATION"],["mutationPerformed",false],["rollbackAttempted",false],["sourceKind","CATALOG_SELECTION"],["draftMutation",false],["repositoryMutation",false]]] call ServoPeregrino_Organizador_Nexus_fnc_createResult
 };
-if (isNull _unit || {!local _unit}) exitWith {["WEAPONS_APPLICATION_TARGET_NOT_LOCAL","O destino precisa ser um personagem local."] call _reject};
+if (isNull _unit || {!(_unit isKindOf "CAManBase")} || {!local _unit}) exitWith {["WEAPONS_APPLICATION_TARGET_NOT_LOCAL","O destino precisa ser um personagem local."] call _reject};
 _kind=toUpperANSI _kind;
 if (_className isEqualTo "") exitWith {["WEAPONS_UI_CATALOG_SELECTION_REQUIRED","Selecione um item no Catálogo antes de equipar."] call _reject};
 private _slot=toUpperANSI _viewSlot;
@@ -64,7 +64,11 @@ if (count _error > 0) exitWith {
  _error set ["data",_d];_error
 };
 private _recipeR=[_cfg,_mag] call ServoPeregrino_Organizador_Weapons_fnc_createWeaponRecipe;
-if !(_recipeR getOrDefault ["success",false]) exitWith {_recipeR};
+if !(_recipeR getOrDefault ["success",false]) exitWith {
+ private _d=_recipeR getOrDefault ["data",createHashMap];
+ _d set ["failurePhase","PRE_MUTATION"];_d set ["mutationPerformed",false];_d set ["rollbackAttempted",false];_d set ["sourceKind","CATALOG_SELECTION"];
+ _recipeR set ["data",_d];_recipeR
+};
 // Unsaved transient intent: no UI draft lookup and no repository authoring calls.
 private _intent=createHashMapFromArray [["targetSlot",_slot],["recipe",(_recipeR get "data") get "recipe"]];
 private _result=[_unit,_intent,_labFault] call ServoPeregrino_Organizador_Weapons_fnc_executeDraftApplication;
