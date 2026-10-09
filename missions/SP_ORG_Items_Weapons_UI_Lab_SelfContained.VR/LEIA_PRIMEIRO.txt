@@ -17,6 +17,10 @@ SP_ORG — WEAPONS 0.7-E E1 R2 — CANDIDATA MISSION-FIRST / RUNTIME PENDING
 11. Envie RPT completo, com [AUTO_TEST_SUMMARY] mode=MISSION_FIRST_0_7_E_R2,
     além das observações manuais. CI GREEN não equivale a homologação real.
 
+12. O aviso CAPTURA PARCIAL inclui campo/classe exatos não copiados (não silencioso).
+13. A R2 não modifica arma equipada, status de munição nem validadores globais.
+14. Se o botão ainda falhar, o RPT agora mostrará nested diagnostics/weaponClass e motivo detalhado.
+
 Versão visual: 0.6-F R6; aplicação física local: 0.7-D2 R1.
 Captura P4 -> P2: 0.7-E E1.
 UNDO_DEFERRED / MP_DEFERRED_0_8 / PBO_PENDING.
