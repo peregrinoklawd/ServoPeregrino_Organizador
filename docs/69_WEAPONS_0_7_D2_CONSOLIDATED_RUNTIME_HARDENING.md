@@ -152,3 +152,16 @@ Missão `SP_ORG_Weapons_0_7_D2_NoMag_Contract_Review_R1.VR`.
 **RUNTIME PENDING**. Não homologar enquanto o novo RPT não trouxer 1360/1360.
 
 O botão `CAPTURAR` pertence hoje a Items; Weapons ainda não tem a ação player-facing `CONTEÚDO DO EQUIPAMENTO → ARMAS DO KIT`. Essa funcionalidade permanece no backlog, fora da revisão R1.
+
+
+
+### Pacote da revisão D2 R1 — static PASS, runtime pendente
+
+- Workflow: `37872918374` — completed/success, incluindo validação estática, identidade, ZIP e upload.
+- Commit executável e identidade empacotada: `0d36ce24b04dc11399ff58142a1179f0082a341b`.
+- Artifact: `11590644990`.
+- Nome único da missão: `SP_ORG_Weapons_0_7_D2_NoMag_Contract_Review_R1.VR`.
+- SHA256 do ZIP interno: `81cabddb9a4fd97e7a23e57c52d3f4fe21bb05380f2943516f78f7204fe592ec`.
+- ZIP verificado: SHA256 bate exatamente com o SHA256.txt do workflow; todas as entradas passaram teste de integridade; 514 entradas.
+- Gate RPT ainda pendente: **1360 PASS / 0 FAIL / 0 BLOCKED**.
+- Limitação operacional conhecida até decisão futura: arma-base sem magazine selecionado pode falhar de modo seguro e retornar ao Snapshot quando o engine introduz magazine automaticamente a partir dos containers. Essa recusa não é uma aplicação bem-sucedida.
