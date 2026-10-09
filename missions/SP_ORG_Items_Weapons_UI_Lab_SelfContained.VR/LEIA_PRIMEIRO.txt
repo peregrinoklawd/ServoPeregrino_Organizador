@@ -1,14 +1,14 @@
-SP_ORG — WEAPONS 0.7-E E1 R3 — DIAGNÓSTICO DE COMPATIBILIDADE
+SP_ORG — WEAPONS 0.7-E E1 R3 R1 — DIAGNÓSTICO DE COMPATIBILIDADE
 CANDIDATA MISSION-FIRST — TESTES NO ARMA PENDENTES
 
-1. Extraia SP_ORG_Weapons_0_7_E_Equipment_Capture_E1_R3.VR em missions do Arma 3.
+1. Extraia SP_ORG_Weapons_0_7_E_Equipment_Capture_E1_R3_R1.VR em missions do Arma 3.
 2. Não carregue PBO SP_ORG. A missão contém Nexus, UICommon, Items e Weapons.
-3. Execute SP_ORG LAB - TESTAR WEAPONS 0.7-E R3 com a interface Weapons FECHADA.
+3. Execute SP_ORG LAB - TESTAR WEAPONS 0.7-E R3 R1 com a interface Weapons FECHADA.
    Aguarde o resumo [AUTO_TEST_SUMMARY] mode=MISSION_FIRST_0_7_E_R3.
    Meta: 1420 PASS, 0 FAIL, 0 BLOCKED (D2 1360 + E1/R2/R3 60).
 4. Após o AUTO TEST, equipe a MCC_RD704_AFG e o MCC_Handbrake_BLK no ACE Arsenal;
    feche o ACE Arsenal completamente.
-5. Execute SP_ORG LAB - DIAGNOSTICAR COMPATIBILIDADE (ação do scroll).
+5. OBRIGATÓRIO para investigar o bipé: execute SP_ORG LAB - DIAGNOSTICAR COMPATIBILIDADE (ação do scroll).
    O RPT exibirá:
    [COMPAT_AUDIT_CONTEXT] estado físico/rascunho/cache do Catálogo;
    [COMPAT_AUDIT_LISTS] quantidades vanilla/CBA/BIS e diferenças;
@@ -28,6 +28,10 @@ CANDIDATA MISSION-FIRST — TESTES NO ARMA PENDENTES
     ainda não foi unificada; o diagnóstico deve justificar a decisão seguinte.
 
 IMPORTANTE:
+- A R3 original terminou 1419/1420 com FAIL em sourceSlot de kit capturado;
+  esta R3 R1 corrige a ordem do carregamento de targetSlot do draft.
+- Sem logs COMPAT_AUDIT_ITEM/COMPAT_AUDIT_ISOLATED não poderemos concluir se
+  o MCC_Handbrake_BLK funciona no motor/CBA, nem autorizar sua montagem.
 - CI estático aprovado NÃO equivale a teste real.
 - Nenhuma whitelist de mods foi incluída nesta entrega.
 - O botão CAPTURAR pode continuar avisando CAPTURA PARCIAL até resolvermos
