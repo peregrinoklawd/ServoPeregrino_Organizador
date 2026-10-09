@@ -75,6 +75,7 @@ switch (_eventName) do {
      _state set ["previousKitIdBeforeNew",""];
      _state set ["pendingNewKit",false];
      _state set ["pendingNewName",""];
+     _state set ["pendingCapturedDraft",createHashMap];
      _state set ["selectedKitIsNew",false];
      _state set ["lastFocus","KITS"];
      // Accessory catalog depends on selected weapon compatibility. Keep the category,
@@ -778,16 +779,38 @@ switch (_eventName) do {
  case "DRAFT_CLEAR": {
   _refresh=false;
   private _kitId=_state getOrDefault ["selectedKitId",""];
-  if (_kitId isEqualTo "") then {
-   ["O novo rascunho ainda não possui arma-base para LIMPAR.","INFO",true] call ServoPeregrino_Organizador_Weapons_fnc_pushUIFeedback;
+  if (_kitId isEqualTo "" && {_state getOrDefault ["pendingNewKit",false]} && {count (_state getOrDefault ["pendingCapturedDraft",createHashMap])>0}) then {
+   private _old=_state get "pendingCapturedDraft";
+   private _updated=[_old] call ServoPeregrino_Organizador_Weapons_fnc_deepCopy;
+   private _recipe=[_updated get "recipe"] call ServoPeregrino_Organizador_Weapons_fnc_deepCopy;
+   private _cfg=[_recipe get "configuration"] call ServoPeregrino_Organizador_Weapons_fnc_deepCopy;
+   {_cfg set [_x,""]} forEach ["optic","muzzle","pointer","bipod"];
+   _recipe set ["configuration",_cfg];
+   _recipe set ["magazineClass",""];
+   private _valid=[_recipe] call ServoPeregrino_Organizador_Weapons_fnc_validateWeaponRecipeSemantic;
+   if (_valid getOrDefault ["success",false]) then {
+    _updated set ["recipe",_recipe];
+    _updated set ["revision",(_old getOrDefault ["revision",0])+1];
+    _updated set ["updatedAtTick",diag_tickTime];
+    _state set ["pendingCapturedDraft",_updated];
+    missionNamespace setVariable [SP_ORG_WEAPONS_UI_STATE,_state];
+    ["Acessórios e carregador removidos do rascunho NOVO; nada foi salvo.","INFO",true] call ServoPeregrino_Organizador_Weapons_fnc_pushUIFeedback;
+    _focusedRefresh="DRAFT";
+   } else {
+    [_valid getOrDefault ["message","Não foi possível limpar o rascunho."],"ERROR",true] call ServoPeregrino_Organizador_Weapons_fnc_pushUIFeedback;
+   };
   } else {
-   private _clearR=[_kitId] call ServoPeregrino_Organizador_Weapons_fnc_clearWeaponKitDraft;
+   if (_kitId isEqualTo "") then {
+    ["O novo rascunho ainda não possui arma-base para LIMPAR.","INFO",true] call ServoPeregrino_Organizador_Weapons_fnc_pushUIFeedback;
+   } else {
+    private _clearR=[_kitId] call ServoPeregrino_Organizador_Weapons_fnc_clearWeaponKitDraft;
    if (_clearR getOrDefault ["success",false]) then {
     ["Rascunho limpo: arma-base preservada; acessórios e carregador removidos. Use SALVAR para persistir.","INFO",true] call ServoPeregrino_Organizador_Weapons_fnc_pushUIFeedback;
    } else {
     [format ["Não foi possível limpar: %1",_clearR getOrDefault ["code","ERRO"]],"ERROR",true] call ServoPeregrino_Organizador_Weapons_fnc_pushUIFeedback;
    };
    _focusedRefresh="DRAFT";
+   };
   };
  };
 
