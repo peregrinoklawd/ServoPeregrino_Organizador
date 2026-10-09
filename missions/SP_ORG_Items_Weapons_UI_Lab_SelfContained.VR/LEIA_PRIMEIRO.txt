@@ -1,27 +1,37 @@
-SP_ORG — WEAPONS 0.7-E E1 R2 — CANDIDATA MISSION-FIRST / RUNTIME PENDING
+SP_ORG — WEAPONS 0.7-E E1 R3 — DIAGNÓSTICO DE COMPATIBILIDADE
+CANDIDATA MISSION-FIRST — TESTES NO ARMA PENDENTES
 
-1. Extraia SP_ORG_Weapons_0_7_E_Equipment_Capture_E1_R2.VR na pasta de missões do Arma 3.
-2. Não carregue PBOs SP_ORG; Nexus, UICommon, Items e Weapons já estão incorporados à missão.
-3. Abra em VR. Mantenha a interface Weapons FECHADA durante todo o AUTO TEST.
-4. Execute somente SP_ORG LAB - TESTAR WEAPONS 0.7-E R2 e aguarde o resumo final.
-5. Meta cumulativa: 1408 PASS / 0 FAIL / 0 BLOCKED (D2=1360; novos E=48 (E1 + E1 R2)).
-6. ABRIR WEAPONS -> escolha um kit SALVO; em P4, selecione PRINC./PORTE/SEC. ocupado;
-   clique CAPTURAR ARMA EQUIPADA: P2 deve exibir arma/acessórios/magazine capturados
-   sem alterar o kit salvo ou equipamento físico; SALVAR permanece opcional.
-7. Clique NOVO em MEUS KITS; no P4, selecione uma arma física e clique CAPTURAR.
-   P2 mostra um NOVO rascunho capturado, que NÃO aparece salvo no repositório ainda.
-   Edite um acessório e pressione SALVAR para criar o kit session-local pela primeira vez.
-8. Com acessórios de mods incompatíveis (ex.: MCC_RD704_AFG / rhsusf_acc_grip2), CAPTURAR deve copiar a arma, informar exatamente o que não foi copiado e manter a Recipe válida. Depois, repita NOVO -> CAPTURAR -> DESCARTAR.
-9. P4 sem arma: CAPTURAR deve ficar desabilitado. Não salvar munição restante na Recipe.
-10. Faça também um smoke do EQUIPAR RASCUNHO e EQUIPAMENTO → do D2; o legado deve permanecer funcional.
-11. Envie RPT completo, com [AUTO_TEST_SUMMARY] mode=MISSION_FIRST_0_7_E_R2,
-    além das observações manuais. CI GREEN não equivale a homologação real.
+1. Extraia SP_ORG_Weapons_0_7_E_Equipment_Capture_E1_R3.VR em missions do Arma 3.
+2. Não carregue PBO SP_ORG. A missão contém Nexus, UICommon, Items e Weapons.
+3. Execute SP_ORG LAB - TESTAR WEAPONS 0.7-E R3 com a interface Weapons FECHADA.
+   Aguarde o resumo [AUTO_TEST_SUMMARY] mode=MISSION_FIRST_0_7_E_R3.
+   Meta: 1420 PASS, 0 FAIL, 0 BLOCKED (D2 1360 + E1/R2/R3 60).
+4. Após o AUTO TEST, equipe a MCC_RD704_AFG e o MCC_Handbrake_BLK no ACE Arsenal;
+   feche o ACE Arsenal completamente.
+5. Execute SP_ORG LAB - DIAGNOSTICAR COMPATIBILIDADE (ação do scroll).
+   O RPT exibirá:
+   [COMPAT_AUDIT_CONTEXT] estado físico/rascunho/cache do Catálogo;
+   [COMPAT_AUDIT_LISTS] quantidades vanilla/CBA/BIS e diferenças;
+   [COMPAT_AUDIT_ITEM] MCC_Handbrake_BLK / rhsusf_acc_grip2 / MSS_EI_Revoloution;
+   [COMPAT_AUDIT_ISOLATED] teste SOMENTE em soldado temporário;
+   [COMPAT_AUDIT_SUMMARY] confirmação de limpeza da unidade isolada.
+   A operação NÃO altera arma, munição ou kit do jogador.
+6. Abra Weapons; capture a arma equipada para um kit salvo:
+   ARMAS DO KIT deve mostrar a arma capturada;
+   CATÁLOGO deve recomputar opções para essa arma (sem cache antigo).
+   Acessórios não suportados pelos validadores ainda aparecem como CAPTURA PARCIAL.
+7. Clique NOVO e CAPTURAR ARMA EQUIPADA novamente:
+   o CATÁLOGO deve exibir acessórios ligados ao novo rascunho ANTES de SALVAR.
+8. Use busca e filtros BIPÉ/EMPUNHADURA e anote se as peças esperadas surgem.
+9. Não tente forçar a equipagem física de uma Recipe considerada incompatível.
+10. Envie RPT COMPLETO e suas observações manuais. Compatibilidade ACE/Arma
+    ainda não foi unificada; o diagnóstico deve justificar a decisão seguinte.
 
-12. O aviso CAPTURA PARCIAL inclui campo/classe exatos não copiados (não silencioso).
-13. A R2 não modifica arma equipada, status de munição nem validadores globais.
-14. Se o botão ainda falhar, o RPT agora mostrará nested diagnostics/weaponClass e motivo detalhado.
-
-Versão visual: 0.6-F R6; aplicação física local: 0.7-D2 R1.
-Captura P4 -> P2: 0.7-E E1.
-UNDO_DEFERRED / MP_DEFERRED_0_8 / PBO_PENDING.
-Baseline homologada anterior intacta: baseline/weapons-0.7-d2-r1-homologated.
+IMPORTANTE:
+- CI estático aprovado NÃO equivale a teste real.
+- Nenhuma whitelist de mods foi incluída nesta entrega.
+- O botão CAPTURAR pode continuar avisando CAPTURA PARCIAL até resolvermos
+  a diferença entre a compatibilidade da engine e ACE Arsenal.
+- O motor de aplicação D2, pós-validação/rollback, Item e UICommon estão congelados.
+- MP/JIP/PBO/Undo permanecem fora da entrega.
+- Baseline estável: baseline/weapons-0.7-d2-r1-homologated.
