@@ -11,6 +11,57 @@ if (_className isEqualTo "" || {_kind isEqualTo ""}) exitWith {
  [false,"WEAPONS_UI_CATALOG_SELECTION_REQUIRED","Selecione uma arma ou acessório no Catálogo de Armas."] call ServoPeregrino_Organizador_Nexus_fnc_createResult
 };
 
+// When a physical capture has staged a truly unsaved NEW kit, author this
+// transient Recipe directly; the session repository must stay untouched.
+if (_kitId isEqualTo "" && {_pending} && {count (_state getOrDefault ["pendingCapturedDraft",createHashMap])>0}) exitWith {
+ private _current=_state get "pendingCapturedDraft";
+ if (_kind isEqualTo "WEAPON") exitWith {
+  private _entryR=[_className,false] call ServoPeregrino_Organizador_Weapons_fnc_getWeaponCatalogEntry;
+  if !(_entryR getOrDefault ["success",false]) exitWith {_entryR};
+  private _entry=(_entryR get "data") get "entry";
+  private _slot=toUpperANSI (_entry getOrDefault ["category",""]);
+  if !(_slot in ["PRIMARY","HANDGUN","SECONDARY"]) exitWith {
+   [false,"WEAPONS_UI_DRAFT_WEAPON_TYPE_UNSUPPORTED","Esta arma não é suportada nos kits de Weapons."] call ServoPeregrino_Organizador_Nexus_fnc_createResult
+  };
+  private _cfgR=[_entry getOrDefault ["weaponClass",_className]] call ServoPeregrino_Organizador_Weapons_fnc_createWeaponConfiguration;
+  if !(_cfgR getOrDefault ["success",false]) exitWith {_cfgR};
+  private _recipeR=[(_cfgR get "data") get "configuration",""] call ServoPeregrino_Organizador_Weapons_fnc_createWeaponRecipe;
+  if !(_recipeR getOrDefault ["success",false]) exitWith {_recipeR};
+  private _updated=[_current] call ServoPeregrino_Organizador_Weapons_fnc_deepCopy;
+  _updated set ["recipe",(_recipeR get "data") get "recipe"];
+  _updated set ["targetSlot",_slot];
+  _updated set ["dirty",true];
+  _updated set ["revision",(_current getOrDefault ["revision",0])+1];
+  _updated set ["updatedAtTick",diag_tickTime];
+  _state set ["pendingCapturedDraft",_updated];
+  _state set ["selectedKitDraftDirty",true];
+  missionNamespace setVariable [SP_ORG_WEAPONS_UI_STATE,_state];
+  [true,"WEAPONS_UI_PENDING_CAPTURE_WEAPON_UPDATED","Arma-base trocada no rascunho ainda não salvo.",createHashMapFromArray [
+   ["kind",_kind],["className",_className],["sourceResult",createHashMapFromArray [["changed",true]]],
+   ["loadoutMutation",false],["savedKitMutation",false]
+  ]] call ServoPeregrino_Organizador_Nexus_fnc_createResult
+ };
+ private _field=switch _kind do {
+  case "OPTIC": {"optic"};
+  case "POINTER": {"pointer"};
+  case "MUZZLE": {"muzzle"};
+  case "BIPOD": {"bipod"};
+  case "GRIP": {"bipod"};
+  case "MAGAZINE": {"magazineClass"};
+  default {""};
+ };
+ if (_field isEqualTo "") exitWith {
+  [false,"WEAPONS_UI_CATALOG_KIND_UNSUPPORTED","Esta categoria não pode ser enviada ao rascunho."] call ServoPeregrino_Organizador_Nexus_fnc_createResult
+ };
+ private _changeR=[_field,_className] call ServoPeregrino_Organizador_Weapons_fnc_setPendingCapturedDraftSelection;
+ if !(_changeR getOrDefault ["success",false]) exitWith {_changeR};
+ [true,"WEAPONS_UI_PENDING_CAPTURE_CATALOG_UPDATED","Seleção adicionada ao rascunho capturado, ainda sem salvar.",createHashMapFromArray [
+  ["kind",_kind],["className",_className],
+  ["sourceResult",createHashMapFromArray [["changed",true]]],
+  ["loadoutMutation",false],["savedKitMutation",false]
+ ]] call ServoPeregrino_Organizador_Nexus_fnc_createResult
+};
+
 // A weapon may always be sent to ARMAS DO KIT. If no kit exists/was selected,
  // create a new session-local kit automatically and mark it NOVO.
 if (_kitId isEqualTo "") exitWith {
