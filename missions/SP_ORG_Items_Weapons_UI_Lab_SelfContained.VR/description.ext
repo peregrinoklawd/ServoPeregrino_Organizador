@@ -1,7 +1,7 @@
 author = "Claudio Malta Telhada";
-onLoadName = "SP_ORG UI Lab - Weapons 0.7-E R2";
-onLoadMission = "Weapons 0.7-E R2: captura de arma modded com exclusões explícitas de peças incompatíveis; D2 preservada.";
-overviewText = "Weapons 0.7-E E1 R2 candidata mission-first; captura com compatibilidade e alertas, sem salvar automaticamente. D2 estável; Undo e MP adiados.";
+onLoadName = "SP_ORG UI Lab - Weapons 0.7-E R3";
+onLoadMission = "Weapons 0.7-E R3: diagnostica compatibilidade Arma/CBA/BIS, corrige projecao do catalogo apos captura; D2 preservada.";
+overviewText = "Weapons 0.7-E E1 R3 candidata mission-first; catalogo atualizado para rascunho e diagnostico isolado. D2 estável; Undo e MP adiados.";
 enableDebugConsole = 1;
 disabledAI = 1;
 respawn = 3;
