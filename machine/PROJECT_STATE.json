@@ -22,8 +22,8 @@
     "hub_rule": "Hub is an optional player-facing integration/orchestration layer. No domain module may require Hub in order to function.",
     "independent_core_development": true
   },
-  "global_next_gate": "Weapons 0.7-E E1 R4: runtime 1430/1430, no FAIL/BLOCKED, COMPAT_AUDIT verifies CBA-only MCC_Handbrake_BLK and isolated dummy cleanup; manual existing & pending capture, Catalog and apply.",
-  "global_after_gate": "If R4 passes in Arma, review/approve candidate E1 before freezing. Preserve D2 R1 baseline and MP/Undo deferrals.",
+  "global_next_gate": "Weapons 0.7-E E1 R5: run real-Arma cumulative AUTO 1446 PASS 0 FAIL 0 BLOCKED; manual NOVO -> EQUIPMENT_CAPTURE -> SAVE_AS_NEW plus SAVE and existing-copy paths; get full RPT.",
+  "global_after_gate": "UC-001 required full Arma+CBA+ACE compatibility for all attachment slots, magazines and weapon variants, in dedicated controlled deliveries after R5 is approved. Do not merge main or unfreeze stable D2.",
   "modules": [
     {
       "id": "Nexus",
@@ -215,9 +215,9 @@
         "build": "0.7.3.2-consolidated-runtime-hardening-d2-r1-mission-first"
       },
       "development_version": {
-        "display": "0.7-E E1 R4 mission-first",
-        "semantic": "0.7.4.4 mission-first",
-        "build": "0.7.4.4-equipment-cba-underbarrel-e1-r4-mission-first"
+        "display": "0.7-E E1 R5 mission-first",
+        "semantic": "0.7.4.5 mission-first",
+        "build": "0.7.4.5-pending-save-as-new-e1-r5-mission-first"
       },
       "dependencies": [
         "Nexus",
@@ -255,10 +255,10 @@
           "persistence.provider.v1"
         ]
       },
-      "status": "MISSION_FIRST_0_7_E_E1_R4_STATIC_READY_RUNTIME_PENDING",
-      "next_gate": "1430/1430 and manual CBA underbarrel gate; do not claim homologation before RPT.",
+      "status": "MISSION_FIRST_0_7_E_E1_R5_STATIC_READY_RUNTIME_PENDING",
+      "next_gate": "1446 cumulative tests 0 FAIL/BLOCKED; manual captured NOVO SAVE_AS_NEW, name, kit list and no autosave. Then UC-001 full compatibility.",
       "homologated_artifact": "Weapons 0.7-D2 R1 mission-first operator approved: reported zero FAIL in latest auto run (clean RPT not independently audited), manual checks approved. Baseline branch baseline/weapons-0.7-d2-r1-homologated; code 0d36ce24b04dc11399ff58142a1179f0082a341b; mission SP_ORG_Weapons_0_7_D2_NoMag_Contract_Review_R1.VR; ZIP SHA256 81cabddb9a4fd97e7a23e57c52d3f4fe21bb05380f2943516f78f7204fe592ec.",
-      "current_candidate_artifact": "SP_ORG_Weapons_0_7_E_CBA_Underbarrel_E1_R4.VR",
+      "current_candidate_artifact": "SP_ORG_Weapons_0_7_E_Save_As_New_E1_R5.VR",
       "mission_first_validation": {
         "0.1-B": {
           "status": "APPROVED_SP",
@@ -330,7 +330,7 @@
           "modded_provenance": true,
           "session_cache": true
         },
-        "next": "R3 R1 real 1420/1420, CBA audit confirms MCC_Handbrake_BLK compatible/retained; R4 resolver static ready, runtime/manual pending.",
+        "next": "R4 1430/1430 auto and full physical capture/apply proven, but pending SAVE_AS_NEW disabled. R5 fixes, runtime/manual pending. UC-001 required next.",
         "0.4": {
           "status": "APPROVED_SP_FROZEN",
           "final_candidate": "R5",
@@ -938,16 +938,60 @@
             "UICOMMON_0_2",
             "ITEMS"
           ],
-          "runtime": "PENDING",
-          "manual_approval": "PENDING",
+          "runtime": "1430_PASS_0_FAIL_0_BLOCKED",
+          "manual_approval": "CAPTURE_CBA_UNDERBARREL_AND_PHYSICAL_APPLY_SUCCESS_BUT_SAVE_AS_NEW_BROKEN",
           "homologated": false,
           "deferred": [
             "PBO",
             "MP_0_8",
             "JIP",
             "UNDO"
+          ],
+          "evidence": "2026-10-09 user RPT after 19:36:13, 19:37:46/52 and 19:38:53"
+        },
+        "0.7-E E1 R5": {
+          "status": "STATIC_READY_RUNTIME_PENDING",
+          "source_baseline": "baseline/weapons-0.7-d2-r1-homologated",
+          "branch": "feature/weapons-0.7-e-equipment-capture",
+          "mission": "SP_ORG_Weapons_0_7_E_Save_As_New_E1_R5.VR",
+          "build": "0.7.4.5-pending-save-as-new-e1-r5-mission-first",
+          "expected_checks": 1446,
+          "legacy_D2": 1360,
+          "R4_total": 1430,
+          "R5_new_checks": 16,
+          "static_checks": "220/220",
+          "workflow_run": 38001126521,
+          "artifact_id": 11648858056,
+          "packaged_sha": "aafbe25bc0f1921d761cfbdb97f12f36b4497bb1",
+          "zip_sha256": "deac8ca5a8596c86e6ca60ec01afc9670e85fcd2363236f6d57b14ab1a65bfda",
+          "fix": "ENABLE_SAVE_AS_NEW_ON_CAPTURED_PENDING_AND_ROUTE_TO_EXPLICIT_VALIDATED_SAVE",
+          "tests": "CLICK_WITH_NO_KIT_ID;SINGLE_CREATION;NAME;RECIPE;PENDING_CLEAR;NO_PHYSICAL_MUTATION",
+          "real_rpt": "PENDING",
+          "manual": "PENDING",
+          "homologated": false,
+          "protected": [
+            "STABLE_D2_R1",
+            "APPLICATION_CORE_B_C_D2",
+            "UICOMMON_0_2",
+            "ITEMS"
+          ],
+          "next_required": "UC-001 full compatibility Arma/CBA/ACE all accessories, magazines, weapon families",
+          "deferred": [
+            "MP_0_8",
+            "PBO",
+            "JIP",
+            "UNDO"
           ]
         }
+      },
+      "full_compatibility_requirement": {
+        "requirement_id": "UC-001",
+        "status": "REQUIRED_NOT_IMPLEMENTED_FULLY",
+        "priority": "NEXT_AFTER_R5_RUNTIME_APPROVAL",
+        "canonical_document": "docs/74_WEAPONS_UNIFIED_COMPATIBILITY_ARCHITECTURE.md",
+        "scope": "all weapons, presets/variants, attachment slots, magazines, config/mod provenance, fail-closed postvalidation",
+        "current_partial_support": "only UnderBarrelSlot engine+CBA in R4/R5",
+        "must_not_claim_complete_until_end_to_end": true
       }
     },
     {
