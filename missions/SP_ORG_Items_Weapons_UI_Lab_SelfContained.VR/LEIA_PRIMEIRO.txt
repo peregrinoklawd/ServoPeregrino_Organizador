@@ -30,6 +30,9 @@ CANDIDATA MISSION-FIRST — TESTES NO ARMA PENDENTES
 IMPORTANTE:
 - A R3 original terminou 1419/1420 com FAIL em sourceSlot de kit capturado;
   esta R3 R1 corrige a ordem do carregamento de targetSlot do draft.
+- Se ainda encontrar o bipé fisicamente equipado mas não disponível no rascunho,
+  NÃO trate a ausência como falha do clique: execute primeiro o LAB de
+  compatibilidade e envie as linhas COMPAT_AUDIT_ITEM/COMPAT_AUDIT_ISOLATED.
 - Sem logs COMPAT_AUDIT_ITEM/COMPAT_AUDIT_ISOLATED não poderemos concluir se
   o MCC_Handbrake_BLK funciona no motor/CBA, nem autorizar sua montagem.
 - CI estático aprovado NÃO equivale a teste real.
