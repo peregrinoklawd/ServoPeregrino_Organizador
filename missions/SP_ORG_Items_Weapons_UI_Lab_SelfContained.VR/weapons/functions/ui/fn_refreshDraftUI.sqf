@@ -11,7 +11,9 @@ missionNamespace setVariable [SP_ORG_WEAPONS_UI_STATE,_state];
 private _startedAt = diag_tickTime;
 private _selectedKitId = _state getOrDefault ["selectedKitId",""];
 private _pendingNew = _state getOrDefault ["pendingNewKit",false];
-private _isNew = _state getOrDefault ["selectedKitIsNew",false];
+private _pendingCapture = _state getOrDefault ["pendingCapturedDraft",createHashMap];
+private _capturedNew = (_state getOrDefault ["pendingNewKit",false]) && {_selectedKitId isEqualTo ""} && {(count _pendingCapture)>0};
+private _isNew = (_state getOrDefault ["selectedKitIsNew",false]) || {_capturedNew};
 private _query = _state getOrDefault ["draftQuery",""];
 private _slotLabel = {params ["_slot"];[_slot] call ServoPeregrino_Organizador_Weapons_fnc_getUISlotLabel};
 (_display displayCtrl 2003) ctrlSetText ""; (_display displayCtrl 2003) ctrlShow false;
@@ -36,8 +38,20 @@ if (_selectedKitId isNotEqualTo "") then {
  private _kitR=[_selectedKitId] call ServoPeregrino_Organizador_Weapons_fnc_getWeaponKit;
  if (_kitR get "success") then {_kit=(_kitR get "data") get "kit"};
 };
+if (_capturedNew) then {
+ _draft=[_pendingCapture] call ServoPeregrino_Organizador_Weapons_fnc_deepCopy;
+ _kit=createHashMapFromArray [
+  ["name",_state getOrDefault ["pendingNewName","Arma equipada"]],
+  ["targetSlot",_draft getOrDefault ["targetSlot",""]],
+  ["recipe",_draft getOrDefault ["recipe",createHashMap]]
+ ];
+};
 if ((count _kit)>0) then {
- private _draftR=[_selectedKitId] call ServoPeregrino_Organizador_Weapons_fnc_getOrCreateWeaponKitDraft;
+ private _draftR=if (_capturedNew) then {
+  [true,"WEAPONS_UI_PENDING_CAPTURE_DRAFT","Captured draft in session.",createHashMapFromArray [["draft",_draft]]] call ServoPeregrino_Organizador_Nexus_fnc_createResult
+ } else {
+  [_selectedKitId] call ServoPeregrino_Organizador_Weapons_fnc_getOrCreateWeaponKitDraft
+ }; call ServoPeregrino_Organizador_Weapons_fnc_getOrCreateWeaponKitDraft;
  if (_draftR get "success") then {_draft=(_draftR get "data") get "draft"};
  private _recipe=if ((count _draft)>0) then {_draft getOrDefault ["recipe",createHashMap]} else {_kit getOrDefault ["recipe",createHashMap]};
  private _cfg=_recipe getOrDefault ["configuration",createHashMap]; private _weaponClass=_cfg getOrDefault ["weaponClass",""];
@@ -117,7 +131,7 @@ if ((count _kit) isEqualTo 0) then {
  private _status=if (_isNew) then {"NOVO"} else {if (_effectiveDirty) then {"ALTERADO"} else {"SALVO"}};
  private _statusColor=if (_isNew) then {[0.35,0.78,1.0,1]} else {if (_effectiveDirty) then {[1.0,0.76,0.28,1]} else {[0.45,0.88,0.69,1]}};
  (_display displayCtrl 2002) ctrlSetText _status; (_display displayCtrl 2002) ctrlSetTextColor _statusColor;
- (_display displayCtrl 2002) ctrlSetTooltip (if (_isNew) then {"WeaponKit criado a partir do Catálogo; use SALVAR para confirmar nome/Recipe."} else {if (_dirty) then {"Rascunho diferente do WeaponKit salvo."} else {"Rascunho igual ao WeaponKit salvo."}});
+ (_display displayCtrl 2002) ctrlSetTooltip (if (_isNew) then {if (_capturedNew) then {"Arma capturada em rascunho NOVO. Ainda não existe WeaponKit salvo: use SALVAR para criar um."} else {"WeaponKit criado a partir do Catálogo; use SALVAR para confirmar nome/Recipe."}} else {if (_dirty) then {"Rascunho diferente do WeaponKit salvo."} else {"Rascunho igual ao WeaponKit salvo."}});
  (_display displayCtrl 2003) ctrlSetText ""; (_display displayCtrl 2003) ctrlShow false; (_display displayCtrl 2010) ctrlSetText _picture; (_display displayCtrl 2021) ctrlSetText _weaponName; (_display displayCtrl 2032) ctrlSetText _weaponClass; (_display displayCtrl 2021) ctrlEnable true;
  [2060,2021,"weaponClass",_normalButtonBg] call _paintChangedRow;
  [2061,2023,"optic",_normalComboBg] call _paintChangedRow;
@@ -125,14 +139,14 @@ if ((count _kit) isEqualTo 0) then {
  [2063,2027,"pointer",_normalComboBg] call _paintChangedRow;
  [2064,2029,"bipod",_normalComboBg] call _paintChangedRow;
  [2065,2031,"magazineClass",_normalComboBg] call _paintChangedRow;
- (_display displayCtrl 2140) ctrlEnable (_effectiveDirty || {_isNew}); (_display displayCtrl 2141) ctrlEnable (_effectiveDirty || {_isNew}); (_display displayCtrl 2142) ctrlEnable true; (_display displayCtrl 2143) ctrlEnable true;
+ (_display displayCtrl 2140) ctrlEnable (_effectiveDirty || {_isNew}); (_display displayCtrl 2141) ctrlEnable (!_capturedNew && {(_effectiveDirty || {_isNew})}); (_display displayCtrl 2142) ctrlEnable true; (_display displayCtrl 2143) ctrlEnable true;
  {(_display displayCtrl _x) ctrlEnable true} forEach [1122,1123,1124];
  (_display displayCtrl 2021) ctrlSetTooltip format ["%1 | Classe: %2 | Origem: %3",_weaponName,_weaponClass,_weaponInfo getOrDefault ["originLabel","Origem não informada"]];
  if ((count _compat)>0) then {private _selectors=_compat getOrDefault ["selectors",createHashMap]; [2023,_selectors getOrDefault ["optic",createHashMap],"Miras compatíveis; altera apenas o rascunho local."] call _populateCompatibilityCombo; [2025,_selectors getOrDefault ["muzzle",createHashMap],"Acessórios de boca compatíveis; altera apenas o rascunho local."] call _populateCompatibilityCombo; [2027,_selectors getOrDefault ["pointer",createHashMap],"Apontadores compatíveis; altera apenas o rascunho local."] call _populateCompatibilityCombo; [2029,_selectors getOrDefault ["bipod",createHashMap],"Bipés/empunhaduras compatíveis; altera apenas o rascunho local."] call _populateCompatibilityCombo; [2031,_selectors getOrDefault ["magazineClass",createHashMap],"Carregadores compatíveis; altera apenas o rascunho local."] call _populateCompatibilityCombo;} else {private _tip=format ["Compatibilidade indisponível: %1",_compatCode]; {[_x,"Indisponível",_tip] call _setComboPlaceholder} forEach [2023,2025,2027,2029,2031];};
  private _fieldLabels = createHashMapFromArray [["weaponClass","Arma"],["optic","Mira"],["muzzle","Boca"],["pointer","Apontador"],["bipod","Bipé/Emp."],["magazineClass","Carregador"]];
  private _changedLabels = _changedFields apply {_fieldLabels getOrDefault [_x,_x]};
  private _changedText = if ((count _changedLabels)>0) then {format ["<t color='#FFC247'>ALTERAÇÕES: %1</t><br/><br/>",_changedLabels joinString ", "]} else {"<t color='#73D6A4'>SEM ALTERAÇÕES DE EQUIPAMENTO</t><br/><br/>"};
- private _hint=format ["%1%2",_changedText,if (_isNew) then {"WeaponKit NOVO. O preview acima usa a mesma composição vertical do equipamento e está preparado para futura evolução 3D. Use SALVAR para confirmar."} else {if (_effectiveDirty) then {"Rascunho ALTERADO. Linhas âmbar indicam diferenças reais de equipamento; mudanças de nome também mantêm o estado ALTERADO até SALVAR."} else {"WeaponKit SALVO. Preview, identificação e componentes seguem a mesma hierarquia visual do CONTEÚDO DO EQUIPAMENTO."}}];
+ private _hint=format ["%1%2",_changedText,if (_isNew) then {if (_capturedNew) then {"ARMA CAPTURADA — RASCUNHO NOVO, ainda sem WeaponKit salvo. Edite os acessórios ou pressione SALVAR para criar o kit. Munição restante não é salva."} else {"WeaponKit NOVO. O preview acima usa a mesma composição vertical do equipamento e está preparado para futura evolução 3D. Use SALVAR para confirmar."}} else {if (_effectiveDirty) then {"Rascunho ALTERADO. Linhas âmbar indicam diferenças reais de equipamento; mudanças de nome também mantêm o estado ALTERADO até SALVAR."} else {"WeaponKit SALVO. Preview, identificação e componentes seguem a mesma hierarquia visual do CONTEÚDO DO EQUIPAMENTO."}}];
  (_display displayCtrl 2040) ctrlSetStructuredText parseText _hint;
 };
 
