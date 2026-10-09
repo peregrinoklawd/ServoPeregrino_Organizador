@@ -18,6 +18,8 @@ if ((ctrlText _equipmentSearchCtrl) isNotEqualTo _query) then {_equipmentSearchC
 
 private _snapshotResult = [player,_slot] call ServoPeregrino_Organizador_Weapons_fnc_getEquipmentSlotSnapshot;
 private _eq = if (_snapshotResult get "success") then {(_snapshotResult get "data") get "snapshot"} else {createHashMap};
+(_display displayCtrl 4123) ctrlEnable (_eq getOrDefault ["equipped",false]);
+(_display displayCtrl 4123) ctrlSetTooltip (if (_eq getOrDefault ["equipped",false]) then {"Capturar esta arma e seus acessórios para o rascunho, sem salvar nem alterar equipamento físico."} else {"Este destino não possui arma para capturar."});
 {
  _x params ["_idc","_value"];
  (_display displayCtrl _idc) ctrlSetBackgroundColor (if (_value isEqualTo _slot) then {[0.08,0.38,0.30,0.76]} else {[0.08,0.11,0.12,0.58]});
