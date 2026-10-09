@@ -51,7 +51,7 @@ if ((count _kit)>0) then {
   [true,"WEAPONS_UI_PENDING_CAPTURE_DRAFT","Captured draft in session.",createHashMapFromArray [["draft",_draft]]] call ServoPeregrino_Organizador_Nexus_fnc_createResult
  } else {
   [_selectedKitId] call ServoPeregrino_Organizador_Weapons_fnc_getOrCreateWeaponKitDraft
- }; call ServoPeregrino_Organizador_Weapons_fnc_getOrCreateWeaponKitDraft;
+ };
  if (_draftR get "success") then {_draft=(_draftR get "data") get "draft"};
  private _recipe=if ((count _draft)>0) then {_draft getOrDefault ["recipe",createHashMap]} else {_kit getOrDefault ["recipe",createHashMap]};
  private _cfg=_recipe getOrDefault ["configuration",createHashMap]; private _weaponClass=_cfg getOrDefault ["weaponClass",""];
@@ -139,7 +139,13 @@ if ((count _kit) isEqualTo 0) then {
  [2063,2027,"pointer",_normalComboBg] call _paintChangedRow;
  [2064,2029,"bipod",_normalComboBg] call _paintChangedRow;
  [2065,2031,"magazineClass",_normalComboBg] call _paintChangedRow;
- (_display displayCtrl 2140) ctrlEnable (_effectiveDirty || {_isNew}); (_display displayCtrl 2141) ctrlEnable (!_capturedNew && {(_effectiveDirty || {_isNew})}); (_display displayCtrl 2142) ctrlEnable true; (_display displayCtrl 2143) ctrlEnable true;
+ (_display displayCtrl 2140) ctrlEnable (_effectiveDirty || {_isNew});
+  // A captured NOVO has a complete Recipe but no repository kitId.
+  // Both SALVAR and SALVAR COMO NOVO must create its first session-local kit.
+  (_display displayCtrl 2141) ctrlEnable (_effectiveDirty || {_isNew});
+  (_display displayCtrl 2141) ctrlSetTooltip (if (_capturedNew) then {"Criar um novo WeaponKit a partir da arma capturada. Equivale a SALVAR enquanto o rascunho ainda é NOVO."} else {"Salvar uma cópia independente do kit/rascunho atual."});
+  (_display displayCtrl 2142) ctrlEnable true;
+  (_display displayCtrl 2143) ctrlEnable true;
  {(_display displayCtrl _x) ctrlEnable true} forEach [1122,1123,1124];
  (_display displayCtrl 2021) ctrlSetTooltip format ["%1 | Classe: %2 | Origem: %3",_weaponName,_weaponClass,_weaponInfo getOrDefault ["originLabel","Origem não informada"]];
  if ((count _compat)>0) then {private _selectors=_compat getOrDefault ["selectors",createHashMap]; [2023,_selectors getOrDefault ["optic",createHashMap],"Miras compatíveis; altera apenas o rascunho local."] call _populateCompatibilityCombo; [2025,_selectors getOrDefault ["muzzle",createHashMap],"Acessórios de boca compatíveis; altera apenas o rascunho local."] call _populateCompatibilityCombo; [2027,_selectors getOrDefault ["pointer",createHashMap],"Apontadores compatíveis; altera apenas o rascunho local."] call _populateCompatibilityCombo; [2029,_selectors getOrDefault ["bipod",createHashMap],"Bipés/empunhaduras compatíveis; altera apenas o rascunho local."] call _populateCompatibilityCombo; [2031,_selectors getOrDefault ["magazineClass",createHashMap],"Carregadores compatíveis; altera apenas o rascunho local."] call _populateCompatibilityCombo;} else {private _tip=format ["Compatibilidade indisponível: %1",_compatCode]; {[_x,"Indisponível",_tip] call _setComboPlaceholder} forEach [2023,2025,2027,2029,2031];};
