@@ -1,6 +1,6 @@
 author = "Claudio Malta Telhada";
-onLoadName = "SP_ORG UI Lab - Weapons 0.7-E R4";
-onLoadMission = "Weapons 0.7-E R4: consulta engine e CBA no slot inferior, mantendo rollback D2.";
+onLoadName = "SP_ORG UI Lab - Weapons 0.7-E R5";
+onLoadMission = "Weapons 0.7-E R5: consulta engine e CBA no slot inferior, mantendo rollback D2.";
 overviewText = "Weapons 0.7-E E1 R3 R1 candidata mission-first; validacao semantica ampliada apenas para underbarrel quando CBA presente; D2 intacta. D2 estável.";
 enableDebugConsole = 1;
 disabledAI = 1;
