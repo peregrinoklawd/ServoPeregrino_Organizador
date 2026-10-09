@@ -34,7 +34,7 @@ private _draftCfg=(_draft getOrDefault ["recipe",createHashMap]) getOrDefault ["
 private _draftWeapon=_draftCfg getOrDefault ["weaponClass",""];
 private _projection=missionNamespace getVariable [SP_ORG_WEAPONS_UI_CATALOG_PROJECTION_VAR,createHashMap];
 private _projectedWeapon=_projection getOrDefault ["sourceWeaponClass",""];
-private _catalogStale = _draftWeapon isNotEqualTo "" && {toLowerANSI _draftWeapon isNotEqualTo toLowerANSI _projectedWeapon};
+private _catalogStale = (_draftWeapon isNotEqualTo "") && {(toLowerANSI _draftWeapon) isNotEqualTo (toLowerANSI _projectedWeapon)};
 diag_log format ["[SP_ORG] [WEAPONS] [COMPAT_AUDIT_CONTEXT] slot=%1 physicalWeapon=%2 baseWeapon=%3 draftWeapon=%4 catalogProjectedWeapon=%5 catalogStale=%6 selectedKitId=%7 pendingNew=%8",_slotU,_weapon,_baseClass,_draftWeapon,_projectedWeapon,_catalogStale,_kitId,_state getOrDefault ["pendingNewKit",false]];
 
 private _candidates=[];
