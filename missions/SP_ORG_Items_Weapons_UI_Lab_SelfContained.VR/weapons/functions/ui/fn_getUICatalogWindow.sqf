@@ -90,11 +90,13 @@ if (_canReuseProjectionSource) then {
   if (_kitResult get "success") then {_sourceKit = ((_kitResult get "data") get "kit")};
  };
  if ((count _sourceKit) > 0) then {
-  _selectedKitSlot = toUpperANSI (_sourceDraft getOrDefault ["targetSlot",_sourceKit getOrDefault ["targetSlot",""]]);
+  // R3 R1: fetch the current draft BEFORE reading its targetSlot.
+  // The saved kit may still be HANDGUN while a captured draft targets PRIMARY.
   if ((count _sourceDraft) isEqualTo 0) then {
    private _draftResult = [_sourceKitId] call ServoPeregrino_Organizador_Weapons_fnc_getOrCreateWeaponKitDraft;
    if (_draftResult get "success") then {_sourceDraft = ((_draftResult get "data") get "draft")};
   };
+  _selectedKitSlot = toUpperANSI (_sourceDraft getOrDefault ["targetSlot",_sourceKit getOrDefault ["targetSlot",""]]);
   private _recipe = if ((count _sourceDraft)>0) then {_sourceDraft getOrDefault ["recipe",createHashMap]} else {_sourceKit getOrDefault ["recipe",createHashMap]};
   private _cfg = _recipe getOrDefault ["configuration",createHashMap];
   _selectedWeaponClass = _cfg getOrDefault ["weaponClass",""];
