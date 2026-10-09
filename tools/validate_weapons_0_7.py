@@ -98,7 +98,10 @@ ui_body=d2.split('private _uiTests={',1)[1].split('private _start=count _checks;
 per_run=len(re.findall(r'call _assert;',run_body));per_ui=len(re.findall(r'call _assert;',ui_body))
 top=len(re.findall(r'call _assert;',d2))-per_run-per_ui
 expected=1109+scenarios*per_run+per_ui+top
-check('D2 deterministic 1348 checks from 18x12 + 12 UI + 11 top-level',scenarios==18 and per_run==12 and per_ui==12 and top==11 and expected==1348 and '["expected",1348]' in d2)
+check('D2 deterministic 1360 checks from 19x12 + 12 UI + 11 top-level',scenarios==19 and per_run==12 and per_ui==12 and top==11 and expected==1360 and '["expected",1360]' in d2)
+check('D2 no-recipe ammo-rich fixture expects strict rollback','"WEAPON_PRIMARY","arifle_MX_F","WEAPON","HANDGUN",_p07,"PRIMARY","WEAPONS_APPLICATION_APPLY_VERIFY_FAILED"' in d2)
+check('D2 no-recipe ammo-free fixture independently proves physical apply','"WEAPON_PRIMARY_NO_CARGO_AMMO"' in d2 and 'removeAllItemsWithMagazines _unit' in d2)
+check('D2 no-recipe diagnostics expose rollback and engine rows','[NO_MAG_D2_DIAGNOSTIC]' in d2 and 'rollbackRestoredExactly' in d2)
 for name in ['fn_rollbackApplicationSnapshot.sqf','fn_validateApplicationRollback.sqf','fn_validateAppliedApplicationState.sqf']:
  rel=str((W/'functions/application'/name).relative_to(R))
  original=subprocess.check_output(['git','show','8c177c4a05b4018231bd0c11538bcfa2cc81f53a:'+rel],cwd=R,text=True)
