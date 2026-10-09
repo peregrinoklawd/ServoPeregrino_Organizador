@@ -214,7 +214,7 @@ switch (_eventName) do {
     _state set ["equipmentSlotView",_slot];
     _state set ["lastFocus","EQUIPMENT"];
     missionNamespace setVariable [SP_ORG_WEAPONS_UI_STATE,_state];
-    [format ["Conteúdo do equipamento: %1 (somente leitura).",[_slot] call ServoPeregrino_Organizador_Weapons_fnc_getUISlotLabel],"INFO",true] call ServoPeregrino_Organizador_Weapons_fnc_pushUIFeedback;
+    [format ["Conteúdo do equipamento: %1. Use CAPTURAR para copiar ao rascunho.",[_slot] call ServoPeregrino_Organizador_Weapons_fnc_getUISlotLabel],"INFO",true] call ServoPeregrino_Organizador_Weapons_fnc_pushUIFeedback;
     _refresh = false;
     _focusedRefresh = "EQUIPMENT";
    } else {
@@ -241,11 +241,15 @@ switch (_eventName) do {
     ];
     private _idc = _controlMap getOrDefault [_field,-1];
     private _selectedKitId = _state getOrDefault ["selectedKitId",""];
-    if (_idc >= 0 && {_selectedKitId isNotEqualTo ""}) then {
+    if (_idc >= 0 && {_selectedKitId isNotEqualTo "" || {(_state getOrDefault ["pendingNewKit",false]) && {count (_state getOrDefault ["pendingCapturedDraft",createHashMap])>0}}}) then {
      private _ctrl = _display displayCtrl _idc;
      private _chosenClass = _ctrl lbData _index;
      private _chosenText = _ctrl lbText _index;
-     private _draftResult = [_selectedKitId,_field,_chosenClass] call ServoPeregrino_Organizador_Weapons_fnc_setWeaponKitDraftSelection;
+     private _draftResult = if (_selectedKitId isEqualTo "") then {
+      [_field,_chosenClass] call ServoPeregrino_Organizador_Weapons_fnc_setPendingCapturedDraftSelection
+     } else {
+      [_selectedKitId,_field,_chosenClass] call ServoPeregrino_Organizador_Weapons_fnc_setWeaponKitDraftSelection
+     };
      if (_draftResult get "success") then {
       private _dirty = ((_draftResult get "data") getOrDefault ["dirty",false]);
       [format [
@@ -280,6 +284,7 @@ switch (_eventName) do {
    };
    _state set ["pendingNewKit",false];
    _state set ["pendingNewName",""];
+   _state set ["pendingCapturedDraft",createHashMap];
    _state set ["draftNameEditing",false];
    _state set ["draftNameInput",""];
    _state set ["selectedKitIsNew",false];
@@ -333,6 +338,7 @@ switch (_eventName) do {
   _state set ["previousKitIdBeforeNew",_previousKitBeforeNew];
   _state set ["pendingNewKit",true];
   _state set ["pendingNewName",_pendingName];
+  _state set ["pendingCapturedDraft",createHashMap];
   _state set ["draftNameEditing",false];
   _state set ["draftNameInput",""];
   _state set ["selectedKitIsNew",false];
@@ -684,7 +690,11 @@ switch (_eventName) do {
  case "APPLY_DRAFT": {
   _refresh=false;
   private _kitId = _state getOrDefault ["selectedKitId",""];
-  private _draft = (_state getOrDefault ["draftsByKitId",createHashMap]) getOrDefault [_kitId,createHashMap];
+  private _draft = if (_kitId isEqualTo "" && {_state getOrDefault ["pendingNewKit",false]}) then {
+   _state getOrDefault ["pendingCapturedDraft",createHashMap]
+  } else {
+   (_state getOrDefault ["draftsByKitId",createHashMap]) getOrDefault [_kitId,createHashMap]
+  };
   private _result = [player,_draft] call ServoPeregrino_Organizador_Weapons_fnc_executeDraftApplication;
   private _d = _result getOrDefault ["data",createHashMap];
   _state set ["lastApplicationResult",_result];
@@ -694,6 +704,25 @@ switch (_eventName) do {
   [_feedback get "message",_feedback get "kind",true] call ServoPeregrino_Organizador_Weapons_fnc_pushUIFeedback;
   diag_log format ["[SP_ORG] [WEAPONS] [DRAFT_APPLY] result=%1",_result];
   _focusedRefresh="EQUIPMENT";
+ };
+
+ case "EQUIPMENT_TO_DRAFT": {
+  _refresh=false;
+  private _slot=_state getOrDefault ["equipmentSlotView","PRIMARY"];
+  private _captureR=[player,_slot] call ServoPeregrino_Organizador_Weapons_fnc_captureEquippedWeaponToDraft;
+  if (_captureR getOrDefault ["success",false]) then {
+   private _created=(_captureR get "data") getOrDefault ["createdNew",false];
+   ["Arma e acessórios capturados em ARMAS DO KIT. SALVAR é opcional para o rascunho atual. A quantidade de tiros não é copiada.","SUCCESS",true] call ServoPeregrino_Organizador_Weapons_fnc_pushUIFeedback;
+   _focusedRefresh="DRAFT";
+   _focusedRefreshSecondary="CATALOG";
+   _focusedReason="EQUIPMENT_TO_DRAFT";
+   // A pending NEW draft changes the P1 selection/filters, so refresh once.
+   _refresh=_created;
+  } else {
+   [_captureR getOrDefault ["message","Não foi possível capturar a arma deste destino."],"ERROR",true] call ServoPeregrino_Organizador_Weapons_fnc_pushUIFeedback;
+   _focusedRefresh="EQUIPMENT";
+  };
+  diag_log format ["[SP_ORG] [WEAPONS] [EQUIPMENT_CAPTURE] slot=%1 code=%2 success=%3",_slot,_captureR getOrDefault ["code",""],_captureR getOrDefault ["success",false]];
  };
 
  case "CATALOG_TO_EQUIPMENT": {
