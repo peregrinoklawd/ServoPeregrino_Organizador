@@ -165,3 +165,25 @@ O botão `CAPTURAR` pertence hoje a Items; Weapons ainda não tem a ação playe
 - ZIP verificado: SHA256 bate exatamente com o SHA256.txt do workflow; todas as entradas passaram teste de integridade; 514 entradas.
 - Gate RPT ainda pendente: **1360 PASS / 0 FAIL / 0 BLOCKED**.
 - Limitação operacional conhecida até decisão futura: arma-base sem magazine selecionado pode falhar de modo seguro e retornar ao Snapshot quando o engine introduz magazine automaticamente a partir dos containers. Essa recusa não é uma aplicação bem-sucedida.
+
+
+## 09/10/2026 — Homologação operacional e congelamento Weapons 0.7-D2 R1 (mission-first)
+
+**Decisão do operador:** aprovar e congelar a 0.7-D2 R1 após regressão real e testes manuais aprovados, preservando exatamente o ZIP que foi testado.
+
+**Evidência e limites de auditoria:** a execução anterior, com abertura da UI enquanto o AUTO TEST corria, registrou **1357/1360, 3 FAIL cumulativos, 0 BLOCKED**: `D source draft intact PRIMARY_RECONFIGURE_PARTIAL`, `D source draft intact PRIMARY_NO_OP` e `D2 cumulative A/B/C/D baseline`. A análise do código encontrou normalização de `baseTargetSlot` no mesmo objeto de draft pela atualização da UI; essa é **causa provável, não definitivamente provada por diff de draft**. Em nova execução sem interferência da interface, o operador relatou que o AUTO TEST **concluiu sem falhas**. O último RPT limpo **não foi anexado nem auditado** neste registro; portanto `1360/1360, 0 FAIL, 0 BLOCKED` é o **contrato esperado**, não um resumo independente extraído do último RPT. O operador também declarou aprovação de todos os testes manuais D2.
+
+**Escopo homologado:** aplicação física local pelo rascunho não salvo e diretamente pelo Catálogo; Plan/Snapshot, slot-safe apply, pós-validação e rollback explícito; NO_OP, proteção dos demais domínios, kit/repository não modificados por apply, refresh focado. A revisão R1 dividiu os casos `NO_RECIPE_MAGAZINE` em recusa com rollback de autoload não solicitado e aplicação sem magazine quando não há cargo compatível. No RPT anteriormente auditado ambos passaram. **Não há homologação de multiplayer, JIP, PBO/addon integrado nem identidade física intrínseca.**
+
+**Baseline canônica do artefato mission-first:**
+- Branch fonte/candidata encerrada: `feature/weapons-0.7-d2-consolidated-runtime-hardening`.
+- Commit exato dos arquivos de missão empacotados: `0d36ce24b04dc11399ff58142a1179f0082a341b`.
+- Missão: `SP_ORG_Weapons_0_7_D2_NoMag_Contract_Review_R1.VR`.
+- Build: `0.7.3.2-consolidated-runtime-hardening-d2-r1-mission-first`.
+- Workflow GitHub Actions: `37872918374`; artifact `11590644990`; validação estática e empacotamento oficiais GREEN.
+- ZIP SHA256: `81cabddb9a4fd97e7a23e57c52d3f4fe21bb05380f2943516f78f7204fe592ec`.
+- Branch de referência congelada: `baseline/weapons-0.7-d2-r1-homologated` (checkpoint documental; não alterar source executável).
+
+**Pendências explícitas:** arquivar e auditar o RPT completo do último AUTO TEST limpo quando disponibilizado; endurecer futuramente o harness para não aceitar interferência concorrente do `OPEN_WEAPONS` no draft sintético; avaliar `CAPTURAR ARMA EQUIPADA → RASCUNHO` (paridade funcional com Items, ainda ausente em Weapons); conservar `UNDO_DEFERRED` e `MP_DEFERRED_0_8` até tarefas próprias; comportamento de arma-base sem magazine com cargo compatível permanece recusa segura + rollback, e não aplicação permissiva.
+
+**Regra de continuidade:** congelar o código desta missão; qualquer mudança funcional parte de branch/entrega posterior e passa por seus próprios gates; não alterar a baseline. Sem merge para `main` nesta homologação.
