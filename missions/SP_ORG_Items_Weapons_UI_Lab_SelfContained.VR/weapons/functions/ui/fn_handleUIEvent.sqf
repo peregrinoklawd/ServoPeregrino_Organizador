@@ -12,6 +12,20 @@ if ((count _state) isEqualTo 0) then {
  _state = missionNamespace getVariable [SP_ORG_WEAPONS_UI_STATE,createHashMap];
 };
 
+// R5: a captured NOVO has no kitId yet. SAVE_AS_NEW is a valid first
+// explicit save, not an attempt to duplicate a nonexistent source kit.
+if (
+ _eventName isEqualTo "SAVE_AS_NEW"
+ && {_state getOrDefault ["pendingNewKit",false]}
+ && {(_state getOrDefault ["selectedKitId",""]) isEqualTo ""}
+ && {count (_state getOrDefault ["pendingCapturedDraft",createHashMap])>0}
+) then {
+ diag_log "[SP_ORG] [WEAPONS] [SAVE_ALIAS] SAVE_AS_NEW_PENDING -> SAVE_DRAFT; no existing kitId is required";
+ _eventName="SAVE_DRAFT";
+};
+if (_eventName in ["SAVE_DRAFT","SAVE_AS_NEW"]) then {
+ diag_log format ["[SP_ORG] [WEAPONS] [SAVE_REQUEST] action=%1 pendingNew=%2 selectedKitId=%3 pendingCaptured=%4",_eventName,_state getOrDefault ["pendingNewKit",false],_state getOrDefault ["selectedKitId",""],count (_state getOrDefault ["pendingCapturedDraft",createHashMap])>0];
+};
 private _refresh = true;
 private _focusedRefresh = "";
 private _focusedRefreshSecondary = "";
@@ -508,6 +522,7 @@ switch (_eventName) do {
    } else {
     private _name=(_nameCheck get "data") get "name";
     private _savedR=[_name,_captured getOrDefault ["targetSlot",""],_captured getOrDefault ["recipe",createHashMap]] call ServoPeregrino_Organizador_Weapons_fnc_createWeaponKit;
+     diag_log format ["[SP_ORG] [WEAPONS] [SAVE_RESULT] path=PENDING_FIRST_SAVE success=%1 code=%2",_savedR getOrDefault ["success",false],_savedR getOrDefault ["code",""]];
     if !(_savedR getOrDefault ["success",false]) then {
      [_savedR getOrDefault ["message","Nome duplicado ou Recipe inválida. Nada foi salvo."],"ERROR",true] call ServoPeregrino_Organizador_Weapons_fnc_pushUIFeedback;
      _focusedRefresh="DRAFT";
@@ -619,6 +634,7 @@ switch (_eventName) do {
       ["Não foi possível gerar um nome válido para o novo kit.","ERROR",true] call ServoPeregrino_Organizador_Weapons_fnc_pushUIFeedback;
      } else {
       private _createR = [_name,_draft getOrDefault ["targetSlot",_source getOrDefault ["targetSlot",""]],_draft getOrDefault ["recipe",createHashMap]] call ServoPeregrino_Organizador_Weapons_fnc_createWeaponKit;
+       diag_log format ["[SP_ORG] [WEAPONS] [SAVE_RESULT] path=EXISTING_SAVE_AS_NEW success=%1 code=%2",_createR getOrDefault ["success",false],_createR getOrDefault ["code",""]];
       if (_createR get "success") then {
        private _newKit = (_createR get "data") get "kit";
        private _newId = _newKit getOrDefault ["kitId",""];
