@@ -22,8 +22,8 @@
     "hub_rule": "Hub is an optional player-facing integration/orchestration layer. No domain module may require Hub in order to function.",
     "independent_core_development": true
   },
-  "global_next_gate": "Weapons 0.7-E E1 single real-Arma AUTO 1396 PASS / 0 FAIL / 0 BLOCKED plus manual P4 equipment-to-draft and NOVO pending SAVE review. Do not open UI during the auto gate.",
-  "global_after_gate": "Review real RPT, manual UX/performance; freeze E only after approval. D2 R1 baseline remains untouched. MP/JIP/PBO/Undo deferred.",
+  "global_next_gate": "Weapons 0.7-E E1 R2 real-Arma AUTO 1408 PASS / 0 FAIL / 0 BLOCKED and manual equipped-weapon capture on modded MCC_RD704_AFG. Capture may explicitly omit incompatible components without mutating saved kit/loadout.",
+  "global_after_gate": "Review R2 manual capture warnings and RPT; do not freeze/merge E before operator approval. Stable D2 R1 remains untouched.",
   "modules": [
     {
       "id": "Nexus",
@@ -215,9 +215,9 @@
         "build": "0.7.3.2-consolidated-runtime-hardening-d2-r1-mission-first"
       },
       "development_version": {
-        "display": "0.7-E E1 mission-first",
-        "semantic": "0.7.4.1 mission-first",
-        "build": "0.7.4.1-equipment-to-draft-e1-mission-first"
+        "display": "0.7-E E1 R2 mission-first",
+        "semantic": "0.7.4.2 mission-first",
+        "build": "0.7.4.2-equipment-to-draft-e1-r2-mission-first"
       },
       "dependencies": [
         "Nexus",
@@ -255,10 +255,10 @@
           "persistence.provider.v1"
         ]
       },
-      "status": "MISSION_FIRST_0_7_E_E1_CANDIDATE_STATIC_AND_RUNTIME_PENDING",
-      "next_gate": "Single 0.7-E real-Arma cumulative RPT 1396 PASS / 0 FAIL / 0 BLOCKED, then manual capture existing and NOVO pending before any homologation.",
+      "status": "MISSION_FIRST_0_7_E_E1_R2_CANDIDATE_STATIC_AND_RUNTIME_PENDING",
+      "next_gate": "E1 R2 one cumulative real-Arma action 1408 PASS / 0 FAIL / 0 BLOCKED, followed by manual capture of MCC_RD704_AFG/observed incompatible accessory and save/discard.",
       "homologated_artifact": "Weapons 0.7-D2 R1 mission-first operator approved: reported zero FAIL in latest auto run (clean RPT not independently audited), manual checks approved. Baseline branch baseline/weapons-0.7-d2-r1-homologated; code 0d36ce24b04dc11399ff58142a1179f0082a341b; mission SP_ORG_Weapons_0_7_D2_NoMag_Contract_Review_R1.VR; ZIP SHA256 81cabddb9a4fd97e7a23e57c52d3f4fe21bb05380f2943516f78f7204fe592ec.",
-      "current_candidate_artifact": "SP_ORG_Weapons_0_7_E_Equipment_Capture_E1.VR",
+      "current_candidate_artifact": "SP_ORG_Weapons_0_7_E_Equipment_Capture_E1_R2.VR",
       "mission_first_validation": {
         "0.1-B": {
           "status": "APPROVED_SP",
@@ -330,7 +330,7 @@
           "modded_provenance": true,
           "session_cache": true
         },
-        "next": "0.7-E capture-equipped-weapon candidate runtime/manual; D2 R1 operator-frozen source preserved. No 0.8.",
+        "next": "E1 R1 auto PASS 1396/1396 but MANUAL FAIL equipment capture; R2 fail-closed partial capture candidate, runtime pending. D2 R1 remains stable.",
         "0.4": {
           "status": "APPROVED_SP_FROZEN",
           "final_candidate": "R5",
@@ -806,7 +806,7 @@
           ]
         },
         "0.7-E": {
-          "status": "CANDIDATE_STATIC_AND_RUNTIME_PENDING",
+          "status": "R1_REAL_AUTO_GREEN_MANUAL_CAPTURE_FAILED_SUPERSEDED_BY_R2",
           "branch": "feature/weapons-0.7-e-equipment-capture",
           "source_baseline": "baseline/weapons-0.7-d2-r1-homologated",
           "stable_parent": "0.7-D2 R1",
@@ -822,6 +822,33 @@
           "transient_ammo": "NEVER_PERSIST_ROUND_COUNT",
           "focused_refresh": "DRAFT_AND_CATALOG_ONLY_OR_ONE_FULL_FOR_NEW_PENDING",
           "mode": "MISSION_FIRST_SINGLE_PLAYER",
+          "manual_gate": "FAILED_WEAPONS_RECIPE_CONFIGURATION_INCOMPATIBLE_SLOT_PRIMARY",
+          "auto_test_real_rpt": "1396_PASS_0_FAIL_0_BLOCKED_2026_10_09",
+          "homologated": false,
+          "deferred": [
+            "UNDO",
+            "MULTIPLAYER_0_8",
+            "JIP",
+            "PBO_ADDON",
+            "PERSISTENCE"
+          ],
+          "observed_mod_warning": "MCC_RD704_AFG vs rhsusf_acc_grip2 incompatible per engine warnings; causality probable but original E1 logs lack nested fields."
+        },
+        "0.7-E E1 R2": {
+          "status": "STATIC_AND_RUNTIME_PENDING",
+          "parent_candidate": "0.7-E E1",
+          "source_baseline": "baseline/weapons-0.7-d2-r1-homologated",
+          "branch": "feature/weapons-0.7-e-equipment-capture",
+          "mission": "SP_ORG_Weapons_0_7_E_Equipment_Capture_E1_R2.VR",
+          "build": "0.7.4.2-equipment-to-draft-e1-r2-mission-first",
+          "expected_checks": 1408,
+          "frozen_legacy_checks": 1360,
+          "E_checks": 48,
+          "test_action": "SP_ORG LAB - TESTAR WEAPONS 0.7-E R2",
+          "fix": "SAFE_RECIPE_FROM_OBSERVED_PHYSICAL_LOADOUT_WITH_EXPLICIT_INCOMPATIBLE_ACCESSORY_OMISSIONS",
+          "no_silent_loss": true,
+          "validator_frozen": true,
+          "physical_mutation": false,
           "manual_gate": "PENDING",
           "auto_test_real_rpt": "PENDING",
           "homologated": false,
