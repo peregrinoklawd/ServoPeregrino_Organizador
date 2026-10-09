@@ -98,6 +98,11 @@ if ((count _captureError)>0) exitWith {_captureError};
 _state set ["lastFocus","DRAFT"];
 _state set ["equipmentSlotView",_slotU];
 missionNamespace setVariable [SP_ORG_WEAPONS_UI_STATE,_state];
+// Capturing a different base weapon in the SAME selected kit must invalidate
+// the accessory projection; kitId alone is not a compatibility cache key.
+if (_changed || {_createdNew}) then {
+ missionNamespace setVariable [SP_ORG_WEAPONS_UI_CATALOG_PROJECTION_VAR,createHashMap];
+};
 [true,if (_createdNew) then {"WEAPONS_UI_EQUIPMENT_CAPTURED_TO_NEW_DRAFT"} else {"WEAPONS_UI_EQUIPMENT_CAPTURED_TO_DRAFT"},"Arma equipada capturada para ARMAS DO KIT. O equipamento e os kits salvos não foram alterados.",createHashMapFromArray [
  ["slot",_slotU],["kitId",_kitId],["createdNew",_createdNew],["changed",_changed],
  ["draft",[_draft] call ServoPeregrino_Organizador_Weapons_fnc_deepCopy],
