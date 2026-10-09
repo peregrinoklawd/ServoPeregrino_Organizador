@@ -11,7 +11,7 @@ private _checks=[];
 private _assert={
  params ["_name","_ok"];
  _checks pushBack [_name,_ok];
- diag_log format ["[SP_ORG] [WEAPONS] [AUTO_TEST] mode=MISSION_FIRST_0_7_E %1 | %2",if (_ok) then {"PASS"} else {"FAIL"},_name];
+ diag_log format ["[SP_ORG] [WEAPONS] [AUTO_TEST] mode=MISSION_FIRST_0_7_E_R2 %1 | %2",if (_ok) then {"PASS"} else {"FAIL"},_name];
 };
 ["E cumulative D2 baseline",_legacy getOrDefault ["success",false] && {(_ld getOrDefault ["passed",0]) isEqualTo 1360}] call _assert;
 private _playerBefore=[getUnitLoadout player] call ServoPeregrino_Organizador_Weapons_fnc_deepCopy;
@@ -93,6 +93,38 @@ private _test={
  private _setR=["optic",""] call ServoPeregrino_Organizador_Weapons_fnc_setPendingCapturedDraftSelection;
  ["E pending compatibility edit valid",_setR getOrDefault ["success",false]] call _assert;
  ["E pending editing keeps repository",(missionNamespace getVariable SP_ORG_WEAPONS_KIT_STORE) isEqualTo _storeAfterFixture] call _assert;
+ // E1 R2 regression: a physically observed modded accessory can be rejected
+ // by compatibleItems even though getUnitLoadout exposes it. A bad attachment
+ // must not abort the whole capture or leak into the strict canonical Recipe.
+ private _incompatibleCfgR=["hgun_P07_F"] call ServoPeregrino_Organizador_Weapons_fnc_createWeaponConfiguration;
+ private _sourceCfg=(_incompatibleCfgR get "data") get "configuration";
+ _sourceCfg set ["optic","optic_Hamr"];
+ private _sourceBefore=[_sourceCfg] call ServoPeregrino_Organizador_Weapons_fnc_deepCopy;
+ private _invalidSemantic=[_sourceCfg] call ServoPeregrino_Organizador_Weapons_fnc_validateWeaponConfigurationSemantic;
+ ["E R2 physical mismatch fixture actually rejected",!(_invalidSemantic getOrDefault ["success",true]) && {(_invalidSemantic getOrDefault ["code",""]) isEqualTo "WEAPONS_CONFIGURATION_INCOMPATIBLE"}] call _assert;
+ private _prepared=[_sourceCfg,""] call ServoPeregrino_Organizador_Weapons_fnc_prepareObservedCaptureRecipe;
+ private _preparedData=_prepared getOrDefault ["data",createHashMap];
+ private _preparedRecipe=_preparedData getOrDefault ["recipe",createHashMap];
+ private _preparedCfg=_preparedRecipe getOrDefault ["configuration",createHashMap];
+ private _omissions=_preparedData getOrDefault ["omissions",[]];
+ ["E R2 mismatched physical weapon still captured",_prepared getOrDefault ["success",false]] call _assert;
+ ["E R2 partial capture is never presented as exact",(_prepared getOrDefault ["code",""]) isEqualTo "WEAPONS_UI_OBSERVED_CAPTURE_PARTIAL" && {_preparedData getOrDefault ["partial",false]}] call _assert;
+ ["E R2 omitted accessory field and classname stated",count _omissions isEqualTo 1 && {(_omissions select 0) getOrDefault ["field",""] isEqualTo "optic"} && {(_omissions select 0) getOrDefault ["className",""] isEqualTo "optic_Hamr"}] call _assert;
+ ["E R2 canonical Recipe retains base weapon",(_preparedCfg getOrDefault ["weaponClass",""]) isEqualTo "hgun_P07_F"] call _assert;
+ ["E R2 canonical Recipe excludes incompatible optic",(_preparedCfg getOrDefault ["optic","INCOMPATIBLE"]) isEqualTo ""] call _assert;
+ ["E R2 source observation remains completely unchanged",_sourceCfg isEqualTo _sourceBefore] call _assert;
+ private _safeR=[_preparedRecipe] call ServoPeregrino_Organizador_Weapons_fnc_validateWeaponRecipeSemantic;
+ ["E R2 canonical Recipe passes unmodified strict validator",_safeR getOrDefault ["success",false]] call _assert;
+ private _unknownCfgR=["SP_ORG_Unknown_Weapon_E1R2"] call ServoPeregrino_Organizador_Weapons_fnc_createWeaponConfiguration;
+ private _unknownR=[(_unknownCfgR get "data") get "configuration",""] call ServoPeregrino_Organizador_Weapons_fnc_prepareObservedCaptureRecipe;
+ ["E R2 unknown weapon still rejected fail-closed",!(_unknownR getOrDefault ["success",true])] call _assert;
+ private _validPrimaryR=["arifle_MX_F"] call ServoPeregrino_Organizador_Weapons_fnc_createWeaponConfiguration;
+ private _incompatibleMag=[(_validPrimaryR get "data") get "configuration","16Rnd_9x21_Mag"] call ServoPeregrino_Organizador_Weapons_fnc_prepareObservedCaptureRecipe;
+ private _magData=_incompatibleMag getOrDefault ["data",createHashMap];
+ private _magOmissions=_magData getOrDefault ["omissions",[]];
+ ["E R2 incompatible magazine does not block weapon",_incompatibleMag getOrDefault ["success",false]] call _assert;
+ ["E R2 incompatible magazine omission is explicit",count _magOmissions isEqualTo 1 && {(_magOmissions select 0) getOrDefault ["field",""] isEqualTo "magazineClass"}] call _assert;
+ ["E R2 incompatible magazine omitted from Recipe",((_magData getOrDefault ["recipe",createHashMap]) getOrDefault ["magazineClass","X"]) isEqualTo ""] call _assert;
  // Use a real UI SAVE, which must be the ONLY action that creates the new kit.
  [] call ServoPeregrino_Organizador_Weapons_fnc_openInterface;
  [] call ServoPeregrino_Organizador_Weapons_fnc_refreshInterface;
@@ -138,9 +170,9 @@ private _lf=count _checks-_lp-_lb;
 private _passed=(_ld getOrDefault ["passed",0])+_lp;
 private _failed=(_ld getOrDefault ["failed",1])+_lf;
 private _total=(_ld getOrDefault ["total",0])+count _checks;
-diag_log format ["[SP_ORG] [WEAPONS] [AUTO_TEST_SUMMARY] mode=MISSION_FIRST_0_7_E passed=%1 failed=%2 blocked=%3 total=%4 expected=%5",_passed,_failed,_lb+(_ld getOrDefault ["blocked",0]),_total,1396];
-hint format ["Weapons 0.7-E: %1/%2; falhas=%3; bloqueados=%4. Envie o RPT completo.",_passed,_total,_failed,_lb+(_ld getOrDefault ["blocked",0])];
-[_failed isEqualTo 0 && {_lb isEqualTo 0} && {_total isEqualTo 1396},"WEAPONS_0_7_E_AUTO_TEST_COMPLETE","E capture tests; Arma runtime/manual approval pending.",createHashMapFromArray [
+diag_log format ["[SP_ORG] [WEAPONS] [AUTO_TEST_SUMMARY] mode=MISSION_FIRST_0_7_E_R2 passed=%1 failed=%2 blocked=%3 total=%4 expected=%5",_passed,_failed,_lb+(_ld getOrDefault ["blocked",0]),_total,1408];
+hint format ["Weapons 0.7-E R2: %1/%2; falhas=%3; bloqueados=%4. Envie o RPT completo.",_passed,_total,_failed,_lb+(_ld getOrDefault ["blocked",0])];
+[_failed isEqualTo 0 && {_lb isEqualTo 0} && {_total isEqualTo 1408},"WEAPONS_0_7_E_R2_AUTO_TEST_COMPLETE","E capture tests; Arma runtime/manual approval pending.",createHashMapFromArray [
  ["passed",_passed],["failed",_failed],["blocked",_lb+(_ld getOrDefault ["blocked",0])],["total",_total],
- ["expected",1396],["checks",_checks],["manual","PENDING"]
+ ["expected",1408],["checks",_checks],["manual","PENDING"]
 ]] call ServoPeregrino_Organizador_Nexus_fnc_createResult
