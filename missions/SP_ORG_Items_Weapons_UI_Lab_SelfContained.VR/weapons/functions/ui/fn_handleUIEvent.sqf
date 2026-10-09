@@ -748,18 +748,27 @@ switch (_eventName) do {
   private _slot=_state getOrDefault ["equipmentSlotView","PRIMARY"];
   private _captureR=[player,_slot] call ServoPeregrino_Organizador_Weapons_fnc_captureEquippedWeaponToDraft;
   if (_captureR getOrDefault ["success",false]) then {
-   private _created=(_captureR get "data") getOrDefault ["createdNew",false];
-   ["Arma e acessórios capturados em ARMAS DO KIT. SALVAR é opcional para o rascunho atual. A quantidade de tiros não é copiada.","SUCCESS",true] call ServoPeregrino_Organizador_Weapons_fnc_pushUIFeedback;
+   private _captureData=_captureR get "data";
+   private _created=_captureData getOrDefault ["createdNew",false];
+   private _omitted=_captureData getOrDefault ["captureOmissions",[]];
+   if (count _omitted>0) then {
+    private _parts=_omitted apply {format ["%1 (%2)",_x getOrDefault ["field","? "],_x getOrDefault ["className","?"]]};
+    [format ["CAPTURA PARCIAL: arma enviada ao rascunho, mas %1 peça(s) incompatível(is) NÃO foram copiadas: %2. Confira antes de SALVAR.",count _omitted,_parts joinString ", "],"WARNING",true] call ServoPeregrino_Organizador_Weapons_fnc_pushUIFeedback;
+   } else {
+    ["Arma e acessórios capturados em ARMAS DO KIT. SALVAR continua opcional; tiros restantes não são copiados.","SUCCESS",true] call ServoPeregrino_Organizador_Weapons_fnc_pushUIFeedback;
+   };
    _focusedRefresh=if (_created) then {""} else {"DRAFT"};
    _focusedRefreshSecondary=if (_created) then {""} else {"CATALOG"};
    _focusedReason="EQUIPMENT_TO_DRAFT";
    // A pending NEW draft changes the P1 selection/filters, so refresh once.
    _refresh=_created;
   } else {
-   [_captureR getOrDefault ["message","Não foi possível capturar a arma deste destino."],"ERROR",true] call ServoPeregrino_Organizador_Weapons_fnc_pushUIFeedback;
+   private _reason=_captureR getOrDefault ["message","Não foi possível capturar a arma deste destino."];
+   [format ["%1 (código: %2). Nenhum rascunho foi alterado.",_reason,_captureR getOrDefault ["code","DESCONHECIDO"]],"ERROR",true] call ServoPeregrino_Organizador_Weapons_fnc_pushUIFeedback;
    _focusedRefresh="EQUIPMENT";
   };
-  diag_log format ["[SP_ORG] [WEAPONS] [EQUIPMENT_CAPTURE] slot=%1 code=%2 success=%3",_slot,_captureR getOrDefault ["code",""],_captureR getOrDefault ["success",false]];
+  private _crData=_captureR getOrDefault ["data",createHashMap];
+  diag_log format ["[SP_ORG] [WEAPONS] [EQUIPMENT_CAPTURE] slot=%1 code=%2 success=%3 weapon=%4 partial=%5 omissions=%6 diagnostic=%7",_slot,_captureR getOrDefault ["code",""],_captureR getOrDefault ["success",false],_crData getOrDefault ["observedWeaponClass",_crData getOrDefault ["weaponClass",""]],_crData getOrDefault ["capturePartial",false],_crData getOrDefault ["captureOmissions",_crData getOrDefault ["omissions",[]]],_crData];
  };
 
  case "CATALOG_TO_EQUIPMENT": {
