@@ -88,7 +88,10 @@ check('D2 catalog has no multiplayer/CBA engine invocation',not re.search(r'\b(r
 oldlayout=subprocess.check_output(['git','show','8c177c4a05b4018231bd0c11538bcfa2cc81f53a:'+str((W/'ui/weapons_dialog.hpp').relative_to(R))],cwd=R,text=True)
 layout=(W/'ui/weapons_dialog.hpp').read_text()
 geometry=lambda s:re.findall(r'\b(?:idc|x|y|w|h)\s*=\s*[^;]+;',s)
-check('D2 frozen dialog geometry and IDC map preserved',geometry(oldlayout)==geometry(layout))
+# E1 adds only one P4 action; all previously frozen positions/IDCs stay untouched.
+legacy_layout=re.sub(r'\\bclass\\s+EquipmentCapture:\\s*SPORG_Weapons_Button\\s*\\{[^{}]*\\};','',layout)
+check('E1 freezes every existing dialog geometry and IDC',geometry(oldlayout)==geometry(legacy_layout))
+check('E1 capture has distinct P4 action/IDC', 'class EquipmentCapture: SPORG_Weapons_Button {idc=4123;' in layout and "['EQUIPMENT_TO_DRAFT']" in layout)
 # Healthy-path count is derived from actual call sites and scenario rows; missing checks become BLOCKED.
 d2=(W/'functions/tests/fn_runDelivery0_7_D2Tests.sqf').read_text()
 scenario_body=d2.split('} forEach [',1)[1].split('];',1)[0]
@@ -108,6 +111,22 @@ for name in ['fn_rollbackApplicationSnapshot.sqf','fn_validateApplicationRollbac
  check('D2 preserves C validation '+name,original==(W/'functions/application'/name).read_text())
 check('D2 legacy R6 catalog harness cannot physically equip player','_rightStateE set ["selectedCatalogClass",""]' in (W/'functions/tests/fn_runDelivery0_6_FR6Tests.sqf').read_text())
 check('D2 mission config structural delimiters',balanced(config))
+
+
+capture=(W/'functions/ui/fn_captureEquippedWeaponToDraft.sqf').read_text()
+capture_edit=(W/'functions/ui/fn_setPendingCapturedDraftSelection.sqf').read_text()
+events=(W/'functions/ui/fn_handleUIEvent.sqf').read_text()
+check('E1 uses only existing snapshot, Recipe and Recipe compare',all(x in capture for x in ['fnc_getEquipmentSlotSnapshot','fnc_createWeaponRecipe','fnc_compareWeaponRecipes']))
+check('E1 equipment capture never physically mutates or stores kits',not re.search(r'\\b(setUnitLoadout|addWeapon|removeWeapon|remoteExec|remoteExecCall)\\b|fnc_(createWeaponKit|updateWeaponKitDefinition|saveWeaponKitDraft|publish)',strip(capture)))
+check('E1 pending compatibility never mutates physical equipment or saved kit',not re.search(r'\\b(setUnitLoadout|remoteExec|remoteExecCall)\\b|fnc_(createWeaponKit|updateWeaponKitDefinition|saveWeaponKitDraft)',strip(capture_edit)))
+check('E1 explicit save owns only pending new creation', '["SAVE_DRAFT"]' not in capture and 'private _savedR=[_name,_captured getOrDefault ["targetSlot",""]' in events)
+check('E1 capture and pending compatibility events connected','case "EQUIPMENT_TO_DRAFT"' in events and 'fnc_setPendingCapturedDraftSelection' in events)
+check('E1 equipment control enabled only on occupied slot',all('displayCtrl 4123) ctrlEnable (_eq getOrDefault ["equipped",false])' in (W/'functions/ui'/p).read_text() for p in ['fn_refreshInterface.sqf','fn_refreshEquipmentViewUI.sqf']))
+e=(W/'functions/tests/fn_runDelivery0_7_ETests.sqf').read_text()
+e_asserts=len(re.findall(r'call _assert;',e))
+check('E1 cumulative runner preserves D2 and 36 E checks',e_asserts==36 and 'fnc_runDelivery0_7_D2Tests' in e and '1396' in e and 'MISSION_FIRST_0_7_E' in e)
+check('E1 mission action single 0.7-E gate','SP_ORG LAB - TESTAR WEAPONS 0.7-E' in (M/'initPlayerLocal.sqf').read_text())
+check('E1 mission and build identity', '0.7.4.1-equipment-to-draft-e1-mission-first' in (W/'script_version.hpp').read_text() and (R/'missions/PACKAGE_MISSION_NAME.txt').read_text().strip()=='SP_ORG_Weapons_0_7_E_Equipment_Capture_E1.VR')
 
 print(f'STATIC SUMMARY {checks-len(failures)}/{checks}; runtime remains pending')
 raise SystemExit(bool(failures))
