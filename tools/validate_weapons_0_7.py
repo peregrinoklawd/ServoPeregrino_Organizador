@@ -126,7 +126,7 @@ e=(W/'functions/tests/fn_runDelivery0_7_ETests.sqf').read_text()
 e_asserts=len(re.findall(r'call _assert;',e))
 check('E1 R3 cumulative runner preserves D2 and 60 E checks',e_asserts==60 and 'fnc_runDelivery0_7_D2Tests' in e and '1420' in e and 'MISSION_FIRST_0_7_E_R3' in e)
 check('E1 R3 mission two dedicated lab actions','SP_ORG LAB - TESTAR WEAPONS 0.7-E R3' in (M/'initPlayerLocal.sqf').read_text() and 'SP_ORG LAB - DIAGNOSTICAR COMPATIBILIDADE' in (M/'initPlayerLocal.sqf').read_text())
-check('E1 R3 mission and build identity', '0.7.4.3-equipment-compatibility-audit-e1-r3-mission-first' in (W/'script_version.hpp').read_text() and (R/'missions/PACKAGE_MISSION_NAME.txt').read_text().strip()=='SP_ORG_Weapons_0_7_E_Equipment_Capture_E1_R3.VR')
+check('E1 R3 R1 build identity', '0.7.4.3-equipment-compatibility-audit-e1-r3-r1-mission-first' in (W/'script_version.hpp').read_text() and (R/'missions/PACKAGE_MISSION_NAME.txt').read_text().strip()=='SP_ORG_Weapons_0_7_E_Equipment_Capture_E1_R3_R1.VR')
 
 observed_prep=(W/'functions/ui/fn_prepareObservedCaptureRecipe.sqf').read_text()
 check('E1 R2 fallback only strips engine-identified incompatible classes',
@@ -157,6 +157,8 @@ check('R3 invalidates catalog projection when equipment changes draft', 'mission
 check('R3 pending NOVO projection reads unsaved captured Recipe',all(x in catalogwindow for x in ['pendingCapturedDraft','_pendingCaptured','_selectedWeaponClass=(_pendingRecipe']))
 check('R3 projection cache tracks target slot', 'toUpperANSI _selectedKitSlot' in catalogwindow and 'sourceKey' in catalogwindow)
 check('R3 selected kit projection follows draft target slot','_sourceDraft getOrDefault ["targetSlot"' in catalogwindow)
+check('R3 R1 loads selected draft before selecting catalog slot',
+  catalogwindow.index('private _draftResult = [_sourceKitId]') < catalogwindow.index('_selectedKitSlot = toUpperANSI (_sourceDraft getOrDefault ["targetSlot"'))
 check('R3 capture tests assert same-kit cache invalidation', 'E R3 capture invalidates stale catalog' in e)
 check('R3 pending tests detect stale weapon and reproject', 'E R3 pending restore recalculates catalog' in e and 'E R3 NOVO pending offers captured optic' in e)
 check('R3 diagnostic supports CBA and BIS and vanilla independently',all(x in audit for x in ['compatibleItems [_w,"UnderBarrelSlot"]','CBA_fnc_compatibleItems','BIS_fnc_compatibleItems']))
