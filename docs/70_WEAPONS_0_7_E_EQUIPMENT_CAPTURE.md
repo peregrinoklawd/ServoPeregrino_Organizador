@@ -79,3 +79,14 @@ Uma validação estática/GitHub Actions GREEN **não equivale a homologação n
 Riscos a verificar no RPT: captura de armas modded / variantes SECONDARY, transição de slot do kit ao salvar, renderização da Recipe pendente NOVO e concorrência de refresh ao digitar nome.
 
 Não fazer merge main nem modificar `baseline/weapons-0.7-d2-r1-homologated`.
+
+## Empacotamento da candidata E1 — 09/10/2026
+
+- Workflow oficial GitHub Actions: `37887099996` — **SUCCESS**, inclusive validação estática **185/185** e upload do pacote.
+- Commit do código mission-first empacotado: `6d8a68af0d3e05b68fc8019f712feebf6b9c2a60`.
+- Artifact: `11596687783`, nome `SP_ORG_UI_Lab`.
+- ZIP único da missão: `SP_ORG_Weapons_0_7_E_Equipment_Capture_E1.zip`.
+- SHA256 do ZIP interno: `3fcae43233e2cf4e90a2cb8f11a2d5b20a65248e159ebcc1c242bdbf5bd3bb14`.
+- Arquivo conferido: **517 entradas**, **um único diretório raiz**, **CRC válido** e função `fn_captureEquippedWeaponToDraft.sqf` presente.
+- **STATIC READY / RUNTIME PENDING**. Nenhum teste real da E1 foi executado no Arma nesta rodada. O gate pretendido continua **1396/1396, 0 FAIL, 0 BLOCKED** com homologação manual posterior.
+- O material documental acrescido depois do commit do workflow não altera o código empacotado nem o hash da missão.
