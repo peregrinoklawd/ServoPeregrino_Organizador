@@ -14,9 +14,11 @@ if !(_snapshot getOrDefault ["equipped",false]) exitWith {
 };
 private _cfg=_snapshot getOrDefault ["configuration",createHashMap];
 private _magClass=_snapshot getOrDefault ["magazineClass",""];
-private _recipeR=[_cfg,_magClass] call ServoPeregrino_Organizador_Weapons_fnc_createWeaponRecipe;
+private _recipeR=[_cfg,_magClass] call ServoPeregrino_Organizador_Weapons_fnc_prepareObservedCaptureRecipe;
 if !(_recipeR getOrDefault ["success",false]) exitWith {_recipeR};
 private _recipe=(_recipeR get "data") get "recipe";
+private _omissions=(_recipeR get "data") getOrDefault ["omissions",[]];
+diag_log format ["[SP_ORG] [WEAPONS] [EQUIPMENT_CAPTURE_PREPARED] slot=%1 weapon=%2 magazine=%3 partial=%4 omissions=%5",_slotU,_cfg getOrDefault ["weaponClass",""],_magClass,count _omissions>0,_omissions];
 private _state=missionNamespace getVariable [SP_ORG_WEAPONS_UI_STATE,createHashMap];
 if ((count _state) isEqualTo 0) then {
  [] call ServoPeregrino_Organizador_Weapons_fnc_createUIState;
@@ -45,6 +47,7 @@ if (!_createdNew) then {
  // Copy, do not mutate a HashMap owned by the caller while comparing the draft.
  _draft=[_draft] call ServoPeregrino_Organizador_Weapons_fnc_deepCopy;
  _draft set ["recipe",[_recipe] call ServoPeregrino_Organizador_Weapons_fnc_deepCopy];
+ _draft set ["captureOmissions",[_omissions] call ServoPeregrino_Organizador_Weapons_fnc_deepCopy];
  _draft set ["targetSlot",_slotU];
  _draft set ["dirty",_dirty];
  if (_changed) then {
@@ -75,6 +78,7 @@ if (!_createdNew) then {
   ["baseTargetSlot",_slotU],
   ["baseRecipe",createHashMap],
   ["recipe",[_recipe] call ServoPeregrino_Organizador_Weapons_fnc_deepCopy],
+  ["captureOmissions",[_omissions] call ServoPeregrino_Organizador_Weapons_fnc_deepCopy],
   ["dirty",true],
   ["revision",(_previous getOrDefault ["revision",0])+1],
   ["updatedAtTick",diag_tickTime]
@@ -97,6 +101,9 @@ missionNamespace setVariable [SP_ORG_WEAPONS_UI_STATE,_state];
 [true,if (_createdNew) then {"WEAPONS_UI_EQUIPMENT_CAPTURED_TO_NEW_DRAFT"} else {"WEAPONS_UI_EQUIPMENT_CAPTURED_TO_DRAFT"},"Arma equipada capturada para ARMAS DO KIT. O equipamento e os kits salvos não foram alterados.",createHashMapFromArray [
  ["slot",_slotU],["kitId",_kitId],["createdNew",_createdNew],["changed",_changed],
  ["draft",[_draft] call ServoPeregrino_Organizador_Weapons_fnc_deepCopy],
+ ["captureOmissions",[_omissions] call ServoPeregrino_Organizador_Weapons_fnc_deepCopy],
+ ["capturePartial",count _omissions>0],
+ ["observedWeaponClass",_cfg getOrDefault ["weaponClass",""]],
  ["observedLoadedState",[_snapshot getOrDefault ["loadedState",createHashMap]] call ServoPeregrino_Organizador_Weapons_fnc_deepCopy],
  ["savedKitMutation",false],["loadoutMutation",false],["ammoCountPersisted",false]
 ]] call ServoPeregrino_Organizador_Nexus_fnc_createResult
