@@ -109,7 +109,7 @@ private _test={
  private _omissions=_preparedData getOrDefault ["omissions",[]];
  ["E R2 mismatched physical weapon still captured",_prepared getOrDefault ["success",false]] call _assert;
  ["E R2 partial capture is never presented as exact",(_prepared getOrDefault ["code",""]) isEqualTo "WEAPONS_UI_OBSERVED_CAPTURE_PARTIAL" && {_preparedData getOrDefault ["partial",false]}] call _assert;
- ["E R2 omitted accessory field and classname stated",count _omissions isEqualTo 1 && {(_omissions select 0) getOrDefault ["field",""] isEqualTo "optic"} && {(_omissions select 0) getOrDefault ["className",""] isEqualTo "optic_Hamr"}] call _assert;
+ ["E R2 omitted accessory field and classname stated",count _omissions isEqualTo 1 && {((_omissions select 0) getOrDefault ["field",""]) isEqualTo "optic"} && {((_omissions select 0) getOrDefault ["className",""]) isEqualTo "optic_Hamr"}] call _assert;
  ["E R2 canonical Recipe retains base weapon",(_preparedCfg getOrDefault ["weaponClass",""]) isEqualTo "hgun_P07_F"] call _assert;
  ["E R2 canonical Recipe excludes incompatible optic",(_preparedCfg getOrDefault ["optic","INCOMPATIBLE"]) isEqualTo ""] call _assert;
  ["E R2 source observation remains completely unchanged",_sourceCfg isEqualTo _sourceBefore] call _assert;
@@ -123,7 +123,7 @@ private _test={
  private _magData=_incompatibleMag getOrDefault ["data",createHashMap];
  private _magOmissions=_magData getOrDefault ["omissions",[]];
  ["E R2 incompatible magazine does not block weapon",_incompatibleMag getOrDefault ["success",false]] call _assert;
- ["E R2 incompatible magazine omission is explicit",count _magOmissions isEqualTo 1 && {(_magOmissions select 0) getOrDefault ["field",""] isEqualTo "magazineClass"}] call _assert;
+ ["E R2 incompatible magazine omission is explicit",count _magOmissions isEqualTo 1 && {((_magOmissions select 0) getOrDefault ["field",""]) isEqualTo "magazineClass"}] call _assert;
  ["E R2 incompatible magazine omitted from Recipe",((_magData getOrDefault ["recipe",createHashMap]) getOrDefault ["magazineClass","X"]) isEqualTo ""] call _assert;
  // Use a real UI SAVE, which must be the ONLY action that creates the new kit.
  [] call ServoPeregrino_Organizador_Weapons_fnc_openInterface;
