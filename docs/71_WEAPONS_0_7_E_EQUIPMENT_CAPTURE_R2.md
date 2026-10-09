@@ -43,3 +43,14 @@ Casos: pistol `hgun_P07_F` com `optic_Hamr` incompatível (rejeição real pelo 
 6. Enviar RPT completo, inclusive linhas `EQUIPMENT_CAPTURE_PREPARED`, `EQUIPMENT_CAPTURE`, `AUTO_TEST_SUMMARY`, e percepção visual do painel P2.
 
 **Critério:** auto 1408/1408 + testes manuais acima aprovados, zero crash/SQF errors SP_ORG. GitHub Actions GREEN sozinho não homologa. Sem merge/main/PBO/MP/Undo.
+
+## Pacote E1 R2 gerado e verificado — 09/10/2026
+
+- GitHub Actions run [37991717217](https://github.com/peregrinoklawd/ServoPeregrino_Organizador/actions/runs/37991717217): **SUCCESS**; `STATIC SUMMARY 192/192`.
+- Executável empacotado: commit `32a63834397e2c34f00cbc74ead7ec2e711f2962`, artifact `11644589749`.
+- ZIP da missão: `SP_ORG_Weapons_0_7_E_Equipment_Capture_E1_R2.zip`.
+- SHA256 do ZIP interno: `b4cfe6963bd513c9a709835b108997e0fc4f1f43722dde18debe99d413d0c741`.
+- Inspeção local: **518 entradas**, **uma única pasta raiz**, CRC íntegro, arquivos `fn_prepareObservedCaptureRecipe.sqf`, `fn_captureEquippedWeaponToDraft.sqf` e `fn_runDelivery0_7_ETests.sqf` presentes; version/build R2 confirmado.
+- **RUNTIME PENDING:** 1408 é meta ainda não executada no Arma 3. O problema manual da E1 R1 justificou esta correção; não declarar a E1 R2 homologada antes de RPT e manual.
+
+O registro documental posterior ao commit do ZIP não muda o código empacotado.
