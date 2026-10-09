@@ -378,3 +378,8 @@ A investigação deve agora comparar o comportamento do mesmo UI source quando r
 2. mission `description.ext`.
 
 O objetivo é descobrir por que o render final aparenta diferença mesmo com source visual equivalente.
+
+
+## 09/10/2026 — Weapons CAPTURAR ARMA EQUIPADA → RASCUNHO (BACKLOG, NÃO IMPLEMENTADO)
+
+Classificação: **CANDIDATE-SHARED / DOMAIN-SPECIFIC**. Items possui ação de capturar o equipamento físico visualizado para o rascunho; Weapons D2 R1 não expõe ação equivalente em P4. Proposta: botão player-facing **CAPTURAR ARMA EQUIPADA** em `CONTEÚDO DO EQUIPAMENTO` para capturar a arma do slot atual, configuração/acessórios e classe do magazine em `ARMAS DO KIT`, sem salvar/publicar automaticamente e sem mutar o loadout. Separar ammo restante do WeaponRecipe como loaded state transitório. Exigir compatibilidade, dirty-state, refresh focado e regressões para PRIMARY/HANDGUN/SECONDARY, inclusive slot vazio. **NÃO implementar na baseline congelada 0.7-D2 R1**. Também pendente: endurecer testes contra abertura concorrente da UI durante AUTO TEST.
