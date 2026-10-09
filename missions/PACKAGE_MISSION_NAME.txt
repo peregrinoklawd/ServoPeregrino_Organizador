@@ -1,1 +1,1 @@
-SP_ORG_Weapons_0_7_E_Equipment_Capture_E1_R3_R1.VR
+SP_ORG_Weapons_0_7_E_CBA_Underbarrel_E1_R4.VR
