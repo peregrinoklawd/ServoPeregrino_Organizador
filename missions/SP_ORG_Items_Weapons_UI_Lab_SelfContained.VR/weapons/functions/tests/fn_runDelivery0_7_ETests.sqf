@@ -11,7 +11,7 @@ private _checks=[];
 private _assert={
  params ["_name","_ok"];
  _checks pushBack [_name,_ok];
- diag_log format ["[SP_ORG] [WEAPONS] [AUTO_TEST] mode=MISSION_FIRST_0_7_E_R4 %1 | %2",if (_ok) then {"PASS"} else {"FAIL"},_name];
+ diag_log format ["[SP_ORG] [WEAPONS] [AUTO_TEST] mode=MISSION_FIRST_0_7_E_R5 %1 | %2",if (_ok) then {"PASS"} else {"FAIL"},_name];
 };
 ["E cumulative D2 baseline",_legacy getOrDefault ["success",false] && {(_ld getOrDefault ["passed",0]) isEqualTo 1360}] call _assert;
 private _playerBefore=[getUnitLoadout player] call ServoPeregrino_Organizador_Weapons_fnc_deepCopy;
@@ -228,6 +228,46 @@ private _test={
  ["E saved Recipe matches pending edit",_savedRecipe isEqualTo (_editedDraft getOrDefault ["recipe",createHashMap])] call _assert;
  ["E SAVE did not touch player",(getUnitLoadout player) isEqualTo _playerBefore] call _assert;
  ["E SAVE did not touch isolated target",(getUnitLoadout _unit) isEqualTo _observedBefore] call _assert;
+ 
+// R5 regression: true user path NOVO -> physical capture -> type name ->
+// SALVAR COMO NOVO. R4 only tested SAVE_DRAFT and left IDC 2141 disabled.
+private _beforeSaveAsStore=([] call ServoPeregrino_Organizador_Weapons_fnc_listWeaponKits);
+private _beforeSaveAsCount=count ((_beforeSaveAsStore getOrDefault ["data",createHashMap]) getOrDefault ["kits",[]]);
+private _savedPrevious=[_savedKit] call ServoPeregrino_Organizador_Weapons_fnc_deepCopy;
+_state=missionNamespace getVariable SP_ORG_WEAPONS_UI_STATE;
+_state set ["selectedKitId",""];
+_state set ["pendingNewKit",true];
+_state set ["pendingCapturedDraft",createHashMap];
+_state set ["pendingNewName","E R5 Salvar Como Pending"];
+_state set ["draftNameEditing",false];
+_state set ["draftNameInput",""];
+missionNamespace setVariable [SP_ORG_WEAPONS_UI_STATE,_state];
+private _r5Captured=[_unit,"PRIMARY"] call ServoPeregrino_Organizador_Weapons_fnc_captureEquippedWeaponToDraft;
+["E R5 pending physical capture succeeds",_r5Captured getOrDefault ["success",false]] call _assert;
+private _r5Staged=(missionNamespace getVariable SP_ORG_WEAPONS_UI_STATE) getOrDefault ["pendingCapturedDraft",createHashMap];
+["E R5 captured NOVO remains unsaved",count _r5Staged>0 && {((missionNamespace getVariable SP_ORG_WEAPONS_UI_STATE) getOrDefault ["selectedKitId","BAD"]) isEqualTo ""}] call _assert;
+["E R5 capturing does not persist repository",count (((([] call ServoPeregrino_Organizador_Weapons_fnc_listWeaponKits) getOrDefault ["data",createHashMap]) getOrDefault ["kits",[]])) isEqualTo _beforeSaveAsCount] call _assert;
+private _r5Paint=["R5_SAVE_AS_PENDING"] call ServoPeregrino_Organizador_Weapons_fnc_refreshDraftUI;
+["E R5 focused render of unsaved captured NOVO succeeds",_r5Paint getOrDefault ["success",false]] call _assert;
+["E R5 SALVAR is enabled for captured NOVO",ctrlEnabled (_display displayCtrl 2140)] call _assert;
+["E R5 SALVAR COMO NOVO is enabled for captured NOVO",ctrlEnabled (_display displayCtrl 2141)] call _assert;
+["E R5 pending name survives display refresh",(ctrlText (_display displayCtrl 2001)) isEqualTo "E R5 Salvar Como Pending"] call _assert;
+private _r5SaveEvent=["SAVE_AS_NEW"] call ServoPeregrino_Organizador_Weapons_fnc_handleUIEvent;
+["E R5 SAVE_AS_NEW click handler returns",_r5SaveEvent] call _assert;
+private _r5After=missionNamespace getVariable SP_ORG_WEAPONS_UI_STATE;
+private _r5KitId=_r5After getOrDefault ["selectedKitId",""];
+private _r5SavedR=if (_r5KitId isNotEqualTo "") then {[_r5KitId] call ServoPeregrino_Organizador_Weapons_fnc_getWeaponKit} else {createHashMap};
+private _r5Saved=(_r5SavedR getOrDefault ["data",createHashMap]) getOrDefault ["kit",createHashMap];
+["E R5 SAVE_AS_NEW creates a distinct WeaponKit",_r5KitId isNotEqualTo "" && {_r5KitId isNotEqualTo _savedId} && {_r5SavedR getOrDefault ["success",false]}] call _assert;
+["E R5 SAVE_AS_NEW preserves typed name",(_r5Saved getOrDefault ["name",""]) isEqualTo "E R5 Salvar Como Pending"] call _assert;
+["E R5 SAVE_AS_NEW saves captured Recipe",(_r5Saved getOrDefault ["recipe",createHashMap]) isEqualTo (_r5Staged getOrDefault ["recipe",createHashMap])] call _assert;
+["E R5 SAVE_AS_NEW stores exactly one new kit",count (((([] call ServoPeregrino_Organizador_Weapons_fnc_listWeaponKits) getOrDefault ["data",createHashMap]) getOrDefault ["kits",[]])) isEqualTo (_beforeSaveAsCount+1)] call _assert;
+["E R5 SAVE_AS_NEW clears transient pending",!(_r5After getOrDefault ["pendingNewKit",true]) && {count (_r5After getOrDefault ["pendingCapturedDraft",createHashMap]) isEqualTo 0}] call _assert;
+private _r5OriginalR=[_savedId] call ServoPeregrino_Organizador_Weapons_fnc_getWeaponKit;
+["E R5 SAVE_AS_NEW leaves preceding saved kit intact",_r5OriginalR getOrDefault ["success",false] && {((_r5OriginalR get "data") get "kit") isEqualTo _savedPrevious}] call _assert;
+["E R5 SAVE_AS_NEW never changes player equipment",(getUnitLoadout player) isEqualTo _playerBefore] call _assert;
+["E R5 SAVE_AS_NEW never changes isolated equipment",(getUnitLoadout _unit) isEqualTo _observedBefore] call _assert;
+
  // An empty selected slot fails without altering pending draft/repository.
  private _beforeEmpty=[missionNamespace getVariable SP_ORG_WEAPONS_UI_STATE] call ServoPeregrino_Organizador_Weapons_fnc_deepCopy;
  private _empty=[_unit,"SECONDARY"] call ServoPeregrino_Organizador_Weapons_fnc_captureEquippedWeaponToDraft;
@@ -251,9 +291,9 @@ private _lf=count _checks-_lp-_lb;
 private _passed=(_ld getOrDefault ["passed",0])+_lp;
 private _failed=(_ld getOrDefault ["failed",1])+_lf;
 private _total=(_ld getOrDefault ["total",0])+count _checks;
-diag_log format ["[SP_ORG] [WEAPONS] [AUTO_TEST_SUMMARY] mode=MISSION_FIRST_0_7_E_R4 passed=%1 failed=%2 blocked=%3 total=%4 expected=%5",_passed,_failed,_lb+(_ld getOrDefault ["blocked",0]),_total,1430];
-hint format ["Weapons 0.7-E R4: %1/%2; falhas=%3; bloqueados=%4. Envie o RPT completo.",_passed,_total,_failed,_lb+(_ld getOrDefault ["blocked",0])];
-[_failed isEqualTo 0 && {_lb isEqualTo 0} && {_total isEqualTo 1430},"WEAPONS_0_7_E_R4_AUTO_TEST_COMPLETE","E capture tests; Arma runtime/manual approval pending.",createHashMapFromArray [
+diag_log format ["[SP_ORG] [WEAPONS] [AUTO_TEST_SUMMARY] mode=MISSION_FIRST_0_7_E_R5 passed=%1 failed=%2 blocked=%3 total=%4 expected=%5",_passed,_failed,_lb+(_ld getOrDefault ["blocked",0]),_total,1446];
+hint format ["Weapons 0.7-E R5: %1/%2; falhas=%3; bloqueados=%4. Envie o RPT completo.",_passed,_total,_failed,_lb+(_ld getOrDefault ["blocked",0])];
+[_failed isEqualTo 0 && {_lb isEqualTo 0} && {_total isEqualTo 1446},"WEAPONS_0_7_E_R5_AUTO_TEST_COMPLETE","E capture tests; Arma runtime/manual approval pending.",createHashMapFromArray [
  ["passed",_passed],["failed",_failed],["blocked",_lb+(_ld getOrDefault ["blocked",0])],["total",_total],
- ["expected",1430],["checks",_checks],["manual","PENDING"]
+ ["expected",1446],["checks",_checks],["manual","PENDING"]
 ]] call ServoPeregrino_Organizador_Nexus_fnc_createResult
