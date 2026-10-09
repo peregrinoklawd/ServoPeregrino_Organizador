@@ -226,7 +226,7 @@ if ((count _eq) isEqualTo 0 || {!(_eq getOrDefault ["equipped",false])}) then {
  (_display displayCtrl 4021) ctrlSetText "Nenhuma arma equipada";
  (_display displayCtrl 4022) ctrlSetText "-";
  {(_display displayCtrl _x) ctrlSetText "Nenhum"} forEach [4031,4033,4035,4037,4039];
- (_display displayCtrl 4040) ctrlSetStructuredText parseText format ["<t color='#8FAAA4'>%1 sem arma equipada.<br/><br/>Este painel é somente leitura; use EQUIPAR RASCUNHO para aplicar.</t>",[_equipmentSlot] call _slotLabel];
+ (_display displayCtrl 4040) ctrlSetStructuredText parseText format ["<t color='#8FAAA4'>%1 sem arma equipada.<br/><br/>Use CAPTURAR ARMA EQUIPADA para copiar a arma deste destino ao rascunho. EQUIPAR RASCUNHO continua disponível.</t>",[_equipmentSlot] call _slotLabel];
 } else {
  private _weaponInfo = _eq getOrDefault ["weaponInfo",createHashMap];
  private _weaponName = _weaponInfo getOrDefault ["displayName",_eq getOrDefault ["weaponClass",""]];
