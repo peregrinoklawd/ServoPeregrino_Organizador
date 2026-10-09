@@ -1,0 +1,144 @@
+#include "..\..\script_version.hpp"
+if (!canSuspend || {!isServer} || {isRemoteExecuted} || {!(missionNamespace getVariable ["SP_ORG_Weapons_LabEnabled",false])}) exitWith {
+ [false,"WEAPONS_TEST_SCHEDULED_LAB_ONLY","Use SP_ORG LAB - TESTAR WEAPONS 0.7-E."] call ServoPeregrino_Organizador_Nexus_fnc_createResult
+};
+if (!isNull (findDisplay SP_ORG_WEAPONS_UI_DISPLAY_IDD)) exitWith {
+ [false,"WEAPONS_TEST_UI_MUST_BE_CLOSED","Feche Weapons antes de iniciar o AUTO TEST. Não abra durante a execução."] call ServoPeregrino_Organizador_Nexus_fnc_createResult
+};
+private _legacy=[] call ServoPeregrino_Organizador_Weapons_fnc_runDelivery0_7_D2Tests;
+private _ld=_legacy getOrDefault ["data",createHashMap];
+private _checks=[];
+private _assert={
+ params ["_name","_ok"];
+ _checks pushBack [_name,_ok];
+ diag_log format ["[SP_ORG] [WEAPONS] [AUTO_TEST] mode=MISSION_FIRST_0_7_E %1 | %2",if (_ok) then {"PASS"} else {"FAIL"},_name];
+};
+["E cumulative D2 baseline",_legacy getOrDefault ["success",false] && {(_ld getOrDefault ["passed",0]) isEqualTo 1360}] call _assert;
+private _playerBefore=[getUnitLoadout player] call ServoPeregrino_Organizador_Weapons_fnc_deepCopy;
+private _stateBefore=[missionNamespace getVariable [SP_ORG_WEAPONS_UI_STATE,createHashMap]] call ServoPeregrino_Organizador_Weapons_fnc_deepCopy;
+private _storeBefore=[missionNamespace getVariable [SP_ORG_WEAPONS_KIT_STORE,createHashMap]] call ServoPeregrino_Organizador_Weapons_fnc_deepCopy;
+private _group=createGroup [west,true];
+private _unit=_group createUnit ["B_Soldier_F",getPosATL player,[],0,"NONE"];
+["E isolated target local",!isNull _unit && {local _unit}] call _assert;
+private _storeAfterFixture=createHashMap;private _kitId="";
+private _test={
+ if (isNull _unit) exitWith {};
+ _unit hideObject true;_unit allowDamage false;_unit enableSimulation false;
+ private _loadout=[getUnitLoadout _unit] call ServoPeregrino_Organizador_Weapons_fnc_deepCopy;
+ _loadout set [0,["arifle_MX_F","","","optic_Hamr",["30Rnd_65x39_caseless_mag",17],[],""]];
+ _unit setUnitLoadout [_loadout,false];
+ private _observedBefore=[getUnitLoadout _unit] call ServoPeregrino_Organizador_Weapons_fnc_deepCopy;
+ private _eq=[_unit,"PRIMARY"] call ServoPeregrino_Organizador_Weapons_fnc_getEquipmentSlotSnapshot;
+ ["E occupied P4 snapshot",_eq getOrDefault ["success",false] && {((_eq getOrDefault ["data",createHashMap]) getOrDefault ["snapshot",createHashMap]) getOrDefault ["equipped",false]}] call _assert;
+ private _observed=(_eq getOrDefault ["data",createHashMap]) getOrDefault ["snapshot",createHashMap];
+ private _entryCfgR=["hgun_P07_F"] call ServoPeregrino_Organizador_Weapons_fnc_createWeaponConfiguration;
+ private _entryRecipeR=if (_entryCfgR getOrDefault ["success",false]) then {
+  [(_entryCfgR get "data") get "configuration","16Rnd_9x21_Mag"] call ServoPeregrino_Organizador_Weapons_fnc_createWeaponRecipe
+ } else {_entryCfgR};
+ private _nameR=["E Capture Fixture"] call ServoPeregrino_Organizador_Weapons_fnc_getUniqueWeaponKitName;
+ private _newKitR=if (_entryRecipeR getOrDefault ["success",false] && {_nameR getOrDefault ["success",false]}) then {
+  [(_nameR get "data") get "name","HANDGUN",(_entryRecipeR get "data") get "recipe"] call ServoPeregrino_Organizador_Weapons_fnc_createWeaponKit
+ } else {
+  [false,"WEAPONS_TEST_FIXTURE_FAILED","Could not create isolated fixture."] call ServoPeregrino_Organizador_Nexus_fnc_createResult
+ };
+ ["E fixture kit and recipe",_newKitR getOrDefault ["success",false]] call _assert;
+ if !(_newKitR getOrDefault ["success",false]) exitWith {};
+ _kitId=((_newKitR get "data") get "kit") get "kitId";
+ private _draftR=[_kitId] call ServoPeregrino_Organizador_Weapons_fnc_getOrCreateWeaponKitDraft;
+ ["E original kit draft available",_draftR getOrDefault ["success",false]] call _assert;
+ _storeAfterFixture=[missionNamespace getVariable SP_ORG_WEAPONS_KIT_STORE] call ServoPeregrino_Organizador_Weapons_fnc_deepCopy;
+ private _state=missionNamespace getVariable SP_ORG_WEAPONS_UI_STATE;
+ _state set ["selectedKitId",_kitId];
+ _state set ["pendingNewKit",false];
+ _state set ["pendingCapturedDraft",createHashMap];
+ missionNamespace setVariable [SP_ORG_WEAPONS_UI_STATE,_state];
+ private _otherDraft=[(_state get "draftsByKitId") get _kitId] call ServoPeregrino_Organizador_Weapons_fnc_deepCopy;
+ private _captured=[_unit,"PRIMARY"] call ServoPeregrino_Organizador_Weapons_fnc_captureEquippedWeaponToDraft;
+ private _capData=_captured getOrDefault ["data",createHashMap];
+ private _draft=_capData getOrDefault ["draft",createHashMap];
+ private _recipe=_draft getOrDefault ["recipe",createHashMap];
+ private _config=_recipe getOrDefault ["configuration",createHashMap];
+ ["E capture existing succeeds",_captured getOrDefault ["success",false]] call _assert;
+ ["E capture uses actual P4 slot",(_draft getOrDefault ["targetSlot",""]) isEqualTo "PRIMARY"] call _assert;
+ ["E capture stores observed weapon class",(_config getOrDefault ["weaponClass",""]) isEqualTo (_observed getOrDefault ["weaponClass",""])] call _assert;
+ ["E capture preserves observed optic",(_config getOrDefault ["optic",""]) isEqualTo ((_observed getOrDefault ["configuration",createHashMap]) getOrDefault ["optic",""])] call _assert;
+ ["E capture preserves observed magazine class",(_recipe getOrDefault ["magazineClass",""]) isEqualTo (_observed getOrDefault ["magazineClass",""])] call _assert;
+ ["E capture changes target slot with dirty draft",_draft getOrDefault ["dirty",false] && {!((_otherDraft getOrDefault ["targetSlot",""]) isEqualTo (_draft getOrDefault ["targetSlot",""]))}] call _assert;
+ ["E capture never stores round count in Recipe",isNil {_recipe get "ammoCount"} && {!(_capData getOrDefault ["ammoCountPersisted",true])}] call _assert;
+ ["E capture returns transient loaded state",(_capData getOrDefault ["observedLoadedState",createHashMap]) isEqualTo (_observed getOrDefault ["loadedState",createHashMap])] call _assert;
+ ["E capture did not touch live loadout",(getUnitLoadout _unit) isEqualTo _observedBefore] call _assert;
+ ["E capture did not touch repository",(missionNamespace getVariable SP_ORG_WEAPONS_KIT_STORE) isEqualTo _storeAfterFixture] call _assert;
+ ["E original saved WeaponKit unchanged",((_newKitR get "data") get "kit") isEqualTo (([_kitId] call ServoPeregrino_Organizador_Weapons_fnc_getWeaponKit) get "data" get "kit")] call _assert;
+ private _beforeRepeat=[missionNamespace getVariable SP_ORG_WEAPONS_UI_STATE] call ServoPeregrino_Organizador_Weapons_fnc_deepCopy;
+ private _again=[_unit,"PRIMARY"] call ServoPeregrino_Organizador_Weapons_fnc_captureEquippedWeaponToDraft;
+ private _afterRepeat=missionNamespace getVariable SP_ORG_WEAPONS_UI_STATE;
+ ["E repeated capture no change",_again getOrDefault ["success",false] && {!((_again getOrDefault ["data",createHashMap]) getOrDefault ["changed",true])}] call _assert;
+ ["E repeated capture preserves revision",(((_afterRepeat get "draftsByKitId") get _kitId) getOrDefault ["revision",-1]) isEqualTo (((_beforeRepeat get "draftsByKitId") get _kitId) getOrDefault ["revision",-2])] call _assert;
+ // Simulate NOVO, without writing a session kit until the explicit SAVE handler.
+ _state=missionNamespace getVariable SP_ORG_WEAPONS_UI_STATE;
+ _state set ["selectedKitId",""];
+ _state set ["pendingNewKit",true];
+ _state set ["pendingNewName","E Capture Unsaved Fixture"];
+ _state set ["pendingCapturedDraft",createHashMap];
+ missionNamespace setVariable [SP_ORG_WEAPONS_UI_STATE,_state];
+ private _fresh=[_unit,"PRIMARY"] call ServoPeregrino_Organizador_Weapons_fnc_captureEquippedWeaponToDraft;
+ private _freshData=_fresh getOrDefault ["data",createHashMap];
+ private _stage=(missionNamespace getVariable SP_ORG_WEAPONS_UI_STATE) getOrDefault ["pendingCapturedDraft",createHashMap];
+ ["E no selection creates pending draft",_fresh getOrDefault ["success",false] && {_freshData getOrDefault ["createdNew",false]} && {count _stage>0}] call _assert;
+ ["E pending Recipe carries captured weapon",(((_stage get "recipe") get "configuration") get "weaponClass") isEqualTo (_observed get "weaponClass")] call _assert;
+ ["E pending has no repository kit",(missionNamespace getVariable SP_ORG_WEAPONS_KIT_STORE) isEqualTo _storeAfterFixture] call _assert;
+ ["E pending state marks unsaved",((missionNamespace getVariable SP_ORG_WEAPONS_UI_STATE) getOrDefault ["selectedKitId","X"]) isEqualTo "" && {((missionNamespace getVariable SP_ORG_WEAPONS_UI_STATE) getOrDefault ["pendingNewKit",false])}] call _assert;
+ private _setR=["optic",""] call ServoPeregrino_Organizador_Weapons_fnc_setPendingCapturedDraftSelection;
+ ["E pending compatibility edit valid",_setR getOrDefault ["success",false]] call _assert;
+ ["E pending editing keeps repository",(missionNamespace getVariable SP_ORG_WEAPONS_KIT_STORE) isEqualTo _storeAfterFixture] call _assert;
+ // Use a real UI SAVE, which must be the ONLY action that creates the new kit.
+ [] call ServoPeregrino_Organizador_Weapons_fnc_openInterface;
+ [] call ServoPeregrino_Organizador_Weapons_fnc_refreshInterface;
+ private _display=findDisplay SP_ORG_WEAPONS_UI_DISPLAY_IDD;
+ ["E capture control exists",!isNull (_display displayCtrl 4123)] call _assert;
+ ["E P4 capture button enabled for player's occupied slot",
+  (ctrlEnabled (_display displayCtrl 4123)) isEqualTo (
+   (([player,(missionNamespace getVariable SP_ORG_WEAPONS_UI_STATE) getOrDefault ["equipmentSlotView","PRIMARY"]]
+    call ServoPeregrino_Organizador_Weapons_fnc_getEquipmentSlotSnapshot) getOrDefault ["data",createHashMap]
+    getOrDefault ["snapshot",createHashMap]) getOrDefault ["equipped",false]
+  )
+ ] call _assert;
+ (_display displayCtrl 2001) ctrlSetText "E Capture Unsaved Fixture";
+ ["SAVE_DRAFT"] call ServoPeregrino_Organizador_Weapons_fnc_handleUIEvent;
+ private _savedState=missionNamespace getVariable SP_ORG_WEAPONS_UI_STATE;
+ private _savedId=_savedState getOrDefault ["selectedKitId",""];
+ private _savedR=if (_savedId isNotEqualTo "") then {[_savedId] call ServoPeregrino_Organizador_Weapons_fnc_getWeaponKit} else {createHashMap};
+ ["E explicit SAVE creates one WeaponKit",_savedId isNotEqualTo "" && {_savedR getOrDefault ["success",false]}] call _assert;
+ ["E save clears transient pending",!(_savedState getOrDefault ["pendingNewKit",true]) && {count (_savedState getOrDefault ["pendingCapturedDraft",createHashMap]) isEqualTo 0}] call _assert;
+ ["E saved Recipe matches pending edit",((_savedR getOrDefault ["data",createHashMap]) getOrDefault ["kit",createHashMap]) getOrDefault ["recipe",createHashMap] getOrDefault ["magazineClass","X"]) isNotEqualTo "X"] call _assert;
+ ["E SAVE did not touch player",(getUnitLoadout player) isEqualTo _playerBefore] call _assert;
+ ["E SAVE did not touch isolated target",(getUnitLoadout _unit) isEqualTo _observedBefore] call _assert;
+ // An empty selected slot fails without altering pending draft/repository.
+ private _beforeEmpty=[missionNamespace getVariable SP_ORG_WEAPONS_UI_STATE] call ServoPeregrino_Organizador_Weapons_fnc_deepCopy;
+ private _empty=[_unit,"SECONDARY"] call ServoPeregrino_Organizador_Weapons_fnc_captureEquippedWeaponToDraft;
+ ["E empty slot refused",!(_empty getOrDefault ["success",true]) && {(_empty getOrDefault ["code",""]) isEqualTo "WEAPONS_UI_CAPTURE_SLOT_EMPTY"}] call _assert;
+ ["E empty slot did not alter state",(missionNamespace getVariable SP_ORG_WEAPONS_UI_STATE) isEqualTo _beforeEmpty] call _assert;
+ ["E empty slot did not alter physical state",(getUnitLoadout _unit) isEqualTo _observedBefore] call _assert;
+};
+[] call _test;
+if (!isNull _unit) then {deleteVehicle _unit};
+private _deadline=diag_tickTime+5;
+waitUntil {sleep 0.01;isNull _unit || {diag_tickTime>=_deadline}};
+["E isolated target removed",isNull _unit] call _assert;
+deleteGroup _group;
+["E final player loadout preserved",(getUnitLoadout player) isEqualTo _playerBefore] call _assert;
+missionNamespace setVariable [SP_ORG_WEAPONS_KIT_STORE,_storeBefore];
+missionNamespace setVariable [SP_ORG_WEAPONS_UI_STATE,_stateBefore];
+[] call ServoPeregrino_Organizador_Weapons_fnc_refreshInterface;
+private _lp={_x select 1} count _checks;
+private _lb={(_x param [2,""]) isEqualTo "BLOCKED"} count _checks;
+private _lf=count _checks-_lp-_lb;
+private _passed=(_ld getOrDefault ["passed",0])+_lp;
+private _failed=(_ld getOrDefault ["failed",1])+_lf;
+private _total=(_ld getOrDefault ["total",0])+count _checks;
+diag_log format ["[SP_ORG] [WEAPONS] [AUTO_TEST_SUMMARY] mode=MISSION_FIRST_0_7_E passed=%1 failed=%2 blocked=%3 total=%4 expected=%5",_passed,_failed,_lb+(_ld getOrDefault ["blocked",0]),_total,1360+(count _checks)];
+hint format ["Weapons 0.7-E: %1/%2; falhas=%3; bloqueados=%4. Envie o RPT completo.",_passed,_total,_failed,_lb+(_ld getOrDefault ["blocked",0])];
+[_failed isEqualTo 0 && {_lb isEqualTo 0} && {_total isEqualTo 1360+(count _checks)},"WEAPONS_0_7_E_AUTO_TEST_COMPLETE","E capture tests; Arma runtime/manual approval pending.",createHashMapFromArray [
+ ["passed",_passed],["failed",_failed],["blocked",_lb+(_ld getOrDefault ["blocked",0])],["total",_total],
+ ["expected",1360+(count _checks)],["checks",_checks],["manual","PENDING"]
+]] call ServoPeregrino_Organizador_Nexus_fnc_createResult
