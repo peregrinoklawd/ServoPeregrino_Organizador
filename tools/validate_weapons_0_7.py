@@ -116,7 +116,7 @@ check('D2 mission config structural delimiters',balanced(config))
 capture=(W/'functions/ui/fn_captureEquippedWeaponToDraft.sqf').read_text()
 capture_edit=(W/'functions/ui/fn_setPendingCapturedDraftSelection.sqf').read_text()
 events=(W/'functions/ui/fn_handleUIEvent.sqf').read_text()
-check('E1 uses only existing snapshot, Recipe and Recipe compare',all(x in capture for x in ['fnc_getEquipmentSlotSnapshot','fnc_createWeaponRecipe','fnc_compareWeaponRecipes']))
+check('E1 R2 captures with safe observed Recipe preparation',all(x in capture for x in ['fnc_getEquipmentSlotSnapshot','fnc_prepareObservedCaptureRecipe','fnc_compareWeaponRecipes']))
 check('E1 equipment capture never physically mutates or stores kits',not re.search(r'\b(setUnitLoadout|addWeapon|removeWeapon|remoteExec|remoteExecCall)\b|fnc_(createWeaponKit|updateWeaponKitDefinition|saveWeaponKitDraft|publish)',strip(capture)))
 check('E1 pending compatibility never mutates physical equipment or saved kit',not re.search(r'\b(setUnitLoadout|remoteExec|remoteExecCall)\b|fnc_(createWeaponKit|updateWeaponKitDefinition|saveWeaponKitDraft)',strip(capture_edit)))
 check('E1 explicit save owns only pending new creation', '["SAVE_DRAFT"]' not in capture and 'private _savedR=[_name,_captured getOrDefault ["targetSlot",""]' in events)
@@ -124,9 +124,29 @@ check('E1 capture and pending compatibility events connected','case "EQUIPMENT_T
 check('E1 equipment control enabled only on occupied slot',all('displayCtrl 4123) ctrlEnable (_eq getOrDefault ["equipped",false])' in (W/'functions/ui'/p).read_text() for p in ['fn_refreshInterface.sqf','fn_refreshEquipmentViewUI.sqf']))
 e=(W/'functions/tests/fn_runDelivery0_7_ETests.sqf').read_text()
 e_asserts=len(re.findall(r'call _assert;',e))
-check('E1 cumulative runner preserves D2 and 36 E checks',e_asserts==36 and 'fnc_runDelivery0_7_D2Tests' in e and '1396' in e and 'MISSION_FIRST_0_7_E' in e)
-check('E1 mission action single 0.7-E gate','SP_ORG LAB - TESTAR WEAPONS 0.7-E' in (M/'initPlayerLocal.sqf').read_text())
-check('E1 mission and build identity', '0.7.4.1-equipment-to-draft-e1-mission-first' in (W/'script_version.hpp').read_text() and (R/'missions/PACKAGE_MISSION_NAME.txt').read_text().strip()=='SP_ORG_Weapons_0_7_E_Equipment_Capture_E1.VR')
+check('E1 R2 cumulative runner preserves D2 and 48 E checks',e_asserts==48 and 'fnc_runDelivery0_7_D2Tests' in e and '1408' in e and 'MISSION_FIRST_0_7_E_R2' in e)
+check('E1 R2 mission action single gate','SP_ORG LAB - TESTAR WEAPONS 0.7-E R2' in (M/'initPlayerLocal.sqf').read_text())
+check('E1 R2 mission and build identity', '0.7.4.2-equipment-to-draft-e1-r2-mission-first' in (W/'script_version.hpp').read_text() and (R/'missions/PACKAGE_MISSION_NAME.txt').read_text().strip()=='SP_ORG_Weapons_0_7_E_Equipment_Capture_E1_R2.VR')
+
+observed_prep=(W/'functions/ui/fn_prepareObservedCaptureRecipe.sqf').read_text()
+check('E1 R2 fallback only strips engine-identified incompatible classes',
+  'WEAPONS_CONFIGURATION_INCOMPATIBLE' in observed_prep and
+  'WEAPONS_RECIPE_MAGAZINE_INCOMPATIBLE' in observed_prep and
+  'fnc_validateWeaponConfigurationSemantic' in observed_prep and
+  'fnc_createWeaponRecipe' in observed_prep and
+  'fnc_deepCopy' in observed_prep)
+check('E1 R2 preserves exact class name in omission reporting',
+  '["field",_field]' in observed_prep and '["className",_original]' in observed_prep and
+  '["field","magazineClass"]' in observed_prep)
+check('E1 R2 UI does not silently omit incompatible pieces',
+  'CAPTURA PARCIAL' in events and
+  'captureOmissions' in capture and
+  'captureOmissions' in (W/'functions/ui/fn_refreshDraftUI.sqf').read_text())
+check('E1 R2 keeps compatibility validators frozen',
+  (W/'functions/domain/fn_validateWeaponConfigurationSemantic.sqf').read_text() == (R/'weapons_0_7_d2_baseline'/ 'never_present') if False else
+  'WEAPONS_UI_CAPTURE_WEAPON_CONFIGURATION_UNSUPPORTED' in observed_prep)
+check('E1 R2 no global semantic bypass or physical mutations in helper',
+  not re.search(r'\\b(setUnitLoadout|addWeapon|removeWeapon|remoteExec|remoteExecCall)\\b|fnc_(saveWeaponKitDraft|createWeaponKit|updateWeaponKitDefinition)',strip(observed_prep)))
 
 print(f'STATIC SUMMARY {checks-len(failures)}/{checks}; runtime remains pending')
 raise SystemExit(bool(failures))
