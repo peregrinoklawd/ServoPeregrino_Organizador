@@ -68,7 +68,9 @@ private _test={
  ["E capture returns transient loaded state",(_capData getOrDefault ["observedLoadedState",createHashMap]) isEqualTo (_observed getOrDefault ["loadedState",createHashMap])] call _assert;
  ["E capture did not touch live loadout",(getUnitLoadout _unit) isEqualTo _observedBefore] call _assert;
  ["E capture did not touch repository",(missionNamespace getVariable SP_ORG_WEAPONS_KIT_STORE) isEqualTo _storeAfterFixture] call _assert;
- ["E original saved WeaponKit unchanged",((_newKitR get "data") get "kit") isEqualTo (([_kitId] call ServoPeregrino_Organizador_Weapons_fnc_getWeaponKit) get "data" get "kit")] call _assert;
+ private _savedFixtureR=[_kitId] call ServoPeregrino_Organizador_Weapons_fnc_getWeaponKit;
+ private _savedFixture=(_savedFixtureR getOrDefault ["data",createHashMap]) getOrDefault ["kit",createHashMap];
+ ["E original saved WeaponKit unchanged",((_newKitR get "data") get "kit") isEqualTo _savedFixture] call _assert;
  private _beforeRepeat=[missionNamespace getVariable SP_ORG_WEAPONS_UI_STATE] call ServoPeregrino_Organizador_Weapons_fnc_deepCopy;
  private _again=[_unit,"PRIMARY"] call ServoPeregrino_Organizador_Weapons_fnc_captureEquippedWeaponToDraft;
  private _afterRepeat=missionNamespace getVariable SP_ORG_WEAPONS_UI_STATE;
