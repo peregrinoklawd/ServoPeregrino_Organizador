@@ -20,6 +20,12 @@ private _offset = (_state getOrDefault ["catalogOffset",0]) max 0;
 private _windowSize = ((_state getOrDefault ["catalogWindowSize",SP_ORG_WEAPONS_UI_CATALOG_WINDOW_SIZE]) max 8) min 100;
 
 if (_sourceKitId isEqualTo "") then {_sourceKitId = _state getOrDefault ["selectedKitId",""]};
+// A pending NOVO must supply its own weapon-class accessory compatibility.
+// This does not create a kit or mutate any saved repository entry.
+private _pendingCaptured = if (
+ _sourceKitId isEqualTo ""
+ && {_state getOrDefault ["pendingNewKit",false]}
+) then {_state getOrDefault ["pendingCapturedDraft",createHashMap]} else {createHashMap};
 
 // Base weapon rows are immutable during a session/build. Convert the 0.3 catalog only once,
 // instead of rebuilding thousands of HashMaps on every wheel tick like R2 did.
@@ -73,6 +79,12 @@ if (_canReuseProjectionSource) then {
  _selectedKitSlot = _projection getOrDefault ["sourceSlot",""];
  _selectedWeaponClass = _projection getOrDefault ["sourceWeaponClass",""];
 } else {
+ if ((count _pendingCaptured)>0) then {
+  _sourceDraft=_pendingCaptured;
+  _selectedKitSlot=toUpperANSI (_pendingCaptured getOrDefault ["targetSlot",""]);
+  private _pendingRecipe=_pendingCaptured getOrDefault ["recipe",createHashMap];
+  _selectedWeaponClass=(_pendingRecipe getOrDefault ["configuration",createHashMap]) getOrDefault ["weaponClass",""];
+ };
  if ((count _sourceKit) isEqualTo 0 && {_sourceKitId isNotEqualTo ""}) then {
   private _kitResult = [_sourceKitId] call ServoPeregrino_Organizador_Weapons_fnc_getWeaponKit;
   if (_kitResult get "success") then {_sourceKit = ((_kitResult get "data") get "kit")};
@@ -89,7 +101,7 @@ if (_canReuseProjectionSource) then {
  };
 };
 
-private _sourceKey = format ["%1|%2|%3|%4",SERVO_PEREGRINO_ORGANIZADOR_WEAPONS_BUILD,_baseCatalogCount,toLowerANSI _sourceKitId,toLowerANSI _selectedWeaponClass];
+private _sourceKey = format ["%1|%2|%3|%4|%5",SERVO_PEREGRINO_ORGANIZADOR_WEAPONS_BUILD,_baseCatalogCount,toLowerANSI _sourceKitId,toLowerANSI _selectedWeaponClass,toUpperANSI _selectedKitSlot];
 private _projectionBuiltNow = false;
 private _projectionBuildMs = 0;
 
