@@ -147,7 +147,7 @@ for domain_name in ['fn_validateWeaponConfigurationSemantic.sqf','fn_validateWea
   approved=subprocess.check_output(['git','show','6d8a68af0d3e05b68fc8019f712feebf6b9c2a60:'+rel],cwd=R,text=True)
   check('E1 R2 freezes strict domain validator '+domain_name,approved==(W/'functions/domain'/domain_name).read_text())
 check('E1 R2 no global semantic bypass or physical mutations in helper',
-  not re.search(r'\\b(setUnitLoadout|addWeapon|removeWeapon|remoteExec|remoteExecCall)\\b|fnc_(saveWeaponKitDraft|createWeaponKit|updateWeaponKitDefinition)',strip(observed_prep)))
+  not re.search(r'\b(setUnitLoadout|addWeapon|removeWeapon|remoteExec|remoteExecCall)\b|fnc_(saveWeaponKitDraft|createWeaponKit|updateWeaponKitDefinition)',strip(observed_prep)))
 
 print(f'STATIC SUMMARY {checks-len(failures)}/{checks}; runtime remains pending')
 raise SystemExit(bool(failures))
