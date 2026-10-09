@@ -96,13 +96,10 @@ private _test={
  [] call ServoPeregrino_Organizador_Weapons_fnc_refreshInterface;
  private _display=findDisplay SP_ORG_WEAPONS_UI_DISPLAY_IDD;
  ["E capture control exists",!isNull (_display displayCtrl 4123)] call _assert;
- ["E P4 capture button enabled for player's occupied slot",
-  (ctrlEnabled (_display displayCtrl 4123)) isEqualTo (
-   (([player,(missionNamespace getVariable SP_ORG_WEAPONS_UI_STATE) getOrDefault ["equipmentSlotView","PRIMARY"]]
-    call ServoPeregrino_Organizador_Weapons_fnc_getEquipmentSlotSnapshot) getOrDefault ["data",createHashMap]
-    getOrDefault ["snapshot",createHashMap]) getOrDefault ["equipped",false]
-  )
- ] call _assert;
+ private _p4Slot=(missionNamespace getVariable SP_ORG_WEAPONS_UI_STATE) getOrDefault ["equipmentSlotView","PRIMARY"];
+ private _playerSnapshotR=[player,_p4Slot] call ServoPeregrino_Organizador_Weapons_fnc_getEquipmentSlotSnapshot;
+ private _playerSnapshot=(_playerSnapshotR getOrDefault ["data",createHashMap]) getOrDefault ["snapshot",createHashMap];
+ ["E P4 capture button matches occupied slot",(ctrlEnabled (_display displayCtrl 4123)) isEqualTo (_playerSnapshot getOrDefault ["equipped",false])] call _assert;
  (_display displayCtrl 2001) ctrlSetText "E Capture Unsaved Fixture";
  ["SAVE_DRAFT"] call ServoPeregrino_Organizador_Weapons_fnc_handleUIEvent;
  private _savedState=missionNamespace getVariable SP_ORG_WEAPONS_UI_STATE;
@@ -110,7 +107,10 @@ private _test={
  private _savedR=if (_savedId isNotEqualTo "") then {[_savedId] call ServoPeregrino_Organizador_Weapons_fnc_getWeaponKit} else {createHashMap};
  ["E explicit SAVE creates one WeaponKit",_savedId isNotEqualTo "" && {_savedR getOrDefault ["success",false]}] call _assert;
  ["E save clears transient pending",!(_savedState getOrDefault ["pendingNewKit",true]) && {count (_savedState getOrDefault ["pendingCapturedDraft",createHashMap]) isEqualTo 0}] call _assert;
- ["E saved Recipe matches pending edit",((_savedR getOrDefault ["data",createHashMap]) getOrDefault ["kit",createHashMap]) getOrDefault ["recipe",createHashMap] getOrDefault ["magazineClass","X"]) isNotEqualTo "X"] call _assert;
+ private _savedKit=(_savedR getOrDefault ["data",createHashMap]) getOrDefault ["kit",createHashMap];
+ private _savedRecipe=_savedKit getOrDefault ["recipe",createHashMap];
+ private _editedDraft=(_setR getOrDefault ["data",createHashMap]) getOrDefault ["draft",createHashMap];
+ ["E saved Recipe matches pending edit",_savedRecipe isEqualTo (_editedDraft getOrDefault ["recipe",createHashMap])] call _assert;
  ["E SAVE did not touch player",(getUnitLoadout player) isEqualTo _playerBefore] call _assert;
  ["E SAVE did not touch isolated target",(getUnitLoadout _unit) isEqualTo _observedBefore] call _assert;
  // An empty selected slot fails without altering pending draft/repository.
@@ -136,9 +136,9 @@ private _lf=count _checks-_lp-_lb;
 private _passed=(_ld getOrDefault ["passed",0])+_lp;
 private _failed=(_ld getOrDefault ["failed",1])+_lf;
 private _total=(_ld getOrDefault ["total",0])+count _checks;
-diag_log format ["[SP_ORG] [WEAPONS] [AUTO_TEST_SUMMARY] mode=MISSION_FIRST_0_7_E passed=%1 failed=%2 blocked=%3 total=%4 expected=%5",_passed,_failed,_lb+(_ld getOrDefault ["blocked",0]),_total,1360+(count _checks)];
+diag_log format ["[SP_ORG] [WEAPONS] [AUTO_TEST_SUMMARY] mode=MISSION_FIRST_0_7_E passed=%1 failed=%2 blocked=%3 total=%4 expected=%5",_passed,_failed,_lb+(_ld getOrDefault ["blocked",0]),_total,1396];
 hint format ["Weapons 0.7-E: %1/%2; falhas=%3; bloqueados=%4. Envie o RPT completo.",_passed,_total,_failed,_lb+(_ld getOrDefault ["blocked",0])];
-[_failed isEqualTo 0 && {_lb isEqualTo 0} && {_total isEqualTo 1360+(count _checks)},"WEAPONS_0_7_E_AUTO_TEST_COMPLETE","E capture tests; Arma runtime/manual approval pending.",createHashMapFromArray [
+[_failed isEqualTo 0 && {_lb isEqualTo 0} && {_total isEqualTo 1396},"WEAPONS_0_7_E_AUTO_TEST_COMPLETE","E capture tests; Arma runtime/manual approval pending.",createHashMapFromArray [
  ["passed",_passed],["failed",_failed],["blocked",_lb+(_ld getOrDefault ["blocked",0])],["total",_total],
- ["expected",1360+(count _checks)],["checks",_checks],["manual","PENDING"]
+ ["expected",1396],["checks",_checks],["manual","PENDING"]
 ]] call ServoPeregrino_Organizador_Nexus_fnc_createResult
