@@ -14,6 +14,7 @@ private _state = createHashMapFromArray [
  ["previousKitIdBeforeNew",""],
  ["pendingNewKit",false],
  ["pendingNewName",""],
+ ["pendingCapturedDraft",createHashMap],
  ["selectedKitIsNew",false],
  ["draftNameInput",""],
  ["draftNameEditing",false],
