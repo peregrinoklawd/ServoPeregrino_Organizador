@@ -146,7 +146,12 @@ if ((count _kit) isEqualTo 0) then {
  private _fieldLabels = createHashMapFromArray [["weaponClass","Arma"],["optic","Mira"],["muzzle","Boca"],["pointer","Apontador"],["bipod","Bipé/Emp."],["magazineClass","Carregador"]];
  private _changedLabels = _changedFields apply {_fieldLabels getOrDefault [_x,_x]};
  private _changedText = if ((count _changedLabels)>0) then {format ["<t color='#FFC247'>ALTERAÇÕES: %1</t><br/><br/>",_changedLabels joinString ", "]} else {"<t color='#73D6A4'>SEM ALTERAÇÕES DE EQUIPAMENTO</t><br/><br/>"};
- private _hint=format ["%1%2",_changedText,if (_isNew) then {if (_capturedNew) then {"ARMA CAPTURADA — RASCUNHO NOVO, ainda sem WeaponKit salvo. Edite os acessórios ou pressione SALVAR para criar o kit. Munição restante não é salva."} else {"WeaponKit NOVO. O preview acima usa a mesma composição vertical do equipamento e está preparado para futura evolução 3D. Use SALVAR para confirmar."}} else {if (_effectiveDirty) then {"Rascunho ALTERADO. Linhas âmbar indicam diferenças reais de equipamento; mudanças de nome também mantêm o estado ALTERADO até SALVAR."} else {"WeaponKit SALVO. Preview, identificação e componentes seguem a mesma hierarquia visual do CONTEÚDO DO EQUIPAMENTO."}}];
+ private _omittedCapture=_draft getOrDefault ["captureOmissions",[]];
+ private _omittedNotice=if (count _omittedCapture>0) then {
+  private _missing=_omittedCapture apply {format ["%1: %2",_x getOrDefault ["field",""],_x getOrDefault ["className",""]]};
+  format ["<t color='#FFC247'>CAPTURA PARCIAL: peça(s) não copiadas por incompatibilidade — %1.</t><br/><br/>",[_missing joinString ", "] call ServoPeregrino_Organizador_Weapons_fnc_escapeStructuredText]
+ } else {""};
+ private _hint=format ["%1%2",_omittedNotice+_changedText,if (_isNew) then {if (_capturedNew) then {"ARMA CAPTURADA — RASCUNHO NOVO, ainda sem WeaponKit salvo. Edite os acessórios ou pressione SALVAR para criar o kit. Munição restante não é salva."} else {"WeaponKit NOVO. O preview acima usa a mesma composição vertical do equipamento e está preparado para futura evolução 3D. Use SALVAR para confirmar."}} else {if (_effectiveDirty) then {"Rascunho ALTERADO. Linhas âmbar indicam diferenças reais de equipamento; mudanças de nome também mantêm o estado ALTERADO até SALVAR."} else {"WeaponKit SALVO. Preview, identificação e componentes seguem a mesma hierarquia visual do CONTEÚDO DO EQUIPAMENTO."}}];
  (_display displayCtrl 2040) ctrlSetStructuredText parseText _hint;
 };
 
