@@ -34,6 +34,12 @@ private _run={
  private _load=[_base] call ServoPeregrino_Organizador_Weapons_fnc_deepCopy;_load set [_si,_row];
  if (_kind isEqualTo "WEAPON" && {!_draftRoute}) then {_load set [["PRIMARY","SECONDARY","HANDGUN"] find _expectedSlot,[]]};
  _unit setUnitLoadout [_load,false];
+ // Isolated positive case: an unrequested magazine must stay absent when
+ // the fixture contains no spare magazines for the engine to auto-load.
+ // Never remove magazine cargo from a real player: this fixture is LAB-only.
+ if (_label isEqualTo "WEAPON_PRIMARY_NO_CARGO_AMMO") then {
+  removeAllItemsWithMagazines _unit;
+ };
  private _before=[getUnitLoadout _unit] call ServoPeregrino_Organizador_Weapons_fnc_deepCopy;
  private _r=createHashMap;
  if (_draftRoute) then {
@@ -45,8 +51,22 @@ private _run={
  } else {_r=[_unit,_class,_kind,_slot,_fault] call ServoPeregrino_Organizador_Weapons_fnc_executeCatalogApplication};
  private _d=_r getOrDefault ["data",createHashMap];private _post=_d getOrDefault ["postValidation",createHashMap];
  private _ok=_expectedCode in ["WEAPONS_APPLICATION_APPLIED","WEAPONS_APPLICATION_ALREADY_APPLIED"];
- private _rollback=!(_fault isEqualTo "");
+ // In an ammo-rich unit the engine may auto-load a spare magazine into a
+ // weapon whose Recipe specifies none. Our strict post-validator must refuse
+ // and restore, not silently accept unrequested ammo.
+ private _rollback=!(_fault isEqualTo "") || {_expectedCode isEqualTo "WEAPONS_APPLICATION_APPLY_VERIFY_FAILED"};
  private _after=[getUnitLoadout _unit] call ServoPeregrino_Organizador_Weapons_fnc_deepCopy;
+ if (_label in ["WEAPON_PRIMARY","WEAPON_PRIMARY_NO_CARGO_AMMO"]) then {
+  diag_log format [
+   "[SP_ORG] [WEAPONS] [NO_MAG_D2_DIAGNOSTIC] scenario=%1 expectedCode=%2 actualCode=%3 success=%4 failurePhase=%5 rollbackAttempted=%6 rollbackSucceeded=%7 rollbackRestoredExactly=%8 preMagazine=%9 postValidationExpectedRow=%10 postValidationObservedRow=%11 restoredRow=%12",
+   _label,_expectedCode,_r getOrDefault ["code",""],_r getOrDefault ["success",false],
+   _d getOrDefault ["failurePhase",""],_d getOrDefault ["rollbackAttempted",false],
+   _d getOrDefault ["rollbackSucceeded",false],_d getOrDefault ["rollbackRestoredExactly",false],
+   (_before param [0,[]]) param [4,[]],
+   _post getOrDefault ["expectedTargetRow",[]],_post getOrDefault ["observedTargetRow",[]],
+   _after param [0,[]]
+  ];
+ };
  private _targetSi=["PRIMARY","SECONDARY","HANDGUN"] find _expectedSlot;
  private _fpA=[_before,_expectedSlot] call ServoPeregrino_Organizador_Weapons_fnc_getApplicationPreservationFingerprint;
  private _fpB=[_after,_expectedSlot] call ServoPeregrino_Organizador_Weapons_fnc_getApplicationPreservationFingerprint;
@@ -77,7 +97,11 @@ private _p07=["hgun_P07_F","","","",["16Rnd_9x21_Mag",7],[],""];
 {
  private _start=count _checks;_x call _run;[_start,12,_x select 0] call _blockTo;
 } forEach [
- ["WEAPON_PRIMARY","arifle_MX_F","WEAPON","HANDGUN",_p07,"PRIMARY","WEAPONS_APPLICATION_APPLIED","",false],
+ // Ammo-rich fixture: engine may auto-load a compatible spare magazine.
+ // Strict NO_RECIPE_MAGAZINE must reject it and restore the exact Snapshot.
+ ["WEAPON_PRIMARY","arifle_MX_F","WEAPON","HANDGUN",_p07,"PRIMARY","WEAPONS_APPLICATION_APPLY_VERIFY_FAILED","",false],
+ // Ammo-free isolated fixture: unrequested ammo must remain absent; apply succeeds.
+ ["WEAPON_PRIMARY_NO_CARGO_AMMO","arifle_MX_F","WEAPON","HANDGUN",_p07,"PRIMARY","WEAPONS_APPLICATION_APPLIED","",false],
  ["WEAPON_HANDGUN","hgun_ACPC2_F","WEAPON","PRIMARY",_mx,"HANDGUN","WEAPONS_APPLICATION_APPLIED","",false],
  ["WEAPON_SECONDARY","launch_NLAW_F","WEAPON","PRIMARY",_mx,"SECONDARY","WEAPONS_APPLICATION_APPLIED","",false],
  ["OPTIC","optic_Hamr","OPTIC","PRIMARY",_mx,"PRIMARY","WEAPONS_APPLICATION_APPLIED","",false],
@@ -133,6 +157,6 @@ if (!isNull _unit) then {deleteVehicle _unit};private _deadline=diag_tickTime+5;
 missionNamespace setVariable [SP_ORG_WEAPONS_UI_STATE,_stateBefore];missionNamespace setVariable [SP_ORG_WEAPONS_KIT_STORE,_storeBefore];[] call ServoPeregrino_Organizador_Weapons_fnc_refreshInterface;
 private _lp={_x select 1} count _checks;private _lb={(_x param [2,""]) isEqualTo "BLOCKED"} count _checks;
 private _passed=(_ld getOrDefault ["passed",0])+_lp;private _failed=(_ld getOrDefault ["failed",1])+count _checks-_lp-_lb;private _total=(_ld getOrDefault ["total",0])+count _checks;
-diag_log format ["[SP_ORG] [WEAPONS] [AUTO_TEST_SUMMARY] mode=MISSION_FIRST_0_7_D2 passed=%1 failed=%2 blocked=%3 total=%4 expected=1348 UNDO=UNDO_DEFERRED MP=MP_DEFERRED_0_8",_passed,_failed,_blocked,_total];
+diag_log format ["[SP_ORG] [WEAPONS] [AUTO_TEST_SUMMARY] mode=MISSION_FIRST_0_7_D2 passed=%1 failed=%2 blocked=%3 total=%4 expected=1360 UNDO=UNDO_DEFERRED MP=MP_DEFERRED_0_8",_passed,_failed,_blocked,_total];
 hint format ["Weapons 0.7-D2: %1/%2; falhas=%3; bloqueados=%4. Envie o RPT completo.",_passed,_total,_failed,_blocked];
-[_failed isEqualTo 0 && {_blocked isEqualTo 0} && {_total isEqualTo 1348},"WEAPONS_0_7_D2_AUTO_TEST_COMPLETE","Consolidated runtime gate; real Arma approval required.",createHashMapFromArray [["passed",_passed],["failed",_failed],["blocked",_blocked],["total",_total],["expected",1348],["checks",_checks],["undo","UNDO_DEFERRED"]]] call ServoPeregrino_Organizador_Nexus_fnc_createResult
+[_failed isEqualTo 0 && {_blocked isEqualTo 0} && {_total isEqualTo 1360},"WEAPONS_0_7_D2_AUTO_TEST_COMPLETE","Consolidated runtime gate; real Arma approval required.",createHashMapFromArray [["passed",_passed],["failed",_failed],["blocked",_blocked],["total",_total],["expected",1360],["checks",_checks],["undo","UNDO_DEFERRED"]]] call ServoPeregrino_Organizador_Nexus_fnc_createResult
