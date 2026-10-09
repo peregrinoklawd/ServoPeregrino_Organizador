@@ -45,3 +45,14 @@ Os campos `engineRetainedImmediate` e `engineRetainedStable` descrevem o experim
 - Verificado localmente: ZIP com 519 entradas, 1 pasta raiz, CRC sem erros, função de diagnóstico e runner R3 presentes.
 
 **PENDENTE**: RPT do Arma 3 e testes manuais do operador para E1 R3. Não homologar nem congelar E1 nesta fase.
+
+## R3 R1 — Hotfix após RPT real de 09/10/2026
+
+O RPT integral da missão R3, entre 18:41 e 18:45, apontou **1419 PASS / 1 FAIL / 0 BLOCKED**, com único FAIL `E R3 catalog slot follows captured draft`. O Catálogo era reconstruído para a classe correta da arma, mas lia o slot do WeaponKit salvo **antes de buscar o rascunho modificado**; um kit antigo de HANDGUN capturado para PRIMARY expunha o slot anterior. A correção pontual reordena `getOrCreateWeaponKitDraft` e leitura de `targetSlot` em `fn_getUICatalogWindow.sqf`. A CI exige explicitamente essa ordem.
+
+O mesmo RPT confirma capturas parciais às 18:43:20 (kit existente) e 18:45:30 (NOVO), arma `MCC_RD704_AFG`, bipod-slot observado `MCC_Handbrake_BLK`, exclusão `ENGINE_ATTACHMENT_INCOMPATIBLE`. A projeção foi reconstruída (`projectionBuilt=true`). Não há nenhuma linha `COMPAT_AUDIT`: **o diagnóstico específico Arma/CBA/BIS não foi executado ou não foi registrado**; nenhuma conclusão definitiva sobre compatibilidade dinâmica é autorizada por esse RPT. Aviso da engine cita separadamente `rhsusf_acc_grip2`.
+
+- Entrega: `SP_ORG_Weapons_0_7_E_Equipment_Capture_E1_R3_R1.VR`, semantic **0.7.4.3**, build `0.7.4.3-equipment-compatibility-audit-e1-r3-r1-mission-first`.
+- Workflow [37995683506](https://github.com/peregrinoklawd/ServoPeregrino_Organizador/actions/runs/37995683506): **SUCCESS**, 204/204 checks estáticos.
+- ZIP `SP_ORG_Weapons_0_7_E_Equipment_Capture_E1_R3_R1.zip`: SHA256 `9d80f9ac0003976a8154e482b0449b87a18ac104e801548e315cd6388fea88d0`; 519 entradas, CRC válido, uma única pasta raiz, laboratório diagnóstico presente.
+- **Ainda não homologada.** Novo gate cumulativo: **1420/1420**, 0 FAIL, 0 BLOCKED, seguido de **SP_ORG LAB - DIAGNOSTICAR COMPATIBILIDADE** (com arma MCC equipada, após fechar ACE Arsenal) e avaliação manual em kit existente/NOVO. Sem whitelist, alteração no executor físico, modificações da baseline D2 R1, merge ou PBO.
