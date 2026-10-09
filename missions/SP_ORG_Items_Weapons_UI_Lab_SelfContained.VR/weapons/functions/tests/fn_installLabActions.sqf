@@ -28,8 +28,8 @@ _unit addAction ["Weapons | Compatibilidade MX - RPT",{
  hint "Compatibilidade da MX gravada no RPT.";
 }];
 
-_unit addAction ["Weapons | Sobre o teste 0.7-E",{
- hint "Visual baseline 0.6-F R6; Weapons 0.7-E captura arma equipada para rascunho. Use SP_ORG LAB - TESTAR WEAPONS 0.7-E. Não abra a UI durante o teste. Undo deferred.";
+_unit addAction ["Weapons | Sobre o teste 0.7-E R2",{
+ hint "Visual baseline 0.6-F R6; Weapons 0.7-E captura arma equipada para rascunho. Use SP_ORG LAB - TESTAR WEAPONS 0.7-E R2. Não abra a UI durante o teste. Undo deferred.";
 }];
 
 _unit addEventHandler ["Respawn",{params ["_new"];[_new] call ServoPeregrino_Organizador_Weapons_fnc_installLabActions}];
