@@ -1,6 +1,6 @@
 {
   "generated_from": "machine/PROJECT_STATE.json",
-  "snapshot_date": "2026-10-08",
+  "snapshot_date": "2026-10-09",
   "repository": "peregrinoklawd/ServoPeregrino_Organizador",
   "modules": [
     {
@@ -183,14 +183,14 @@
       "id": "Weapons",
       "addon": "ServoPeregrino_Organizador_Weapons",
       "mandatory": false,
-      "status": "MISSION_FIRST_CANDIDATE_STATIC_READY_RUNTIME_PENDING",
+      "status": "MISSION_FIRST_0_7_D2_R1_USER_HOMOLOGATED_FROZEN_CLEAN_RPT_ARCHIVE_PENDING",
       "stable_version": {
-        "display": "0.7-A mission-first",
-        "semantic": "0.7.0.1 mission-first",
-        "build": "0.7.0.1-plan-snapshot-dry-run-mission-first"
+        "display": "0.7-D2 R1 mission-first",
+        "semantic": "0.7.3.2 mission-first",
+        "build": "0.7.3.2-consolidated-runtime-hardening-d2-r1-mission-first"
       },
       "development_version": {
-        "display": "0.7-D2 mission-first",
+        "display": "0.7-D2 R1 mission-first",
         "semantic": "0.7.3.2 mission-first",
         "build": "0.7.3.2-consolidated-runtime-hardening-d2-r1-mission-first"
       },
@@ -230,9 +230,9 @@
           "persistence.provider.v1"
         ]
       },
-      "next_gate": "One real-Arma D2 cumulative RPT: 1360 PASS, 0 FAIL, 0 BLOCKED; then manual draft/catalog checks",
-      "homologated_artifact": "0.7-A: 673/673, 0 FAIL.",
-      "current_candidate_artifact": "SP_ORG_Weapons_0_7_D2_NoMag_Contract_Review_R1.VR",
+      "next_gate": "FROZEN mission-first. Optional archive/audit of last clean 1360 expected AUTO RPT; next feature CAPTURE_EQUIPPED_WEAPON_TO_DRAFT requires separate branch. MP/JIP/PBO/Undo deferred.",
+      "homologated_artifact": "Weapons 0.7-D2 R1 mission-first operator approved: reported zero FAIL in latest auto run (clean RPT not independently audited), manual checks approved. Baseline branch baseline/weapons-0.7-d2-r1-homologated; code 0d36ce24b04dc11399ff58142a1179f0082a341b; mission SP_ORG_Weapons_0_7_D2_NoMag_Contract_Review_R1.VR; ZIP SHA256 81cabddb9a4fd97e7a23e57c52d3f4fe21bb05380f2943516f78f7204fe592ec.",
+      "current_candidate_artifact": null,
       "mission_first_validation": {
         "lifecycle_0_1_b": "APPROVED_SP",
         "weapon_configuration_0_2": "APPROVED_SP",
@@ -245,7 +245,7 @@
         "weapon_kit": "ONE_CONFIGURED_WEAPON_PER_TARGET_SLOT",
         "weapon_kit_repository": "SESSION_LOCAL_CANDIDATE",
         "slot_isolation": "PRESERVE_ALL_NON_TARGET_LOADOUT_DOMAINS",
-        "next": "D2 real RPT and manual gate; no 0.8",
+        "next": "D2 R1 operator-approved/frozen; capture equipped weapon → draft is backlog; no MP 0.8 gate opened.",
         "weapon_kit_specific_checks": "50_OF_50",
         "weapon_kit_slots": "PRIMARY_HANDGUN_SECONDARY",
         "weapon_kit_loadout_mutation": "NONE",
@@ -322,27 +322,69 @@
         "loadout_mutation": "TARGET_SLOT_ONLY_LOCAL_APPLY",
         "current_candidate_0_7_d2": {
           "branch": "feature/weapons-0.7-d2-consolidated-runtime-hardening",
-          "status": "STATIC_READY_RUNTIME_PENDING",
+          "status": "USER_HOMOLOGATED_MISSION_FIRST_FROZEN_CLEAN_RPT_ARCHIVE_PENDING",
           "display": "0.7-D2",
           "semantic": "0.7.3.2",
           "build": "0.7.3.2-consolidated-runtime-hardening-d2-r1-mission-first",
           "origin_head": "8c177c4a05b4018231bd0c11538bcfa2cc81f53a",
           "expected_checks": 1360,
-          "local_checks": 239,
+          "local_checks": 251,
           "static_checks": "169/169",
           "ui_physical_application": "LOCAL_DRAFT_AND_CATALOG_APPLY_0_7_D2",
           "undo": "UNDO_DEFERRED",
           "multiplayer": "MP_DEFERRED_0_8",
           "mission": "SP_ORG_Weapons_0_7_D2_NoMag_Contract_Review_R1.VR",
           "test_action": "SP_ORG LAB - TESTAR WEAPONS 0.7-D2",
-          "ammo_runtime_measurement": "PENDING_D2_RPT_CONFIG_COUNT_IMMEDIATE_POST_RETURN_NEXT_FRAME",
-          "homologated": false,
-          "code_commit": "ecee6ee23cb0018c699c8047d7dc8fce3589cba5",
-          "workflow_run": 37730110664,
-          "artifact_id": 11529253605,
-          "zip_sha256": "7fcac528f8d23245f1cbc2b736aa8e18ba35a9d20a0f7d3360937cf3e1e465a1",
-          "package_validation": "462_FILES_CRC_SOURCE_MATCH_ONE_MISSION",
-          "workflow_conclusion": "success"
+          "ammo_runtime_measurement": "NO_RECIPE_MAGAZINE_TWO_FIXTURES_VERIFIED_PREVIOUS_RPT",
+          "homologated": true,
+          "code_commit": "0d36ce24b04dc11399ff58142a1179f0082a341b",
+          "workflow_run": 37872918374,
+          "artifact_id": 11590644990,
+          "zip_sha256": "81cabddb9a4fd97e7a23e57c52d3f4fe21bb05380f2943516f78f7204fe592ec",
+          "package_validation": "514_FILES_CRC_AND_SHA256_VERIFIED",
+          "workflow_conclusion": "success",
+          "baseline_branch": "baseline/weapons-0.7-d2-r1-homologated",
+          "runtime_evidence": "USER_REPORTED_ZERO_FAILS_FINAL_CLEAN_RPT_NOT_ATTACHED",
+          "manual_gate": "USER_APPROVED"
+        },
+        "0.7-D2-R1": {
+          "status": "USER_HOMOLOGATED_MISSION_FIRST_FROZEN_CLEAN_RPT_ARCHIVE_PENDING",
+          "auto_test_expected": {
+            "passed": 1360,
+            "failed": 0,
+            "blocked": 0,
+            "total": 1360
+          },
+          "auto_test_latest": {
+            "source": "USER_REPORT",
+            "reported_failed": 0,
+            "verified_summary": false,
+            "rpt_provided": false
+          },
+          "previous_rpt_audited": {
+            "passed": 1357,
+            "failed": 3,
+            "blocked": 0,
+            "total": 1360,
+            "classification": "UI_OPENED_DURING_D_TEST_PROBABLE_DRAFT_NORMALIZATION_INTERFERENCE"
+          },
+          "manual_gate": "USER_APPROVED",
+          "static_validation": "GITHUB_ACTIONS_GREEN",
+          "code_commit": "0d36ce24b04dc11399ff58142a1179f0082a341b",
+          "branch": "baseline/weapons-0.7-d2-r1-homologated",
+          "source_branch": "feature/weapons-0.7-d2-consolidated-runtime-hardening",
+          "mission": "SP_ORG_Weapons_0_7_D2_NoMag_Contract_Review_R1.VR",
+          "zip_sha256": "81cabddb9a4fd97e7a23e57c52d3f4fe21bb05380f2943516f78f7204fe592ec",
+          "artifact_id": 11590644990,
+          "workflow_run": 37872918374,
+          "scope": "SINGLE_PLAYER_MISSION_FIRST_LOCAL_APPLICATION",
+          "deferred": [
+            "MP_0_8",
+            "JIP",
+            "PBO_ADDON_INTEGRATION",
+            "UNDO",
+            "CAPTURE_EQUIPMENT_TO_DRAFT"
+          ]
         }
       }
     },
