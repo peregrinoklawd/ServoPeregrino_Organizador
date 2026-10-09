@@ -1,7 +1,7 @@
 author = "Claudio Malta Telhada";
-onLoadName = "SP_ORG UI Lab - Weapons 0.7-D2";
-onLoadMission = "Weapons 0.7-D2: rascunho e Catálogo equipam localmente sem salvar, com aplicação slot-safe e rollback validado.";
-overviewText = "Candidata D1. B2/C/D aguardam RPT real sequencial. Items e UICommon congelados. Undo deferred; multiplayer 0.8 deferred.";
+onLoadName = "SP_ORG UI Lab - Weapons 0.7-E";
+onLoadMission = "Weapons 0.7-E: CAPTURAR ARMA EQUIPADA atualiza somente o rascunho; aplicação física 0.7-D2 preservada.";
+overviewText = "Weapons 0.7-E E1 candidata mission-first; baseline D2 R1 congelada. Captura de equipamento para rascunho, sem salvar automaticamente. Undo e multiplayer adiados.";
 enableDebugConsole = 1;
 disabledAI = 1;
 respawn = 3;
@@ -256,6 +256,8 @@ class ServoPeregrino_Organizador_Weapons
    class getWeaponPresentationInfo {};
    class getClassPresentationInfo {};
    class getEquipmentSlotSnapshot {};
+   class captureEquippedWeaponToDraft {};
+   class setPendingCapturedDraftSelection {};
    class buildCompatibilitySelectorModel {};
    class getOrCreateWeaponKitDraft {};
             class getDraftChangedFields {};
