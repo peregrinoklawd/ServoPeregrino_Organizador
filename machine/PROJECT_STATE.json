@@ -22,8 +22,8 @@
     "hub_rule": "Hub is an optional player-facing integration/orchestration layer. No domain module may require Hub in order to function.",
     "independent_core_development": true
   },
-  "global_next_gate": "Weapons D2 R1 mission-first frozen by operator approval. Archive last clean AUTO RPT when available; next work must use a new branch and scoped gate. No merge main.",
-  "global_after_gate": "Capture equipped weapon to Weapons draft remains backlog. Undo/0.8 multiplayer/JIP/PBO remain deferred and unvalidated.",
+  "global_next_gate": "Weapons 0.7-E E1 single real-Arma AUTO 1396 PASS / 0 FAIL / 0 BLOCKED plus manual P4 equipment-to-draft and NOVO pending SAVE review. Do not open UI during the auto gate.",
+  "global_after_gate": "Review real RPT, manual UX/performance; freeze E only after approval. D2 R1 baseline remains untouched. MP/JIP/PBO/Undo deferred.",
   "modules": [
     {
       "id": "Nexus",
@@ -215,9 +215,9 @@
         "build": "0.7.3.2-consolidated-runtime-hardening-d2-r1-mission-first"
       },
       "development_version": {
-        "display": "0.7-D2 R1 mission-first",
-        "semantic": "0.7.3.2 mission-first",
-        "build": "0.7.3.2-consolidated-runtime-hardening-d2-r1-mission-first"
+        "display": "0.7-E E1 mission-first",
+        "semantic": "0.7.4.1 mission-first",
+        "build": "0.7.4.1-equipment-to-draft-e1-mission-first"
       },
       "dependencies": [
         "Nexus",
@@ -255,10 +255,10 @@
           "persistence.provider.v1"
         ]
       },
-      "status": "MISSION_FIRST_0_7_D2_R1_USER_HOMOLOGATED_FROZEN_CLEAN_RPT_ARCHIVE_PENDING",
-      "next_gate": "FROZEN mission-first. Optional archive/audit of last clean 1360 expected AUTO RPT; next feature CAPTURE_EQUIPPED_WEAPON_TO_DRAFT requires separate branch. MP/JIP/PBO/Undo deferred.",
+      "status": "MISSION_FIRST_0_7_E_E1_CANDIDATE_STATIC_AND_RUNTIME_PENDING",
+      "next_gate": "Single 0.7-E real-Arma cumulative RPT 1396 PASS / 0 FAIL / 0 BLOCKED, then manual capture existing and NOVO pending before any homologation.",
       "homologated_artifact": "Weapons 0.7-D2 R1 mission-first operator approved: reported zero FAIL in latest auto run (clean RPT not independently audited), manual checks approved. Baseline branch baseline/weapons-0.7-d2-r1-homologated; code 0d36ce24b04dc11399ff58142a1179f0082a341b; mission SP_ORG_Weapons_0_7_D2_NoMag_Contract_Review_R1.VR; ZIP SHA256 81cabddb9a4fd97e7a23e57c52d3f4fe21bb05380f2943516f78f7204fe592ec.",
-      "current_candidate_artifact": null,
+      "current_candidate_artifact": "SP_ORG_Weapons_0_7_E_Equipment_Capture_E1.VR",
       "mission_first_validation": {
         "0.1-B": {
           "status": "APPROVED_SP",
@@ -330,7 +330,7 @@
           "modded_provenance": true,
           "session_cache": true
         },
-        "next": "D2 R1 operator-approved/frozen; capture equipped weapon → draft is backlog; no MP 0.8 gate opened.",
+        "next": "0.7-E capture-equipped-weapon candidate runtime/manual; D2 R1 operator-frozen source preserved. No 0.8.",
         "0.4": {
           "status": "APPROVED_SP_FROZEN",
           "final_candidate": "R5",
@@ -803,6 +803,34 @@
             "PBO_ADDON_INTEGRATION",
             "UNDO",
             "CAPTURE_EQUIPMENT_TO_DRAFT"
+          ]
+        },
+        "0.7-E": {
+          "status": "CANDIDATE_STATIC_AND_RUNTIME_PENDING",
+          "branch": "feature/weapons-0.7-e-equipment-capture",
+          "source_baseline": "baseline/weapons-0.7-d2-r1-homologated",
+          "stable_parent": "0.7-D2 R1",
+          "mission": "SP_ORG_Weapons_0_7_E_Equipment_Capture_E1.VR",
+          "build": "0.7.4.1-equipment-to-draft-e1-mission-first",
+          "expected_checks": 1396,
+          "legacy_checks": 1360,
+          "new_checks": 36,
+          "test_action": "SP_ORG LAB - TESTAR WEAPONS 0.7-E",
+          "contract": "P4_CAPTURE_TO_DRAFT_NO_LOADOUT_OR_KIT_MUTATION",
+          "selected_kit": "DRAFT_RECIPE_AND_SLOT_DIRTY_UNTIL_SAVE",
+          "no_kit": "PENDING_CAPTURED_DRAFT_NO_REPOSITORY_RECORD_UNTIL_EXPLICIT_SAVE",
+          "transient_ammo": "NEVER_PERSIST_ROUND_COUNT",
+          "focused_refresh": "DRAFT_AND_CATALOG_ONLY_OR_ONE_FULL_FOR_NEW_PENDING",
+          "mode": "MISSION_FIRST_SINGLE_PLAYER",
+          "manual_gate": "PENDING",
+          "auto_test_real_rpt": "PENDING",
+          "homologated": false,
+          "deferred": [
+            "UNDO",
+            "MULTIPLAYER_0_8",
+            "JIP",
+            "PBO_ADDON",
+            "PERSISTENCE"
           ]
         }
       }
