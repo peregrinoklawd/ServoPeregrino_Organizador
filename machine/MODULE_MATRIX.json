@@ -192,7 +192,7 @@
       "development_version": {
         "display": "0.7-D2 mission-first",
         "semantic": "0.7.3.2 mission-first",
-        "build": "0.7.3.2-consolidated-runtime-hardening-d2-mission-first"
+        "build": "0.7.3.2-consolidated-runtime-hardening-d2-r1-mission-first"
       },
       "dependencies": [
         "Nexus",
@@ -230,9 +230,9 @@
           "persistence.provider.v1"
         ]
       },
-      "next_gate": "One real-Arma D2 cumulative RPT: 1348 PASS, 0 FAIL, 0 BLOCKED; then manual draft/catalog checks",
+      "next_gate": "One real-Arma D2 cumulative RPT: 1360 PASS, 0 FAIL, 0 BLOCKED; then manual draft/catalog checks",
       "homologated_artifact": "0.7-A: 673/673, 0 FAIL.",
-      "current_candidate_artifact": "SP_ORG_Weapons_0_7_D2_Consolidated_Runtime_Hardening.VR",
+      "current_candidate_artifact": "SP_ORG_Weapons_0_7_D2_NoMag_Contract_Review_R1.VR",
       "mission_first_validation": {
         "lifecycle_0_1_b": "APPROVED_SP",
         "weapon_configuration_0_2": "APPROVED_SP",
@@ -325,15 +325,15 @@
           "status": "STATIC_READY_RUNTIME_PENDING",
           "display": "0.7-D2",
           "semantic": "0.7.3.2",
-          "build": "0.7.3.2-consolidated-runtime-hardening-d2-mission-first",
+          "build": "0.7.3.2-consolidated-runtime-hardening-d2-r1-mission-first",
           "origin_head": "8c177c4a05b4018231bd0c11538bcfa2cc81f53a",
-          "expected_checks": 1348,
+          "expected_checks": 1360,
           "local_checks": 239,
           "static_checks": "169/169",
           "ui_physical_application": "LOCAL_DRAFT_AND_CATALOG_APPLY_0_7_D2",
           "undo": "UNDO_DEFERRED",
           "multiplayer": "MP_DEFERRED_0_8",
-          "mission": "SP_ORG_Weapons_0_7_D2_Consolidated_Runtime_Hardening.VR",
+          "mission": "SP_ORG_Weapons_0_7_D2_NoMag_Contract_Review_R1.VR",
           "test_action": "SP_ORG LAB - TESTAR WEAPONS 0.7-D2",
           "ammo_runtime_measurement": "PENDING_D2_RPT_CONFIG_COUNT_IMMEDIATE_POST_RETURN_NEXT_FRAME",
           "homologated": false,
@@ -667,15 +667,15 @@
     "status": "STATIC_READY_RUNTIME_PENDING",
     "display": "0.7-D2",
     "semantic": "0.7.3.2",
-    "build": "0.7.3.2-consolidated-runtime-hardening-d2-mission-first",
+    "build": "0.7.3.2-consolidated-runtime-hardening-d2-r1-mission-first",
     "origin_head": "8c177c4a05b4018231bd0c11538bcfa2cc81f53a",
-    "expected_checks": 1348,
+    "expected_checks": 1360,
     "local_checks": 239,
     "static_checks": "169/169",
     "ui_physical_application": "LOCAL_DRAFT_AND_CATALOG_APPLY_0_7_D2",
     "undo": "UNDO_DEFERRED",
     "multiplayer": "MP_DEFERRED_0_8",
-    "mission": "SP_ORG_Weapons_0_7_D2_Consolidated_Runtime_Hardening.VR",
+    "mission": "SP_ORG_Weapons_0_7_D2_NoMag_Contract_Review_R1.VR",
     "test_action": "SP_ORG LAB - TESTAR WEAPONS 0.7-D2",
     "ammo_runtime_measurement": "PENDING_D2_RPT_CONFIG_COUNT_IMMEDIATE_POST_RETURN_NEXT_FRAME",
     "homologated": false,
