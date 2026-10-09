@@ -750,8 +750,8 @@ switch (_eventName) do {
   if (_captureR getOrDefault ["success",false]) then {
    private _created=(_captureR get "data") getOrDefault ["createdNew",false];
    ["Arma e acessórios capturados em ARMAS DO KIT. SALVAR é opcional para o rascunho atual. A quantidade de tiros não é copiada.","SUCCESS",true] call ServoPeregrino_Organizador_Weapons_fnc_pushUIFeedback;
-   _focusedRefresh="DRAFT";
-   _focusedRefreshSecondary="CATALOG";
+   _focusedRefresh=if (_created) then {""} else {"DRAFT"};
+   _focusedRefreshSecondary=if (_created) then {""} else {"CATALOG"};
    _focusedReason="EQUIPMENT_TO_DRAFT";
    // A pending NEW draft changes the P1 selection/filters, so refresh once.
    _refresh=_created;
