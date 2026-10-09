@@ -44,10 +44,17 @@ private _slotItems = createHashMap;
  private _field = _x;
  private _engineSlot = (_defs get _field) get "engineSlot";
  private _items = compatibleItems [_weaponClass,_engineSlot];
+ if (_field isEqualTo "bipod") then {
+  private _underbarrel=[_weaponClass] call ServoPeregrino_Organizador_Weapons_fnc_getUnderbarrelCompatibility;
+  if !(_underbarrel getOrDefault ["success",false]) exitWith {_items=[]};
+  _items=(_underbarrel get "data") getOrDefault ["items",[]];
+ };
  _items = [_items,configFile >> "CfgWeapons"] call _dedupeConfigClassnamesCI;
  _slotItems set [_field,_items];
 } forEach ["muzzle","pointer","optic","bipod"];
 
+private _underbarrelR=[_weaponClass] call ServoPeregrino_Organizador_Weapons_fnc_getUnderbarrelCompatibility;
+private _underbarrelData=if (_underbarrelR getOrDefault ["success",false]) then {_underbarrelR get "data"} else {createHashMap};
 private _allMagazines = compatibleMagazines _weaponClass;
 _allMagazines = _allMagazines arrayIntersect _allMagazines;
 
@@ -148,5 +155,7 @@ private _attachmentCount = 0;
  ["secondaryVariantClasses",_secondaryVariantClasses],
  ["secondaryVariantCount",count _secondaryVariantClasses],
  ["secondaryVariantMagazineCount",count _secondaryVariantMagazines],
+ ["underbarrelSource",_underbarrelData getOrDefault ["source","ENGINE_UNDERBARREL"]],
+ ["underbarrelCBAAdded",_underbarrelData getOrDefault ["cbaAddedCount",0]],
  ["source","ENGINE_COMPATIBLE_COMMANDS"]
 ]] call ServoPeregrino_Organizador_Nexus_fnc_createResult
