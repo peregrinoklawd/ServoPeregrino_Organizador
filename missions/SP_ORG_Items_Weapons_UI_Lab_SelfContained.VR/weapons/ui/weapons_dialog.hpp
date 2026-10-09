@@ -218,8 +218,9 @@ class SP_ORG_Weapons_Dialog
   class EqBipodValue: SPORG_Weapons_Text {idc=4037; text="Nenhum"; x=safeZoneX+0.853*safeZoneW; y=safeZoneY+0.498*safeZoneH; w=0.125*safeZoneW; h=0.027*safeZoneH; sizeEx=0.0145*safeZoneH;};
   class EqMagazineLabel: SPORG_Weapons_Text {idc=4038; text="Carregador"; x=safeZoneX+0.804*safeZoneW; y=safeZoneY+0.533*safeZoneH; w=0.048*safeZoneW; h=0.027*safeZoneH; sizeEx=0.0145*safeZoneH;};
   class EqMagazineValue: SPORG_Weapons_Text {idc=4039; text="Nenhum"; x=safeZoneX+0.853*safeZoneW; y=safeZoneY+0.533*safeZoneH; w=0.125*safeZoneW; h=0.027*safeZoneH; sizeEx=0.0145*safeZoneH;};
+  class EquipmentCapture: SPORG_Weapons_Button {idc=4123; text="CAPTURAR ARMA EQUIPADA"; tooltip="Copiar a arma equipada neste destino para ARMAS DO KIT. Não salva o kit, não equipa e não copia a quantidade de tiros."; x=safeZoneX+0.804*safeZoneW; y=safeZoneY+0.615*safeZoneH; w=0.174*safeZoneW; h=0.034*safeZoneH; action="['EQUIPMENT_TO_DRAFT'] call ServoPeregrino_Organizador_Weapons_fnc_handleUIEvent";};
   class EquipmentStatus: SPORG_Weapons_Structured {idc=4040; x=safeZoneX+0.804*safeZoneW; y=safeZoneY+0.657*safeZoneH; w=0.174*safeZoneW; h=0.148*safeZoneH; colorBackground[]={0.01,0.015,0.017,0.20};};
-  class EquipmentReadOnly: SPORG_Weapons_Text {idc=4041; style=2; text="ESTADO ATUAL DO EQUIPAMENTO"; x=safeZoneX+0.804*safeZoneW; y=safeZoneY+0.812*safeZoneH; w=0.174*safeZoneW; h=0.032*safeZoneH; sizeEx=0.0115*safeZoneH; colorText[]={0.55,0.75,0.71,1};};
+  class EquipmentReadOnly: SPORG_Weapons_Text {idc=4041; style=2; text="VISUALIZAÇÃO DO EQUIPAMENTO ATUAL"; x=safeZoneX+0.804*safeZoneW; y=safeZoneY+0.812*safeZoneH; w=0.174*safeZoneW; h=0.032*safeZoneH; sizeEx=0.0115*safeZoneH; colorText[]={0.55,0.75,0.71,1};};
 
   class FooterContext: SPORG_Weapons_FooterContext {idc=5000; x=safeZoneX+0.022*safeZoneW; y=safeZoneY+0.887*safeZoneH; w=0.956*safeZoneW; h=0.023*safeZoneH;};
   class FooterMessage: SPORG_Weapons_FooterMessage {idc=5001; x=safeZoneX+0.022*safeZoneW; y=safeZoneY+0.917*safeZoneH; w=0.956*safeZoneW; h=0.023*safeZoneH;};
