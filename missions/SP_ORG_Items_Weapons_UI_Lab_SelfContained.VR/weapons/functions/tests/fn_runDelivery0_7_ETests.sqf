@@ -11,7 +11,7 @@ private _checks=[];
 private _assert={
  params ["_name","_ok"];
  _checks pushBack [_name,_ok];
- diag_log format ["[SP_ORG] [WEAPONS] [AUTO_TEST] mode=MISSION_FIRST_0_7_E_R2 %1 | %2",if (_ok) then {"PASS"} else {"FAIL"},_name];
+ diag_log format ["[SP_ORG] [WEAPONS] [AUTO_TEST] mode=MISSION_FIRST_0_7_E_R3 %1 | %2",if (_ok) then {"PASS"} else {"FAIL"},_name];
 };
 ["E cumulative D2 baseline",_legacy getOrDefault ["success",false] && {(_ld getOrDefault ["passed",0]) isEqualTo 1360}] call _assert;
 private _playerBefore=[getUnitLoadout player] call ServoPeregrino_Organizador_Weapons_fnc_deepCopy;
@@ -53,12 +53,23 @@ private _test={
  _state set ["pendingCapturedDraft",createHashMap];
  missionNamespace setVariable [SP_ORG_WEAPONS_UI_STATE,_state];
  private _otherDraft=[(_state get "draftsByKitId") get _kitId] call ServoPeregrino_Organizador_Weapons_fnc_deepCopy;
+ missionNamespace setVariable [SP_ORG_WEAPONS_UI_CATALOG_PROJECTION_VAR,createHashMapFromArray [
+  ["sourceKitId",_kitId],["sourceWeaponClass","hgun_P07_F"],["sourceSlot","HANDGUN"],["sourceKey","R3_STALE_SENTINEL"]
+ ]];
+ ["E R3 stale catalog fixture created",(missionNamespace getVariable SP_ORG_WEAPONS_UI_CATALOG_PROJECTION_VAR) getOrDefault ["sourceWeaponClass",""] isEqualTo "hgun_P07_F"] call _assert;
  private _captured=[_unit,"PRIMARY"] call ServoPeregrino_Organizador_Weapons_fnc_captureEquippedWeaponToDraft;
  private _capData=_captured getOrDefault ["data",createHashMap];
  private _draft=_capData getOrDefault ["draft",createHashMap];
  private _recipe=_draft getOrDefault ["recipe",createHashMap];
  private _config=_recipe getOrDefault ["configuration",createHashMap];
  ["E capture existing succeeds",_captured getOrDefault ["success",false]] call _assert;
+ ["E R3 capture invalidates stale catalog",count (missionNamespace getVariable [SP_ORG_WEAPONS_UI_CATALOG_PROJECTION_VAR,createHashMap]) isEqualTo 0] call _assert;
+ private _catalogExisting=[] call ServoPeregrino_Organizador_Weapons_fnc_getUICatalogWindow;
+ private _projectionExisting=missionNamespace getVariable [SP_ORG_WEAPONS_UI_CATALOG_PROJECTION_VAR,createHashMap];
+ private _rowsExisting=_projectionExisting getOrDefault ["rows",[]];
+ ["E R3 catalog rebuilt for captured physical weapon",_catalogExisting getOrDefault ["success",false] && {(_projectionExisting getOrDefault ["sourceWeaponClass",""]) isEqualTo "arifle_MX_F"}] call _assert;
+ ["E R3 catalog slot follows captured draft",(_projectionExisting getOrDefault ["sourceSlot",""]) isEqualTo "PRIMARY"] call _assert;
+ ["E R3 captured optic appears in catalog",(count (_rowsExisting select {(_x getOrDefault ["catalogKind",""]) isEqualTo "OPTIC" && {(_x getOrDefault ["catalogClass",""]) isEqualTo "optic_Hamr"}}))>0] call _assert;
  ["E capture uses actual P4 slot",(_draft getOrDefault ["targetSlot",""]) isEqualTo "PRIMARY"] call _assert;
  ["E capture stores observed weapon class",(_config getOrDefault ["weaponClass",""]) isEqualTo (_observed getOrDefault ["weaponClass",""])] call _assert;
  ["E capture preserves observed optic",(_config getOrDefault ["optic",""]) isEqualTo ((_observed getOrDefault ["configuration",createHashMap]) getOrDefault ["optic",""])] call _assert;
@@ -90,6 +101,29 @@ private _test={
  ["E pending Recipe carries captured weapon",(((_stage get "recipe") get "configuration") get "weaponClass") isEqualTo (_observed get "weaponClass")] call _assert;
  ["E pending has no repository kit",(missionNamespace getVariable SP_ORG_WEAPONS_KIT_STORE) isEqualTo _storeAfterFixture] call _assert;
  ["E pending state marks unsaved",((missionNamespace getVariable SP_ORG_WEAPONS_UI_STATE) getOrDefault ["selectedKitId","X"]) isEqualTo "" && {((missionNamespace getVariable SP_ORG_WEAPONS_UI_STATE) getOrDefault ["pendingNewKit",false])}] call _assert;
+ private _pendingCatalog=[] call ServoPeregrino_Organizador_Weapons_fnc_getUICatalogWindow;
+ private _pendingProjection=missionNamespace getVariable [SP_ORG_WEAPONS_UI_CATALOG_PROJECTION_VAR,createHashMap];
+ private _pendingRows=_pendingProjection getOrDefault ["rows",[]];
+ ["E R3 NOVO pending sources captured weapon",_pendingCatalog getOrDefault ["success",false] && {(_pendingProjection getOrDefault ["sourceWeaponClass",""]) isEqualTo "arifle_MX_F"}] call _assert;
+ ["E R3 NOVO pending advertises correct slot",(_pendingProjection getOrDefault ["sourceSlot",""]) isEqualTo "PRIMARY"] call _assert;
+ ["E R3 NOVO pending offers captured optic",_pendingRows findIf {(_x getOrDefault ["catalogKind",""]) isEqualTo "OPTIC" && {(_x getOrDefault ["catalogClass",""]) isEqualTo "optic_Hamr"}} >= 0] call _assert;
+ ["E R3 NOVO pending exposes accessory rows",count (_pendingRows select {(_x getOrDefault ["catalogKind",""]) isEqualTo "BIPOD"})>0] call _assert;
+ ["E R3 pending catalog has no kit mutation",(missionNamespace getVariable SP_ORG_WEAPONS_KIT_STORE) isEqualTo _storeAfterFixture] call _assert;
+ private _priorPending=[_stage] call ServoPeregrino_Organizador_Weapons_fnc_deepCopy;
+ private _alternate=[_priorPending] call ServoPeregrino_Organizador_Weapons_fnc_deepCopy;
+ _alternate set ["recipe",(_entryRecipeR get "data") get "recipe"];
+ _alternate set ["targetSlot","HANDGUN"];
+ _state=missionNamespace getVariable SP_ORG_WEAPONS_UI_STATE;
+ _state set ["pendingCapturedDraft",_alternate];
+ missionNamespace setVariable [SP_ORG_WEAPONS_UI_STATE,_state];
+ private _alternateWindow=[] call ServoPeregrino_Organizador_Weapons_fnc_getUICatalogWindow;
+ private _alternateProjection=missionNamespace getVariable SP_ORG_WEAPONS_UI_CATALOG_PROJECTION_VAR;
+ ["E R3 pending change updates compatibility weapon",_alternateWindow getOrDefault ["success",false] && {(_alternateProjection getOrDefault ["sourceWeaponClass",""]) isEqualTo "hgun_P07_F"}] call _assert;
+ _state set ["pendingCapturedDraft",_priorPending];
+ missionNamespace setVariable [SP_ORG_WEAPONS_UI_STATE,_state];
+ private _restoredWindow=[] call ServoPeregrino_Organizador_Weapons_fnc_getUICatalogWindow;
+ private _restoredProjection=missionNamespace getVariable SP_ORG_WEAPONS_UI_CATALOG_PROJECTION_VAR;
+ ["E R3 pending restore recalculates catalog",_restoredWindow getOrDefault ["success",false] && {(_restoredProjection getOrDefault ["sourceWeaponClass",""]) isEqualTo "arifle_MX_F"}] call _assert;
  private _setR=["optic",""] call ServoPeregrino_Organizador_Weapons_fnc_setPendingCapturedDraftSelection;
  ["E pending compatibility edit valid",_setR getOrDefault ["success",false]] call _assert;
  ["E pending editing keeps repository",(missionNamespace getVariable SP_ORG_WEAPONS_KIT_STORE) isEqualTo _storeAfterFixture] call _assert;
@@ -170,9 +204,9 @@ private _lf=count _checks-_lp-_lb;
 private _passed=(_ld getOrDefault ["passed",0])+_lp;
 private _failed=(_ld getOrDefault ["failed",1])+_lf;
 private _total=(_ld getOrDefault ["total",0])+count _checks;
-diag_log format ["[SP_ORG] [WEAPONS] [AUTO_TEST_SUMMARY] mode=MISSION_FIRST_0_7_E_R2 passed=%1 failed=%2 blocked=%3 total=%4 expected=%5",_passed,_failed,_lb+(_ld getOrDefault ["blocked",0]),_total,1408];
-hint format ["Weapons 0.7-E R2: %1/%2; falhas=%3; bloqueados=%4. Envie o RPT completo.",_passed,_total,_failed,_lb+(_ld getOrDefault ["blocked",0])];
-[_failed isEqualTo 0 && {_lb isEqualTo 0} && {_total isEqualTo 1408},"WEAPONS_0_7_E_R2_AUTO_TEST_COMPLETE","E capture tests; Arma runtime/manual approval pending.",createHashMapFromArray [
+diag_log format ["[SP_ORG] [WEAPONS] [AUTO_TEST_SUMMARY] mode=MISSION_FIRST_0_7_E_R3 passed=%1 failed=%2 blocked=%3 total=%4 expected=%5",_passed,_failed,_lb+(_ld getOrDefault ["blocked",0]),_total,1420];
+hint format ["Weapons 0.7-E R3: %1/%2; falhas=%3; bloqueados=%4. Envie o RPT completo.",_passed,_total,_failed,_lb+(_ld getOrDefault ["blocked",0])];
+[_failed isEqualTo 0 && {_lb isEqualTo 0} && {_total isEqualTo 1420},"WEAPONS_0_7_E_R3_AUTO_TEST_COMPLETE","E capture tests; Arma runtime/manual approval pending.",createHashMapFromArray [
  ["passed",_passed],["failed",_failed],["blocked",_lb+(_ld getOrDefault ["blocked",0])],["total",_total],
- ["expected",1408],["checks",_checks],["manual","PENDING"]
+ ["expected",1420],["checks",_checks],["manual","PENDING"]
 ]] call ServoPeregrino_Organizador_Nexus_fnc_createResult
