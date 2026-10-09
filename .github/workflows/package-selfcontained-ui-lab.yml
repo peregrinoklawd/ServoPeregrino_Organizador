@@ -9,6 +9,7 @@ on:
       - feature/weapons-0.7-c-post-validation-rollback
       - feature/weapons-0.7-d-ui-integration
       - feature/weapons-0.7-d2-consolidated-runtime-hardening
+      - feature/weapons-0.7-e-equipment-capture
     paths:
       - "missions/SP_ORG_Items_Weapons_UI_Lab_SelfContained.VR/**"
       - "missions/PACKAGE_MISSION_NAME.txt"
@@ -27,8 +28,8 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Validate D2 static mission contracts
-        if: github.ref == 'refs/heads/feature/weapons-0.7-d2-consolidated-runtime-hardening'
+      - name: Validate Weapons D2 and E1 static mission contracts
+        if: github.ref == 'refs/heads/feature/weapons-0.7-d2-consolidated-runtime-hardening' || github.ref == 'refs/heads/feature/weapons-0.7-e-equipment-capture'
         run: python3 tools/validate_weapons_0_7.py
 
       - name: Resolve mission package identity
