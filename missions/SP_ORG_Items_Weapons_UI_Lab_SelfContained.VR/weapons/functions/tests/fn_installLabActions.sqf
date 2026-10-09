@@ -5,6 +5,7 @@ _unit setVariable ["SP_ORG_Weapons_labActionsInstalled",true];
 
 
 _unit addAction ["Weapons | ABRIR UI 0.7-E",{
+ if (missionNamespace getVariable ["SP_ORG_Weapons_AutoTestRunning",false]) exitWith {hint "Aguarde a conclusão do AUTO TEST antes de abrir Weapons.";};
  private _result = [] call ServoPeregrino_Organizador_Weapons_fnc_openInterface;
  if !(_result get "success") then {
   hint format ["UI falhou: %1",_result get "code"];
