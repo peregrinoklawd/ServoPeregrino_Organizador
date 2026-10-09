@@ -142,9 +142,10 @@ check('E1 R2 UI does not silently omit incompatible pieces',
   'CAPTURA PARCIAL' in events and
   'captureOmissions' in capture and
   'captureOmissions' in (W/'functions/ui/fn_refreshDraftUI.sqf').read_text())
-check('E1 R2 keeps compatibility validators frozen',
-  (W/'functions/domain/fn_validateWeaponConfigurationSemantic.sqf').read_text() == (R/'weapons_0_7_d2_baseline'/ 'never_present') if False else
-  'WEAPONS_UI_CAPTURE_WEAPON_CONFIGURATION_UNSUPPORTED' in observed_prep)
+for domain_name in ['fn_validateWeaponConfigurationSemantic.sqf','fn_validateWeaponConfigurationStructural.sqf']:
+  rel=str((W/'functions/domain'/domain_name).relative_to(R))
+  approved=subprocess.check_output(['git','show','6d8a68af0d3e05b68fc8019f712feebf6b9c2a60:'+rel],cwd=R,text=True)
+  check('E1 R2 freezes strict domain validator '+domain_name,approved==(W/'functions/domain'/domain_name).read_text())
 check('E1 R2 no global semantic bypass or physical mutations in helper',
   not re.search(r'\\b(setUnitLoadout|addWeapon|removeWeapon|remoteExec|remoteExecCall)\\b|fnc_(saveWeaponKitDraft|createWeaponKit|updateWeaponKitDefinition)',strip(observed_prep)))
 
