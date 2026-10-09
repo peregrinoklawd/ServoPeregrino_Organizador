@@ -42,7 +42,7 @@
             missionNamespace setVariable ["SP_ORG_Weapons_AutoTestRunning",true];
             private _r=[] call ServoPeregrino_Organizador_Weapons_fnc_runDelivery0_7_ETests;
             missionNamespace setVariable ["SP_ORG_Weapons_AutoTestRunning",false];
-            diag_log format ["[SP_ORG] [FULL_UI_LAB] WEAPONS_0_7_E_R3_TEST result=%1",_r];
+            diag_log format ["[SP_ORG] [FULL_UI_LAB] WEAPONS_0_7_E_R3_R1_TEST result=%1",_r];
         };
     }];
     missionNamespace setVariable ["SP_ORG_FullLab_fnc_auditWeaponsCompatibility", {
@@ -84,7 +84,7 @@
             {[] call (missionNamespace getVariable ["SP_ORG_FullLab_fnc_testItemsUICommon",{}]);},nil,14.5,true,true,"","alive _this",50
         ]];
         _unit setVariable ["SPORG_FL_Weapons07E", _unit addAction [
-            "<t color='#F0D98C'>SP_ORG LAB - TESTAR WEAPONS 0.7-E R3</t>",
+            "<t color='#F0D98C'>SP_ORG LAB - TESTAR WEAPONS 0.7-E R3 R1</t>",
             {[] call (missionNamespace getVariable ["SP_ORG_FullLab_fnc_testWeapons07E",{}]);},nil,14.2,true,true,"","alive _this && isServer",50
         ]];
         _unit setVariable ["SPORG_FL_WeaponsCompatAudit", _unit addAction [
@@ -132,5 +132,5 @@
     }];
 
     diag_log format ["[SP_ORG] [FULL_UI_LAB] CLIENT_READY player=%1 owner=%2",name player,clientOwner];
-    hint parseText "<t size='1.2'>SP_ORG - WEAPONS 0.7-E R3 + UICOMMON 0.2</t><br/><br/>Weapons 0.7-E R3 investiga compatibilidade real Arma/CBA/BIS e corrige atualizacao do catalogo quando uma arma for capturada. Baseline D2 R1 congelada.<br/><br/><t color='#F0D98C'>IMPORTANTE:</t> o AUTO TEST executa as mutacoes em uma unidade isolada criada pelo harness. O loadout do jogador nao deve ser alterado. UI: CAPTURAR edita rascunho sem salvar, SALVAR persiste. Não abra a UI durante o AUTO TEST. Undo deferred.<br/><br/>Nao carregue PBOs do Servo Peregrino neste teste.";
+    hint parseText "<t size='1.2'>SP_ORG - WEAPONS 0.7-E R3 R1 + UICOMMON 0.2</t><br/><br/>Weapons 0.7-E R3 R1 corrige destino da projecao no Catálogo. Para investigar o bipe equipado, execute a acao DIAGNOSTICAR COMPATIBILIDADE antes de abrir Weapons. Baseline D2 R1 congelada.<br/><br/><t color='#F0D98C'>IMPORTANTE:</t> o AUTO TEST executa as mutacoes em uma unidade isolada criada pelo harness. O loadout do jogador nao deve ser alterado. UI: CAPTURAR edita rascunho sem salvar, SALVAR persiste. Não abra a UI durante o AUTO TEST. Undo deferred.<br/><br/>Nao carregue PBOs do Servo Peregrino neste teste.";
 };
