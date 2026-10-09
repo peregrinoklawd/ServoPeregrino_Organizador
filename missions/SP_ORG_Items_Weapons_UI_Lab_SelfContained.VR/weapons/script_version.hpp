@@ -1,6 +1,6 @@
 #define SERVO_PEREGRINO_ORGANIZADOR_WEAPONS_DISPLAY_VERSION "0.7-E"
-#define SERVO_PEREGRINO_ORGANIZADOR_WEAPONS_SEMANTIC_VERSION "0.7.4.3"
-#define SERVO_PEREGRINO_ORGANIZADOR_WEAPONS_BUILD "0.7.4.3-equipment-compatibility-audit-e1-r3-r1-mission-first"
+#define SERVO_PEREGRINO_ORGANIZADOR_WEAPONS_SEMANTIC_VERSION "0.7.4.4"
+#define SERVO_PEREGRINO_ORGANIZADOR_WEAPONS_BUILD "0.7.4.4-equipment-cba-underbarrel-e1-r4-mission-first"
 #define SP_ORG_WEAPONS_RUNTIME "ServoPeregrino_Organizador_Weapons_runtime"
 #define SP_ORG_WEAPONS_AUTHORITY "ServoPeregrino_Organizador_Weapons_authority"
 #define SP_ORG_WEAPONS_LIVE_TEST "ServoPeregrino_Organizador_Weapons_liveLifecycleTest"
