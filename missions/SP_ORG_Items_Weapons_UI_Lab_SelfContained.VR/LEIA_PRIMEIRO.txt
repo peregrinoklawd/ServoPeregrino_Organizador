@@ -1,44 +1,44 @@
-SP_ORG — WEAPONS 0.7-E E1 R3 R1 — DIAGNÓSTICO DE COMPATIBILIDADE
-CANDIDATA MISSION-FIRST — TESTES NO ARMA PENDENTES
+SP_ORG — WEAPONS 0.7-E E1 R4 — CBA UNDERBARREL
+CANDIDATA MISSION-FIRST — RUNTIME REAL PENDENTE
 
-1. Extraia SP_ORG_Weapons_0_7_E_Equipment_Capture_E1_R3_R1.VR em missions do Arma 3.
-2. Não carregue PBO SP_ORG. A missão contém Nexus, UICommon, Items e Weapons.
-3. Execute SP_ORG LAB - TESTAR WEAPONS 0.7-E R3 R1 com a interface Weapons FECHADA.
-   Aguarde o resumo [AUTO_TEST_SUMMARY] mode=MISSION_FIRST_0_7_E_R3.
-   Meta: 1420 PASS, 0 FAIL, 0 BLOCKED (D2 1360 + E1/R2/R3 60).
-4. Após o AUTO TEST, equipe a MCC_RD704_AFG e o MCC_Handbrake_BLK no ACE Arsenal;
-   feche o ACE Arsenal completamente.
-5. OBRIGATÓRIO para investigar o bipé: execute SP_ORG LAB - DIAGNOSTICAR COMPATIBILIDADE (ação do scroll).
-   O RPT exibirá:
-   [COMPAT_AUDIT_CONTEXT] estado físico/rascunho/cache do Catálogo;
-   [COMPAT_AUDIT_LISTS] quantidades vanilla/CBA/BIS e diferenças;
-   [COMPAT_AUDIT_ITEM] MCC_Handbrake_BLK / rhsusf_acc_grip2 / MSS_EI_Revoloution;
-   [COMPAT_AUDIT_ISOLATED] teste SOMENTE em soldado temporário;
-   [COMPAT_AUDIT_SUMMARY] confirmação de limpeza da unidade isolada.
-   A operação NÃO altera arma, munição ou kit do jogador.
-6. Abra Weapons; capture a arma equipada para um kit salvo:
-   ARMAS DO KIT deve mostrar a arma capturada;
-   CATÁLOGO deve recomputar opções para essa arma (sem cache antigo).
-   Acessórios não suportados pelos validadores ainda aparecem como CAPTURA PARCIAL.
-7. Clique NOVO e CAPTURAR ARMA EQUIPADA novamente:
-   o CATÁLOGO deve exibir acessórios ligados ao novo rascunho ANTES de SALVAR.
-8. Use busca e filtros BIPÉ/EMPUNHADURA e anote se as peças esperadas surgem.
-9. Não tente forçar a equipagem física de uma Recipe considerada incompatível.
-10. Envie RPT COMPLETO e suas observações manuais. Compatibilidade ACE/Arma
-    ainda não foi unificada; o diagnóstico deve justificar a decisão seguinte.
+1. Extraia a pasta SP_ORG_Weapons_0_7_E_CBA_Underbarrel_E1_R4.VR
+   na pasta missions do perfil Arma 3. Nenhum PBO é necessário.
+2. Inicie a missão. Com Weapons FECHADA, execute:
+   SP_ORG LAB - TESTAR WEAPONS 0.7-E R4
+   Aguarde o resumo no RPT:
+   [AUTO_TEST_SUMMARY] mode=MISSION_FIRST_0_7_E_R4
+   META: 1430 PASS / 0 FAIL / 0 BLOCKED.
+   A suíte inclui 1360 verificações D2 + 60 E anteriores + 10 R4.
+3. Abra ACE Arsenal, equipe a MCC_RD704_AFG com MCC_Handbrake_BLK.
+   Feche completamente o Arsenal.
+4. Execute SP_ORG LAB - DIAGNOSTICAR COMPATIBILIDADE.
+   O RPT deve conter COMPAT_AUDIT_ITEM com cba=true, vanilla=false,
+   engineRetainedStable=true e, após a limpeza, isolatedDummyDeleted=true.
+5. Abra Weapons; selecione um KIT EXISTENTE. CAPTURAR ARMA EQUIPADA.
+   A MCC_RD704_AFG e seu MCC_Handbrake_BLK devem aparecer no rascunho,
+   sem CAPTURA PARCIAL para este acessório. Nenhum save automático.
+6. Confira o CATÁLOGO nos filtros BIPÉ e EMPUNHADURA e no seletor do
+   rascunho: o acessório precisa estar disponível.
+   OBS: o filtro é heurístico de nome; uma empunhadura pode aparecer
+   em EMPUNHADURA, não em BIPÉ, ainda que ambos usem o slot bipod.
+7. Pressione NOVO; capture novamente a arma e verifique o mesmo antes
+   de SALVAR.
+8. Apenas depois, execute EQUIPAR RASCUNHO em cenário seguro.
+   Se o motor não mantiver a configuração pedida, a validação D2
+   continuará falhando e executando rollback ao Snapshot.
+9. Repita com uma peça não aceita, como rhsusf_acc_grip2, somente se
+   ela constar no seu ambiente. Ela NÃO deve ser liberada pela R4.
+10. Envie RPT COMPLETO, informando se a captura, o catálogo, o rascunho
+    e a equipagem física passaram, separadamente.
 
-IMPORTANTE:
-- A R3 original terminou 1419/1420 com FAIL em sourceSlot de kit capturado;
-  esta R3 R1 corrige a ordem do carregamento de targetSlot do draft.
-- Se ainda encontrar o bipé fisicamente equipado mas não disponível no rascunho,
-  NÃO trate a ausência como falha do clique: execute primeiro o LAB de
-  compatibilidade e envie as linhas COMPAT_AUDIT_ITEM/COMPAT_AUDIT_ISOLATED.
-- Sem logs COMPAT_AUDIT_ITEM/COMPAT_AUDIT_ISOLATED não poderemos concluir se
-  o MCC_Handbrake_BLK funciona no motor/CBA, nem autorizar sua montagem.
-- CI estático aprovado NÃO equivale a teste real.
-- Nenhuma whitelist de mods foi incluída nesta entrega.
-- O botão CAPTURAR pode continuar avisando CAPTURA PARCIAL até resolvermos
-  a diferença entre a compatibilidade da engine e ACE Arsenal.
-- O motor de aplicação D2, pós-validação/rollback, Item e UICommon estão congelados.
-- MP/JIP/PBO/Undo permanecem fora da entrega.
-- Baseline estável: baseline/weapons-0.7-d2-r1-homologated.
+MUDANÇA R4:
+- Um único resolvedor underbarrel combina compatibleItems vanilla
+  e CBA_fnc_compatibleItems(...,"bipod"), quando CBA está disponível.
+- Classes CBA inexistentes, ocultas, duplicadas ou vazias são excluídas.
+- Mesmo resolvedor alimenta catálogo e validador semântico.
+- CBA ausente: usa apenas dados do motor do Arma.
+- Nenhuma whitelist por MCC, RHS ou outro mod foi incluída.
+- Não modifica código físico de aplicação D2, pós-validação, rollback,
+  peso/equipamento Items, UICommon, MP/JIP/Undo nem main.
+- Os testes automáticos verdes NÃO homologam a aplicação física modded.
+- Baseline estável preservada: baseline/weapons-0.7-d2-r1-homologated.
