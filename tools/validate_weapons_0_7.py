@@ -124,9 +124,9 @@ check('E1 capture and pending compatibility events connected','case "EQUIPMENT_T
 check('E1 equipment control enabled only on occupied slot',all('displayCtrl 4123) ctrlEnable (_eq getOrDefault ["equipped",false])' in (W/'functions/ui'/p).read_text() for p in ['fn_refreshInterface.sqf','fn_refreshEquipmentViewUI.sqf']))
 e=(W/'functions/tests/fn_runDelivery0_7_ETests.sqf').read_text()
 e_asserts=len(re.findall(r'call _assert;',e))
-check('E1 R3 cumulative runner preserves D2 and 60 E checks',e_asserts==60 and 'fnc_runDelivery0_7_D2Tests' in e and '1420' in e and 'MISSION_FIRST_0_7_E_R3' in e)
-check('E1 R3 mission two dedicated lab actions','SP_ORG LAB - TESTAR WEAPONS 0.7-E R3' in (M/'initPlayerLocal.sqf').read_text() and 'SP_ORG LAB - DIAGNOSTICAR COMPATIBILIDADE' in (M/'initPlayerLocal.sqf').read_text())
-check('E1 R3 R1 build identity', '0.7.4.3-equipment-compatibility-audit-e1-r3-r1-mission-first' in (W/'script_version.hpp').read_text() and (R/'missions/PACKAGE_MISSION_NAME.txt').read_text().strip()=='SP_ORG_Weapons_0_7_E_Equipment_Capture_E1_R3_R1.VR')
+check('E1 R4 cumulative runner preserves D2 and 70 E checks',e_asserts==70 and 'fnc_runDelivery0_7_D2Tests' in e and '1430' in e and 'MISSION_FIRST_0_7_E_R4' in e)
+check('E1 R4 mission two dedicated lab actions','SP_ORG LAB - TESTAR WEAPONS 0.7-E R4' in (M/'initPlayerLocal.sqf').read_text() and 'SP_ORG LAB - DIAGNOSTICAR COMPATIBILIDADE' in (M/'initPlayerLocal.sqf').read_text())
+check('E1 R4 build identity', '0.7.4.4-equipment-cba-underbarrel-e1-r4-mission-first' in (W/'script_version.hpp').read_text() and (R/'missions/PACKAGE_MISSION_NAME.txt').read_text().strip()=='SP_ORG_Weapons_0_7_E_CBA_Underbarrel_E1_R4.VR')
 
 observed_prep=(W/'functions/ui/fn_prepareObservedCaptureRecipe.sqf').read_text()
 check('E1 R2 fallback only strips engine-identified incompatible classes',
@@ -142,15 +142,24 @@ check('E1 R2 UI does not silently omit incompatible pieces',
   'CAPTURA PARCIAL' in events and
   'captureOmissions' in capture and
   'captureOmissions' in (W/'functions/ui/fn_refreshDraftUI.sqf').read_text())
-for domain_name in ['fn_validateWeaponConfigurationSemantic.sqf','fn_validateWeaponConfigurationStructural.sqf']:
-  rel=str((W/'functions/domain'/domain_name).relative_to(R))
-  approved=subprocess.check_output(['git','show','6d8a68af0d3e05b68fc8019f712feebf6b9c2a60:'+rel],cwd=R,text=True)
-  check('E1 R2 freezes strict domain validator '+domain_name,approved==(W/'functions/domain'/domain_name).read_text())
+domain_name='fn_validateWeaponConfigurationStructural.sqf'
+rel=str((W/'functions/domain'/domain_name).relative_to(R))
+approved=subprocess.check_output(['git','show','6d8a68af0d3e05b68fc8019f712feebf6b9c2a60:'+rel],cwd=R,text=True)
+check('E1 freezes strict structural validator',approved==(W/'functions/domain'/domain_name).read_text())
+# R4 does not weaken semantic validation; it switches the finite eligible list
+# for bipod to the same CBA-aware resolver used by discovery/authoring.
+semantic=(W/'functions/domain/fn_validateWeaponConfigurationSemantic.sqf').read_text()
+check('R4 semantic validator preserves rejection and closed fields',
+ 'WEAPONS_CONFIGURATION_INCOMPATIBLE' in semantic and
+ 'fnc_getUnderbarrelCompatibility' in semantic and
+ 'if (_item != "" && {!(_item in (_allowed apply' in semantic and
+ 'muzzle","MuzzleSlot' in semantic and 'optic","CowsSlot' in semantic)
+
 check('E1 R2 no global semantic bypass or physical mutations in helper',
   not re.search(r'\b(setUnitLoadout|addWeapon|removeWeapon|remoteExec|remoteExecCall)\b|fnc_(saveWeaponKitDraft|createWeaponKit|updateWeaponKitDefinition)',strip(observed_prep)))
 
 
-# R3 is read-only in the compatibility domain: no invented ACE exceptions.
+# R4 supports CBA in the underbarrel domain only; application D2 stays frozen.
 catalogwindow=(W/'functions/ui/fn_getUICatalogWindow.sqf').read_text()
 audit=(W/'functions/tests/fn_diagnoseEquippedWeaponCompatibility.sqf').read_text()
 check('R3 invalidates catalog projection when equipment changes draft', 'missionNamespace setVariable [SP_ORG_WEAPONS_UI_CATALOG_PROJECTION_VAR,createHashMap]' in capture)
@@ -166,5 +175,22 @@ check('R3 diagnostic logs comparative source and physical observations', all(x i
 check('R3 compatibility diagnostic tests only expendable isolated dummy', 'createUnit ["B_Soldier_F"' in audit and '_dummy setUnitLoadout' in audit and 'deleteVehicle _dummy' in audit and '_unit setUnitLoadout' not in audit)
 check('R3 diagnostic never modifies player or global validators', not re.search(r'\\b(remoteExec|remoteExecCall|addPrimaryWeaponItem|removePrimaryWeaponItem)\\b',strip(audit)))
 
+resolver=(W/'functions/catalog/fn_getUnderbarrelCompatibility.sqf').read_text()
+discovery=(W/'functions/catalog/fn_getWeaponCompatibility.sqf').read_text()
+check('R4 helper is registered by CfgFunctions','class getUnderbarrelCompatibility {}' in (M/'description.ext').read_text())
+check('R4 engine + CBA fallback no whitelist',
+ all(x in resolver for x in ['compatibleItems [_weapon,"UnderBarrelSlot"]','CBA_fnc_compatibleItems','isNil "CBA_fnc_compatibleItems"','getNumber (_cfg >> "scope") < 2'])
+ and all(x not in resolver for x in ['MCC_RD704','MCC_Handbrake','rhsusf_','remoteExec','setUnitLoadout']))
+check('R4 discovery and semantics use one shared authority',
+ 'fnc_getUnderbarrelCompatibility' in discovery and 'fnc_getUnderbarrelCompatibility' in semantic)
+check('R4 only changes the bottom accessory slot',
+ 'if (_field isEqualTo "bipod")' in discovery and 'if (_field isEqualTo "bipod")' in semantic)
+check('R4 runtime tests exercise dynamic mod availability',
+ all(x in e for x in ['E R4 every public CBA underbarrel option is discoverable','E R4 physical capture uses same compatibility policy','E R4 no unverified mod whitelist or physical mutation']))
+check('R4 diagnostic confirms temporary dummy deletion',all(x in audit for x in ['waitUntil {uiSleep 0.02','_isolatedDeleted=isNull _dummy','[_isolatedDeleted,"WEAPONS_COMPAT_AUDIT_COMPLETED"']))
+for name in ['fn_applyApplicationPlan.sqf','fn_validateAppliedApplicationState.sqf','fn_rollbackApplicationSnapshot.sqf']:
+ rel=str((W/'functions/application'/name).relative_to(R))
+ approved=subprocess.check_output(['git','show','6d8a68af0d3e05b68fc8019f712feebf6b9c2a60:'+rel],cwd=R,text=True)
+ check('R4 preserves D2 application core '+name,approved==(W/'functions/application'/name).read_text())
 print(f'STATIC SUMMARY {checks-len(failures)}/{checks}; runtime remains pending')
 raise SystemExit(bool(failures))
