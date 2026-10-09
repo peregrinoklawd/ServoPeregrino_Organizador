@@ -348,6 +348,7 @@ class ServoPeregrino_Organizador_Weapons
             class runDelivery0_7_CTests {};
             class runDelivery0_7_DTests {};
             class runDelivery0_7_D2Tests {};
+             class runDelivery0_7_ETests {};
    class serverHandleLabRequest {};
   };
  };
