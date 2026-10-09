@@ -123,3 +123,32 @@ Workflow `.github/workflows/package-selfcontained-ui-lab.yml`, com trigger D2. I
 - commit posterior apenas docs/machine não modifica a missão testável nem gera outro artifact.
 
 Revisão do diff: Items/UICommon/addons/backlog Items intocados; única correção no registro Items elimina a função alheia. Nenhum merge main/tag homologation. Gate final continua STATIC READY / RUNTIME PENDING.
+
+## 08/10/2026 — D2 R1 no-mag runtime contract review (RPT 09/10)
+
+RPT real da D2 original: **1345/1348**, **3 FAIL**, **0 BLOCKED**.
+Todas as regressões antigas estão verdes: R6 594/594, A 673/673, B2 890/890, C 978/978, D 1109/1109.
+Os três FAILs novos derivam de uma única condição no cenário `WEAPON_PRIMARY`:
+- WeaponRecipe transitória do Catálogo seleciona MX sem magazine (`NO_RECIPE_MAGAZINE`);
+- `setUnitLoadout [...,false]` recebe target row com magazine `[]`;
+- engine observa `30Rnd_65x39_caseless_mag` de 30 rounds porque o soldado LAB tem magazines compatíveis nos containers;
+- pós-validação estrita rejeita esse magazine não requisitado e executa rollback; após o frame a arma primária segue vazia.
+Isso **não autoriza** converter no-mag em magazine cheio, aceitar ammo inesperada, enfraquecer fingerprint, remover magazines de um jogador real ou modificar `fullMagazines=false`.
+A documentação do Arma registra casos em que `setUnitLoadout` normaliza magazines apesar de `fullMagazines=false`, o que reforça a necessidade de validar o estado observado.
+
+A revisão pontual **não altera nenhum executor físico, validador nem rollback da 0.7-C**.
+Corrige o *contrato do harness*: separa dois estados reais e independentes:
+1. `WEAPON_PRIMARY` com ammo compatível no inventário LAB: espera `WEAPONS_APPLICATION_APPLY_VERIFY_FAILED`, rollback exitoso e retorno exato ao Snapshot. Um FAIL transacional seguro é um **PASS do teste de recusa**.
+2. `WEAPON_PRIMARY_NO_CARGO_AMMO`: nova unidade-fixture equivalente, mas sem itens/magazines de containers removidos **somente na unidade isolada de teste** via `removeAllItemsWithMagazines`; espera aplicação do MX sem magazine e pós-validação exata sem rollback.
+
+Ambos exercitam os mesmos 12 asserts de estado, Plan, draft/repository, fingerprint, rollback, pós-validação, feedback e next-frame. O cenário de recusa registra `NO_MAG_D2_DIAGNOSTIC` com result code, failure phase, rollback flags, expected/observed rows e estado final. Nenhum teste antigo foi removido.
+
+**Novo gate cumulativo esperado: 1360 = 1109 legacy + 19 x 12 cenários + 12 UI + 11 checks fixos; 0 FAIL, 0 BLOCKED.**
+
+**Limitação deliberada de produto ainda aberta:** quando se escolhe diretamente uma arma-base do Catálogo sem magazine na Recipe, em presença de cargo compatível o engine pode tentar carregar um magazine; a rota atual recusa e restaura o estado anterior. Não chamar isso de "aplicação bem-sucedida" nem autoload autorizado. Antes de decidir um fluxo permissivo, será necessária especificação separada sobre alocação de munição e preservação dos containers. O usuário relatou sucesso nos testes manuais D2 anteriores. Não introduzir redistribuição de magazines na revisão pontual.
+
+Identidade de revisão: display `0.7-D2`, semantic `0.7.3.2`, build `0.7.3.2-consolidated-runtime-hardening-d2-r1-mission-first`.
+Missão `SP_ORG_Weapons_0_7_D2_NoMag_Contract_Review_R1.VR`.
+**RUNTIME PENDING**. Não homologar enquanto o novo RPT não trouxer 1360/1360.
+
+O botão `CAPTURAR` pertence hoje a Items; Weapons ainda não tem a ação player-facing `CONTEÚDO DO EQUIPAMENTO → ARMAS DO KIT`. Essa funcionalidade permanece no backlog, fora da revisão R1.
