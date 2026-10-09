@@ -275,6 +275,9 @@ private _weaponVisible = _equipmentQueryLower isEqualTo "" || {(toLowerANSI _wea
  [[4038,4039],"carregador magazine","magazineInfo"]
 ];
 
+(_display displayCtrl 4123) ctrlEnable (_eq getOrDefault ["equipped",false]);
+(_display displayCtrl 4123) ctrlSetTooltip (if (_eq getOrDefault ["equipped",false]) then {"Capturar a arma do destino visualizado para o rascunho. Sem salvar, sem equipar."} else {"Este destino não possui arma para capturar."});
+
 // Footer bands.
 _state = missionNamespace getVariable [SP_ORG_WEAPONS_UI_STATE,createHashMap];
 private _contextState=if (_state getOrDefault ["pendingNewKit",false]) then {"NOVO"} else {if (_state getOrDefault ["selectedKitIsNew",false]) then {"NOVO"} else {if (_state getOrDefault ["selectedKitDraftDirty",false]) then {"ALTERADO"} else {if ((_state getOrDefault ["selectedKitId",""]) isEqualTo "") then {"-"} else {"SALVO"}}}};
