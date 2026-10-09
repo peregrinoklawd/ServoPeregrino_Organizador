@@ -183,16 +183,16 @@
       "id": "Weapons",
       "addon": "ServoPeregrino_Organizador_Weapons",
       "mandatory": false,
-      "status": "MISSION_FIRST_0_7_E_E1_R3_R1_STATIC_READY_RUNTIME_PENDING",
+      "status": "MISSION_FIRST_0_7_E_E1_R4_STATIC_READY_RUNTIME_PENDING",
       "stable_version": {
         "display": "0.7-D2 R1 mission-first",
         "semantic": "0.7.3.2 mission-first",
         "build": "0.7.3.2-consolidated-runtime-hardening-d2-r1-mission-first"
       },
       "development_version": {
-        "display": "0.7-E E1 R3 R1 mission-first",
-        "semantic": "0.7.4.3 mission-first",
-        "build": "0.7.4.3-equipment-compatibility-audit-e1-r3-r1-mission-first"
+        "display": "0.7-E E1 R4 mission-first",
+        "semantic": "0.7.4.4 mission-first",
+        "build": "0.7.4.4-equipment-cba-underbarrel-e1-r4-mission-first"
       },
       "dependencies": [
         "Nexus",
@@ -230,9 +230,9 @@
           "persistence.provider.v1"
         ]
       },
-      "next_gate": "Real R3 R1 cumulative AUTO 1420/1420 + mandatory COMPAT_AUDIT (vanilla/CBA/BIS + isolated unit) before any compatibility policy change.",
+      "next_gate": "1430/1430 and manual CBA underbarrel gate; do not claim homologation before RPT.",
       "homologated_artifact": "Weapons 0.7-D2 R1 mission-first operator approved: reported zero FAIL in latest auto run (clean RPT not independently audited), manual checks approved. Baseline branch baseline/weapons-0.7-d2-r1-homologated; code 0d36ce24b04dc11399ff58142a1179f0082a341b; mission SP_ORG_Weapons_0_7_D2_NoMag_Contract_Review_R1.VR; ZIP SHA256 81cabddb9a4fd97e7a23e57c52d3f4fe21bb05380f2943516f78f7204fe592ec.",
-      "current_candidate_artifact": "SP_ORG_Weapons_0_7_E_Equipment_Capture_E1_R3_R1.VR",
+      "current_candidate_artifact": "SP_ORG_Weapons_0_7_E_CBA_Underbarrel_E1_R4.VR",
       "mission_first_validation": {
         "lifecycle_0_1_b": "APPROVED_SP",
         "weapon_configuration_0_2": "APPROVED_SP",
@@ -245,7 +245,7 @@
         "weapon_kit": "ONE_CONFIGURED_WEAPON_PER_TARGET_SLOT",
         "weapon_kit_repository": "SESSION_LOCAL_CANDIDATE",
         "slot_isolation": "PRESERVE_ALL_NON_TARGET_LOADOUT_DOMAINS",
-        "next": "R3 R1 slot-order hotfix ready, 204 static checks; real runtime + mandatory CBA/BIS comparison pending.",
+        "next": "R3 R1 real 1420/1420, CBA audit confirms MCC_Handbrake_BLK compatible/retained; R4 resolver static ready, runtime/manual pending.",
         "weapon_kit_specific_checks": "50_OF_50",
         "weapon_kit_slots": "PRIMARY_HANDGUN_SECONDARY",
         "weapon_kit_loadout_mutation": "NONE",
@@ -485,8 +485,8 @@
           "workflow_run": 37995683506,
           "workflow_artifact_id": 11646288727,
           "expected_runtime": 1420,
-          "runtime_state": "PENDING",
-          "manual_compat_audit": "PENDING",
+          "runtime_state": "1420_PASS_0_FAIL_0_BLOCKED",
+          "manual_compat_audit": "DONE_CBA_TRUE_ENGINE_RETAINED_TRUE_MCC_HAND_BRAKE_WITH_CAPTURE_OMISSION",
           "bipod": "MCC_Handbrake_BLK observed in MCC_RD704_AFG but R2/R3 safely omit it; not proven compatible",
           "issue_fixed": "catalog targetSlot read before getOrCreateWeaponKitDraft",
           "zip_sha256": "9d80f9ac0003976a8154e482b0449b87a18ac104e801548e315cd6388fea88d0",
@@ -494,6 +494,37 @@
           "deferred": [
             "MP_0_8",
             "PBO",
+            "JIP",
+            "UNDO"
+          ]
+        },
+        "0.7-E E1 R4": {
+          "status": "STATIC_READY_RUNTIME_PENDING",
+          "branch": "feature/weapons-0.7-e-equipment-capture",
+          "source_baseline": "baseline/weapons-0.7-d2-r1-homologated",
+          "mission": "SP_ORG_Weapons_0_7_E_CBA_Underbarrel_E1_R4.VR",
+          "build": "0.7.4.4-equipment-cba-underbarrel-e1-r4-mission-first",
+          "static_checks": "214/214",
+          "workflow_run": 37997421548,
+          "workflow_artifact_id": 11647966356,
+          "code_commit": "324918a09bdeca56a7108c66c9f3cf52bd39631c",
+          "zip_sha256": "596df283b10dec4a572b1f7e02af99d1728b3a4df3719515f86b4d9013ffa7d8",
+          "cumulative_expected": 1430,
+          "legacy_D2": 1360,
+          "E_before_R4": 60,
+          "R4_checks": 10,
+          "changes": "CBA+engine underbarrel authority for discovery, semantics and capture; wait for dummy cleanup",
+          "protected": [
+            "D2_APPLICATION_CORE",
+            "UICOMMON_0_2",
+            "ITEMS"
+          ],
+          "runtime": "PENDING",
+          "manual_approval": "PENDING",
+          "homologated": false,
+          "deferred": [
+            "PBO",
+            "MP_0_8",
             "JIP",
             "UNDO"
           ]
@@ -840,6 +871,6 @@
     "package_validation": "462_FILES_CRC_SOURCE_MATCH_ONE_MISSION",
     "workflow_conclusion": "success"
   },
-  "global_next_gate": "Weapons E1 R3 R1: 1420/1420 auto, then SP_ORG LAB - DIAGNOSTICAR COMPATIBILIDADE on MCC_RD704_AFG with MCC_Handbrake_BLK. R3 previous 1419/1420; one catalog targetSlot failure fixed.",
-  "global_after_gate": "Only after actual COMPAT_AUDIT logs decide safe resolver for modded underbarrel; no compatibility whitelisting. D2 R1 stays stable."
+  "global_next_gate": "Weapons 0.7-E E1 R4: runtime 1430/1430, no FAIL/BLOCKED, COMPAT_AUDIT verifies CBA-only MCC_Handbrake_BLK and isolated dummy cleanup; manual existing & pending capture, Catalog and apply.",
+  "global_after_gate": "If R4 passes in Arma, review/approve candidate E1 before freezing. Preserve D2 R1 baseline and MP/Undo deferrals."
 }
