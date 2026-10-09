@@ -133,14 +133,21 @@ if (_slotU isEqualTo "PRIMARY" && {canSuspend}) then {
   } forEach _rows;
  };
 };
-if (!isNull _dummy) then {deleteVehicle _dummy};
-if (!isNull _group) then {deleteGroup _group};
+// Object deletion may finish on a later simulation frame. Do not claim
+// that an isolated diagnostic dummy was removed until the engine confirms.
+if (!isNull _dummy) then {
+ deleteVehicle _dummy;
+ private _deadline=diag_tickTime+5;
+ waitUntil {uiSleep 0.02;isNull _dummy || {diag_tickTime>=_deadline}};
+};
+private _isolatedDeleted=isNull _dummy;
+if (_isolatedDeleted && {!isNull _group}) then {deleteGroup _group};
 {
  diag_log format ["[SP_ORG] [WEAPONS] [COMPAT_AUDIT_ITEM] weapon=%1 item=%2 result=%3",_weapon,_x getOrDefault ["className",""],_x];
 } forEach _rows;
-diag_log format ["[SP_ORG] [WEAPONS] [COMPAT_AUDIT_SUMMARY] weapon=%1 slot=%2 candidates=%3 isolatedDummyDeleted=%4 playerLoadoutMutated=false",_weapon,_slotU,count _rows,isNull _dummy];
-[true,"WEAPONS_COMPAT_AUDIT_COMPLETED","Comparação Arma/CBA/BIS e teste em unidade isolada registrados no RPT. Nenhuma alteração no equipamento do jogador.",createHashMapFromArray [
+diag_log format ["[SP_ORG] [WEAPONS] [COMPAT_AUDIT_SUMMARY] weapon=%1 slot=%2 candidates=%3 isolatedDummyDeleted=%4 playerLoadoutMutated=false",_weapon,_slotU,count _rows,_isolatedDeleted];
+[_isolatedDeleted,"WEAPONS_COMPAT_AUDIT_COMPLETED","Comparação Arma/CBA/BIS concluída. Unidade temporária removida apenas após confirmação; nenhuma alteração do equipamento do jogador.",createHashMapFromArray [
  ["weaponClass",_weapon],["baseWeapon",_baseClass],["slot",_slotU],["rows",_rows],
  ["sources",_compatibleLists],["draftWeapon",_draftWeapon],["projectedWeapon",_projectedWeapon],["catalogStale",_catalogStale],
- ["playerMutation",false],["isolatedDummyDeleted",isNull _dummy]
+ ["playerMutation",false],["isolatedDummyDeleted",_isolatedDeleted]
 ]] call ServoPeregrino_Organizador_Nexus_fnc_createResult
