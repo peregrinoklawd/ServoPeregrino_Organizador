@@ -124,9 +124,9 @@ check('E1 capture and pending compatibility events connected','case "EQUIPMENT_T
 check('E1 equipment control enabled only on occupied slot',all('displayCtrl 4123) ctrlEnable (_eq getOrDefault ["equipped",false])' in (W/'functions/ui'/p).read_text() for p in ['fn_refreshInterface.sqf','fn_refreshEquipmentViewUI.sqf']))
 e=(W/'functions/tests/fn_runDelivery0_7_ETests.sqf').read_text()
 e_asserts=len(re.findall(r'call _assert;',e))
-check('E1 R4 cumulative runner preserves D2 and 70 E checks',e_asserts==70 and 'fnc_runDelivery0_7_D2Tests' in e and '1430' in e and 'MISSION_FIRST_0_7_E_R4' in e)
-check('E1 R4 mission two dedicated lab actions','SP_ORG LAB - TESTAR WEAPONS 0.7-E R4' in (M/'initPlayerLocal.sqf').read_text() and 'SP_ORG LAB - DIAGNOSTICAR COMPATIBILIDADE' in (M/'initPlayerLocal.sqf').read_text())
-check('E1 R4 build identity', '0.7.4.4-equipment-cba-underbarrel-e1-r4-mission-first' in (W/'script_version.hpp').read_text() and (R/'missions/PACKAGE_MISSION_NAME.txt').read_text().strip()=='SP_ORG_Weapons_0_7_E_CBA_Underbarrel_E1_R4.VR')
+check('E1 R5 cumulative runner preserves D2 and 86 E checks',e_asserts==86 and 'fnc_runDelivery0_7_D2Tests' in e and '1446' in e and 'MISSION_FIRST_0_7_E_R5' in e)
+check('E1 R5 mission two dedicated lab actions','SP_ORG LAB - TESTAR WEAPONS 0.7-E R5' in (M/'initPlayerLocal.sqf').read_text() and 'SP_ORG LAB - DIAGNOSTICAR COMPATIBILIDADE' in (M/'initPlayerLocal.sqf').read_text())
+check('E1 R5 build identity', '0.7.4.5-pending-save-as-new-e1-r5-mission-first' in (W/'script_version.hpp').read_text() and (R/'missions/PACKAGE_MISSION_NAME.txt').read_text().strip()=='SP_ORG_Weapons_0_7_E_Save_As_New_E1_R5.VR')
 
 observed_prep=(W/'functions/ui/fn_prepareObservedCaptureRecipe.sqf').read_text()
 check('E1 R2 fallback only strips engine-identified incompatible classes',
@@ -192,5 +192,16 @@ for name in ['fn_applyApplicationPlan.sqf','fn_validateAppliedApplicationState.s
  rel=str((W/'functions/application'/name).relative_to(R))
  approved=subprocess.check_output(['git','show','6d8a68af0d3e05b68fc8019f712feebf6b9c2a60:'+rel],cwd=R,text=True)
  check('R4 preserves D2 application core '+name,approved==(W/'functions/application'/name).read_text())
+
+# R5 must never silently disable SAVE_AS_NEW while an unsaved captured
+# WeaponRecipe is present, nor bypass existing name/Recipe validators.
+draft_ui=(W/'functions/ui/fn_refreshDraftUI.sqf').read_text()
+check('R5 SAVE_AS_NEW UI enabled for captured NEW', '(_display displayCtrl 2141) ctrlEnable (_effectiveDirty || {_isNew})' in draft_ui and '!_capturedNew &&' not in draft_ui)
+check('R5 saves alias only captured pending NEW','_eventName isEqualTo "SAVE_AS_NEW"' in events and '_eventName="SAVE_DRAFT"' in events and 'pendingCapturedDraft' in events)
+check('R5 aliases to existing strictly validated first save, never autosaves','["SAVE_DRAFT"]' not in capture and 'fnc_normalizeWeaponKitName' in events and 'fnc_createWeaponKit' in events)
+check('R5 UI save request/result are audited','[SAVE_REQUEST]' in events and '[SAVE_ALIAS]' in events and '[SAVE_RESULT]' in events)
+check('R5 pending save-as new has 16 regression assertions',all(x in e for x in ['E R5 SALVAR COMO NOVO is enabled for captured NOVO','E R5 SAVE_AS_NEW saves captured Recipe','E R5 SAVE_AS_NEW stores exactly one new kit','E R5 SAVE_AS_NEW never changes player equipment']))
+check('R5 draft refresh does not issue spurious unconditional getter','}; call ServoPeregrino_Organizador_Weapons_fnc_getOrCreateWeaponKitDraft' not in draft_ui)
+
 print(f'STATIC SUMMARY {checks-len(failures)}/{checks}; runtime remains pending')
 raise SystemExit(bool(failures))
