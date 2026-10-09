@@ -15,6 +15,7 @@
 
     missionNamespace setVariable ["SP_ORG_FullLab_fnc_openWeapons", {
         hintSilent "";
+        if (missionNamespace getVariable ["SP_ORG_Weapons_AutoTestRunning",false]) exitWith {hint "AUTO TEST em andamento. Aguarde o resumo final antes de abrir Weapons.";};
         private _r = [] call ServoPeregrino_Organizador_Weapons_fnc_openInterface;
         diag_log format ["[SP_ORG] [FULL_UI_LAB] OPEN_WEAPONS result=%1",_r];
     }];
@@ -38,7 +39,9 @@
 
     missionNamespace setVariable ["SP_ORG_FullLab_fnc_testWeapons07E", {
         [] spawn {
+            missionNamespace setVariable ["SP_ORG_Weapons_AutoTestRunning",true];
             private _r=[] call ServoPeregrino_Organizador_Weapons_fnc_runDelivery0_7_ETests;
+            missionNamespace setVariable ["SP_ORG_Weapons_AutoTestRunning",false];
             diag_log format ["[SP_ORG] [FULL_UI_LAB] WEAPONS_0_7_E_TEST result=%1",_r];
         };
     }];
