@@ -1,19 +1,23 @@
-SP_ORG — WEAPONS 0.7-D2 — STATIC READY / RUNTIME PENDING
+SP_ORG — WEAPONS 0.7-E E1 — CANDIDATA MISSION-FIRST / RUNTIME PENDING
 
-1. Extraia SP_ORG_Weapons_0_7_D2_Consolidated_Runtime_Hardening.VR na pasta de missões do Arma.
-2. Não carregue PBOs SP_ORG; Nexus, UICommon, Items e Weapons já estão na missão.
-3. Abra em VR e execute somente: SP_ORG LAB - TESTAR WEAPONS 0.7-D2.
-4. Gate esperado: 1348 PASS / 0 FAIL / 0 BLOCKED. As regressões R6/A/B2/C/D são internas.
-5. Abrir Weapons -> selecionar kit -> editar acessórios sem salvar -> EQUIPAR RASCUNHO.
-   Conferir arma/P4, ALTERADO preservado, kit salvo intacto; repetir para NO_OP.
-6. Catálogo -> pistola -> EQUIPAMENTO →. Conferir HANDGUN/PORTE em P4, draft/kit intactos.
-7. P4 PRIMARY -> óptica compatível -> EQUIPAMENTO →. Conferir arma física e draft intacto.
-8. Acessório incompatível ou destino vazio: nenhuma mutação e feedback claro.
-9. Magazine igual: partial ammo preservado; novo: capacidade de CfgMagazines ativo.
-10. Fechar/reabrir UI: equipamento observado e drafts session-local preservados.
-11. Enviar RPT completo com SUMMARY 0_7_D2 e AMMO_D2 por etapa; não homologar só por CI.
+1. Extraia SP_ORG_Weapons_0_7_E_Equipment_Capture_E1.VR na pasta de missões do Arma 3.
+2. Não carregue PBOs SP_ORG; Nexus, UICommon, Items e Weapons já estão incorporados à missão.
+3. Abra em VR. Mantenha a interface Weapons FECHADA durante todo o AUTO TEST.
+4. Execute somente SP_ORG LAB - TESTAR WEAPONS 0.7-E e aguarde o resumo final.
+5. Meta cumulativa: 1396 PASS / 0 FAIL / 0 BLOCKED (D2=1360; novos E=36).
+6. ABRIR WEAPONS -> escolha um kit SALVO; em P4, selecione PRINC./PORTE/SEC. ocupado;
+   clique CAPTURAR ARMA EQUIPADA: P2 deve exibir arma/acessórios/magazine capturados
+   sem alterar o kit salvo ou equipamento físico; SALVAR permanece opcional.
+7. Clique NOVO em MEUS KITS; no P4, selecione uma arma física e clique CAPTURAR.
+   P2 mostra um NOVO rascunho capturado, que NÃO aparece salvo no repositório ainda.
+   Edite um acessório e pressione SALVAR para criar o kit session-local pela primeira vez.
+8. Repita NOVO -> CAPTURAR -> DESCARTAR e confirme ausência de novo kit salvo.
+9. P4 sem arma: CAPTURAR deve ficar desabilitado. Não salvar munição restante na Recipe.
+10. Faça também um smoke do EQUIPAR RASCUNHO e EQUIPAMENTO → do D2; o legado deve permanecer funcional.
+11. Envie RPT completo, com [AUTO_TEST_SUMMARY] mode=MISSION_FIRST_0_7_E,
+    além das observações manuais. CI GREEN não equivale a homologação real.
 
-Visual baseline: 0.6-F R6. Aplicação local: 0.7-D2 (rascunho + Catálogo).
-Rollback automático C preservado. UNDO_DEFERRED; MP_DEFERRED_0_8.
-Erros CBA addPerFrameHandler: o source executável não contém invocação dessa função;
-o RPT anterior não identifica stack SP_ORG responsável. Reavaliar se houver nova evidência.
+Versão visual: 0.6-F R6; aplicação física local: 0.7-D2 R1.
+Captura P4 -> P2: 0.7-E E1.
+UNDO_DEFERRED / MP_DEFERRED_0_8 / PBO_PENDING.
+Baseline homologada anterior intacta: baseline/weapons-0.7-d2-r1-homologated.
