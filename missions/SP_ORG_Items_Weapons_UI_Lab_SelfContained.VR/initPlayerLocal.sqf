@@ -42,7 +42,21 @@
             missionNamespace setVariable ["SP_ORG_Weapons_AutoTestRunning",true];
             private _r=[] call ServoPeregrino_Organizador_Weapons_fnc_runDelivery0_7_ETests;
             missionNamespace setVariable ["SP_ORG_Weapons_AutoTestRunning",false];
-            diag_log format ["[SP_ORG] [FULL_UI_LAB] WEAPONS_0_7_E_R2_TEST result=%1",_r];
+            diag_log format ["[SP_ORG] [FULL_UI_LAB] WEAPONS_0_7_E_R3_TEST result=%1",_r];
+        };
+    }];
+    missionNamespace setVariable ["SP_ORG_FullLab_fnc_auditWeaponsCompatibility", {
+        [] spawn {
+            if (missionNamespace getVariable ["SP_ORG_Weapons_AutoTestRunning",false]) exitWith {
+                hint "Aguarde o AUTO TEST terminar antes do diagnóstico.";
+            };
+            // Lab-only sample classes from the current user RPT. The diagnostic
+            // implementation is generic and also checks the actually equipped item.
+            private _r=[player,"PRIMARY",[
+             "MCC_Handbrake_BLK","rhsusf_acc_grip2","MSS_EI_Revoloution"
+            ]] call ServoPeregrino_Organizador_Weapons_fnc_diagnoseEquippedWeaponCompatibility;
+            diag_log format ["[SP_ORG] [FULL_UI_LAB] WEAPONS_COMPAT_AUDIT result=%1",_r];
+            hint format ["Diagnóstico de compatibilidade: %1. Verifique COMPAT_AUDIT no RPT; nenhuma arma do jogador foi alterada.",_r getOrDefault ["code","ERRO"]];
         };
     }];
     missionNamespace setVariable ["SP_ORG_FullLab_fnc_installCoreActions", {
@@ -51,7 +65,7 @@
         {
             private _id = _unit getVariable [_x,-1];
             if (_id >= 0) then {_unit removeAction _id;};
-        } forEach ["SPORG_FL_Items","SPORG_FL_Weapons","SPORG_FL_UICommon","SPORG_FL_ItemsUICommon","SPORG_FL_WeaponsR6","SPORG_FL_Weapons07B","SPORG_FL_Weapons07C","SPORG_FL_Weapons07E"];
+        } forEach ["SPORG_FL_Items","SPORG_FL_Weapons","SPORG_FL_UICommon","SPORG_FL_ItemsUICommon","SPORG_FL_WeaponsR6","SPORG_FL_Weapons07B","SPORG_FL_Weapons07C","SPORG_FL_Weapons07E","SPORG_FL_WeaponsCompatAudit"];
 
         _unit setVariable ["SPORG_FL_Items", _unit addAction [
             "<t color='#7FD9D0' size='1.12'>SP_ORG LAB - ABRIR ITEMS</t>",
@@ -70,8 +84,12 @@
             {[] call (missionNamespace getVariable ["SP_ORG_FullLab_fnc_testItemsUICommon",{}]);},nil,14.5,true,true,"","alive _this",50
         ]];
         _unit setVariable ["SPORG_FL_Weapons07E", _unit addAction [
-            "<t color='#F0D98C'>SP_ORG LAB - TESTAR WEAPONS 0.7-E R2</t>",
+            "<t color='#F0D98C'>SP_ORG LAB - TESTAR WEAPONS 0.7-E R3</t>",
             {[] call (missionNamespace getVariable ["SP_ORG_FullLab_fnc_testWeapons07E",{}]);},nil,14.2,true,true,"","alive _this && isServer",50
+        ]];
+        _unit setVariable ["SPORG_FL_WeaponsCompatAudit", _unit addAction [
+            "<t color='#76D3FE'>SP_ORG LAB - DIAGNOSTICAR COMPATIBILIDADE</t>",
+            {[] call (missionNamespace getVariable ["SP_ORG_FullLab_fnc_auditWeaponsCompatibility",{}]);},nil,14.1,true,true,"","alive _this && isServer",50
         ]];
     }];
 
@@ -114,5 +132,5 @@
     }];
 
     diag_log format ["[SP_ORG] [FULL_UI_LAB] CLIENT_READY player=%1 owner=%2",name player,clientOwner];
-    hint parseText "<t size='1.2'>SP_ORG - WEAPONS 0.7-E R2 + UICOMMON 0.2</t><br/><br/>Weapons 0.7-E R2 aceita captura parcial segura de armas modded: informa peças incompatíveis, sem as incluir na Recipe. Baseline D2 R1 congelada.<br/><br/><t color='#F0D98C'>IMPORTANTE:</t> o AUTO TEST executa as mutacoes em uma unidade isolada criada pelo harness. O loadout do jogador nao deve ser alterado. UI: CAPTURAR edita rascunho sem salvar, SALVAR persiste. Não abra a UI durante o AUTO TEST. Undo deferred.<br/><br/>Nao carregue PBOs do Servo Peregrino neste teste.";
+    hint parseText "<t size='1.2'>SP_ORG - WEAPONS 0.7-E R3 + UICOMMON 0.2</t><br/><br/>Weapons 0.7-E R3 investiga compatibilidade real Arma/CBA/BIS e corrige atualizacao do catalogo quando uma arma for capturada. Baseline D2 R1 congelada.<br/><br/><t color='#F0D98C'>IMPORTANTE:</t> o AUTO TEST executa as mutacoes em uma unidade isolada criada pelo harness. O loadout do jogador nao deve ser alterado. UI: CAPTURAR edita rascunho sem salvar, SALVAR persiste. Não abra a UI durante o AUTO TEST. Undo deferred.<br/><br/>Nao carregue PBOs do Servo Peregrino neste teste.";
 };
