@@ -11,7 +11,7 @@ private _checks=[];
 private _assert={
  params ["_name","_ok"];
  _checks pushBack [_name,_ok];
- diag_log format ["[SP_ORG] [WEAPONS] [AUTO_TEST] mode=MISSION_FIRST_0_7_E_R3 %1 | %2",if (_ok) then {"PASS"} else {"FAIL"},_name];
+ diag_log format ["[SP_ORG] [WEAPONS] [AUTO_TEST] mode=MISSION_FIRST_0_7_E_R4 %1 | %2",if (_ok) then {"PASS"} else {"FAIL"},_name];
 };
 ["E cumulative D2 baseline",_legacy getOrDefault ["success",false] && {(_ld getOrDefault ["passed",0]) isEqualTo 1360}] call _assert;
 private _playerBefore=[getUnitLoadout player] call ServoPeregrino_Organizador_Weapons_fnc_deepCopy;
@@ -159,6 +159,53 @@ private _test={
  ["E R2 incompatible magazine does not block weapon",_incompatibleMag getOrDefault ["success",false]] call _assert;
  ["E R2 incompatible magazine omission is explicit",count _magOmissions isEqualTo 1 && {((_magOmissions select 0) getOrDefault ["field",""]) isEqualTo "magazineClass"}] call _assert;
  ["E R2 incompatible magazine omitted from Recipe",((_magData getOrDefault ["recipe",createHashMap]) getOrDefault ["magazineClass","X"]) isEqualTo ""] call _assert;
+ // E1 R4: engine + optional CBA compatibility must agree across
+ // discovery, semantics, capture and catalog, even without third-party addons.
+ // No mod classname is hardcoded into production compatibility logic.
+ private _r4Root=configFile >> "CfgWeapons";
+ private _mccPresent=isClass (_r4Root >> "MCC_RD704_AFG") && {isClass (_r4Root >> "MCC_Handbrake_BLK")};
+ private _r4Weapon=if (_mccPresent) then {"MCC_RD704_AFG"} else {"arifle_MX_F"};
+ private _r4Engine=compatibleItems [_r4Weapon,"UnderBarrelSlot"];
+ private _r4Resolver=[_r4Weapon] call ServoPeregrino_Organizador_Weapons_fnc_getUnderbarrelCompatibility;
+ private _r4Data=_r4Resolver getOrDefault ["data",createHashMap];
+ private _r4Items=_r4Data getOrDefault ["items",[]];
+ private _r4Lower=_r4Items apply {toLowerANSI _x};
+ ["E R4 underbarrel resolver succeeds",_r4Resolver getOrDefault ["success",false]] call _assert;
+ ["E R4 preserves all vanilla underbarrel options",(_r4Engine findIf {!((toLowerANSI _x) in _r4Lower)})<0] call _assert;
+ ["E R4 canonical CBA/engine result has no duplicate",count _r4Lower isEqualTo count (_r4Lower arrayIntersect _r4Lower)] call _assert;
+ private _r4Missing=["SP_ORG_R4_UNKNOWN_WEAPON"] call ServoPeregrino_Organizador_Weapons_fnc_getUnderbarrelCompatibility;
+ ["E R4 unknown weapon remains rejected",!(_r4Missing getOrDefault ["success",true])] call _assert;
+ private _r4Cba=if !(isNil "CBA_fnc_compatibleItems") then {[_r4Weapon,"bipod"] call CBA_fnc_compatibleItems} else {[]};
+ if !(_r4Cba isEqualType []) then {_r4Cba=[]};
+ private _r4CbaEligible=_r4Cba select {
+  isClass (_r4Root >> _x) && {getNumber ((_r4Root >> _x) >> "scope")>=2}
+ };
+ ["E R4 every public CBA underbarrel option is discoverable",(_r4CbaEligible findIf {!((toLowerANSI _x) in _r4Lower)})<0] call _assert;
+ private _r4Compat=[_r4Weapon] call ServoPeregrino_Organizador_Weapons_fnc_getWeaponCompatibility;
+ private _r4CatalogSlots=((_r4Compat getOrDefault ["data",createHashMap]) getOrDefault ["slots",createHashMap]) getOrDefault ["bipod",[]];
+ ["E R4 catalog uses same compatibility authority",_r4Compat getOrDefault ["success",false] && {_r4CatalogSlots isEqualTo _r4Items}] call _assert;
+ private _r4Selectors=[_r4Weapon] call ServoPeregrino_Organizador_Weapons_fnc_buildCompatibilitySelectorModel;
+ private _r4Opt=(((_r4Selectors getOrDefault ["data",createHashMap]) getOrDefault ["model",createHashMap]) getOrDefault ["selectors",createHashMap]) getOrDefault ["bipod",createHashMap];
+ private _r4Opts=(_r4Opt getOrDefault ["options",[]]) apply {toLowerANSI (_x getOrDefault ["className",""])};
+ ["E R4 draft selector exposes resolved accessories",_r4Selectors getOrDefault ["success",false] && {(_r4Items findIf {!((toLowerANSI _x) in _r4Opts)})<0}] call _assert;
+ private _r4Handbrake="mcc_handbrake_blk" in _r4Lower;
+ private _r4ConfigR=[_r4Weapon] call ServoPeregrino_Organizador_Weapons_fnc_createWeaponConfiguration;
+ private _r4Cfg=(_r4ConfigR getOrDefault ["data",createHashMap]) getOrDefault ["configuration",createHashMap];
+ if (_mccPresent) then {_r4Cfg set ["bipod","MCC_Handbrake_BLK"]};
+ private _r4Semantic=[_r4Cfg] call ServoPeregrino_Organizador_Weapons_fnc_validateWeaponConfigurationSemantic;
+ ["E R4 semantic policy matches resolver",_r4ConfigR getOrDefault ["success",false] && {(_r4Semantic getOrDefault ["success",false]) isEqualTo (!_mccPresent || {_r4Handbrake})}] call _assert;
+ private _r4Prepared=[_r4Cfg,""] call ServoPeregrino_Organizador_Weapons_fnc_prepareObservedCaptureRecipe;
+ private _r4PreparedData=_r4Prepared getOrDefault ["data",createHashMap];
+ private _r4PreparedBipod=((_r4PreparedData getOrDefault ["recipe",createHashMap]) getOrDefault ["configuration",createHashMap]) getOrDefault ["bipod",""];
+ ["E R4 physical capture uses same compatibility policy",
+  _r4Prepared getOrDefault ["success",false] && {
+   !_mccPresent || {(_r4PreparedBipod isEqualTo "MCC_Handbrake_BLK") isEqualTo _r4Handbrake}
+  }
+ ] call _assert;
+ ["E R4 no unverified mod whitelist or physical mutation",
+  (_r4Data getOrDefault ["cbaAvailable",false]) isEqualTo !(isNil "CBA_fnc_compatibleItems")
+  && {(getUnitLoadout _unit) isEqualTo _observedBefore}
+ ] call _assert;
  // Use a real UI SAVE, which must be the ONLY action that creates the new kit.
  [] call ServoPeregrino_Organizador_Weapons_fnc_openInterface;
  [] call ServoPeregrino_Organizador_Weapons_fnc_refreshInterface;
@@ -204,9 +251,9 @@ private _lf=count _checks-_lp-_lb;
 private _passed=(_ld getOrDefault ["passed",0])+_lp;
 private _failed=(_ld getOrDefault ["failed",1])+_lf;
 private _total=(_ld getOrDefault ["total",0])+count _checks;
-diag_log format ["[SP_ORG] [WEAPONS] [AUTO_TEST_SUMMARY] mode=MISSION_FIRST_0_7_E_R3 passed=%1 failed=%2 blocked=%3 total=%4 expected=%5",_passed,_failed,_lb+(_ld getOrDefault ["blocked",0]),_total,1420];
-hint format ["Weapons 0.7-E R3: %1/%2; falhas=%3; bloqueados=%4. Envie o RPT completo.",_passed,_total,_failed,_lb+(_ld getOrDefault ["blocked",0])];
-[_failed isEqualTo 0 && {_lb isEqualTo 0} && {_total isEqualTo 1420},"WEAPONS_0_7_E_R3_AUTO_TEST_COMPLETE","E capture tests; Arma runtime/manual approval pending.",createHashMapFromArray [
+diag_log format ["[SP_ORG] [WEAPONS] [AUTO_TEST_SUMMARY] mode=MISSION_FIRST_0_7_E_R4 passed=%1 failed=%2 blocked=%3 total=%4 expected=%5",_passed,_failed,_lb+(_ld getOrDefault ["blocked",0]),_total,1430];
+hint format ["Weapons 0.7-E R4: %1/%2; falhas=%3; bloqueados=%4. Envie o RPT completo.",_passed,_total,_failed,_lb+(_ld getOrDefault ["blocked",0])];
+[_failed isEqualTo 0 && {_lb isEqualTo 0} && {_total isEqualTo 1430},"WEAPONS_0_7_E_R4_AUTO_TEST_COMPLETE","E capture tests; Arma runtime/manual approval pending.",createHashMapFromArray [
  ["passed",_passed],["failed",_failed],["blocked",_lb+(_ld getOrDefault ["blocked",0])],["total",_total],
- ["expected",1420],["checks",_checks],["manual","PENDING"]
+ ["expected",1430],["checks",_checks],["manual","PENDING"]
 ]] call ServoPeregrino_Organizador_Nexus_fnc_createResult
