@@ -22,8 +22,8 @@
     "hub_rule": "Hub is an optional player-facing integration/orchestration layer. No domain module may require Hub in order to function.",
     "independent_core_development": true
   },
-  "global_next_gate": "Weapons E1 R3 mission-first candidate: AUTO 1420/1420 0 FAIL, then COMPAT_AUDIT on MCC_RD704_AFG with MCC_Handbrake_BLK and manual capture old kit and NEW pending. RPT required.",
-  "global_after_gate": "Compare Arma native, CBA, BIS results and isolated retention before changing validators. Do not merge/freeze E1 R3 without runtime/manual approval; D2 R1 stable frozen.",
+  "global_next_gate": "Weapons E1 R3 R1: 1420/1420 auto, then SP_ORG LAB - DIAGNOSTICAR COMPATIBILIDADE on MCC_RD704_AFG with MCC_Handbrake_BLK. R3 previous 1419/1420; one catalog targetSlot failure fixed.",
+  "global_after_gate": "Only after actual COMPAT_AUDIT logs decide safe resolver for modded underbarrel; no compatibility whitelisting. D2 R1 stays stable.",
   "modules": [
     {
       "id": "Nexus",
@@ -215,9 +215,9 @@
         "build": "0.7.3.2-consolidated-runtime-hardening-d2-r1-mission-first"
       },
       "development_version": {
-        "display": "0.7-E E1 R3 mission-first",
+        "display": "0.7-E E1 R3 R1 mission-first",
         "semantic": "0.7.4.3 mission-first",
-        "build": "0.7.4.3-equipment-compatibility-audit-e1-r3-mission-first"
+        "build": "0.7.4.3-equipment-compatibility-audit-e1-r3-r1-mission-first"
       },
       "dependencies": [
         "Nexus",
@@ -255,10 +255,10 @@
           "persistence.provider.v1"
         ]
       },
-      "status": "MISSION_FIRST_0_7_E_E1_R3_STATIC_READY_RUNTIME_PENDING",
-      "next_gate": "AUTO 1420/1420 then COMPAT_AUDIT and manual confirmation existing and pending captured draft. No semantic compatibility expansion until measured.",
+      "status": "MISSION_FIRST_0_7_E_E1_R3_R1_STATIC_READY_RUNTIME_PENDING",
+      "next_gate": "Real R3 R1 cumulative AUTO 1420/1420 + mandatory COMPAT_AUDIT (vanilla/CBA/BIS + isolated unit) before any compatibility policy change.",
       "homologated_artifact": "Weapons 0.7-D2 R1 mission-first operator approved: reported zero FAIL in latest auto run (clean RPT not independently audited), manual checks approved. Baseline branch baseline/weapons-0.7-d2-r1-homologated; code 0d36ce24b04dc11399ff58142a1179f0082a341b; mission SP_ORG_Weapons_0_7_D2_NoMag_Contract_Review_R1.VR; ZIP SHA256 81cabddb9a4fd97e7a23e57c52d3f4fe21bb05380f2943516f78f7204fe592ec.",
-      "current_candidate_artifact": "SP_ORG_Weapons_0_7_E_Equipment_Capture_E1_R3.VR",
+      "current_candidate_artifact": "SP_ORG_Weapons_0_7_E_Equipment_Capture_E1_R3_R1.VR",
       "mission_first_validation": {
         "0.1-B": {
           "status": "APPROVED_SP",
@@ -330,7 +330,7 @@
           "modded_provenance": true,
           "session_cache": true
         },
-        "next": "R3 diagnosis of physical underbarrel from Arma/CBA/BIS and correction of stale catalog projection; runtime/manual pending.",
+        "next": "R3 R1 slot-order hotfix ready, 204 static checks; real runtime + mandatory CBA/BIS comparison pending.",
         "0.4": {
           "status": "APPROVED_SP_FROZEN",
           "final_candidate": "R5",
@@ -861,7 +861,7 @@
           ]
         },
         "0.7-E E1 R3": {
-          "status": "STATIC_READY_RUNTIME_PENDING",
+          "status": "SUPERSEDED_BY_R3_R1_AFTER_REAL_1419_PASS_1_FAIL",
           "branch": "feature/weapons-0.7-e-equipment-capture",
           "source_baseline": "baseline/weapons-0.7-d2-r1-homologated",
           "mission": "SP_ORG_Weapons_0_7_E_Equipment_Capture_E1_R3.VR",
@@ -876,7 +876,7 @@
           "code_commit": "5936345a44fe6632f8bc2901068ac6b3bc503a14",
           "zip_sha256": "16b6c82ce4f1a93f218032a13ae8a5b9c4cc013cd21e6a9852d1764273f54ade",
           "gate": "REAL_RPT_PENDING",
-          "manual_compatibility_audit": "PENDING",
+          "manual_compatibility_audit": "NOT_EXECUTED_NO_COMPAT_AUDIT_RECORDS",
           "scope": "catalog projection invalidation; pending unsaved recipe source; isolated CBA/Arma/BIS diagnostic",
           "protected": [
             "STABLE_D2_R1",
@@ -891,7 +891,31 @@
             "JIP",
             "UNDO"
           ],
-          "homologated": false
+          "homologated": false,
+          "real_runtime": "1419_PASS_1_FAIL_0_BLOCKED"
+        },
+        "0.7-E E1 R3 R1": {
+          "status": "STATIC_READY_RUNTIME_PENDING",
+          "branch": "feature/weapons-0.7-e-equipment-capture",
+          "source_baseline": "baseline/weapons-0.7-d2-r1-homologated",
+          "mission": "SP_ORG_Weapons_0_7_E_Equipment_Capture_E1_R3_R1.VR",
+          "build": "0.7.4.3-equipment-compatibility-audit-e1-r3-r1-mission-first",
+          "static_checks": "204/204",
+          "workflow_run": 37995683506,
+          "workflow_artifact_id": 11646288727,
+          "expected_runtime": 1420,
+          "runtime_state": "PENDING",
+          "manual_compat_audit": "PENDING",
+          "bipod": "MCC_Handbrake_BLK observed in MCC_RD704_AFG but R2/R3 safely omit it; not proven compatible",
+          "issue_fixed": "catalog targetSlot read before getOrCreateWeaponKitDraft",
+          "zip_sha256": "9d80f9ac0003976a8154e482b0449b87a18ac104e801548e315cd6388fea88d0",
+          "homologated": false,
+          "deferred": [
+            "MP_0_8",
+            "PBO",
+            "JIP",
+            "UNDO"
+          ]
         }
       }
     },
