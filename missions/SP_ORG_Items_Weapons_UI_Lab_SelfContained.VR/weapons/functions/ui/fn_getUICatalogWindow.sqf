@@ -90,7 +90,7 @@ if (_canReuseProjectionSource) then {
   if (_kitResult get "success") then {_sourceKit = ((_kitResult get "data") get "kit")};
  };
  if ((count _sourceKit) > 0) then {
-  _selectedKitSlot = toUpperANSI (_sourceKit getOrDefault ["targetSlot",""]);
+  _selectedKitSlot = toUpperANSI (_sourceDraft getOrDefault ["targetSlot",_sourceKit getOrDefault ["targetSlot",""]]);
   if ((count _sourceDraft) isEqualTo 0) then {
    private _draftResult = [_sourceKitId] call ServoPeregrino_Organizador_Weapons_fnc_getOrCreateWeaponKitDraft;
    if (_draftResult get "success") then {_sourceDraft = ((_draftResult get "data") get "draft")};
