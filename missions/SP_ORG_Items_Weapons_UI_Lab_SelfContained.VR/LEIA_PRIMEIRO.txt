@@ -1,44 +1,32 @@
-SP_ORG — WEAPONS 0.7-E E1 R4 — CBA UNDERBARREL
+SP_ORG — WEAPONS 0.7-E E1 R5 — SALVAR COMO NOVO
 CANDIDATA MISSION-FIRST — RUNTIME REAL PENDENTE
 
-1. Extraia a pasta SP_ORG_Weapons_0_7_E_CBA_Underbarrel_E1_R4.VR
-   na pasta missions do perfil Arma 3. Nenhum PBO é necessário.
-2. Inicie a missão. Com Weapons FECHADA, execute:
-   SP_ORG LAB - TESTAR WEAPONS 0.7-E R4
-   Aguarde o resumo no RPT:
-   [AUTO_TEST_SUMMARY] mode=MISSION_FIRST_0_7_E_R4
-   META: 1430 PASS / 0 FAIL / 0 BLOCKED.
-   A suíte inclui 1360 verificações D2 + 60 E anteriores + 10 R4.
-3. Abra ACE Arsenal, equipe a MCC_RD704_AFG com MCC_Handbrake_BLK.
-   Feche completamente o Arsenal.
-4. Execute SP_ORG LAB - DIAGNOSTICAR COMPATIBILIDADE.
-   O RPT deve conter COMPAT_AUDIT_ITEM com cba=true, vanilla=false,
-   engineRetainedStable=true e, após a limpeza, isolatedDummyDeleted=true.
-5. Abra Weapons; selecione um KIT EXISTENTE. CAPTURAR ARMA EQUIPADA.
-   A MCC_RD704_AFG e seu MCC_Handbrake_BLK devem aparecer no rascunho,
-   sem CAPTURA PARCIAL para este acessório. Nenhum save automático.
-6. Confira o CATÁLOGO nos filtros BIPÉ e EMPUNHADURA e no seletor do
-   rascunho: o acessório precisa estar disponível.
-   OBS: o filtro é heurístico de nome; uma empunhadura pode aparecer
-   em EMPUNHADURA, não em BIPÉ, ainda que ambos usem o slot bipod.
-7. Pressione NOVO; capture novamente a arma e verifique o mesmo antes
-   de SALVAR.
-8. Apenas depois, execute EQUIPAR RASCUNHO em cenário seguro.
-   Se o motor não mantiver a configuração pedida, a validação D2
-   continuará falhando e executando rollback ao Snapshot.
-9. Repita com uma peça não aceita, como rhsusf_acc_grip2, somente se
-   ela constar no seu ambiente. Ela NÃO deve ser liberada pela R4.
-10. Envie RPT COMPLETO, informando se a captura, o catálogo, o rascunho
-    e a equipagem física passaram, separadamente.
+1. Extraia SP_ORG_Weapons_0_7_E_Save_As_New_E1_R5.VR na pasta missions.
+2. Não carregue PBOs SP_ORG. Mantenha Weapons FECHADA durante o AUTO TEST.
+3. Execute SP_ORG LAB - TESTAR WEAPONS 0.7-E R5.
+   Meta: 1446 PASS / 0 FAIL / 0 BLOCKED (D2 1360 + 86 E).
+4. Depois do auto, equipe a MCC_RD704_AFG e MCC_Handbrake_BLK no ACE Arsenal.
+5. Na interface Weapons:
+   a) Use NOVO -> CAPTURAR ARMA EQUIPADA;
+   b) Confira o nome (campo no cabeçalho P2) e a arma/bipé presentes;
+   c) Clique SALVAR COMO NOVO — AGORA HABILITADO.
+   d) Confira que um único WeaponKit com nome e Recipe corretos surgiu em MEUS KITS;
+      status SALVO, pending NOVO limpo, nenhum outro kit modificado.
+6. Repita NOVO -> CAPTURAR -> SALVAR (botão tradicional) para garantir que
+   ambos os caminhos criam o kit sem salvar automaticamente.
+7. Para um KIT EXISTENTE alterado, clique SALVAR COMO NOVO:
+   deve criar uma cópia, manter intacto o kit original e selecionar o novo.
+8. Teste DESCARTAR sem salvar e valide que o repositório não recebe kit.
+9. Teste EQUIPAR RASCUNHO e confira o rollback/post-validation legado.
+10. Envie o RPT completo, incluindo [SAVE_REQUEST], [SAVE_ALIAS],
+    [SAVE_RESULT] e [AUTO_TEST_SUMMARY] mode=MISSION_FIRST_0_7_E_R5.
 
-MUDANÇA R4:
-- Um único resolvedor underbarrel combina compatibleItems vanilla
-  e CBA_fnc_compatibleItems(...,"bipod"), quando CBA está disponível.
-- Classes CBA inexistentes, ocultas, duplicadas ou vazias são excluídas.
-- Mesmo resolvedor alimenta catálogo e validador semântico.
-- CBA ausente: usa apenas dados do motor do Arma.
-- Nenhuma whitelist por MCC, RHS ou outro mod foi incluída.
-- Não modifica código físico de aplicação D2, pós-validação, rollback,
-  peso/equipamento Items, UICommon, MP/JIP/Undo nem main.
-- Os testes automáticos verdes NÃO homologam a aplicação física modded.
-- Baseline estável preservada: baseline/weapons-0.7-d2-r1-homologated.
+IMPORTANTE:
+- Correção R5: SAVE_AS_NEW de pending NOVO usa o mesmo SAVE_DRAFT validado;
+  não tenta duplicar kit inexistente, não cria duas cópias, não mexe no físico.
+- Manter a R4 CBA UnderBarrel funcional para o bipé.
+- UC-001 — Compatibilidade Unificada Completa está documentada em
+  docs/74_WEAPONS_UNIFIED_COMPATIBILITY_ARCHITECTURE.md.
+  A ampliação para miras, bocas, apontadores, magazines e variantes de armas
+  é a próxima evolução separada APÓS aprovação da correção de salvamento.
+- D2 R1 estável congelada; sem merge main, PBO, MP, JIP ou Undo.
