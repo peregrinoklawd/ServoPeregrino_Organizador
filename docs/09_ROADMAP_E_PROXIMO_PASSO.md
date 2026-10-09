@@ -1,6 +1,6 @@
 # Roadmap e próximo passo
 
-> Checkpoint 09/10/2026: **Weapons 0.7-D2 R1 mission-first homologada pelo operador e congelada**; baseline `baseline/weapons-0.7-d2-r1-homologated`. AUTO R1 esperado 1360/1360, com execução final sem FAIL relatada pelo operador (RPT limpo ainda não anexado nem auditado); testes manuais aprovados. Artefato ZIP SHA256 `81cabddb9a4fd97e7a23e57c52d3f4fe21bb05380f2943516f78f7204fe592ec`. Código de missão e ZIP preservados; NO merge main; MP/JIP/PBO/Undo ainda DEFERRED. Captura arma equipada → rascunho no backlog; ver `docs/69`.
+> Checkpoint ativo 09/10/2026: **Weapons 0.7-E E1 — Capturar Arma Equipada → Rascunho**, branch `feature/weapons-0.7-e-equipment-capture`; **CANDIDATA — runtime/manual pendentes**. Partiu da baseline homologada e congelada `baseline/weapons-0.7-d2-r1-homologated`, sem alterá-la. Missão única `SP_ORG_Weapons_0_7_E_Equipment_Capture_E1.VR`; um AUTO TEST `SP_ORG LAB - TESTAR WEAPONS 0.7-E` com meta **1396/1396**, 0 FAIL e 0 BLOCKED (1360 D2 + 36 E). Captura P4→P2 não salva nem muta loadout; NOVO pending só cria WeaponKit mediante SALVAR. Ver `docs/70_WEAPONS_0_7_E_EQUIPMENT_CAPTURE.md`. UICommon/Items/core B/C/D2 preservados; MP/JIP/PBO/Undo adiados. Não fazer merge main.
 
 
 ## Gate imediato — Items
