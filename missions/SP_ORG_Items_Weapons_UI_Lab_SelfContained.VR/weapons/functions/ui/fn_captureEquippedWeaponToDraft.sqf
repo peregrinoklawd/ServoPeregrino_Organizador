@@ -26,16 +26,17 @@ private _kitId=if (_state getOrDefault ["pendingNewKit",false]) then {""} else {
 private _createdNew=_kitId isEqualTo "";
 private _changed=true;
 private _draft=createHashMap;
+private _captureError=createHashMap;
 if (!_createdNew) then {
  private _kitR=[_kitId] call ServoPeregrino_Organizador_Weapons_fnc_getWeaponKit;
- if !(_kitR getOrDefault ["success",false]) exitWith {_kitR};
+ if !(_kitR getOrDefault ["success",false]) exitWith {_captureError=_kitR};
  private _kit=(_kitR get "data") get "kit";
  private _draftR=[_kitId] call ServoPeregrino_Organizador_Weapons_fnc_getOrCreateWeaponKitDraft;
- if !(_draftR getOrDefault ["success",false]) exitWith {_draftR};
+ if !(_draftR getOrDefault ["success",false]) exitWith {_captureError=_draftR};
  _draft=(_draftR get "data") get "draft";
  private _baseRecipe=_draft getOrDefault ["baseRecipe",_kit getOrDefault ["recipe",createHashMap]];
  private _comparison=[_baseRecipe,_recipe] call ServoPeregrino_Organizador_Weapons_fnc_compareWeaponRecipes;
- if !(_comparison getOrDefault ["success",false]) exitWith {_comparison};
+ if !(_comparison getOrDefault ["success",false]) exitWith {_captureError=_comparison};
  private _baseSlot=toUpperANSI (_draft getOrDefault ["baseTargetSlot",_kit getOrDefault ["targetSlot",""]]);
  private _dirty= !(((_comparison get "data") getOrDefault ["equal",false])) || {_slotU isNotEqualTo _baseSlot};
  _changed= !((_draft getOrDefault ["recipe",createHashMap]) isEqualTo _recipe)
@@ -62,7 +63,7 @@ if (!_createdNew) then {
  if (_pendingName isEqualTo "") then {
   private _nameBase=(_snapshot getOrDefault ["weaponInfo",createHashMap]) getOrDefault ["displayName","Arma equipada"];
   private _uniqueR=[_nameBase] call ServoPeregrino_Organizador_Weapons_fnc_getUniqueWeaponKitName;
-  if !(_uniqueR getOrDefault ["success",false]) exitWith {_uniqueR};
+  if !(_uniqueR getOrDefault ["success",false]) exitWith {_captureError=_uniqueR};
   _pendingName=(_uniqueR get "data") get "name";
  };
  private _previous=_state getOrDefault ["pendingCapturedDraft",createHashMap];
@@ -78,6 +79,7 @@ if (!_createdNew) then {
   ["revision",(_previous getOrDefault ["revision",0])+1],
   ["updatedAtTick",diag_tickTime]
  ];
+ if ((count _captureError)>0) exitWith {};
  _state set ["pendingNewKit",true];
  _state set ["pendingNewName",_pendingName];
  _state set ["pendingCapturedDraft",_draft];
@@ -88,6 +90,7 @@ if (!_createdNew) then {
  _state set ["kitTypeFilter","ALL"];
  _state set ["kitQuery",""];
 };
+if ((count _captureError)>0) exitWith {_captureError};
 _state set ["lastFocus","DRAFT"];
 _state set ["equipmentSlotView",_slotU];
 missionNamespace setVariable [SP_ORG_WEAPONS_UI_STATE,_state];
