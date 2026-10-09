@@ -497,7 +497,42 @@ switch (_eventName) do {
   _refresh = false;
   private _kitId = _state getOrDefault ["selectedKitId",""];
   private _display = findDisplay SP_ORG_WEAPONS_UI_DISPLAY_IDD;
-  if (_kitId isEqualTo "" || {isNull _display}) then {
+  if (_kitId isEqualTo "" && {_state getOrDefault ["pendingNewKit",false]} && {count (_state getOrDefault ["pendingCapturedDraft",createHashMap])>0} && {!isNull _display}) then {
+   private _captured=_state get "pendingCapturedDraft";
+   private _typedName=ctrlText (_display displayCtrl 2001);
+   private _nameCheck=[_typedName] call ServoPeregrino_Organizador_Weapons_fnc_normalizeWeaponKitName;
+   if !(_nameCheck getOrDefault ["success",false]) then {
+    ["Informe um nome válido para salvar a arma capturada.","ERROR",true] call ServoPeregrino_Organizador_Weapons_fnc_pushUIFeedback;
+    _focusedRefresh="DRAFT";
+   } else {
+    private _name=(_nameCheck get "data") get "name";
+    private _savedR=[_name,_captured getOrDefault ["targetSlot",""],_captured getOrDefault ["recipe",createHashMap]] call ServoPeregrino_Organizador_Weapons_fnc_createWeaponKit;
+    if !(_savedR getOrDefault ["success",false]) then {
+     [_savedR getOrDefault ["message","Nome duplicado ou Recipe inválida. Nada foi salvo."],"ERROR",true] call ServoPeregrino_Organizador_Weapons_fnc_pushUIFeedback;
+     _focusedRefresh="DRAFT";
+    } else {
+     private _saved=(_savedR get "data") get "kit";
+     private _newId=_saved getOrDefault ["kitId",""];
+     _state=missionNamespace getVariable [SP_ORG_WEAPONS_UI_STATE,createHashMap];
+     _state set ["selectedKitId",_newId];
+     _state set ["pendingNewKit",false];
+     _state set ["pendingNewName",""];
+     _state set ["pendingCapturedDraft",createHashMap];
+     _state set ["previousKitIdBeforeNew",""];
+     _state set ["selectedKitIsNew",false];
+     _state set ["draftNameEditing",false];
+     _state set ["draftNameInput",""];
+     _state set ["selectedKitDraftDirty",false];
+     _state set ["kitTypeFilter","ALL"];
+     _state set ["kitQuery",""];
+     missionNamespace setVariable [SP_ORG_WEAPONS_UI_STATE,_state];
+     [_newId] call ServoPeregrino_Organizador_Weapons_fnc_getOrCreateWeaponKitDraft;
+     ["Arma capturada salva como novo WeaponKit da sessão. O equipamento real permanece inalterado.","SUCCESS",true] call ServoPeregrino_Organizador_Weapons_fnc_pushUIFeedback;
+     _refresh=true;
+    };
+   };
+  } else {
+   if (_kitId isEqualTo "" || {isNull _display}) then {
    ["O novo rascunho precisa receber uma arma do Catálogo antes de SALVAR.","INFO",true] call ServoPeregrino_Organizador_Weapons_fnc_pushUIFeedback;
   } else {
    private _typedName = ctrlText (_display displayCtrl 2001);
@@ -547,6 +582,7 @@ switch (_eventName) do {
      };
     };
    };
+  };
   };
  };
 
