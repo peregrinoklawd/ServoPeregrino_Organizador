@@ -257,6 +257,7 @@ class ServoPeregrino_Organizador_Weapons
    class getClassPresentationInfo {};
    class getEquipmentSlotSnapshot {};
    class captureEquippedWeaponToDraft {};
+   class prepareObservedCaptureRecipe {};
    class setPendingCapturedDraftSelection {};
    class buildCompatibilitySelectorModel {};
    class getOrCreateWeaponKitDraft {};
