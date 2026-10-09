@@ -196,7 +196,7 @@ class ServoPeregrino_Organizador_Weapons
   class Catalog
   {
    file="weapons\functions\catalog";
-   class getWeaponCompatibility {};
+   class getWeaponCompatibility {}; class getUnderbarrelCompatibility {};
    class getWeaponCatalogEntry {};
    class buildWeaponCatalog {};
    class getWeaponCatalog {};
