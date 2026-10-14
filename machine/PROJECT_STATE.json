@@ -22,8 +22,8 @@
     "hub_rule": "Hub is an optional player-facing integration/orchestration layer. No domain module may require Hub in order to function.",
     "independent_core_development": true
   },
-  "global_next_gate": "UC001-A RPT review partial PASS (PRIMARY/HANDGUN; SECONDARY not equipped); persistence WST-001 explicitly NOT IMPLEMENTED; continue tests then UC001-B.",
-  "global_after_gate": "UC-001-B attachments; UC-001-C magazines/variants; UC-001-D end-to-end/performance; then prioritize 0.8 MP per roadmap. Packaging/Undo deferred.",
+  "global_next_gate": "UC-001-B R1 resolver all four attachment slots implemented; static mission packaged; need Arma 1516/1516 and manual evidence, R5 baseline still frozen. UC001-A secondary audit deferred by user.",
+  "global_after_gate": "UC-001-B further review or R2 after runtime, then UC-001-C magazines/variants, UC-001-D e2e. WST-001 cross-mission profile persistence essential before shipping, WUX-002 magazines vest and WUX-003 icon filters backlog; 0.8 MP later.",
   "modules": [
     {
       "id": "Nexus",
@@ -216,9 +216,9 @@
         "homologation": "AUTO_1446_OF_1446_AND_MANUAL_APPROVED_2026_10_14"
       },
       "development_version": {
-        "display": "0.7-E E1 R5 mission-first",
-        "semantic": "0.7.4.5 mission-first",
-        "build": "0.7.4.5-pending-save-as-new-e1-r5-mission-first"
+        "display": "0.7-F UC-001-B R1 mission-first",
+        "semantic": "0.7.5.1 mission-first",
+        "build": "0.7.5.1-uc001-b-attachments-r1-mission-first"
       },
       "dependencies": [
         "Nexus",
@@ -256,10 +256,10 @@
           "persistence.provider.v1"
         ]
       },
-      "status": "R5_E1_HOMOLOGATED_UC001A_DIAGNOSTIC_CANDIDATE_RUNTIME_PENDING",
-      "next_gate": "UC-001-A auto 1446/1446 and two diagnostic passes 2/3 slots complete; test SECONDARY occupied (prefer multi-muzzle) before closing coverage. WST-001 persistence among future essential gates; 0.8 authority separate.",
+      "status": "UC001B_R1_UNIFIED_ATTACHMENTS_STATIC_READY_ARMA_RUNTIME_PENDING",
+      "next_gate": "Run Arma cumulative B R1 1516 expected (R5 1446 + B 70), and manual MCC/RHS/TierOne/ACE accessories, capture/apply and D2 rollback; keep UC001A SECONDARY diagnostic debt.",
       "homologated_artifact": "R5 E1 mission-first: RPT 2026-10-14 auto 1446/1446, zero fail/blocked, manual captures and SAVE_AS_NEW approved. Baseline marker baseline/weapons-0.7-e-r5-homologated @ 52dd24af4f54ca9f3c9c6832f55ffdf772ff0314; prior D2 R1 remains immutable.",
-      "current_candidate_artifact": "SP_ORG_Weapons_UC_001_A_Source_Audit_R1.VR",
+      "current_candidate_artifact": "SP_ORG_Weapons_UC_001_B_Unified_Attachments_R1.VR",
       "mission_first_validation": {
         "0.1-B": {
           "status": "APPROVED_SP",
@@ -1005,7 +1005,8 @@
         "scope": "all weapons, presets/variants, attachment slots, magazines, config/mod provenance, fail-closed postvalidation",
         "current_partial_support": "only UnderBarrelSlot engine+CBA in R4/R5",
         "must_not_claim_complete_until_end_to_end": true,
-        "uc001a_status": "SOURCE_AUDIT_IMPLEMENTED_RUNTIME_PENDING"
+        "uc001a_status": "SOURCE_AUDIT_IMPLEMENTED_RUNTIME_PENDING",
+        "uc001b_status": "R1_IMPLEMENTED_STATIC_READY_RUNTIME_PENDING"
       },
       "previous_homologated_baseline": {
         "display": "0.7-D2 R1 mission-first",
@@ -1687,5 +1688,31 @@
       "status": "RUNTIME_PASS_PARTIAL_COVERAGE",
       "document": "docs/79_WEAPONS_UC001A_R1_REVIEW.md"
     }
+  },
+  "weapons_uc001b": {
+    "branch": "feature/weapons-uc-001-b-unified-attachments",
+    "base_branch": "feature/weapons-uc-001-a-compatibility-audit",
+    "base_commit": "08cdf5497cd4e67c2af9a0fc50aa06ee18bac438",
+    "pr_number": 11,
+    "pr_status": "DRAFT",
+    "status": "STATIC_READY_ARMA_RUNTIME_PENDING",
+    "display": "0.7-F",
+    "semantic": "0.7.5.1",
+    "package_name": "SP_ORG_Weapons_UC_001_B_Unified_Attachments_R1.VR",
+    "expected_auto_tests": 1516,
+    "previous_r5_auto": 1446,
+    "new_tests": 70,
+    "validation_script": "tools/validate_uc001_b.py",
+    "documentation": "docs/80_WEAPONS_UC001B_R1_UNIFIED_ATTACHMENTS.md",
+    "scope": "Muzzle, Pointer, Optic, Underbarrel single logical source, CBA optional, D2 unchanged",
+    "deferred": [
+      "UC001A_SECONDARY",
+      "UC001C_MAGAZINES",
+      "UC001D_E2E",
+      "WST001_PERSISTENCE",
+      "WUX002_VEST_AMMO",
+      "WUX003_ICON_FILTERS",
+      "MP_PBO_UNDO"
+    ]
   }
 }
