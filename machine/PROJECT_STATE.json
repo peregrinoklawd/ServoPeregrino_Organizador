@@ -22,7 +22,7 @@
     "hub_rule": "Hub is an optional player-facing integration/orchestration layer. No domain module may require Hub in order to function.",
     "independent_core_development": true
   },
-  "global_next_gate": "Weapons R5 frozen as baseline marker. UC-001-A diagnostic sources candidate: static/packaging and Arma RPT still pending. New backlog WUX-002 magazine-to-vest, WUX-003 icon filters.",
+  "global_next_gate": "UC-001-A: CI static 35/35 and mission packaging PASS. Next actual Arma R5 regression 1446/1446 plus read-only per-slot compatibility audit RPT/manual. UC-001-B not started.",
   "global_after_gate": "UC-001-B attachments; UC-001-C magazines/variants; UC-001-D end-to-end/performance; then prioritize 0.8 MP per roadmap. Packaging/Undo deferred.",
   "modules": [
     {
@@ -1657,9 +1657,18 @@
     "branch": "feature/weapons-uc-001-a-compatibility-audit",
     "base_commit": "52dd24af4f54ca9f3c9c6832f55ffdf772ff0314",
     "base_marker": "baseline/weapons-0.7-e-r5-homologated",
-    "status": "STATIC_PACKAGING_PENDING_ARMA_RUNTIME_PENDING",
+    "status": "STATIC_35_OF_35_PACKAGE_SUCCESS_ARMA_RUNTIME_PENDING",
     "doc": "docs/78_WEAPONS_UC_001_A_SOURCE_AUDIT.md",
     "test_action": "SP_ORG LAB - AUDITAR FONTES UC-001-A",
-    "safety": "READ_ONLY_NOT_PRODUCTION_RESOLVER"
+    "safety": "READ_ONLY_NOT_PRODUCTION_RESOLVER",
+    "ci_run": 38636973136,
+    "ci_commit": "40ccec1dd6c2e620ade61fb161814e2ff1a5a52b",
+    "artifact_id": 11929195446,
+    "mission_zip_sha256": "f6775f1991e6a920910152e9d409d7e30e73b342ca92457162afb88d04979e61",
+    "static_checks": {
+      "passed": 35,
+      "failed": 0,
+      "total": 35
+    }
   }
 }
