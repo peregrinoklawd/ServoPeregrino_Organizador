@@ -72,7 +72,11 @@ private _defs=[
   [_invalid] call ServoPeregrino_Organizador_Weapons_fnc_validateWeaponConfigurationSemantic
  } else {_baseR};
  ["B unknown optic rejected "+_weapon,!(_v getOrDefault ["success",true])] call _assert;
- ["B legacy R4 bipod parity "+_weapon,(([_weapon] call ServoPeregrino_Organizador_Weapons_fnc_getUnderbarrelCompatibility) getOrDefault ["data",createHashMap]) getOrDefault ["items",[]] isEqualTo (_slots getOrDefault ["bipod",[]])] call _assert;
+ private _legacyBipodR=[_weapon] call ServoPeregrino_Organizador_Weapons_fnc_getUnderbarrelCompatibility;
+ private _legacyItems=(_legacyBipodR getOrDefault ["data",createHashMap]) getOrDefault ["items",[]];
+ ["B legacy R4 bipod parity "+_weapon,
+  _legacyBipodR getOrDefault ["success",false] && {_legacyItems isEqualTo (_slots getOrDefault ["bipod",[]])}
+ ] call _assert;
 } forEach ["arifle_MX_F","hgun_P07_F","launch_NLAW_F"];
 private _unknown=["SPORG_UC001B_NONEXISTENT_WEAPON"] call ServoPeregrino_Organizador_Weapons_fnc_resolveAttachmentCompatibility;
 ["B resolver rejects unregistered weapon",!(_unknown getOrDefault ["success",true])] call _assert;
