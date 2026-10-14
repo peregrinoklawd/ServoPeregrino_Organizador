@@ -64,7 +64,7 @@
             if (missionNamespace getVariable ["SP_ORG_Weapons_AutoTestRunning",false]) exitWith {
                 hint "Feche o AUTO TEST antes de auditar as fontes.";
             };
-            if (!isNull (findDisplay SP_ORG_WEAPONS_UI_DISPLAY_IDD)) exitWith {
+            if (!isNull (findDisplay 7800)) exitWith {
                 hint "Feche a interface Weapons antes da auditoria UC-001-A.";
             };
             private _before=getUnitLoadout player;
