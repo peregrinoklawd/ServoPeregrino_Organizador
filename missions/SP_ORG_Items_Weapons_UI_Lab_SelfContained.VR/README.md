@@ -1,3 +1,5 @@
+> **Missão ativa UC-001-A (14/10/2026):** este README conserva histórico antigo de Weapons 0.6-F R5. Para a candidata atual, siga `LEIA_PRIMEIRO.txt`, `docs/78_WEAPONS_UC_001_A_SOURCE_AUDIT.md` e execute o diagnóstico **somente leitura**, preservando AUTO R5 1446/1446 como regressão. O título histórico abaixo não representa a versão atual.
+
 # SP_ORG Items + Weapons UI Lab — Weapons 0.6-F R5
 
 Missão **100% self-contained** para validar a candidata Weapons 0.6-F R5.
