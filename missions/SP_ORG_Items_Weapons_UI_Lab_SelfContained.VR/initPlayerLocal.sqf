@@ -59,13 +59,40 @@
             hint format ["Diagnóstico de compatibilidade: %1. Verifique COMPAT_AUDIT no RPT; nenhuma arma do jogador foi alterada.",_r getOrDefault ["code","ERRO"]];
         };
     }];
+    missionNamespace setVariable ["SP_ORG_FullLab_fnc_auditUC001A", {
+        [] spawn {
+            if (missionNamespace getVariable ["SP_ORG_Weapons_AutoTestRunning",false]) exitWith {
+                hint "Feche o AUTO TEST antes de auditar as fontes.";
+            };
+            if (!isNull (findDisplay SP_ORG_WEAPONS_UI_DISPLAY_IDD)) exitWith {
+                hint "Feche a interface Weapons antes da auditoria UC-001-A.";
+            };
+            private _before=getUnitLoadout player;
+            private _visited=0;
+            private _skipped=0;
+            private _failures=0;
+            {
+                private _r=[player,_x] call ServoPeregrino_Organizador_Weapons_fnc_auditUC001ASources;
+                if !(_r getOrDefault ["success",false]) then {
+                    _failures=_failures+1;
+                } else {
+                    private _d=_r getOrDefault ["data",createHashMap];
+                    if (_d getOrDefault ["skipped",false]) then {_skipped=_skipped+1} else {_visited=_visited+1};
+                };
+                diag_log format ["[SP_ORG] [FULL_UI_LAB] UC001A_SLOT slot=%1 success=%2 code=%3",_x,_r getOrDefault ["success",false],_r getOrDefault ["code",""]];
+            } forEach ["PRIMARY","HANDGUN","SECONDARY"];
+            private _unchanged=_before isEqualTo (getUnitLoadout player);
+            diag_log format ["[SP_ORG] [WEAPONS] [UC001A_GATE] audited=%1 emptySlots=%2 failures=%3 playerLoadoutUnchanged=%4",_visited,_skipped,_failures,_unchanged];
+            hint format ["UC-001-A fontes: %1 armas auditadas, %2 slots vazios, %3 erros. Equipamento intacto: %4. Envie o RPT.",_visited,_skipped,_failures,_unchanged];
+        };
+    }];
     missionNamespace setVariable ["SP_ORG_FullLab_fnc_installCoreActions", {
         params [["_unit",objNull,[objNull]]];
         if (isNull _unit || {!local _unit}) exitWith {};
         {
             private _id = _unit getVariable [_x,-1];
             if (_id >= 0) then {_unit removeAction _id;};
-        } forEach ["SPORG_FL_Items","SPORG_FL_Weapons","SPORG_FL_UICommon","SPORG_FL_ItemsUICommon","SPORG_FL_WeaponsR6","SPORG_FL_Weapons07B","SPORG_FL_Weapons07C","SPORG_FL_Weapons07E","SPORG_FL_WeaponsCompatAudit"];
+        } forEach ["SPORG_FL_Items","SPORG_FL_Weapons","SPORG_FL_UICommon","SPORG_FL_ItemsUICommon","SPORG_FL_WeaponsR6","SPORG_FL_Weapons07B","SPORG_FL_Weapons07C","SPORG_FL_Weapons07E","SPORG_FL_WeaponsCompatAudit","SPORG_FL_WeaponsUC001A"];
 
         _unit setVariable ["SPORG_FL_Items", _unit addAction [
             "<t color='#7FD9D0' size='1.12'>SP_ORG LAB - ABRIR ITEMS</t>",
@@ -86,6 +113,10 @@
         _unit setVariable ["SPORG_FL_Weapons07E", _unit addAction [
             "<t color='#F0D98C'>SP_ORG LAB - TESTAR WEAPONS 0.7-E R5</t>",
             {[] call (missionNamespace getVariable ["SP_ORG_FullLab_fnc_testWeapons07E",{}]);},nil,14.2,true,true,"","alive _this && isServer",50
+        ]];
+        _unit setVariable ["SPORG_FL_WeaponsUC001A", _unit addAction [
+            "<t color='#84E7DA'>SP_ORG LAB - AUDITAR FONTES UC-001-A</t>",
+            {[] call (missionNamespace getVariable ["SP_ORG_FullLab_fnc_auditUC001A",{}]);},nil,14.0,true,true,"","alive _this && isServer",50
         ]];
         _unit setVariable ["SPORG_FL_WeaponsCompatAudit", _unit addAction [
             "<t color='#76D3FE'>SP_ORG LAB - DIAGNOSTICAR COMPATIBILIDADE</t>",
@@ -132,5 +163,5 @@
     }];
 
     diag_log format ["[SP_ORG] [FULL_UI_LAB] CLIENT_READY player=%1 owner=%2",name player,clientOwner];
-    hint parseText "<t size='1.2'>SP_ORG - WEAPONS 0.7-E R5 + UICOMMON 0.2</t><br/><br/>Weapons 0.7-E R5 corrige SALVAR COMO NOVO para rascunho de arma capturada; R4 CBA continua valida. Confira nome, Receita e status SALVO na lista. Baseline D2 R1 congelada.<br/><br/><t color='#F0D98C'>IMPORTANTE:</t> o AUTO TEST executa as mutacoes em uma unidade isolada criada pelo harness. O loadout do jogador nao deve ser alterado. UI: CAPTURAR edita rascunho sem salvar, SALVAR persiste. Não abra a UI durante o AUTO TEST. Undo deferred.<br/><br/>Nao carregue PBOs do Servo Peregrino neste teste.";
+    hint parseText "<t size='1.2'>SP_ORG - UC-001-A + WEAPONS 0.7-E R5</t><br/><br/>Weapons 0.7-E R5 corrige SALVAR COMO NOVO para rascunho de arma capturada; R4 CBA continua valida. Confira nome, Receita e status SALVO na lista. Baseline D2 R1 congelada.<br/><br/><t color='#F0D98C'>IMPORTANTE:</t> o AUTO TEST executa as mutacoes em uma unidade isolada criada pelo harness. O loadout do jogador nao deve ser alterado. UI: CAPTURAR edita rascunho sem salvar, SALVAR persiste. Não abra a UI durante o AUTO TEST. Undo deferred.<br/><br/>Nao carregue PBOs do Servo Peregrino neste teste.";
 };
