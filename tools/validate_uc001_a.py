@@ -40,7 +40,7 @@ check("Has source diff logs", "[UC001A_SOURCE]" in CODE)
 check("Has magazine logs", "[UC001A_MAGAZINE]" in CODE)
 check("Has explicit summary logs", "[UC001A_SUMMARY]" in CODE)
 check("Has robust missing CBA result", "cbaItemsAvailable" in CODE and "cbaMagazinesAvailable" in CODE)
-EXECUTABLE = re.sub(r"//[^\\n]*", "", CODE)
+EXECUTABLE = re.sub(r"//[^\n]*", "", CODE)
 for cmd in ("setUnitLoadout", "addMagazine", "addItemToVest", "removeMagazine",
             "setVariable", "createUnit", "createVehicle", "remoteExec", "setPos", "deleteVehicle"):
     # This file may read mission state through other read-only functions.
