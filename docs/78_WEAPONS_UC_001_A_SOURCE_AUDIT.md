@@ -43,3 +43,12 @@ Executar laboratório **somente leitura** que registra divergências reais de fo
 ## Backlog paralelo
 
 WUX-002 (adicionar magazine ao colete) e WUX-003 (filtros por ícones) em `docs/77_WEAPONS_BACKLOG_AMMO_VEST_ICON_FILTERS.md`, **fora desta candidata**.
+
+## Packaging/CI da candidata UC-001-A R1 (14/10/2026)
+
+- GitHub Actions: https://github.com/peregrinoklawd/ServoPeregrino_Organizador/actions/runs/38636973136 — **SUCCESS**.
+- Commit mission-first empacotado: `40ccec1dd6c2e620ade61fb161814e2ff1a5a52b`.
+- Validador estático: **35 PASS / 0 FAIL** (não é compilador SQF nem execução Arma).
+- ZIP interno: `SP_ORG_Weapons_UC_001_A_Source_Audit_R1.zip`; SHA256: `f6775f1991e6a920910152e9d409d7e30e73b342ca92457162afb88d04979e61`.
+- Artifact oficial: https://github.com/peregrinoklawd/ServoPeregrino_Organizador/actions/runs/38636973136/artifacts/11929195446 (`SP_ORG_UI_Lab`, contém ZIP da missão e SHA256.txt).
+- **RUNTIME ARMA NÃO EXECUTADO**: R5 1446/1446 deve regredir e auditoria UC-001-A requer RPT real; nenhum gate de compatibilidade completa homologado.
