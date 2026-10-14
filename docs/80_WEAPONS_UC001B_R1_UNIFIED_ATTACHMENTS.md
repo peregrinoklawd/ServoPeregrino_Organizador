@@ -49,3 +49,13 @@ A UC-001-A comparou Arma e CBA por slot. No MCC_RD704_AFG houve 44 opções vani
 Referências técnicas:
 https://community.bistudio.com/wiki/compatibleItems
 https://cbateam.github.io/CBA_A3/docs/files/jr/fnc_compatibleItems-sqf.html
+
+## Pacote CI aprovado (14/10/2026)
+
+- Commit da missão empacotada: `62be98aa122cce57f7fc5f8f6ea42a4dcf4970b5`.
+- Workflow: https://github.com/peregrinoklawd/ServoPeregrino_Organizador/actions/runs/38642584369 — **SUCCESS**.
+- Static **30/30 PASS**, sem comprovar sintaxe/runtime Arma.
+- [Artifact oficial da missão](https://github.com/peregrinoklawd/ServoPeregrino_Organizador/actions/runs/38642584369/artifacts/11930762125).
+- ZIP `SP_ORG_Weapons_UC_001_B_Unified_Attachments_R1.zip` SHA256 `d6e90db28ac82b13438bf1d73dd74d14140a596f394c6e479a6fd64595c5ade8`.
+- O artifact `SP_ORG_UI_Lab` contém o ZIP da missão e `SHA256.txt`.
+- **Teste no Arma e homologação manual permanecem pendentes**. O nome de missão informa 0.7-F R1, mas a baseline R5 (0.7-E) permanece protegida.
