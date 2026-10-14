@@ -32,6 +32,13 @@ private _rootW=configFile >> "CfgWeapons";
 private _rootM=configFile >> "CfgMagazines";
 private _cbaItemsAvailable=!(isNil "CBA_fnc_compatibleItems");
 private _cbaMagAvailable=!(isNil "CBA_fnc_compatibleMagazines");
+private _aceArsenalPatch=isClass (configFile >> "CfgPatches" >> "ace_arsenal");
+private _aceArsenalApi=!(isNil "ace_arsenal_fnc_initBox");
+diag_log format [
+ "[SP_ORG] [WEAPONS] [UC001A_CONTEXT] slot=%1 weapon=%2 baseWeapon=%3 aceArsenalPatch=%4 aceArsenalApi=%5 cbaItems=%6 cbaMagazines=%7 aceCompatibilityAuthority=UNVERIFIED",
+ _slotU,_weapon,_base,_aceArsenalPatch,_aceArsenalApi,_cbaItemsAvailable,_cbaMagAvailable
+];
+
 private _normal={
  params ["_values","_root"];
  private _out=[];private _seen=createHashMap;
@@ -143,6 +150,7 @@ diag_log format [
  ["slot",_slotU],["weaponClass",_weapon],["baseWeapon",_base],
  ["slots",_rows],["muzzles",_magRows],
  ["cbaItemsAvailable",_cbaItemsAvailable],["cbaMagazinesAvailable",_cbaMagAvailable],
+ ["aceArsenalPatchDetected",_aceArsenalPatch],["aceArsenalPublicApiDetected",_aceArsenalApi],
  ["engineMagazineCount",count _allEng],["cbaMagazineCount",count _allCba],
  ["cbaOnlyMagazineSample",_allSample],["sourceDiffCount",_diffTotal],
  ["loadoutUnchanged",_unchanged],["skipped",false],
