@@ -4,7 +4,7 @@ if (_unit getVariable ["SP_ORG_Weapons_labActionsInstalled",false]) exitWith {tr
 _unit setVariable ["SP_ORG_Weapons_labActionsInstalled",true];
 
 
-_unit addAction ["Weapons | ABRIR UI 0.7-E",{
+_unit addAction ["Weapons | ABRIR UI 0.7-F UC-001-B",{
  if (missionNamespace getVariable ["SP_ORG_Weapons_AutoTestRunning",false]) exitWith {hint "Aguarde a conclusão do AUTO TEST antes de abrir Weapons.";};
  private _result = [] call ServoPeregrino_Organizador_Weapons_fnc_openInterface;
  if !(_result get "success") then {
@@ -28,8 +28,8 @@ _unit addAction ["Weapons | Compatibilidade MX - RPT",{
  hint "Compatibilidade da MX gravada no RPT.";
 }];
 
-_unit addAction ["Weapons | Sobre o teste 0.7-E R5",{
- hint "Visual baseline 0.6-F R6; Weapons 0.7-E captura arma equipada para rascunho. Use SP_ORG LAB - TESTAR WEAPONS 0.7-E R5. Não abra a UI durante o teste. Undo deferred.";
+_unit addAction ["Weapons | Sobre UC-001-B R1",{
+ hint "UC-001-B R1: catalogo e validacao de miras, bocas, apontadores e bipés usam a mesma consulta Arma+CBA. Execute SP_ORG LAB - TESTAR UC-001-B R1 com a UI fechada (1516 testes previstos). SALVAR conserva kits somente nesta missao; persistencia WST-001 pendente. Rollback D2 mantido.";
 }];
 
 _unit addEventHandler ["Respawn",{params ["_new"];[_new] call ServoPeregrino_Organizador_Weapons_fnc_installLabActions}];
