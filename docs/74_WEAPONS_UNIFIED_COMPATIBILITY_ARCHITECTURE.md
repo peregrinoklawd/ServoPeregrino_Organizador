@@ -57,3 +57,8 @@ O cliente exige **compatibilidade completa para todas as armas, acessórios e ca
 - Revisão e homologação com RPT completo antes de promover; não declarar **compatibilidade completa** por apenas concluir um slot.
 
 **Sequência acordada:** resolver primeiro o bloqueio do SALVAR COMO NOVO na R5 e obter RPT/manual verde; UC-001 é então a prioridade explícita da próxima linha de trabalho. Não fazer merge na main nem tocar a baseline D2 R1 até aceite.
+
+
+## Continuidade UC-001-A e backlog (14/10/2026)
+
+R5 homologada e congelada via marker `baseline/weapons-0.7-e-r5-homologated`. Candidata UC-001-A é diagnóstico somente leitura; ver `docs/78_WEAPONS_UC_001_A_SOURCE_AUDIT.md`. Ação de adicionar magazines ao colete e filtros de categorias por ícones estão documentadas em `docs/77_WEAPONS_BACKLOG_AMMO_VEST_ICON_FILTERS.md` como **pendentes**, fora da UC-001-A. UC-001-B/C/D não implementadas.

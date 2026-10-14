@@ -1,5 +1,8 @@
 # Estado atual do projeto
 
+> **Checkpoint 14/10/2026 — ATUAL (substitui o primeiro checkpoint histórico abaixo):** Weapons 0.7-E E1 R5 **homologada** após AUTO 1446/1446 e teste manual no Arma; marcador congelado `baseline/weapons-0.7-e-r5-homologated` @ `52dd24af4f54ca9f3c9c6832f55ffdf772ff0314`. D2 R1 continua preservada. A branch ativa é `feature/weapons-uc-001-a-compatibility-audit`, com UC-001-A em implementação **somente diagnóstica; runtime no Arma e CI da candidata ainda não homologados**. Fonte `docs/78_WEAPONS_UC_001_A_SOURCE_AUDIT.md`. Backlog WUX-002 (carregadores no colete) e WUX-003 (ícones de filtros) em `docs/77_WEAPONS_BACKLOG_AMMO_VEST_ICON_FILTERS.md`. Nenhum merge main, PBO, MP/JIP, Undo ou ação de magazines no colete nesta candidata.
+
+
 > Checkpoint ativo 14/10/2026: **Weapons 0.7-E E1 R5 testada com êxito no Arma 3** — automático **1446/1446, 0 FAIL, 0 BLOCKED**, execução real às 14:24:44; usuário relata manuais sem falhas e RPT comprova NOVO → CAPTURAR → SALVAR COMO NOVO (14:27:15, 8→9 kits) e SALVAR COMO NOVO em kit existente (14:28:34, 9→10 kits). **Status: runtime/manual PASS, decisão formal de baseline R5 pendente; D2 R1 continua congelada sem merge.** Auditoria `docs/76_WEAPONS_0_7_E_R5_RUNTIME_REVIEW_2026_10_14.md`. Encontradas **24 ocorrências de erro CBA addPerFrameHandler** de origem não identificada, não bloqueantes para o teste Weapons. **Próximo requisito obrigatório UC-001** compatibilidade unificada COMPLETA Arma/CBA/ACE: todas as armas, variantes, acessórios de cada slot e magazines, em `docs/74_WEAPONS_UNIFIED_COMPATIBILITY_ARCHITECTURE.md`. UnderBarrel R4/R5 é compatibilidade parcial. Sem PBO/MP/Undo por enquanto.
 
 

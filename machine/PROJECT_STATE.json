@@ -22,8 +22,8 @@
     "hub_rule": "Hub is an optional player-facing integration/orchestration layer. No domain module may require Hub in order to function.",
     "independent_core_development": true
   },
-  "global_next_gate": "Weapons E1 R5: automated 1446/1446 0 FAIL/BLOCKED and user manual validation PASS on 2026-10-14. Decide whether to freeze/promote R5 baseline; then implement UC-001 complete unified compatibility.",
-  "global_after_gate": "UC-001 compatibility for all weapon attachment slots, magazines and variants via Arma/CBA/ACE interfaces. Existing partial support UnderBarrel only. D2 stable unchanged. MP/PBO/Undo deferred.",
+  "global_next_gate": "UC001-A RPT review partial PASS (PRIMARY/HANDGUN; SECONDARY not equipped); persistence WST-001 explicitly NOT IMPLEMENTED; continue tests then UC001-B.",
+  "global_after_gate": "UC-001-B attachments; UC-001-C magazines/variants; UC-001-D end-to-end/performance; then prioritize 0.8 MP per roadmap. Packaging/Undo deferred.",
   "modules": [
     {
       "id": "Nexus",
@@ -210,9 +210,10 @@
       "addon": "ServoPeregrino_Organizador_Weapons",
       "mandatory": false,
       "stable_version": {
-        "display": "0.7-D2 R1 mission-first",
-        "semantic": "0.7.3.2 mission-first",
-        "build": "0.7.3.2-consolidated-runtime-hardening-d2-r1-mission-first"
+        "display": "0.7-E E1 R5 mission-first",
+        "semantic": "0.7.4.5 mission-first",
+        "build": "0.7.4.5-pending-save-as-new-e1-r5-mission-first",
+        "homologation": "AUTO_1446_OF_1446_AND_MANUAL_APPROVED_2026_10_14"
       },
       "development_version": {
         "display": "0.7-E E1 R5 mission-first",
@@ -255,10 +256,10 @@
           "persistence.provider.v1"
         ]
       },
-      "status": "MISSION_FIRST_0_7_E_E1_R5_RUNTIME_MANUAL_PASS_AWAITING_BASELINE_DECISION",
-      "next_gate": "R5 ready for formal baseline decision; preserve D2 and current branch; then UC-001 full compatibility. Observe external CBA PFH errors as nonblocking.",
-      "homologated_artifact": "Weapons 0.7-D2 R1 mission-first operator approved: reported zero FAIL in latest auto run (clean RPT not independently audited), manual checks approved. Baseline branch baseline/weapons-0.7-d2-r1-homologated; code 0d36ce24b04dc11399ff58142a1179f0082a341b; mission SP_ORG_Weapons_0_7_D2_NoMag_Contract_Review_R1.VR; ZIP SHA256 81cabddb9a4fd97e7a23e57c52d3f4fe21bb05380f2943516f78f7204fe592ec.",
-      "current_candidate_artifact": "SP_ORG_Weapons_0_7_E_Save_As_New_E1_R5.VR",
+      "status": "R5_E1_HOMOLOGATED_UC001A_DIAGNOSTIC_CANDIDATE_RUNTIME_PENDING",
+      "next_gate": "UC-001-A auto 1446/1446 and two diagnostic passes 2/3 slots complete; test SECONDARY occupied (prefer multi-muzzle) before closing coverage. WST-001 persistence among future essential gates; 0.8 authority separate.",
+      "homologated_artifact": "R5 E1 mission-first: RPT 2026-10-14 auto 1446/1446, zero fail/blocked, manual captures and SAVE_AS_NEW approved. Baseline marker baseline/weapons-0.7-e-r5-homologated @ 52dd24af4f54ca9f3c9c6832f55ffdf772ff0314; prior D2 R1 remains immutable.",
+      "current_candidate_artifact": "SP_ORG_Weapons_UC_001_A_Source_Audit_R1.VR",
       "mission_first_validation": {
         "0.1-B": {
           "status": "APPROVED_SP",
@@ -999,11 +1000,41 @@
       "full_compatibility_requirement": {
         "requirement_id": "UC-001",
         "status": "REQUIRED_NOT_IMPLEMENTED_FULLY",
-        "priority": "NEXT_AFTER_R5_RUNTIME_APPROVAL",
+        "priority": "CURRENT_UC001_A_SOURCE_AUDIT",
         "canonical_document": "docs/74_WEAPONS_UNIFIED_COMPATIBILITY_ARCHITECTURE.md",
         "scope": "all weapons, presets/variants, attachment slots, magazines, config/mod provenance, fail-closed postvalidation",
         "current_partial_support": "only UnderBarrelSlot engine+CBA in R4/R5",
-        "must_not_claim_complete_until_end_to_end": true
+        "must_not_claim_complete_until_end_to_end": true,
+        "uc001a_status": "SOURCE_AUDIT_IMPLEMENTED_RUNTIME_PENDING"
+      },
+      "previous_homologated_baseline": {
+        "display": "0.7-D2 R1 mission-first",
+        "semantic": "0.7.3.2 mission-first",
+        "build": "0.7.3.2-consolidated-runtime-hardening-d2-r1-mission-first",
+        "branch": "baseline/weapons-0.7-d2-r1-homologated",
+        "preserved": true
+      },
+      "ux_backlog": [
+        {
+          "id": "WUX-002",
+          "status": "RECORDED_NOT_IMPLEMENTED",
+          "summary": "Manual action in equipment content to add chosen compatible weapon magazines into player vest",
+          "doc": "docs/77_WEAPONS_BACKLOG_AMMO_VEST_ICON_FILTERS.md",
+          "ownership": "Weapons UI + inventory contract (Items/Equipment); explicit capacity/policy check"
+        },
+        {
+          "id": "WUX-003",
+          "status": "RECORDED_NOT_IMPLEMENTED",
+          "summary": "Compact image category filters, while save/save-as and other action buttons stay textual",
+          "doc": "docs/77_WEAPONS_BACKLOG_AMMO_VEST_ICON_FILTERS.md"
+        }
+      ],
+      "kit_persistence_requirement": {
+        "id": "WST-001",
+        "status": "NOT_IMPLEMENTED",
+        "current_mode": "SESSION_LOCAL_CANDIDATE",
+        "target": "Cross-mission profile-persistent private WeaponKits with versioned store; MP authority separate",
+        "doc": "docs/79_WEAPONS_UC001A_R1_REVIEW.md"
       }
     },
     {
@@ -1628,5 +1659,33 @@
     "zip_sha256": "7fcac528f8d23245f1cbc2b736aa8e18ba35a9d20a0f7d3360937cf3e1e465a1",
     "package_validation": "462_FILES_CRC_SOURCE_MATCH_ONE_MISSION",
     "workflow_conclusion": "success"
+  },
+  "weapons_uc001a": {
+    "branch": "feature/weapons-uc-001-a-compatibility-audit",
+    "base_commit": "52dd24af4f54ca9f3c9c6832f55ffdf772ff0314",
+    "base_marker": "baseline/weapons-0.7-e-r5-homologated",
+    "status": "RUNTIME_PASS_PARTIAL_COVERAGE_SECONDARY_NOT_TESTED",
+    "doc": "docs/78_WEAPONS_UC_001_A_SOURCE_AUDIT.md",
+    "test_action": "SP_ORG LAB - AUDITAR FONTES UC-001-A",
+    "safety": "READ_ONLY_NOT_PRODUCTION_RESOLVER",
+    "ci_run": 38636973136,
+    "ci_commit": "40ccec1dd6c2e620ade61fb161814e2ff1a5a52b",
+    "artifact_id": 11929195446,
+    "mission_zip_sha256": "f6775f1991e6a920910152e9d409d7e30e73b342ca92457162afb88d04979e61",
+    "static_checks": {
+      "passed": 35,
+      "failed": 0,
+      "total": 35
+    },
+    "runtime_review": {
+      "date": "2026-10-14",
+      "rpt": "Texto colado(20261014-212800).txt",
+      "auto_r5": "1446/1446_0_FAIL_0_BLOCKED",
+      "uc001a": "TWO_PASSES_TWO_OCCUPIED_SLOTS_EACH_ZERO_FAIL_LOADOUT_UNCHANGED",
+      "primary_bipod_source_diff": 43,
+      "secondary": "EMPTY_NOT_TESTED",
+      "status": "RUNTIME_PASS_PARTIAL_COVERAGE",
+      "document": "docs/79_WEAPONS_UC001A_R1_REVIEW.md"
+    }
   }
 }

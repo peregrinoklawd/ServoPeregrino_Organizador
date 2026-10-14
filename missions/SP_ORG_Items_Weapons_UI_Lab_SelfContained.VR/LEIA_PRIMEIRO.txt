@@ -1,32 +1,48 @@
-SP_ORG — WEAPONS 0.7-E E1 R5 — SALVAR COMO NOVO
-CANDIDATA MISSION-FIRST — RUNTIME REAL PENDENTE
+SP_ORG — WEAPONS UC-001-A — INVENTÁRIO DE FONTES DE COMPATIBILIDADE
+CANDIDATA DIAGNÓSTICA R1 — TESTE NO ARMA PENDENTE (CI ESTÁTICA SEPARADA)
 
-1. Extraia SP_ORG_Weapons_0_7_E_Save_As_New_E1_R5.VR na pasta missions.
-2. Não carregue PBOs SP_ORG. Mantenha Weapons FECHADA durante o AUTO TEST.
-3. Execute SP_ORG LAB - TESTAR WEAPONS 0.7-E R5.
-   Meta: 1446 PASS / 0 FAIL / 0 BLOCKED (D2 1360 + 86 E).
-4. Depois do auto, equipe a MCC_RD704_AFG e MCC_Handbrake_BLK no ACE Arsenal.
-5. Na interface Weapons:
-   a) Use NOVO -> CAPTURAR ARMA EQUIPADA;
-   b) Confira o nome (campo no cabeçalho P2) e a arma/bipé presentes;
-   c) Clique SALVAR COMO NOVO — AGORA HABILITADO.
-   d) Confira que um único WeaponKit com nome e Recipe corretos surgiu em MEUS KITS;
-      status SALVO, pending NOVO limpo, nenhum outro kit modificado.
-6. Repita NOVO -> CAPTURAR -> SALVAR (botão tradicional) para garantir que
-   ambos os caminhos criam o kit sem salvar automaticamente.
-7. Para um KIT EXISTENTE alterado, clique SALVAR COMO NOVO:
-   deve criar uma cópia, manter intacto o kit original e selecionar o novo.
-8. Teste DESCARTAR sem salvar e valide que o repositório não recebe kit.
-9. Teste EQUIPAR RASCUNHO e confira o rollback/post-validation legado.
-10. Envie o RPT completo, incluindo [SAVE_REQUEST], [SAVE_ALIAS],
-    [SAVE_RESULT] e [AUTO_TEST_SUMMARY] mode=MISSION_FIRST_0_7_E_R5.
+BASELINE PRESERVADA
+- Weapons 0.7-E E1 R5 HOMOLOGADA: 1446 PASS / 0 FAIL / 0 BLOCKED
+- Marker Git: baseline/weapons-0.7-e-r5-homologated @ 52dd24af
+- Weapons D2 R1 e UICommon 0.2 preservados
 
-IMPORTANTE:
-- Correção R5: SAVE_AS_NEW de pending NOVO usa o mesmo SAVE_DRAFT validado;
-  não tenta duplicar kit inexistente, não cria duas cópias, não mexe no físico.
-- Manter a R4 CBA UnderBarrel funcional para o bipé.
-- UC-001 — Compatibilidade Unificada Completa está documentada em
-  docs/74_WEAPONS_UNIFIED_COMPATIBILITY_ARCHITECTURE.md.
-  A ampliação para miras, bocas, apontadores, magazines e variantes de armas
-  é a próxima evolução separada APÓS aprovação da correção de salvamento.
-- D2 R1 estável congelada; sem merge main, PBO, MP, JIP ou Undo.
+INSTALAÇÃO
+1. Pelo GitHub Actions da branch feature/weapons-uc-001-a-compatibility-audit,
+   baixar o artifact SP_ORG_UI_Lab e extrair a missão
+   SP_ORG_Weapons_UC_001_A_Source_Audit_R1.VR.
+2. Copiar a pasta .VR inteira para o diretório de missões local do Arma 3.
+3. Iniciar sem PBOs SP_ORG, com seu modset habitual (Arma, CBA, ACE e MCC/RHS).
+4. NÃO abrir a interface Weapons durante os testes automáticos.
+
+TESTES
+1. Execute primeiro "SP_ORG LAB - TESTAR WEAPONS 0.7-E R5".
+   Gate de regressão: 1446 PASS / 0 FAIL / 0 BLOCKED.
+2. Depois de concluído, equipe uma arma PRIMARY com acessórios/magazine.
+   Recomendação: MCC_RD704_AFG + MCC_Handbrake_BLK no ACE Arsenal.
+3. Feche ACE Arsenal e a interface Weapons.
+4. Execute "SP_ORG LAB - AUDITAR FONTES UC-001-A".
+   A ação compara fontes para PRIMARY, HANDGUN e SECONDARY equipadas.
+   Os slots vazios são marcados como SKIPPED, não como falha.
+5. Consulte as linhas [UC001A_SOURCE], [UC001A_MAGAZINE],
+   [UC001A_SUMMARY] e [UC001A_GATE] no RPT completo.
+6. Repita com uma arma de porte e uma secundária, incluindo quando possível
+   uma arma com muzzle secundário/lançador de granadas.
+7. Valide que loadout físico, colete, magazines já carregados,
+   WeaponKits e drafts NÃO mudaram por causa do diagnóstico.
+8. Envie o RPT completo e as observações dos três slots.
+
+EXPECTATIVAS
+- CBA pode ter itens compatíveis ausentes na consulta vanilla, principalmente
+  em acessórios inferiores. Esse é o PROBLEMA A MEDIR; não rejeita o gate.
+- As diferenças ainda NÃO passam a ser aceitas automaticamente pelo Weapons.
+- Não criamos uma API ACE universal. Esta entrega mede Arma/CBA;
+  a compatibilidade ACE Arsenal será investigada em gates seguintes.
+- Não há auto-inserção de munição no colete, nem novos filtros de ícones:
+  melhorias WUX-002/WUX-003 apenas registradas.
+- Nada de PBO, MP/JIP, Undo ou merge na main nesta candidata.
+- Não declarar UC-001-B, C, D ou COMPATIBILIDADE COMPLETA como implementadas.
+
+DOCUMENTOS
+docs/78_WEAPONS_UC_001_A_SOURCE_AUDIT.md
+docs/77_WEAPONS_BACKLOG_AMMO_VEST_ICON_FILTERS.md
+docs/74_WEAPONS_UNIFIED_COMPATIBILITY_ARCHITECTURE.md
