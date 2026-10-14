@@ -22,7 +22,7 @@
     "hub_rule": "Hub is an optional player-facing integration/orchestration layer. No domain module may require Hub in order to function.",
     "independent_core_development": true
   },
-  "global_next_gate": "UC-001-B R1 resolver all four attachment slots implemented; static mission packaged; need Arma 1516/1516 and manual evidence, R5 baseline still frozen. UC001-A secondary audit deferred by user.",
+  "global_next_gate": "UC001-B R1 CI static 30/30 + mission ZIP SUCCESS. Next: actual Arma R5 1446 + B 70 = 1516, then manual modded accessories before homologation. A secondary slot audit deferred.",
   "global_after_gate": "UC-001-B further review or R2 after runtime, then UC-001-C magazines/variants, UC-001-D e2e. WST-001 cross-mission profile persistence essential before shipping, WUX-002 magazines vest and WUX-003 icon filters backlog; 0.8 MP later.",
   "modules": [
     {
@@ -1695,7 +1695,7 @@
     "base_commit": "08cdf5497cd4e67c2af9a0fc50aa06ee18bac438",
     "pr_number": 11,
     "pr_status": "DRAFT",
-    "status": "STATIC_READY_ARMA_RUNTIME_PENDING",
+    "status": "STATIC_30_OF_30_PACKAGE_SUCCESS_ARMA_RUNTIME_PENDING",
     "display": "0.7-F",
     "semantic": "0.7.5.1",
     "package_name": "SP_ORG_Weapons_UC_001_B_Unified_Attachments_R1.VR",
@@ -1713,6 +1713,15 @@
       "WUX002_VEST_AMMO",
       "WUX003_ICON_FILTERS",
       "MP_PBO_UNDO"
-    ]
+    ],
+    "ci_run": 38642584369,
+    "package_code_commit": "62be98aa122cce57f7fc5f8f6ea42a4dcf4970b5",
+    "artifact_id": 11930762125,
+    "mission_zip_sha256": "d6e90db28ac82b13438bf1d73dd74d14140a596f394c6e479a6fd64595c5ade8",
+    "static_checks": {
+      "passed": 30,
+      "failed": 0,
+      "total": 30
+    }
   }
 }
