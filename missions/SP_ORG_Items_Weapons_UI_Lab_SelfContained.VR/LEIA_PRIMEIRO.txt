@@ -1,48 +1,43 @@
-SP_ORG — WEAPONS UC-001-A — INVENTÁRIO DE FONTES DE COMPATIBILIDADE
-CANDIDATA DIAGNÓSTICA R1 — TESTE NO ARMA PENDENTE (CI ESTÁTICA SEPARADA)
+SP_ORG — WEAPONS 0.7-F / UC-001-B R1 — COMPATIBILIDADE DE ACESSÓRIOS
+CANDIDATA MISSION-FIRST: STATIC PENDENTE/ARMA PENDENTE
 
-BASELINE PRESERVADA
-- Weapons 0.7-E E1 R5 HOMOLOGADA: 1446 PASS / 0 FAIL / 0 BLOCKED
-- Marker Git: baseline/weapons-0.7-e-r5-homologated @ 52dd24af
-- Weapons D2 R1 e UICommon 0.2 preservados
+BASELINE
+- R5 (0.7-E): 1446/1446 runtime e manual homologadas; preserve baseline
+  baseline/weapons-0.7-e-r5-homologated
+- R1 usa o diagnóstico UC-001-A, com SECONDARY ainda não auditada.
+- PR #10 UC-001-A permanece Draft; nenhuma branch deve ser mergeada na main.
 
-INSTALAÇÃO
-1. Pelo GitHub Actions da branch feature/weapons-uc-001-a-compatibility-audit,
-   baixar o artifact SP_ORG_UI_Lab e extrair a missão
-   SP_ORG_Weapons_UC_001_A_Source_Audit_R1.VR.
-2. Copiar a pasta .VR inteira para o diretório de missões local do Arma 3.
-3. Iniciar sem PBOs SP_ORG, com seu modset habitual (Arma, CBA, ACE e MCC/RHS).
-4. NÃO abrir a interface Weapons durante os testes automáticos.
+EXECUÇÃO
+1. Baixe o artifact SP_ORG_UI_Lab da branch UC-001-B no GitHub Actions;
+   extraia dentro dele SP_ORG_Weapons_UC_001_B_Unified_Attachments_R1.zip.
+2. Coloque a pasta SP_ORG_Weapons_UC_001_B_Unified_Attachments_R1.VR
+   inteira em seu diretório missions; inicie no Editor.
+3. Não carregue PBOs SP_ORG. Pode usar o modset CBA/ACE/TierOne/MCC/RHS.
+4. Feche a interface Weapons antes de rodar o AUTO TEST.
+5. Execute SP_ORG LAB - TESTAR UC-001-B R1.
+   META PROJETADA: 1516 PASS / 0 FAIL / 0 BLOCKED
+   (R5 1446 + 70 asserções novas).
+6. Se falhar, envie RPT completo. Não declare a entrega aprovada.
+7. Testes manuais de ópticas, boca, ponteiros, bipés e empunhaduras:
+   use o Catálogo para trocar acessórios de rifle/pistola.
+   Compare as opções com ACE Arsenal para as armas usadas e observe
+   os logs COMPAT_RESOLVE, COMPAT_SOURCE_DIFF e COMPAT_REJECT.
+8. CAPTURAR ARMA EQUIPADA deve manter anexos semanticamente aceitos no draft.
+   SALVAR COMO NOVO não pode criar duplicatas.
+   EQUIPAR NO RASCUNHO / aplicar fisicamente mantém pós-validação D2;
+   se engine recusar anexo, deve recusar/rollback, não forçar aceitação.
+9. Se possível, use uma arma SECONDARY e repita a auditoria A
+   SP_ORG LAB - AUDITAR FONTES UC-001-A; esta pendência antiga
+   pode ser concluída separadamente.
+10. Envie RPT, incluindo [AUTO_TEST_SUMMARY] mode=MISSION_FIRST_UC001B_R1
+    e COMPAT_RESOLVE/SOURCE_DIFF/REJECT.
 
-TESTES
-1. Execute primeiro "SP_ORG LAB - TESTAR WEAPONS 0.7-E R5".
-   Gate de regressão: 1446 PASS / 0 FAIL / 0 BLOCKED.
-2. Depois de concluído, equipe uma arma PRIMARY com acessórios/magazine.
-   Recomendação: MCC_RD704_AFG + MCC_Handbrake_BLK no ACE Arsenal.
-3. Feche ACE Arsenal e a interface Weapons.
-4. Execute "SP_ORG LAB - AUDITAR FONTES UC-001-A".
-   A ação compara fontes para PRIMARY, HANDGUN e SECONDARY equipadas.
-   Os slots vazios são marcados como SKIPPED, não como falha.
-5. Consulte as linhas [UC001A_SOURCE], [UC001A_MAGAZINE],
-   [UC001A_SUMMARY] e [UC001A_GATE] no RPT completo.
-6. Repita com uma arma de porte e uma secundária, incluindo quando possível
-   uma arma com muzzle secundário/lançador de granadas.
-7. Valide que loadout físico, colete, magazines já carregados,
-   WeaponKits e drafts NÃO mudaram por causa do diagnóstico.
-8. Envie o RPT completo e as observações dos três slots.
+FORA DE ESCOPO
+- WST-001 Persistência: kits SALVOS estão apenas no missionNamespace;
+  ao iniciar outra missão serão perdidos. Não confundir com bug novo.
+- UC-001-C magazine/magwell/variants; UC-001-D end-to-end/performance.
+- WUX-002 adicionar magazines ao colete, WUX-003 filtros por ícones.
+- Sem PBO, MP, JIP, Undo ou merge main.
+- Regra física D2 não deve ser alterada nesta rodada.
 
-EXPECTATIVAS
-- CBA pode ter itens compatíveis ausentes na consulta vanilla, principalmente
-  em acessórios inferiores. Esse é o PROBLEMA A MEDIR; não rejeita o gate.
-- As diferenças ainda NÃO passam a ser aceitas automaticamente pelo Weapons.
-- Não criamos uma API ACE universal. Esta entrega mede Arma/CBA;
-  a compatibilidade ACE Arsenal será investigada em gates seguintes.
-- Não há auto-inserção de munição no colete, nem novos filtros de ícones:
-  melhorias WUX-002/WUX-003 apenas registradas.
-- Nada de PBO, MP/JIP, Undo ou merge na main nesta candidata.
-- Não declarar UC-001-B, C, D ou COMPATIBILIDADE COMPLETA como implementadas.
-
-DOCUMENTOS
-docs/78_WEAPONS_UC_001_A_SOURCE_AUDIT.md
-docs/77_WEAPONS_BACKLOG_AMMO_VEST_ICON_FILTERS.md
-docs/74_WEAPONS_UNIFIED_COMPATIBILITY_ARCHITECTURE.md
+DOCUMENTO: docs/80_WEAPONS_UC001B_R1_UNIFIED_ATTACHMENTS.md
