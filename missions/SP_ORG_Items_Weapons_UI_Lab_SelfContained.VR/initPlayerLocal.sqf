@@ -178,5 +178,5 @@
     }];
 
     diag_log format ["[SP_ORG] [FULL_UI_LAB] CLIENT_READY player=%1 owner=%2",name player,clientOwner];
-    hint parseText "<t size='1.2'>SP_ORG - UC-001-B R1 + WEAPONS 0.7-E R5</t><br/><br/>Weapons 0.7-E R5 corrige SALVAR COMO NOVO para rascunho de arma capturada; R4 CBA continua valida. Confira nome, Receita e status SALVO na lista. Baseline D2 R1 congelada.<br/><br/><t color='#F0D98C'>IMPORTANTE:</t> o AUTO TEST executa as mutacoes em uma unidade isolada criada pelo harness. O loadout do jogador nao deve ser alterado. UI: CAPTURAR edita rascunho sem salvar, SALVAR persiste. Não abra a UI durante o AUTO TEST. Undo deferred.<br/><br/>Nao carregue PBOs do Servo Peregrino neste teste.";
+    hint parseText "<t size='1.2'>SP_ORG WEAPONS 0.7-F - UC-001-B R1</t><br/><br/>Compatibilidade de mira, boca, apontador e bipé unificada entre Arma e CBA. CAPTURAR modifica somente o rascunho. SALVAR/SALVAR COMO NOVO armazenam kits <t color='#F0D98C'>somente nesta missão</t>; a persistência entre missões (WST-001) ainda não foi implementada.<br/><br/>Teste UC-001-B R1: 1516 verificações projetadas. <t color='#F0D98C'>IMPORTANTE:</t> mantenha a UI fechada durante o AUTO TEST. Aplicação física permanece protegida por pós-validação e rollback D2. Não carregue PBOs SP_ORG.";
 };
