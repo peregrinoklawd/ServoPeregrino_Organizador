@@ -85,7 +85,7 @@ private _passed=(_r5Data getOrDefault ["passed",0])+_passedNew;
 private _failed=(_r5Data getOrDefault ["failed",0])+_failedNew;
 private _total=(_r5Data getOrDefault ["total",0])+count _checks;
 private _blocked=_r5Data getOrDefault ["blocked",0];
-private _expected=1513;
+private _expected=1516;
 diag_log format ["[SP_ORG] [WEAPONS] [AUTO_TEST_SUMMARY] mode=MISSION_FIRST_UC001B_R1 passed=%1 failed=%2 blocked=%3 total=%4 expected=%5",_passed,_failed,_blocked,_total,_expected];
 hint format ["UC-001-B R1: %1/%2 PASS, %3 FAIL, %4 BLOCKED. Envie o RPT.",_passed,_total,_failed,_blocked];
 [_r5 getOrDefault ["success",false] && {_failed isEqualTo 0} && {_blocked isEqualTo 0} && {_total isEqualTo _expected},
