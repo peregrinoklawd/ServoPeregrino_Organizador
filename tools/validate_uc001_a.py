@@ -40,10 +40,11 @@ check("Has source diff logs", "[UC001A_SOURCE]" in CODE)
 check("Has magazine logs", "[UC001A_MAGAZINE]" in CODE)
 check("Has explicit summary logs", "[UC001A_SUMMARY]" in CODE)
 check("Has robust missing CBA result", "cbaItemsAvailable" in CODE and "cbaMagazinesAvailable" in CODE)
+EXECUTABLE = re.sub(r"//[^\\n]*", "", CODE)
 for cmd in ("setUnitLoadout", "addMagazine", "addItemToVest", "removeMagazine",
             "setVariable", "createUnit", "createVehicle", "remoteExec", "setPos", "deleteVehicle"):
     # This file may read mission state through other read-only functions.
-    check("No mutation command: " + cmd, not re.search(r"\b" + re.escape(cmd) + r"\b", CODE, re.I))
+    check("No mutation command: " + cmd, not re.search(r"\b" + re.escape(cmd) + r"\b", EXECUTABLE, re.I))
 check("Mission package identity set", PACKAGE == "SP_ORG_Weapons_UC_001_A_Source_Audit_R1.VR")
 check("Workflow includes UC-001-A branch", "feature/weapons-uc-001-a-compatibility-audit" in WORKFLOW)
 check("Workflow validates UC001A", "tools/validate_uc001_a.py" in WORKFLOW)
