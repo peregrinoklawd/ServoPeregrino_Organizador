@@ -22,7 +22,7 @@
     "hub_rule": "Hub is an optional player-facing integration/orchestration layer. No domain module may require Hub in order to function.",
     "independent_core_development": true
   },
-  "global_next_gate": "UC-001-A: CI static 35/35 and mission packaging PASS. Next actual Arma R5 regression 1446/1446 plus read-only per-slot compatibility audit RPT/manual. UC-001-B not started.",
+  "global_next_gate": "UC001-A RPT review partial PASS (PRIMARY/HANDGUN; SECONDARY not equipped); persistence WST-001 explicitly NOT IMPLEMENTED; continue tests then UC001-B.",
   "global_after_gate": "UC-001-B attachments; UC-001-C magazines/variants; UC-001-D end-to-end/performance; then prioritize 0.8 MP per roadmap. Packaging/Undo deferred.",
   "modules": [
     {
@@ -257,7 +257,7 @@
         ]
       },
       "status": "R5_E1_HOMOLOGATED_UC001A_DIAGNOSTIC_CANDIDATE_RUNTIME_PENDING",
-      "next_gate": "Run static CI/packaging and actual Arma UC-001-A source audit for every occupied slot (Arma/CBA, per-muzzle magazines), then R5 1446/1446 regression. Not UC-001-B or MP.",
+      "next_gate": "UC-001-A auto 1446/1446 and two diagnostic passes 2/3 slots complete; test SECONDARY occupied (prefer multi-muzzle) before closing coverage. WST-001 persistence among future essential gates; 0.8 authority separate.",
       "homologated_artifact": "R5 E1 mission-first: RPT 2026-10-14 auto 1446/1446, zero fail/blocked, manual captures and SAVE_AS_NEW approved. Baseline marker baseline/weapons-0.7-e-r5-homologated @ 52dd24af4f54ca9f3c9c6832f55ffdf772ff0314; prior D2 R1 remains immutable.",
       "current_candidate_artifact": "SP_ORG_Weapons_UC_001_A_Source_Audit_R1.VR",
       "mission_first_validation": {
@@ -1028,7 +1028,14 @@
           "summary": "Compact image category filters, while save/save-as and other action buttons stay textual",
           "doc": "docs/77_WEAPONS_BACKLOG_AMMO_VEST_ICON_FILTERS.md"
         }
-      ]
+      ],
+      "kit_persistence_requirement": {
+        "id": "WST-001",
+        "status": "NOT_IMPLEMENTED",
+        "current_mode": "SESSION_LOCAL_CANDIDATE",
+        "target": "Cross-mission profile-persistent private WeaponKits with versioned store; MP authority separate",
+        "doc": "docs/79_WEAPONS_UC001A_R1_REVIEW.md"
+      }
     },
     {
       "id": "Equipment",
@@ -1657,7 +1664,7 @@
     "branch": "feature/weapons-uc-001-a-compatibility-audit",
     "base_commit": "52dd24af4f54ca9f3c9c6832f55ffdf772ff0314",
     "base_marker": "baseline/weapons-0.7-e-r5-homologated",
-    "status": "STATIC_35_OF_35_PACKAGE_SUCCESS_ARMA_RUNTIME_PENDING",
+    "status": "RUNTIME_PASS_PARTIAL_COVERAGE_SECONDARY_NOT_TESTED",
     "doc": "docs/78_WEAPONS_UC_001_A_SOURCE_AUDIT.md",
     "test_action": "SP_ORG LAB - AUDITAR FONTES UC-001-A",
     "safety": "READ_ONLY_NOT_PRODUCTION_RESOLVER",
@@ -1669,6 +1676,16 @@
       "passed": 35,
       "failed": 0,
       "total": 35
+    },
+    "runtime_review": {
+      "date": "2026-10-14",
+      "rpt": "Texto colado(20261014-212800).txt",
+      "auto_r5": "1446/1446_0_FAIL_0_BLOCKED",
+      "uc001a": "TWO_PASSES_TWO_OCCUPIED_SLOTS_EACH_ZERO_FAIL_LOADOUT_UNCHANGED",
+      "primary_bipod_source_diff": 43,
+      "secondary": "EMPTY_NOT_TESTED",
+      "status": "RUNTIME_PASS_PARTIAL_COVERAGE",
+      "document": "docs/79_WEAPONS_UC001A_R1_REVIEW.md"
     }
   }
 }
