@@ -59,3 +59,13 @@ https://cbateam.github.io/CBA_A3/docs/files/jr/fnc_compatibleItems-sqf.html
 - ZIP `SP_ORG_Weapons_UC_001_B_Unified_Attachments_R1.zip` SHA256 `d6e90db28ac82b13438bf1d73dd74d14140a596f394c6e479a6fd64595c5ade8`.
 - O artifact `SP_ORG_UI_Lab` contém o ZIP da missão e `SHA256.txt`.
 - **Teste no Arma e homologação manual permanecem pendentes**. O nome de missão informa 0.7-F R1, mas a baseline R5 (0.7-E) permanece protegida.
+
+### Pacote mais recente (substitui o artifact anterior)
+
+Ajuste posterior apenas de clareza visual: a UI e os `addAction` agora identificam UC-001-B e explicitam que `SALVAR` mantém WeaponKits **somente na missão atual**, até WST-001. O código de compatibilidade/teste não foi modificado após a CI anterior.
+
+- Commit empacotado **`1c99118cebbcd92d7a31d9dd4c44aa5cf2a58d7f`**.
+- GitHub Actions: https://github.com/peregrinoklawd/ServoPeregrino_Organizador/actions/runs/38642958338 — SUCCESS, **30/30 estáticos**.
+- **Artifact vigente**: https://github.com/peregrinoklawd/ServoPeregrino_Organizador/actions/runs/38642958338/artifacts/11931252451
+- ZIP interno `SP_ORG_Weapons_UC_001_B_Unified_Attachments_R1.zip` SHA256 `a3aa8630e3b7908bb0e68b2479fb0c9111a0b30d6f528b18198f37f2695f16d9`.
+- Gate Arma runtime e homologação manual **PENDENTES** (1516 esperado, não observado).
