@@ -149,5 +149,8 @@ private _attachmentCount = 0;
  ["underbarrelCBAAdded",_underbarrelData getOrDefault ["cbaAddedCount",0]],
  ["attachmentSources",_attachmentSources],
  ["attachmentResolutionMode",_attachmentD getOrDefault ["resolutionMode","ENGINE"]],
- ["source","ENGINE_WITH_OPTIONAL_CBA_ATTACHMENTS"]
+ // The legacy "source" field is a stable compatibility marker introduced in
+ // catalog 0.3. The actual slot source/provenance is expressed separately above.
+ // Preserve this value for existing consumers and the R5 frozen test contract.
+ ["source","ENGINE_COMPATIBLE_COMMANDS"]
 ]] call ServoPeregrino_Organizador_Nexus_fnc_createResult
