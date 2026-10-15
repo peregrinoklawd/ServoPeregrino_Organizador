@@ -39,7 +39,7 @@ jobs:
         if: github.ref == 'refs/heads/feature/weapons-uc-001-a-compatibility-audit'
         run: python3 tools/validate_uc001_a.py
 
-      - name: Validate UC-001-B R1 resolver integration contracts
+      - name: Validate UC-001-B R2 resolver and legacy contract
         if: github.ref == 'refs/heads/feature/weapons-uc-001-b-unified-attachments'
         run: python3 tools/validate_uc001_b.py
 
