@@ -54,3 +54,13 @@ O teste original em `fn_runDelivery0_6_FR6Tests.sqf` exige `(_mxCompat get "sour
 5. Após RPT 1518/1518 esperado e validação física/manual, considerar fechar UC-001-B e preparar UC-001-C. O desempenho dos refreshes deve continuar observado.
 
 **Status R1:** `REPROVADA_CONTRATO_LEGADO`. **Status R2:** `CORRECAO_PREPARADA_SEM_RPT_REAL`.
+
+## CI e pacote oficial UC-001-B R2 (static PASS)
+
+- Código empacotado em `0e62d13cefd9f3f9a91bf95117bece6a1ed9e666` (workflow foi alterado para disparar o pacote; as alterações posteriores de documentação e estado não mudam código da missão).
+- GitHub Actions: https://github.com/peregrinoklawd/ServoPeregrino_Organizador/actions/runs/38666282681 — **SUCCESS, 33/33 verificações estáticas PASS**.
+- Artifact: https://github.com/peregrinoklawd/ServoPeregrino_Organizador/actions/runs/38666282681/artifacts/11942210059
+- ZIP interno: `SP_ORG_Weapons_UC_001_B_Unified_Attachments_R2.zip`.
+- SHA256 do ZIP interno: `7deef9483c14fdb2fd7ae33daebd032245b740a768a1a54e2370a2c40fcae7db`.
+- Runner: `SP_ORG LAB - TESTAR UC-001-B R2`, meta **1518 PASS / 0 FAIL / 0 BLOCKED**.
+- **Runtime R2 ainda não foi testado no Arma pelo operador; não homologar até receber RPT.**
