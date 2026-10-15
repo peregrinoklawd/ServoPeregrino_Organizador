@@ -28,8 +28,8 @@ _unit addAction ["Weapons | Compatibilidade MX - RPT",{
  hint "Compatibilidade da MX gravada no RPT.";
 }];
 
-_unit addAction ["Weapons | Sobre UC-001-B R1",{
- hint "UC-001-B R1: catalogo e validacao de miras, bocas, apontadores e bipés usam a mesma consulta Arma+CBA. Execute SP_ORG LAB - TESTAR UC-001-B R1 com a UI fechada (1516 testes previstos). SALVAR conserva kits somente nesta missao; persistencia WST-001 pendente. Rollback D2 mantido.";
+_unit addAction ["Weapons | Sobre UC-001-B R2",{
+ hint "UC-001-B R2: catalogo e validacao de miras, bocas, apontadores e bipés usam a mesma consulta Arma+CBA. Execute SP_ORG LAB - TESTAR UC-001-B R2 com a UI fechada (1518 testes previstos). SALVAR conserva kits somente nesta missao; persistencia WST-001 pendente. Rollback D2 mantido.";
 }];
 
 _unit addEventHandler ["Respawn",{params ["_new"];[_new] call ServoPeregrino_Organizador_Weapons_fnc_installLabActions}];
