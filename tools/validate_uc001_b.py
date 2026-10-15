@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Static safety gates for Weapons UC-001-B R1. Not a SQF engine/runtime validation."""
+"""Static safety gates for Weapons UC-001-B R2. Not a SQF engine/runtime validation."""
 from pathlib import Path
 import re
 import sys
@@ -25,15 +25,15 @@ def check(label, okay):
     checks.append((label, bool(okay)))
     print(("PASS" if okay else "FAIL") + " | " + label)
 
-check("Build 0.7-F R1", '0.7.5.1-uc001-b-attachments-r1-mission-first' in version)
+check("Build 0.7-F R1", '0.7.5.2-uc001-b-r2-legacy-source-contract-mission-first' in version)
 check("Canonical resolver exists", len(resolver)>1000)
 check("Canonical function registered", 'class resolveAttachmentCompatibility {};' in desc)
 check("B runner registered", "class runUC001BTests {};" in desc)
-check("B test action installed", "SP_ORG LAB - TESTAR UC-001-B R1" in init)
+check("B test action installed", "SP_ORG LAB - TESTAR UC-001-B R2" in init)
 check("B test action invokes new runner", "fnc_runUC001BTests" in init)
 check("B runner keeps R5 cumulative", "fnc_runDelivery0_7_ETests" in runner)
 check("B R5 still expects 1446", "1446" in r5)
-check("B runner explicitly expects 1516", "private _expected=1516;" in runner)
+check("B runner explicitly expects 1516", "private _expected=1518;" in runner)
 check("B runner covers all four slots", all('"'+x+'"' in runner for x in ["muzzle","pointer","optic","bipod"]))
 check("B runner contains no physical mutation", not any(re.search(r"\b"+re.escape(cmd)+r"\b",re.sub(r"//[^\n]*","",runner),re.I) for cmd in ["setUnitLoadout","addPrimaryWeaponItem","addWeapon","createUnit"]))
 check("Resolver covers all four fields", all('"'+x+'"' in resolver for x in ["muzzle","pointer","optic","bipod"]))
@@ -45,16 +45,19 @@ check("Hashmap canonical case-insensitive dedup", 'toLowerANSI _canonical' in re
 check("Mission cache and per-class key", "AttachmentCompatibilityCache_UC001B_R1" in resolver and "toLowerANSI _weapon" in resolver)
 check("Resolver logs only disagreement or initial resolve", "[COMPAT_SOURCE_DIFF]" in resolver and "[COMPAT_RESOLVE]" in resolver)
 check("Catalog delegates to resolver", "fnc_resolveAttachmentCompatibility" in compat)
+check("Legacy 0.3 catalog source marker restored", '["source","ENGINE_COMPATIBLE_COMMANDS"]' in compat)
+check("New CBA provenance retained in dedicated source field", '["attachmentSources",_attachmentSources]' in compat)
+check("R2 runner asserts legacy + modern metadata", "B R2 legacy compatibility source marker preserved" in runner and "B R2 four-field source metadata available" in runner)
 check("Semantic delegates to resolver", "fnc_resolveAttachmentCompatibility" in semantic)
 check("R4 underbarrel facade delegates to resolver", "fnc_resolveAttachmentCompatibility" in legacy)
 check("Semantic logs incompatible item", "[COMPAT_REJECT]" in semantic)
 check("Legacy R4 schema preserved", all('"'+x+'"' in legacy for x in ["items","engineCount","cbaAvailable","cbaCount","cbaAdded","cbaAddedCount","source"]))
 check("Magazine rules intentionally unchanged", 'compatibleMagazines _weaponClass' in compat and 'compatibleMagazines [_weaponClass,_muzzle]' in compat)
 check("No physical application code in resolver", not any(re.search(r"\b"+re.escape(cmd)+r"\b",re.sub(r"//[^\n]*","",resolver),re.I) for cmd in ["setUnitLoadout","addPrimaryWeaponItem","removeWeapon","addWeapon","createUnit","deleteVehicle","remoteExec"]))
-check("Mission package name correct", identity == "SP_ORG_Weapons_UC_001_B_Unified_Attachments_R1.VR")
+check("Mission package name correct", identity == "SP_ORG_Weapons_UC_001_B_Unified_Attachments_R2.VR")
 check("CI branch included", "feature/weapons-uc-001-b-unified-attachments" in workflow)
 check("CI validation included", "tools/validate_uc001_b.py" in workflow)
 check("Documentation exists", (ROOT / "docs" / "80_WEAPONS_UC001B_R1_UNIFIED_ATTACHMENTS.md").exists())
 passed=sum(ok for _,ok in checks)
-print(f"UC001B R1 STATIC SUMMARY passed={passed} failed={len(checks)-passed} total={len(checks)}")
+print(f"UC001B R2 STATIC SUMMARY passed={passed} failed={len(checks)-passed} total={len(checks)}")
 sys.exit(0 if passed==len(checks) else 1)
