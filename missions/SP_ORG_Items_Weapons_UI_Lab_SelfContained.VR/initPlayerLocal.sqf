@@ -53,7 +53,7 @@
             missionNamespace setVariable ["SP_ORG_Weapons_AutoTestRunning",true];
             private _result=[] call ServoPeregrino_Organizador_Weapons_fnc_runUC001BTests;
             missionNamespace setVariable ["SP_ORG_Weapons_AutoTestRunning",false];
-            diag_log format ["[SP_ORG] [FULL_UI_LAB] WEAPONS_UC001B_R1_TEST result=%1",_result];
+            diag_log format ["[SP_ORG] [FULL_UI_LAB] WEAPONS_UC001B_R2_TEST result=%1",_result];
         };
     }];
     missionNamespace setVariable ["SP_ORG_FullLab_fnc_auditWeaponsCompatibility", {
@@ -130,7 +130,7 @@
             {[] call (missionNamespace getVariable ["SP_ORG_FullLab_fnc_auditUC001A",{}]);},nil,14.0,true,true,"","alive _this && isServer",50
         ]];
         _unit setVariable ["SPORG_FL_WeaponsUC001B", _unit addAction [
-            "<t color='#EECA7F'>SP_ORG LAB - TESTAR UC-001-B R1</t>",
+            "<t color='#EECA7F'>SP_ORG LAB - TESTAR UC-001-B R2</t>",
             {[] call (missionNamespace getVariable ["SP_ORG_FullLab_fnc_testWeaponsUC001B",{}]);},nil,14.3,true,true,"","alive _this && isServer",50
         ]];
         _unit setVariable ["SPORG_FL_WeaponsCompatAudit", _unit addAction [
@@ -178,5 +178,5 @@
     }];
 
     diag_log format ["[SP_ORG] [FULL_UI_LAB] CLIENT_READY player=%1 owner=%2",name player,clientOwner];
-    hint parseText "<t size='1.2'>SP_ORG WEAPONS 0.7-F - UC-001-B R1</t><br/><br/>Compatibilidade de mira, boca, apontador e bipé unificada entre Arma e CBA. CAPTURAR modifica somente o rascunho. SALVAR/SALVAR COMO NOVO armazenam kits <t color='#F0D98C'>somente nesta missão</t>; a persistência entre missões (WST-001) ainda não foi implementada.<br/><br/>Teste UC-001-B R1: 1516 verificações projetadas. <t color='#F0D98C'>IMPORTANTE:</t> mantenha a UI fechada durante o AUTO TEST. Aplicação física permanece protegida por pós-validação e rollback D2. Não carregue PBOs SP_ORG.";
+    hint parseText "<t size='1.2'>SP_ORG WEAPONS 0.7-F - UC-001-B R2</t><br/><br/>Compatibilidade de mira, boca, apontador e bipé unificada entre Arma e CBA. CAPTURAR modifica somente o rascunho. SALVAR/SALVAR COMO NOVO armazenam kits <t color='#F0D98C'>somente nesta missão</t>; a persistência entre missões (WST-001) ainda não foi implementada.<br/><br/>Teste UC-001-B R2: 1518 verificações projetadas. <t color='#F0D98C'>IMPORTANTE:</t> mantenha a UI fechada durante o AUTO TEST. Aplicação física permanece protegida por pós-validação e rollback D2. Não carregue PBOs SP_ORG.";
 };
