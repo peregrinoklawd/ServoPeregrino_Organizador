@@ -22,7 +22,7 @@
     "hub_rule": "Hub is an optional player-facing integration/orchestration layer. No domain module may require Hub in order to function.",
     "independent_core_development": true
   },
-  "global_next_gate": "R1 UC001B RPT real 1508/1516 (eight cascading errors from ONE legacy source marker); R2 reverts marker, retains CBA provenance, runs 1518 expected; static build and runtime outstanding.",
+  "global_next_gate": "UC001B R1 runtime 1508/1516 due one broken 0.3 source marker; R2 static 33/33 package ready, expect R2 Arma 1518/1518 and manual modded validation. R5 frozen and PR #11 Draft.",
   "global_after_gate": "UC-001-B further review or R2 after runtime, then UC-001-C magazines/variants, UC-001-D e2e. WST-001 cross-mission profile persistence essential before shipping, WUX-002 magazines vest and WUX-003 icon filters backlog; 0.8 MP later.",
   "modules": [
     {
@@ -256,7 +256,7 @@
           "persistence.provider.v1"
         ]
       },
-      "status": "UC001B_R1_RUNTIME_FAIL_ONE_LEGACY_SOURCE_CONTRACT_R2_FIX_STATIC_PENDING",
+      "status": "UC001B_R2_STATIC_33_OF_33_PACKAGE_SUCCESS_ARMA_RUNTIME_PENDING",
       "next_gate": "UC001-B R1 RPT 1508/1516 8 cumulative FAIL from 1 actual failure 0.3 compatibility source marker; R2 restores old source marker, adds 2 regression tests; run expected 1518/1518 in Arma, then manual test physical apply.",
       "homologated_artifact": "R5 E1 mission-first: RPT 2026-10-14 auto 1446/1446, zero fail/blocked, manual captures and SAVE_AS_NEW approved. Baseline marker baseline/weapons-0.7-e-r5-homologated @ 52dd24af4f54ca9f3c9c6832f55ffdf772ff0314; prior D2 R1 remains immutable.",
       "current_candidate_artifact": "SP_ORG_Weapons_UC_001_B_Unified_Attachments_R2.VR",
@@ -1695,7 +1695,7 @@
     "base_commit": "08cdf5497cd4e67c2af9a0fc50aa06ee18bac438",
     "pr_number": 11,
     "pr_status": "DRAFT",
-    "status": "R1_RUNTIME_REJECTED_R2_FIX_AWAITING_ARMA",
+    "status": "R1_RUNTIME_REJECTED_R2_STATIC_33_OF_33_PACKAGE_SUCCESS_ARMA_PENDING",
     "display": "0.7-F",
     "semantic": "0.7.5.2",
     "package_name": "SP_ORG_Weapons_UC_001_B_Unified_Attachments_R2.VR",
@@ -1715,9 +1715,9 @@
       "MP_PBO_UNDO"
     ],
     "static_checks": {
-      "passed": 30,
+      "passed": 33,
       "failed": 0,
-      "total": 30
+      "total": 33
     },
     "r1_runtime_review": {
       "date": "2026-10-14",
@@ -1747,6 +1747,10 @@
       "report": "docs/81_WEAPONS_UC001B_R1_RPT_REVIEW_R2_FIX.md",
       "external_cba_pfhandler_errors": 24
     },
-    "report": "docs/81_WEAPONS_UC001B_R1_RPT_REVIEW_R2_FIX.md"
+    "report": "docs/81_WEAPONS_UC001B_R1_RPT_REVIEW_R2_FIX.md",
+    "ci_run": 38666282681,
+    "artifact_id": 11942210059,
+    "package_code_commit": "0e62d13cefd9f3f9a91bf95117bece6a1ed9e666",
+    "mission_zip_sha256": "7deef9483c14fdb2fd7ae33daebd032245b740a768a1a54e2370a2c40fcae7db"
   }
 }
