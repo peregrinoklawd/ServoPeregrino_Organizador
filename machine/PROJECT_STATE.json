@@ -22,7 +22,7 @@
     "hub_rule": "Hub is an optional player-facing integration/orchestration layer. No domain module may require Hub in order to function.",
     "independent_core_development": true
   },
-  "global_next_gate": "UC001-B R1 CI static 30/30 + mission ZIP SUCCESS. Next: actual Arma R5 1446 + B 70 = 1516, then manual modded accessories before homologation. A secondary slot audit deferred.",
+  "global_next_gate": "R1 UC001B RPT real 1508/1516 (eight cascading errors from ONE legacy source marker); R2 reverts marker, retains CBA provenance, runs 1518 expected; static build and runtime outstanding.",
   "global_after_gate": "UC-001-B further review or R2 after runtime, then UC-001-C magazines/variants, UC-001-D e2e. WST-001 cross-mission profile persistence essential before shipping, WUX-002 magazines vest and WUX-003 icon filters backlog; 0.8 MP later.",
   "modules": [
     {
@@ -216,9 +216,9 @@
         "homologation": "AUTO_1446_OF_1446_AND_MANUAL_APPROVED_2026_10_14"
       },
       "development_version": {
-        "display": "0.7-F UC-001-B R1 mission-first",
-        "semantic": "0.7.5.1 mission-first",
-        "build": "0.7.5.1-uc001-b-attachments-r1-mission-first"
+        "display": "0.7-F UC-001-B R2",
+        "semantic": "0.7.5.2 mission-first",
+        "build": "0.7.5.2-uc001-b-r2-legacy-source-contract-mission-first"
       },
       "dependencies": [
         "Nexus",
@@ -256,10 +256,10 @@
           "persistence.provider.v1"
         ]
       },
-      "status": "UC001B_R1_UNIFIED_ATTACHMENTS_STATIC_READY_ARMA_RUNTIME_PENDING",
-      "next_gate": "Run Arma cumulative B R1 1516 expected (R5 1446 + B 70), and manual MCC/RHS/TierOne/ACE accessories, capture/apply and D2 rollback; keep UC001A SECONDARY diagnostic debt.",
+      "status": "UC001B_R1_RUNTIME_FAIL_ONE_LEGACY_SOURCE_CONTRACT_R2_FIX_STATIC_PENDING",
+      "next_gate": "UC001-B R1 RPT 1508/1516 8 cumulative FAIL from 1 actual failure 0.3 compatibility source marker; R2 restores old source marker, adds 2 regression tests; run expected 1518/1518 in Arma, then manual test physical apply.",
       "homologated_artifact": "R5 E1 mission-first: RPT 2026-10-14 auto 1446/1446, zero fail/blocked, manual captures and SAVE_AS_NEW approved. Baseline marker baseline/weapons-0.7-e-r5-homologated @ 52dd24af4f54ca9f3c9c6832f55ffdf772ff0314; prior D2 R1 remains immutable.",
-      "current_candidate_artifact": "SP_ORG_Weapons_UC_001_B_Unified_Attachments_R1.VR",
+      "current_candidate_artifact": "SP_ORG_Weapons_UC_001_B_Unified_Attachments_R2.VR",
       "mission_first_validation": {
         "0.1-B": {
           "status": "APPROVED_SP",
@@ -1695,13 +1695,13 @@
     "base_commit": "08cdf5497cd4e67c2af9a0fc50aa06ee18bac438",
     "pr_number": 11,
     "pr_status": "DRAFT",
-    "status": "STATIC_30_OF_30_PACKAGE_SUCCESS_ARMA_RUNTIME_PENDING",
+    "status": "R1_RUNTIME_REJECTED_R2_FIX_AWAITING_ARMA",
     "display": "0.7-F",
-    "semantic": "0.7.5.1",
-    "package_name": "SP_ORG_Weapons_UC_001_B_Unified_Attachments_R1.VR",
-    "expected_auto_tests": 1516,
+    "semantic": "0.7.5.2",
+    "package_name": "SP_ORG_Weapons_UC_001_B_Unified_Attachments_R2.VR",
+    "expected_auto_tests": 1518,
     "previous_r5_auto": 1446,
-    "new_tests": 70,
+    "new_tests": 72,
     "validation_script": "tools/validate_uc001_b.py",
     "documentation": "docs/80_WEAPONS_UC001B_R1_UNIFIED_ATTACHMENTS.md",
     "scope": "Muzzle, Pointer, Optic, Underbarrel single logical source, CBA optional, D2 unchanged",
@@ -1714,14 +1714,39 @@
       "WUX003_ICON_FILTERS",
       "MP_PBO_UNDO"
     ],
-    "ci_run": 38642958338,
-    "package_code_commit": "1c99118cebbcd92d7a31d9dd4c44aa5cf2a58d7f",
-    "artifact_id": 11931252451,
-    "mission_zip_sha256": "a3aa8630e3b7908bb0e68b2479fb0c9111a0b30d6f528b18198f37f2695f16d9",
     "static_checks": {
       "passed": 30,
       "failed": 0,
       "total": 30
-    }
+    },
+    "r1_runtime_review": {
+      "date": "2026-10-14",
+      "file": "Texto colado(20261015-012435).txt",
+      "line_count": 10469,
+      "auto": {
+        "passed": 1508,
+        "failed": 8,
+        "blocked": 0,
+        "total": 1516
+      },
+      "first_failure": "0.3 compatibility source marker",
+      "root_cause": "legacy source ENGINE_COMPATIBLE_COMMANDS changed in R1; repeated via 7 cumulative gates",
+      "new_uc001b_assertions": {
+        "passed": 69,
+        "failed": 1,
+        "total": 70
+      },
+      "manual": {
+        "captures_exact": 3,
+        "save_as_new_success": 3,
+        "mcc_rd704_cba_bipod_added": 43,
+        "mcc_rattler_cba_bipod_added": 43,
+        "physical_apply_manual": "NOT_OBSERVED",
+        "full_ui_refresh_median_ms": 433
+      },
+      "report": "docs/81_WEAPONS_UC001B_R1_RPT_REVIEW_R2_FIX.md",
+      "external_cba_pfhandler_errors": 24
+    },
+    "report": "docs/81_WEAPONS_UC001B_R1_RPT_REVIEW_R2_FIX.md"
   }
 }
