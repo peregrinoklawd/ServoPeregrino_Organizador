@@ -13,9 +13,20 @@ private _checks=[];
 private _assert={
  params ["_label","_pass"];
  _checks pushBack [_label,_pass];
- diag_log format ["[SP_ORG] [WEAPONS] [AUTO_TEST] mode=MISSION_FIRST_UC001B_R1 %1 | %2",if (_pass) then {"PASS"} else {"FAIL"},_label];
+ diag_log format ["[SP_ORG] [WEAPONS] [AUTO_TEST] mode=MISSION_FIRST_UC001B_R2 %1 | %2",if (_pass) then {"PASS"} else {"FAIL"},_label];
 };
 ["B R5 unchanged cumulative regression",_r5 getOrDefault ["success",false] && {(_r5Data getOrDefault ["passed",0]) isEqualTo 1446} && {(_r5Data getOrDefault ["failed",1]) isEqualTo 0}] call _assert;
+// R2: keep legacy 0.3 contract while exposing richer UC-001-B provenance.
+private _r2Compat=["arifle_MX_F"] call ServoPeregrino_Organizador_Weapons_fnc_getWeaponCompatibility;
+private _r2Meta=_r2Compat getOrDefault ["data",createHashMap];
+["B R2 legacy compatibility source marker preserved",
+ _r2Compat getOrDefault ["success",false] && {(_r2Meta getOrDefault ["source",""]) isEqualTo "ENGINE_COMPATIBLE_COMMANDS"}
+] call _assert;
+private _r2Sources=_r2Meta getOrDefault ["attachmentSources",createHashMap];
+["B R2 four-field source metadata available",
+ _r2Compat getOrDefault ["success",false] && {count (keys _r2Sources) isEqualTo 4}
+ && {(_r2Meta getOrDefault ["attachmentResolutionMode",""]) isEqualTo "UC001B_R1_ENGINE_PLUS_PUBLIC_CBA"}
+] call _assert;
 private _originalLoadout=getUnitLoadout player;
 private _storeR=[] call ServoPeregrino_Organizador_Weapons_fnc_listWeaponKits;
 private _originalKits=if (_storeR getOrDefault ["success",false]) then {((_storeR get "data") get "kits")} else {[]};
@@ -89,11 +100,11 @@ private _passed=(_r5Data getOrDefault ["passed",0])+_passedNew;
 private _failed=(_r5Data getOrDefault ["failed",0])+_failedNew;
 private _total=(_r5Data getOrDefault ["total",0])+count _checks;
 private _blocked=_r5Data getOrDefault ["blocked",0];
-private _expected=1516;
+private _expected=1518;
 diag_log format ["[SP_ORG] [WEAPONS] [AUTO_TEST_SUMMARY] mode=MISSION_FIRST_UC001B_R1 passed=%1 failed=%2 blocked=%3 total=%4 expected=%5",_passed,_failed,_blocked,_total,_expected];
-hint format ["UC-001-B R1: %1/%2 PASS, %3 FAIL, %4 BLOCKED. Envie o RPT.",_passed,_total,_failed,_blocked];
+hint format ["UC-001-B R2: %1/%2 PASS, %3 FAIL, %4 BLOCKED. Envie o RPT.",_passed,_total,_failed,_blocked];
 [_r5 getOrDefault ["success",false] && {_failed isEqualTo 0} && {_blocked isEqualTo 0} && {_total isEqualTo _expected},
- "WEAPONS_UC001B_R1_AUTO_TEST_COMPLETE","Cumulative R5 plus logical attachment policy tests. Physical modded integration requires operator verification.",
+ "WEAPONS_UC001B_R2_AUTO_TEST_COMPLETE","Cumulative R5 plus logical attachment policy tests. Physical modded integration requires operator verification.",
  createHashMapFromArray [
   ["passed",_passed],["failed",_failed],["blocked",_blocked],["total",_total],
   ["expected",_expected],["newChecks",count _checks],["checks",_checks],
