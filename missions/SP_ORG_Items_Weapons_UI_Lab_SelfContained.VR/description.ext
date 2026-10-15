@@ -1,7 +1,7 @@
 author = "Claudio Malta Telhada";
-onLoadName = "SP_ORG UI Lab - UC-001-B Unified Attachments R1";
-onLoadMission = "UC-001-B R1: catalogo, seletores e validacao semantica usam fonte unica Arma e CBA. D2 inalterada.";
-overviewText = "UC-001-B R1: autoridade unificada de acessórios. Carregadores, persistencia e MP permanecem separados.";
+onLoadName = "SP_ORG UI Lab - UC-001-B Unified Attachments R2";
+onLoadMission = "UC-001-B R2: catalogo, seletores e validacao semantica usam fonte unica Arma e CBA. D2 inalterada.";
+overviewText = "UC-001-B R2: autoridade unificada de acessórios. Carregadores, persistencia e MP permanecem separados.";
 enableDebugConsole = 1;
 disabledAI = 1;
 respawn = 3;
