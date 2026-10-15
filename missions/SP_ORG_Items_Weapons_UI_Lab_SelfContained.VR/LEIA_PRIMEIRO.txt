@@ -1,5 +1,5 @@
-SP_ORG — WEAPONS 0.7-F / UC-001-B R1 — COMPATIBILIDADE DE ACESSÓRIOS
-CANDIDATA MISSION-FIRST: CI ESTATICA PASSOU; TESTE NO ARMA PENDENTE
+SP_ORG — WEAPONS 0.7-F / UC-001-B R2 — COMPATIBILIDADE DE ACESSÓRIOS
+CANDIDATA MISSION-FIRST: CI E TESTE NO ARMA PENDENTES; R1 REPRODUZIU 1508/1516 (8 FAIL ACUMULADOS DE 1 BUG SOURCE-MARKER)
 
 BASELINE
 - R5 (0.7-E): 1446/1446 runtime e manual homologadas; preserve baseline
@@ -9,14 +9,14 @@ BASELINE
 
 EXECUÇÃO
 1. Baixe o artifact SP_ORG_UI_Lab da branch UC-001-B no GitHub Actions;
-   extraia dentro dele SP_ORG_Weapons_UC_001_B_Unified_Attachments_R1.zip.
-2. Coloque a pasta SP_ORG_Weapons_UC_001_B_Unified_Attachments_R1.VR
+   extraia dentro dele SP_ORG_Weapons_UC_001_B_Unified_Attachments_R2.zip.
+2. Coloque a pasta SP_ORG_Weapons_UC_001_B_Unified_Attachments_R2.VR
    inteira em seu diretório missions; inicie no Editor.
 3. Não carregue PBOs SP_ORG. Pode usar o modset CBA/ACE/TierOne/MCC/RHS.
 4. Feche a interface Weapons antes de rodar o AUTO TEST.
-5. Execute SP_ORG LAB - TESTAR UC-001-B R1.
-   META PROJETADA: 1516 PASS / 0 FAIL / 0 BLOCKED
-   (R5 1446 + 70 asserções novas).
+5. Execute SP_ORG LAB - TESTAR UC-001-B R2.
+   META PROJETADA: 1518 PASS / 0 FAIL / 0 BLOCKED
+   (R5 1446 + 72 asserções novas).
 6. Se falhar, envie RPT completo. Não declare a entrega aprovada.
 7. Testes manuais de ópticas, boca, ponteiros, bipés e empunhaduras:
    use o Catálogo para trocar acessórios de rifle/pistola.
@@ -29,7 +29,7 @@ EXECUÇÃO
 9. Se possível, use uma arma SECONDARY e repita a auditoria A
    SP_ORG LAB - AUDITAR FONTES UC-001-A; esta pendência antiga
    pode ser concluída separadamente.
-10. Envie RPT, incluindo [AUTO_TEST_SUMMARY] mode=MISSION_FIRST_UC001B_R1
+10. Envie RPT, incluindo [AUTO_TEST_SUMMARY] mode=MISSION_FIRST_UC001B_R2
     e COMPAT_RESOLVE/SOURCE_DIFF/REJECT.
 
 FORA DE ESCOPO
@@ -40,4 +40,4 @@ FORA DE ESCOPO
 - Sem PBO, MP, JIP, Undo ou merge main.
 - Regra física D2 não deve ser alterada nesta rodada.
 
-DOCUMENTO: docs/80_WEAPONS_UC001B_R1_UNIFIED_ATTACHMENTS.md
+DOCUMENTO: docs/80_WEAPONS_UC001B_R2_UNIFIED_ATTACHMENTS.md
