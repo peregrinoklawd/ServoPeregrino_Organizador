@@ -1,5 +1,8 @@
 # Roadmap e próximo passo
 
+**Atualização 14/10/2026 — UC-001-B R2:** RPT real R1: **1508/1516** (8 FAIL acumulados de 1 regressão real: campo `source` trocado e contrato histórico 0.3 quebrado). R2 restaura `ENGINE_COMPATIBLE_COMMANDS` no campo legado e mantém os novos metadados de proveniência Arma+CBA; 2 asserts adicionais. **CI R2 33/33 PASS**, [mission ZIP no artifact 11942210059](https://github.com/peregrinoklawd/ServoPeregrino_Organizador/actions/runs/38666282681/artifacts/11942210059), missão `SP_ORG_Weapons_UC_001_B_Unified_Attachments_R2.VR`. **Teste real R2 pendente, alvo 1518/1518**. Consulte `docs/81_WEAPONS_UC001B_R1_RPT_REVIEW_R2_FIX.md`. PR #11 segue Draft; R5/D2 homologadas preservadas; WST-001 pendente.
+
+
 > **Checkpoint atual (14/10/2026) — Weapons UC-001-B R1 (0.7-F) preparada para teste real:** branch `feature/weapons-uc-001-b-unified-attachments`, Draft PR #11 (base UC-001-A PR #10 Draft). O catálogo e a validação de acessórios usam o mesmo resolvedor Arma+CBA nos quatro slots; D2 aplicação/rollback e baseline R5 congelada permanecem inalterados. **CI 30/30 PASS**, pacote `SP_ORG_Weapons_UC_001_B_Unified_Attachments_R1.VR` gerado no [workflow 38642958338](https://github.com/peregrinoklawd/ServoPeregrino_Organizador/actions/runs/38642958338), artifact 11931252451. **Arma 1516/1516 projetados, ainda não executados!** UC-001-A PRIMARY/HANDGUN tiveram PASS; SECONDARY foi postergada pelo usuário. WST-001 persistência entre missões, WUX-002 magazines ao colete e WUX-003 ícones seguem no backlog, sem implementação. Próximo artefato: `docs/80_WEAPONS_UC001B_R1_UNIFIED_ATTACHMENTS.md`. Não fazer merge/main, PBO, MP ou Undo.
 
 
