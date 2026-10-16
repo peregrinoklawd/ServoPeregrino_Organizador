@@ -22,7 +22,7 @@
     "hub_rule": "Hub is an optional player-facing integration/orchestration layer. No domain module may require Hub in order to function.",
     "independent_core_development": true
   },
-  "global_next_gate": "UC001B APPROVED by user w deferred MCC CBA-only physical; prepare UC001C (magazines, wells, variants) in child branch. UC001D E2E later. No merge/PBO.",
+  "global_next_gate": "UC001B R2 formally approved with MCC CBA-only physical test explicitly deferred. UC001C R1 static 37/37 & mission ZIP ready; next user test 1589/1589 in Arma + manual magazines & multi-muzzle/launcher variants. No merge, PBO, MP.",
   "global_after_gate": "UC-001-B further review or R2 after runtime, then UC-001-C magazines/variants, UC-001-D e2e. WST-001 cross-mission profile persistence essential before shipping, WUX-002 magazines vest and WUX-003 icon filters backlog; 0.8 MP later.",
   "modules": [
     {
@@ -216,9 +216,9 @@
         "homologation": "USER_APPROVED_2026_10_16_1518_1518_MANUAL_2_WITH_UC001B_DEFER_001"
       },
       "development_version": {
-        "display": "0.7-F UC-001-B R2",
-        "semantic": "0.7.5.2 mission-first",
-        "build": "0.7.5.2-uc001-b-r2-legacy-source-contract-mission-first"
+        "display": "0.7-G UC-001-C R1 mission-first",
+        "semantic": "0.7.6.1 mission-first",
+        "build": "0.7.6.1-uc001-c-r1-magazines-wells-variants-mission-first"
       },
       "dependencies": [
         "Nexus",
@@ -256,10 +256,10 @@
           "persistence.provider.v1"
         ]
       },
-      "status": "UC001B_R2_USER_APPROVED_WITH_ACCEPTED_MCC_CBA_ONLY_MANUAL_TEST_GAP",
-      "next_gate": "UC-001-C magazine/magwell/variant resolver from approved B R2 branch; B deferred manual test MUST remain documented for D e2e.",
+      "status": "UC001C_R1_STATIC_37_37_RUNTIME_PENDING",
+      "next_gate": "CI UC001C R1 37/37 PASS; RPT Arma AUTO 1589/1589 0 FAIL/BLOCKED + physical/manual magazine wells/multi muzzle/launcher variant to approve; UC001B-DEFER-001 accepted/manual remains outstanding UC001D.",
       "homologated_artifact": "UC001B R2 approved on 2026-10-16, auto 1518/1518, 2 physical PRIMARY apply successes; pending manual MCC CBA-only specifically recorded in docs/83_WEAPONS_UC001B_R2_APPROVAL_AND_DEFERRED_GATES.md",
-      "current_candidate_artifact": "SP_ORG_Weapons_UC_001_B_Unified_Attachments_R2.VR",
+      "current_candidate_artifact": "SP_ORG_Weapons_UC_001_C_Magazines_Wells_R1.VR",
       "mission_first_validation": {
         "0.1-B": {
           "status": "APPROVED_SP",
@@ -1000,13 +1000,14 @@
       "full_compatibility_requirement": {
         "requirement_id": "UC-001",
         "status": "REQUIRED_NOT_IMPLEMENTED_FULLY",
-        "priority": "UC001C_MAGAZINES_MAGWELLS_VARIANTS",
+        "priority": "UC001C_R1_MAGAZINE_RESOLVER_RUNTIME_GATE",
         "canonical_document": "docs/74_WEAPONS_UNIFIED_COMPATIBILITY_ARCHITECTURE.md",
         "scope": "all weapons, presets/variants, attachment slots, magazines, config/mod provenance, fail-closed postvalidation",
-        "current_partial_support": "only UnderBarrelSlot engine+CBA in R4/R5",
+        "current_partial_support": "UC001B 4 attachment slots approved; UC001C magazine/magwell engine-first resolver candidate",
         "must_not_claim_complete_until_end_to_end": true,
         "uc001a_status": "SOURCE_AUDIT_IMPLEMENTED_RUNTIME_PENDING",
-        "uc001b_status": "APPROVED_WITH_EXPLICIT_MANUAL_MCC_CBA_ONLY_EXCEPTION"
+        "uc001b_status": "APPROVED_BY_USER_2026_10_16_KNOWN_ACCEPTED_TEST_GAP_UC001B_DEFER_001",
+        "uc001c_status": "R1_STATIC_GREEN_RUNTIME_AND_MANUAL_PENDING"
       },
       "previous_homologated_baseline": {
         "display": "0.7-D2 R1 mission-first",
@@ -1813,6 +1814,50 @@
         "detail": "Physical manual application of MCC with CBA-only grip not executed",
         "revisit": "UC001D_E2E_BEFORE_PBO_MP"
       }
-    ]
+    ],
+    "baseline_branch": "baseline/weapons-uc001b-r2-approved",
+    "baseline_commit": "6b22783d7a73d279b6af73ba762d422371bfd341"
+  },
+  "weapons_uc001c": {
+    "branch": "feature/weapons-uc-001-c-magazine-compatibility",
+    "base_branch": "baseline/weapons-uc001b-r2-approved",
+    "pr_status": "DRAFT_NO_MERGE",
+    "status": "R1_STATIC_37_PASS_ARMA_1589_PENDING",
+    "display": "0.7-G",
+    "semantic": "0.7.6.1",
+    "build": "0.7.6.1-uc001-c-r1-magazines-wells-variants-mission-first",
+    "package": "SP_ORG_Weapons_UC_001_C_Magazines_Wells_R1.VR",
+    "target_auto_tests": 1589,
+    "legacy_b_tests": 1518,
+    "new_checks": 71,
+    "static_checks": {
+      "passed": 37,
+      "failed": 0,
+      "total": 37
+    },
+    "first_static_run": 38862452414,
+    "first_artifact_id": 12030085733,
+    "first_zip_sha256": "ee7e778e578aca5795800762e2b550c78d7cab8514a44f8b5be67c7e32f44c0f",
+    "source": "ENGINE_COMPATIBLE_MAGAZINES_PLUS_CFGMAGWELLS_AUDIT_AND_BASEWEAPON_TYPE4_FAMILY",
+    "physical_engine_authority": "D2_UNMODIFIED",
+    "magazines_investigated_not_force_allowed": true,
+    "report": "docs/84_WEAPONS_UC001C_R1_MAGAZINE_RESOLVER.md",
+    "deferred": [
+      "UC001B-DEFER-001_MCC_CBA_ONLY_PHYSICAL",
+      "UC001A_SECONDARY",
+      "WST-001_PROFILE_KITS",
+      "WUX-002_VEST_MAGAZINE",
+      "WUX-003_ICON_FILTERS",
+      "UC001D_E2E_PERFORMANCE",
+      "PBO_MP_JIP_UNDO"
+    ],
+    "manual": "PENDING",
+    "runtime": "PENDING",
+    "pr_number": 12,
+    "ci_run": 38862586403,
+    "artifact_id": 12030335992,
+    "zip_sha256": "da2a23abc445bf5f4724b73013d4ec3ff1e39e5b063269e90b2b373171a4ffe8",
+    "package_code_commit": "f2767c7c31b59d205e7950e70942dc42d5b94f25",
+    "package_code_commit_context": "LEIA_PRIMEIRO final mission packaging, doc/state commits afterwards only"
   }
 }

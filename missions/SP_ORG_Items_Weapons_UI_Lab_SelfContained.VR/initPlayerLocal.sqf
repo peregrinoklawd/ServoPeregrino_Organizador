@@ -56,6 +56,17 @@
             diag_log format ["[SP_ORG] [FULL_UI_LAB] WEAPONS_UC001B_R2_TEST result=%1",_result];
         };
     }];
+    missionNamespace setVariable ["SP_ORG_FullLab_fnc_testWeaponsUC001C", {
+        [] spawn {
+            if (missionNamespace getVariable ["SP_ORG_Weapons_AutoTestRunning",false]) exitWith {
+                hint "Outro AUTO TEST de Weapons ja esta em andamento.";
+            };
+            missionNamespace setVariable ["SP_ORG_Weapons_AutoTestRunning",true];
+            private _result=[] call ServoPeregrino_Organizador_Weapons_fnc_runUC001CTests;
+            missionNamespace setVariable ["SP_ORG_Weapons_AutoTestRunning",false];
+            diag_log format ["[SP_ORG] [FULL_UI_LAB] WEAPONS_UC001C_R1_TEST result=%1",_result];
+        };
+    }];
     missionNamespace setVariable ["SP_ORG_FullLab_fnc_auditWeaponsCompatibility", {
         [] spawn {
             if (missionNamespace getVariable ["SP_ORG_Weapons_AutoTestRunning",false]) exitWith {
@@ -103,7 +114,7 @@
         {
             private _id = _unit getVariable [_x,-1];
             if (_id >= 0) then {_unit removeAction _id;};
-        } forEach ["SPORG_FL_Items","SPORG_FL_Weapons","SPORG_FL_UICommon","SPORG_FL_ItemsUICommon","SPORG_FL_WeaponsR6","SPORG_FL_Weapons07B","SPORG_FL_Weapons07C","SPORG_FL_Weapons07E","SPORG_FL_WeaponsCompatAudit","SPORG_FL_WeaponsUC001A","SPORG_FL_WeaponsUC001B"];
+        } forEach ["SPORG_FL_Items","SPORG_FL_Weapons","SPORG_FL_UICommon","SPORG_FL_ItemsUICommon","SPORG_FL_WeaponsR6","SPORG_FL_Weapons07B","SPORG_FL_Weapons07C","SPORG_FL_Weapons07E","SPORG_FL_WeaponsCompatAudit","SPORG_FL_WeaponsUC001A","SPORG_FL_WeaponsUC001B","SPORG_FL_WeaponsUC001C"];
 
         _unit setVariable ["SPORG_FL_Items", _unit addAction [
             "<t color='#7FD9D0' size='1.12'>SP_ORG LAB - ABRIR ITEMS</t>",
@@ -132,6 +143,10 @@
         _unit setVariable ["SPORG_FL_WeaponsUC001B", _unit addAction [
             "<t color='#EECA7F'>SP_ORG LAB - TESTAR UC-001-B R2</t>",
             {[] call (missionNamespace getVariable ["SP_ORG_FullLab_fnc_testWeaponsUC001B",{}]);},nil,14.3,true,true,"","alive _this && isServer",50
+        ]];
+        _unit setVariable ["SPORG_FL_WeaponsUC001C", _unit addAction [
+            "<t color='#BCE99C'>SP_ORG LAB - TESTAR UC-001-C R1</t>",
+            {[] call (missionNamespace getVariable ["SP_ORG_FullLab_fnc_testWeaponsUC001C",{}]);},nil,14.4,true,true,"","alive _this && isServer",50
         ]];
         _unit setVariable ["SPORG_FL_WeaponsCompatAudit", _unit addAction [
             "<t color='#76D3FE'>SP_ORG LAB - DIAGNOSTICAR COMPATIBILIDADE</t>",
@@ -178,5 +193,5 @@
     }];
 
     diag_log format ["[SP_ORG] [FULL_UI_LAB] CLIENT_READY player=%1 owner=%2",name player,clientOwner];
-    hint parseText "<t size='1.2'>SP_ORG WEAPONS 0.7-F - UC-001-B R2</t><br/><br/>Compatibilidade de mira, boca, apontador e bipé unificada entre Arma e CBA. CAPTURAR modifica somente o rascunho. SALVAR/SALVAR COMO NOVO armazenam kits <t color='#F0D98C'>somente nesta missão</t>; a persistência entre missões (WST-001) ainda não foi implementada.<br/><br/>Teste UC-001-B R2: 1518 verificações projetadas. <t color='#F0D98C'>IMPORTANTE:</t> mantenha a UI fechada durante o AUTO TEST. Aplicação física permanece protegida por pós-validação e rollback D2. Não carregue PBOs SP_ORG.";
+    hint parseText "<t size='1.2'>SP_ORG WEAPONS 0.7-G - UC-001-C R1</t><br/><br/>UC-001-B aprovada (acessorios Arma+CBA). UC-001-C R1 unifica carregadores, magazine wells, muzzles e variantes de lancadores. CAPTURAR modifica somente o rascunho. SALVAR/SALVAR COMO NOVO armazenam kits <t color='#F0D98C'>somente nesta missão</t>; a persistência entre missões (WST-001) ainda não foi implementada.<br/><br/>Teste UC-001-C R1: 1589 verificações projetadas. <t color='#F0D98C'>IMPORTANTE:</t> mantenha a UI fechada durante o AUTO TEST. Aplicação física permanece protegida por pós-validação e rollback D2. Não carregue PBOs SP_ORG.";
 };

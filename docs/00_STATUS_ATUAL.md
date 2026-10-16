@@ -1,5 +1,8 @@
 # Estado atual do projeto
 
+**Checkpoint vigente 16/10/2026 — Weapons: UC-001-B R2 formalmente APROVADA pelo operador, baseline imutável `baseline/weapons-uc001b-r2-approved` @ `6b22783d7a73d279b6af73ba762d422371bfd341` (AUTO real 1518/1518, 2 aplicações físicas PRIMARY). A verificação física MCC com acessório exclusivo CBA **foi PULADA COM ACEITE FORMAL**, pendência `UC001B-DEFER-001` para UC-001-D, não chamar de PASS; veja `docs/83_WEAPONS_UC001B_R2_APPROVAL_AND_DEFERRED_GATES.md`. Linha atual UC-001-C R1: branch `feature/weapons-uc-001-c-magazine-compatibility`, display 0.7-G / semantic 0.7.6.1, magazine/magwell/variants resolver engine-first e diagnóstico por muzzle; CI 37/37 PASS e missão `SP_ORG_Weapons_UC_001_C_Magazines_Wells_R1.VR`, **RPT real do Arma 1589/1589 ainda PENDENTE**. Guia `docs/84_WEAPONS_UC001C_R1_MAGAZINE_RESOLVER.md`. PR #11 B fica Draft sem merge; UC-001-C usa PR filha Draft. WST-001 persistência, UC-001-D e2e, PBO/MP/JIP/Undo permanecem pendentes.**
+
+
 **Atualização 14/10/2026 — UC-001-B R2:** RPT real R1: **1508/1516** (8 FAIL acumulados de 1 regressão real: campo `source` trocado e contrato histórico 0.3 quebrado). R2 restaura `ENGINE_COMPATIBLE_COMMANDS` no campo legado e mantém os novos metadados de proveniência Arma+CBA; 2 asserts adicionais. **CI R2 33/33 PASS**, [mission ZIP no artifact 11942210059](https://github.com/peregrinoklawd/ServoPeregrino_Organizador/actions/runs/38666282681/artifacts/11942210059), missão `SP_ORG_Weapons_UC_001_B_Unified_Attachments_R2.VR`. **Teste real R2 pendente, alvo 1518/1518**. Consulte `docs/81_WEAPONS_UC001B_R1_RPT_REVIEW_R2_FIX.md`. PR #11 segue Draft; R5/D2 homologadas preservadas; WST-001 pendente.
 
 

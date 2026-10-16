@@ -45,89 +45,17 @@ private _attachmentD=_attachmentR getOrDefault ["data",createHashMap];
 private _slotItems=_attachmentD getOrDefault ["slots",createHashMap];
 private _attachmentSources=_attachmentD getOrDefault ["sourcesBySlot",createHashMap];
 private _underbarrelData=_attachmentSources getOrDefault ["bipod",createHashMap];
-private _allMagazines = compatibleMagazines _weaponClass;
-_allMagazines = _allMagazines arrayIntersect _allMagazines;
-
-private _magazineSource = "ENGINE_COMPATIBLE_COMMANDS";
-private _secondaryVariantClasses = [];
-private _secondaryVariantMagazines = [];
-
-// SECONDARY launchers may be represented by hidden/runtime variants.
-// Example pattern used by third-party mods:
-//   public/base launcher -> hidden READY/USED runtime classes
-// where the runtime READY class restores the real magazine/magazineWell.
-//
-// Resolve these generically through baseWeapon; never hardcode addon,
-// launcher or magazine class names.
-if (_type isEqualTo 4) then {
- private _requestedClass = configName _cfg;
- private _canonicalBase = getText (_cfg >> "baseWeapon");
- if (_canonicalBase isEqualTo "") then {_canonicalBase = _requestedClass};
- private _canonicalBaseLower = toLowerANSI _canonicalBase;
-
- private _secondaryCfgs = "getNumber (_x >> 'type') == 4" configClasses (configFile >> "CfgWeapons");
- {
-  private _candidateCfg = _x;
-  private _candidateClass = configName _candidateCfg;
-  private _candidateBase = getText (_candidateCfg >> "baseWeapon");
-  if (_candidateBase isEqualTo "") then {_candidateBase = _candidateClass};
-
-  if ((toLowerANSI _candidateBase) isEqualTo _canonicalBaseLower) then {
-   _secondaryVariantClasses pushBackUnique _candidateClass;
-
-   private _variantMags = compatibleMagazines _candidateClass;
-   private _variantConfigMags = [_candidateClass,false] call BIS_fnc_compatibleMagazines;
-
-   _secondaryVariantMagazines append _variantMags;
-   _secondaryVariantMagazines append _variantConfigMags;
-  };
- } forEach _secondaryCfgs;
-
- _secondaryVariantClasses = [_secondaryVariantClasses,configFile >> "CfgWeapons"] call _dedupeConfigClassnamesCI;
- _secondaryVariantMagazines = [_secondaryVariantMagazines,configFile >> "CfgMagazines"] call _dedupeConfigClassnamesCI;
-
- private _beforeVariantCount = count _allMagazines;
- _allMagazines append _secondaryVariantMagazines;
- _allMagazines = [_allMagazines,configFile >> "CfgMagazines"] call _dedupeConfigClassnamesCI;
-
- if ((count _allMagazines) > _beforeVariantCount) then {
-  _magazineSource = "ENGINE_COMMANDS_PLUS_BASEWEAPON_RUNTIME_VARIANTS";
- };
-};
-
-// Player-facing compatibility must not expose hidden/internal magazines.
-// This removes technical placeholders (scope < 2) while preserving public
-// magazines that a Recipe may legitimately request.
-_allMagazines = _allMagazines select {
- private _magCfg = configFile >> "CfgMagazines" >> _x;
- isClass _magCfg && {getNumber (_magCfg >> "scope") >= 2}
-};
-_allMagazines = [_allMagazines,configFile >> "CfgMagazines"] call _dedupeConfigClassnamesCI;
-
-private _muzzles = getArray (_cfg >> "muzzles");
-if (_muzzles isEqualTo []) then {_muzzles = ["this"]};
-private _magazinesByMuzzle = createHashMap;
-{
- private _muzzle = _x;
- private _mags = compatibleMagazines [_weaponClass,_muzzle];
-
- // For a single primary muzzle on SECONDARY, expose the same public
- // compatibility union resolved from base/runtime variants.
- if (
-  _type isEqualTo 4
-  && {count _muzzles isEqualTo 1}
-  && {_muzzle isEqualTo "this"}
- ) then {
-  _mags append _allMagazines;
- };
-
- _mags = _mags select {
-  private _magCfg = configFile >> "CfgMagazines" >> _x;
-  isClass _magCfg && {getNumber (_magCfg >> "scope") >= 2}
- };
- _mags = [_mags,configFile >> "CfgMagazines"] call _dedupeConfigClassnamesCI;
- _magazinesByMuzzle set [_muzzle,_mags];
-} forEach _muzzles;
+// UC-001-C: magazines/muzzles/magwells/launcher-variants have one
+// read-only source; existing selectors and recipe validation consume this map.
+private _magazineR=[_weaponClass] call ServoPeregrino_Organizador_Weapons_fnc_resolveMagazineCompatibility;
+if !(_magazineR getOrDefault ["success",false]) exitWith {_magazineR};
+private _magazineD=_magazineR getOrDefault ["data",createHashMap];
+private _allMagazines=_magazineD getOrDefault ["magazines",[]];
+private _muzzles=_magazineD getOrDefault ["muzzles",[]];
+private _magazinesByMuzzle=_magazineD getOrDefault ["magazinesByMuzzle",createHashMap];
+private _magazineSource=_magazineD getOrDefault ["magazineSource","ENGINE_COMPATIBLE_COMMANDS"];
+private _secondaryVariantClasses=_magazineD getOrDefault ["secondaryVariantClasses",[]];
+private _secondaryVariantMagazines=_magazineD getOrDefault ["secondaryVariantMagazines",[]];
 
 private _attachmentCount = 0;
 {_attachmentCount = _attachmentCount + count (_slotItems get _x)} forEach ["muzzle","pointer","optic","bipod"];
@@ -142,6 +70,9 @@ private _attachmentCount = 0;
  ["attachmentCount",_attachmentCount],
  ["magazineCount",count _allMagazines],
  ["magazineSource",_magazineSource],
+ ["magazineWellsByMuzzle",_magazineD getOrDefault ["magazineWellsByMuzzle",createHashMap]],
+ ["magazineSourcesByMuzzle",_magazineD getOrDefault ["sourcesByMuzzle",createHashMap]],
+ ["magazineResolutionMode",_magazineD getOrDefault ["resolutionMode","ENGINE"]],
  ["secondaryVariantClasses",_secondaryVariantClasses],
  ["secondaryVariantCount",count _secondaryVariantClasses],
  ["secondaryVariantMagazineCount",count _secondaryVariantMagazines],
