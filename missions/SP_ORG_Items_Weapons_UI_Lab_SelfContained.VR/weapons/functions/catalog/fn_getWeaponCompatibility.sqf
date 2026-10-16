@@ -38,23 +38,13 @@ private _dedupeConfigClassnamesCI = {
  _out
 };
 
-private _defs = [] call ServoPeregrino_Organizador_Weapons_fnc_getConfigurationSlotDefinitions;
-private _slotItems = createHashMap;
-{
- private _field = _x;
- private _engineSlot = (_defs get _field) get "engineSlot";
- private _items = compatibleItems [_weaponClass,_engineSlot];
- if (_field isEqualTo "bipod") then {
-  private _underbarrel=[_weaponClass] call ServoPeregrino_Organizador_Weapons_fnc_getUnderbarrelCompatibility;
-  if !(_underbarrel getOrDefault ["success",false]) exitWith {_items=[]};
-  _items=(_underbarrel get "data") getOrDefault ["items",[]];
- };
- _items = [_items,configFile >> "CfgWeapons"] call _dedupeConfigClassnamesCI;
- _slotItems set [_field,_items];
-} forEach ["muzzle","pointer","optic","bipod"];
-
-private _underbarrelR=[_weaponClass] call ServoPeregrino_Organizador_Weapons_fnc_getUnderbarrelCompatibility;
-private _underbarrelData=if (_underbarrelR getOrDefault ["success",false]) then {_underbarrelR get "data"} else {createHashMap};
+// UC-001-B: a single slot-aware logical source for catalog, selectors and domain.
+private _attachmentR=[_weaponClass] call ServoPeregrino_Organizador_Weapons_fnc_resolveAttachmentCompatibility;
+if !(_attachmentR getOrDefault ["success",false]) exitWith {_attachmentR};
+private _attachmentD=_attachmentR getOrDefault ["data",createHashMap];
+private _slotItems=_attachmentD getOrDefault ["slots",createHashMap];
+private _attachmentSources=_attachmentD getOrDefault ["sourcesBySlot",createHashMap];
+private _underbarrelData=_attachmentSources getOrDefault ["bipod",createHashMap];
 private _allMagazines = compatibleMagazines _weaponClass;
 _allMagazines = _allMagazines arrayIntersect _allMagazines;
 
@@ -155,7 +145,12 @@ private _attachmentCount = 0;
  ["secondaryVariantClasses",_secondaryVariantClasses],
  ["secondaryVariantCount",count _secondaryVariantClasses],
  ["secondaryVariantMagazineCount",count _secondaryVariantMagazines],
- ["underbarrelSource",_underbarrelData getOrDefault ["source","ENGINE_UNDERBARREL"]],
+ ["underbarrelSource",if ((_underbarrelData getOrDefault ["source","ENGINE"]) isEqualTo "ENGINE_PLUS_CBA") then {"ENGINE_PLUS_CBA_UNDERBARREL"} else {"ENGINE_UNDERBARREL"}],
  ["underbarrelCBAAdded",_underbarrelData getOrDefault ["cbaAddedCount",0]],
+ ["attachmentSources",_attachmentSources],
+ ["attachmentResolutionMode",_attachmentD getOrDefault ["resolutionMode","ENGINE"]],
+ // The legacy "source" field is a stable compatibility marker introduced in
+ // catalog 0.3. The actual slot source/provenance is expressed separately above.
+ // Preserve this value for existing consumers and the R5 frozen test contract.
  ["source","ENGINE_COMPATIBLE_COMMANDS"]
 ]] call ServoPeregrino_Organizador_Nexus_fnc_createResult

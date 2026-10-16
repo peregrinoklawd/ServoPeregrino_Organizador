@@ -1,6 +1,6 @@
 {
   "project": "Servo Peregrino Organizador / SP_ORG",
-  "snapshot_date": "2026-10-14",
+  "snapshot_date": "2026-10-16",
   "state_schema_version": 2,
   "source_of_truth": {
     "repository_role": "MONOREPO",
@@ -22,8 +22,8 @@
     "hub_rule": "Hub is an optional player-facing integration/orchestration layer. No domain module may require Hub in order to function.",
     "independent_core_development": true
   },
-  "global_next_gate": "UC001-A RPT review partial PASS (PRIMARY/HANDGUN; SECONDARY not equipped); persistence WST-001 explicitly NOT IMPLEMENTED; continue tests then UC001-B.",
-  "global_after_gate": "UC-001-B attachments; UC-001-C magazines/variants; UC-001-D end-to-end/performance; then prioritize 0.8 MP per roadmap. Packaging/Undo deferred.",
+  "global_next_gate": "UC001B APPROVED by user w deferred MCC CBA-only physical; prepare UC001C (magazines, wells, variants) in child branch. UC001D E2E later. No merge/PBO.",
+  "global_after_gate": "UC-001-B further review or R2 after runtime, then UC-001-C magazines/variants, UC-001-D e2e. WST-001 cross-mission profile persistence essential before shipping, WUX-002 magazines vest and WUX-003 icon filters backlog; 0.8 MP later.",
   "modules": [
     {
       "id": "Nexus",
@@ -210,15 +210,15 @@
       "addon": "ServoPeregrino_Organizador_Weapons",
       "mandatory": false,
       "stable_version": {
-        "display": "0.7-E E1 R5 mission-first",
-        "semantic": "0.7.4.5 mission-first",
-        "build": "0.7.4.5-pending-save-as-new-e1-r5-mission-first",
-        "homologation": "AUTO_1446_OF_1446_AND_MANUAL_APPROVED_2026_10_14"
+        "display": "0.7-F UC-001-B R2 mission-first",
+        "semantic": "0.7.5.2 mission-first",
+        "build": "0.7.5.2-uc001-b-r2-legacy-source-contract-mission-first",
+        "homologation": "USER_APPROVED_2026_10_16_1518_1518_MANUAL_2_WITH_UC001B_DEFER_001"
       },
       "development_version": {
-        "display": "0.7-E E1 R5 mission-first",
-        "semantic": "0.7.4.5 mission-first",
-        "build": "0.7.4.5-pending-save-as-new-e1-r5-mission-first"
+        "display": "0.7-F UC-001-B R2",
+        "semantic": "0.7.5.2 mission-first",
+        "build": "0.7.5.2-uc001-b-r2-legacy-source-contract-mission-first"
       },
       "dependencies": [
         "Nexus",
@@ -256,10 +256,10 @@
           "persistence.provider.v1"
         ]
       },
-      "status": "R5_E1_HOMOLOGATED_UC001A_DIAGNOSTIC_CANDIDATE_RUNTIME_PENDING",
-      "next_gate": "UC-001-A auto 1446/1446 and two diagnostic passes 2/3 slots complete; test SECONDARY occupied (prefer multi-muzzle) before closing coverage. WST-001 persistence among future essential gates; 0.8 authority separate.",
-      "homologated_artifact": "R5 E1 mission-first: RPT 2026-10-14 auto 1446/1446, zero fail/blocked, manual captures and SAVE_AS_NEW approved. Baseline marker baseline/weapons-0.7-e-r5-homologated @ 52dd24af4f54ca9f3c9c6832f55ffdf772ff0314; prior D2 R1 remains immutable.",
-      "current_candidate_artifact": "SP_ORG_Weapons_UC_001_A_Source_Audit_R1.VR",
+      "status": "UC001B_R2_USER_APPROVED_WITH_ACCEPTED_MCC_CBA_ONLY_MANUAL_TEST_GAP",
+      "next_gate": "UC-001-C magazine/magwell/variant resolver from approved B R2 branch; B deferred manual test MUST remain documented for D e2e.",
+      "homologated_artifact": "UC001B R2 approved on 2026-10-16, auto 1518/1518, 2 physical PRIMARY apply successes; pending manual MCC CBA-only specifically recorded in docs/83_WEAPONS_UC001B_R2_APPROVAL_AND_DEFERRED_GATES.md",
+      "current_candidate_artifact": "SP_ORG_Weapons_UC_001_B_Unified_Attachments_R2.VR",
       "mission_first_validation": {
         "0.1-B": {
           "status": "APPROVED_SP",
@@ -1000,12 +1000,13 @@
       "full_compatibility_requirement": {
         "requirement_id": "UC-001",
         "status": "REQUIRED_NOT_IMPLEMENTED_FULLY",
-        "priority": "CURRENT_UC001_A_SOURCE_AUDIT",
+        "priority": "UC001C_MAGAZINES_MAGWELLS_VARIANTS",
         "canonical_document": "docs/74_WEAPONS_UNIFIED_COMPATIBILITY_ARCHITECTURE.md",
         "scope": "all weapons, presets/variants, attachment slots, magazines, config/mod provenance, fail-closed postvalidation",
         "current_partial_support": "only UnderBarrelSlot engine+CBA in R4/R5",
         "must_not_claim_complete_until_end_to_end": true,
-        "uc001a_status": "SOURCE_AUDIT_IMPLEMENTED_RUNTIME_PENDING"
+        "uc001a_status": "SOURCE_AUDIT_IMPLEMENTED_RUNTIME_PENDING",
+        "uc001b_status": "APPROVED_WITH_EXPLICIT_MANUAL_MCC_CBA_ONLY_EXCEPTION"
       },
       "previous_homologated_baseline": {
         "display": "0.7-D2 R1 mission-first",
@@ -1687,5 +1688,131 @@
       "status": "RUNTIME_PASS_PARTIAL_COVERAGE",
       "document": "docs/79_WEAPONS_UC001A_R1_REVIEW.md"
     }
+  },
+  "weapons_uc001b": {
+    "branch": "feature/weapons-uc-001-b-unified-attachments",
+    "base_branch": "feature/weapons-uc-001-a-compatibility-audit",
+    "base_commit": "08cdf5497cd4e67c2af9a0fc50aa06ee18bac438",
+    "pr_number": 11,
+    "pr_status": "DRAFT",
+    "status": "APPROVED_BY_USER_2026_10_16_WITH_ACCEPTED_CBA_ONLY_MANUAL_TEST_GAP",
+    "display": "0.7-F",
+    "semantic": "0.7.5.2",
+    "package_name": "SP_ORG_Weapons_UC_001_B_Unified_Attachments_R2.VR",
+    "expected_auto_tests": 1518,
+    "previous_r5_auto": 1446,
+    "new_tests": 72,
+    "validation_script": "tools/validate_uc001_b.py",
+    "documentation": "docs/80_WEAPONS_UC001B_R1_UNIFIED_ATTACHMENTS.md",
+    "scope": "Muzzle, Pointer, Optic, Underbarrel single logical source, CBA optional, D2 unchanged",
+    "deferred": [
+      "UC001A_SECONDARY",
+      "UC001C_MAGAZINES",
+      "UC001D_E2E",
+      "WST001_PERSISTENCE",
+      "WUX002_VEST_AMMO",
+      "WUX003_ICON_FILTERS",
+      "MP_PBO_UNDO"
+    ],
+    "static_checks": {
+      "passed": 33,
+      "failed": 0,
+      "total": 33
+    },
+    "r1_runtime_review": {
+      "date": "2026-10-14",
+      "file": "Texto colado(20261015-012435).txt",
+      "line_count": 10469,
+      "auto": {
+        "passed": 1508,
+        "failed": 8,
+        "blocked": 0,
+        "total": 1516
+      },
+      "first_failure": "0.3 compatibility source marker",
+      "root_cause": "legacy source ENGINE_COMPATIBLE_COMMANDS changed in R1; repeated via 7 cumulative gates",
+      "new_uc001b_assertions": {
+        "passed": 69,
+        "failed": 1,
+        "total": 70
+      },
+      "manual": {
+        "captures_exact": 3,
+        "save_as_new_success": 3,
+        "mcc_rd704_cba_bipod_added": 43,
+        "mcc_rattler_cba_bipod_added": 43,
+        "physical_apply_manual": "NOT_OBSERVED",
+        "full_ui_refresh_median_ms": 433
+      },
+      "report": "docs/81_WEAPONS_UC001B_R1_RPT_REVIEW_R2_FIX.md",
+      "external_cba_pfhandler_errors": 24
+    },
+    "report": "docs/81_WEAPONS_UC001B_R1_RPT_REVIEW_R2_FIX.md",
+    "ci_run": 38666282681,
+    "artifact_id": 11942210059,
+    "package_code_commit": "0e62d13cefd9f3f9a91bf95117bece6a1ed9e666",
+    "mission_zip_sha256": "7deef9483c14fdb2fd7ae33daebd032245b740a768a1a54e2370a2c40fcae7db",
+    "r2_runtime_review": {
+      "date": "2026-10-14",
+      "source": "Texto colado(20261015-024245).txt",
+      "lines": 10358,
+      "auto": {
+        "passed": 1518,
+        "failed": 0,
+        "blocked": 0,
+        "total": 1518,
+        "expected": 1518
+      },
+      "r5_regression": {
+        "passed": 1446,
+        "failed": 0
+      },
+      "new_b_assertions": {
+        "passed": 72,
+        "failed": 0
+      },
+      "manual_physical": {
+        "applications": 2,
+        "operations": [
+          "PRIMARY_REPLACE",
+          "PRIMARY_RECONFIGURE"
+        ],
+        "both_success": true,
+        "both_target_matches": true,
+        "observed_rollback_attempts": 0,
+        "includes_rhs_ace_accessories": true,
+        "mcc_cba_only_application": "NOT_OBSERVED"
+      },
+      "mcc_rd704_bipod": {
+        "engine": 44,
+        "cba": 87,
+        "cba_added": 43
+      },
+      "nonfunctional": "AUTO_TEST_SUMMARY prints mode=MISSION_FIRST_UC001B_R1 despite R2 checks and R2 code",
+      "cba_perframe_errors": 24,
+      "performance_full": {
+        "n": 30,
+        "median_ms": 541.5,
+        "max_ms": 1768
+      },
+      "performance_draft": {
+        "n": 48,
+        "median_ms": 82.5,
+        "max_ms": 312
+      },
+      "review_doc": "docs/82_WEAPONS_UC001B_R2_RPT_REVIEW.md"
+    },
+    "next_gate": "Approved. Continue UC001C; test deferred MCC/CBA-only on UC001D when feasible.",
+    "approved": true,
+    "approval_date": "2026-10-16",
+    "approval_doc": "docs/83_WEAPONS_UC001B_R2_APPROVAL_AND_DEFERRED_GATES.md",
+    "accepted_unverified_gates": [
+      {
+        "id": "UC001B-DEFER-001",
+        "status": "KNOWN_ACCEPTED_TEST_GAP",
+        "detail": "Physical manual application of MCC with CBA-only grip not executed",
+        "revisit": "UC001D_E2E_BEFORE_PBO_MP"
+      }
+    ]
   }
 }

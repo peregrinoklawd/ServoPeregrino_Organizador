@@ -11,6 +11,7 @@ on:
       - feature/weapons-0.7-d2-consolidated-runtime-hardening
       - feature/weapons-0.7-e-equipment-capture
       - feature/weapons-uc-001-a-compatibility-audit
+      - feature/weapons-uc-001-b-unified-attachments
     paths:
       - "missions/SP_ORG_Items_Weapons_UI_Lab_SelfContained.VR/**"
       - "missions/PACKAGE_MISSION_NAME.txt"
@@ -37,6 +38,10 @@ jobs:
       - name: Validate UC-001-A diagnostic-only contracts
         if: github.ref == 'refs/heads/feature/weapons-uc-001-a-compatibility-audit'
         run: python3 tools/validate_uc001_a.py
+
+      - name: Validate UC-001-B R2 resolver and legacy contract
+        if: github.ref == 'refs/heads/feature/weapons-uc-001-b-unified-attachments'
+        run: python3 tools/validate_uc001_b.py
 
       - name: Resolve mission package identity
         shell: bash
