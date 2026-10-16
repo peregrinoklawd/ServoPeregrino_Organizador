@@ -49,3 +49,11 @@ Pasta da missão: `SP_ORG_Weapons_UC_001_C_Magazines_Wells_R1.VR`, guardada como
 - ZIP da missão no [artifact SP_ORG_UI_Lab](https://github.com/peregrinoklawd/ServoPeregrino_Organizador/actions/runs/38862452414/artifacts/12030085733); `SP_ORG_Weapons_UC_001_C_Magazines_Wells_R1.zip`, SHA256 `ee7e778e578aca5795800762e2b550c78d7cab8514a44f8b5be67c7e32f44c0f`.
 - Um novo pacote será produzido automaticamente após atualizar as instruções dentro da missão. Preferir o artifact mais recente com sucesso.
 - **Não homologar C antes do RPT real 1589/1589 e teste manual**, nem substituir a aceitação formal da B.
+
+## Artefato FINAL da candidata R1 / PR Draft (16/10/2026)
+
+- **PR #12 Draft:** https://github.com/peregrinoklawd/ServoPeregrino_Organizador/pull/12 (base: `baseline/weapons-uc001b-r2-approved`, sem merge).
+- **CI vencedora pós-LEIA_PRIMEIRO:** https://github.com/peregrinoklawd/ServoPeregrino_Organizador/actions/runs/38862586403 — 37/37 static PASS.
+- **Download do pacote mission-first:** https://github.com/peregrinoklawd/ServoPeregrino_Organizador/actions/runs/38862586403/artifacts/12030335992
+- ZIP interno: `SP_ORG_Weapons_UC_001_C_Magazines_Wells_R1.zip`; SHA256 `da2a23abc445bf5f4724b73013d4ec3ff1e39e5b063269e90b2b373171a4ffe8`.
+- A CI só confirma estrutura e empacotamento; a missão ainda precisa ser executada no Arma, com 1589/1589 alvo.
