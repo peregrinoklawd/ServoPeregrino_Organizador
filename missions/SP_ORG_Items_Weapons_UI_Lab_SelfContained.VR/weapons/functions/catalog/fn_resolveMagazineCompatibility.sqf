@@ -65,6 +65,7 @@ private _all=+_engineAll;
 private _magazineSource="ENGINE_COMPATIBLE_COMMANDS";
 private _secondaryClasses=[];
 private _secondaryMags=[];
+private _secondaryAllKnown=[];
 if (_type isEqualTo 4) then {
  private _base=getText (_cfg >> "baseWeapon");
  if (_base isEqualTo "") then {_base=_weapon};
@@ -83,6 +84,21 @@ if (_type isEqualTo 4) then {
   };
  } forEach _candidates;
  _secondaryClasses=[_secondaryClasses] call _canonicalizeWeapons;
+ // Preserve historical R5 variant metadata (known config magazines can
+ // include private runtime classes); only public classes enter catalog options.
+ private _seenSecondary=createHashMap;
+ {
+  private _mCfg=_magRoot >> _x;
+  if (isClass _mCfg) then {
+   private _canonical=configName _mCfg;
+   private _identity=toLowerANSI _canonical;
+   if !(_seenSecondary getOrDefault [_identity,false]) then {
+    _seenSecondary set [_identity,true];
+    _secondaryAllKnown pushBack _canonical;
+   };
+  };
+ } forEach _secondaryMags;
+ _secondaryAllKnown sort true;
  _secondaryMags=[_secondaryMags] call _normalize;
  private _before=count _all;
  _all append _secondaryMags;
@@ -96,7 +112,6 @@ if (_muzzles isEqualTo []) then {_muzzles=["this"]};
 private _byMuzzle=createHashMap;
 private _wellByMuzzle=createHashMap;
 private _sourceByMuzzle=createHashMap;
-private _allLowers=_all apply {toLowerANSI _x};
 {
  private _muzzle=_x;
  private _engineForMuzzle=[compatibleMagazines [_weapon,_muzzle]] call _normalize;
@@ -150,7 +165,8 @@ private _data=createHashMapFromArray [
  ["magazineSource",_magazineSource],
  ["secondaryVariantClasses",_secondaryClasses],
  ["secondaryVariantCount",count _secondaryClasses],
- ["secondaryVariantMagazineCount",count _secondaryMags],
+ ["secondaryVariantMagazineCount",count _secondaryAllKnown],
+ ["secondaryVariantMagazines",_secondaryAllKnown],
  ["engineMagazines",_engineAll],
  ["resolutionMode","UC001C_R1_ENGINE_MAGWELLS_TYPE4_VARIANTS"],
  ["cacheScope","MISSION_CONFIG"],["physicalAuthority","D2_POSTVALIDATION_AND_ROLLBACK"]
