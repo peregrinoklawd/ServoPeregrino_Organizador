@@ -4,7 +4,7 @@ if (_unit getVariable ["SP_ORG_Weapons_labActionsInstalled",false]) exitWith {tr
 _unit setVariable ["SP_ORG_Weapons_labActionsInstalled",true];
 
 
-_unit addAction ["Weapons | ABRIR UI 0.7-F UC-001-B",{
+_unit addAction ["Weapons | ABRIR UI 0.7-G UC-001-C",{
  if (missionNamespace getVariable ["SP_ORG_Weapons_AutoTestRunning",false]) exitWith {hint "Aguarde a conclusão do AUTO TEST antes de abrir Weapons.";};
  private _result = [] call ServoPeregrino_Organizador_Weapons_fnc_openInterface;
  if !(_result get "success") then {
@@ -28,8 +28,8 @@ _unit addAction ["Weapons | Compatibilidade MX - RPT",{
  hint "Compatibilidade da MX gravada no RPT.";
 }];
 
-_unit addAction ["Weapons | Sobre UC-001-B R2",{
- hint "UC-001-B R2: catalogo e validacao de miras, bocas, apontadores e bipés usam a mesma consulta Arma+CBA. Execute SP_ORG LAB - TESTAR UC-001-B R2 com a UI fechada (1518 testes previstos). SALVAR conserva kits somente nesta missao; persistencia WST-001 pendente. Rollback D2 mantido.";
+_unit addAction ["Weapons | Sobre UC-001-C R1",{
+ hint "UC-001-C R1: catalogo, seletores e receitas compartilham carregadores/magwells/variantes. UC-001-B aprovada, teste fisico MCC CBA-only diferido. Execute SP_ORG LAB - TESTAR UC-001-C R1 com UI fechada (1589 testes). SALVAR e local a missao; WST-001 e D2 preservados.";
 }];
 
 _unit addEventHandler ["Respawn",{params ["_new"];[_new] call ServoPeregrino_Organizador_Weapons_fnc_installLabActions}];
