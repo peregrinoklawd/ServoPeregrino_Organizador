@@ -1,6 +1,6 @@
 {
   "project": "Servo Peregrino Organizador / SP_ORG",
-  "snapshot_date": "2026-10-14",
+  "snapshot_date": "2026-10-16",
   "state_schema_version": 2,
   "source_of_truth": {
     "repository_role": "MONOREPO",
@@ -22,7 +22,7 @@
     "hub_rule": "Hub is an optional player-facing integration/orchestration layer. No domain module may require Hub in order to function.",
     "independent_core_development": true
   },
-  "global_next_gate": "UC001B R2 actual Arma auto 1518/1518 and manual PRIMARY REPLACE+RECONFIGURE successful with RHS/ACE, CBA 43 extra underbarrels discovered on MCC. Next physical MCC CBA-only test; PR #11 Draft, no merge; WST001 not implemented.",
+  "global_next_gate": "UC001B APPROVED by user w deferred MCC CBA-only physical; prepare UC001C (magazines, wells, variants) in child branch. UC001D E2E later. No merge/PBO.",
   "global_after_gate": "UC-001-B further review or R2 after runtime, then UC-001-C magazines/variants, UC-001-D e2e. WST-001 cross-mission profile persistence essential before shipping, WUX-002 magazines vest and WUX-003 icon filters backlog; 0.8 MP later.",
   "modules": [
     {
@@ -210,10 +210,10 @@
       "addon": "ServoPeregrino_Organizador_Weapons",
       "mandatory": false,
       "stable_version": {
-        "display": "0.7-E E1 R5 mission-first",
-        "semantic": "0.7.4.5 mission-first",
-        "build": "0.7.4.5-pending-save-as-new-e1-r5-mission-first",
-        "homologation": "AUTO_1446_OF_1446_AND_MANUAL_APPROVED_2026_10_14"
+        "display": "0.7-F UC-001-B R2 mission-first",
+        "semantic": "0.7.5.2 mission-first",
+        "build": "0.7.5.2-uc001-b-r2-legacy-source-contract-mission-first",
+        "homologation": "USER_APPROVED_2026_10_16_1518_1518_MANUAL_2_WITH_UC001B_DEFER_001"
       },
       "development_version": {
         "display": "0.7-F UC-001-B R2",
@@ -256,9 +256,9 @@
           "persistence.provider.v1"
         ]
       },
-      "status": "UC001B_R2_AUTO_RUNTIME_1518_PASS_MANUAL_APPLY_2_PASS_CBA_ONLY_PHYSICAL_MANUAL_PENDING",
-      "next_gate": "UC001B R2 AUTO 1518/1518 PASS 0 FAIL; 2 successful PRIMARY physical modded-accessory applications. Remaining: manual apply on MCC with underbarrel CBA-only, verify post-validation or safe failure; R1 summary mode R1 string typo; PR #11 Draft.",
-      "homologated_artifact": "R5 E1 mission-first: RPT 2026-10-14 auto 1446/1446, zero fail/blocked, manual captures and SAVE_AS_NEW approved. Baseline marker baseline/weapons-0.7-e-r5-homologated @ 52dd24af4f54ca9f3c9c6832f55ffdf772ff0314; prior D2 R1 remains immutable.",
+      "status": "UC001B_R2_USER_APPROVED_WITH_ACCEPTED_MCC_CBA_ONLY_MANUAL_TEST_GAP",
+      "next_gate": "UC-001-C magazine/magwell/variant resolver from approved B R2 branch; B deferred manual test MUST remain documented for D e2e.",
+      "homologated_artifact": "UC001B R2 approved on 2026-10-16, auto 1518/1518, 2 physical PRIMARY apply successes; pending manual MCC CBA-only specifically recorded in docs/83_WEAPONS_UC001B_R2_APPROVAL_AND_DEFERRED_GATES.md",
       "current_candidate_artifact": "SP_ORG_Weapons_UC_001_B_Unified_Attachments_R2.VR",
       "mission_first_validation": {
         "0.1-B": {
@@ -1000,13 +1000,13 @@
       "full_compatibility_requirement": {
         "requirement_id": "UC-001",
         "status": "REQUIRED_NOT_IMPLEMENTED_FULLY",
-        "priority": "CURRENT_UC001_A_SOURCE_AUDIT",
+        "priority": "UC001C_MAGAZINES_MAGWELLS_VARIANTS",
         "canonical_document": "docs/74_WEAPONS_UNIFIED_COMPATIBILITY_ARCHITECTURE.md",
         "scope": "all weapons, presets/variants, attachment slots, magazines, config/mod provenance, fail-closed postvalidation",
         "current_partial_support": "only UnderBarrelSlot engine+CBA in R4/R5",
         "must_not_claim_complete_until_end_to_end": true,
         "uc001a_status": "SOURCE_AUDIT_IMPLEMENTED_RUNTIME_PENDING",
-        "uc001b_status": "R1_IMPLEMENTED_STATIC_READY_RUNTIME_PENDING"
+        "uc001b_status": "APPROVED_WITH_EXPLICIT_MANUAL_MCC_CBA_ONLY_EXCEPTION"
       },
       "previous_homologated_baseline": {
         "display": "0.7-D2 R1 mission-first",
@@ -1695,7 +1695,7 @@
     "base_commit": "08cdf5497cd4e67c2af9a0fc50aa06ee18bac438",
     "pr_number": 11,
     "pr_status": "DRAFT",
-    "status": "R2_RUNTIME_AUTO_PASS_1518_1518_MANUAL_APPLY_2_CBA_ONLY_PHYSICAL_PENDING",
+    "status": "APPROVED_BY_USER_2026_10_16_WITH_ACCEPTED_CBA_ONLY_MANUAL_TEST_GAP",
     "display": "0.7-F",
     "semantic": "0.7.5.2",
     "package_name": "SP_ORG_Weapons_UC_001_B_Unified_Attachments_R2.VR",
@@ -1802,6 +1802,17 @@
       },
       "review_doc": "docs/82_WEAPONS_UC001B_R2_RPT_REVIEW.md"
     },
-    "next_gate": "Physical application for MCC RD704 with CBA-only underbarrel item and confirm D2 physical result; investigate performance separately; correct mislabeled R1 final summary in next code revision, no RPT retest required solely for cosmetic string."
+    "next_gate": "Approved. Continue UC001C; test deferred MCC/CBA-only on UC001D when feasible.",
+    "approved": true,
+    "approval_date": "2026-10-16",
+    "approval_doc": "docs/83_WEAPONS_UC001B_R2_APPROVAL_AND_DEFERRED_GATES.md",
+    "accepted_unverified_gates": [
+      {
+        "id": "UC001B-DEFER-001",
+        "status": "KNOWN_ACCEPTED_TEST_GAP",
+        "detail": "Physical manual application of MCC with CBA-only grip not executed",
+        "revisit": "UC001D_E2E_BEFORE_PBO_MP"
+      }
+    ]
   }
 }
