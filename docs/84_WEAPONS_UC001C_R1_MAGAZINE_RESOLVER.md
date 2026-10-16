@@ -42,3 +42,10 @@ Runner **`SP_ORG LAB - TESTAR UC-001-C R1`**:
 ## Pacote
 
 Pasta da missão: `SP_ORG_Weapons_UC_001_C_Magazines_Wells_R1.VR`, guardada como ZIP em artifact `SP_ORG_UI_Lab` na Actions da branch UC-001-C. Substituir neste documento o workflow/artifact assim que confirmado CI, mantendo o histórico.
+
+## Primeira CI de compilação estática e pacote (16/10/2026)
+
+- GitHub Actions: https://github.com/peregrinoklawd/ServoPeregrino_Organizador/actions/runs/38862452414 — **SUCCESS, 37/37 static PASS**, executada antes do ajuste final do LEIA_PRIMEIRO; não é teste SQF real.
+- ZIP da missão no [artifact SP_ORG_UI_Lab](https://github.com/peregrinoklawd/ServoPeregrino_Organizador/actions/runs/38862452414/artifacts/12030085733); `SP_ORG_Weapons_UC_001_C_Magazines_Wells_R1.zip`, SHA256 `ee7e778e578aca5795800762e2b550c78d7cab8514a44f8b5be67c7e32f44c0f`.
+- Um novo pacote será produzido automaticamente após atualizar as instruções dentro da missão. Preferir o artifact mais recente com sucesso.
+- **Não homologar C antes do RPT real 1589/1589 e teste manual**, nem substituir a aceitação formal da B.
