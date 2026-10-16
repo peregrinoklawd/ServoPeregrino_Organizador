@@ -1821,7 +1821,7 @@
   "weapons_uc001c": {
     "branch": "feature/weapons-uc-001-c-magazine-compatibility",
     "base_branch": "baseline/weapons-uc001b-r2-approved",
-    "pr_status": "DRAFT_PLANNED",
+    "pr_status": "DRAFT_NO_MERGE",
     "status": "R1_STATIC_37_PASS_ARMA_1589_PENDING",
     "display": "0.7-G",
     "semantic": "0.7.6.1",
@@ -1852,6 +1852,12 @@
       "PBO_MP_JIP_UNDO"
     ],
     "manual": "PENDING",
-    "runtime": "PENDING"
+    "runtime": "PENDING",
+    "pr_number": 12,
+    "ci_run": 38862586403,
+    "artifact_id": 12030335992,
+    "zip_sha256": "da2a23abc445bf5f4724b73013d4ec3ff1e39e5b063269e90b2b373171a4ffe8",
+    "package_code_commit": "f2767c7c31b59d205e7950e70942dc42d5b94f25",
+    "package_code_commit_context": "LEIA_PRIMEIRO final mission packaging, doc/state commits afterwards only"
   }
 }
