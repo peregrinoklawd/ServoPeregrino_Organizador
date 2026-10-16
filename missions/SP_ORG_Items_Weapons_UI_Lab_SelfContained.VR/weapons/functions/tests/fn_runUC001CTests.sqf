@@ -38,10 +38,10 @@ private _samples=["arifle_MX_F","arifle_MX_GL_F","hgun_P07_F","launch_NLAW_F"];
  private _again=[_weapon] call ServoPeregrino_Organizador_Weapons_fnc_resolveMagazineCompatibility;
  private _engine=compatibleMagazines _weapon;
  private _resolvedCI=_mags apply {toLowerANSI _x};
- private _validPublic=_mags findIf {
+ private _validPublic=(_mags findIf {
   private _cfg=_magRoot >> _x;
   !(isClass _cfg) || {getNumber (_cfg >> "scope")<2} || {(configName _cfg) isNotEqualTo _x}
- } < 0;
+ }) < 0;
  private _keyset=createHashMap;
  private _noDuplicates=true;
  {
@@ -61,10 +61,10 @@ private _samples=["arifle_MX_F","arifle_MX_GL_F","hgun_P07_F","launch_NLAW_F"];
   };
   private _resolved=_by getOrDefault [_muzzle,[]];
   private _ci=_resolved apply {toLowerANSI _x};
-  if (_muzzlePublic findIf {!((toLowerANSI _x) in _ci)} >= 0) then {_muzzleAllRecognized=false};
+  if ((_muzzlePublic findIf {!((toLowerANSI _x) in _ci)}) >= 0) then {_muzzleAllRecognized=false};
   private _meta=_sources getOrDefault [_muzzle,createHashMap];
   if ((_meta getOrDefault ["policy",""]) isNotEqualTo "ENGINE_FIRST_MAGWELL_DIAGNOSTIC_WITH_TYPE4_VARIANTS") then {_wellsDiagnostic=false};
-  if (_resolved findIf {!((toLowerANSI _x) in _resolvedCI)} >= 0) then {_wellsDiagnostic=false};
+  if ((_resolved findIf {!((toLowerANSI _x) in _resolvedCI)}) >= 0) then {_wellsDiagnostic=false};
  } forEach _muzzles;
  private _configR=[_weapon] call ServoPeregrino_Organizador_Weapons_fnc_createWeaponConfiguration;
  private _config=(_configR getOrDefault ["data",createHashMap]) getOrDefault ["configuration",createHashMap];
