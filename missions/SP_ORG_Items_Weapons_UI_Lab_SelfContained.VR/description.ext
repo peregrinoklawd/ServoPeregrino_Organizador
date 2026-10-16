@@ -1,7 +1,7 @@
 author = "Claudio Malta Telhada";
-onLoadName = "SP_ORG UI Lab - UC-001-B Unified Attachments R2";
-onLoadMission = "UC-001-B R2: catalogo, seletores e validacao semantica usam fonte unica Arma e CBA. D2 inalterada.";
-overviewText = "UC-001-B R2: autoridade unificada de acessórios. Carregadores, persistencia e MP permanecem separados.";
+onLoadName = "SP_ORG UI Lab - UC-001-C Magazines R1";
+onLoadMission = "UC-001-C R1: magazines, magazine wells, muzzle e variantes baseWeapon. Acessorios B preservados; D2 inalterada.";
+overviewText = "UC-001-C R1: resolvedor unico de carregadores; operacoes fisicas continuam sob D2, persistencia/MP separados.";
 enableDebugConsole = 1;
 disabledAI = 1;
 respawn = 3;
@@ -196,7 +196,7 @@ class ServoPeregrino_Organizador_Weapons
   class Catalog
   {
    file="weapons\functions\catalog";
-   class getWeaponCompatibility {}; class getUnderbarrelCompatibility {}; class resolveAttachmentCompatibility {};
+   class getWeaponCompatibility {}; class getUnderbarrelCompatibility {}; class resolveAttachmentCompatibility {}; class resolveMagazineCompatibility {};
    class getWeaponCatalogEntry {};
    class buildWeaponCatalog {};
    class getWeaponCatalog {};
@@ -350,7 +350,7 @@ class ServoPeregrino_Organizador_Weapons
             class runDelivery0_7_DTests {};
             class runDelivery0_7_D2Tests {};
              class runDelivery0_7_ETests {};
-              class diagnoseEquippedWeaponCompatibility {}; class auditUC001ASources {}; class runUC001BTests {};
+              class diagnoseEquippedWeaponCompatibility {}; class auditUC001ASources {}; class runUC001BTests {}; class runUC001CTests {};
    class serverHandleLabRequest {};
   };
  };
