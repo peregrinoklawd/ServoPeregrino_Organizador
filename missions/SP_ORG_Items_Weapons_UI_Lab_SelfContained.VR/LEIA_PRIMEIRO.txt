@@ -1,43 +1,42 @@
-SP_ORG — WEAPONS 0.7-F / UC-001-B R2 — COMPATIBILIDADE DE ACESSÓRIOS
-CANDIDATA MISSION-FIRST: CI E TESTE NO ARMA PENDENTES; R1 REPRODUZIU 1508/1516 (8 FAIL ACUMULADOS DE 1 BUG SOURCE-MARKER)
+SP_ORG — WEAPONS 0.7-G / UC-001-C R1 — MAGAZINES, MAGAZINE WELLS E VARIANTES
+STATUS: CANDIDATA MISSION-FIRST; CI ESTATICA 37/37 PASS; RPT REAL NO ARMA PENDENTE
 
-BASELINE
-- R5 (0.7-E): 1446/1446 runtime e manual homologadas; preserve baseline
-  baseline/weapons-0.7-e-r5-homologated
-- R1 usa o diagnóstico UC-001-A, com SECONDARY ainda não auditada.
-- PR #10 UC-001-A permanece Draft; nenhuma branch deve ser mergeada na main.
+BASELINES
+- UC-001-B R2 formalmente APROVADA pelo operador (16/10/2026):
+  baseline/weapons-uc001b-r2-approved; 1518/1518 auto e 2 APPLY manuais.
+- UC001B-DEFER-001: teste de empunhadura exclusivamente CBA em MCC não
+  realizado por decisão do operador. CONTINUA PENDENTE até UC-001-D.
+- R5 0.7-E 1446/1446 e D2 aplicação física/rollback preservados.
+- NENHUM merge, PBO, MP, JIP, Undo ou persistência cross-mission.
 
 EXECUÇÃO
-1. Baixe o artifact SP_ORG_UI_Lab da branch UC-001-B no GitHub Actions;
-   extraia dentro dele SP_ORG_Weapons_UC_001_B_Unified_Attachments_R2.zip.
-2. Coloque a pasta SP_ORG_Weapons_UC_001_B_Unified_Attachments_R2.VR
-   inteira em seu diretório missions; inicie no Editor.
-3. Não carregue PBOs SP_ORG. Pode usar o modset CBA/ACE/TierOne/MCC/RHS.
-4. Feche a interface Weapons antes de rodar o AUTO TEST.
-5. Execute SP_ORG LAB - TESTAR UC-001-B R2.
-   META PROJETADA: 1518 PASS / 0 FAIL / 0 BLOCKED
-   (R5 1446 + 72 asserções novas).
-6. Se falhar, envie RPT completo. Não declare a entrega aprovada.
-7. Testes manuais de ópticas, boca, ponteiros, bipés e empunhaduras:
-   use o Catálogo para trocar acessórios de rifle/pistola.
-   Compare as opções com ACE Arsenal para as armas usadas e observe
-   os logs COMPAT_RESOLVE, COMPAT_SOURCE_DIFF e COMPAT_REJECT.
-8. CAPTURAR ARMA EQUIPADA deve manter anexos semanticamente aceitos no draft.
-   SALVAR COMO NOVO não pode criar duplicatas.
-   EQUIPAR NO RASCUNHO / aplicar fisicamente mantém pós-validação D2;
-   se engine recusar anexo, deve recusar/rollback, não forçar aceitação.
-9. Se possível, use uma arma SECONDARY e repita a auditoria A
-   SP_ORG LAB - AUDITAR FONTES UC-001-A; esta pendência antiga
-   pode ser concluída separadamente.
-10. Envie RPT, incluindo [AUTO_TEST_SUMMARY] mode=MISSION_FIRST_UC001B_R2
-    e COMPAT_RESOLVE/SOURCE_DIFF/REJECT.
+1. Baixe o artifact SP_ORG_UI_Lab do workflow de UC-001-C no GitHub.
+   Extraia o ZIP interno SP_ORG_Weapons_UC_001_C_Magazines_Wells_R1.zip.
+2. Coloque a pasta SP_ORG_Weapons_UC_001_C_Magazines_Wells_R1.VR
+   inteira em missions e abra no Eden/Editor.
+3. Não carregue PBOs SP_ORG. CBA/ACE/RHS/TierOne/MCC podem estar ativos.
+4. FECHE a UI WEAPONS antes do teste; aguarde o término do teste.
+5. Acione SP_ORG LAB - TESTAR UC-001-C R1.
+   META: 1589 PASS / 0 FAIL / 0 BLOCKED (B R2 1518 + C 71).
+   CI Python NAO substitui runtime SQF real no Arma.
+6. Envie o RPT; procure
+   [AUTO_TEST_SUMMARY] mode=MISSION_FIRST_UC001C_R1
+   [COMPAT_MAG_RESOLVE] e [COMPAT_MAGWELL_DIFF].
+7. Teste manualmente uma arma principal MX_GL (carregadores por muzzle)
+   e, se possível, launcher com variante READY/USED e arma de mod:
+   selecione carregadores, salve em rascunho, aplique ao jogador.
+   Verifique que o D2 recusa ou executa com pós-validação correta e
+   que os demais slots, acessórios e munição física permanecem seguros.
+8. CfgMagazineWells e fonte do motor podem divergir; o diagnóstico
+   NÃO converte classe de magazine well em permissão de equipagem.
+9. SALVAR/SALVAR COMO NOVO permanecem nesta MISSÃO (WST-001 pendente).
 
-FORA DE ESCOPO
-- WST-001 Persistência: kits SALVOS estão apenas no missionNamespace;
-  ao iniciar outra missão serão perdidos. Não confundir com bug novo.
-- UC-001-C magazine/magwell/variants; UC-001-D end-to-end/performance.
-- WUX-002 adicionar magazines ao colete, WUX-003 filtros por ícones.
-- Sem PBO, MP, JIP, Undo ou merge main.
-- Regra física D2 não deve ser alterada nesta rodada.
+FORA DO ESCOPO
+- UC001B-DEFER-001 físico MCC/CBA-only: pendente por decisão expressa.
+- UC001A-SECONDARY diagnóstico com lançador equipado ainda pendente.
+- UC001-D end-to-end completo/performance ainda não iniciado.
+- WUX-002 carregador ao colete, WUX-003 filtro com ícones.
+- PBO, MP/JIP, Undo, perfil cross-mission e merge main.
+- Não tocar módulo Items, UICommon, Nexus, nem aplicação física D2.
 
-DOCUMENTO: docs/80_WEAPONS_UC001B_R2_UNIFIED_ATTACHMENTS.md
+DOCUMENTO: docs/84_WEAPONS_UC001C_R1_MAGAZINE_RESOLVER.md
