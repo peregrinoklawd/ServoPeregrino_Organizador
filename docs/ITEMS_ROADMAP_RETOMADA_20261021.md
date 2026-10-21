@@ -1,5 +1,16 @@
 # Items — roadmap de retomada (21/10/2026)
 
+## Checkpoint de fechamento R2.2 — 21/10/2026
+
+- [x] **R2.2 homologada no escopo SP** com screenshot + RPT do Arma 3, sem aviso de `Invalid path`, logo presente e footer roxo. Registro completo: [70_ITEMS_R2_2_SP_HOMOLOGACAO_E_HANDOFF_ICONES.md](70_ITEMS_R2_2_SP_HOMOLOGACAO_E_HANDOFF_ICONES.md).
+- [x] CAPTURAR e realce laranja da UX R1 preservados. UICommon 0.2.0.11 validada no escopo da R2.2 SP, sem transformar a 0.2.0.10 de outubro em versão obsoleta.
+- [x] Criar checkpoint Git para garantir regressão segura antes dos ícones.
+- [ ] **Ícones R1 simplificados**: nova proposta visual com silhueta forte e 24px legível; avaliar antes de integrar no Arma.
+- [ ] Quando aprovada a arte: integrar ícone + texto nos seis controles (APP_TARGET x EQUIPMENT_VIEW), mantendo semânticas independentes.
+- [ ] 0.13-A MP (host + cliente real), assim que jogadores disponíveis.
+
+O texto histórico abaixo reflete o momento de preparação das versões e não reabre gates já homologados.
+
 ## Checkpoint executado — R2.2 código e ZIP + início de botões (21/10/2026)
 
 - **R2.2 código pronto e empacotamento CI PASS**: removida exclusivamente a verificação `fileExists` incompatível com caminho absoluto; logo, footer, CAPTURAR, highlight laranja e Weapons intocados. Missão `SP_ORG_Items_HeaderBGD_FooterR2_2_DiagnosticFix.VR`. Não homologada no engine até novo RPT. Ver [69_ITEMS_R2_2_MINIMAL_DIAGNOSTIC_FIX.md](69_ITEMS_R2_2_MINIMAL_DIAGNOSTIC_FIX.md).
