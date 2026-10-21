@@ -37,6 +37,29 @@ O repositório `RicGonzalezb/bgd-hq` tem dois guias relevantes:
 
 Na R2 do Organizador utilizamos `github.com/woozymasta/paa@v0.2.0` para derivar o PAA em GitHub Actions, com formato DXT5 e presença/hash verificados. Esse pipeline **não substitui** a qualificação oficial do BGD-HQ e ainda **não** foi submetido a round-trip ImageToPAA ou engine render aprovado. Não regenerar/alterar a imagem institucional original.
 
+## Evidência R2.1 recebida — 21/10/2026, novo RPT e screenshot
+
+**Resultado manual informado pelo operador**:
+- Logo BGD **visível** no header, confirmado também no recorte do screenshot enviado.
+- Destaque laranja de itens alterados e operações de Items avaliados visualmente como funcionando normalmente.
+- A cor roxa de HISTÓRICO aparece no screenshot; a estabilidade em todas as transições permanece guiada pelo checklist R2, não por um teste automatizado comprovado neste RPT.
+- Missão carregada: `SP_ORG_Items_HeaderBGD_FooterR2_1_TexturePathFix.VR`, UICommon `0.2.0.11-header-brand-slot-r2-candidate`.
+
+**Achado técnico pendente (RPT 14:37:15 e 14:37:52):**
+
+```text
+Invalid path (only relative paths supported): 'C:\Users\win\Documents\Arma 3 - Other Profiles\Peregrino\missions\SP_ORG_Items_HeaderBGD_FooterR2_1_TexturePathFix.VR\items\data\bgd_logo_ca.paa'
+[SP_ORG] [ITEMS] [BRAND_HEADER] resolved=true source=MISSION idc=107 fileExists=false texture=C:\Users\win\Documents\Arma 3 - Other Profiles\Peregrino\missions\SP_ORG_Items_HeaderBGD_FooterR2_1_TexturePathFix.VR\items\data\bgd_logo_ca.paa
+```
+
+O código chama `fileExists _logoPath` com o caminho **absoluto** produzido por `getMissionPath`. No Arma, `fileExists` aceita somente caminhos relativos. A ordem das instruções no source e a correlação temporal no RPT sugerem fortemente que a mensagem é provocada **pela verificação de diagnóstico**, não pelo `ctrlSetText`, que renderizou o logo conforme screenshot. **`fileExists=false` nesta condição não comprova arquivo ausente.** Também não há `Picture bgd_logo_ca.paa not found` novo neste RPT.
+
+Próximo delta de higiene, de escopo mínimo: remover a chamada `fileExists` aplicada ao path absoluto (ou substituí-la por verificação compatível), ajustar o log para `pathAssigned` em vez de alegar `resolved` e repetir smoke visual e RPT. **Não** reconverter o logo que já renderiza, nem alterar o slot ou o footer durante esse delta.
+
+Outras evidências: catálogo CONFIG_ALL com **7.092 itens**, **73.470 configs visitadas** e **24.747 ms** de primeiro build no modset; `CATALOG_FOCUSED` **10 ms** na troca de categoria. Existem **14 erros** em `/x/cba/addons/common/fnc_addPerFrameHandler.sqf` durante o postInit, sem stack direto que os atribua ao Items; investigar independentemente somente se reproduzidos sem o Organizador ou associados causalmente a ele.
+
+**Status**: validação manual visual R2.1 positiva; gate de log/diagnóstico ainda pendente; UICommon `0.2.0.10` homologado em 07/10 continua sendo fallback, e `0.2.0.11` permanece candidato até fechar o gate R2; não declarar 0.13-A multiplayer aprovado.
+
 ## Próximo teste no Arma
 
 1. Remova a pasta antiga R2 e extraia a missão `SP_ORG_Items_HeaderBGD_FooterR2_1_TexturePathFix.VR`. Não carregar PBOs do SP_ORG.
