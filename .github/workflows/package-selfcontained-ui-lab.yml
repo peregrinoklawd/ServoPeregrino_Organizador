@@ -60,6 +60,8 @@ jobs:
           assert 'getMissionPath "items\\data\\bgd_logo_ca.paa"' in header
           assert 'ctrlSetText _logoPath' in header
           assert '[BRAND_HEADER]' in header
+          assert 'fileExists _logoPath' not in header, 'Absolute fileExists probe must remain removed'
+          assert 'pathAssigned=true' in header and 'fileExists=%2' not in header
           desc = (root/"description.ext").read_text(encoding="utf-8")
           assert "SPORG_ITEMS_MISSION_BRAND_TEXTURE" not in desc
           print("PASS: PAA DXT5; mirrored addon/mission; purple history; runtime mission path; generic brand")
