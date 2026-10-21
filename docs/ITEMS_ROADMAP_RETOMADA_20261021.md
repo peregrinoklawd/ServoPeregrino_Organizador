@@ -1,5 +1,12 @@
 # Items — roadmap de retomada (21/10/2026)
 
+## Checkpoint executado — R2.2 código e ZIP + início de botões (21/10/2026)
+
+- **R2.2 código pronto e empacotamento CI PASS**: removida exclusivamente a verificação `fileExists` incompatível com caminho absoluto; logo, footer, CAPTURAR, highlight laranja e Weapons intocados. Missão `SP_ORG_Items_HeaderBGD_FooterR2_2_DiagnosticFix.VR`. Não homologada no engine até novo RPT. Ver [69_ITEMS_R2_2_MINIMAL_DIAGNOSTIC_FIX.md](69_ITEMS_R2_2_MINIMAL_DIAGNOSTIC_FIX.md).
+- **UX-ITEMS-04 INICIADA em R0 CONCEITUAL**: documento [68_ITEMS_UI_ICON_BUTTONS_CONCEPT_R0.md](68_ITEMS_UI_ICON_BUTTONS_CONCEPT_R0.md). Primeiro Uniforme/Colete/Mochila; mesmo conjunto de ícones para destinos P2 (2111–2113) e visualização P4 (4110–4112), sem misturar seleção ou ações. Criar conceito original para revisão antes de trocar imagens no Arma.
+- **A implementação de botões ainda não foi iniciada no runtime**, pois as silhuetas originais dependem de aprovação; os conceitos visuais não substituem fontes PNG/SVG/PAA qualificadas.
+- MP 0.13-A continua pendente por indisponibilidade de outro jogador; não bloquear trabalho SP.
+
 ## Atualização do checkpoint — R2.1 testada visualmente em 21/10/2026
 
 A missão R2.1 foi aberta no Arma 3 e o operador confirmou **logo BGD no header, linhas alteradas laranja e comportamento funcional observado**. O RPT prova inicialização da UI e catálogo, sem novo `Picture bgd_logo_ca.paa not found`, mas mostra duas chamadas a `fileExists` com caminho absoluto causando `Invalid path (only relative paths supported)`; o arquivo PAA **aparece na interface**, logo não tratar `fileExists=false` como falha da textura. Evidência detalhada: [67_ITEMS_HEADER_BGD_R2_1_TEXTURE_PATH_FIX.md](67_ITEMS_HEADER_BGD_R2_1_TEXTURE_PATH_FIX.md).
