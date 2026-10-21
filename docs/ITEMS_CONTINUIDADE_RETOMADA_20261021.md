@@ -1,5 +1,11 @@
 # SP_ORG Items — continuidade canônica de retomada (21/10/2026)
 
+## ATUALIZAÇÃO CANÔNICA — R2.2 homologada SP (21/10/2026)
+
+R2.2 foi executada pelo operador no Arma 3 com RPT e screenshot; **homologada no escopo do hotfix do header/footer em single-player**. O logo BGD aparece, a rotina `[BRAND_HEADER]` informa `pathAssigned=true` e o aviso anterior de caminho absoluto não reaparece no RPT. CAPTURAR, laranja do draft e lógica de Items foram preservados; multiplayer público 0.13-A continua pendente.
+
+**Documento de referência prioritário:** [70_ITEMS_R2_2_SP_HOMOLOGACAO_E_HANDOFF_ICONES.md](70_ITEMS_R2_2_SP_HOMOLOGACAO_E_HANDOFF_ICONES.md). O desenvolvimento **seguinte é a iconografia R1 simplificada**, inicialmente somente desenho/avaliação, em frente isolada. A baseline UICommon 0.2.0.10 (07/10) não é reescrita. Demais adendos abaixo são registros cronológicos, não estado atual.
+
 ## ADENDO 21/10/2026 — correção R2.1 da textura no header
 
 O usuário executou R2 no Arma: header sem logo. RPT confirmou `Picture items\\data\\bgd_logo_ca.paa not found`. **Não era falha confirmada do conteúdo PAA**, mas um arquivo não localizado pelo caminho relativo do HPP.
