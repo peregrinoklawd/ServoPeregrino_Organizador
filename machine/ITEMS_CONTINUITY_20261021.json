@@ -105,7 +105,7 @@
     "historical automated gates 516 and 523 accepted debt"
   ],
   "change_policy": {
-    "current_checkpoint": "ITEMS_UX_R1_SOURCE_CANDIDATE_PENDING_SP_GATE",
+    "current_checkpoint": "ITEMS_UI_BRAND_FOOTER_R2_PENDING_SP_GATE",
     "runtime_files_changed": true,
     "packaging_created": true,
     "mp_runtime_executed": false,
@@ -113,15 +113,16 @@
     "sp_runtime_executed": false
   },
   "handoff_docs": [
+    "docs/66_ITEMS_UICOMMON_BGD_BRAND_FOOTER_R2.md",
     "docs/ITEMS_CONTINUIDADE_RETOMADA_20261021.md",
     "docs/ITEMS_ROADMAP_RETOMADA_20261021.md",
     "docs/30_ITEMS_UI_REGRESSION_CONTRACT.md",
     "missions/SP_ORG_Items_Weapons_UI_Lab_SelfContained.VR/ITEMS_UX_R1_TESTE_SINGLEPLAYER.md"
   ],
   "priority_order": [
-    "ITEMS_UX_R1_SINGLEPLAYER_GATE",
+    "ITEMS_HEADER_BGD_FOOTER_R2_SP_GATE",
     "ITEMS_0_13_A_PUBLIC_LIBRARY_MULTIPLAYER_GATE",
-    "ITEMS_0_13_B_JIP"
+    "ITEMS_ORIGINAL_BUTTON_ASSET_DESIGN_FUTURE"
   ],
   "ux_r1": {
     "label": "Items UX R1",
@@ -140,5 +141,24 @@
     "gh_artifact_id": 12357007178,
     "gh_packed_head_sha": "427340593b12db98f90391e62716c72772a1f525",
     "static_check": "ZIP decompressed successfully; structure/source anchors verified; not SQF runtime compiler"
+  },
+  "active_branch": "feature/items-uicommon-brand-footer-r2-20261021",
+  "latest_candidate": {
+    "id": "ITEMS_UI_BRAND_FOOTER_R2",
+    "status": "SOURCE_IN_GITHUB_CI_PACKAGE_READY_PENDING_REAL_ARMA_SP",
+    "mission": "SP_ORG_Items_HeaderBGD_FooterR2_UICommon_0_2_0_11.VR",
+    "uicommon_semantic": "0.2.0.11",
+    "uicommon_build": "0.2.0.11-header-brand-slot-r2-candidate",
+    "frozen_uicommon_fallback": "0.2.0.10",
+    "logo_source": "RicGonzalezb/bgd-hq/comunicacao-social/identidade/assets/bgd-logo-primary.png",
+    "logo_sha": "2916a99374ca8d13602dd7034ede7e2b84000294",
+    "logo_local": "assets/branding/bgd/bgd-logo-primary.png",
+    "paa_addon": "addons/ServoPeregrino_Organizador_Items/data/bgd_logo_ca.paa",
+    "paa_mission": "missions/SP_ORG_Items_Weapons_UI_Lab_SelfContained.VR/items/data/bgd_logo_ca.paa",
+    "footer_root_cause": "fn_refreshPhysicalTargetUI.sqf wrote #81918E to control 5002; fixed via shared renderFooter #B9A3E8",
+    "weapons_unchanged": true,
+    "items_ux_r1_preserved": true,
+    "multiplayer_pending": true,
+    "guide": "docs/66_ITEMS_UICOMMON_BGD_BRAND_FOOTER_R2.md"
   }
 }
