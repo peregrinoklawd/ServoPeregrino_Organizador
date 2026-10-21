@@ -17,13 +17,12 @@ if (!isNull _logoCtrl) then {
 
     // Nao alterar o controle a cada refresh: apenas no primeiro bind ou se o path mudou.
     if ((ctrlText _logoCtrl) isNotEqualTo _logoPath) then {
-        private _textureExists = fileExists _logoPath;
-        // Mesmo quando fileExists falhar, tentar o path resolvido e logar para auditoria de RPT.
+        // Imagem já validada visualmente no engine (R2.1); fileExists nao aceita path absoluto.
         _logoCtrl ctrlSetText _logoPath;
         diag_log format [
-            "[SP_ORG] [ITEMS] [BRAND_HEADER] resolved=true source=%1 idc=107 fileExists=%2 texture=%3",
+            "[SP_ORG] [ITEMS] [BRAND_HEADER] pathAssigned=true source=%1 idc=107 texture=%2",
             if (_isMissionFirst) then {"MISSION"} else {"ADDON"},
-            _textureExists, _logoPath
+            _logoPath
         ];
     };
 };
