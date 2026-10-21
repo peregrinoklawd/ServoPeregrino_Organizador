@@ -17,13 +17,15 @@
       "status": "IMPLEMENTED_PENDING_PUBLIC_MP_HOMOLOGATION",
       "domain_homologated_fallback": "0.12 FINAL",
       "ux_candidate": "ITEMS_UX_R1_CAPTURE_CONFIRMATION_AND_ORANGE_DRAFT_ROW_DIFF",
-      "ux_status": "SOURCE_AND_MISSION_IN_SYNC_PENDING_REAL_ARMA_SP"
+      "ux_status": "UX_R1_MANUAL_SP_APPROVED_PRESERVED_IN_R2_2"
     },
     "uicommon": {
       "display": "0.2",
       "semantic": "0.2.0.10",
       "build": "0.2.0.10-equivalence-cleanup-f1",
-      "status": "REAL_ARMA_APPROVED_FROZEN"
+      "status": "REAL_ARMA_APPROVED_FROZEN",
+      "r2_2_status": "0.2.0.11_SP_HEADER_FOOTER_GATE_APPROVED_NOT_GLOBAL_MP_RELEASE",
+      "r2_2_frozen_fallback": "0.2.0.10_homologated_2026_10_07"
     },
     "nexus": {
       "display": "1.1",
@@ -82,19 +84,25 @@
     {
       "id": "UX-ITEMS-01",
       "name": "CAPTURAR confirm + replace draft",
-      "status": "CODE_CANDIDATE_PENDING_ARMA_SP_RPT",
+      "status": "IMPLEMENTED_MANUAL_SP_APPROVED",
       "source": "docs/64_ITEMS_FUTURE_CAPTURE_CONFIRMATION.md"
     },
     {
       "id": "UX-ITEMS-02",
       "name": "draft altered-entry row highlighting",
-      "status": "CODE_CANDIDATE_PENDING_ARMA_SP_RPT",
+      "status": "IMPLEMENTED_MANUAL_SP_APPROVED",
       "source": "docs/30_ITEMS_UI_REGRESSION_CONTRACT.md"
     },
     {
       "id": "UX-ITEMS-03",
       "name": "audit stale tooltips/UI terminology",
       "status": "PROPOSED_NOT_IMPLEMENTED"
+    },
+    {
+      "id": "UX-ITEMS-04",
+      "name": "Original minimal U/C/M silhouettes; icon plus label in P2 and P4",
+      "status": "R1_ART_DIRECTION_IN_PROGRESS_NOT_IN_RUNTIME",
+      "source": "docs/68_ITEMS_UI_ICON_BUTTONS_CONCEPT_R0.md"
     }
   ],
   "invariants": [
@@ -105,14 +113,15 @@
     "historical automated gates 516 and 523 accepted debt"
   ],
   "change_policy": {
-    "current_checkpoint": "ITEMS_UI_BRAND_FOOTER_R2_1_CI_PASS_PENDING_SP_GATE",
+    "current_checkpoint": "ITEMS_R2_2_SP_HOMOLOGATED_ICONS_R1_PENDING_ART",
     "runtime_files_changed": true,
     "packaging_created": true,
     "mp_runtime_executed": false,
     "merge_performed": false,
-    "sp_runtime_executed": false
+    "sp_runtime_executed": true
   },
   "handoff_docs": [
+    "docs/70_ITEMS_R2_2_SP_HOMOLOGACAO_E_HANDOFF_ICONES.md",
     "docs/67_ITEMS_HEADER_BGD_R2_1_TEXTURE_PATH_FIX.md",
     "docs/66_ITEMS_UICOMMON_BGD_BRAND_FOOTER_R2.md",
     "docs/ITEMS_CONTINUIDADE_RETOMADA_20261021.md",
@@ -121,9 +130,10 @@
     "missions/SP_ORG_Items_Weapons_UI_Lab_SelfContained.VR/ITEMS_UX_R1_TESTE_SINGLEPLAYER.md"
   ],
   "priority_order": [
-    "ITEMS_HEADER_BGD_FOOTER_R2_SP_GATE",
-    "ITEMS_0_13_A_PUBLIC_LIBRARY_MULTIPLAYER_GATE",
-    "ITEMS_ORIGINAL_BUTTON_ASSET_DESIGN_FUTURE"
+    "ITEMS_ICONS_R1_CONCEPT_REVIEW",
+    "ITEMS_ICON_PLUS_LABEL_IMPLEMENTATION_AFTER_ART_APPROVAL",
+    "ITEMS_UI_MICROTEXT_AUDIT",
+    "ITEMS_PUBLIC_LIBRARY_MP_0_13_A_WHEN_PLAYERS_AVAILABLE"
   ],
   "ux_r1": {
     "label": "Items UX R1",
@@ -145,9 +155,9 @@
   },
   "active_branch": "feature/items-uicommon-brand-footer-r2-20261021",
   "latest_candidate": {
-    "id": "ITEMS_UI_BRAND_FOOTER_R2_1_TEXTURE_PATH_FIX",
-    "status": "ZIP_CI_PASS_PENDING_ARMA_RUNTIME_TEST",
-    "mission": "SP_ORG_Items_HeaderBGD_FooterR2_1_TexturePathFix.VR",
+    "id": "ITEMS_UICOMMON_R2_2_SP_GATE_HOMOLOGATED",
+    "status": "HOMOLOGATED_SINGLEPLAYER_SCOPE_HEADER_LOGO_FOOTER_DIAGNOSTIC",
+    "mission": "SP_ORG_Items_HeaderBGD_FooterR2_2_DiagnosticFix.VR",
     "uicommon_semantic": "0.2.0.11",
     "uicommon_build": "0.2.0.11-header-brand-slot-r2-candidate",
     "frozen_uicommon_fallback": "0.2.0.10",
@@ -162,15 +172,15 @@
     "multiplayer_pending": true,
     "guide": "docs/66_ITEMS_UICOMMON_BGD_BRAND_FOOTER_R2.md",
     "previous_failed_mission": "SP_ORG_Items_HeaderBGD_FooterR2_UICommon_0_2_0_11.VR",
-    "rpt_evidence": "13:50:40 Warning Message: Picture items\\\\data\\\\bgd_logo_ca.paa not found",
+    "rpt_evidence": "2026-10-21 R2.2 RPT 15:56:09 pathAssigned=true source=MISSION idc=107; no Invalid path warning; logo visible in screenshot",
     "root_cause_confirmed": "Header HPP relative texture path unresolved by Arma; updated via getMissionPath/ctrlSetText",
     "fix_info": {
       "module": "Items",
       "idc": 107,
       "mission_runtime_path": "getMissionPath \"items\\data\\bgd_logo_ca.paa\"",
       "addon_runtime_path": "\\ServoPeregrino_Organizador_Items\\data\\bgd_logo_ca.paa",
-      "rpt_log_tag": "[BRAND_HEADER]",
-      "runtime_qa": "PENDING",
+      "rpt_log_tag": "[BRAND_HEADER] pathAssigned=true",
+      "runtime_qa": "PASS_SP_NO_ABSOLUTE_FILEEXISTS_WARNING",
       "weapons_changed": false
     },
     "build_verified": {
@@ -178,7 +188,9 @@
       "zip_integrity": "PASS",
       "paa_type": "DXT5",
       "mission_addon_file_parity": "PASS",
-      "manual_engine": "PENDING"
-    }
+      "manual_engine": "PASS_RPT_AND_OPERATOR_SCREENSHOT"
+    },
+    "screen_res": "5120x1440 profile WIDE",
+    "official_handoff": "docs/70_ITEMS_R2_2_SP_HOMOLOGACAO_E_HANDOFF_ICONES.md"
   }
 }
