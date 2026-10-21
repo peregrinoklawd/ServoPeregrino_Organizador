@@ -1,0 +1,46 @@
+name: Build BGD header icon (Items UI)
+on:
+  push:
+    branches:
+      - feature/items-uicommon-brand-footer-r2-20261021
+    paths:
+      - assets/branding/bgd/bgd-logo-primary.png
+      - tools/brand/convert_png_to_paa.go
+      - .github/workflows/build-bgd-header-texture.yml
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  texture:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - uses: actions/setup-go@v5
+        with:
+          go-version: '1.24'
+      - name: Build transparent PAA from canonical BGD PNG
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p addons/ServoPeregrino_Organizador_Items/data
+          mkdir -p missions/SP_ORG_Items_Weapons_UI_Lab_SelfContained.VR/items/data
+          cd tools/brand
+          go mod init sporg/brand
+          go get github.com/woozymasta/paa@v0.2.0
+          go run ./convert_png_to_paa.go ../../assets/branding/bgd/bgd-logo-primary.png ../../addons/ServoPeregrino_Organizador_Items/data/bgd_logo_ca.paa
+          cd ../..
+          cp addons/ServoPeregrino_Organizador_Items/data/bgd_logo_ca.paa missions/SP_ORG_Items_Weapons_UI_Lab_SelfContained.VR/items/data/bgd_logo_ca.paa
+          test -s addons/ServoPeregrino_Organizador_Items/data/bgd_logo_ca.paa
+          cmp addons/ServoPeregrino_Organizador_Items/data/bgd_logo_ca.paa missions/SP_ORG_Items_Weapons_UI_Lab_SelfContained.VR/items/data/bgd_logo_ca.paa
+          sha256sum addons/ServoPeregrino_Organizador_Items/data/bgd_logo_ca.paa
+      - name: Commit generated PAA twins without touching the institutional PNG
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add addons/ServoPeregrino_Organizador_Items/data/bgd_logo_ca.paa missions/SP_ORG_Items_Weapons_UI_Lab_SelfContained.VR/items/data/bgd_logo_ca.paa
+          if ! git diff --cached --quiet; then
+            git commit -m "assets(items): adicionar PAA derivada do logo institucional BGD"
+            git push
+          fi
