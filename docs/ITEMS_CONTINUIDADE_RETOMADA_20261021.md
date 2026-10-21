@@ -1,5 +1,20 @@
 # SP_ORG Items — continuidade canônica de retomada (21/10/2026)
 
+## Atualização de prioridade — Items UX R1 (21/10/2026)
+
+**Decisão do usuário:** devido à indisponibilidade temporária de outro jogador para testar MP, **inverter os gates de execução**: primeiro UX Items (CAPTURAR + realce laranja), depois fechar 0.13-A multiplayer. A pendência MP permanece registrada e NÃO bloqueia teste SP da UX.
+
+**Candidata implementada em source, NÃO homologada no Arma**:
+- `CAPTURAR` agora abre confirmação. Cancelar não muda Draft nem inventário; confirmar pré-captura/prevalida e substitui somente `entries` preservando `kitId`, nome, modo, baseline, `preferredTarget` e `origin`; sem salvar, sem mutação física. Um Draft inexistente ainda gera NEW. Revisão de Draft é verificada no retorno do diálogo.
+- `ITENS DO KIT` agora recebe fundo laranja RGBA `[1,0.76,0.28,0.18]` por linha que diverge do baseline salvo: quantidade, classe/entrada nova, `stateData` e EXACT. Voltar ao snapshot remove destaque; salvar reseta baseline; sem linha fantasma para exclusões.
+- A referência de cor **é Weapons**, onde `fn_getDraftChangedFields.sqf` e `fn_refreshDraftUI.sqf` são código **exclusivo de domínio Weapons**; UICommon fornece controles/tema genérico mas não calcula `changedFields` nem aplica essa coloração de conteúdo.
+- Itens alterados sincronizados 1:1 em `addons/ServoPeregrino_Organizador_Items/` e `missions/SP_ORG_Items_Weapons_UI_Lab_SelfContained.VR/items/`. UICommon, Nexus e Weapons permanecem sem alterações.
+- Teste SP: `missions/SP_ORG_Items_Weapons_UI_Lab_SelfContained.VR/ITEMS_UX_R1_TESTE_SINGLEPLAYER.md`. Missão pacote `SP_ORG_Items_UX_R1_UICommon_0_2_FINAL.VR`.
+- O dirty global do Draft ainda é histórico (mutation flag): uma linha que retorna ao original perde laranja, mas o status geral pode continuar ALTERADO até salvar. Não alterar sem um gate específico para semântica do dirty geral.
+- **Status**: código candidato sob revisão/testes; nenhum RPT atual recebido, sem aprovação automática nem homologação de 0.13-A MP.
+
+Este adendo de prioridade **substitui** recomendações antigas abaixo que colocavam o MP como bloqueador imediato da UX.
+
 ## 0. Mandato deste handoff
 
 Retomar **Items** usando exclusivamente a versão integrada e homologada junto de **UICommon 0.2 FINAL em 07/10/2026**. Não voltar à fonte de `main` (snapshot setembro) nem reconstruir Items de memória, ZIP, RPT ou missão anterior.
