@@ -46,6 +46,14 @@ class SPORG_UICommon_PictureKeepAspect: SPORG_UICommon_Text
     style = 2096; colorText[] = {1,1,1,1};
 };
 
+// Generic optional branding slot. Ownership of texture belongs to the consumer module,
+// not to UICommon. The keep-aspect style prevents institutional marks from distortion.
+class SPORG_UICommon_HeaderBrand: SPORG_UICommon_PictureKeepAspect
+{
+    text = ""; colorText[] = {1,1,1,0.92}; colorBackground[] = {0,0,0,0};
+    tooltip = ""; shadow = 0;
+};
+
 // Vanilla shortcut-button alpha texture gives static surfaces soft/rounded corners
 // without shipping extra assets. R2 uses it only for a small, fixed number of controls.
 class SPORG_UICommon_RoundedSurface: SPORG_UICommon_Picture
