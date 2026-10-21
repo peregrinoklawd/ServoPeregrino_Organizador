@@ -1,5 +1,17 @@
 # Como continuar com outra IA / outro chat
 
+## Exceção explícita para retomar Items — 21/10/2026
+
+A recomendação genérica abaixo para iniciar pela `main` foi escrita antes da integração homologada de Items com UICommon 0.2. **Para o trabalho ativo de Items, a fonte de partida é outra**:
+
+- `baseline/uicommon-0.2-final-homologated@f92137769cf4d0478a5872aae157f5a229177c85`.
+- Branch criada exclusivamente para retomada: `feature/items-0.13-retomada-20261021`.
+- Ler **primeiro** [ITEMS_CONTINUIDADE_RETOMADA_20261021.md](ITEMS_CONTINUIDADE_RETOMADA_20261021.md), [ITEMS_ROADMAP_RETOMADA_20261021.md](ITEMS_ROADMAP_RETOMADA_20261021.md) e `machine/ITEMS_CONTINUITY_20261021.json`.
+- Respeitar a homologação do UICommon 0.2 FINAL de 07/10 e a lacuna de teste multiplayer público da Items 0.13-A.
+- Não alterar Weapons ou misturar suas PRs abertas, nem voltar ao Packaging R2 histórico como origem de runtime.
+
+Todo o texto seguinte permanece útil como referência histórica/arquitetural, mas instruções sobre versão ou `main` que conflitem com este adendo não prevalecem **para Items**.
+
 ## Source of Truth
 
 Use o repositório **`peregrinoklawd/ServoPeregrino_Organizador`**, branch `main`.
