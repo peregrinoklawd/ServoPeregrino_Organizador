@@ -1,5 +1,20 @@
 # Estado atual do projeto
 
+## ADENDO ITEMS — 21/10/2026 (retomada canônica na branch própria)
+
+**Para desenvolver Items, não usar este snapshot histórico nem a `main` como baseline de source**. A versão selecionada pelo operador é a integrada à **UICommon 0.2 FINAL**, homologada em 07/10/2026.
+
+- Base congelada exata: `baseline/uicommon-0.2-final-homologated@f92137769cf4d0478a5872aae157f5a229177c85`.
+- Branch de trabalho Items: `feature/items-0.13-retomada-20261021`.
+- Handoff específico: [ITEMS_CONTINUIDADE_RETOMADA_20261021.md](ITEMS_CONTINUIDADE_RETOMADA_20261021.md).
+- Roadmap de retomada: [ITEMS_ROADMAP_RETOMADA_20261021.md](ITEMS_ROADMAP_RETOMADA_20261021.md).
+- Estado por módulo: `machine/ITEMS_CONTINUITY_20261021.json`.
+- UICommon 0.2 F1 real Arma aprovado: **43/43**; Items + UICommon **16/16**, com smoke manual e focused refresh aprovados.
+- Items 0.13-A possui código server-authoritative, **mas biblioteca pública multiplayer ainda aguarda gate específico**; o `Packaging R2` histórico é anterior à integração com UICommon e não deve ser assumido como artefato atual.
+- Backlog Items `CAPTURAR` e destaque por linha está separado do gate MP, sem mudanças de runtime nesta retomada.
+
+As entradas cronológicas abaixo permanecem como histórico e podem descrever checkpoints anteriores.
+
 Data do snapshot: **01/10/2026**.
 
 ## Source of Truth
