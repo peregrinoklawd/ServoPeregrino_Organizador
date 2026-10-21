@@ -4,6 +4,30 @@ params [["_unit",player,[objNull]]];
 private _display=uiNamespace getVariable [SERVO_PEREGRINO_ORGANIZADOR_ITEMS_UI_DISPLAY_VAR,displayNull];
 if (isNull _display || {isNull _unit}) exitWith {false};
 
+// HeaderBrand 0.2.0.11 hotfix: caminhos relativos de RscPicture definidos no HPP
+// nao sao resolvidos a partir da pasta da missao pelo engine (RPT: Picture items\\data\\bgd_logo_ca.paa not found).
+// A identidade e o caminho sao responsabilidades do Items, nao do UICommon.
+private _logoCtrl = _display displayCtrl 107;
+if (!isNull _logoCtrl) then {
+    // O mesmo arquivo SQF e executado tanto como addon quanto no laboratorio mission-first.
+    private _isMissionFirst = isClass (missionConfigFile >> "CfgFunctions" >> "ServoPeregrino_Organizador_Items");
+    private _missionLogo = getMissionPath "items\data\bgd_logo_ca.paa";
+    private _addonLogo = "\ServoPeregrino_Organizador_Items\data\bgd_logo_ca.paa";
+    private _logoPath = if (_isMissionFirst) then {_missionLogo} else {_addonLogo};
+
+    // Nao alterar o controle a cada refresh: apenas no primeiro bind ou se o path mudou.
+    if ((ctrlText _logoCtrl) isNotEqualTo _logoPath) then {
+        private _textureExists = fileExists _logoPath;
+        // Mesmo quando fileExists falhar, tentar o path resolvido e logar para auditoria de RPT.
+        _logoCtrl ctrlSetText _logoPath;
+        diag_log format [
+            "[SP_ORG] [ITEMS] [BRAND_HEADER] resolved=true source=%1 idc=107 fileExists=%2 texture=%3",
+            if (_isMissionFirst) then {"MISSION"} else {"ADDON"},
+            _textureExists, _logoPath
+        ];
+    };
+};
+
 private _operator=name _unit;
 if (_operator isEqualTo "") then {_operator=profileName;};
 private _unitName=groupId (group _unit);
