@@ -38,6 +38,18 @@ Nome interno provisório: **SP/ORG — Tactical Glyphs**, tom técnico/industria
 - A arte deverá ser legível em **24, 32 e 48 px** e em tela 1920×1080 e 5120×1440 (padrão do último RPT).
 - Famílias futuras Weapons devem compartilhar espessura, alinhamento e cantos angulares; ícones especializados não devem ser derivados de assets ACE.
 
+## Protótipos originais já criados em SVG
+
+Após a definição do contrato visual, três ícones **R0 provisórios** foram desenhados vetorialmente, com recortes transparentes (regra SVG `fill-rule="evenodd"`), e adicionados como fonte editável ao Git. Não são imagens derivadas do ACE nem recursos de runtime:
+
+- `assets/ui/icons/items/r0/uniforme.svg` — casaco de campanha frontal, zíper, bolsos e mangas angulares;
+- `assets/ui/icons/items/r0/colete.svg` — torso blindado modular, alças e bolsas compartimentadas;
+- `assets/ui/icons/items/r0/mochila.svg` — mochila tática, alça superior, tampa, bolso frontal e volumes laterais.
+
+Foram exportados PNGs 256×256 com alfa e uma prancha comparando botões neutros/selecionados e legibilidade a 24/32/48 px, fornecidos para revisão no chat. **Status: protótipo não homologado**. SVG não é PAA: após aprovação do desenho, gerar/qualificar a textura de jogo e só então começar a integração da UI.
+
+**Decisão de projeto pendente**: aprovar ou revisar detalhes de silhueta, contraste e escala (principalmente 24 px). Os estados de seleção são propriedade do controle, e não devem ser gravados em cada textura.
+
 ## Pipeline e critérios de aceite
 
 1. **Prancha conceitual R0**: Uniforme, Colete, Mochila, lado a lado e cada qual em botão neutro + botão selected, para avaliar contraste/semelhança; imagem é somente referência visual, não arquivo final.
