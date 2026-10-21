@@ -51,6 +51,25 @@ missionNamespace setVariable [SERVO_PEREGRINO_ORGANIZADOR_ITEMS_UI_STATE_VAR,_ui
 
 // Draft header + true per-row controls
 private _draft=_vm getOrDefault ["draft",createHashMap]; private _hasDraft=_draft getOrDefault ["hasDraft",false]; private _dirty=_draft getOrDefault ["dirty",false];
+// Diff por identidade (tipo, classe, modo) e por valor completo (quantidade/EXACT stateData).
+// O baseline é o snapshot salvo pelo DraftService, não o flag geral dirty.
+private _draftStoreForDiff=missionNamespace getVariable [SERVO_PEREGRINO_ORGANIZADOR_ITEMS_DRAFT_STATE_VAR,createHashMap];
+private _baselineForDiff=_draftStoreForDiff getOrDefault ["baseline",createHashMap];
+private _hasSavedBaselineForDiff=(_baselineForDiff getOrDefault ["mode",""]) isEqualTo "EDIT";
+private _baselineEntriesForDiff=_baselineForDiff getOrDefault ["entries",[]];
+private _isDraftEntryAltered={
+    params [["_entry",[],[[]]]];
+    if (!_hasSavedBaselineForDiff || {(count _entry)<6}) exitWith {false};
+    private _match=_baselineEntriesForDiff findIf {
+        (_x isEqualType []) && {(count _x)>=6} &&
+        {(_x#1) isEqualTo (_entry#1)} &&
+        {(_x#2) isEqualTo (_entry#2)} &&
+        {(_x#4) isEqualTo (_entry#4)}
+    };
+    if (_match<0) exitWith {true};
+    !((_baselineEntriesForDiff#_match) isEqualTo _entry)
+};
+
 private _nameCtrl=_display displayCtrl 2100; _nameCtrl ctrlEnable _hasDraft; if ((ctrlText _nameCtrl) isNotEqualTo (_draft getOrDefault ["name",""])) then {_nameCtrl ctrlSetText (_draft getOrDefault ["name",""]);};
 (_display displayCtrl 2001) ctrlSetText (if !_hasDraft then {"SEM KIT"} else {if (_dirty) then {"ALTERADO"} else {"SALVO"}});
 (_display displayCtrl 2001) ctrlSetTextColor (if !_hasDraft then {[0.55,0.60,0.60,1]} else {if (_dirty) then {[0.96,0.72,0.25,1]} else {[0.45,0.85,0.68,1]}});
@@ -67,7 +86,7 @@ private _selectedKey=_ui getOrDefault ["selectedDraftRowKey",[]]; private _selec
         if ((count _dragEntry) isNotEqualTo 6) then {private _er=[_row getOrDefault ["type","ITEM"],_row getOrDefault ["className",""],_row getOrDefault ["quantity",0],_row getOrDefault ["stateMode","NONE"],+(_row getOrDefault ["stateData",[]])] call ServoPeregrino_Organizador_Items_fnc_createItemEntry; if (_er getOrDefault ["success",false]) then {_dragEntry=+(((_er getOrDefault ["data",createHashMap]) getOrDefault ["entry",[]]));};};
         private _dragDisplayName=_row getOrDefault ["displayName",_row getOrDefault ["className",""]];
         {_x setVariable ["SPORG_Items_draftEntry",+_dragEntry]; _x setVariable ["SPORG_Items_draftDisplayName",_dragDisplayName];} forEach [_pic,_name];
-        _bg ctrlSetBackgroundColor [0.01,0.015,0.017,if ((_rowIndex mod 2) isEqualTo 0) then {0.12}else{0.20}];
+        _bg ctrlSetBackgroundColor (if ([_dragEntry] call _isDraftEntryAltered) then {[1.0,0.76,0.28,0.18]} else {[0.01,0.015,0.017,if ((_rowIndex mod 2) isEqualTo 0) then {0.12}else{0.20}]});
         _pic ctrlSetText (_row getOrDefault ["picture",""]); _pic ctrlSetTextColor [1,1,1,1]; _pic ctrlSetTooltip format ["%1\n%2",_row getOrDefault ["displayName",_row getOrDefault ["className",""]],_row getOrDefault ["className",""]];
         private _suffix=if ((_row getOrDefault ["stateMode",""]) isEqualTo "EXACT") then {format [" · EXACT %1",_row getOrDefault ["stateData",[]]]} else {if ((_row getOrDefault ["stateMode",""]) isEqualTo "DEFAULT_FULL") then {" · CHEIO"} else {""}};
         private _massSuffix=if (_row getOrDefault ["massKnown",false]) then {format [" · %1",[(_row getOrDefault ["totalMass",0]),false,2] call ServoPeregrino_Organizador_Items_fnc_formatUIMass]} else {" · peso ?"};
