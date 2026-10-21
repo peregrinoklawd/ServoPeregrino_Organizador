@@ -60,16 +60,20 @@ private _eqCtrl = _display displayCtrl 4120;
 (_display displayCtrl 4122) ctrlSetStructuredText parseText format ["<t color='#B9DDD5'>Mostrando: %1 · %2 linha(s)</t>  <t color='#D0D7D5'>Arrastes neste painel serão adicionados ao equipamento mostrado.</t>",_viewLabel,lbSize _eqCtrl];
 
 private _context = format ["Adicionar em: %1  •  Mostrando: %2  •  %3",_resolvedLabel,_viewLabel,if (_capacity getOrDefault ["known",false]) then {format ["Carga %1 / %2",[_capacity getOrDefault ["currentLoad",0],false,2] call ServoPeregrino_Organizador_Items_fnc_formatUIMass,[_capacity getOrDefault ["maxLoad",0],false,2] call ServoPeregrino_Organizador_Items_fnc_formatUIMass]} else {"Carga não disponível"}];
-private _contextSafe = [_context] call ServoPeregrino_Organizador_Items_fnc_escapeStructuredText;
-private _messageSafe = [_state getOrDefault ["temporaryMessage",""]] call ServoPeregrino_Organizador_Items_fnc_escapeStructuredText;
+// Footer unificado: TARGET_ONLY não pode restabelecer HISTÓRICO cinza (#81918E).
+// O helper UICommon faz escape do texto e preserva os tokens de cor de todos os caminhos de refresh.
 private _feedbackPalette=[_state getOrDefault ["lastFeedbackKind","INFO"]] call ServoPeregrino_Organizador_Items_fnc_getUIFeedbackPalette;
-(_display displayCtrl 5000) ctrlSetStructuredText parseText format ["<t color='#6FCBB8'>CONTEXTO</t><t color='#A8C9C2'>  •  %1</t>",_contextSafe];
-(_display displayCtrl 5001) ctrlSetStructuredText parseText format ["<t color='%1'>RESULTADO</t><t color='%2'>  •  %3</t>",_feedbackPalette getOrDefault ["labelColor","#7EC8FF"],_feedbackPalette getOrDefault ["messageColor","#D7EEFF"],_messageSafe];
 private _hist = _state getOrDefault ["history",[]];
 private _histText = "";
 {private _entry=_x; _histText=_histText + (if (_histText isEqualTo "") then {""} else {"  |  "}) + format ["%1: %2",_entry#0,_entry#1];} forEach (_hist select [((count _hist)-3) max 0,(3 min (count _hist))]);
-private _histSafe = [_histText] call ServoPeregrino_Organizador_Items_fnc_escapeStructuredText;
-(_display displayCtrl 5002) ctrlSetStructuredText parseText format ["<t color='#81918E'>HISTÓRICO  •  %1</t>",_histSafe];
+[
+    _display,
+    [
+        [5000,"CONTEXTO",_context,"#6FCBB8","#A8C9C2","  •  "],
+        [5001,"RESULTADO",_state getOrDefault ["temporaryMessage",""],_feedbackPalette getOrDefault ["labelColor","#7EC8FF"],_feedbackPalette getOrDefault ["messageColor","#D7EEFF"],"  •  "],
+        [5002,"HISTÓRICO",_histText,"#B9A3E8","#D1C2F0","  •  "]
+    ]
+] call ServoPeregrino_Organizador_UICommon_fnc_renderFooter;
 
 _state = missionNamespace getVariable [SERVO_PEREGRINO_ORGANIZADOR_ITEMS_UI_STATE_VAR,createHashMap];
 _state set ["physicalMutationEnabled",false];
