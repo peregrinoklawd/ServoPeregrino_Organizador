@@ -1,0 +1,117 @@
+{
+  "schema_version": 1,
+  "record_date": "2026-10-21",
+  "type": "items_module_resumption_handoff",
+  "repository": "peregrinoklawd/ServoPeregrino_Organizador",
+  "branch": "feature/items-0.13-retomada-20261021",
+  "source_of_truth": {
+    "frozen_branch": "baseline/uicommon-0.2-final-homologated",
+    "frozen_commit": "f92137769cf4d0478a5872aae157f5a229177c85",
+    "do_not_use_as_source": "main snapshot September or older Packaging R2",
+    "no_weapons_branch_runtime_import": true
+  },
+  "runtime": {
+    "items": {
+      "display": "0.13-A",
+      "semantic": "0.13.0.1",
+      "status": "IMPLEMENTED_PENDING_PUBLIC_MP_HOMOLOGATION",
+      "domain_homologated_fallback": "0.12 FINAL"
+    },
+    "uicommon": {
+      "display": "0.2",
+      "semantic": "0.2.0.10",
+      "build": "0.2.0.10-equivalence-cleanup-f1",
+      "status": "REAL_ARMA_APPROVED_FROZEN"
+    },
+    "nexus": {
+      "display": "1.1",
+      "status": "PRESERVED"
+    }
+  },
+  "approved_evidence": [
+    {
+      "date": "2026-10-02",
+      "gate": "Items + UICommon equivalence R1",
+      "automated": "12/12 PASS",
+      "manual": "Items smoke/regression approved",
+      "source": "docs/35_ITEMS_UICOMMON_EQUIVALENCE_R1.md"
+    },
+    {
+      "date": "2026-10-07",
+      "gate": "UICommon 0.2-F F1",
+      "automated": {
+        "UICommon": "43/43 PASS",
+        "Items + UICommon": "16/16 PASS",
+        "Weapons": "594/594 PASS"
+      },
+      "manual": "focused refresh and real-Arma equivalence approved",
+      "source": "docs/62_UICOMMON_0_2_F_F1_EQUIVALENCE_CLEANUP.md"
+    }
+  ],
+  "pending_gates": [
+    {
+      "name": "Items 0.13-A addon PBO load, server authoritative public library real MP",
+      "status": "PENDING",
+      "not_substituted_by": "Items 16/16 UICommon equivalence",
+      "test_contract": "docs/ITEMS_ROADMAP_RETOMADA_20261021.md"
+    },
+    {
+      "name": "Items 0.13-B JIP reconciliation",
+      "status": "NOT_STARTED"
+    },
+    {
+      "name": "0.13-C Server Persistence and Recovery",
+      "status": "NOT_STARTED"
+    },
+    {
+      "name": "0.13-D Permissions / Concurrency",
+      "status": "NOT_STARTED"
+    },
+    {
+      "name": "0.13-E soak / large modsets",
+      "status": "NOT_STARTED"
+    },
+    {
+      "name": "0.13-F Nexus public contracts",
+      "status": "NOT_STARTED"
+    }
+  ],
+  "ux_backlog": [
+    {
+      "id": "UX-ITEMS-01",
+      "name": "CAPTURAR confirm + replace draft",
+      "status": "SPECIFIED_NOT_IMPLEMENTED",
+      "source": "docs/64_ITEMS_FUTURE_CAPTURE_CONFIRMATION.md"
+    },
+    {
+      "id": "UX-ITEMS-02",
+      "name": "draft altered-entry row highlighting",
+      "status": "SPECIFIED_NOT_IMPLEMENTED",
+      "source": "docs/30_ITEMS_UI_REGRESSION_CONTRACT.md"
+    },
+    {
+      "id": "UX-ITEMS-03",
+      "name": "audit stale tooltips/UI terminology",
+      "status": "PROPOSED_NOT_IMPLEMENTED"
+    }
+  ],
+  "invariants": [
+    "UICommon frozen and domain-free",
+    "Private profileNamespace repository independent from SESSION-scoped server public library",
+    "applicationTarget separate from equipmentView",
+    "Whole-Kit EXACT rollback DnD ghost and focused refresh preserved",
+    "historical automated gates 516 and 523 accepted debt"
+  ],
+  "change_policy": {
+    "current_checkpoint": "DOCUMENTATION_ONLY",
+    "runtime_files_changed": false,
+    "packaging_created": false,
+    "mp_runtime_executed": false,
+    "merge_performed": false
+  },
+  "handoff_docs": [
+    "docs/ITEMS_CONTINUIDADE_RETOMADA_20261021.md",
+    "docs/ITEMS_ROADMAP_RETOMADA_20261021.md",
+    "docs/30_ITEMS_UI_REGRESSION_CONTRACT.md"
+  ]
+}
