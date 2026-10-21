@@ -15,7 +15,9 @@
       "display": "0.13-A",
       "semantic": "0.13.0.1",
       "status": "IMPLEMENTED_PENDING_PUBLIC_MP_HOMOLOGATION",
-      "domain_homologated_fallback": "0.12 FINAL"
+      "domain_homologated_fallback": "0.12 FINAL",
+      "ux_candidate": "ITEMS_UX_R1_CAPTURE_CONFIRMATION_AND_ORANGE_DRAFT_ROW_DIFF",
+      "ux_status": "SOURCE_AND_MISSION_IN_SYNC_PENDING_REAL_ARMA_SP"
     },
     "uicommon": {
       "display": "0.2",
@@ -80,13 +82,13 @@
     {
       "id": "UX-ITEMS-01",
       "name": "CAPTURAR confirm + replace draft",
-      "status": "SPECIFIED_NOT_IMPLEMENTED",
+      "status": "CODE_CANDIDATE_PENDING_ARMA_SP_RPT",
       "source": "docs/64_ITEMS_FUTURE_CAPTURE_CONFIRMATION.md"
     },
     {
       "id": "UX-ITEMS-02",
       "name": "draft altered-entry row highlighting",
-      "status": "SPECIFIED_NOT_IMPLEMENTED",
+      "status": "CODE_CANDIDATE_PENDING_ARMA_SP_RPT",
       "source": "docs/30_ITEMS_UI_REGRESSION_CONTRACT.md"
     },
     {
@@ -103,15 +105,33 @@
     "historical automated gates 516 and 523 accepted debt"
   ],
   "change_policy": {
-    "current_checkpoint": "DOCUMENTATION_ONLY",
-    "runtime_files_changed": false,
+    "current_checkpoint": "ITEMS_UX_R1_SOURCE_CANDIDATE_PENDING_SP_GATE",
+    "runtime_files_changed": true,
     "packaging_created": false,
     "mp_runtime_executed": false,
-    "merge_performed": false
+    "merge_performed": false,
+    "sp_runtime_executed": false
   },
   "handoff_docs": [
     "docs/ITEMS_CONTINUIDADE_RETOMADA_20261021.md",
     "docs/ITEMS_ROADMAP_RETOMADA_20261021.md",
-    "docs/30_ITEMS_UI_REGRESSION_CONTRACT.md"
-  ]
+    "docs/30_ITEMS_UI_REGRESSION_CONTRACT.md",
+    "missions/SP_ORG_Items_Weapons_UI_Lab_SelfContained.VR/ITEMS_UX_R1_TESTE_SINGLEPLAYER.md"
+  ],
+  "priority_order": [
+    "ITEMS_UX_R1_SINGLEPLAYER_GATE",
+    "ITEMS_0_13_A_PUBLIC_LIBRARY_MULTIPLAYER_GATE",
+    "ITEMS_0_13_B_JIP"
+  ],
+  "ux_r1": {
+    "label": "Items UX R1",
+    "source_snapshot": "baseline/uicommon-0.2-final-homologated@f92137769cf4d0478a5872aae157f5a229177c85",
+    "capture": "Confirm before change; capture/prevalidate; replace only draft entries; no autosave/physical mutation; guard revision; preserve draft identity and baseline",
+    "highlight": "Weapons visual accent RGBA 1,0.76,0.28,0.18 adopted inside Items UI. Domain-specific diff against saved baseline entries. UICommon not modified.",
+    "testing": "PENDING_REAL_ARMA_SP",
+    "mission_package_name": "SP_ORG_Items_UX_R1_UICommon_0_2_FINAL.VR",
+    "guide": "missions/SP_ORG_Items_Weapons_UI_Lab_SelfContained.VR/ITEMS_UX_R1_TESTE_SINGLEPLAYER.md",
+    "module_source_mirrored_in_mission": true,
+    "backend_unchanged": true
+  }
 }
