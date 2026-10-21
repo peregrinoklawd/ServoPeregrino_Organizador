@@ -16,7 +16,7 @@ Os mestres vetoriais editáveis desta candidata estão em:
 - `assets/ui/icons/items/r1/colete.svg`: colete tático compacto, volume distinto da jaqueta e duas alças; somente um recorte horizontal opcional.
 - `assets/ui/icons/items/r1/mochila.svg`: mochila tática compacta com alça superior e uma divisão principal; sem compartimentos microscópicos.
 
-São desenhos originais feitos em shapes SVG, sem reprodução ou derivação dos assets ACE. SVG tem transparência, viewBox quadrado 64×64, preenchimento off-white `#F3F6F4`; não há moldura, fundo escuro, hover, sombra, contraste de estado ou branding embutidos nos assets. Os recortes dark-teal residuais no R1 são **apenas protótipo**; para finalização PAA precisam ser convertidos em vazados transparentes ou validados contra fundos dinâmicos. Isso deve ser corrigido antes do arquivo final.
+São desenhos originais feitos em shapes SVG, sem reprodução ou derivação dos assets ACE. SVG tem transparência, viewBox quadrado 64×64, preenchimento off-white `#F3F6F4`; não há moldura, fundo escuro, hover, sombra, contraste de estado ou branding embutidos nos assets. Os recortes internos (gola, separação frontal do colete e bolso da mochila) são **vazados transparentes verdadeiros**, usando `fill-rule="evenodd"` no SVG: não gravar cor do painel sobre os assets. Este requisito já foi aplicado aos três vetores R1, mas a exportação PAA ainda precisa de qualificação.
 
 ### Critérios obrigatórios para aprovação
 
@@ -41,3 +41,9 @@ São desenhos originais feitos em shapes SVG, sem reprodução ou derivação do
 **CONCEITO R1 DESENHADO, AGUARDANDO AVALIAÇÃO VISUAL. NÃO INTEGRADO NO ARMA.**
 
 No Git, as mudanças desta branch relativas aos ícones devem ser só em `assets/ui/icons/items/r1/` e docs; não alterar arquivos `addons/`, `missions/` ou versão UICommon até aprovação.
+
+## Prancha vetorial e arquivos de revisão
+
+A prévia R1 foi renderizada diretamente da geometria SVG em 256 px e apresentada também em botões com imagem de 48 px e texto, em 24/32/48/16 px, sobre fundo escuro e selecionado (verde). Pacote de revisão local: `SPORG_Items_Icones_R1.zip` (SVG, PNG transparentes e prancha `prancha_vetorial_R1.png`). SHA256 do ZIP: `5b2a5ea8ad7af03acd87844e6d845d2772b8267c9ed5b9c2d0fcfd97bc47712b`. **O arquivo ZIP foi produzido no chat; a fonte controlada em Git são os 3 SVGs.**
+
+As imagens conceituais em contexto de interface podem ser ilustrativas. A referência executável das formas é `assets/ui/icons/items/r1/*.svg`; nenhum botão do jogo foi alterado.
