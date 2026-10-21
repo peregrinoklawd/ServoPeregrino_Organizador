@@ -1,5 +1,20 @@
 # Items — contrato mestre de regressão pós-UICommon
 
+## Atualização de leitura — Items + UICommon 0.2 FINAL (21/10/2026)
+
+A redação deste documento nasceu em 01/10 e inclui algumas melhorias então **futuras** que foram realizadas depois, na UICommon 0.2 homologada em 07/10:
+
+- P2 já se intitula **ITENS DO KIT**, com indicador geral **SALVO/ALTERADO**;
+- P4 já usa **Visualizar:** e o destino Whole-Kit passou a **Qual o destino?**;
+- o rodapé compartilhado e o focused refresh foram exercitados no RPT aprovado da UICommon 0.2 F1;
+- os labels atuais e os tooltips legados podem divergir: auditar microtextos sem mudar semântica.
+
+**Permanece futuro** o destaque individual de linhas de draft divergentes (nova entrada ou quantidade alterada), apesar de o título e o status geral já estarem implementados. O **CAPTURAR com diálogo de confirmação e substituição** está descrito em [64_ITEMS_FUTURE_CAPTURE_CONFIRMATION.md](64_ITEMS_FUTURE_CAPTURE_CONFIRMATION.md), ainda não implementado na baseline.
+
+**Biblioteca pública multiplayer**: status pendente de teste completo com clientes reais, independentemente dos **16/16** checks de equivalência com UICommon. Para versão, branch, escopo de retomada e ordem de gates, consultar [ITEMS_CONTINUIDADE_RETOMADA_20261021.md](ITEMS_CONTINUIDADE_RETOMADA_20261021.md).
+
+O checklist original abaixo continua válido para proteger as invariantes, exceto onde esta nota distingue algo já realizado de algo ainda futuro.
+
 Data de criação: 2026-10-01.
 
 ## Objetivo
