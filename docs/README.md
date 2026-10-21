@@ -1,5 +1,16 @@
 # Índice de documentação SP_ORG
 
+## Retomada Items — 21/10/2026
+
+Para continuar **Items** a partir da UICommon 0.2 FINAL homologada em 07/10, **comece por**:
+- [Handoff Items 21/10](ITEMS_CONTINUIDADE_RETOMADA_20261021.md)
+- [Roadmap de retomada Items](ITEMS_ROADMAP_RETOMADA_20261021.md)
+- [Contrato de regressão Items](30_ITEMS_UI_REGRESSION_CONTRACT.md)
+- [CAPTURAR — especificação futura](64_ITEMS_FUTURE_CAPTURE_CONFIRMATION.md)
+- `../machine/ITEMS_CONTINUITY_20261021.json` (estado por módulo)
+
+Esta instrução é específica à branch `feature/items-0.13-retomada-20261021`; o catálogo geral abaixo contém marcos históricos e demais módulos.
+
 Comece por:
 
 1. `00_STATUS_ATUAL.md`
