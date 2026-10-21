@@ -113,7 +113,7 @@
     "historical automated gates 516 and 523 accepted debt"
   ],
   "change_policy": {
-    "current_checkpoint": "ICONS_R1_VECTOR_CONCEPT_FOR_VISUAL_REVIEW_NO_RUNTIME_CHANGE",
+    "current_checkpoint": "ICONS_THREE_GENERATED_PNG_MASTERS_CHOSEN_HASHED_GIT_BINARY_INGEST_PENDING",
     "runtime_files_changed": true,
     "packaging_created": true,
     "mp_runtime_executed": false,
@@ -121,6 +121,8 @@
     "sp_runtime_executed": true
   },
   "handoff_docs": [
+    "assets/ui/icons/items/approved/README.md",
+    "assets/ui/icons/items/approved/SELECTION_20261021.json",
     "docs/71_ITEMS_ICONES_R1_SILHUETAS_CONCEITO.md",
     "docs/70_ITEMS_R2_2_SP_HOMOLOGACAO_E_HANDOFF_ICONES.md",
     "docs/67_ITEMS_HEADER_BGD_R2_1_TEXTURE_PATH_FIX.md",
@@ -131,10 +133,10 @@
     "missions/SP_ORG_Items_Weapons_UI_Lab_SelfContained.VR/ITEMS_UX_R1_TESTE_SINGLEPLAYER.md"
   ],
   "priority_order": [
-    "ICONS_R1_ART_APPROVAL",
-    "ICONS_R1_ASSET_QUALIFICATION_PAA",
-    "ICONS_R1_UI_IMPLEMENTATION_SP",
-    "ITEMS_0_13_A_MULTIPLAYER_WHEN_AVAILABLE"
+    "ICON_APPROVED_ORIGINAL_PNG_GIT_IMPORT_VERIFY_SHA",
+    "ICON_PAA_DERIVATION_AND_RENDER_QA",
+    "ICON_AND_LABEL_INTEGRATION_SINGLEPLAYER",
+    "ITEMS_MULTIPLAYER_WHEN_AVAILABLE"
   ],
   "ux_r1": {
     "label": "Items UX R1",
@@ -197,7 +199,7 @@
   "iconography": {
     "id": "UX-ITEMS-04",
     "revision": "R1",
-    "status": "VECTOR_SILHOUETTES_READY_USER_ART_APPROVAL_PENDING",
+    "status": "FINAL_IMAGES_APPROVED_GIT_BINARY_UPLOAD_PENDING",
     "frozen_runtime_baseline": "baseline/items-uicommon-r2-2-sp-homologated-20261021",
     "source_paths": [
       "assets/ui/icons/items/r1/uniforme.svg",
@@ -226,6 +228,28 @@
       "run RPT regression"
     ],
     "runtime_modified_in_this_branch": false,
-    "mp_pending": true
+    "mp_pending": true,
+    "originals_in_git": false,
+    "approved_source_manifest": "assets/ui/icons/items/approved/SELECTION_20261021.json",
+    "approved_source_readme": "assets/ui/icons/items/approved/README.md",
+    "backup_zip": "SPORG_Items_Icones_Selecionados_ORIGINAIS_20261021.zip",
+    "backup_sha256": "9d4473a2647cd7c9d689e1bcb5476ffeb981f54ed631d6580d6cf1bb035df2b4",
+    "approved_images": {
+      "uniforme": {
+        "source_name": "ícone_minimalista_de_camisa_com_gola_v.png",
+        "sha256": "93e50ec9756bd635403c45b9a7bf374101d850bc5dff11c2855385cd495e1fb7"
+      },
+      "colete": {
+        "source_name": "ícone_de_colete_tático_branco.png",
+        "sha256": "37890a2476dec579a90a72d31c37718c0a48c1940a9cf1cacf111df0f0fed105"
+      },
+      "mochila": {
+        "source_name": "silhueta_branca_de_mochila.png",
+        "sha256": "908cbc604658e13eab8571ee7bbf0e87878665cb5b934b6ea488674d2207bb5c"
+      }
+    },
+    "old_vector_r1_is_not_approved_reference": true,
+    "source_images_available_in_conversation_backup": true,
+    "additional_work": "Git binary ingest + checksum verification before PAA conversion"
   }
 }
