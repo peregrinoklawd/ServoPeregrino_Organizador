@@ -107,7 +107,7 @@
   "change_policy": {
     "current_checkpoint": "ITEMS_UX_R1_SOURCE_CANDIDATE_PENDING_SP_GATE",
     "runtime_files_changed": true,
-    "packaging_created": false,
+    "packaging_created": true,
     "mp_runtime_executed": false,
     "merge_performed": false,
     "sp_runtime_executed": false
@@ -132,6 +132,13 @@
     "mission_package_name": "SP_ORG_Items_UX_R1_UICommon_0_2_FINAL.VR",
     "guide": "missions/SP_ORG_Items_Weapons_UI_Lab_SelfContained.VR/ITEMS_UX_R1_TESTE_SINGLEPLAYER.md",
     "module_source_mirrored_in_mission": true,
-    "backend_unchanged": true
+    "backend_unchanged": true,
+    "package_verified": true,
+    "zip_file_name": "SP_ORG_Items_UX_R1_UICommon_0_2_FINAL.zip",
+    "zip_sha256": "2f2b990683001eefae4d2ca22d1a8b7d99665b5739852bf659fe73ba13b44079",
+    "gh_run_id": 39626658726,
+    "gh_artifact_id": 12357007178,
+    "gh_packed_head_sha": "427340593b12db98f90391e62716c72772a1f525",
+    "static_check": "ZIP decompressed successfully; structure/source anchors verified; not SQF runtime compiler"
   }
 }
