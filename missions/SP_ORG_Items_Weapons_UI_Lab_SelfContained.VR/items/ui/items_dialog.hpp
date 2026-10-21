@@ -86,6 +86,7 @@ class SPORG_Items_Structured: SPORG_UICommon_Structured {};
 class SPORG_Items_FooterContext: SPORG_UICommon_FooterContext {};
 class SPORG_Items_FooterMessage: SPORG_UICommon_FooterMessage {};
 class SPORG_Items_FooterHistory: SPORG_UICommon_FooterHistory {};
+class SPORG_Items_HeaderBrand: SPORG_UICommon_HeaderBrand {};
 
 // Self-contained bases used by CT_CONTROLS_TABLE. The table gives every row its own real
 // - / quantity / + / delete controls, avoiding global selected-item handlers.
@@ -236,7 +237,19 @@ class SP_ORG_Items_Dialog
         class HeaderWeightBarFill: SPORG_Items_ProgressFill {idc=106; x=SPORG_ITEMS_UI_HEADER_LOAD_X; y=safeZoneY+0.029*safeZoneH; w=0.001*safeZoneW; h=0.006*safeZoneH; colorText[]={0.15,0.62,0.48,0.92};};
         class HeaderIdentity: SPORG_Items_Text {idc=103; style=1; text="Operador: -"; tooltip="Jogador que está usando o Organizador"; x=SPORG_ITEMS_UI_HEADER_ID_X; y=safeZoneY+0.005*safeZoneH; w=SPORG_ITEMS_UI_HEADER_ID_W; h=0.018*safeZoneH; sizeEx=0.0109*safeZoneH;};
         class HeaderUnit: SPORG_Items_Text {idc=108; style=1; text="Unidade: -"; tooltip="Grupo atual do jogador"; x=SPORG_ITEMS_UI_HEADER_ID_X; y=safeZoneY+0.024*safeZoneH; w=SPORG_ITEMS_UI_HEADER_ID_W; h=0.018*safeZoneH; sizeEx=0.0109*safeZoneH;};
-        class FutureIconSlot: SPORG_Items_Text {idc=107; text=""; tooltip="Espaço reservado para uma integração futura"; x=SPORG_ITEMS_UI_HEADER_FUTURE_X; y=safeZoneY+0.009*safeZoneH; w=SPORG_ITEMS_UI_ICON_W; h=SPORG_ITEMS_UI_ICON_H; colorBackground[]={0.04,0.08,0.085,0.14};};
+        class FutureIconSlot: SPORG_Items_HeaderBrand
+        {
+            idc=107;
+            // Slot genérico UICommon: Items injeta o asset BGD. O module Weapons pode fornecer outro.
+#ifdef SPORG_ITEMS_MISSION_BRAND_TEXTURE
+            text="items\\data\\bgd_logo_ca.paa";
+#else
+            text="\\ServoPeregrino_Organizador_Items\\data\\bgd_logo_ca.paa";
+#endif
+            tooltip="Black Goat Division — marca institucional";
+            x=SPORG_ITEMS_UI_HEADER_FUTURE_X; y=safeZoneY+0.009*safeZoneH;
+            w=SPORG_ITEMS_UI_ICON_W; h=SPORG_ITEMS_UI_ICON_H;
+        };
         class Close: SPORG_Items_IconButton {idc=102; text="X"; tooltip="Fechar o Organizador; alterações não salvas pedem confirmação"; x=SPORG_ITEMS_UI_HEADER_CLOSE_X; y=safeZoneY+0.009*safeZoneH; w=SPORG_ITEMS_UI_ICON_W; h=SPORG_ITEMS_UI_ICON_H; action="['REQUEST_CLOSE'] call ServoPeregrino_Organizador_Items_fnc_handleUIEvent";};
         // Compatibility stub: historical IDC remains addressable, but no duplicate 'Adicionar em' is visible in the header.
         class HeaderStatus: SPORG_Items_Text {idc=101; style=0; text=""; x=safeZoneX-2; y=safeZoneY-2; w=0.001; h=0.001; sizeEx=0.001;};
