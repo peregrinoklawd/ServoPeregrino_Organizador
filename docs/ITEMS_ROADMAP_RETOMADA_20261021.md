@@ -9,7 +9,8 @@ O usuário decidiu trabalhar agora em single-player, adiando o gate MP até disp
 - [x] Sincronizar os mesmos seis arquivos entre addon e missão; sem mudanças de Weapons/UICommon.
 - [x] Preparar missão self-contained identificada como `SP_ORG_Items_UX_R1_UICommon_0_2_FINAL.VR` (arquivos fonte no Git).
 - [x] Roteiro SP criado em `missions/SP_ORG_Items_Weapons_UI_Lab_SelfContained.VR/ITEMS_UX_R1_TESTE_SINGLEPLAYER.md`.
-- [ ] Empacotamento ZIP confirmado / link de artifact verificado, quando disponível.
+- [x] Empacotamento ZIP pelo GitHub Actions executado com sucesso; verificação local de integridade e SHA256 registrada.
+- Pacote verificado: `SP_ORG_Items_UX_R1_UICommon_0_2_FINAL.zip` (SHA256 `2f2b990683001eefae4d2ca22d1a8b7d99665b5739852bf659fe73ba13b44079`); workflow run [39626658726](https://github.com/peregrinoklawd/ServoPeregrino_Organizador/actions/runs/39626658726), artifact `12357007178`. Confere zip válido e conteúdo estrutural; **não comprova funcionamento no Arma**.
 - [ ] Executar Arma SP, suíte automática + teste manual, enviar RPT/prints.
 - [ ] Homologar e congelar UX R1 após aprovação; somente então iniciar UX R2 ou MP.
 
