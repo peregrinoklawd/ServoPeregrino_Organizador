@@ -1,7 +1,7 @@
 author = "Claudio Malta Telhada";
-onLoadName = "SP_ORG UI Lab - UICommon 0.2-F F1";
-onLoadMission = "UICommon 0.2-F F1: equivalência final e limpeza não funcional, preservando comportamento, ownership de refresh e regras de domínio.";
-overviewText = "UICommon 0.2-E E1 está homologada; F1 valida equivalência final, limpa nomenclatura histórica do harness e preserva Items/Weapons sem mudança funcional.";
+onLoadName = "SP_ORG UI Lab - Items UX R1 (UICommon 0.2 FINAL)";
+onLoadMission = "Items UX R1: CAPTURAR com confirmação e substituição atômica do rascunho; realce laranja de linhas alteradas. UICommon 0.2 FINAL permanece congelada.";
+overviewText = "Base UICommon 0.2 FINAL homologada (07/10). Candidata Items UX R1, a validar no Arma SP; biblioteca pública multiplayer continua pendente.";
 enableDebugConsole = 1;
 disabledAI = 1;
 respawn = 3;
