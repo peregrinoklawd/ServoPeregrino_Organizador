@@ -18,7 +18,11 @@
         1254
       ],
       "format": "PNG RGBA",
-      "notes": "Latest white V-neck uniform graphic accepted without further changes."
+      "notes": "Latest white V-neck uniform graphic accepted without further changes.",
+      "repository_path": "assets/ui/icons/items/approved/uniforme_aprovado_original.png",
+      "git_blob_sha1": "2178eaeb7596573993cb50d15231d10881de5ff9",
+      "integrity_status": "VERIFIED_EXACT_SHA256_AND_GIT_BLOB_SHA1",
+      "import_status": "COMMITTED_TO_GIT"
     },
     {
       "id": "colete",
@@ -32,7 +36,11 @@
         1254
       ],
       "format": "PNG RGBA",
-      "notes": "Explicit choice: Colete 1 (not Colete 2); preserve rounded neckline, side relief and plain white silhouette."
+      "notes": "Explicit choice: Colete 1 (not Colete 2); preserve rounded neckline, side relief and plain white silhouette.",
+      "repository_path": "assets/ui/icons/items/approved/colete_1_aprovado_original.png",
+      "git_blob_sha1": "a78ecf87ef6c3a90e982d5be96e3f240178eaaf1",
+      "integrity_status": "VERIFIED_EXACT_SHA256_AND_GIT_BLOB_SHA1",
+      "import_status": "COMMITTED_TO_GIT"
     },
     {
       "id": "mochila",
@@ -46,7 +54,11 @@
         1254
       ],
       "format": "PNG RGBA",
-      "notes": "Latest corrected all-white filled center; shoulder straps, top handle and larger side pouches; no hollow/transparent center. This supersedes all earlier backpack concepts."
+      "notes": "Latest corrected all-white filled center; shoulder straps, top handle and larger side pouches; no hollow/transparent center. This supersedes all earlier backpack concepts.",
+      "repository_path": "assets/ui/icons/items/approved/mochila_corrigida_aprovada_original.png",
+      "git_blob_sha1": "7e846f1bf4de8ad7c5fe66b4312a26b74d21c6fb",
+      "integrity_status": "VERIFIED_EXACT_SHA256_AND_GIT_BLOB_SHA1",
+      "import_status": "COMMITTED_TO_GIT"
     }
   ],
   "preservation": {
@@ -58,8 +70,10 @@
       "mochila_corrigida_aprovada_original.png",
       "MANIFEST_ORIGINAIS.json"
     ],
-    "original_files_uploaded_to_github": false,
-    "reason": "This GitHub connector accepts UTF-8 strings/base64 blob content and does not expose a local-binary upload operation; image bytes are backed up in user-downloadable archive outside GitHub until a verified binary ingestion is possible. Do not mark migration complete."
+    "original_files_uploaded_to_github": true,
+    "reason": "User uploaded the original PNGs to the feature branch root; all Git blob SHA-1 identities match the exact originals verified locally using SHA-256. Moved without re-encoding using the identical blob SHA into the approved directory. The root copies were removed in one Git tree commit.",
+    "manifest_original_committed": true,
+    "import_commit": "92b864b8913d5490ece6df04a53518b39683f394"
   },
   "runtime": {
     "icon_buttons_implemented": false,
@@ -77,5 +91,5 @@
     ],
     "last_homologated_branch": "baseline/items-uicommon-r2-2-sp-homologated-20261021"
   },
-  "next_gate": "Ingest exact verified PNG bytes as Git blobs and compare SHA256 to this manifest; then derive PNG/PAA and integrate icon plus label only after QA."
+  "next_gate": "Use exact approved source PNGs to produce qualified Arma PAA derivatives, preserve original masters untouched, then integrate icon + text with SP regression. The original R1 SVGs are not approved."
 }
