@@ -5,6 +5,7 @@ on:
     branches:
       - feature/uicommon-0.1-foundation
       - feature/items-0.13-retomada-20261021
+      - feature/items-uicommon-brand-footer-r2-20261021
     paths:
       - "missions/SP_ORG_Items_Weapons_UI_Lab_SelfContained.VR/**"
       - "missions/PACKAGE_MISSION_NAME.txt"
@@ -31,6 +32,31 @@ jobs:
           fi
           echo "MISSION_NAME=$MISSION_NAME" >> "$GITHUB_ENV"
           echo "ARCHIVE_NAME=${MISSION_NAME%.VR}.zip" >> "$GITHUB_ENV"
+
+      - name: Validate branding asset and footer source invariants
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import struct
+          addon = Path("addons/ServoPeregrino_Organizador_Items/data/bgd_logo_ca.paa")
+          mission = Path("missions/SP_ORG_Items_Weapons_UI_Lab_SelfContained.VR/items/data/bgd_logo_ca.paa")
+          assert addon.is_file() and mission.is_file(), "PAA BGD missing"
+          assert addon.read_bytes() == mission.read_bytes(), "addon / mission PAA mismatch"
+          assert struct.unpack("<H", addon.read_bytes()[:2])[0] == 0xFF05, "BGD PAA is not DXT5"
+          root = Path("missions/SP_ORG_Items_Weapons_UI_Lab_SelfContained.VR")
+          for rel in ["items/functions/ui/fn_refreshPhysicalTargetUI.sqf","items/ui/items_dialog.hpp","uicommon/ui/shared_controls.hpp"]:
+              m = (root / rel).read_bytes()
+              a = (Path("addons/ServoPeregrino_Organizador_"+("UICommon" if rel.startswith("uicommon/") else "Items")) / rel.split("/",1)[1]).read_bytes()
+              assert a == m, "mission/addon mismatch: " + rel
+          footer = (root/"items/functions/ui/fn_refreshPhysicalTargetUI.sqf").read_text(encoding="utf-8")
+          assert '[5002,"HISTÓRICO",_histText,"#B9A3E8","#D1C2F0"' in footer
+          assert "ctrlSetStructuredText parseText format [\"<t color='#81918E'>HISTÓRICO" not in footer
+          ui = (root/"items/ui/items_dialog.hpp").read_text(encoding="utf-8")
+          assert "SPORG_Items_HeaderBrand: SPORG_UICommon_HeaderBrand" in ui
+          assert "bgd_logo_ca.paa" in ui
+          print("PASS: PAA DXT5; mirrored addon/mission; purple history renderer; generic header brand")
+          PY
 
       - name: Package mission with delivery-specific name
         shell: bash
