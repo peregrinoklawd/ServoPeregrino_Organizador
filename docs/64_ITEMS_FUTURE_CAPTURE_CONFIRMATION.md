@@ -1,5 +1,13 @@
 # Items — Backlog futuro: confirmação no botão CAPTURAR
 
+## Atualização — 21/10/2026
+
+Este é o registro original do backlog de 07/10, preservado por rastreabilidade. Em 21/10, a implementação candidata foi criada **na branch de Items** `feature/items-0.13-retomada-20261021`, sem alterar Weapons, e aguarda homologação no Arma.
+
+Decisão adicional de segurança/continuidade: quando já existe Draft EDIT/NEW, **substituir apenas `entries`**, preservando identificação do kit, nome, destino preferido e baseline; quando não existe Draft, criar NEW. A comparação orange usa o baseline anterior à captura; o Repository não recebe escrita antes do SALVAR. O botão continua chamado CAPTURAR. O cancelamento não escreve estado e captura falha não destrói Draft.
+
+Tester: `missions/SP_ORG_Items_Weapons_UI_Lab_SelfContained.VR/ITEMS_UX_R1_TESTE_SINGLEPLAYER.md`. **Código em candidato; RPT e teste manual pendentes.** As menções a "futuro" abaixo descrevem seu estado em 07/10, não o estado atual desta branch.
+
 Data de registro: 2026-10-07.
 
 Status: **BACKLOG / NÃO IMPLEMENTAR NA ENTREGA WEAPONS 0.7-A**.
