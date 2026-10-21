@@ -1,0 +1,42 @@
+{
+  "source": "PNG originais escolhidos no chat em 2026-10-21; sem edicao, escala ou recompressao",
+  "branch": "feature/items-ui-icons-r1-simple-silhouettes",
+  "files": [
+    {
+      "id": "uniforme",
+      "original_filename": "ícone_minimalista_de_camisa_com_gola_v.png",
+      "archive_filename": "uniforme_aprovado_original.png",
+      "sha256": "93e50ec9756bd635403c45b9a7bf374101d850bc5dff11c2855385cd495e1fb7",
+      "size_bytes": 731981,
+      "resolution": [
+        1254,
+        1254
+      ],
+      "mime": "image/png"
+    },
+    {
+      "id": "colete",
+      "original_filename": "ícone_de_colete_tático_branco.png",
+      "archive_filename": "colete_1_aprovado_original.png",
+      "sha256": "37890a2476dec579a90a72d31c37718c0a48c1940a9cf1cacf111df0f0fed105",
+      "size_bytes": 533572,
+      "resolution": [
+        1254,
+        1254
+      ],
+      "mime": "image/png"
+    },
+    {
+      "id": "mochila",
+      "original_filename": "silhueta_branca_de_mochila.png",
+      "archive_filename": "mochila_corrigida_aprovada_original.png",
+      "sha256": "908cbc604658e13eab8571ee7bbf0e87878665cb5b934b6ea488674d2207bb5c",
+      "size_bytes": 721056,
+      "resolution": [
+        1254,
+        1254
+      ],
+      "mime": "image/png"
+    }
+  ]
+}
