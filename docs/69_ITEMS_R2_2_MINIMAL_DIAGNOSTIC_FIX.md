@@ -29,7 +29,7 @@ Em `fn_refreshHeaderUI.sqf`:
 3. Validar RPT **sem** `Invalid path (only relative paths supported)` causado pela rotina Items, e log `[BRAND_HEADER] pathAssigned=true`.
 4. Não precisar repetir todos os testes de UX R1; gate R2.2 é **somente diagnóstico**, mas RPT é necessário para conclusão em engine.
 
-**Status:** commit/source/CI/ZIP verificados; aguardando RPT real R2.2. Não declarar encerramento de 0.13-A MP.
+**Status atualizado em 21/10/2026:** RPT R2.2 recebido, screenshot validado e fechamento **HOMOLOGADO EM SINGLE-PLAYER NO ESCOPO DO HOTFIX**. O novo `[BRAND_HEADER] pathAssigned=true` aparece sem o `Invalid path` anterior. Ver [70_ITEMS_R2_2_SP_HOMOLOGACAO_E_HANDOFF_ICONES.md](70_ITEMS_R2_2_SP_HOMOLOGACAO_E_HANDOFF_ICONES.md). A 0.13-A multiplayer continua NÃO homologada.
 
 ## Continuação iconográfica
 
