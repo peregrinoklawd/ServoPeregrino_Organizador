@@ -1,5 +1,13 @@
 # Roadmap e próximo passo
 
+## ATUALIZAÇÃO ITEMS — prioridade de retomada 21/10/2026
+
+O roteiro imediato de **Items** está consolidado em [ITEMS_ROADMAP_RETOMADA_20261021.md](ITEMS_ROADMAP_RETOMADA_20261021.md), partindo da baseline **UICommon 0.2 FINAL** (07/10), commit `f92137769cf4d0478a5872aae157f5a229177c85`, branch `feature/items-0.13-retomada-20261021`.
+
+**Atenção à cronologia**: a seção histórica abaixo que manda "Validar Packaging R2" não autoriza reutilizar PBOs antigos como se contivessem a versão com UICommon. Preparar um pacote reproduzível **Nexus + UICommon 0.2.0.10 + Items 0.13-A** e validar load real antes do smoke de autoridade pública MP. O gate de equivalência Items + UICommon 16/16 já homologado não encerra a 0.13-A multiplayer.
+
+Depois: fechar 0.13-A com RPT real; em entregas separadas, CAPTURAR com confirmação/substituição e destaque ALTERADO por linha; seguir 0.13-B (JIP), 0.13-C (persistência), 0.13-D/E/F. Nenhum teste ou alteração de runtime foi realizado neste adendo documental.
+
 ## Gate imediato — Items
 
 **Validar Addon Packaging R2**. Enquanto o engine não montar os PBOs, não iniciar trabalho funcional 0.13-B.
