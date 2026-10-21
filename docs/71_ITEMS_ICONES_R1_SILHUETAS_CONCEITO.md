@@ -12,7 +12,9 @@ Esta é a decisão canônica **mais recente**, prevalecendo sobre as opções R1
 
 São **três imagens raster originais**, e não os três SVGs em `assets/ui/icons/items/r1/` criados antes. Não trocar automaticamente arte aprovada pelos vetores experimentais. A origem, hashes SHA-256 e nomes exatos estão em [SELECTION_20261021.json](../assets/ui/icons/items/approved/SELECTION_20261021.json) e [README da seleção](../assets/ui/icons/items/approved/README.md).
 
-O arquivo de backup `SPORG_Items_Icones_Selecionados_ORIGINAIS_20261021.zip` preserva os bytes dos três PNGs no contexto da conversa, mas **a cópia binária para a branch Git ainda é pendência**. Confirmar o SHA depois da importação; não declarar salvamento dos mestres no Git concluído prematuramente.
+O usuário enviou os três PNGs à branch, e eles já foram movidos para `assets/ui/icons/items/approved/`, juntamente com `MANIFEST_ORIGINAIS.json`. **Todos os hashes Git SHA-1 correspondem aos arquivos originais, e os SHA-256 foram confrontados com o backup do chat.** Commit da movimentação sem alterações de bytes: `92b864b8913d5490ece6df04a53518b39683f394`. Os masters estão **versionados e verificados**; a geração de PAA e a integração aos botões permanecem pendentes.
+
+**Atualização de estado:** a família SVG experimental R1 abaixo permanece documentada como histórico do conceito, mas foi substituída na decisão visual pelas três imagens PNG aprovadas. Não reutilizar esses SVGs sem nova aprovação.
 
 ## Origem e controle de regressão
 
