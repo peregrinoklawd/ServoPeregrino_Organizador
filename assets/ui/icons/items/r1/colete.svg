@@ -1,6 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 64 64">
   <title>SP_ORG Items R1 — Colete</title>
-  <desc>Silhueta de colete tático compacto com duas alças superiores e área frontal contínua.</desc>
-  <path fill="#F3F6F4" d="M15 8 25 7 27 18 37 18 39 7 49 8 55 22 53 56 11 56 9 22 Z"/>
-  <path fill="#101B1D" d="M17 37 H47 V39 H17 Z"/>
+  <desc>Silhueta original minimalista de colete com duas alças e um vazado discreto.</desc>
+  <path fill="#F3F6F4" fill-rule="evenodd" d="M15 8 25 7 27 18 37 18 39 7 49 8 55 22 53 56 11 56 9 22 Z M17 37 H47 V39 H17 Z"/>
 </svg>
