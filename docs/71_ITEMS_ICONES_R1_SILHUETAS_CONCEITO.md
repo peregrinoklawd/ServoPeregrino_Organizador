@@ -2,6 +2,18 @@
 
 Data: 2026-10-21. Branch: `feature/items-ui-icons-r1-simple-silhouettes`.
 
+## Decisão posterior do usuário — três PNGs selecionados (21/10/2026)
+
+Esta é a decisão canônica **mais recente**, prevalecendo sobre as opções R1 originalmente propostas abaixo. O usuário selecionou:
+
+- **Uniforme:** a última camisa branca com gola em V, aprovada sem mudanças.
+- **Colete:** **Colete 1** da família de duas opções apresentada posteriormente, sem desenhos internos.
+- **Mochila:** **última versão da silhueta branca com o centro efetivamente preenchido**, mantendo contorno das alças e bolsos laterais.
+
+São **três imagens raster originais**, e não os três SVGs em `assets/ui/icons/items/r1/` criados antes. Não trocar automaticamente arte aprovada pelos vetores experimentais. A origem, hashes SHA-256 e nomes exatos estão em [SELECTION_20261021.json](../assets/ui/icons/items/approved/SELECTION_20261021.json) e [README da seleção](../assets/ui/icons/items/approved/README.md).
+
+O arquivo de backup `SPORG_Items_Icones_Selecionados_ORIGINAIS_20261021.zip` preserva os bytes dos três PNGs no contexto da conversa, mas **a cópia binária para a branch Git ainda é pendência**. Confirmar o SHA depois da importação; não declarar salvamento dos mestres no Git concluído prematuramente.
+
 ## Origem e controle de regressão
 
 A referência funcional imutável é `baseline/items-uicommon-r2-2-sp-homologated-20261021` — **R2.2 homologada em Arma SP** (logo BGD, footer roxo, CAPTURAR e linhas laranja preservados).
