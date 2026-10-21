@@ -1,5 +1,14 @@
 # SP_ORG Items + Weapons UI Lab — Weapons 0.6-F R5
 
+## ATUAL — Items Header BGD + Footer R2 (21/10/2026)
+
+A candidata atual desta branch é `SP_ORG_Items_HeaderBGD_FooterR2_UICommon_0_2_0_11.VR`. Ler **primeiro** [HEADER_BGD_FOOTER_R2_TEST.md](HEADER_BGD_FOOTER_R2_TEST.md).
+
+- UICommon 0.2.0.11 **candidate** (base aprovada: 0.2.0.10), slot genérico no header; Items injeta logo BGD a partir de PAA com alfa derivado do PNG oficial BGD-HQ.
+- Corrigido HISTÓRICO que mudava para cinza em TARGET_ONLY; nunca era regra intencional.
+- UX R1 (CAPTURAR e linhas laranja) e Weapons permanecem preservados.
+- Teste SP self-contained sem PBOs SP_ORG; aguardar RPT/prints antes de homologar esta R2.
+
 ## ADENDO 21/10/2026 — Items UX R1 (candidata SP)
 
 **Este adendo prevalece sobre o título R5 histórico abaixo para o pacote desta branch.**
