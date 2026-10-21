@@ -1,5 +1,19 @@
 # Items — roadmap de retomada (21/10/2026)
 
+## Atualização do checkpoint — R2.1 testada visualmente em 21/10/2026
+
+A missão R2.1 foi aberta no Arma 3 e o operador confirmou **logo BGD no header, linhas alteradas laranja e comportamento funcional observado**. O RPT prova inicialização da UI e catálogo, sem novo `Picture bgd_logo_ca.paa not found`, mas mostra duas chamadas a `fileExists` com caminho absoluto causando `Invalid path (only relative paths supported)`; o arquivo PAA **aparece na interface**, logo não tratar `fileExists=false` como falha da textura. Evidência detalhada: [67_ITEMS_HEADER_BGD_R2_1_TEXTURE_PATH_FIX.md](67_ITEMS_HEADER_BGD_R2_1_TEXTURE_PATH_FIX.md).
+
+**Próximos passos, nesta ordem recomendada enquanto MP não estiver disponível:**
+1. **R2.2 — higiene diagnóstica do header**: retirar `fileExists` do caminho absoluto e log enganoso, validar novamente em SP/RPT sem regressão, depois congelar R2 (sem mexer na aparência aprovada).
+2. **UX-ITEMS-04 — família original de botões/ícones**: documentar requisitos e protótipos para Uniforme/Colete/Mochila, aproveitando controles/estados/escala genéricos em UICommon e mantendo as texturas próprias por módulo. Não copiar ACE, não antecipar ícones de Weapons sem sua revisão. Incluir PNG masters, PAA compilado e QA de 1080p e ultrawide.
+3. **UX-ITEMS-03 — microtextos defasados**: conferir tooltips e textos herdados de `Mostrar`, `Onde aplicar o kit?`, CLOSE_UI sem confirmação; entregar delta separado de iconografia.
+4. **UX/semântica do dirty geral**: discutir comportamento quando todas as linhas voltam ao baseline mas indicador geral permanece `ALTERADO`; não alterar sem decisão de domínio/contrato.
+5. **Performance de catálogo com modset grande**: documentar o primeiro build de 24.747 ms / 7.092 itens, investigar opções de cache/progresso sem perder CONFIG_ALL; focused refresh de 10 ms continua saudável. Otimização como gate próprio, não misturar com botões.
+6. **0.13-A MP**: validar PBO atual e biblioteca pública com host + cliente real quando disponível, depois 0.13-B (JIP), C (persistência), D (ACL/concorrência), E (soak) e F (contratos Nexus).
+
+Somente resultados efetivamente observados podem elevar os status. Não fazer merge nem atualizar `main` automaticamente.
+
 ## Checkpoint ativo — R2 branding e footer (21/10/2026)
 
 Nova branch de desenvolvimento: `feature/items-uicommon-brand-footer-r2-20261021`, derivada da UX R1. Ver [66_ITEMS_UICOMMON_BGD_BRAND_FOOTER_R2.md](66_ITEMS_UICOMMON_BGD_BRAND_FOOTER_R2.md).
