@@ -1,5 +1,17 @@
 # SP_ORG Items — continuidade canônica de retomada (21/10/2026)
 
+## Continuidade adicional — Items Header BGD / Footer R2 (21/10/2026)
+
+Após aprovação manual da UX R1, a próxima candidata está **isolada** em `feature/items-uicommon-brand-footer-r2-20261021`.
+
+- [R2: logo BGD, root cause de HISTÓRICO cinza e gates](66_ITEMS_UICOMMON_BGD_BRAND_FOOTER_R2.md).
+- A UICommon **0.2.0.10** aprovada em 07/10 continua congelada como fallback; branch R2 contém UICommon **0.2.0.11 candidate**, com **slot visual genérico** `SPORG_UICommon_HeaderBrand`.
+- Items injeta marca canônica BGD no IDC 107; logo original preservado em `assets/branding/bgd/bgd-logo-primary.png`, PAA derivado com alfa no addon e na missão.
+- HISTÓRICO cinza comprovadamente vinha de `fn_refreshPhysicalTargetUI.sqf`, cor hardcoded `#81918E`; TARGET_ONLY foi migrado a `UICommon_fnc_renderFooter`, roxo `#B9A3E8`.
+- Botões com ícones originais continuam **fora** da R2. Library MP continua pendente, sem bloquear teste SP.
+- Missão: `SP_ORG_Items_HeaderBGD_FooterR2_UICommon_0_2_0_11.VR`; roteiro SP `missions/SP_ORG_Items_Weapons_UI_Lab_SelfContained.VR/HEADER_BGD_FOOTER_R2_TEST.md`.
+- **Ainda não homologar R2**: aguardar engine, teste manual, screenshots e RPT.
+
 ## Atualização de prioridade — Items UX R1 (21/10/2026)
 
 **Decisão do usuário:** devido à indisponibilidade temporária de outro jogador para testar MP, **inverter os gates de execução**: primeiro UX Items (CAPTURAR + realce laranja), depois fechar 0.13-A multiplayer. A pendência MP permanece registrada e NÃO bloqueia teste SP da UX.
