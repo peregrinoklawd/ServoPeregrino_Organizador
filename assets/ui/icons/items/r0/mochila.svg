@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256">
+  <title>Mochila tática — SP_ORG R0</title>
+  <desc>Silhueta monocromática original. Recortes transparentes. Não derivada dos ícones do ACE.</desc>
+  <path fill="#F3F6F4" fill-rule="evenodd" d="M111 34 C111 20 145 20 145 34 L145 54 H111 Z M83 48 H173 L199 79 L201 223 H55 L57 79 Z M42 102 H56 V191 H40 L31 174 V119 Z M200 102 H214 L225 119 V174 L216 191 H200 Z M112 34 Q128 27 144 34 L144 45 H112 Z M73 83 Q128 65 183 83 L183 117 Q128 134 73 117 Z M81 91 Q128 78 175 91 L175 110 Q128 122 81 110 Z M81 142 H175 V203 H81 Z M89 150 H167 V195 H89 Z M121 156 H135 V186 H121 Z M63 136 H72 V177 H63 Z M184 136 H193 V177 H184 Z"/>
+</svg>
