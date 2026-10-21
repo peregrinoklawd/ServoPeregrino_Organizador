@@ -1,0 +1,81 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-21",
+  "decision": "APPROVED_ARTWORK_SELECTION",
+  "source": "User approval of three generated image artifacts in Arma 3 - Organizador Servo Peregrino project",
+  "branch": "feature/items-ui-icons-r1-simple-silhouettes",
+  "important": "These user-approved PNG images are not the earlier SVG R0/R1 prototypes. Do not silently substitute them, regenerate them, or treat prior SVGs as canonical.",
+  "assets": [
+    {
+      "id": "uniforme",
+      "status": "APPROVED",
+      "source_filename": "ícone_minimalista_de_camisa_com_gola_v.png",
+      "target_filename": "uniforme_aprovado_original.png",
+      "sha256": "93e50ec9756bd635403c45b9a7bf374101d850bc5dff11c2855385cd495e1fb7",
+      "bytes": 731981,
+      "pixels": [
+        1254,
+        1254
+      ],
+      "format": "PNG RGBA",
+      "notes": "Latest white V-neck uniform graphic accepted without further changes."
+    },
+    {
+      "id": "colete",
+      "status": "APPROVED",
+      "source_filename": "ícone_de_colete_tático_branco.png",
+      "target_filename": "colete_1_aprovado_original.png",
+      "sha256": "37890a2476dec579a90a72d31c37718c0a48c1940a9cf1cacf111df0f0fed105",
+      "bytes": 533572,
+      "pixels": [
+        1254,
+        1254
+      ],
+      "format": "PNG RGBA",
+      "notes": "Explicit choice: Colete 1 (not Colete 2); preserve rounded neckline, side relief and plain white silhouette."
+    },
+    {
+      "id": "mochila",
+      "status": "APPROVED",
+      "source_filename": "silhueta_branca_de_mochila.png",
+      "target_filename": "mochila_corrigida_aprovada_original.png",
+      "sha256": "908cbc604658e13eab8571ee7bbf0e87878665cb5b934b6ea488674d2207bb5c",
+      "bytes": 721056,
+      "pixels": [
+        1254,
+        1254
+      ],
+      "format": "PNG RGBA",
+      "notes": "Latest corrected all-white filled center; shoulder straps, top handle and larger side pouches; no hollow/transparent center. This supersedes all earlier backpack concepts."
+    }
+  ],
+  "preservation": {
+    "exact_original_master_archive_filename": "SPORG_Items_Icones_Selecionados_ORIGINAIS_20261021.zip",
+    "archive_sha256": "9d4473a2647cd7c9d689e1bcb5476ffeb981f54ed631d6580d6cf1bb035df2b4",
+    "archive_contents": [
+      "uniforme_aprovado_original.png",
+      "colete_1_aprovado_original.png",
+      "mochila_corrigida_aprovada_original.png",
+      "MANIFEST_ORIGINAIS.json"
+    ],
+    "original_files_uploaded_to_github": false,
+    "reason": "This GitHub connector accepts UTF-8 strings/base64 blob content and does not expose a local-binary upload operation; image bytes are backed up in user-downloadable archive outside GitHub until a verified binary ingestion is possible. Do not mark migration complete."
+  },
+  "runtime": {
+    "icon_buttons_implemented": false,
+    "paa_generated": false,
+    "approval_of_SVG_R1": false,
+    "app_target_idcs": [
+      2111,
+      2112,
+      2113
+    ],
+    "equipment_view_idcs": [
+      4110,
+      4111,
+      4112
+    ],
+    "last_homologated_branch": "baseline/items-uicommon-r2-2-sp-homologated-20261021"
+  },
+  "next_gate": "Ingest exact verified PNG bytes as Git blobs and compare SHA256 to this manifest; then derive PNG/PAA and integrate icon plus label only after QA."
+}
