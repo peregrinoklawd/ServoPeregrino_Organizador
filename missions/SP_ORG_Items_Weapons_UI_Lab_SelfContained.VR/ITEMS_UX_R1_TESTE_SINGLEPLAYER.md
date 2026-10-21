@@ -28,7 +28,7 @@ Observação: `dirty` geral tem comportamento histórico de flag de mutação e 
 1. Com um kit privado já salvo e selecionado, modificar o rascunho: inserir um item "A" que **não** está no equipamento físico.
 2. Selecionar `Visualizar:` UNIFORME, COLETE ou MOCHILA e verificar o conteúdo físico mostrado.
 3. Clicar `CAPTURAR`: deve abrir confirmação explicando **SUBSTITUIR** ITENS DO KIT, não fazer merge; deve indicar equipamento visualizado e ausência de autosave.
-4. Escolher **Cancelar**: rascunho, quantidade, nome, kitId, identidade, equipamento físico e kit salvo permanecem iguais.
+4. Escolher **Cancelar**: rascunho, quantidade, nome, kitId, identidade, equipamento físico, kit salvo, status transitório e revisão de UI permanecem iguais (nenhum efeito até confirmar).
 5. Clicar de novo e **Confirmar**: a lista ITENS DO KIT vira exatamente o conteúdo físico da visualização escolhida; "A" desaparece se não estava lá. Nome/kitId do kit selecionado e destination preferido são preservados.
 6. Com o equipamento com 2+ classes, verificar quantidades, modos EXACT e ausência de mistura de UNIFORME com COLETE/MOCHILA.
 7. Antes de SALVAR, fechar/reabrir: o rascunho capturado permanece em memória. Usar DESCARTAR e confirmar que o kit salvo anterior continua intacto.
