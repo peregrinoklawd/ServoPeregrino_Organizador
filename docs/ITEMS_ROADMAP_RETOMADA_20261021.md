@@ -8,7 +8,7 @@
 - [x] Isolar branch `feature/items-0.13-retomada-20261021` diretamente da baseline, sem merge.
 - [x] Documentar versão, testes homologados, riscos, pendências e contratos.
 - [x] Registrar backlog CAPTURAR importando somente a especificação, não o runtime.
-- [ ] Conferir delta final desta branch contra a base (nenhum SQF/HPP/CPP/mission alterado).
+- [x] Conferir delta documental contra a base: 8 arquivos exclusivamente em `docs/` e `machine/` nos 8 primeiros commits; nenhum `addons/` ou `missions/` alterado (comparação GitHub, 21/10/2026).
 - [ ] Criar PR em Draft somente se desejável após revisão da documentação; não merge automático.
 
 ## Gate 1 — Fechar Items 0.13-A Server Authority Foundation [PENDENTE DE RUNTIME MP]
