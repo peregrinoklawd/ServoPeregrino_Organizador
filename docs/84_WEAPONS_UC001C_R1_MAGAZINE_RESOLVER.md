@@ -1,5 +1,8 @@
 # Weapons UC-001-C R1 — Carregadores, magazine wells, muzzles e variantes
 
+**Checkpoint 21/10/2026 — UC-001-C R1 runtime AUTO confirmado 1589/1589 PASS, 0 FAIL/BLOCKED** (RPT real 11.234 linhas; build 0.7.6.1). Manual físico multi-muzzle ainda não comprovado; PR #12 continua Draft. **WUX-004**: clicar no nome da arma P2 chama indevidamente CATALOG_TO_DRAFT (IDC 2021). **WUX-005**: selecionar kit/trocar arma-base reinicia catalogOffset=0; preservar scroll das armas e recomputar somente acessórios dependentes. **Não implementar UI agora**, revisar após setas/botões por linha de catálogo. **UC001C-MUZZLE-001**: potencial divergência magazine do launcher vs campo primaryMagazine na aplicação D2; requer teste físico direcionado, não falha demonstrada. Registrar e continuar pendência aceita UC001B-DEFER-001 (MCC grip CBA-only). Análise completa: `docs/85_WEAPONS_UC001C_R1_RPT_REVIEW_UX_OBSERVATIONS_2026_10_21.md`.
+
+
 **Situação:** candidata de implementação, missão *mission-first*; **RPT real do Arma 3 ainda pendente**.
 **Nova branch:** `feature/weapons-uc-001-c-magazine-compatibility`, derivada do marcador imutável `baseline/weapons-uc001b-r2-approved` (UC-001-B homologada pelo usuário em 16/10/2026; 1518/1518, com `UC001B-DEFER-001` explicitamente aceito).
 **Display:** 0.7-G; **semantic** 0.7.6.1; **build** `0.7.6.1-uc001-c-r1-magazines-wells-variants-mission-first`.
