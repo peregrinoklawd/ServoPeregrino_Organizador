@@ -392,9 +392,33 @@ switch _eventU do {
         };
     };
     case "CAPTURE_EQUIPMENT": {
-        _result=[player,_state getOrDefault ["equipmentView","U"]] call ServoPeregrino_Organizador_Items_fnc_captureEquipmentToDraft;
-        [_result,true] call _publishResult;
-        _refresh=false; _draftFocusedRefresh=true; _draftFocusedReason="CAPTURE_EQUIPMENT_TO_DRAFT";
+        // A escolha é capturada ao clicar. Cancelar jamais muda Draft, Repository ou equipamento.
+        private _captureView=_state getOrDefault ["equipmentView","U"];
+        private _draftStateAtClick=missionNamespace getVariable [SERVO_PEREGRINO_ORGANIZADOR_ITEMS_DRAFT_STATE_VAR,createHashMap];
+        private _expectedRevision=_draftStateAtClick getOrDefault ["revision",0];
+        [_captureView,_expectedRevision] spawn {
+            params ["_view","_expectedDraftRevision"];
+            private _viewLabel=[_view] call ServoPeregrino_Organizador_Items_fnc_getUITargetLabel;
+            private _question=format [
+                "CAPTURAR substituirá todos os itens de ITENS DO KIT pelo conteúdo atualmente exibido em CONTEÚDO DO EQUIPAMENTO (%1).<br/><br/>As alterações ficarão somente no rascunho até você usar SALVAR. Continuar?",
+                _viewLabel
+            ];
+            private _yes=[_question,"SP_ORG_Items",true,true] call BIS_fnc_guiMessage;
+            if (_yes) then {
+                private _openDisplay=uiNamespace getVariable [SERVO_PEREGRINO_ORGANIZADOR_ITEMS_UI_DISPLAY_VAR,displayNull];
+                if (!isNull _openDisplay) then {
+                    private _nowState=missionNamespace getVariable [SERVO_PEREGRINO_ORGANIZADOR_ITEMS_DRAFT_STATE_VAR,createHashMap];
+                    if ((_nowState getOrDefault ["revision",0]) isNotEqualTo _expectedDraftRevision) then {
+                        ["O rascunho mudou durante a confirmação. Nenhum item foi substituído; tente capturar novamente.","WARN"] call ServoPeregrino_Organizador_Items_fnc_pushUIFeedback;
+                    } else {
+                        private _captureResult=[player,_view] call ServoPeregrino_Organizador_Items_fnc_captureEquipmentToDraft;
+                        [_captureResult,true] call ServoPeregrino_Organizador_Items_fnc_presentUIResult;
+                        ["CAPTURE_EQUIPMENT_CONFIRMED"] call ServoPeregrino_Organizador_Items_fnc_refreshDraftMutationUI;
+                    };
+                };
+            };
+        };
+        _refresh=false;
     };
     case "REFRESH": {_feedback="Conteúdo do equipamento atualizado."; _refresh=false; _equipmentFocusedRefresh=true; _equipmentFocusedReason="EQUIPMENT_REFRESH"; _equipmentSameView=false;};
     default {_refresh=false;};
