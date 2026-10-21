@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 64 64">
+  <title>SP_ORG Items R1 — Mochila</title>
+  <desc>Silhueta compacta de mochila com alça superior e volumes laterais, sem bolsos internos.</desc>
+  <path fill="#F3F6F4" fill-rule="evenodd" d="M23 12 V8 C23 0 41 0 41 8 V12 C49 14 53 21 53 31 V55 H11 V31 C11 21 15 14 23 12 Z M27 11 H37 V8 C37 4 27 4 27 8 Z"/>
+  <path fill="#101B1D" d="M20 38 H44 V40 H20 Z"/>
+</svg>
