@@ -1,5 +1,20 @@
 # Items — roadmap de retomada (21/10/2026)
 
+## Checkpoint ativo — R2 branding e footer (21/10/2026)
+
+Nova branch de desenvolvimento: `feature/items-uicommon-brand-footer-r2-20261021`, derivada da UX R1. Ver [66_ITEMS_UICOMMON_BGD_BRAND_FOOTER_R2.md](66_ITEMS_UICOMMON_BGD_BRAND_FOOTER_R2.md).
+
+- [x] Localizar logo institucional do BGD-HQ; copiar exatamente o PNG canônico, preservando SHA.
+- [x] Gerar PAA transparente 256x256 para Arma 3 e sincronizar addon/mission por CI.
+- [x] Criar `SPORG_UICommon_HeaderBrand` sem hardcode de BGD.
+- [x] Items usa logo próprio em IDC 107; Weapon permanece neutro.
+- [x] Remover caminho cinza de TARGET_ONLY, renderizar HISTÓRICO roxo pelo footer UICommon.
+- [x] Preparar checklist RPT e missão dedicada a R2.
+- [ ] **Teste manual em Arma SP e homologação R2**.
+- [ ] Após R2, planejar em outra entrega família de ícones de botões originais (não nesta).
+
+O gate de biblioteca pública MP Items 0.13-A permanece adiado até haver outro jogador disponível.
+
 ## PRIORIDADE ATUAL — UX R1 antes de Multiplayer (21/10/2026)
 
 O usuário decidiu trabalhar agora em single-player, adiando o gate MP até dispor de outro jogador. **Ordem operacional atual:** (1) Items UX R1 CAPTURAR + realce por linha → RPT/prints/homologação SP; (2) retomar Items 0.13-A Authority MP; (3) Items 0.13-B/C/D/E/F. Os Gates numerados abaixo permanecem históricos/temáticos e **não são ordem obrigatória**.
