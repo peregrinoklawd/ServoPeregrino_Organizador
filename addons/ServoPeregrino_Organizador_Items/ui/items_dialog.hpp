@@ -240,12 +240,10 @@ class SP_ORG_Items_Dialog
         class FutureIconSlot: SPORG_Items_HeaderBrand
         {
             idc=107;
-            // Slot genérico UICommon: Items injeta o asset BGD. O module Weapons pode fornecer outro.
-#ifdef SPORG_ITEMS_MISSION_BRAND_TEXTURE
-            text="items\\data\\bgd_logo_ca.paa";
-#else
-            text="\\ServoPeregrino_Organizador_Items\\data\\bgd_logo_ca.paa";
-#endif
+            // O UICommon define apenas o controle visual.
+            // A textura e o caminho dependem do contexto (mission-first vs addon)
+            // e sao aplicados por Items/fn_refreshHeaderUI via ctrlSetText.
+            text="";
             tooltip="Black Goat Division — marca institucional";
             x=SPORG_ITEMS_UI_HEADER_FUTURE_X; y=safeZoneY+0.009*safeZoneH;
             w=SPORG_ITEMS_UI_ICON_W; h=SPORG_ITEMS_UI_ICON_H;
