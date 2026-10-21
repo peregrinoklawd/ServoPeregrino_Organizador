@@ -1,5 +1,15 @@
 # SP_ORG Items + Weapons UI Lab — Weapons 0.6-F R5
 
+## ADENDO 21/10/2026 — correção R2.1 da textura no header
+
+O usuário executou R2 no Arma: header sem logo. RPT confirmou `Picture items\\data\\bgd_logo_ca.paa not found`. **Não era falha confirmada do conteúdo PAA**, mas um arquivo não localizado pelo caminho relativo do HPP.
+
+A R2.1 usa `getMissionPath "items\data\bgd_logo_ca.paa"` e `ctrlSetText` no controle 107, com telemetria `[BRAND_HEADER]`. A missão nova é `SP_ORG_Items_HeaderBGD_FooterR2_1_TexturePathFix.VR`; preservar a R2 antiga como evidência de falha, não como entrega pronta. Teste no engine e RPT R2.1 ainda pendentes.
+
+- Detalhes: [docs/67_ITEMS_HEADER_BGD_R2_1_TEXTURE_PATH_FIX.md](../../docs/67_ITEMS_HEADER_BGD_R2_1_TEXTURE_PATH_FIX.md).
+- Sem mudanças na UX R1, no módulo Weapons e no contrato do footer roxo.
+- BGD-HQ Watch: preferir ImageToPAA oficial, decode/round-trip e inspeção alpha/mips antes de liberar a textura final.
+
 ## ATUAL — Items Header BGD + Footer R2 (21/10/2026)
 
 A candidata atual desta branch é `SP_ORG_Items_HeaderBGD_FooterR2_UICommon_0_2_0_11.VR`. Ler **primeiro** [HEADER_BGD_FOOTER_R2_TEST.md](HEADER_BGD_FOOTER_R2_TEST.md).
