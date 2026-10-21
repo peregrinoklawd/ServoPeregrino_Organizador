@@ -73,7 +73,7 @@ private _draftUnknownMassCount = 0;
     private _aware=[_entry,_meta] call ServoPeregrino_Organizador_Items_fnc_getUIEntryAwareness;
     if (_aware getOrDefault ["known",false]) then {_draftTotalMass=_draftTotalMass+(_aware getOrDefault ["totalMass",0]);} else {_draftUnknownMassCount=_draftUnknownMassCount+1;};
     if ([_draftNeedle, format ["%1 %2",_entry#2,_meta getOrDefault ["displayName",_entry#2]]] call _needleMatch) then {
-        _draftRows pushBack createHashMapFromArray [["type",_entry#1],["className",_entry#2],["quantity",_entry#3],["stateMode",_entry#4],["stateData",+(_entry#5)],["displayName",_meta getOrDefault ["displayName",_entry#2]],["picture",_meta getOrDefault ["picture",""]],["available",_meta getOrDefault ["available",false]],["massKnown",_aware getOrDefault ["known",false]],["unitMass",_aware getOrDefault ["unitMass",0]],["totalMass",_aware getOrDefault ["totalMass",0]]];
+        _draftRows pushBack createHashMapFromArray [["entry",+_entry],["type",_entry#1],["className",_entry#2],["quantity",_entry#3],["stateMode",_entry#4],["stateData",+(_entry#5)],["displayName",_meta getOrDefault ["displayName",_entry#2]],["picture",_meta getOrDefault ["picture",""]],["available",_meta getOrDefault ["available",false]],["massKnown",_aware getOrDefault ["known",false]],["unitMass",_aware getOrDefault ["unitMass",0]],["totalMass",_aware getOrDefault ["totalMass",0]]];
     };
 } forEach (_draft getOrDefault ["entries",[]]);
 
