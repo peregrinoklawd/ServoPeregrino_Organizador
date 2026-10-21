@@ -1,5 +1,20 @@
 # Items — roadmap de retomada (21/10/2026)
 
+## PRIORIDADE ATUAL — UX R1 antes de Multiplayer (21/10/2026)
+
+O usuário decidiu trabalhar agora em single-player, adiando o gate MP até dispor de outro jogador. **Ordem operacional atual:** (1) Items UX R1 CAPTURAR + realce por linha → RPT/prints/homologação SP; (2) retomar Items 0.13-A Authority MP; (3) Items 0.13-B/C/D/E/F. Os Gates numerados abaixo permanecem históricos/temáticos e **não são ordem obrigatória**.
+
+- [x] Código candidato CAPTURAR confirmado e substituição de `entries` com preservação do kit selecionado.
+- [x] Código candidato realce laranja por `baseline.entries` em FULL + DRAFT_FOCUSED.
+- [x] Sincronizar os mesmos seis arquivos entre addon e missão; sem mudanças de Weapons/UICommon.
+- [x] Preparar missão self-contained identificada como `SP_ORG_Items_UX_R1_UICommon_0_2_FINAL.VR` (arquivos fonte no Git).
+- [x] Roteiro SP criado em `missions/SP_ORG_Items_Weapons_UI_Lab_SelfContained.VR/ITEMS_UX_R1_TESTE_SINGLEPLAYER.md`.
+- [ ] Empacotamento ZIP confirmado / link de artifact verificado, quando disponível.
+- [ ] Executar Arma SP, suíte automática + teste manual, enviar RPT/prints.
+- [ ] Homologar e congelar UX R1 após aprovação; somente então iniciar UX R2 ou MP.
+
+**Importante**: o Items usa o orange do Weapons como **padrão de apresentação**, mas a comparação de linhas é específica do Items. Nenhuma alteração foi necessária na UICommon 0.2 FINAL.
+
 > Complementa `docs/history/SP_ORG_0_13_ROADMAP.md` e NÃO reclassifica validações passadas. A fonte funcional é `baseline/uicommon-0.2-final-homologated@f92137769cf4d0478a5872aae157f5a229177c85`.
 
 ## Gate 0 — Continuidade e provenance [DOCUMENTAÇÃO]
