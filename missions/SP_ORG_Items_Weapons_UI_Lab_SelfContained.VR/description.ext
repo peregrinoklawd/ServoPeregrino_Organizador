@@ -337,7 +337,11 @@ class CfgSounds
 };
 
 #include "uicommon\ui\shared_controls.hpp"
+// Items artwork paths are mission-relative in the self-contained UI Lab.
+// Addon compilation omits this define and uses \ServoPeregrino_Organizador_Items\data\...
+#define SPORG_ITEMS_MISSION_BRAND_TEXTURE 1
 #include "items\ui\items_dialog.hpp"
+#undef SPORG_ITEMS_MISSION_BRAND_TEXTURE
 #include "weapons\ui\weapons_dialog.hpp"
 
 class CfgRemoteExec
