@@ -1,5 +1,16 @@
 # SP_ORG Items + Weapons UI Lab — Weapons 0.6-F R5
 
+## ADENDO 21/10/2026 — Items UX R1 (candidata SP)
+
+**Este adendo prevalece sobre o título R5 histórico abaixo para o pacote desta branch.**
+- Baseline congelada: UICommon 0.2 FINAL de 07/10/2026, sem alteração em UICommon nem no runtime Weapons.
+- Identidade do ZIP/mission: `SP_ORG_Items_UX_R1_UICommon_0_2_FINAL.VR`.
+- Mudança Items: CAPTURAR mostra confirmação e **substitui as entradas do rascunho**, preservando identidade, sem autosave/alterar inventário físico; cancelamento sem mutação. Rascunho salvo intacto até SALVAR.
+- Mudança Items: realce laranja `[1,0.76,0.28,0.18]` por linha divergente em relação ao snapshot salvo; referência visual Weapons, implementação de comparação exclusiva Items.
+- Teste obrigatório: [ITEMS_UX_R1_TESTE_SINGLEPLAYER.md](ITEMS_UX_R1_TESTE_SINGLEPLAYER.md).
+- Status: **source candidate; nenhum novo RPT/engine PASS nesta entrega ainda**. A biblioteca pública MP permanece pendente até testes com outro jogador.
+- Usar missão self-contained sem PBOs SP_ORG para validação SP; pacote é versionado sem alterar o diretório de fonte da missão.
+
 Missão **100% self-contained** para validar a candidata Weapons 0.6-F R5.
 Não carregue PBOs do Servo Peregrino durante este teste.
 
