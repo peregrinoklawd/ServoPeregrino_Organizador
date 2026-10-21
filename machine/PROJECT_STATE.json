@@ -22,7 +22,7 @@
     "hub_rule": "Hub is an optional player-facing integration/orchestration layer. No domain module may require Hub in order to function.",
     "independent_core_development": true
   },
-  "global_next_gate": "UC001C real Arma AUTO 1589/1589 PASS 2026-10-21. Manual physical multi-muzzle and UC001C-MUZZLE-001 still unverified. WUX004/005 code root cause established, defer until row buttons completed. UC001B approved with deferred CBA-only MCC physical gate; PR #12 Draft; no merge/PBO.",
+  "global_next_gate": "UC001C R1 AUTO 1589 PASS, manual observed mixed primary and GL magazines. Multi-muzzle separate selector/Recipe version/D2 plan registered docs/86 as PROPOSED, NOT IMPLEMENTED. User wants reuse of CATALOG_TO_DRAFT in per-row buttons then remove IDC2021 name click and double-click transfer. WUX005 scroll deferred. PR12 Draft, no merge; UC001B frozen approved.",
   "global_after_gate": "UC-001-B further review or R2 after runtime, then UC-001-C magazines/variants, UC-001-D e2e. WST-001 cross-mission profile persistence essential before shipping, WUX-002 magazines vest and WUX-003 icon filters backlog; 0.8 MP later.",
   "modules": [
     {
@@ -1032,13 +1032,13 @@
         },
         {
           "id": "WUX-004",
-          "status": "RECORDED_DEFERRED_AFTER_CATALOG_ROW_BUTTONS",
-          "summary": "WeaponValue name IDC 2021 currently calls CATALOG_TO_DRAFT; naming/selection must not transfer from catalog; only explicit catalog buttons; also review catalog onLBDblClick",
-          "doc": "docs/85_WEAPONS_UC001C_R1_RPT_REVIEW_UX_OBSERVATIONS_2026_10_21.md"
+          "status": "MIGRATE_EXISTING_CATALOG_TO_DRAFT_TO_ROW_BUTTONS_THEN_REMOVE_NAME_CLICK",
+          "summary": "Operator confirmed 2026-10-21: reuse existing CATALOG_TO_DRAFT for future per-row Catalog buttons, then detach from WeaponValue IDC 2021; also disable CatalogList dblclick mutation per button-only rule",
+          "doc": "docs/86_WEAPONS_UC001C_MAGAZINES_BY_MUZZLE_AND_CATALOG_BUTTON_MIGRATION.md"
         },
         {
           "id": "WUX-005",
-          "status": "RECORDED_DEFERRED_AFTER_CATALOG_ROW_BUTTONS",
+          "status": "DEFER_UNTIL_CATALOG_ROW_BUTTONS_AND_MAGAZINE_UI",
           "summary": "Preserve catalog weapon list position/search/selection when selecting kit and changing base weapon; only dependent accessory/magazine projection refreshes; currently KIT_SELECT and SET_DRAFT_WEAPON set catalogOffset=0",
           "doc": "docs/85_WEAPONS_UC001C_R1_RPT_REVIEW_UX_OBSERVATIONS_2026_10_21.md"
         }
@@ -1937,6 +1937,16 @@
       "status": "DESIGN_RISK_NOT_RPT_PROVEN",
       "detail": "recipe magazineClass currently selected from aggregated magazines across muzzles, D2 targetLoadout treats it as primaryMagazine; explicit secondary-muzzle mapping not demonstrated",
       "gate": "VALIDATE_BEFORE_COMPLETE_MAGAZINE_PHYSICAL_ACCEPTANCE"
-    }
+    },
+    "multimuzzle_proposal": {
+      "id": "UC001C-MUZZLE-001",
+      "status": "DESIGN_PROPOSED_NOT_IMPLEMENTED",
+      "operator_observed": "2026-10-21 manual visual: GL magazines and rifle mags mixed in one Carregador selector",
+      "design_doc": "docs/86_WEAPONS_UC001C_MAGAZINES_BY_MUZZLE_AND_CATALOG_BUTTON_MIGRATION.md",
+      "proposal": "Separate primary magazine and second muzzle ammunition selection conditionally; model muzzleId and KEEP/CLEAR/SET; version Recipe; integrate D2 and capture/rollback; test physical MX GL and modded weapons",
+      "user_approval": "Concept discussion underway; no new code or physical validation approved",
+      "current_R1_runtime": "1589/1589 AUTO PASS, manual loadout D2 GL not validated"
+    },
+    "next_gate": "Design/approval of independent muzzle-specific magazines; C1 runtime 1589 passed but GL ammo shares primary selector; physical D2 target row index4 used for selected mag; further versioned Recipe migration required"
   }
 }
