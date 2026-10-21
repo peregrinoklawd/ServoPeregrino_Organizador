@@ -18,6 +18,25 @@ private _draftData=_draftR getOrDefault ["data",createHashMap];
 private _hasDraft=_draftData getOrDefault ["hasDraft",false];
 private _draft=_draftData getOrDefault ["current",createHashMap];
 private _dirty=_draft getOrDefault ["dirty",false];
+// Diff por identidade (tipo, classe, modo) e por valor completo (quantidade/EXACT stateData).
+// O baseline é o snapshot salvo pelo DraftService, não o flag geral dirty.
+private _draftStoreForDiff=missionNamespace getVariable [SERVO_PEREGRINO_ORGANIZADOR_ITEMS_DRAFT_STATE_VAR,createHashMap];
+private _baselineForDiff=_draftStoreForDiff getOrDefault ["baseline",createHashMap];
+private _hasSavedBaselineForDiff=(_baselineForDiff getOrDefault ["mode",""]) isEqualTo "EDIT";
+private _baselineEntriesForDiff=_baselineForDiff getOrDefault ["entries",[]];
+private _isDraftEntryAltered={
+    params [["_entry",[],[[]]]];
+    if (!_hasSavedBaselineForDiff || {(count _entry)<6}) exitWith {false};
+    private _match=_baselineEntriesForDiff findIf {
+        (_x isEqualType []) && {(count _x)>=6} &&
+        {(_x#1) isEqualTo (_entry#1)} &&
+        {(_x#2) isEqualTo (_entry#2)} &&
+        {(_x#4) isEqualTo (_entry#4)}
+    };
+    if (_match<0) exitWith {true};
+    !((_baselineEntriesForDiff#_match) isEqualTo _entry)
+};
+
 private _needle=toLower (_state getOrDefault ["draftQuery",""]);
 private _rows=[];
 private _draftTotalMass=0;
@@ -65,7 +84,7 @@ ctClear _draftCtrl;
         if ((count _dragEntry) isNotEqualTo 6) then {private _er=[_row getOrDefault ["type","ITEM"],_row getOrDefault ["className",""],_row getOrDefault ["quantity",0],_row getOrDefault ["stateMode","NONE"],+(_row getOrDefault ["stateData",[]])] call ServoPeregrino_Organizador_Items_fnc_createItemEntry; if (_er getOrDefault ["success",false]) then {_dragEntry=+(((_er getOrDefault ["data",createHashMap]) getOrDefault ["entry",[]]));};};
         private _dragDisplayName=_row getOrDefault ["displayName",_row getOrDefault ["className",""]];
         {_x setVariable ["SPORG_Items_draftEntry",+_dragEntry]; _x setVariable ["SPORG_Items_draftDisplayName",_dragDisplayName];} forEach [_pic,_name];
-        _bg ctrlSetBackgroundColor [0.01,0.015,0.017,if ((_rowIndex mod 2) isEqualTo 0) then {0.12} else {0.20}];
+        _bg ctrlSetBackgroundColor (if ([_dragEntry] call _isDraftEntryAltered) then {[1.0,0.76,0.28,0.18]} else {[0.01,0.015,0.017,if ((_rowIndex mod 2) isEqualTo 0) then {0.12} else {0.20}]});
         _pic ctrlSetText (_row getOrDefault ["picture",""]);
         _pic ctrlSetTextColor [1,1,1,1];
         _pic ctrlSetTooltip format ["%1\n%2",_row getOrDefault ["displayName",_row getOrDefault ["className",""]],_row getOrDefault ["className",""]];
