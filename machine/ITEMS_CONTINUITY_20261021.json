@@ -105,7 +105,7 @@
     "historical automated gates 516 and 523 accepted debt"
   ],
   "change_policy": {
-    "current_checkpoint": "ITEMS_UI_BRAND_FOOTER_R2_PENDING_SP_GATE",
+    "current_checkpoint": "ITEMS_UI_BRAND_FOOTER_R2_1_CI_PASS_PENDING_SP_GATE",
     "runtime_files_changed": true,
     "packaging_created": true,
     "mp_runtime_executed": false,
@@ -113,6 +113,7 @@
     "sp_runtime_executed": false
   },
   "handoff_docs": [
+    "docs/67_ITEMS_HEADER_BGD_R2_1_TEXTURE_PATH_FIX.md",
     "docs/66_ITEMS_UICOMMON_BGD_BRAND_FOOTER_R2.md",
     "docs/ITEMS_CONTINUIDADE_RETOMADA_20261021.md",
     "docs/ITEMS_ROADMAP_RETOMADA_20261021.md",
@@ -144,9 +145,9 @@
   },
   "active_branch": "feature/items-uicommon-brand-footer-r2-20261021",
   "latest_candidate": {
-    "id": "ITEMS_UI_BRAND_FOOTER_R2",
-    "status": "SOURCE_IN_GITHUB_CI_PACKAGE_READY_PENDING_REAL_ARMA_SP",
-    "mission": "SP_ORG_Items_HeaderBGD_FooterR2_UICommon_0_2_0_11.VR",
+    "id": "ITEMS_UI_BRAND_FOOTER_R2_1_TEXTURE_PATH_FIX",
+    "status": "ZIP_CI_PASS_PENDING_ARMA_RUNTIME_TEST",
+    "mission": "SP_ORG_Items_HeaderBGD_FooterR2_1_TexturePathFix.VR",
     "uicommon_semantic": "0.2.0.11",
     "uicommon_build": "0.2.0.11-header-brand-slot-r2-candidate",
     "frozen_uicommon_fallback": "0.2.0.10",
@@ -159,6 +160,25 @@
     "weapons_unchanged": true,
     "items_ux_r1_preserved": true,
     "multiplayer_pending": true,
-    "guide": "docs/66_ITEMS_UICOMMON_BGD_BRAND_FOOTER_R2.md"
+    "guide": "docs/66_ITEMS_UICOMMON_BGD_BRAND_FOOTER_R2.md",
+    "previous_failed_mission": "SP_ORG_Items_HeaderBGD_FooterR2_UICommon_0_2_0_11.VR",
+    "rpt_evidence": "13:50:40 Warning Message: Picture items\\\\data\\\\bgd_logo_ca.paa not found",
+    "root_cause_confirmed": "Header HPP relative texture path unresolved by Arma; updated via getMissionPath/ctrlSetText",
+    "fix_info": {
+      "module": "Items",
+      "idc": 107,
+      "mission_runtime_path": "getMissionPath \"items\\data\\bgd_logo_ca.paa\"",
+      "addon_runtime_path": "\\ServoPeregrino_Organizador_Items\\data\\bgd_logo_ca.paa",
+      "rpt_log_tag": "[BRAND_HEADER]",
+      "runtime_qa": "PENDING",
+      "weapons_changed": false
+    },
+    "build_verified": {
+      "ci": "PASS",
+      "zip_integrity": "PASS",
+      "paa_type": "DXT5",
+      "mission_addon_file_parity": "PASS",
+      "manual_engine": "PENDING"
+    }
   }
 }
