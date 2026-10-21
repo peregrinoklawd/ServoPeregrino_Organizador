@@ -45,7 +45,7 @@ jobs:
           assert addon.read_bytes() == mission.read_bytes(), "addon / mission PAA mismatch"
           assert struct.unpack("<H", addon.read_bytes()[:2])[0] == 0xFF05, "BGD PAA is not DXT5"
           root = Path("missions/SP_ORG_Items_Weapons_UI_Lab_SelfContained.VR")
-          for rel in ["items/functions/ui/fn_refreshPhysicalTargetUI.sqf","items/ui/items_dialog.hpp","uicommon/ui/shared_controls.hpp"]:
+          for rel in ["items/functions/ui/fn_refreshPhysicalTargetUI.sqf","items/functions/ui/fn_refreshHeaderUI.sqf","items/ui/items_dialog.hpp","uicommon/ui/shared_controls.hpp"]:
               m = (root / rel).read_bytes()
               a = (Path("addons/ServoPeregrino_Organizador_"+("UICommon" if rel.startswith("uicommon/") else "Items")) / rel.split("/",1)[1]).read_bytes()
               assert a == m, "mission/addon mismatch: " + rel
@@ -54,8 +54,15 @@ jobs:
           assert "ctrlSetStructuredText parseText format [\"<t color='#81918E'>HISTÓRICO" not in footer
           ui = (root/"items/ui/items_dialog.hpp").read_text(encoding="utf-8")
           assert "SPORG_Items_HeaderBrand: SPORG_UICommon_HeaderBrand" in ui
-          assert "bgd_logo_ca.paa" in ui
-          print("PASS: PAA DXT5; mirrored addon/mission; purple history renderer; generic header brand")
+          assert 'text="";' in ui and "FutureIconSlot: SPORG_Items_HeaderBrand" in ui
+          assert "SPORG_ITEMS_MISSION_BRAND_TEXTURE" not in ui
+          header = (root/"items/functions/ui/fn_refreshHeaderUI.sqf").read_text(encoding="utf-8")
+          assert 'getMissionPath "items\\data\\bgd_logo_ca.paa"' in header
+          assert 'ctrlSetText _logoPath' in header
+          assert '[BRAND_HEADER]' in header
+          desc = (root/"description.ext").read_text(encoding="utf-8")
+          assert "SPORG_ITEMS_MISSION_BRAND_TEXTURE" not in desc
+          print("PASS: PAA DXT5; mirrored addon/mission; purple history; runtime mission path; generic brand")
           PY
 
       - name: Package mission with delivery-specific name
