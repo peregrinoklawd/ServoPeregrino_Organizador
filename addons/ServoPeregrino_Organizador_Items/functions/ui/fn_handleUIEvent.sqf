@@ -6,7 +6,7 @@ if ((count _state) isEqualTo 0) then {_state=[] call ServoPeregrino_Organizador_
 private _eventU=toUpper _event;
 if ((_state getOrDefault ["refreshing",false]) && {_eventU in ["KIT_SELECT","CATALOG_SELECT","CATALOG_TABLE_SELECT","CATALOG_ROW_SELECT","CATALOG_SCROLL_ABSOLUTE","DRAFT_ROW_SELECT","EQUIPMENT_SELECT"]}) exitWith {true};
 // COPIADO/PUBLICADO são confirmações transitórias: ficam visíveis até a próxima interação real.
-[_eventU] call ServoPeregrino_Organizador_Items_fnc_clearKitLibraryActionStatus;
+if (_eventU isNotEqualTo "CAPTURE_EQUIPMENT") then {[_eventU] call ServoPeregrino_Organizador_Items_fnc_clearKitLibraryActionStatus;};
 _state=missionNamespace getVariable [SERVO_PEREGRINO_ORGANIZADOR_ITEMS_UI_STATE_VAR,_state];
 private _display=uiNamespace getVariable [SERVO_PEREGRINO_ORGANIZADOR_ITEMS_UI_DISPLAY_VAR,displayNull];
 private _refresh=true; private _draftFocusedRefresh=false; private _draftFocusedReason="EVENT"; private _catalogFocusedRefresh=false; private _catalogFocusedReason="EVENT"; private _equipmentFocusedRefresh=false; private _equipmentFocusedReason="EVENT"; private _equipmentSameView=false; private _feedback=""; private _feedbackLevel="INFO"; private _result=createHashMap; private _stateManagedExternally=false; private _focusedRefreshResult=createHashMap; private _targetRefresh=false; private _targetRefreshReason="EVENT"; private _soundOutcome=""; private _movementSound=""; private _pendingOutcome=createHashMap;
@@ -411,6 +411,7 @@ switch _eventU do {
                     if ((_nowState getOrDefault ["revision",0]) isNotEqualTo _expectedDraftRevision) then {
                         ["O rascunho mudou durante a confirmação. Nenhum item foi substituído; tente capturar novamente.","WARN"] call ServoPeregrino_Organizador_Items_fnc_pushUIFeedback;
                     } else {
+                        ["CAPTURE_EQUIPMENT"] call ServoPeregrino_Organizador_Items_fnc_clearKitLibraryActionStatus;
                         private _captureResult=[player,_view] call ServoPeregrino_Organizador_Items_fnc_captureEquipmentToDraft;
                         [_captureResult,true] call ServoPeregrino_Organizador_Items_fnc_presentUIResult;
                         ["CAPTURE_EQUIPMENT_CONFIRMED"] call ServoPeregrino_Organizador_Items_fnc_refreshDraftMutationUI;
@@ -418,7 +419,7 @@ switch _eventU do {
                 };
             };
         };
-        _refresh=false;
+        _refresh=false; _stateManagedExternally=true;
     };
     case "REFRESH": {_feedback="Conteúdo do equipamento atualizado."; _refresh=false; _equipmentFocusedRefresh=true; _equipmentFocusedReason="EQUIPMENT_REFRESH"; _equipmentSameView=false;};
     default {_refresh=false;};
