@@ -1,6 +1,6 @@
 {
   "project": "Servo Peregrino Organizador / SP_ORG",
-  "snapshot_date": "2026-10-16",
+  "snapshot_date": "2026-10-21",
   "state_schema_version": 2,
   "source_of_truth": {
     "repository_role": "MONOREPO",
@@ -22,7 +22,7 @@
     "hub_rule": "Hub is an optional player-facing integration/orchestration layer. No domain module may require Hub in order to function.",
     "independent_core_development": true
   },
-  "global_next_gate": "UC001B APPROVED by user w deferred MCC CBA-only physical; prepare UC001C (magazines, wells, variants) in child branch. UC001D E2E later. No merge/PBO.",
+  "global_next_gate": "Weapons handoff docs/87_WEAPONS_CONTINUIDADE_UC001C_PROXIMO_CHAT_20261021.md: B approved with explicit MCC CBA-only physical exception; C R1 runtime 1589/1589 AUTO green but manual mixed magazines GL+rifle; conditional magazine by muzzle/Recipe version/migration D2 plan PROPOSED NOT IMPLEMENTED. Reuse CATALOG_TO_DRAFT in per-row Catalog button before removing WeaponValue click; preserve catalog scroll. PR12 Draft/no merge/PBO.",
   "global_after_gate": "UC-001-B further review or R2 after runtime, then UC-001-C magazines/variants, UC-001-D e2e. WST-001 cross-mission profile persistence essential before shipping, WUX-002 magazines vest and WUX-003 icon filters backlog; 0.8 MP later.",
   "modules": [
     {
@@ -216,9 +216,9 @@
         "homologation": "USER_APPROVED_2026_10_16_1518_1518_MANUAL_2_WITH_UC001B_DEFER_001"
       },
       "development_version": {
-        "display": "0.7-F UC-001-B R2",
-        "semantic": "0.7.5.2 mission-first",
-        "build": "0.7.5.2-uc001-b-r2-legacy-source-contract-mission-first"
+        "display": "0.7-G UC-001-C R1 mission-first",
+        "semantic": "0.7.6.1 mission-first",
+        "build": "0.7.6.1-uc001-c-r1-magazines-wells-variants-mission-first"
       },
       "dependencies": [
         "Nexus",
@@ -256,10 +256,10 @@
           "persistence.provider.v1"
         ]
       },
-      "status": "UC001B_R2_USER_APPROVED_WITH_ACCEPTED_MCC_CBA_ONLY_MANUAL_TEST_GAP",
-      "next_gate": "UC-001-C magazine/magwell/variant resolver from approved B R2 branch; B deferred manual test MUST remain documented for D e2e.",
+      "status": "UC001C_R1_AUTO_APPROVED_1589_1589_MANUAL_MIXED_MUZZLES_CONFIRMED_DESIGN_PENDING",
+      "next_gate": "Follow canonical handoff docs/87_WEAPONS_CONTINUIDADE_UC001C_PROXIMO_CHAT_20261021.md. C R1 1589/1589 AUTO only; decide/implement versioned Recipe and muzzle-specific magazines safely; after functional row Catalog buttons, remove IDC2021 click and address WUX004/005. DO NOT rewrite B baseline/merge/PBO.",
       "homologated_artifact": "UC001B R2 approved on 2026-10-16, auto 1518/1518, 2 physical PRIMARY apply successes; pending manual MCC CBA-only specifically recorded in docs/83_WEAPONS_UC001B_R2_APPROVAL_AND_DEFERRED_GATES.md",
-      "current_candidate_artifact": "SP_ORG_Weapons_UC_001_B_Unified_Attachments_R2.VR",
+      "current_candidate_artifact": "SP_ORG_Weapons_UC_001_C_Magazines_Wells_R1.VR",
       "mission_first_validation": {
         "0.1-B": {
           "status": "APPROVED_SP",
@@ -1000,13 +1000,14 @@
       "full_compatibility_requirement": {
         "requirement_id": "UC-001",
         "status": "REQUIRED_NOT_IMPLEMENTED_FULLY",
-        "priority": "UC001C_MAGAZINES_MAGWELLS_VARIANTS",
+        "priority": "UC001C_R1_MAGAZINE_RESOLVER_RUNTIME_GATE",
         "canonical_document": "docs/74_WEAPONS_UNIFIED_COMPATIBILITY_ARCHITECTURE.md",
         "scope": "all weapons, presets/variants, attachment slots, magazines, config/mod provenance, fail-closed postvalidation",
-        "current_partial_support": "only UnderBarrelSlot engine+CBA in R4/R5",
+        "current_partial_support": "UC001B 4 attachment slots approved; UC001C magazine/magwell engine-first resolver candidate",
         "must_not_claim_complete_until_end_to_end": true,
         "uc001a_status": "SOURCE_AUDIT_IMPLEMENTED_RUNTIME_PENDING",
-        "uc001b_status": "APPROVED_WITH_EXPLICIT_MANUAL_MCC_CBA_ONLY_EXCEPTION"
+        "uc001b_status": "APPROVED_BY_USER_2026_10_16_KNOWN_ACCEPTED_TEST_GAP_UC001B_DEFER_001",
+        "uc001c_status": "R1_STATIC_GREEN_RUNTIME_AND_MANUAL_PENDING"
       },
       "previous_homologated_baseline": {
         "display": "0.7-D2 R1 mission-first",
@@ -1028,6 +1029,18 @@
           "status": "RECORDED_NOT_IMPLEMENTED",
           "summary": "Compact image category filters, while save/save-as and other action buttons stay textual",
           "doc": "docs/77_WEAPONS_BACKLOG_AMMO_VEST_ICON_FILTERS.md"
+        },
+        {
+          "id": "WUX-004",
+          "status": "MIGRATE_EXISTING_CATALOG_TO_DRAFT_TO_ROW_BUTTONS_THEN_REMOVE_NAME_CLICK",
+          "summary": "Operator confirmed 2026-10-21: reuse existing CATALOG_TO_DRAFT for future per-row Catalog buttons, then detach from WeaponValue IDC 2021; also disable CatalogList dblclick mutation per button-only rule",
+          "doc": "docs/86_WEAPONS_UC001C_MAGAZINES_BY_MUZZLE_AND_CATALOG_BUTTON_MIGRATION.md"
+        },
+        {
+          "id": "WUX-005",
+          "status": "DEFER_UNTIL_CATALOG_ROW_BUTTONS_AND_MAGAZINE_UI",
+          "summary": "Preserve catalog weapon list position/search/selection when selecting kit and changing base weapon; only dependent accessory/magazine projection refreshes; currently KIT_SELECT and SET_DRAFT_WEAPON set catalogOffset=0",
+          "doc": "docs/85_WEAPONS_UC001C_R1_RPT_REVIEW_UX_OBSERVATIONS_2026_10_21.md"
         }
       ],
       "kit_persistence_requirement": {
@@ -1813,6 +1826,194 @@
         "detail": "Physical manual application of MCC with CBA-only grip not executed",
         "revisit": "UC001D_E2E_BEFORE_PBO_MP"
       }
-    ]
+    ],
+    "baseline_branch": "baseline/weapons-uc001b-r2-approved",
+    "baseline_commit": "6b22783d7a73d279b6af73ba762d422371bfd341"
+  },
+  "weapons_uc001c": {
+    "branch": "feature/weapons-uc-001-c-magazine-compatibility",
+    "base_branch": "baseline/weapons-uc001b-r2-approved",
+    "pr_status": "DRAFT_NO_MERGE",
+    "status": "R1_ARMA_RUNTIME_AUTO_PASS_1589_1589_MANUAL_PHYSICAL_UNVERIFIED",
+    "display": "0.7-G",
+    "semantic": "0.7.6.1",
+    "build": "0.7.6.1-uc001-c-r1-magazines-wells-variants-mission-first",
+    "package": "SP_ORG_Weapons_UC_001_C_Magazines_Wells_R1.VR",
+    "target_auto_tests": 1589,
+    "legacy_b_tests": 1518,
+    "new_checks": 71,
+    "static_checks": {
+      "passed": 37,
+      "failed": 0,
+      "total": 37
+    },
+    "first_static_run": 38862452414,
+    "first_artifact_id": 12030085733,
+    "first_zip_sha256": "ee7e778e578aca5795800762e2b550c78d7cab8514a44f8b5be67c7e32f44c0f",
+    "source": "ENGINE_COMPATIBLE_MAGAZINES_PLUS_CFGMAGWELLS_AUDIT_AND_BASEWEAPON_TYPE4_FAMILY",
+    "physical_engine_authority": "D2_UNMODIFIED",
+    "magazines_investigated_not_force_allowed": true,
+    "report": "docs/84_WEAPONS_UC001C_R1_MAGAZINE_RESOLVER.md",
+    "deferred": [
+      "UC001B-DEFER-001_MCC_CBA_ONLY_PHYSICAL",
+      "UC001A_SECONDARY",
+      "WST-001_PROFILE_KITS",
+      "WUX-002_VEST_MAGAZINE",
+      "WUX-003_ICON_FILTERS",
+      "UC001D_E2E_PERFORMANCE",
+      "PBO_MP_JIP_UNDO"
+    ],
+    "manual": "VISUAL_MIXED_MAGAZINES_CONFIRMED_PHYSICAL_MULTI_MUZZLE_NOT_PROVED",
+    "runtime": "PASS_1589_OF_1589_2026_10_21",
+    "pr_number": 12,
+    "ci_run": 38862586403,
+    "artifact_id": 12030335992,
+    "zip_sha256": "da2a23abc445bf5f4724b73013d4ec3ff1e39e5b063269e90b2b373171a4ffe8",
+    "package_code_commit": "f2767c7c31b59d205e7950e70942dc42d5b94f25",
+    "package_code_commit_context": "LEIA_PRIMEIRO final mission packaging, doc/state commits afterwards only",
+    "rpt_review": {
+      "date": "2026-10-21",
+      "source": "Texto colado(20261021-141311).txt",
+      "line_count": 11234,
+      "auto": {
+        "passed": 1589,
+        "failed": 0,
+        "blocked": 0,
+        "total": 1589,
+        "expected": 1589,
+        "new_checks": 71
+      },
+      "legacy_b_auto": {
+        "passed": 1518,
+        "failed": 0,
+        "blocked": 0
+      },
+      "manual": {
+        "post_auto_catalog_navigation": true,
+        "physical_magazine_apply": "NOT_OBSERVED",
+        "multi_muzzle_apply": "NOT_OBSERVED"
+      },
+      "magazines_example": {
+        "MX": 14,
+        "MX_GL": 79,
+        "MX_GL_muzzles": 2,
+        "P07": 8,
+        "NLAW": {
+          "engine": 0,
+          "resolved": 1,
+          "type4_variants": 2
+        }
+      },
+      "magwell_diff_count": 0,
+      "external_cba_addPerFrameHandler_errors": 24,
+      "performance": {
+        "manual_catalog_focused": {
+          "n": 885,
+          "median_ms": 7,
+          "max_ms": 325
+        },
+        "manual_draft_focused": {
+          "n": 33,
+          "median_ms": 27,
+          "max_ms": 116
+        },
+        "manual_full": {
+          "n": 2,
+          "ms": [
+            282,
+            286
+          ]
+        },
+        "auto_full": {
+          "n": 29,
+          "median_ms": 587,
+          "max_ms": 1550
+        }
+      },
+      "review_document": "docs/85_WEAPONS_UC001C_R1_RPT_REVIEW_UX_OBSERVATIONS_2026_10_21.md"
+    },
+    "open_risk": {
+      "id": "UC001C-MUZZLE-001",
+      "status": "DESIGN_RISK_NOT_RPT_PROVEN",
+      "detail": "recipe magazineClass currently selected from aggregated magazines across muzzles, D2 targetLoadout treats it as primaryMagazine; explicit secondary-muzzle mapping not demonstrated",
+      "gate": "VALIDATE_BEFORE_COMPLETE_MAGAZINE_PHYSICAL_ACCEPTANCE"
+    },
+    "multimuzzle_proposal": {
+      "id": "UC001C-MUZZLE-001",
+      "status": "DESIGN_PROPOSED_NOT_IMPLEMENTED",
+      "operator_observed": "2026-10-21 manual visual: GL magazines and rifle mags mixed in one Carregador selector",
+      "design_doc": "docs/86_WEAPONS_UC001C_MAGAZINES_BY_MUZZLE_AND_CATALOG_BUTTON_MIGRATION.md",
+      "proposal": "Separate primary magazine and second muzzle ammunition selection conditionally; model muzzleId and KEEP/CLEAR/SET; version Recipe; integrate D2 and capture/rollback; test physical MX GL and modded weapons",
+      "user_approval": "Concept discussion underway; no new code or physical validation approved",
+      "current_R1_runtime": "1589/1589 AUTO PASS, manual loadout D2 GL not validated"
+    },
+    "next_gate": "Design/approval of independent muzzle-specific magazines; C1 runtime 1589 passed but GL ammo shares primary selector; physical D2 target row index4 used for selected mag; further versioned Recipe migration required",
+    "handoff_doc": "docs/87_WEAPONS_CONTINUIDADE_UC001C_PROXIMO_CHAT_20261021.md",
+    "latest_operator_observation": "2026-10-21: visually observed primary and GL ammo mixed in one Carregador selector; no physical multi-muzzle apply confirmation",
+    "proposal_implementation_status": "DISCUSSION_DOC_ONLY_NOT_CODED",
+    "continuation_priority": "C2_DOMAINS_CONTRACT_BEFORE_D2_UI; MIGRATE_CATALOG_TO_DRAFT_INTO_ROW_BUTTONS_THEN_REMOVE_WEAPONVALUE_ACTION"
+  },
+  "weapons_continuity_handoff": {
+    "date": "2026-10-21",
+    "source_of_truth": "GITHUB_ACTIVE_BRANCH_NOT_CHAT_MEMORY",
+    "repo": "peregrinoklawd/ServoPeregrino_Organizador",
+    "branch": "feature/weapons-uc-001-c-magazine-compatibility",
+    "pr_number": 12,
+    "pr_state": "DRAFT_NO_MERGE",
+    "primary_document": "docs/87_WEAPONS_CONTINUIDADE_UC001C_PROXIMO_CHAT_20261021.md",
+    "supporting_documents": [
+      "docs/83_WEAPONS_UC001B_R2_APPROVAL_AND_DEFERRED_GATES.md",
+      "docs/84_WEAPONS_UC001C_R1_MAGAZINE_RESOLVER.md",
+      "docs/85_WEAPONS_UC001C_R1_RPT_REVIEW_UX_OBSERVATIONS_2026_10_21.md",
+      "docs/86_WEAPONS_UC001C_MAGAZINES_BY_MUZZLE_AND_CATALOG_BUTTON_MIGRATION.md"
+    ],
+    "baseline_approved": {
+      "id": "UC001B_R2",
+      "ref": "baseline/weapons-uc001b-r2-approved",
+      "commit": "6b22783d7a73d279b6af73ba762d422371bfd341",
+      "auto_passed": 1518,
+      "manually_approved": true,
+      "known_accepted_gap": "UC001B-DEFER-001"
+    },
+    "current_candidate": {
+      "id": "UC001C_R1",
+      "version": "0.7.6.1",
+      "build": "0.7.6.1-uc001-c-r1-magazines-wells-variants-mission-first",
+      "runtime_auto": "1589_1589_PASS_0_FAIL_0_BLOCKED",
+      "static": "37_37_PASS",
+      "physical_multi_muzzle_manual_approved": false,
+      "operator_observed": "GL ammo mixed with primary rifle magazines in single Carregador selector",
+      "pr_merged": false
+    },
+    "confirmed_user_decisions": [
+      "REUSE_EXISTING_CATALOG_TO_DRAFT_IMPLEMENTATION_ON_FUTURE_CATALOG_PER_ROW_BUTTONS",
+      "REMOVE_WEAPONVALUE_IDC2021_ACTION_ONLY_AFTER_PER_ROW_BUTTONS_FUNCTION_AND_ARE_TESTED",
+      "REVIEW_CATALOGLIST_IDC3120_DOUBLE_CLICK_TRANSFER_FOR_BUTTON_ONLY_RULE",
+      "PRESERVE_STABLE_WEAPON_CATALOG_SCROLL_OFFSET_AND_SELECTION;REFRESH_DEPENDENT_ACCESSORIES_ONLY",
+      "UC001B_DEFER_001_TEST_SKIP_ACCEPTED_AND_B_APPROVED",
+      "NO_CODE_CHANGES_FOR_HANDOFF"
+    ],
+    "proposed_not_approved_implementation": [
+      "CONDITIONAL_INDEPENDENT_MAGAZINE_SELECTOR_PER_MUZZLE",
+      "NEW_VERSIONED_RECIPE_BACKWARD_COMPAT_0_4",
+      "KEEP_CLEAR_SET_SECONDARY_MAGAZINE_POLICY",
+      "D2_PRIMARY_SECONDARY_MAGAZINE_PHYSICAL_APPLICATION_AND_ROLLBACK",
+      "CAPTURE_EQUIPPED_SECONDARY_MAGAZINE",
+      "STAGED_C2_C3_C4_C5_WITH_REAL_ARMA_TESTS"
+    ],
+    "outstanding": [
+      "UC001C-MUZZLE-001",
+      "WUX-004",
+      "WUX-005",
+      "UC001B-DEFER-001",
+      "UC001A-SECONDARY",
+      "WST-001",
+      "WUX-002",
+      "WUX-003",
+      "UC001D_E2E_PERFORMANCE",
+      "EXT_CBA_PFH_UNATTRIBUTED",
+      "MP_PBO_JIP_UNDO"
+    ],
+    "next_action": "Read this doc and docs/83-86 then freeze new schema/muzzle options/legacy migration plan before new code. No merge, no PBO, no runtime candidate was generated by this handoff."
   }
 }
