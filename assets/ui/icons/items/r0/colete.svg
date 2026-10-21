@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256">
+  <title>Colete modular — SP_ORG R0</title>
+  <desc>Silhueta monocromática original. Recortes transparentes. Não derivada dos ícones do ACE.</desc>
+  <path fill="#F3F6F4" fill-rule="evenodd" d="M73 39 L104 31 L112 71 H143 L151 31 L183 39 L198 87 L205 220 H51 L58 87 Z M84 47 L96 43 L103 80 L91 95 L79 85 Z M160 43 L172 47 L178 85 L166 95 L154 80 Z M105 94 H151 V105 H105 Z M77 120 H119 V157 H77 Z M83 126 H113 V150 H83 Z M137 120 H179 V157 H137 Z M143 126 H173 V150 H143 Z M78 170 H100 V180 H78 Z M107 170 H128 V180 H107 Z M135 170 H156 V180 H135 Z M163 170 H182 V180 H163 Z M79 190 H120 V207 H79 Z M136 190 H177 V207 H136 Z"/>
+</svg>
