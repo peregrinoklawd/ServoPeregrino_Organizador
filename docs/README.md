@@ -1,5 +1,19 @@
 # Índice de documentação SP_ORG
 
+
+## PONTO DE ENTRADA ATUAL — 22/10/2026 (não começar por versões históricas)
+
+**Para continuar Items/Policy em outro chat, começar obrigatoriamente por:**
+
+1. [**Continuidade autossuficiente Items + Policy**](74_CONTINUIDADE_AUTOSSUFICIENTE_ITEMS_POLICY_20261022.md) — branches, evidências, regras, pendências e primeiro passo.
+2. [**Auditoria integral de decisões da conversa**](73_AUDITORIA_COMPLETA_ITEMS_POLICY_DECISOES_20261022.md) — revisão cruzada e supersessões.
+3. [**Policy — especificação funcional**](modules/Policy.md) e [**roadmap P0–P7**](projects/policy-editor/ROADMAP.md).
+4. [**Items R2.2 SP homologado**](70_ITEMS_R2_2_SP_HOMOLOGACAO_E_HANDOFF_ICONES.md) — NÃO é aprovação MP 0.13-A.
+5. [**Iconografia em backlog**](72_BACKLOG_ICONOGRAFIA_MODULOS.md) — masters Items salvos, botões de texto **mantidos** por decisão mais recente.
+
+**Branch documentos atuais:** `feature/items-ui-icons-r1-simple-silhouettes`. **Baseline SP protegida:** `baseline/items-uicommon-r2-2-sp-homologated-20261021`. `main` pode ter marcos antigos; registros abaixo são referências históricas. Policy e seu editor **ainda não foram implementados**.
+
+
 ## Novos registros canônicos — 22/10/2026
 
 - [**Policy — módulo opcional e contrato funcional**](modules/Policy.md).
