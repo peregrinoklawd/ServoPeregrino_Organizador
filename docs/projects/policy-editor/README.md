@@ -6,6 +6,14 @@
 **Plano de execução:** [ROADMAP.md](ROADMAP.md)  
 **Contrato base:** [../../modules/Policy.md](../../modules/Policy.md)
 
+## Contexto e limites atuais (auditoria 22/10/2026)
+
+A configuração de whitelist/blacklist do servidor será **estática inicialmente**, normalmente definida antes de iniciar a sessão. O recurso de **ativação de nova revisão pelo administrador em runtime**, com aviso opcional aos jogadores, é uma **evolução futura**; o botão local `ATUALIZAR CACHE` também é funcionalidade planejada, não implementada.
+
+**Não estão tecnicamente fechados**: formato/serialização definitivo do import/export; escolha de API do Arma para clipboard/arquivo; nome e local da configuração interna e da fonte de servidor; forma concreta de sincronização MP e autenticação de admin; desacoplamento do scanner base quando Policy Editor roda sem Items. Esses são entregáveis do P0 e de spikes subsequentes — não fazer promessas de I/O arbitrário.
+
+**Regras fechadas**: ambas listas vazias = OPEN; whitelist preenchida = allowlist; blacklist preenchida = denylist; juntas = whitelist menos blacklist; admin do servidor controla policy ativa; cliente comum pode editar/exportar apenas localmente. Nenhum filtro por Role Kit nesta fase.
+
 ## 1. Visão do usuário
 
 Criar uma interface de administração (pode ser um módulo separado da família Organizador) que **exiba todos os itens elegíveis disponíveis dos mods ativos**, com busca/categorias, e permita montar **whitelist** e **blacklist** por clique em botões.
