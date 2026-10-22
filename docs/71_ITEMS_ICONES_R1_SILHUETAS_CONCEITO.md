@@ -1,5 +1,9 @@
 # SP_ORG Items — Iconografia R1, silhuetas simplificadas
 
+## Decisão atualizada em 22/10/2026 — não integrar os ícones agora
+
+Por solicitação expressa do usuário, **Items manterá os botões com texto apenas**, para preservar a consistência atual. Os três PNGs originais selecionados estão guardados, aprovados e com hashes conferidos no Git; **não criar PAA nem alterar a UI** sem novo comando. O backlog ampliado de 18 ícones para Weapons/outros módulos está em [72_BACKLOG_ICONOGRAFIA_MODULOS.md](72_BACKLOG_ICONOGRAFIA_MODULOS.md). O restante deste documento é histórico de concepção, não indicação de implementação iminente.
+
 Data: 2026-10-21. Branch: `feature/items-ui-icons-r1-simple-silhouettes`.
 
 ## Decisão posterior do usuário — três PNGs selecionados (21/10/2026)
