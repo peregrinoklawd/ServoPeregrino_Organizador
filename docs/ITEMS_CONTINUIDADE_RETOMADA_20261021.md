@@ -1,5 +1,7 @@
 # SP_ORG Items — continuidade canônica de retomada (21/10/2026)
 
+> **CONTINUIDADE SUPERADA PELA REVISÃO DE 22/10/2026:** para iniciar um **novo chat**, ler primeiro [74_CONTINUIDADE_AUTOSSUFICIENTE_ITEMS_POLICY_20261022.md](74_CONTINUIDADE_AUTOSSUFICIENTE_ITEMS_POLICY_20261022.md) e [73_AUDITORIA_COMPLETA_ITEMS_POLICY_DECISOES_20261022.md](73_AUDITORIA_COMPLETA_ITEMS_POLICY_DECISOES_20261022.md). R2.2 é homologada SP; CAPTURAR e linhas laranja estão aprovados; **ícones estão EM PAUSA (botões texto)**; projeto futuro ativo para planejamento é Policy P0. A antiga instrução "próximo passo iconografia" e outros checkpoints abaixo são históricos. MP Items 0.13-A permanece pendente.
+
 ## ATUALIZAÇÃO CANÔNICA — R2.2 homologada SP (21/10/2026)
 
 R2.2 foi executada pelo operador no Arma 3 com RPT e screenshot; **homologada no escopo do hotfix do header/footer em single-player**. O logo BGD aparece, a rotina `[BRAND_HEADER]` informa `pathAssigned=true` e o aviso anterior de caminho absoluto não reaparece no RPT. CAPTURAR, laranja do draft e lógica de Items foram preservados; multiplayer público 0.13-A continua pendente.
