@@ -89,7 +89,16 @@
       "blacklist",
       "policy-decision",
       "catalog-policy-filter",
-      "server-policy-validation"
+      "server-policy-validation",
+      "policy-internal-fallback-config",
+      "policy-server-effective-snapshot",
+      "policy-allow-deny-evaluation",
+      "policy-local-admin-editor",
+      "policy-whitelist-blacklist-import-export",
+      "policy-revision-sync",
+      "policy-session-cache-refresh",
+      "policy-admin-activation-validation",
+      "policy-kits-availability-classification"
     ],
     "ServerIntegration": [
       "persistence-provider-adapter",
