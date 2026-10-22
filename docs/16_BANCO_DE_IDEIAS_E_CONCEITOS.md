@@ -72,6 +72,19 @@ Regras:
 
 ## 3. Whitelist / blacklist
 
+### Atualização canônica Policy — 22/10/2026 (planejado; NÃO implementado)
+
+A antiga proposta genérica de allow/deny abaixo ganhou um projeto próprio:
+- [Módulo Policy e regras aprovadas](modules/Policy.md);
+- [Editor de política, importação/exportação, refresh de sessão](projects/policy-editor/README.md);
+- [Roadmap P0–P7](projects/policy-editor/ROADMAP.md).
+
+Decisões do usuário: Policy opcional e independente de BGD, whitelist vazia/blacklist vazia não impõem restrição, **ambas preenchidas = whitelist menos blacklist**, proibição prevalece; cliente não-admin pode preparar/exportar mas somente servidor/admin autorizado ativa política. Índice de autorização estático por revisão; atualização manual local e publicação opcional do admin sem revarrer configurações de mods. Kits preservados; vermelho para classe ausente, amarelo para item restrito, laranja para alteração; item ausente prevalece na cor, sem ocultar motivos. Role Kits fora do escopo inicial.
+
+**Iconografia:** botões ficam só em texto; 18 ícones pendentes registrados em [72_BACKLOG_ICONOGRAFIA_MODULOS.md](72_BACKLOG_ICONOGRAFIA_MODULOS.md), PNGs Items já aprovados/versionados mas não integrados.
+
+
+
 **PROPOSTA NOVA**
 
 Uma camada de política reutilizável por Items e Weapons. A regra deve existir na UI/catalog e também no executor/servidor.
