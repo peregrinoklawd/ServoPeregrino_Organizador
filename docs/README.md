@@ -1,5 +1,14 @@
 # Índice de documentação SP_ORG
 
+## Novos registros canônicos — 22/10/2026
+
+- [**Policy — módulo opcional e contrato funcional**](modules/Policy.md).
+- [**Projeto Policy Editor — interface para montar/importar/exportar listas**](projects/policy-editor/README.md).
+- [**Roadmap Policy P0–P7**](projects/policy-editor/ROADMAP.md).
+- [**Backlog de 18 ícones para Weapons e outros módulos**](72_BACKLOG_ICONOGRAFIA_MODULOS.md).
+
+**Última decisão:** continuar com **botões de texto**, sem integrar os PNGs já aprovados de Uniforme/Colete/Mochila. Estes arquivos permanecem guardados e verificados em `assets/ui/icons/items/approved/`. O Policy Editor é futuro; nenhuma whitelist/blacklist foi implementada no runtime. A baseline R2.2 homologada permanece congelada.
+
 ## Retomada Items — 21/10/2026
 
 Para continuar **Items** a partir da UICommon 0.2 FINAL homologada em 07/10, **comece por**:
