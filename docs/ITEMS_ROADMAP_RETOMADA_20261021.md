@@ -1,5 +1,15 @@
 # Items — roadmap de retomada (21/10/2026)
 
+## Nota de planejamento — 22/10/2026: módulo Policy e botões em pausa
+
+- [x] Registrar arquitetura de `Policy` independente de BGD: [modules/Policy.md](modules/Policy.md).
+- [x] Registrar projeto de editor visual com catálogo completo, adicionar/remover whitelist/blacklist, importar/exportar, refresh do cache e administração: [projects/policy-editor/README.md](projects/policy-editor/README.md).
+- [x] Planejar etapas e gates P0–P7: [projects/policy-editor/ROADMAP.md](projects/policy-editor/ROADMAP.md).
+- [x] Anotar 9 ícones prioritários Weapons e 9 secundários (outros módulos): [72_BACKLOG_ICONOGRAFIA_MODULOS.md](72_BACKLOG_ICONOGRAFIA_MODULOS.md).
+- [ ] Implementar Policy e Editor — **NÃO INICIADO**; módulos Items/Weapons atuais não autorizam classes pela blacklist.
+- [ ] MP da 0.13-A — continua pendente, independente do Policy.
+- **PAUSA APROVADA:** os botões Items permanecem **somente texto**; os PNGs canônicos já salvos no Git ficam para uma entrega futura, sem data. Não interpretar etapas antigas abaixo que dizem `integrar ícones` como tarefa ativa.
+
 ## Checkpoint de fechamento R2.2 — 21/10/2026
 
 - [x] **R2.2 homologada no escopo SP** com screenshot + RPT do Arma 3, sem aviso de `Invalid path`, logo presente e footer roxo. Registro completo: [70_ITEMS_R2_2_SP_HOMOLOGACAO_E_HANDOFF_ICONES.md](70_ITEMS_R2_2_SP_HOMOLOGACAO_E_HANDOFF_ICONES.md).
