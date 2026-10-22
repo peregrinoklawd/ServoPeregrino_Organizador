@@ -1,5 +1,7 @@
 # Items — contrato mestre de regressão pós-UICommon
 
+> **ATUALIZAÇÃO CANÔNICA — 22/10/2026:** este documento contém checkpoints de regressão anteriores à entrega Items UX R1. As frases abaixo que dizem que **CAPTURAR com confirmação** e o **realce laranja por linha** são funcionalidades futuras ficaram **SUPERADAS**: ambas foram implementadas e aprovadas manualmente em SP. A R2.2 também foi homologada em SP, com logo BGD e HISTÓRICO roxo. A biblioteca pública **0.13-A continua pendente de testes MP com clientes reais**. Para executar novos gates usar [homologação R2.2](70_ITEMS_R2_2_SP_HOMOLOGACAO_E_HANDOFF_ICONES.md) e [continuidade autossuficiente](74_CONTINUIDADE_AUTOSSUFICIENTE_ITEMS_POLICY_20261022.md). Não alterar os critérios históricos de regressão; interpretar a data de cada trecho.
+
 ## Atualização de leitura — Items + UICommon 0.2 FINAL (21/10/2026)
 
 A redação deste documento nasceu em 01/10 e inclui algumas melhorias então **futuras** que foram realizadas depois, na UICommon 0.2 homologada em 07/10:
