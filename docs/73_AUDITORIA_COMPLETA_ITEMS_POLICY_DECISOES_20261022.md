@@ -141,7 +141,7 @@ Distinguir:
 | `docs/70_ITEMS_R2_2_SP_HOMOLOGACAO_E_HANDOFF_ICONES.md` dizia que a próxima frente obrigatória era ícones | Indicar pausa atual; assets guardados e não integrados |
 | `docs/ITEMS_CONTINUIDADE_RETOMADA_20261021.md` dizia que ícones eram próximo passo | Incluir aviso de supersessão e redirecionar ao handoff novo |
 | Listas Policy e editor descreviam alterações ao vivo, enquanto usuário disse blacklist estática antes do servidor | Reafirmar **estática por padrão**, hot reload somente capacidade futura opcional |
-| Precedência amarelo/l aranja apresentada como fechada sem confirmação visual específica | Marcar como proposta UX a validar, mantendo vermelho inequívoco para ausência |
+| Precedência amarelo/laranja apresentada como fechada sem confirmação visual específica | Marcar como proposta UX a validar, mantendo vermelho inequívoco para ausência |
 | Causa relatada de `n/d`/`peso ?` ao desativar mods não constava explicitamente em todos os documentos | Registrar observação e preservar `isClass` como fonte verificável no código |
 | Config interna vs servidor ainda tem mecanismo/path e serialização incertos | Handoff deve listar **EM ABERTO**, não escolher por suposição |
 | Diferença copiar kit para draft vs abrir para editar vs adicionar ao equipamento tinha risco de ambiguidade | Criar regras por fluxo e exigir regressão sem apagar kit |
