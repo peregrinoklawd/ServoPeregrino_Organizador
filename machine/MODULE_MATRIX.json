@@ -499,7 +499,7 @@
       "id": "Policy",
       "addon": "ServoPeregrino_Organizador_Policy",
       "mandatory": false,
-      "status": "PLANNED_OPTIONAL_POLICY_WITH_EDITOR_ROADMAP",
+      "status": "NEW_PLANNED_OPTIONAL_LAYER",
       "stable_version": null,
       "development_version": null,
       "dependencies": [
