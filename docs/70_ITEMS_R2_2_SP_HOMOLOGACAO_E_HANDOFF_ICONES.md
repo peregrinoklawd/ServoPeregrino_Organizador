@@ -1,5 +1,7 @@
 # Items / UICommon — R2.2 homologação SP e handoff da família de ícones
 
+> **DECISÃO MAIS RECENTE — 22/10/2026:** R2.2 continua **HOMOLOGADA SOMENTE SP**. A indicação abaixo de "próxima frente iconografia" foi superada: usuário decidiu **MANTER ITENS/WEAPONS SOMENTE COM TEXTO**, com ícones gráficos adiados. Os 3 PNGs Items escolhidos foram preservados/versionados, mas **não** foram integrados nem convertidos em PAA para botões. A frente recomendada é **Policy P0 (contratos)**, após revisão do [handoff atual](74_CONTINUIDADE_AUTOSSUFICIENTE_ITEMS_POLICY_20261022.md). Nenhum gate MP foi fechado.
+
 Data da validação: **2026-10-21**. Branch de origem: `feature/items-uicommon-brand-footer-r2-20261021`.
 
 ## 1. Decisão: R2.2 FECHADA no escopo testado
