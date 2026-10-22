@@ -1,5 +1,9 @@
 # Items — roadmap de retomada (21/10/2026)
 
+
+> **CHECKPOINT ATUAL — 22/10/2026:** este roadmap inclui estágios antigos, com datas e prioridades que foram atualizadas. A sequência consolidada vigente é: preservar **Items R2.2 SP homologada**, **não integrar botões gráficos** (permanecem texto), e iniciar **Policy P0** se o usuário pedir evolução. **Policy é planejado, não implementado; Items 0.13-A MP pendente.** Ler [handoff autossuficiente](74_CONTINUIDADE_AUTOSSUFICIENTE_ITEMS_POLICY_20261022.md), [auditoria](73_AUDITORIA_COMPLETA_ITEMS_POLICY_DECISOES_20261022.md) e [Roadmap Policy](projects/policy-editor/ROADMAP.md) antes de prosseguir.
+
+
 ## Nota de planejamento — 22/10/2026: módulo Policy e botões em pausa
 
 - [x] Registrar arquitetura de `Policy` independente de BGD: [modules/Policy.md](modules/Policy.md).
