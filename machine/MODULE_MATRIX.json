@@ -499,7 +499,7 @@
       "id": "Policy",
       "addon": "ServoPeregrino_Organizador_Policy",
       "mandatory": false,
-      "status": "NEW_PLANNED_OPTIONAL_LAYER",
+      "status": "PLANNED_OPTIONAL_POLICY_WITH_EDITOR_ROADMAP",
       "stable_version": null,
       "development_version": null,
       "dependencies": [
@@ -508,20 +508,28 @@
       "capabilities_provided": {
         "implemented": [],
         "planned": [
-          "policy.provider"
+          "policy.provider",
+          "policy.editor.local",
+          "policy.snapshot",
+          "policy.revision.sync",
+          "policy.session.cache.refresh"
         ]
       },
       "contracts_provided": {
         "implemented": [],
         "planned": [
           "policy.provider.v1",
-          "policy.decision.v1"
+          "policy.decision.v1",
+          "policy.snapshot.v1",
+          "policy.import-export.v1"
         ]
       },
       "contracts_consumed": [],
-      "next_gate": "Specify generic whitelist/blacklist decision contract for Items and Weapons; enforce at UI/catalog and execution/server boundaries.",
+      "next_gate": "P0 contract/source-spike: schema/versioned input, default OPEN, deny-wins, explicit server vs addon config, catalog provider, optional editor and cache refresh; roadmap docs/projects/policy-editor/ROADMAP.md. No runtime implementation yet.",
       "homologated_artifact": null,
-      "current_candidate_artifact": null
+      "current_candidate_artifact": null,
+      "planning_reference": "machine/POLICY_EDITOR_PLANNING_20261022.json",
+      "project_reference": "docs/projects/policy-editor/README.md"
     },
     {
       "id": "Adapters",
