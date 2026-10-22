@@ -209,7 +209,7 @@ Documento fonte: `docs/projects/policy-editor/ROADMAP.md`.
 |---|---|---|
 | **P0 — Contratos / spikes** | Origem interna vs servidor; modo estático; esquema PolicySnapshot/Decision; data-only import/export; authority; enumeração de catálogo; falhas; testes de contrato | **PRÓXIMA RECOMENDAÇÃO**, não iniciada |
 | **P1 — Núcleo** | Addon opcional Policy, OPEN + whitelist/blacklist/COMBINED, lookup por classname, DENY prioritário | NÃO INICIADO, teste SP |
-| **P2 — Configuração** | Fallback interno vazio; origem explícita servidor/missão; precedência configurada; diagnosticar policyHash/revision; testar sem Policy/BDG | NÃO INICIADO, SP/host |
+| **P2 — Configuração** | Fallback interno vazio; origem explícita servidor/missão; precedência configurada; diagnosticar policyHash/revision; testar sem Policy/BGD | NÃO INICIADO, SP/host |
 | **P3 — Integração Items/cache/cores** | Catálogo base + projeção filtrada, awareness por kit, cores vermelho/amarelo/laranja, não revarrer CONFIG_ALL | NÃO INICIADO, SP |
 | **P4 — Execução parcial segura** | Rejeições POLICY_DENIED, ITEM_CLASS_UNAVAILABLE, ADD parcial, remoção permitida, REPLACE/CLEAR seguro | NÃO INICIADO, SP |
 | **P5 — Editor local** | Catálogo completo, add/remove, importar/exportar/validar, botão refresh de sessão local | NÃO INICIADO, SP + spike clipboard |
