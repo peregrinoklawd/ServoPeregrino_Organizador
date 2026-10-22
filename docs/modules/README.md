@@ -1,5 +1,9 @@
 # Documentação por módulo
 
+
+> **Auditoria e último handoff Items/Policy (22/10/2026):** [continuidade autossuficiente](../74_CONTINUIDADE_AUTOSSUFICIENTE_ITEMS_POLICY_20261022.md). Status Policy: **planejado**, sem addon ou editor ativo. Não interpretar responsabilidades planejadas como funções já disponíveis.
+
+
 Este diretório consolida ownership e fronteiras dos módulos futuros sem transformar planejamento em API implementada.
 
 - Hub.md
