@@ -1,0 +1,151 @@
+{
+  "schema_version": 1,
+  "record_date": "2026-10-22",
+  "repository": "peregrinoklawd/ServoPeregrino_Organizador",
+  "branch": "feature/items-ui-icons-r1-simple-silhouettes",
+  "kind": "future_module_roadmap_not_runtime",
+  "project": "SPORG_POLICY_EDITOR",
+  "owner": "Policy",
+  "addon": "ServoPeregrino_Organizador_Policy",
+  "status": "PLANNED_NOT_IMPLEMENTED",
+  "docs": [
+    "docs/modules/Policy.md",
+    "docs/projects/policy-editor/README.md",
+    "docs/projects/policy-editor/ROADMAP.md",
+    "docs/72_BACKLOG_ICONOGRAFIA_MODULOS.md"
+  ],
+  "decision": {
+    "dependence_on_BGD": "NONE_OPTIONAL_ADAPTER_ONLY",
+    "rolekit_authorization": "DEFERRED_OPTIONAL_NO_RESTRICTIONS_BY_ROLE",
+    "default_when_both_lists_empty": "ALLOW_ALL_ELIGIBLE_CLASSES",
+    "whitelist_empty": "NO_WHITELIST_RESTRICTION",
+    "blacklist_empty": "NO_BLACKLIST_RESTRICTION",
+    "combined": "WHITELIST_MINUS_BLACKLIST_DENY_WINS",
+    "server_authority": "SERVER_ONLY_LOCAL_CLIENT_DRAFT_EXPORT_ALLOWED",
+    "configuration_fallback": "policy addon internal explicit empty lists",
+    "server_policy_location": "EXPLICIT_WELL_KNOWN_SERVER_OR_MISSION_ADAPTER_NOT_AUTODISCOVERY",
+    "server_effective_precedence": "ACTIVE_SERVER_REVISION_GT_CONFIGURED_SERVER_MISSION_GT_ADDON_FALLBACK",
+    "missing_class_color": "RED",
+    "denied_class_color": "YELLOW",
+    "dirty_row_color": "ORANGE",
+    "multi_status_priority": [
+      "MISSING_RED",
+      "DENIED_YELLOW",
+      "DIRTY_ORANGE"
+    ],
+    "missing_class_overrides_kit_name_color": true,
+    "preserve_persisted_kits": true,
+    "partial_add_for_authorized_available_items": true,
+    "role_permissions_enabled": false,
+    "buttons_items": "TEXT_ONLY_ICONS_INTEGRATION_PAUSED"
+  },
+  "features": {
+    "policy_engine": false,
+    "policy_editor": false,
+    "whitelist_blacklist": false,
+    "import_export": false,
+    "session_policy_refresh_button": false,
+    "admin_policy_activation": false,
+    "server_revision_sync": false,
+    "policy_aware_items_catalog": false,
+    "policy_aware_kit_color": false,
+    "items_partial_application_existing": true,
+    "items_catalog_cache_existing": true,
+    "items_invalidate_catalog_cache_existing": true,
+    "items_env_class_availability_existing": true
+  },
+  "cache": {
+    "base_catalog": "ONE_SCAN_BY_MODSET_BUILD",
+    "allowed_projection": "BY_POLICY_REVISION_NO_CONFIG_RESCAN",
+    "kit_diagnostics": "BY_KIT_CONTENT_POLICY_REVISION_MODSET",
+    "manual_player_refresh": "REVALIDATE_SNAPSHOT_PROJECTIONS_WITHOUT_RESCAN",
+    "server_update": "INCREMENT_REVISION_BROADCAST_OPTIONAL_USER_NOTICE"
+  },
+  "editor": {
+    "full_catalog_unfiltered": true,
+    "actions": [
+      "ADD_WHITELIST",
+      "ADD_BLACKLIST",
+      "REMOVE_LIST",
+      "IMPORT",
+      "EXPORT",
+      "REFRESH_SESSION_CACHE"
+    ],
+    "admin_only": [
+      "ACTIVATE_SERVER_POLICY",
+      "OPTIONAL_NOTIFY_PLAYERS"
+    ],
+    "client_authoring": "LOCAL_EXPORT_ONLY",
+    "import_export_risk": "ARMA_CLIPBOARD_MULTIPLAYER_LIMITS_TBD"
+  },
+  "roadmap": [
+    {
+      "phase": "P0",
+      "name": "Contracts and feasibility",
+      "status": "PLANNED"
+    },
+    {
+      "phase": "P1",
+      "name": "Policy core",
+      "status": "PLANNED"
+    },
+    {
+      "phase": "P2",
+      "name": "Config server/module",
+      "status": "PLANNED"
+    },
+    {
+      "phase": "P3",
+      "name": "Items catalog and kit diagnostics",
+      "status": "PLANNED"
+    },
+    {
+      "phase": "P4",
+      "name": "Partial application and reject codes",
+      "status": "PLANNED"
+    },
+    {
+      "phase": "P5",
+      "name": "Local editor import/export cache refresh",
+      "status": "PLANNED"
+    },
+    {
+      "phase": "P6",
+      "name": "Admin activation multiplayer sync and JIP",
+      "status": "PLANNED_MP_TEST_REQUIRED"
+    },
+    {
+      "phase": "P7",
+      "name": "Adapters BGD optional and hardening",
+      "status": "PLANNED"
+    }
+  ],
+  "icon_backlog": {
+    "weapons_priority": [
+      "Arma Principal",
+      "Arma Porte",
+      "Arma Lançador",
+      "Mira",
+      "Apontador",
+      "Boca",
+      "Bipe",
+      "Carregador",
+      "Carregador Secundário"
+    ],
+    "other_secondary": [
+      "Capacete/Gorro (Headgear)",
+      "Item de rosto (Facewear)",
+      "Óculos de visão noturna",
+      "Binóculo/Telemetro",
+      "Mapa",
+      "Terminal / UAV",
+      "Bússola",
+      "Rádio",
+      "Relógio"
+    ],
+    "all_status": "BACKLOG_NOT_RUNTIME",
+    "items_master_pngs": "ASSETS_APPROVED_PRESERVED_IN_GIT_NOT_USED_IN_UI"
+  },
+  "runtime_changes_in_this_turn": false,
+  "merge_performed": false
+}
