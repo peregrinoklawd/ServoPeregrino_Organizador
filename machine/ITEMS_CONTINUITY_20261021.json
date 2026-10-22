@@ -113,7 +113,7 @@
     "historical automated gates 516 and 523 accepted debt"
   ],
   "change_policy": {
-    "current_checkpoint": "POLICY_EDITOR_AND_ICON_BACKLOG_DOCUMENTED_NO_RUNTIME_CHANGES",
+    "current_checkpoint": "ITEMS_R2_2_SP_HOMOLOGATED_POLICY_P0_NEXT_ICONS_PAUSED",
     "runtime_files_changed": true,
     "packaging_created": true,
     "mp_runtime_executed": false,
@@ -121,6 +121,8 @@
     "sp_runtime_executed": true
   },
   "handoff_docs": [
+    "docs/74_CONTINUIDADE_AUTOSSUFICIENTE_ITEMS_POLICY_20261022.md",
+    "docs/73_AUDITORIA_COMPLETA_ITEMS_POLICY_DECISOES_20261022.md",
     "docs/modules/Policy.md",
     "docs/projects/policy-editor/README.md",
     "docs/projects/policy-editor/ROADMAP.md",
@@ -137,10 +139,10 @@
     "missions/SP_ORG_Items_Weapons_UI_Lab_SelfContained.VR/ITEMS_UX_R1_TESTE_SINGLEPLAYER.md"
   ],
   "priority_order": [
-    "POLICY_P0_CONTRACT_FEASIBILITY_WHEN_REQUESTED",
-    "POLICY_P1_CORE_WHEN_REQUESTED",
-    "ITEMS_0_13_A_MP_GATE_WHEN_PLAYERS_AVAILABLE",
-    "ICON_BACKLOG_PAUSED"
+    "POLICY_P0_CONTRACT_AND_TECH_SPIKES_NOT_STARTED",
+    "POLICY_P1_CORE_AFTER_CONTRACT",
+    "ITEMS_0_13_A_MP_WHEN_PLAYERS_AVAILABLE",
+    "ICONS_GRAPHIC_BUTTONS_DEFERRED"
   ],
   "ux_r1": {
     "label": "Items UX R1",
@@ -203,7 +205,7 @@
   "iconography": {
     "id": "UX-ITEMS-04",
     "revision": "R1",
-    "status": "THREE_APPROVED_PNG_MASTERS_VERSIONED_UI_BUTTONS_TEXT_ONLY_PAUSED",
+    "status": "THREE_APPROVED_PNG_MASTERS_PRESERVED_GRAPHIC_BUTTONS_PAUSED",
     "frozen_runtime_baseline": "baseline/items-uicommon-r2-2-sp-homologated-20261021",
     "source_paths": [
       "assets/ui/icons/items/r1/uniforme.svg",
@@ -274,6 +276,15 @@
     "role_kit": "DEFERRED_POTENTIAL_ONLY",
     "items_r2_2": "HOMOLOGATED_SP_SCOPE_UNCHANGED",
     "blacklist_whitelist": "NOT_IMPLEMENTED",
-    "server_policy_refresh": "NOT_IMPLEMENTED"
-  }
+    "server_policy_refresh": "NOT_IMPLEMENTED",
+    "autonomous_handoff": "docs/74_CONTINUIDADE_AUTOSSUFICIENTE_ITEMS_POLICY_20261022.md",
+    "decision_audit": "docs/73_AUDITORIA_COMPLETA_ITEMS_POLICY_DECISOES_20261022.md",
+    "priority": "POLICY_P0_FIRST_WHEN_REQUESTED",
+    "hot_reload": "OPTIONAL_FUTURE_STATIC_POLICY_DEFAULT",
+    "graphic_buttons": "PAUSED_TEXT_ONLY",
+    "runtime_changes_since_r2_2_baseline": false
+  },
+  "continuity_revision": "2026-10-22-AUDITED",
+  "canonical_handoff": "docs/74_CONTINUIDADE_AUTOSSUFICIENTE_ITEMS_POLICY_20261022.md",
+  "canonical_audit": "docs/73_AUDITORIA_COMPLETA_ITEMS_POLICY_DECISOES_20261022.md"
 }
