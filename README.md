@@ -1,5 +1,16 @@
 # Servo Peregrino Organizador — SP_ORG
 
+
+## CONTINUIDADE ATUAL — 22/10/2026
+
+> **Para continuar Items / Policy em outro chat:** abrir primeiro [`docs/74_CONTINUIDADE_AUTOSSUFICIENTE_ITEMS_POLICY_20261022.md`](docs/74_CONTINUIDADE_AUTOSSUFICIENTE_ITEMS_POLICY_20261022.md) e a [auditoria integral de decisões](docs/73_AUDITORIA_COMPLETA_ITEMS_POLICY_DECISOES_20261022.md). Os marcos antigos deste README são **históricos** e podem estar defasados frente às branches.
+
+- **Items UX R1 e header/footer R2.2:** homologados **single-player no escopo testado**, sobre UICommon 0.2.0.11 candidate; baseline intocável `baseline/items-uicommon-r2-2-sp-homologated-20261021`.
+- **Items 0.13-A público multiplayer:** smoke PBO/host/cliente real pendente, não homologado por testes SP.
+- **Policy e Policy Editor:** especificados em [Policy](docs/modules/Policy.md) e [projeto/roadmap](docs/projects/policy-editor/ROADMAP.md), **não implementados**; próximo recomendado **P0**.
+- **Ícones Items:** três imagens aprovadas preservadas em `assets/ui/icons/items/approved/`; **botões permanecem apenas TEXTO** por decisão mais recente; 18 ícones novos em backlog.
+- **Branch documental corrente:** `feature/items-ui-icons-r1-simple-silhouettes`; sem mudanças runtime `addons/` ou `missions/` após o freeze R2.2. **Não foi realizado merge em main.**
+
 Monorepo do **Servo Peregrino Organizador**, uma família de addons independentes para Arma 3 integrados por contratos públicos do Nexus.
 
 ## Princípio
