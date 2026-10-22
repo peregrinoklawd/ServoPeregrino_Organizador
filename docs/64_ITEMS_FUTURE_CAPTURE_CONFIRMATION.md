@@ -1,5 +1,7 @@
 # Items — Backlog futuro: confirmação no botão CAPTURAR
 
+> **SUPERSESSÃO — 22/10/2026:** O nome deste arquivo e o histórico abaixo dizem "futuro/candidato" porque descrevem o backlog original de 07/10 e o início da UX R1 em 21/10. **Status ATUAL: CAPTURAR COM CONFIRMAÇÃO E SUBSTITUIÇÃO DO DRAFT IMPLEMENTADO, APROVADO MANUALMENTE SP e preservado na R2.2 homologada.** A aprovação **não** cobre os gates MP da biblioteca pública. Fonte: [homologação R2.2](70_ITEMS_R2_2_SP_HOMOLOGACAO_E_HANDOFF_ICONES.md) e [handoff atual](74_CONTINUIDADE_AUTOSSUFICIENTE_ITEMS_POLICY_20261022.md). Não reimplementar CAPTURAR por confundir este documento histórico com backlog ativo.
+
 ## Atualização — 21/10/2026
 
 Este é o registro original do backlog de 07/10, preservado por rastreabilidade. Em 21/10, a implementação candidata foi criada **na branch de Items** `feature/items-0.13-retomada-20261021`, sem alterar Weapons, e aguarda homologação no Arma.
