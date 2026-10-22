@@ -147,5 +147,42 @@
     "items_master_pngs": "ASSETS_APPROVED_PRESERVED_IN_GIT_NOT_USED_IN_UI"
   },
   "runtime_changes_in_this_turn": false,
-  "merge_performed": false
+  "merge_performed": false,
+  "audit_doc": "docs/73_AUDITORIA_COMPLETA_ITEMS_POLICY_DECISOES_20261022.md",
+  "autonomous_handoff_doc": "docs/74_CONTINUIDADE_AUTOSSUFICIENTE_ITEMS_POLICY_20261022.md",
+  "record_revision": "2026-10-22-audited",
+  "policy_lifecycle": {
+    "default": "STATIC_LOADED_BEFORE_OR_AT_SESSION_START",
+    "admin_live_updates": "OPTIONAL_LATER_NOT_REQUIRED_FOR_FIRST_IMPLEMENTATION",
+    "automatic_initial_sync": "PLANNED",
+    "manual_player_cache_refresh": "PLANNED",
+    "no_full_config_scan_on_policy_only_refresh": true
+  },
+  "confirmed_user_observation": {
+    "missing_mods": "User removed mods from modlist, then observed n/d and peso ? on kits/entries; diagnose with isClass rather than UI text alone",
+    "color_missing": "RED",
+    "color_restricted": "YELLOW",
+    "color_dirty": "ORANGE",
+    "mixed_kit_missing_priority": "RED",
+    "rolekit_permissions": "EXCLUDED_MVP_USER_PREFERS_NO_ROLE_BASED_LIMITS",
+    "buttons_graphical": "PAUSED_TEXT_ONLY"
+  },
+  "ux_open_decisions": {
+    "restricted_and_dirty_color": "YELLOW_SUGGESTED_NOT_VISUALLY_HOMOLOGATED",
+    "icon_state_vs_colors": "DEFERRED_KEEP_COLORS",
+    "policy_editor_layout": "DRAFT_ONLY"
+  },
+  "source_config_open_decisions": [
+    "actual addon internal config path/name",
+    "server/mission load mechanism",
+    "import/export format and clipboard/filesystem feasibility",
+    "editor catalog provider when Items absent",
+    "MP policy revision sync/admin authentication"
+  ],
+  "items_review_status": {
+    "r2_2": "HOMOLOGATED_SP_SCOPE",
+    "ux_r1": "APPROVED_MANUAL_SP",
+    "public_library_mp_0_13_a": "PENDING",
+    "icons_assets": "APPROVED_VERSIONED_UI_INTEGRATION_PAUSED"
+  }
 }
