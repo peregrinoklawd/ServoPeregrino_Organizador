@@ -5,6 +5,17 @@
 **Proprietário único:** `ServoPeregrino_Organizador_Policy` (futuro PBO); dependência planejada: Nexus.  
 **Projeto do editor:** [../projects/policy-editor/README.md](../projects/policy-editor/README.md) e [ROADMAP](../projects/policy-editor/ROADMAP.md).
 
+## Esclarecimentos da auditoria — 22/10/2026 (prevalecem sobre alternativas anteriores)
+
+- **Blacklist e whitelist são estáticas por padrão na sessão.** O usuário informou que, na realidade do BGD, são definidas antes de abrir o servidor. A possibilidade de um administrador **publicar revisão durante a partida** é uma capacidade opcional futura do Editor/MP, **não** é condição para o primeiro Policy 0.1-A/B nem implica polling contínuo.
+- **Origem versus autoridade:** a escolha do arquivo/config exato onde o servidor depositará suas listas **ainda está EM ABERTO para P0**; o usuário apenas determinou que **servidor/admin mandam**, e que cliente comum só pode preparar/exportar listas. A configuração interna nasce vazia e a externa é sempre opt-in explícito. **Não** transformar o exemplo `CfgSPORGPolicy` num contrato implementado.
+- **Classes ambientalmente ausentes no print:** o usuário confirmou que o surgimento de `n/d` e `peso ?` coincidiu com a remoção dos mods de sua modlist. Isso é evidência de teste do operador. O código deve usar `isClass`/validação ambiental como confirmação formal, e não inferir ausência apenas do texto.
+- **Cor/estados concorrentes:** VERMELHO para ausência, AMARELO para restrição, LARANJA para modificação são decisões explícitas. **Ausência (vermelho) prevalece** em combinações. A sugestão de **amarelo acima do laranja** quando um item *presente* está simultaneamente restrito e alterado **ainda precisa de validação UX**; preservar motivo secundário em tooltip/resultado. Símbolos substituindo cores foram cogitados e **adiados**.
+- **Movimentação de kit não é operação única:** (a) *abrir para editar* preserva todas as ItemEntries; (b) *copiar/combinar entre drafts* pode gerar apenas subconjunto autorizado e disponível no destino sem regravar origem; (c) *aplicar fisicamente* filtra restritos/ausentes e ainda verifica capacidade. Confirmar semântica com testes próprios.
+- **Catálogo administrativo não filtrado ≠ Catálogo de jogador filtrado:** conservar um catálogo base reutilizável; não destruir os metadados das classes negadas nem executar scan completo dos mods quando só muda uma revisão Policy.
+- **Role Kit:** o usuário expressou preferência **contra limitação por papel**; registrar como hipótese opcional e não como feature prometida.
+- **Status:** todos estes itens Policy são **projetados**, não testados ou implementados. Ver a [auditoria integral](../73_AUDITORIA_COMPLETA_ITEMS_POLICY_DECISOES_20261022.md) e [continuidade autossuficiente](../74_CONTINUIDADE_AUTOSSUFICIENTE_ITEMS_POLICY_20261022.md).
+
 ## 1. Motivo e limites
 
 Policy é o dono único dos critérios de allow/deny. Items, Weapons, Equipment e outros módulos **consultam** Policy; não implementam listas, regras ou renderizadores próprios duplicados de avaliação. UICommon oferece controles genéricos e não conhece autorização, catálogo, classes ou usuário.
