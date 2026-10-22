@@ -1,5 +1,7 @@
 # SP_ORG Items — Iconografia R1, silhuetas simplificadas
 
+> **CONTROLE CANÔNICO — 22/10/2026:** não usar os SVGs `assets/ui/icons/items/r1/` como ícones aprovados; os **masters aprovados são três PNGs** sob `assets/ui/icons/items/approved/`, com hashes em `SELECTION_20261021.json`. **A integração gráfica está suspensa por decisão do usuário**; botões atuais devem permanecer **apenas texto**. Os trechos inferiores sobre produzir PAA ou integrar botões são apenas planejamento histórico condicionado a nova autorização. Ver [handoff atual](74_CONTINUIDADE_AUTOSSUFICIENTE_ITEMS_POLICY_20261022.md).
+
 ## Decisão atualizada em 22/10/2026 — não integrar os ícones agora
 
 Por solicitação expressa do usuário, **Items manterá os botões com texto apenas**, para preservar a consistência atual. Os três PNGs originais selecionados estão guardados, aprovados e com hashes conferidos no Git; **não criar PAA nem alterar a UI** sem novo comando. O backlog ampliado de 18 ícones para Weapons/outros módulos está em [72_BACKLOG_ICONOGRAFIA_MODULOS.md](72_BACKLOG_ICONOGRAFIA_MODULOS.md). O restante deste documento é histórico de concepção, não indicação de implementação iminente.
