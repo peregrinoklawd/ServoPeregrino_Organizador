@@ -2,7 +2,7 @@
 
 **Repo:** `peregrinoklawd/ServoPeregrino_Organizador`  
 **Branch atual:** `feature/policy-0.1-p0-contracts`, criada da baseline `67f457414c37784ef0469e7235d39006342edb40` (`baseline/items-uicommon-r2-2-sp-homologated-20261021`).  
-**Status P0:** EM ANDAMENTO — documentação, matriz de teste e spike preparados; smoke SP/MP Arma pendente. **Não afirmar que P0 foi homologado.**
+**Status P0 após RPT de 24/10:** smoke SP das missões A/B **APROVADO 20/20 PASS (0 FAIL)**; P0 **ainda EM ANDAMENTO**, aguardando testes negativos/contratos. MP não testado. Ver [evidência](projects/policy-editor/evidence/P0_SP_SMOKE_RPT_20261024.md).
 
 ## Artefatos nesta branch
 
@@ -26,7 +26,14 @@
 - `Items_fnc_invalidateCatalogCache` invalida base cara: futuro refresh Policy deve invalidar **projeção**, não CONFIG_ALL.
 - Ícones text-only, Items R2.2 homologada SP, Items 0.13-A MP pendente, Weapons separado, BGD/Role Kits opcional/diferido.
 
-## Testes a executar no próximo checkpoint
+## Testes executados na engine (24/10)
+
+- RPT completo do usuário analisado: **Missão A 10/10 PASS (17:35:59); Missão B 10/10 PASS (17:36:41)**, Arma 3 2.22.154089, single-player VR. JSON, oito casos de decisão e leitura da configuração tiveram PASS nas duas missões.
+- Evidência e SHA-256 do RPT: [P0_SP_SMOKE_RPT_20261024.md](projects/policy-editor/evidence/P0_SP_SMOKE_RPT_20261024.md).
+- Warnings de CBA/FTAC/BGD/outros mods no RPT não foram atribuídos ao Policy; nenhum `[SPORG_POLICY_P0] FAIL`.
+- Não equivale a teste de addon: `addonPresent=false` é o esperado; P0 precisa fechar schema inválido, fail-closed e amostragem de classnames.
+
+## Instruções históricas dos testes SP (já executados em 24/10; reexecutar apenas se código mudar)
 
 **1 — Teste offline:** na raiz de um checkout da branch:
 ~~~bash
@@ -37,7 +44,7 @@ Registrar total, FAILs e ambiente Python; os 28/28 anteriores são um oráculo J
 **2 — Smoke no Arma 3 SP (sem mudar a baseline):**
 - Criar missão de teste descartável no Eden (VR serve); copiar `spikes/policy-p0/runPolicyP0Smoke.sqf` para a raiz **da nova missão de teste**, como `runPolicyP0Smoke.sqf`.
 - Abrir Debug Console em single-player e executar `[] execVM "runPolicyP0Smoke.sqf";`.
-- Verificar linhas `[SPORG_POLICY_P0]` no RPT: espera-se **9 PASS, 0 FAIL** (8 modos + round-trip JSON). Na primeira execução, `missionPresent=false` é esperado se não houver classe de Policy na missão; `addonPresent=false` é esperado pois o addon não existe.
+- Verificar linhas `[SPORG_POLICY_P0]` no RPT: para as missões empacotadas espera-se **10 PASS, 0 FAIL** (8 decisões + round-trip JSON + configuração). Na primeira execução, `missionPresent=false` é esperado se não houver classe de Policy na missão; `addonPresent=false` é esperado pois o addon não existe.
 - Repetir SP com `description.ext` contendo, ao nível raiz:
 ~~~cpp
 class CfgSPORGPolicy {
@@ -54,7 +61,7 @@ class CfgSPORGPolicy {
 
 ## Critério de seguir para P1
 
-1. Resolver qualquer erro do teste offline e smoke SP; verificar samples de classname reais na modlist antes de congelar regex.
+1. Smoke SP já aprovado (20/20); executar testes negativos SQF e verificar classnames reais na modlist antes de congelar regex.
 2. Consolidar fonte de config testada em `missionConfigFile` e modo inválido (fail-closed).
 3. Fixar contratos e ajustar documentação/machine status com evidências, sem fingir homologação MP.
 4. Desenvolver motor `Policy 0.1-A` apenas na branch de Policy, com funções/índice e testes engine; **não integrar Items ainda**.
