@@ -7,7 +7,7 @@
   "project": "SPORG_POLICY_EDITOR",
   "owner": "Policy",
   "addon": "ServoPeregrino_Organizador_Policy",
-  "status": "P0_CONTRACTS_IN_PROGRESS_ARMA_SMOKE_PENDING",
+  "status": "P0_ENGINE_SP_SMOKE_PASS_NEGATIVE_TESTS_PENDING",
   "docs": [
     "docs/modules/Policy.md",
     "docs/projects/policy-editor/README.md",
@@ -84,7 +84,7 @@
     {
       "phase": "P0",
       "name": "Contracts and feasibility",
-      "status": "IN_PROGRESS_CONTRACTS_AND_OFFLINE_FIXTURES_ENGINE_NOT_TESTED"
+      "status": "ENGINE_SP_SMOKE_PASS_NEGATIVE_TESTS_PENDING"
     },
     {
       "phase": "P1",
@@ -152,7 +152,7 @@
   "merge_performed": false,
   "audit_doc": "docs/73_AUDITORIA_COMPLETA_ITEMS_POLICY_DECISOES_20261022.md",
   "autonomous_handoff_doc": "docs/74_CONTINUIDADE_AUTOSSUFICIENTE_ITEMS_POLICY_20261022.md",
-  "record_revision": "2026-10-24-p0-contract-spike",
+  "record_revision": "2026-10-24-p0-sp-smoke-pass",
   "policy_lifecycle": {
     "default": "STATIC_LOADED_BEFORE_OR_AT_SESSION_START",
     "admin_live_updates": "OPTIONAL_LATER_NOT_REQUIRED_FOR_FIRST_IMPLEMENTATION",
@@ -188,7 +188,7 @@
     "icons_assets": "APPROVED_VERSIONED_UI_INTEGRATION_PAUSED"
   },
   "p0": {
-    "status": "IN_PROGRESS_AWAITING_SP_ENGINE_SMOKE",
+    "status": "ENGINE_SP_SMOKE_PASS_NEGATIVE_TESTS_PENDING",
     "baseline": "67f457414c37784ef0469e7235d39006342edb40",
     "source_doc": "docs/projects/policy-editor/P0_CONTRACTS_20261024.md",
     "fixture_file": "machine/policy/p0_contract_fixtures_v1.json",
@@ -197,7 +197,7 @@
     "fixtures_count": 28,
     "fixtures_checked_with_js_oracle": 28,
     "python_unittest_ran": false,
-    "arma_sp_smoke_ran": false,
+    "arma_sp_smoke_ran": true,
     "arma_mp_smoke_ran": false,
     "no_runtime_implementation": true,
     "proposal": {
@@ -207,6 +207,33 @@
       "portable_format": "JSON_FROMJSON_TOJSON_ARMA_2_18",
       "clipboard_mp": "copyFromClipboard_DISABLED_MULTIPLAYER",
       "policy_catalog_contract": "NEXUS_CAPABILITY_PROPOSAL_NOT_IMPLEMENTED"
-    }
+    },
+    "arma_sp_smoke_scenarios": [
+      {
+        "mission": "SP_ORG_Policy_P0_A_Fallback.VR",
+        "pass": 10,
+        "fail": 0,
+        "configuration": "ABSENT_EXPECTED",
+        "time": "2026-10-24T17:35:59-03:00"
+      },
+      {
+        "mission": "SP_ORG_Policy_P0_B_MissionConfig.VR",
+        "pass": 10,
+        "fail": 0,
+        "configuration": "ENABLED_V1_WHITELIST_FIRSTAIDKIT_BLACKLIST_ITEMGPS",
+        "time": "2026-10-24T17:36:41-03:00"
+      }
+    ],
+    "arma_version": "2.22.154089_STABLE",
+    "arma_sp_smoke_total_pass": 20,
+    "arma_sp_smoke_total_fail": 0,
+    "arma_sp_smoke_rpt_sha256": "d4bb57129e89914174dc550a718602f41f91d33611092c6ab0717a2b7b295979",
+    "arma_sp_smoke_evidence": "docs/projects/policy-editor/evidence/P0_SP_SMOKE_RPT_20261024.md",
+    "gates_pending": [
+      "SQF_NEGATIVE_SCHEMA_AND_FAIL_CLOSED",
+      "REAL_CLASSNAME_VALIDATION",
+      "PYTHON_UNITTEST_EXECUTION_OR_RECORDED_EXCEPTION",
+      "POLICY_ADDON_LOADER_GATE_AFTER_P1_P2"
+    ]
   }
 }
