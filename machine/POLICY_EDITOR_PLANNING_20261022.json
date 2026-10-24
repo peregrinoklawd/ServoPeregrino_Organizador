@@ -1,18 +1,20 @@
 {
   "schema_version": 1,
-  "record_date": "2026-10-22",
+  "record_date": "2026-10-24",
   "repository": "peregrinoklawd/ServoPeregrino_Organizador",
-  "branch": "feature/items-ui-icons-r1-simple-silhouettes",
-  "kind": "future_module_roadmap_not_runtime",
+  "branch": "feature/policy-0.1-p0-contracts",
+  "kind": "roadmap_with_p0_contract_work_not_runtime",
   "project": "SPORG_POLICY_EDITOR",
   "owner": "Policy",
   "addon": "ServoPeregrino_Organizador_Policy",
-  "status": "PLANNED_NOT_IMPLEMENTED",
+  "status": "P0_CONTRACTS_IN_PROGRESS_ARMA_SMOKE_PENDING",
   "docs": [
     "docs/modules/Policy.md",
     "docs/projects/policy-editor/README.md",
     "docs/projects/policy-editor/ROADMAP.md",
-    "docs/72_BACKLOG_ICONOGRAFIA_MODULOS.md"
+    "docs/72_BACKLOG_ICONOGRAFIA_MODULOS.md",
+    "docs/projects/policy-editor/P0_CONTRACTS_20261024.md",
+    "docs/75_POLICY_P0_CONTINUIDADE_20261024.md"
   ],
   "decision": {
     "dependence_on_BGD": "NONE_OPTIONAL_ADAPTER_ONLY",
@@ -82,7 +84,7 @@
     {
       "phase": "P0",
       "name": "Contracts and feasibility",
-      "status": "PLANNED"
+      "status": "IN_PROGRESS_CONTRACTS_AND_OFFLINE_FIXTURES_ENGINE_NOT_TESTED"
     },
     {
       "phase": "P1",
@@ -150,7 +152,7 @@
   "merge_performed": false,
   "audit_doc": "docs/73_AUDITORIA_COMPLETA_ITEMS_POLICY_DECISOES_20261022.md",
   "autonomous_handoff_doc": "docs/74_CONTINUIDADE_AUTOSSUFICIENTE_ITEMS_POLICY_20261022.md",
-  "record_revision": "2026-10-22-audited",
+  "record_revision": "2026-10-24-p0-contract-spike",
   "policy_lifecycle": {
     "default": "STATIC_LOADED_BEFORE_OR_AT_SESSION_START",
     "admin_live_updates": "OPTIONAL_LATER_NOT_REQUIRED_FOR_FIRST_IMPLEMENTATION",
@@ -184,5 +186,27 @@
     "ux_r1": "APPROVED_MANUAL_SP",
     "public_library_mp_0_13_a": "PENDING",
     "icons_assets": "APPROVED_VERSIONED_UI_INTEGRATION_PAUSED"
+  },
+  "p0": {
+    "status": "IN_PROGRESS_AWAITING_SP_ENGINE_SMOKE",
+    "baseline": "67f457414c37784ef0469e7235d39006342edb40",
+    "source_doc": "docs/projects/policy-editor/P0_CONTRACTS_20261024.md",
+    "fixture_file": "machine/policy/p0_contract_fixtures_v1.json",
+    "reference_test": "tools/policy/test_p0_contracts.py",
+    "arma_spike": "spikes/policy-p0/runPolicyP0Smoke.sqf",
+    "fixtures_count": 28,
+    "fixtures_checked_with_js_oracle": 28,
+    "python_unittest_ran": false,
+    "arma_sp_smoke_ran": false,
+    "arma_mp_smoke_ran": false,
+    "no_runtime_implementation": true,
+    "proposal": {
+      "addon_internal": "configFile >> CfgSPORGPolicy (candidate)",
+      "mission_explicit": "missionConfigFile >> CfgSPORGPolicy (candidate)",
+      "external_server_cfg": "NOT_COMMITTED_UNVERIFIED",
+      "portable_format": "JSON_FROMJSON_TOJSON_ARMA_2_18",
+      "clipboard_mp": "copyFromClipboard_DISABLED_MULTIPLAYER",
+      "policy_catalog_contract": "NEXUS_CAPABILITY_PROPOSAL_NOT_IMPLEMENTED"
+    }
   }
 }
