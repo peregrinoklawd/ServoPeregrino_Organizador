@@ -1,7 +1,7 @@
 # Policy — módulo opcional de autorização de itens/equipamentos
 
 **Data da consolidação:** 22/10/2026  
-**Status:** ARQUITETURA APROVADA EM PRINCÍPIO, ROADMAP REGISTRADO; **NÃO IMPLEMENTADO**.  
+**Status (24/10/2026):** P0 contratos e fixtures **EM ANDAMENTO**; módulo Policy **NÃO IMPLEMENTADO**. Ver [P0](../projects/policy-editor/P0_CONTRACTS_20261024.md); smoke Arma ainda pendente.  
 **Proprietário único:** `ServoPeregrino_Organizador_Policy` (futuro PBO); dependência planejada: Nexus.  
 **Projeto do editor:** [../projects/policy-editor/README.md](../projects/policy-editor/README.md) e [ROADMAP](../projects/policy-editor/ROADMAP.md).
 
