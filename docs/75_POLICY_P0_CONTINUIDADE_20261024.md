@@ -69,3 +69,12 @@ class CfgSPORGPolicy {
 ## Integridade
 
 Até aqui: **sem alterações de runtime** em `addons/`, `missions/`, e **sem merge** em `main`. Se o estado global antigo `machine/PROJECT_STATE.json` conflitar, priorizar o handoff 74 + este documento 75 para a frente Policy. O roadmap da branch de Policy passa a ser fonte de verdade da implementação do novo módulo; a branch de ícones permanece intacta.
+
+
+## Checkpoint adicional — missões negativas prontas em 24/10/2026 (RPT pendente)
+
+Após o smoke SP positivo **20/20 PASS**, foi entregue novo pacote `SP_ORG_Policy_P0_Testes_Negativos_20261024.zip` com quatro missões automáticas `C` a `F` para estados de **versão inválida, whitelist não-array, classname duplicado e política exigida ausente**. Cada missão prevê **35 asserções** de schema, decisão, prontidão e fonte real `description.ext`, total esperado **140 PASS / 0 FAIL** apenas quando comprovado pelo operador em RPT. Há ainda testes de limites (129 caracteres e 4097 entradas) e payload contendo texto malicioso tratado como dado, nunca como SQF.
+
+**O pacote foi verificado somente estruturalmente, NÃO executado na engine**. Evidência de preparação e hash do ZIP: [P0_NEGATIVE_MISSIONS_PREP_20261024.md](projects/policy-editor/evidence/P0_NEGATIVE_MISSIONS_PREP_20261024.md). Registrar RPT quando recebido; não fechar P0 ainda nem iniciar P1 como homologado. Código de runtime Items/UICommon/Weapons não alterado.
+
+**Retomar:** executar as quatro missões C–F no Eden VR usando `Preview`; cada uma dispara sozinha e exibe hint. Filtrar RPT por `[SPORG_POLICY_P0_NEG]`. Se houver FAIL ou `Error in expression`, corrigir protótipo e gerar ZIP revisado; manter teste reprodutível, sem manipulação manual de scripts.
