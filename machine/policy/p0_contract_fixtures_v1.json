@@ -1,0 +1,300 @@
+{
+  "schema": "SPORG_POLICY_P0_FIXTURES",
+  "schemaVersion": 1,
+  "decisionCases": [
+    {
+      "id": "P0-OPEN-01",
+      "whitelist": [],
+      "blacklist": [],
+      "className": "FirstAidKit",
+      "allowed": true,
+      "code": "POLICY_ALLOW_OPEN"
+    },
+    {
+      "id": "P0-BLACKLIST-01",
+      "whitelist": [],
+      "blacklist": [
+        "ItemGPS"
+      ],
+      "className": "ItemGPS",
+      "allowed": false,
+      "code": "POLICY_DENY_BLACKLIST"
+    },
+    {
+      "id": "P0-BLACKLIST-02",
+      "whitelist": [],
+      "blacklist": [
+        "ItemGPS"
+      ],
+      "className": "FirstAidKit",
+      "allowed": true,
+      "code": "POLICY_ALLOW_OPEN"
+    },
+    {
+      "id": "P0-WHITELIST-01",
+      "whitelist": [
+        "FirstAidKit"
+      ],
+      "blacklist": [],
+      "className": "FirstAidKit",
+      "allowed": true,
+      "code": "POLICY_ALLOW_WHITELIST"
+    },
+    {
+      "id": "P0-WHITELIST-02",
+      "whitelist": [
+        "FirstAidKit"
+      ],
+      "blacklist": [],
+      "className": "ItemGPS",
+      "allowed": false,
+      "code": "POLICY_DENY_NOT_WHITELIST"
+    },
+    {
+      "id": "P0-COMBINED-01",
+      "whitelist": [
+        "FirstAidKit",
+        "ItemGPS"
+      ],
+      "blacklist": [
+        "ItemGPS"
+      ],
+      "className": "ItemGPS",
+      "allowed": false,
+      "code": "POLICY_DENY_BLACKLIST"
+    },
+    {
+      "id": "P0-COMBINED-02",
+      "whitelist": [
+        "FirstAidKit",
+        "ItemGPS"
+      ],
+      "blacklist": [
+        "ItemGPS"
+      ],
+      "className": "FirstAidKit",
+      "allowed": true,
+      "code": "POLICY_ALLOW_WHITELIST"
+    },
+    {
+      "id": "P0-COMBINED-03",
+      "whitelist": [
+        "FirstAidKit",
+        "ItemGPS"
+      ],
+      "blacklist": [
+        "ItemGPS"
+      ],
+      "className": "ACE_fieldDressing",
+      "allowed": false,
+      "code": "POLICY_DENY_NOT_WHITELIST"
+    },
+    {
+      "id": "P0-CASE-01",
+      "whitelist": [
+        "firstaidkit"
+      ],
+      "blacklist": [
+        "ITEMgps"
+      ],
+      "className": "itemGPS",
+      "allowed": false,
+      "code": "POLICY_DENY_BLACKLIST"
+    },
+    {
+      "id": "P0-CASE-02",
+      "whitelist": [
+        "firstaidkit"
+      ],
+      "blacklist": [],
+      "className": "FirstAidKit",
+      "allowed": true,
+      "code": "POLICY_ALLOW_WHITELIST"
+    }
+  ],
+  "validationCases": [
+    {
+      "id": "P0-VALID-EMPTY",
+      "data": {
+        "schema": "SPORG_POLICY_EXPORT",
+        "schemaVersion": 1,
+        "whitelist": [],
+        "blacklist": []
+      },
+      "valid": true
+    },
+    {
+      "id": "P0-VALID-CONFLICT",
+      "data": {
+        "schema": "SPORG_POLICY_EXPORT",
+        "schemaVersion": 1,
+        "whitelist": [
+          "ItemGPS"
+        ],
+        "blacklist": [
+          "ItemGPS"
+        ]
+      },
+      "valid": true
+    },
+    {
+      "id": "P0-INVALID-SCHEMA",
+      "data": {
+        "schema": "OTHER",
+        "schemaVersion": 1,
+        "whitelist": [],
+        "blacklist": []
+      },
+      "valid": false
+    },
+    {
+      "id": "P0-INVALID-VERSION",
+      "data": {
+        "schema": "SPORG_POLICY_EXPORT",
+        "schemaVersion": 2,
+        "whitelist": [],
+        "blacklist": []
+      },
+      "valid": false
+    },
+    {
+      "id": "P0-INVALID-TYPE",
+      "data": {
+        "schema": "SPORG_POLICY_EXPORT",
+        "schemaVersion": 1,
+        "whitelist": "ItemGPS",
+        "blacklist": []
+      },
+      "valid": false
+    },
+    {
+      "id": "P0-INVALID-LIST-MEMBER",
+      "data": {
+        "schema": "SPORG_POLICY_EXPORT",
+        "schemaVersion": 1,
+        "whitelist": [
+          42
+        ],
+        "blacklist": []
+      },
+      "valid": false
+    },
+    {
+      "id": "P0-INVALID-DUPLICATE-CASE",
+      "data": {
+        "schema": "SPORG_POLICY_EXPORT",
+        "schemaVersion": 1,
+        "whitelist": [
+          "ItemGPS",
+          "itemgps"
+        ],
+        "blacklist": []
+      },
+      "valid": false
+    },
+    {
+      "id": "P0-INVALID-FUNCTION-INJECTION",
+      "data": {
+        "schema": "SPORG_POLICY_EXPORT",
+        "schemaVersion": 1,
+        "whitelist": [
+          "ItemGPS; call compile foo"
+        ],
+        "blacklist": []
+      },
+      "valid": false
+    },
+    {
+      "id": "P0-INVALID-AUTH-FIELD",
+      "data": {
+        "schema": "SPORG_POLICY_EXPORT",
+        "schemaVersion": 1,
+        "whitelist": [],
+        "blacklist": [],
+        "admin": true
+      },
+      "valid": false
+    },
+    {
+      "id": "P0-INVALID-REVISION-FIELD",
+      "data": {
+        "schema": "SPORG_POLICY_EXPORT",
+        "schemaVersion": 1,
+        "whitelist": [],
+        "blacklist": [],
+        "revision": 999
+      },
+      "valid": false
+    },
+    {
+      "id": "P0-INVALID-CLASSNAME-SPACES",
+      "data": {
+        "schema": "SPORG_POLICY_EXPORT",
+        "schemaVersion": 1,
+        "whitelist": [
+          "Bad Class"
+        ],
+        "blacklist": []
+      },
+      "valid": false
+    },
+    {
+      "id": "P0-INVALID-LONG",
+      "data": {
+        "schema": "SPORG_POLICY_EXPORT",
+        "schemaVersion": 1,
+        "whitelist": [
+          "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+        ],
+        "blacklist": []
+      },
+      "valid": false
+    }
+  ],
+  "readinessCases": [
+    {
+      "id": "P0-ABSENT-OPTIONAL",
+      "state": "ABSENT",
+      "required": false,
+      "allowed": true,
+      "code": "POLICY_ALLOW_OPEN"
+    },
+    {
+      "id": "P0-PENDING-REQUIRED",
+      "state": "PENDING",
+      "required": true,
+      "allowed": false,
+      "code": "POLICY_NOT_READY"
+    },
+    {
+      "id": "P0-INVALID-REQUIRED",
+      "state": "INVALID",
+      "required": true,
+      "allowed": false,
+      "code": "POLICY_INVALID"
+    }
+  ],
+  "environmentCases": [
+    {
+      "id": "P0-ENV-MISSING-ALLOWED",
+      "policyAllowed": true,
+      "environmentPresent": false,
+      "mayAdd": false,
+      "preservePersistedEntry": true
+    },
+    {
+      "id": "P0-ENV-PRESENT-DENIED",
+      "policyAllowed": false,
+      "environmentPresent": true,
+      "mayAdd": false,
+      "preservePersistedEntry": true
+    },
+    {
+      "id": "P0-ENV-PRESENT-ALLOWED",
+      "policyAllowed": true,
+      "environmentPresent": true,
+      "mayAdd": true,
+      "preservePersistedEntry": true
+    }
+  ]
+}
