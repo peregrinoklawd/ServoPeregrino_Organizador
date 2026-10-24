@@ -1,6 +1,6 @@
 # P0 — Contratos de Policy e prova de viabilidade (24/10/2026)
 
-**Status:** CONTRATOS CANDIDATOS DOCUMENTADOS; testes de referência offline executáveis; **smoke Arma SP NÃO EXECUTADO**. P0 fica **EM VALIDAÇÃO**, não homologado.  
+**Status atualizado em 24/10:** contratos candidatos e testes de referência; **smoke Arma SP executado e aprovado (20/20 PASS, 0 FAIL, duas missões)**. P0 permanece **EM VALIDAÇÃO** até testes negativos e congelamento dos contratos. [Evidência RPT](evidence/P0_SP_SMOKE_RPT_20261024.md).  
 **Baseline imutável:** `baseline/items-uicommon-r2-2-sp-homologated-20261021` (`67f4574`).  
 **Branch:** `feature/policy-0.1-p0-contracts`.  
 **Ownership:** addon opcional `ServoPeregrino_Organizador_Policy`, depende só de Nexus. Sem runtime Policy instalado nesta entrega.
@@ -115,11 +115,13 @@ Provider de catálogo para futuro Editor: `catalog.base.items` v1 pode mapear ao
 - https://community.bistudio.com/wiki/loadFile
 - https://community.bistudio.com/wiki/Arma_3:_Server_Security
 
-## 6. QA e gates ainda obrigatórios
+## 6. QA — evidência obtida e gates ainda obrigatórios
+
+**Evidência nova:** [RPT do smoke SP 24/10](evidence/P0_SP_SMOKE_RPT_20261024.md): cenário sem `CfgSPORGPolicy` e cenário com opt-in explícito em `description.ext` foram aprovados na engine 2.22.154089 (10/10 cada). Testes negativos de schema/fail-closed não executados; addon runtime inexistente. O arquivo de spike original no repo não deve ser confundido com o pacote de duas missões autoexecutáveis.
 
 - Contratos de fixture, casos OPEN, BLACKLIST, WHITELIST, COMBINED, conflitos, duplicatas, tipos inválidos, campo injetado, ausência da dependência e fail-closed: `machine/policy/p0_contract_fixtures_v1.json`.
 - Teste de oráculo Python **não é teste engine**: `tools/policy/test_p0_contracts.py`. Executar com `python -m unittest discover -s tools/policy -p 'test_*.py' -v`.
-- Smoke independente SQF da engine: `spikes/policy-p0/runPolicyP0Smoke.sqf`, copiar para missão de teste e executar via `[] execVM "runPolicyP0Smoke.sqf"` no Debug Console (SP), conferir RPT. Necessário testar JSON, 4 modos, `missionConfigFile`, `configFile` e disponibilidade de funções.
+- Smoke independente SQF da engine (pacote de missões A/B executado e aprovado em 24/10, reexecutar se mudar o contrato): `spikes/policy-p0/runPolicyP0Smoke.sqf`, copiar para missão de teste e executar via `[] execVM "runPolicyP0Smoke.sqf"` no Debug Console (SP), conferir RPT. Necessário testar JSON, 4 modos, `missionConfigFile`, `configFile` e disponibilidade de funções.
 - Repetir engine smoke com e sem classe de missão, e pelo menos um MP local para checar **limitação de entrada por clipboard** sem tratar como publicação/autoridade. Usuário precisa fornecer RPT de Arma para homologação. Não houve teste Arma, SP, MP ou PBO nesta entrega.
 - **P0 não termina** só com fixtures verdes; contrato segue candidato até evidência RPT e inspeção de classes reais do modset. P1 começa depois de revisão P0 e gates considerados suficientes.
 
