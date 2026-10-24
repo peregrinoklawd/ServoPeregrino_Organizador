@@ -5,7 +5,9 @@
 
 > **CHECKPOINT AUDITORIA 22/10/2026 (histórico):** naquela data todo P0–P7 estava pendente. P0 deve diferenciar claramente fonte interna (fallback vazio) de fonte externa (opt-in) e decidir técnica de configuração **sem presumir** `CfgSPORGPolicy` já implantado. A política é **estática por padrão**; ativação de nova revisão em runtime é capacidade futura opcional. Validar explícito: UI do jogador com blacklist não inclui proibidos, mas o editor mostra catálogo base completo; ausência de mod permanece vermelha; role kit fora; ícones dos botões ficam texto. Detalhes: [auditoria](../../73_AUDITORIA_COMPLETA_ITEMS_POLICY_DECISOES_20261022.md) e [continuidade](../../74_CONTINUIDADE_AUTOSSUFICIENTE_ITEMS_POLICY_20261022.md).
 
-**P0 atual:** [Contratos, fontes, testes e gates](P0_CONTRACTS_20261024.md). A aprovação do P0 exige smoke Arma/RPT; nenhum código runtime foi implementado.\n\n## Estratégia geral
+**P0 atual:** [Contratos, fontes, testes e gates](P0_CONTRACTS_20261024.md). A aprovação do P0 exige smoke Arma/RPT; nenhum código runtime foi implementado.
+
+## Estratégia geral
 
 Construir um módulo Policy **opcional, genérico, sem dependência do BGD**, e posteriormente um editor administrativo como frontend desse contrato. Items e Weapons são consumidores, não proprietários de regras. Nunca iniciar por alterar o UICommon/Items aprovado sem candidato versionado e smoke SP.
 
