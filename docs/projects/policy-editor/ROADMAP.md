@@ -1,11 +1,11 @@
 # Roadmap — Policy + Policy Editor
 
-**Data:** 22/10/2026 | **Estado:** BACKLOG PLANEJADO. **Todas as entregas abaixo PENDENTES**.
+**Planejamento:** 22/10/2026 | **Checkpoint 24/10/2026:** **P0 EM ANDAMENTO (contratos/fixtures/spike SQF preparados, engine não testada); P1–P7 PENDENTES**.
 **Fonte funcional:** [README do projeto](README.md) | **módulo proprietário:** [Policy](../../modules/Policy.md).
 
-> **CHECKPOINT AUDITORIA 22/10/2026:** Todo P0–P7 segue **PENDENTE**. P0 deve diferenciar claramente fonte interna (fallback vazio) de fonte externa (opt-in) e decidir técnica de configuração **sem presumir** `CfgSPORGPolicy` já implantado. A política é **estática por padrão**; ativação de nova revisão em runtime é capacidade futura opcional. Validar explícito: UI do jogador com blacklist não inclui proibidos, mas o editor mostra catálogo base completo; ausência de mod permanece vermelha; role kit fora; ícones dos botões ficam texto. Detalhes: [auditoria](../../73_AUDITORIA_COMPLETA_ITEMS_POLICY_DECISOES_20261022.md) e [continuidade](../../74_CONTINUIDADE_AUTOSSUFICIENTE_ITEMS_POLICY_20261022.md).
+> **CHECKPOINT AUDITORIA 22/10/2026 (histórico):** naquela data todo P0–P7 estava pendente. P0 deve diferenciar claramente fonte interna (fallback vazio) de fonte externa (opt-in) e decidir técnica de configuração **sem presumir** `CfgSPORGPolicy` já implantado. A política é **estática por padrão**; ativação de nova revisão em runtime é capacidade futura opcional. Validar explícito: UI do jogador com blacklist não inclui proibidos, mas o editor mostra catálogo base completo; ausência de mod permanece vermelha; role kit fora; ícones dos botões ficam texto. Detalhes: [auditoria](../../73_AUDITORIA_COMPLETA_ITEMS_POLICY_DECISOES_20261022.md) e [continuidade](../../74_CONTINUIDADE_AUTOSSUFICIENTE_ITEMS_POLICY_20261022.md).
 
-## Estratégia geral
+**P0 atual:** [Contratos, fontes, testes e gates](P0_CONTRACTS_20261024.md). A aprovação do P0 exige smoke Arma/RPT; nenhum código runtime foi implementado.\n\n## Estratégia geral
 
 Construir um módulo Policy **opcional, genérico, sem dependência do BGD**, e posteriormente um editor administrativo como frontend desse contrato. Items e Weapons são consumidores, não proprietários de regras. Nunca iniciar por alterar o UICommon/Items aprovado sem candidato versionado e smoke SP.
 
@@ -13,7 +13,7 @@ Construir um módulo Policy **opcional, genérico, sem dependência do BGD**, e 
 
 | Fase | Escopo e entregáveis | Critério de saída | Testável apenas em SP? |
 |---|---|---|---|
-| **P0 — Contrato e spike** | Esquema `PolicySnapshot`, `PolicyDecision`, nomes de config/caminhos, origem interna vs servidor, roles permitidos, import/export seguro, testes do editor sem CBA/ACE | Documentação canônica, exemplos, regras A/B/C testadas em fixtures; spike de clipboard/file loading Arma; não criar acoplamento | Sim |
+| **P0 — Contrato e spike (em andamento; SP pendente)** | Esquema `PolicySnapshot`, `PolicyDecision`, nomes de config/caminhos, origem interna vs servidor, roles permitidos, import/export seguro, testes do editor sem CBA/ACE | Documentação canônica, exemplos, regras A/B/C testadas em fixtures; spike de clipboard/file loading Arma; não criar acoplamento | Sim |
 | **P1 — Núcleo Policy 0.1-A** | Addon `Policy` opcional, lista vazia OPEN, whitelist, blacklist, COMBINED, prioridade DENY, classnames indexados, validação de arrays, status/revisão | 100% dos modos A/B/C em testes isolados e SP; sem impactar catálogo Items quando Policy ausente | Sim |
 | **P2 — Configuração e descoberta 0.1-B** | Fallback interno do addon, fonte de missão/servidor explicitamente nomeada, precedência de configuração, carregamento inicial, detecção de ausência, freeze por sessão, sem busca por configs externas desconhecidas | Servidor com listas vazias e sem Policy mantém comportamento original; configuração conhecida sobrepõe fallback; fonte e hash visíveis no RPT | SP e host; MP autoritativo depois |
 | **P3 — Items e caches 0.1-C** | Integração via capability; base de catálogo sem blacklist vs projeção autorizada; invalidation por `policyRevision`; kit awareness ambiental/política; cores vermelho/amarelo/laranja por prioridade; filtro no catálogo normal | Scan `CONFIG_ALL` não reinicia quando muda apenas Policy; kit salvo intacto; destaque correto de mods ausentes e proibidos; focused refresh, benchmark antes/depois | Sim |
