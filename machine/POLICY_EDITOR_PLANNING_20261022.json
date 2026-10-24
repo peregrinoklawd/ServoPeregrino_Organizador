@@ -7,7 +7,7 @@
   "project": "SPORG_POLICY_EDITOR",
   "owner": "Policy",
   "addon": "ServoPeregrino_Organizador_Policy",
-  "status": "P0_ENGINE_SP_SMOKE_PASS_NEGATIVE_TESTS_PENDING",
+  "status": "P0_NEGATIVE_SP_RPT_PENDING",
   "docs": [
     "docs/modules/Policy.md",
     "docs/projects/policy-editor/README.md",
@@ -84,7 +84,7 @@
     {
       "phase": "P0",
       "name": "Contracts and feasibility",
-      "status": "ENGINE_SP_SMOKE_PASS_NEGATIVE_TESTS_PENDING"
+      "status": "POSITIVE_SP_20_OF_20_PASS_NEGATIVE_RPT_PENDING"
     },
     {
       "phase": "P1",
@@ -152,7 +152,7 @@
   "merge_performed": false,
   "audit_doc": "docs/73_AUDITORIA_COMPLETA_ITEMS_POLICY_DECISOES_20261022.md",
   "autonomous_handoff_doc": "docs/74_CONTINUIDADE_AUTOSSUFICIENTE_ITEMS_POLICY_20261022.md",
-  "record_revision": "2026-10-24-p0-sp-smoke-pass",
+  "record_revision": "2026-10-24-p0-negative-missions-prepared",
   "policy_lifecycle": {
     "default": "STATIC_LOADED_BEFORE_OR_AT_SESSION_START",
     "admin_live_updates": "OPTIONAL_LATER_NOT_REQUIRED_FOR_FIRST_IMPLEMENTATION",
@@ -188,7 +188,7 @@
     "icons_assets": "APPROVED_VERSIONED_UI_INTEGRATION_PAUSED"
   },
   "p0": {
-    "status": "ENGINE_SP_SMOKE_PASS_NEGATIVE_TESTS_PENDING",
+    "status": "ENGINE_SP_SMOKE_PASS_NEGATIVE_MISSIONS_PREPARED_RPT_PENDING",
     "baseline": "67f457414c37784ef0469e7235d39006342edb40",
     "source_doc": "docs/projects/policy-editor/P0_CONTRACTS_20261024.md",
     "fixture_file": "machine/policy/p0_contract_fixtures_v1.json",
@@ -234,6 +234,24 @@
       "REAL_CLASSNAME_VALIDATION",
       "PYTHON_UNITTEST_EXECUTION_OR_RECORDED_EXCEPTION",
       "POLICY_ADDON_LOADER_GATE_AFTER_P1_P2"
-    ]
+    ],
+    "negative_smoke_package": {
+      "delivered": true,
+      "date": "2026-10-24",
+      "filename": "SP_ORG_Policy_P0_Testes_Negativos_20261024.zip",
+      "sha256": "4e092a41aae095085a76b9389aa7e291bf5ac0e296ac4eb47b95599aff2be0a1",
+      "scenarios": [
+        "C_INVALID_CFG_VERSION",
+        "D_INVALID_CFG_LIST_TYPE",
+        "E_DUPLICATE_CLASSNAME",
+        "F_POLICY_REQUIRED_MISSING"
+      ],
+      "test_assertions_per_scenario": 35,
+      "static_zip_structure_checked": true,
+      "sqf_engine_executed": false,
+      "expected_total_assertions": 140,
+      "evidence_plan": "docs/projects/policy-editor/evidence/P0_NEGATIVE_MISSIONS_PREP_20261024.md",
+      "important": "PREPARED_ONLY_NO_ARMA_RESULTS_YET"
+    }
   }
 }
