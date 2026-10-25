@@ -1,7 +1,7 @@
 # Policy — módulo opcional de autorização de itens/equipamentos
 
 **Data da consolidação:** 22/10/2026  
-**Status (25/10/2026): P0 CONTRATOS E VIABILIDADE SP CONCLUÍDOS**: scanner G2 **12/12 PASS** e 532 elegíveis recuperados; unittest Python revisado **8/8 PASS** (32 fixtures); regressão SQF H **156/156 PASS**. Classname v1: `^[A-Za-z0-9_]{1,128}$`. [RPT H](../projects/policy-editor/evidence/P0_H_REVISED_CLASSNAME_SQF_RPT_20261025.md). **Módulo Policy runtime/editor/autoridade MP ainda NÃO IMPLEMENTADOS**; fases P1–P7 planejadas.
+**Status (25/10/2026): P0 CONTRATOS E VIABILIDADE SP CONCLUÍDOS**: scanner G2 **12/12 PASS** e 532 elegíveis recuperados; unittest Python revisado **8/8 PASS** (32 fixtures); regressão SQF H **156/156 PASS**. Classname v1: `^[A-Za-z0-9_]{1,128}$`. [RPT H](../projects/policy-editor/evidence/P0_H_REVISED_CLASSNAME_SQF_RPT_20261025.md). **Módulo Policy P1 CORE SOURCE agora existe como candidata**, mas não está validado em runtime PBO; editor/loader/autoridade MP NÃO IMPLEMENTADOS; P2–P7 planejadas.
 **Proprietário único:** `ServoPeregrino_Organizador_Policy` (futuro PBO); dependência planejada: Nexus.  
 **Projeto do editor:** [../projects/policy-editor/README.md](../projects/policy-editor/README.md) e [ROADMAP](../projects/policy-editor/ROADMAP.md).
 
@@ -257,3 +257,8 @@ P0 G avaliou 133.399 classnames na modlist real; 532 dos 54.003 elegíveis ficar
 ### P0 concluído — 25/10/2026
 
 A análise do RPT de regressão H confirmou **156 PASS/0 FAIL** e validação de prefixos numéricos no Arma, encerrando a homologação de **contratos Policy em laboratório single-player**. [Evidência H](../projects/policy-editor/evidence/P0_H_REVISED_CLASSNAME_SQF_RPT_20261025.md). Mudança de classname **não modifica compatibilidade física de Weapons**: motor é `compatibleItems`/`compatibleMagazines`. Risco real separado para futura revisão Weapons: `magazinesByMuzzle` já é retornado, mas o seletor UI consome lista plana `magazines`. Ver [registro no owner Weapons](Weapons.md). Não afirmar addon real, PBO ou MP testado.
+
+
+## P1 0.1-A — primeira candidata de motor (25/10/2026)
+
+Na branch [`feature/policy-0.1-a-core`](https://github.com/peregrinoklawd/ServoPeregrino_Organizador/tree/feature/policy-0.1-a-core), fonte do addon `addons/ServoPeregrino_Organizador_Policy` contém `config.cpp` e cinco operações puras com whitelist/blacklist, índice case-insensitive e `PolicySnapshot/PolicyDecision`. Uma missão VR self-contained empacotada `SP_ORG_Policy_P1_A_CoreLab_20261025.zip` realiza **68 asserções automáticas** quando executada pelo operador. **Somente QA offline e equivalência byte-a-byte foram feitos; RPT SP e teste de addon/PBO ainda pendentes**. O núcleo não ativa policy, não acessa server.cfg, não aplica loadout, não define CfgRemoteExec global e não é autoridade de servidor. [Documento P1](../projects/policy-editor/P1_CORE_0_1_A_20261025.md).
