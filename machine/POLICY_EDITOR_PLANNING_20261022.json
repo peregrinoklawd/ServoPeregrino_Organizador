@@ -7,7 +7,7 @@
   "project": "SPORG_POLICY_EDITOR",
   "owner": "Policy",
   "addon": "ServoPeregrino_Organizador_Policy",
-  "status": "P0_NEGATIVE_SP_RPT_PENDING",
+  "status": "P0_ENGINE_SMOKES_PASS_CONTRACT_REVIEW_PENDING",
   "docs": [
     "docs/modules/Policy.md",
     "docs/projects/policy-editor/README.md",
@@ -84,7 +84,7 @@
     {
       "phase": "P0",
       "name": "Contracts and feasibility",
-      "status": "POSITIVE_SP_20_OF_20_PASS_NEGATIVE_RPT_PENDING"
+      "status": "SP_ENGINE_SMOKES_PASS_160_OF_160_CONTRACT_FINAL_REVIEW_PENDING"
     },
     {
       "phase": "P1",
@@ -152,7 +152,7 @@
   "merge_performed": false,
   "audit_doc": "docs/73_AUDITORIA_COMPLETA_ITEMS_POLICY_DECISOES_20261022.md",
   "autonomous_handoff_doc": "docs/74_CONTINUIDADE_AUTOSSUFICIENTE_ITEMS_POLICY_20261022.md",
-  "record_revision": "2026-10-24-p0-negative-missions-prepared",
+  "record_revision": "2026-10-24-p0-negative-rpt-140-pass",
   "policy_lifecycle": {
     "default": "STATIC_LOADED_BEFORE_OR_AT_SESSION_START",
     "admin_live_updates": "OPTIONAL_LATER_NOT_REQUIRED_FOR_FIRST_IMPLEMENTATION",
@@ -188,7 +188,7 @@
     "icons_assets": "APPROVED_VERSIONED_UI_INTEGRATION_PAUSED"
   },
   "p0": {
-    "status": "ENGINE_SP_SMOKE_PASS_NEGATIVE_MISSIONS_PREPARED_RPT_PENDING",
+    "status": "SP_POSITIVE_AND_NEGATIVE_ENGINE_SMOKES_PASS_160_OF_160_CONTRACT_FINAL_REVIEW_PENDING",
     "baseline": "67f457414c37784ef0469e7235d39006342edb40",
     "source_doc": "docs/projects/policy-editor/P0_CONTRACTS_20261024.md",
     "fixture_file": "machine/policy/p0_contract_fixtures_v1.json",
@@ -225,15 +225,15 @@
       }
     ],
     "arma_version": "2.22.154089_STABLE",
-    "arma_sp_smoke_total_pass": 20,
+    "arma_sp_smoke_total_pass": 160,
     "arma_sp_smoke_total_fail": 0,
     "arma_sp_smoke_rpt_sha256": "d4bb57129e89914174dc550a718602f41f91d33611092c6ab0717a2b7b295979",
     "arma_sp_smoke_evidence": "docs/projects/policy-editor/evidence/P0_SP_SMOKE_RPT_20261024.md",
     "gates_pending": [
-      "SQF_NEGATIVE_SCHEMA_AND_FAIL_CLOSED",
-      "REAL_CLASSNAME_VALIDATION",
-      "PYTHON_UNITTEST_EXECUTION_OR_RECORDED_EXCEPTION",
-      "POLICY_ADDON_LOADER_GATE_AFTER_P1_P2"
+      "REAL_CLASSNAME_VALIDATION_BEFORE_FREEZING_REGEX",
+      "PYTHON_UNITTEST_EXECUTION_OR_DOCUMENTED_EXCLUSION",
+      "FINAL_P0_CONTRACT_REVIEW",
+      "P1_P2_REAL_ADDON_AND_LOADER_GATES_NOT_PART_OF_P0"
     ],
     "negative_smoke_package": {
       "delivered": true,
@@ -248,10 +248,52 @@
       ],
       "test_assertions_per_scenario": 35,
       "static_zip_structure_checked": true,
-      "sqf_engine_executed": false,
+      "sqf_engine_executed": true,
       "expected_total_assertions": 140,
       "evidence_plan": "docs/projects/policy-editor/evidence/P0_NEGATIVE_MISSIONS_PREP_20261024.md",
-      "important": "PREPARED_ONLY_NO_ARMA_RESULTS_YET"
+      "important": "ENGINE_SP_RPT_VERIFIED_140_PASS_ZERO_FAIL_NOT_ADDON_RUNTIME",
+      "rpt_sha256": "df3fed6cdd85287a346a940d10d286fcaa9f304ef3b555c2b2e25e75e6137583",
+      "evidence": "docs/projects/policy-editor/evidence/P0_NEGATIVE_SP_RPT_20261024.md",
+      "results": [
+        {
+          "scenario": "C_INVALID_CFG_VERSION",
+          "passed": 35,
+          "failed": 0,
+          "time": "2026-10-24T22:19:56-03:00",
+          "state": "INVALID",
+          "code": "INVALID_CFG_VERSION",
+          "effectiveAllow": false
+        },
+        {
+          "scenario": "D_INVALID_CFG_LIST_TYPE",
+          "passed": 35,
+          "failed": 0,
+          "time": "2026-10-24T22:20:35-03:00",
+          "state": "INVALID",
+          "code": "INVALID_CFG_LIST_TYPE",
+          "effectiveAllow": false
+        },
+        {
+          "scenario": "E_DUPLICATE_CLASSNAME",
+          "passed": 35,
+          "failed": 0,
+          "time": "2026-10-24T22:21:08-03:00",
+          "state": "INVALID",
+          "code": "DUPLICATE_CLASSNAME",
+          "effectiveAllow": false
+        },
+        {
+          "scenario": "F_POLICY_REQUIRED_MISSING",
+          "passed": 35,
+          "failed": 0,
+          "time": "2026-10-24T22:21:43-03:00",
+          "state": "PENDING",
+          "code": "POLICY_REQUIRED_MISSING",
+          "effectiveAllow": false
+        }
+      ],
+      "actual_pass": 140,
+      "actual_fail": 0
     }
   }
 }
