@@ -16,7 +16,7 @@ FIXTURES = (
     / "policy"
     / "p0_contract_fixtures_v1.json"
 )
-CLASSNAME = re.compile(r"[A-Za-z_][A-Za-z0-9_]{0,127}\Z", re.ASCII)
+CLASSNAME = re.compile(r"[A-Za-z0-9_]{1,128}\Z", re.ASCII)
 FIELDS = frozenset(("schema", "schemaVersion", "whitelist", "blacklist"))
 MAX_LIST = 4096
 MAX_BYTES = 512 * 1024
@@ -140,10 +140,18 @@ class PolicyP0Contracts(unittest.TestCase):
 
     def test_bad_boundaries(self) -> None:
         template = {"schema": "SPORG_POLICY_EXPORT", "schemaVersion": 1, "whitelist": [], "blacklist": []}
-        for invalid in ([None], [1], ["a.b"], ["Bad Class"], ["a;exec"], ["1StartsWithDigit"], [""]):
+        for invalid in ([None], [1], ["a.b"], ["Bad Class"], ["a;exec"], ["-StartsWithPunctuation"], [""]):
             with self.subTest(classname=invalid):
                 self.assertFalse(validate_export({**template, "blacklist": invalid}))
         self.assertFalse(validate_export({**template, "whitelist": ["A"] * (MAX_LIST + 1)}))
+
+    def test_numeric_prefix_real_classnames(self) -> None:
+        """G2 RPT: actual config classes whose first character is a digit."""
+        template = {"schema": "SPORG_POLICY_EXPORT", "schemaVersion": 1, "whitelist": [], "blacklist": []}
+        for classname in ("30Rnd_556x45_Stanag", "121_SP10M_18_FDE", "1st_pack_1", "1StartsWithDigit"):
+            with self.subTest(classname=classname):
+                self.assertTrue(validate_export({**template, "whitelist": [classname]}))
+        self.assertFalse(validate_export({**template, "whitelist": ["30Rnd_556x45_Stanag;call compile evil"]}))
 
 
 if __name__ == "__main__":
