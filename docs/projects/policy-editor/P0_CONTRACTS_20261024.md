@@ -1,6 +1,6 @@
 # P0 — Contratos de Policy e prova de viabilidade (24/10/2026)
 
-**Status atualizado após ambos os RPTs de 24/10:** **smoke Arma SP A/B 20/20 PASS + C/D/E/F 140/140 PASS = 160/160 PASS, 0 FAIL**. P0 permanece **EM REVISÃO FINAL DE CONTRATOS** (regex com modset real e suíte Python); runtime addon e MP continuam não implementados/testados. Evidências: [A/B](evidence/P0_SP_SMOKE_RPT_20261024.md), [C–F](evidence/P0_NEGATIVE_SP_RPT_20261024.md).  
+**Status atualizado após RPTs e unittest de 24/10:** **smoke Arma SP A/B 20/20 PASS + C/D/E/F 140/140 PASS = 160/160 PASS, 0 FAIL; Python unittest 7/7 PASS (28 fixtures)**. P0 permanece **EM REVISÃO FINAL DE CONTRATOS** (regex com modset real); runtime addon e MP continuam não implementados/testados. Evidências: [A/B](evidence/P0_SP_SMOKE_RPT_20261024.md), [C–F](evidence/P0_NEGATIVE_SP_RPT_20261024.md).  
 **Baseline imutável:** `baseline/items-uicommon-r2-2-sp-homologated-20261021` (`67f4574`).  
 **Branch:** `feature/policy-0.1-p0-contracts`.  
 **Ownership:** addon opcional `ServoPeregrino_Organizador_Policy`, depende só de Nexus. Sem runtime Policy instalado nesta entrega.
@@ -120,10 +120,10 @@ Provider de catálogo para futuro Editor: `catalog.base.items` v1 pode mapear ao
 **Evidência nova:** [RPT do smoke SP 24/10](evidence/P0_SP_SMOKE_RPT_20261024.md): cenário sem `CfgSPORGPolicy` e cenário com opt-in explícito em `description.ext` foram aprovados na engine 2.22.154089 (10/10 cada). Testes negativos de schema/fail-closed C–F executados **140/140 PASS**, conforme [RPT adicional](evidence/P0_NEGATIVE_SP_RPT_20261024.md); addon runtime ainda inexistente. O arquivo de spike original no repo não deve ser confundido com o pacote de duas missões autoexecutáveis.
 
 - Contratos de fixture, casos OPEN, BLACKLIST, WHITELIST, COMBINED, conflitos, duplicatas, tipos inválidos, campo injetado, ausência da dependência e fail-closed: `machine/policy/p0_contract_fixtures_v1.json`.
-- Teste de oráculo Python **não é teste engine**: `tools/policy/test_p0_contracts.py`. Executar com `python -m unittest discover -s tools/policy -p 'test_*.py' -v`.
+- Teste de oráculo Python **não é teste engine**: `tools/policy/test_p0_contracts.py`. **Executado 7/7 PASS** em Python 3.13.5; [evidência unittest](evidence/P0_PYTHON_UNITTEST_20261024.md). Reproduzir com `python -m unittest discover -s tools/policy -p 'test_*.py' -v`.
 - Smoke independente SQF da engine (pacote de missões A/B executado e aprovado em 24/10, reexecutar se mudar o contrato): `spikes/policy-p0/runPolicyP0Smoke.sqf`, copiar para missão de teste e executar via `[] execVM "runPolicyP0Smoke.sqf"` no Debug Console (SP), conferir RPT. Necessário testar JSON, 4 modos, `missionConfigFile`, `configFile` e disponibilidade de funções.
 - Repetir engine smoke com e sem classe de missão, e pelo menos um MP local para checar **limitação de entrada por clipboard** sem tratar como publicação/autoridade. Usuário precisa fornecer RPT de Arma para homologação. Houve duas rodadas de smoke Arma **SP isolado**, A–F 160/160 PASS; **não** houve teste MP nem PBO/loader real.
-- Os smoke SP da engine estão verdes (160/160) e documentados. **P0 ainda exige revisão de classnames reais e QA Python documentado antes de congelar os contratos v1**. Teste completo de loader ocorre após implementação P1/P2. P1 começa depois de revisão P0 e gates considerados suficientes.
+- Os smoke SP da engine estão verdes (160/160) e a suíte Python 7/7 PASS, todos documentados. **P0 ainda exige revisão de classnames reais antes de congelar os contratos v1**. Teste completo de loader ocorre após implementação P1/P2. P1 começa depois de revisão P0 e gates considerados suficientes.
 
 ## 7. Ordem da continuidade
 
