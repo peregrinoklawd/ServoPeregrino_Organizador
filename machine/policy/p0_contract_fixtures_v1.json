@@ -249,6 +249,54 @@
         "blacklist": []
       },
       "valid": false
+    },
+    {
+      "id": "P0-VALID-DIGIT-VANILLA-MAG",
+      "data": {
+        "schema": "SPORG_POLICY_EXPORT",
+        "schemaVersion": 1,
+        "whitelist": [
+          "30Rnd_556x45_Stanag"
+        ],
+        "blacklist": []
+      },
+      "valid": true
+    },
+    {
+      "id": "P0-VALID-DIGIT-BGD-WEAPON",
+      "data": {
+        "schema": "SPORG_POLICY_EXPORT",
+        "schemaVersion": 1,
+        "whitelist": [
+          "121_SP10M_18_FDE"
+        ],
+        "blacklist": []
+      },
+      "valid": true
+    },
+    {
+      "id": "P0-VALID-DIGIT-BGD-BACKPACK",
+      "data": {
+        "schema": "SPORG_POLICY_EXPORT",
+        "schemaVersion": 1,
+        "whitelist": [
+          "1st_pack_1"
+        ],
+        "blacklist": []
+      },
+      "valid": true
+    },
+    {
+      "id": "P0-INVALID-PUNCTUATION-PREFIX",
+      "data": {
+        "schema": "SPORG_POLICY_EXPORT",
+        "schemaVersion": 1,
+        "whitelist": [
+          "-BadStart"
+        ],
+        "blacklist": []
+      },
+      "valid": false
     }
   ],
   "readinessCases": [
