@@ -1,6 +1,6 @@
 # Roadmap — Policy + Policy Editor
 
-**Checkpoint 25/10/2026:** **P0 FECHADO — CONTRATOS/VIABILIDADE EM SP** (G2 12/12 PASS; 532 elegíveis recuperados; Python revisado 8/8 PASS com 32 fixtures; H SQF 156/156 PASS). **P1–P7 PLANEJADOS, sem addon Policy runtime/MP implementados**.
+**Checkpoint 25/10/2026:** **P0 FECHADO — CONTRATOS/VIABILIDADE SP**; **P1 0.1-A CORE SOURCE PREPARADO, MISSÃO 68 ASSERTIONS AGUARDANDO RPT**, código de addon com CfgFunctions/capabilities ainda sem prova de PBO/engine. P2–P7 planejados.
 **Fonte funcional:** [README do projeto](README.md) | **módulo proprietário:** [Policy](../../modules/Policy.md).
 
 > **CHECKPOINT AUDITORIA 22/10/2026 (histórico):** naquela data todo P0–P7 estava pendente. P0 deve diferenciar claramente fonte interna (fallback vazio) de fonte externa (opt-in) e decidir técnica de configuração **sem presumir** `CfgSPORGPolicy` já implantado. A política é **estática por padrão**; ativação de nova revisão em runtime é capacidade futura opcional. Validar explícito: UI do jogador com blacklist não inclui proibidos, mas o editor mostra catálogo base completo; ausência de mod permanece vermelha; role kit fora; ícones dos botões ficam texto. Detalhes: [auditoria](../../73_AUDITORIA_COMPLETA_ITEMS_POLICY_DECISOES_20261022.md) e [continuidade](../../74_CONTINUIDADE_AUTOSSUFICIENTE_ITEMS_POLICY_20261022.md).
@@ -15,7 +15,7 @@ Construir um módulo Policy **opcional, genérico, sem dependência do BGD**, e 
 
 | Fase | Escopo e entregáveis | Critério de saída | Testável apenas em SP? |
 |---|---|---|---|
-| **P0 — Contrato e spike (em revisão de classnames reais P0 G)** | Esquema `PolicySnapshot`, `PolicyDecision`, nomes de config/caminhos, origem interna vs servidor, roles permitidos, import/export seguro, testes do editor sem CBA/ACE | Documentação canônica, exemplos, regras A/B/C testadas em fixtures; spike de clipboard/file loading Arma; não criar acoplamento | Sim |
+| **P0 — Contrato e spike (CONCLUÍDO 25/10/2026)** | Esquema `PolicySnapshot`, `PolicyDecision`, nomes de config/caminhos, origem interna vs servidor, roles permitidos, import/export seguro, testes do editor sem CBA/ACE | Documentação canônica, exemplos, regras A/B/C testadas em fixtures; spike de clipboard/file loading Arma; não criar acoplamento | Sim |
 | **P1 — Núcleo Policy 0.1-A** | Addon `Policy` opcional, lista vazia OPEN, whitelist, blacklist, COMBINED, prioridade DENY, classnames indexados, validação de arrays, status/revisão | 100% dos modos A/B/C em testes isolados e SP; sem impactar catálogo Items quando Policy ausente | Sim |
 | **P2 — Configuração e descoberta 0.1-B** | Fallback interno do addon, fonte de missão/servidor explicitamente nomeada, precedência de configuração, carregamento inicial, detecção de ausência, freeze por sessão, sem busca por configs externas desconhecidas | Servidor com listas vazias e sem Policy mantém comportamento original; configuração conhecida sobrepõe fallback; fonte e hash visíveis no RPT | SP e host; MP autoritativo depois |
 | **P3 — Items e caches 0.1-C** | Integração via capability; base de catálogo sem blacklist vs projeção autorizada; invalidation por `policyRevision`; kit awareness ambiental/política; cores vermelho/amarelo/laranja por prioridade; filtro no catálogo normal | Scan `CONFIG_ALL` não reinicia quando muda apenas Policy; kit salvo intacto; destaque correto de mods ausentes e proibidos; focused refresh, benchmark antes/depois | Sim |
@@ -83,3 +83,8 @@ G2 executada na mesma modlist real: **PASS 12/12 SELFTEST, 0 ROOT ERROR**, 133.3
 ### Encerramento P0 — H RPT 25/10/2026
 
 **P0 CONTRATOS/SP FECHADO.** H regressão SQF corrigida: **156/156 PASS (4×39)**, configs inválidas C/D/E e obrigatória ausente F com `effectiveAllow=false`. [Evidência RPT H](evidence/P0_H_REVISED_CLASSNAME_SQF_RPT_20261025.md). Regex v1 `^[A-Za-z0-9_]{1,128}$`, Python 8/8/32 fixtures, G2 modset 532/532 recuperados. **O próximo marco é P1 (motor real), não uma nova missão regex**. Integração futura Weapons e QA multi-muzzle estão documentados em [Weapons](../../modules/Weapons.md), sem alteração de runtime, sem merge e sem compromisso de entrega no P0.
+
+
+## Checkpoint P1 0.1-A — 25/10/2026
+
+A branch `feature/policy-0.1-a-core` deriva da P0 encerrada. Foram criados source do addon Policy opcional, cinco funções puras de domínio (`isValidClassname`, `validateExport`, `createContext`, `evaluate`, `snapshot`), inicializador de capabilities Nexus v1 e configuração CfgFunctions sem política global `CfgRemoteExec`. **Não há loader de servidor, integração Items/Weapons, PBO construído ou autoridade MP**. Missão self-contained `SP_ORG_Policy_P1_A_CoreLab.VR` em ZIP com **68 asserções projetadas**, QA offline positivo, **RPT da engine pendente**. [Escopo técnico e evidência](P1_CORE_0_1_A_20261025.md). P0 permanece fechado. Não iniciar P2 sem validar P1 com RPT, respeitando decisões de escopo.
