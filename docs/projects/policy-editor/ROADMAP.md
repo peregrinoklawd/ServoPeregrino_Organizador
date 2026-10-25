@@ -1,6 +1,6 @@
 # Roadmap — Policy + Policy Editor
 
-**Planejamento:** 22/10/2026 | **Checkpoint 24/10/2026:** **P0 EM REVISÃO FINAL (smoke engine SP A–F 160/160 PASS; revisão de contrato/regex real pendente; Python 7/7 PASS); P1–P7 PENDENTES**.
+**Planejamento:** 22/10/2026 | **Checkpoint 24/10/2026:** **P0 EM REVISÃO DO CONTRATO DE CLASSNAME (SP A–F 160/160 PASS; Python 7/7 PASS; P0 G REVIEW — 532 classes elegíveis incompatíveis; G2 RPT pendente); P1–P7 PENDENTES**.
 **Fonte funcional:** [README do projeto](README.md) | **módulo proprietário:** [Policy](../../modules/Policy.md).
 
 > **CHECKPOINT AUDITORIA 22/10/2026 (histórico):** naquela data todo P0–P7 estava pendente. P0 deve diferenciar claramente fonte interna (fallback vazio) de fonte externa (opt-in) e decidir técnica de configuração **sem presumir** `CfgSPORGPolicy` já implantado. A política é **estática por padrão**; ativação de nova revisão em runtime é capacidade futura opcional. Validar explícito: UI do jogador com blacklist não inclui proibidos, mas o editor mostra catálogo base completo; ausência de mod permanece vermelha; role kit fora; ícones dos botões ficam texto. Detalhes: [auditoria](../../73_AUDITORIA_COMPLETA_ITEMS_POLICY_DECISOES_20261022.md) e [continuidade](../../74_CONTINUIDADE_AUTOSSUFICIENTE_ITEMS_POLICY_20261022.md).
@@ -68,3 +68,8 @@ O editor pode virar produto independente quando contrato/capabilities estiverem 
 - **M4 — Autoridade e distribuição:** P6–P7; admin, revisões, JIP, adapters, pacote PBO.
 
 Nenhuma dessas milestones foi executada; projetos anteriores de Items (R2.2) permanecem separados.
+
+
+### Checkpoint P0 G (25/10/2026)
+
+A auditoria P0 G sobre modset real identificou **532 classnames elegíveis (529 no pre-filtro Items) fora da regex provisória** e confirmou dígitos iniciais em classnames carregados de `@BGD - Tools of the Trade`. 10 autotestes passaram; resultado global **REVIEW, não PASS**. [Evidência](evidence/P0_G_CLASSNAME_AUDIT_RPT_20261025.md). A missão G2 de diagnóstico diferencial já está preparada, **ainda sem RPT**. [Preparação](evidence/P0_G2_REGEX_COMPARISON_PREP_20261025.md). A revisão do contrato pode exigir atualização de testes Python/SQF antes do fechamento P0; não declarar retroativamente os 160 PASS como prova da regex revisada.
