@@ -415,3 +415,24 @@ Escopo:
 - multiplayer: **DEFERRED_0_8**.
 
 Não avançar para 0.6-F antes do gate real da R2.
+
+
+## Auditoria transversal Policy P0 G2/H — classname e compatibilidade (25/10/2026)
+
+**Status: REGISTRADO PARA QA FUTURO DO WEAPONS, NÃO É BUG REGEX CONFIRMADO.** Auditoria motivada pela correção de formatos de classnames no Policy (G2 detectou 532 elegíveis antes rejeitados pelo bloqueio de prefixos numéricos; H confirmou a regressão SQF 156/156). **Não alterar o runtime Weapons nem reabrir sua baseline homologada por esse achado isolado.**
+
+### Implementação observada na baseline mission-first 0.6-F R6
+
+- `missions/SP_ORG_Items_Weapons_UI_Lab_SelfContained.VR/weapons/functions/catalog/fn_buildWeaponCatalog.sqf`: consulta `CfgWeapons`, filtros por `scope` e `type`, `configName`, `baseWeapon` e presets, **não usa regex do Policy**.
+- `.../catalog/fn_getWeaponCompatibility.sqf`: `compatibleItems` e `compatibleMagazines`, consulta extra `BIS_fnc_compatibleMagazines` e família de lançadores `baseWeapon/type=4`; normaliza e deduplica `toLowerANSI`; disponibiliza tanto `magazines` (união) quanto **`magazinesByMuzzle`**.
+- `.../ui/fn_buildCompatibilitySelectorModel.sqf`: seletores de acessórios dependem das opções do engine; **seletor de magazine atual lê `magazines`**, não `magazinesByMuzzle`. Portanto o runtime já possui distinção por muzzle em dados, mas ela ainda **não foi refletida no seletor** da UI.
+- `.../domain/fn_validateWeaponConfigurationSemantic.sqf` e `.../recipe/fn_validateWeaponRecipeSemantic.sqf`: validam compatibilidade de acessórios/magazines por dados retornados pelo engine/serviço. **Não se identificou restrição de classname iniciado por dígito nestes caminhos**.
+- `.../domain/fn_isValidIdentityToken.sqf` contém restrição de formato para tokens `WID-`/`SPW-` de identidade, **não para os classnames de armas**. Não aplicar a regex Policy a tokens de identidade.
+
+### Pendências objetivas para retomada de Weapons (sem execução nesta rodada)
+
+1. **WEAPONS-COMPAT-MULTIMUZZLE-01 — confirmar e resolver seleção por muzzle:** reproduzir com arma de `muzzles` múltiplos / lançador acoplado; comparar `magazines` e `magazinesByMuzzle`; definir UI de munições por boca de fogo (arma principal versus lançador); validar que a seleção atribui magazine ao muzzle correto, sem misturar munições na escolha de arma principal. Preservar caso especial de SECONDARY runtime variants (`baseWeapon/type=4`). **Classificar como limitação de UI a ser tratada, não regressão causada pelo Policy.**
+2. **WEAPONS-POLICY-CLASSNAME-01 — gate da integração futura:** quando Weapons consumir `policy.evaluate/snapshot`, aceitar formato de classname v1 **`^[A-Za-z0-9_]{1,128}$`** (inclusive dígito inicial: `121_SP10M_18_FDE`, `30Rnd_556x45_Stanag`) em qualquer importação/DTO relevante. Separar **validade sintática**, **existência no modset** (configFile/isClass), **autorização Policy** e **compatibilidade física** (engine). Não copiar validador restritivo antigo do P0 e não usar regex como substituta de `compatibleItems`/`compatibleMagazines`.
+3. **WEAPONS-COMPAT-REGRESSION-01 — evidência futura:** adicionar teste automatizado para classnames de dígito inicial e armas com lançador (magazine por muzzle), incluindo comparação case-insensitive, mods reais, ausência de classe, preservação de Recipe e saída adequada na UI. Só modificar o módulo na sua próxima entrega própria, com novo RPT e sem impacto na linha Items.
+
+**Gate/owner:** Weapons 0.6/0.7 conforme roadmap e integração Policy posteriormente; P0 Policy é apenas contrato/viabilidade SP, não addon ativo. Links: [Policy H RPT](../projects/policy-editor/evidence/P0_H_REVISED_CLASSNAME_SQF_RPT_20261025.md), [Policy G2](../projects/policy-editor/evidence/P0_G2_REGEX_COMPARISON_RPT_20261025.md), [Weapons Catalog 0.3](../24_WEAPONS_0_3_CATALOG_COMPATIBILITY.md). **Não foi observado bug de regex de classname em Weapons** a partir dos arquivos inspecionados; se outros paths do runtime futuro introduzirem validação nova, auditar antes de aceitar.
