@@ -1,11 +1,11 @@
 # Roadmap — Policy + Policy Editor
 
-**Planejamento:** 22/10/2026 | **Checkpoint 24/10/2026:** **P0 EM REVISÃO FINAL (smoke engine SP A–F 160/160 PASS; revisão de contrato, regex real e teste Python pendentes); P1–P7 PENDENTES**.
+**Planejamento:** 22/10/2026 | **Checkpoint 24/10/2026:** **P0 EM REVISÃO FINAL (smoke engine SP A–F 160/160 PASS; revisão de contrato/regex real pendente; Python 7/7 PASS); P1–P7 PENDENTES**.
 **Fonte funcional:** [README do projeto](README.md) | **módulo proprietário:** [Policy](../../modules/Policy.md).
 
 > **CHECKPOINT AUDITORIA 22/10/2026 (histórico):** naquela data todo P0–P7 estava pendente. P0 deve diferenciar claramente fonte interna (fallback vazio) de fonte externa (opt-in) e decidir técnica de configuração **sem presumir** `CfgSPORGPolicy` já implantado. A política é **estática por padrão**; ativação de nova revisão em runtime é capacidade futura opcional. Validar explícito: UI do jogador com blacklist não inclui proibidos, mas o editor mostra catálogo base completo; ausência de mod permanece vermelha; role kit fora; ícones dos botões ficam texto. Detalhes: [auditoria](../../73_AUDITORIA_COMPLETA_ITEMS_POLICY_DECISOES_20261022.md) e [continuidade](../../74_CONTINUIDADE_AUTOSSUFICIENTE_ITEMS_POLICY_20261022.md).
 
-**P0 atual:** [Contratos, fontes, testes e gates](P0_CONTRACTS_20261024.md). Smoke Arma SP A/B 20/20 e C–F 140/140 aprovados via RPT ([evidência A/B](evidence/P0_SP_SMOKE_RPT_20261024.md), [C–F](evidence/P0_NEGATIVE_SP_RPT_20261024.md)); gates de fechamento de contrato/regex e implementação do loader continuam pendentes; nenhum código runtime foi implementado.
+**P0 atual:** [Contratos, fontes, testes e gates](P0_CONTRACTS_20261024.md). Smoke Arma SP A/B 20/20 e C–F 140/140 aprovados via RPT ([evidência A/B](evidence/P0_SP_SMOKE_RPT_20261024.md), [C–F](evidence/P0_NEGATIVE_SP_RPT_20261024.md)); Python 7/7 PASS ([evidência](evidence/P0_PYTHON_UNITTEST_20261024.md)). Auditoria dos classnames **P0 G preparada, RPT pendente** ([preparação](evidence/P0_G_CLASSNAME_AUDIT_PREP_20261025.md)). Gate P0: fechar regex de classnames reais e contrato; loader real é uma etapa P1/P2, não executada. Nenhum código runtime foi implementado.
 
 ## Estratégia geral
 
@@ -15,7 +15,7 @@ Construir um módulo Policy **opcional, genérico, sem dependência do BGD**, e 
 
 | Fase | Escopo e entregáveis | Critério de saída | Testável apenas em SP? |
 |---|---|---|---|
-| **P0 — Contrato e spike (em andamento; SP pendente)** | Esquema `PolicySnapshot`, `PolicyDecision`, nomes de config/caminhos, origem interna vs servidor, roles permitidos, import/export seguro, testes do editor sem CBA/ACE | Documentação canônica, exemplos, regras A/B/C testadas em fixtures; spike de clipboard/file loading Arma; não criar acoplamento | Sim |
+| **P0 — Contrato e spike (em revisão de classnames reais P0 G)** | Esquema `PolicySnapshot`, `PolicyDecision`, nomes de config/caminhos, origem interna vs servidor, roles permitidos, import/export seguro, testes do editor sem CBA/ACE | Documentação canônica, exemplos, regras A/B/C testadas em fixtures; spike de clipboard/file loading Arma; não criar acoplamento | Sim |
 | **P1 — Núcleo Policy 0.1-A** | Addon `Policy` opcional, lista vazia OPEN, whitelist, blacklist, COMBINED, prioridade DENY, classnames indexados, validação de arrays, status/revisão | 100% dos modos A/B/C em testes isolados e SP; sem impactar catálogo Items quando Policy ausente | Sim |
 | **P2 — Configuração e descoberta 0.1-B** | Fallback interno do addon, fonte de missão/servidor explicitamente nomeada, precedência de configuração, carregamento inicial, detecção de ausência, freeze por sessão, sem busca por configs externas desconhecidas | Servidor com listas vazias e sem Policy mantém comportamento original; configuração conhecida sobrepõe fallback; fonte e hash visíveis no RPT | SP e host; MP autoritativo depois |
 | **P3 — Items e caches 0.1-C** | Integração via capability; base de catálogo sem blacklist vs projeção autorizada; invalidation por `policyRevision`; kit awareness ambiental/política; cores vermelho/amarelo/laranja por prioridade; filtro no catálogo normal | Scan `CONFIG_ALL` não reinicia quando muda apenas Policy; kit salvo intacto; destaque correto de mods ausentes e proibidos; focused refresh, benchmark antes/depois | Sim |
