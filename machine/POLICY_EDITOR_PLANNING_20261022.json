@@ -7,7 +7,7 @@
   "project": "SPORG_POLICY_EDITOR",
   "owner": "Policy",
   "addon": "ServoPeregrino_Organizador_Policy",
-  "status": "P0_REVISED_CLASSNAME_CONTRACT_H_SQF_RPT_PENDING",
+  "status": "P0_SP_CONTRACTS_COMPLETE_P1_READY_NO_POLICY_ADDON_RUNTIME",
   "docs": [
     "docs/modules/Policy.md",
     "docs/projects/policy-editor/README.md",
@@ -84,7 +84,7 @@
     {
       "phase": "P0",
       "name": "Contracts and feasibility",
-      "status": "G2_PASS_PYTHON_REVISED_8_PASS_H_SQF_RPT_PENDING"
+      "status": "COMPLETE_SP_CONTRACTS_G2_PASS_H_156_PASS_PYTHON_8_PASS"
     },
     {
       "phase": "P1",
@@ -152,7 +152,7 @@
   "merge_performed": false,
   "audit_doc": "docs/73_AUDITORIA_COMPLETA_ITEMS_POLICY_DECISOES_20261022.md",
   "autonomous_handoff_doc": "docs/74_CONTINUIDADE_AUTOSSUFICIENTE_ITEMS_POLICY_20261022.md",
-  "record_revision": "2026-10-25-p0-g2-pass-python8-h-prepared",
+  "record_revision": "2026-10-25-p0-h-156-pass-weapons-cross-audit",
   "policy_lifecycle": {
     "default": "STATIC_LOADED_BEFORE_OR_AT_SESSION_START",
     "admin_live_updates": "OPTIONAL_LATER_NOT_REQUIRED_FOR_FIRST_IMPLEMENTATION",
@@ -188,7 +188,7 @@
     "icons_assets": "APPROVED_VERSIONED_UI_INTEGRATION_PAUSED"
   },
   "p0": {
-    "status": "G2_REAL_MODSET_PASS_PYTHON_REVISED_8_PASS_H_RPT_PENDING",
+    "status": "P0_CONTRACTS_AND_SP_FEASIBILITY_COMPLETE_REAL_ADDON_MP_FUTURE_PHASES",
     "baseline": "67f457414c37784ef0469e7235d39006342edb40",
     "source_doc": "docs/projects/policy-editor/P0_CONTRACTS_20261024.md",
     "fixture_file": "machine/policy/p0_contract_fixtures_v1.json",
@@ -229,11 +229,7 @@
     "arma_sp_smoke_total_fail": 0,
     "arma_sp_smoke_rpt_sha256": "d4bb57129e89914174dc550a718602f41f91d33611092c6ab0717a2b7b295979",
     "arma_sp_smoke_evidence": "docs/projects/policy-editor/evidence/P0_SP_SMOKE_RPT_20261024.md",
-    "gates_pending": [
-      "P0_H_REVISED_SQF_ENGINE_RPT",
-      "P0_CONTRACT_FINAL_CONSISTENCY_REVIEW",
-      "P1_P2_REAL_ADDON_AND_LOADER_ARE_LATER_PHASES"
-    ],
+    "gates_pending": [],
     "negative_smoke_package": {
       "delivered": true,
       "date": "2026-10-24",
@@ -465,13 +461,14 @@
       ]
     },
     "classname_format_v1": {
-      "status": "CANDIDATE_TESTED_REAL_MODSET_G2_PASSED_AWAIT_H_REGRESSION",
+      "status": "FROZEN_FOR_P0_SP_CONTRACTS_H_PASSED",
       "regex": "^[A-Za-z0-9_]{1,128}$",
       "allow_numeric_prefix": true,
       "invalid_special_characters": true,
       "maximum_characters": 128,
       "environment_checked": "real modset G2",
-      "universally_proven": false
+      "universally_proven": false,
+      "sqf_regression_h_passed": true
     },
     "python_unittest_result_original": {
       "executed": true,
@@ -489,8 +486,8 @@
     },
     "revised_sqf_smoke_h": {
       "prepared": true,
-      "engine_executed": false,
-      "status": "RPT_PENDING",
+      "engine_executed": true,
+      "status": "PASS",
       "package": "SP_ORG_Policy_P0_H_Regressao_Contrato_G2_20261025.zip",
       "sha256": "e7549e7ef6fbe60ada06669efa6af982a7c84b49a691a96aaef2047b2ffab7ec",
       "missions": [
@@ -501,7 +498,93 @@
       ],
       "expected_pass_per_mission": 39,
       "expected_total_pass": 156,
-      "evidence_preparation": "docs/projects/policy-editor/evidence/P0_H_REVISED_CLASSNAME_SQF_PREP_20261025.md"
-    }
+      "evidence_preparation": "docs/projects/policy-editor/evidence/P0_H_REVISED_CLASSNAME_SQF_PREP_20261025.md",
+      "actual_pass": 156,
+      "actual_fail": 0,
+      "assertions_per_mission": 39,
+      "unique_assertion_ids": 39,
+      "arma_version": "2.22.154089_STABLE",
+      "rpt_sha256": "86ad170a1d5a7445aa7b608cde31afa49c68755569ffb081d8c5ea29d7decbf1",
+      "rpt_bytes": 1131619,
+      "rpt_lines": 9060,
+      "rpt_date": "2026-10-25",
+      "runtime_error_in_expression_count": 0,
+      "evidence": "docs/projects/policy-editor/evidence/P0_H_REVISED_CLASSNAME_SQF_RPT_20261025.md",
+      "results": [
+        {
+          "scenario": "C_INVALID_CFG_VERSION",
+          "time": "02:54:26",
+          "state": "INVALID",
+          "code": "INVALID_CFG_VERSION",
+          "pass": 39,
+          "fail": 0,
+          "effectiveAllow": false
+        },
+        {
+          "scenario": "D_INVALID_CFG_LIST_TYPE",
+          "time": "02:55:07",
+          "state": "INVALID",
+          "code": "INVALID_CFG_LIST_TYPE",
+          "pass": 39,
+          "fail": 0,
+          "effectiveAllow": false
+        },
+        {
+          "scenario": "E_DUPLICATE_CLASSNAME",
+          "time": "02:55:43",
+          "state": "INVALID",
+          "code": "DUPLICATE_CLASSNAME",
+          "pass": 39,
+          "fail": 0,
+          "effectiveAllow": false
+        },
+        {
+          "scenario": "F_POLICY_REQUIRED_MISSING",
+          "time": "02:56:23",
+          "state": "PENDING",
+          "code": "POLICY_REQUIRED_MISSING",
+          "pass": 39,
+          "fail": 0,
+          "effectiveAllow": false
+        }
+      ]
+    },
+    "final_review": {
+      "completed": true,
+      "scope": "SP_ENGINE_CONTRACTS_PYTHON_ORACLE_REAL_MODSET_AUDIT_ONLY",
+      "positive_scenarios_sp_pass": 20,
+      "revised_negative_h_sp_pass": 156,
+      "revised_negative_h_sp_fail": 0,
+      "python_methods_pass": 8,
+      "python_fixture_scenarios": 32,
+      "real_modset_scanner_g2_pass": 12,
+      "known_limits": [
+        "NO_POLICY_ADDON_RUNTIME",
+        "NO_POLICY_LOADER",
+        "NO_MP_OR_SERVER_AUTHORITY",
+        "WEAPONS_MULTI_MUZZLE_UI_FUTURE_OWNER"
+      ]
+    },
+    "future_phase_gates": [
+      "P1_POLICY_CORE_RUNTIME_AND_CAPABILITIES",
+      "P2_CONFIG_LOADERS",
+      "P3_P4_ITEMS_INTEGRATION",
+      "P5_EDITOR_UI",
+      "P6_MP_SERVER_AUTHORITY_AND_JIP",
+      "P7_ADAPTERS"
+    ]
+  },
+  "weapons_cross_audit": {
+    "date": "2026-10-25",
+    "source": "docs/modules/Weapons.md",
+    "scope": "FUTURE_WEAPONS_OWNER_QA_NO_RUNTIME_MODIFICATION",
+    "regex_classname_bug_confirmed": false,
+    "compatibility_model": "ENGINE_DERIVED_COMPATIBLE_ITEMS_MAGAZINES",
+    "multimuzzle": "magazinesByMuzzle EXISTS but flat UI magazine selector uses magazines; targeted future UI review",
+    "pending": [
+      "WEAPONS-COMPAT-MULTIMUZZLE-01",
+      "WEAPONS-POLICY-CLASSNAME-01",
+      "WEAPONS-COMPAT-REGRESSION-01"
+    ]
   }
 }
