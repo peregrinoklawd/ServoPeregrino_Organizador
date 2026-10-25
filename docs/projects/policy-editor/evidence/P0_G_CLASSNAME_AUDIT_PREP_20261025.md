@@ -13,7 +13,7 @@ O formato foi proposto, não homologado. O operador precisa rodar a missão no A
 ## Pacote pronto para o operador
 
 - Download (anexo da conversa): `SP_ORG_Policy_P0_G_Auditoria_Classnames_20261025.zip`
-- SHA-256 exato: `0bd55b4742ffb2837f2ae26cb33d165cdf284b2f51b8460d9669d816a0f6d7f7`
+- SHA-256 exato: `ffc30f29a957eadf2586c5270e3719095f57583456e24db4d077bf28c2c92c79`
 - 5 entradas no ZIP: `LEIA-ME.txt`; `SP_ORG_Policy_P0_G_ClassnameAudit.VR/mission.sqm`, `description.ext`, `init.sqf` e `runPolicyP0ClassnameAudit.sqf`.
 - Instalar só a pasta `.VR` em `Documents/Arma 3 - Other Profiles/<perfil>/missions` ou pasta equivalente. Eden Editor → VR → abrir missão → Preview. A execução é automática, sem console.
 - Independente de Policy, Nexus, Items e BGD; precisa **apenas** do Arma 3. Entretanto, com menos mods os resultados não representam a modlist normal.
