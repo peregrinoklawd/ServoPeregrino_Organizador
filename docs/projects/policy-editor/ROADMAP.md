@@ -1,11 +1,11 @@
 # Roadmap — Policy + Policy Editor
 
-**Planejamento:** 22/10/2026 | **Checkpoint 24/10/2026:** **P0 EM REGRESSÃO FINAL (G2 PASS recuperou 532/532; Python revisado 8/8 PASS com 32 fixtures; P0 H SQF aguardando RPT); P1–P7 PENDENTES**.
+**Checkpoint 25/10/2026:** **P0 FECHADO — CONTRATOS/VIABILIDADE EM SP** (G2 12/12 PASS; 532 elegíveis recuperados; Python revisado 8/8 PASS com 32 fixtures; H SQF 156/156 PASS). **P1–P7 PLANEJADOS, sem addon Policy runtime/MP implementados**.
 **Fonte funcional:** [README do projeto](README.md) | **módulo proprietário:** [Policy](../../modules/Policy.md).
 
 > **CHECKPOINT AUDITORIA 22/10/2026 (histórico):** naquela data todo P0–P7 estava pendente. P0 deve diferenciar claramente fonte interna (fallback vazio) de fonte externa (opt-in) e decidir técnica de configuração **sem presumir** `CfgSPORGPolicy` já implantado. A política é **estática por padrão**; ativação de nova revisão em runtime é capacidade futura opcional. Validar explícito: UI do jogador com blacklist não inclui proibidos, mas o editor mostra catálogo base completo; ausência de mod permanece vermelha; role kit fora; ícones dos botões ficam texto. Detalhes: [auditoria](../../73_AUDITORIA_COMPLETA_ITEMS_POLICY_DECISOES_20261022.md) e [continuidade](../../74_CONTINUIDADE_AUTOSSUFICIENTE_ITEMS_POLICY_20261022.md).
 
-**P0 atual:** [Contratos, fontes, testes e gates](P0_CONTRACTS_20261024.md). Smoke Arma SP A/B 20/20 e C–F 140/140 aprovados via RPT ([evidência A/B](evidence/P0_SP_SMOKE_RPT_20261024.md), [C–F](evidence/P0_NEGATIVE_SP_RPT_20261024.md)); Python 7/7 PASS ([evidência](evidence/P0_PYTHON_UNITTEST_20261024.md)). Auditoria dos classnames **P0 G preparada, RPT pendente** ([preparação](evidence/P0_G_CLASSNAME_AUDIT_PREP_20261025.md)). Gate P0: fechar regex de classnames reais e contrato; loader real é uma etapa P1/P2, não executada. Nenhum código runtime foi implementado.
+**P0 fechado no escopo SP:** [Contratos v1](P0_CONTRACTS_20261024.md), [G2 real modset](evidence/P0_G2_REGEX_COMPARISON_RPT_20261025.md), [Python 8 PASS](evidence/P0_G2_PYTHON_REGRESSION_20261025.md) e [H SQF 156 PASS](evidence/P0_H_REVISED_CLASSNAME_SQF_RPT_20261025.md). A/B 20 PASS e C–F histórico 140 PASS são resultados prévios. P1/P2 implementam core/loader reais; P6 exige validação MP; não confundir P0 SP com release funcional.
 
 ## Estratégia geral
 
@@ -78,3 +78,8 @@ A auditoria P0 G sobre modset real identificou **532 classnames elegíveis (529 
 ### Checkpoint P0 G2 (25/10/2026)
 
 G2 executada na mesma modlist real: **PASS 12/12 SELFTEST, 0 ROOT ERROR**, 133.399 brutas, **668/668 incompatibilidades anteriores recuperadas** (532/532 elegíveis, 529/529 no pré-filtro Items), zero restantes; classnames iniciando por número também aparecem em carregadores vanilla/ACE. [RPT G2](evidence/P0_G2_REGEX_COMPARISON_RPT_20261025.md). Revisão canônica de regex `^[A-Za-z0-9_]{1,128}$` aplicada ao oráculo Python e fixtures; **8/8 métodos Python PASS, 32 fixtures**. [Regressão Python](evidence/P0_G2_PYTHON_REGRESSION_20261025.md). Pacote de regressão SQF **P0 H preparado, não executado** (4 missões, 39 assertions cada, 156 esperadas), [instruções](evidence/P0_H_REVISED_CLASSNAME_SQF_PREP_20261025.md). O P0 não é considerado formalmente encerrado até H RPT PASS e revisão documental; P1–P7 continuam pendentes, sem alteração em runtime Items/Nexus/Weapons/UICommon.
+
+
+### Encerramento P0 — H RPT 25/10/2026
+
+**P0 CONTRATOS/SP FECHADO.** H regressão SQF corrigida: **156/156 PASS (4×39)**, configs inválidas C/D/E e obrigatória ausente F com `effectiveAllow=false`. [Evidência RPT H](evidence/P0_H_REVISED_CLASSNAME_SQF_RPT_20261025.md). Regex v1 `^[A-Za-z0-9_]{1,128}$`, Python 8/8/32 fixtures, G2 modset 532/532 recuperados. **O próximo marco é P1 (motor real), não uma nova missão regex**. Integração futura Weapons e QA multi-muzzle estão documentados em [Weapons](../../modules/Weapons.md), sem alteração de runtime, sem merge e sem compromisso de entrega no P0.
