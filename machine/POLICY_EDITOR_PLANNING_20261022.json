@@ -7,7 +7,7 @@
   "project": "SPORG_POLICY_EDITOR",
   "owner": "Policy",
   "addon": "ServoPeregrino_Organizador_Policy",
-  "status": "P0_CLASSNAME_AUDIT_G_RPT_PENDING",
+  "status": "P0_REGEX_CONTRACT_REVISION_REQUIRED_G2_RPT_PENDING",
   "docs": [
     "docs/modules/Policy.md",
     "docs/projects/policy-editor/README.md",
@@ -84,7 +84,7 @@
     {
       "phase": "P0",
       "name": "Contracts and feasibility",
-      "status": "SP160_PY7_PASS_AUDIT_G_MISSION_PREPARED_RPT_PENDING"
+      "status": "SP_160_PASS_PY_7_PASS_G_REGEX_REVIEW_G2_RPT_PENDING"
     },
     {
       "phase": "P1",
@@ -152,7 +152,7 @@
   "merge_performed": false,
   "audit_doc": "docs/73_AUDITORIA_COMPLETA_ITEMS_POLICY_DECISOES_20261022.md",
   "autonomous_handoff_doc": "docs/74_CONTINUIDADE_AUTOSSUFICIENTE_ITEMS_POLICY_20261022.md",
-  "record_revision": "2026-10-25-p0-g-classname-audit-prepared",
+  "record_revision": "2026-10-25-p0-g-review-g2-prepared",
   "policy_lifecycle": {
     "default": "STATIC_LOADED_BEFORE_OR_AT_SESSION_START",
     "admin_live_updates": "OPTIONAL_LATER_NOT_REQUIRED_FOR_FIRST_IMPLEMENTATION",
@@ -188,7 +188,7 @@
     "icons_assets": "APPROVED_VERSIONED_UI_INTEGRATION_PAUSED"
   },
   "p0": {
-    "status": "SP_ENGINE_160_PASS_PYTHON_7_PASS_CLASSNAME_AUDIT_G_RPT_PENDING",
+    "status": "REAL_MODSET_AUDIT_G_REVIEW_532_REGEX_CONFLICT_G2_PENDING",
     "baseline": "67f457414c37784ef0469e7235d39006342edb40",
     "source_doc": "docs/projects/policy-editor/P0_CONTRACTS_20261024.md",
     "fixture_file": "machine/policy/p0_contract_fixtures_v1.json",
@@ -230,9 +230,10 @@
     "arma_sp_smoke_rpt_sha256": "d4bb57129e89914174dc550a718602f41f91d33611092c6ab0717a2b7b295979",
     "arma_sp_smoke_evidence": "docs/projects/policy-editor/evidence/P0_SP_SMOKE_RPT_20261024.md",
     "gates_pending": [
-      "REAL_CLASSNAME_VALIDATION_BEFORE_FREEZING_REGEX",
+      "G2_DIFFERENTIAL_REAL_MODSET_RPT",
+      "REVISE_CONTRACT_PY_FIXTURES_SQF_NEGATIVE_AND_RETEST_IF_REGEX_CHANGES",
       "FINAL_P0_CONTRACT_REVIEW",
-      "P1_P2_REAL_ADDON_AND_LOADER_GATES_NOT_PART_OF_P0"
+      "P1_P2_REAL_ADDON_AND_LOADER_ARE_LATER_PHASES"
     ],
     "negative_smoke_package": {
       "delivered": true,
@@ -311,7 +312,7 @@
     "classname_audit_mission": {
       "scenario": "P0_G_REAL_MODSET_CLASSNAME_AUDIT",
       "prepared": true,
-      "engine_executed": false,
+      "engine_executed": true,
       "expected_selftests": 10,
       "expected_in_game_summary": "PASS_OR_REVIEW_WITH_ROOT_COUNTS_AND_ANOMALIES",
       "zip": "SP_ORG_Policy_P0_G_Auditoria_Classnames_20261025.zip",
@@ -328,7 +329,75 @@
       "qa_static_pass": true,
       "only_read_config": true,
       "evidence_preparation": "docs/projects/policy-editor/evidence/P0_G_CLASSNAME_AUDIT_PREP_20261025.md",
-      "results_from_rpt": "PENDING"
+      "results_from_rpt": "REVIEW_REGEX_CONFLICT",
+      "arma_version": "2.22.154089_STABLE",
+      "executed_local_date": "2026-10-25",
+      "rpt_sha256": "1786ec1c31921e67991df46212b2d561d41ba1d8a1d5fb6732546f69d61e4cb1",
+      "evidence": "docs/projects/policy-editor/evidence/P0_G_CLASSNAME_AUDIT_RPT_20261025.md",
+      "selftest_pass": 10,
+      "selftest_fail": 0,
+      "status": "REVIEW",
+      "raw_total": 133399,
+      "raw_invalid": 668,
+      "eligible_total": 54003,
+      "eligible_invalid": 532,
+      "items_prefilter_total": 50727,
+      "items_prefilter_invalid": 529,
+      "max_class_len": 78,
+      "elapsed_ms": 34930,
+      "root_summary": [
+        {
+          "root": "CfgWeapons",
+          "raw": 69763,
+          "rawInvalid": 62,
+          "eligible": 49502,
+          "eligibleInvalid": 49,
+          "itemsPrefilter": 47760,
+          "itemsPrefilterInvalid": 49
+        },
+        {
+          "root": "CfgMagazines",
+          "raw": 3697,
+          "rawInvalid": 536,
+          "eligible": 2967,
+          "eligibleInvalid": 480,
+          "itemsPrefilter": 2967,
+          "itemsPrefilterInvalid": 480
+        },
+        {
+          "root": "CfgGlasses",
+          "raw": 1000,
+          "rawInvalid": 0,
+          "eligible": 904,
+          "eligibleInvalid": 0,
+          "itemsPrefilter": 0,
+          "itemsPrefilterInvalid": 0
+        },
+        {
+          "root": "CfgVehicles",
+          "raw": 58939,
+          "rawInvalid": 70,
+          "eligible": 630,
+          "eligibleInvalid": 3,
+          "itemsPrefilter": 0,
+          "itemsPrefilterInvalid": 0
+        }
+      ],
+      "reason_confirmed_for_logged_samples": "BAD_START_NUMERIC_PREFIX_BGDTOOLS",
+      "cause_of_other_anomalies": "UNKNOWN_G2_REQUIRED"
+    },
+    "classname_audit_g2": {
+      "prepared": true,
+      "engine_executed": false,
+      "mission": "SP_ORG_Policy_P0_G2_RegexComparison.VR",
+      "zip": "SP_ORG_Policy_P0_G2_Comparacao_Classnames_20261025.zip",
+      "zip_sha256": "d4359363eca916f6a40e4a9d58b7e56fd332c841390d36f01529f105ca8b79a8",
+      "expected_selftests": 12,
+      "strict_regex": "^[A-Za-z_][A-Za-z0-9_]{0,127}$",
+      "candidate_relaxed_regex": "^[A-Za-z0-9_]{1,128}$",
+      "purpose": "Count fixedByDigit and remainingInvalid per root in same real modset",
+      "status": "RPT_PENDING",
+      "evidence_preparation": "docs/projects/policy-editor/evidence/P0_G2_REGEX_COMPARISON_PREP_20261025.md"
     }
   }
 }
