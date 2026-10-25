@@ -1,7 +1,7 @@
 # Policy — módulo opcional de autorização de itens/equipamentos
 
 **Data da consolidação:** 22/10/2026  
-**Status (24/10/2026):** P0 contratos/fixtures **EM ANDAMENTO**, smoke SP A–F **160/160 PASS** ([A/B](../projects/policy-editor/evidence/P0_SP_SMOKE_RPT_20261024.md), [C–F](../projects/policy-editor/evidence/P0_NEGATIVE_SP_RPT_20261024.md)), Python 7/7 PASS; auditoria de classnames reais P0 G preparada, RPT pendente; módulo Policy **NÃO IMPLEMENTADO**. Ver [P0](../projects/policy-editor/P0_CONTRACTS_20261024.md) e [preparação P0 G](../projects/policy-editor/evidence/P0_G_CLASSNAME_AUDIT_PREP_20261025.md).  
+**Status (24/10/2026):** P0 contratos/fixtures **EM ANDAMENTO**, smoke SP A–F **160/160 PASS** ([A/B](../projects/policy-editor/evidence/P0_SP_SMOKE_RPT_20261024.md), [C–F](../projects/policy-editor/evidence/P0_NEGATIVE_SP_RPT_20261024.md)), Python 7/7 PASS; auditoria P0 G concluída **REVIEW**, 532 classes elegíveis fora da regex provisória; G2 preparada/RPT pendente; módulo Policy **NÃO IMPLEMENTADO**. Ver [P0](../projects/policy-editor/P0_CONTRACTS_20261024.md) e [preparação P0 G](../projects/policy-editor/evidence/P0_G_CLASSNAME_AUDIT_PREP_20261025.md).  
 **Proprietário único:** `ServoPeregrino_Organizador_Policy` (futuro PBO); dependência planejada: Nexus.  
 **Projeto do editor:** [../projects/policy-editor/README.md](../projects/policy-editor/README.md) e [ROADMAP](../projects/policy-editor/ROADMAP.md).
 
@@ -119,3 +119,8 @@ Ver [projeto](../projects/policy-editor/README.md) e [roadmap](../projects/polic
 **Já existente para reaproveitar**: catálogo Items (7.092 itens no último modset testado), listagem e busca, cache de catálogo, invalidação explícita, validação de classe existente, planner `BEST_EFFORT` com rejeições, UICommon, contratos previstos no Nexus e server-authority como precedente na biblioteca pública (esta última ainda não homologada MP).
 
 **Gate MP futuro obrigatório**: sincronismo de revisão, cliente malicioso não publica regras, consulta autoritativa server-side, JIP e possível atualização a quente; deixar fora das entregas SP iniciais.
+
+
+## Checkpoint classname real 25/10/2026
+
+P0 G avaliou 133.399 classnames na modlist real; 532 dos 54.003 elegíveis ficaram fora de `^[A-Za-z_][A-Za-z0-9_]{0,127}$` (529 também no pré-filtro Items). Identificadas classes válidas iniciadas por dígito em `@BGD - Tools of the Trade`; **não ativar nem congelar essa regex**. G2 verificará se `^[A-Za-z0-9_]{1,128}$` resolve as incompatibilidades sem permitir caracteres especiais; alteração de contrato exige atualizar os testes. [RPT G](../projects/policy-editor/evidence/P0_G_CLASSNAME_AUDIT_RPT_20261025.md) / [preparação G2](../projects/policy-editor/evidence/P0_G2_REGEX_COMPARISON_PREP_20261025.md).
