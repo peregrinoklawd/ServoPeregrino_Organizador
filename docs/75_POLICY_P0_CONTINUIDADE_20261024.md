@@ -2,7 +2,7 @@
 
 **Repo:** `peregrinoklawd/ServoPeregrino_Organizador`  
 **Branch atual:** `feature/policy-0.1-p0-contracts`, criada da baseline `67f457414c37784ef0469e7235d39006342edb40` (`baseline/items-uicommon-r2-2-sp-homologated-20261021`).  
-**Status P0 após RPT de 24/10:** smoke SP das missões A/B **APROVADO 20/20 PASS (0 FAIL)**; P0 **ainda EM ANDAMENTO**, aguardando testes negativos/contratos. MP não testado. Ver [evidência](projects/policy-editor/evidence/P0_SP_SMOKE_RPT_20261024.md).
+**Status P0 após dois RPTs de 24/10:** smoke SP positivo A/B **20/20 PASS** e negativo C–F **140/140 PASS**, acumulado **160/160 PASS, 0 FAIL**. P0 **em revisão final dos contratos** (amostragem de classnames/QA Python pendentes); **addon runtime e MP NÃO testados**. Evidências: [A/B](projects/policy-editor/evidence/P0_SP_SMOKE_RPT_20261024.md) e [C–F](projects/policy-editor/evidence/P0_NEGATIVE_SP_RPT_20261024.md).
 
 ## Artefatos nesta branch
 
@@ -61,7 +61,7 @@ class CfgSPORGPolicy {
 
 ## Critério de seguir para P1
 
-1. Smoke SP já aprovado (20/20); executar testes negativos SQF e verificar classnames reais na modlist antes de congelar regex.
+1. Smoke SP positivo 20/20 e negativo 140/140 **aprovados** (160/160 total); verificar classnames reais na modlist antes de congelar regex.
 2. Consolidar fonte de config testada em `missionConfigFile` e modo inválido (fail-closed).
 3. Fixar contratos e ajustar documentação/machine status com evidências, sem fingir homologação MP.
 4. Desenvolver motor `Policy 0.1-A` apenas na branch de Policy, com funções/índice e testes engine; **não integrar Items ainda**.
@@ -75,6 +75,6 @@ Até aqui: **sem alterações de runtime** em `addons/`, `missions/`, e **sem me
 
 Após o smoke SP positivo **20/20 PASS**, foi entregue novo pacote `SP_ORG_Policy_P0_Testes_Negativos_20261024.zip` com quatro missões automáticas `C` a `F` para estados de **versão inválida, whitelist não-array, classname duplicado e política exigida ausente**. Cada missão prevê **35 asserções** de schema, decisão, prontidão e fonte real `description.ext`, total esperado **140 PASS / 0 FAIL** apenas quando comprovado pelo operador em RPT. Há ainda testes de limites (129 caracteres e 4097 entradas) e payload contendo texto malicioso tratado como dado, nunca como SQF.
 
-**O pacote foi verificado somente estruturalmente, NÃO executado na engine**. Evidência de preparação e hash do ZIP: [P0_NEGATIVE_MISSIONS_PREP_20261024.md](projects/policy-editor/evidence/P0_NEGATIVE_MISSIONS_PREP_20261024.md). Registrar RPT quando recebido; não fechar P0 ainda nem iniciar P1 como homologado. Código de runtime Items/UICommon/Weapons não alterado.
+**Execução posterior confirmada no RPT, em 24/10/2026 às 22:19–22:21: 140/140 PASS e 0 FAIL;** evidência e SHA-256 do RPT: [P0_NEGATIVE_SP_RPT_20261024.md](projects/policy-editor/evidence/P0_NEGATIVE_SP_RPT_20261024.md). Evidência da preparação e hash do ZIP: [P0_NEGATIVE_MISSIONS_PREP_20261024.md](projects/policy-editor/evidence/P0_NEGATIVE_MISSIONS_PREP_20261024.md). P0 em revisão final (regex de classes reais e teste Python); ainda não há runtime Items/UICommon/Weapons alterado.
 
-**Retomar:** executar as quatro missões C–F no Eden VR usando `Preview`; cada uma dispara sozinha e exibe hint. Filtrar RPT por `[SPORG_POLICY_P0_NEG]`. Se houver FAIL ou `Error in expression`, corrigir protótipo e gerar ZIP revisado; manter teste reprodutível, sem manipulação manual de scripts.
+**Retomar agora:** as missões C–F já foram executadas e aprovadas. Finalizar amostragem real de classnames para congelar regex, executar ou documentar exceção para suíte Python e consolidar contratos v1. Iniciar P1 depois do gate documental, mantendo motor e loader reais como fases ainda não homologadas.
