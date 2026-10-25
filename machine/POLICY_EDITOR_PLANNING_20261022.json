@@ -7,7 +7,7 @@
   "project": "SPORG_POLICY_EDITOR",
   "owner": "Policy",
   "addon": "ServoPeregrino_Organizador_Policy",
-  "status": "P0_ENGINE_SMOKES_PASS_CONTRACT_REVIEW_PENDING",
+  "status": "P0_QA_PASSED_CLASSNAME_REVIEW_PENDING",
   "docs": [
     "docs/modules/Policy.md",
     "docs/projects/policy-editor/README.md",
@@ -84,7 +84,7 @@
     {
       "phase": "P0",
       "name": "Contracts and feasibility",
-      "status": "SP_ENGINE_SMOKES_PASS_160_OF_160_CONTRACT_FINAL_REVIEW_PENDING"
+      "status": "ENGINE_160_PASS_PYTHON_7_PASS_CLASSNAME_REVIEW_PENDING"
     },
     {
       "phase": "P1",
@@ -152,7 +152,7 @@
   "merge_performed": false,
   "audit_doc": "docs/73_AUDITORIA_COMPLETA_ITEMS_POLICY_DECISOES_20261022.md",
   "autonomous_handoff_doc": "docs/74_CONTINUIDADE_AUTOSSUFICIENTE_ITEMS_POLICY_20261022.md",
-  "record_revision": "2026-10-24-p0-negative-rpt-140-pass",
+  "record_revision": "2026-10-24-p0-python-unittest-seven-pass",
   "policy_lifecycle": {
     "default": "STATIC_LOADED_BEFORE_OR_AT_SESSION_START",
     "admin_live_updates": "OPTIONAL_LATER_NOT_REQUIRED_FOR_FIRST_IMPLEMENTATION",
@@ -188,7 +188,7 @@
     "icons_assets": "APPROVED_VERSIONED_UI_INTEGRATION_PAUSED"
   },
   "p0": {
-    "status": "SP_POSITIVE_AND_NEGATIVE_ENGINE_SMOKES_PASS_160_OF_160_CONTRACT_FINAL_REVIEW_PENDING",
+    "status": "SP_ENGINE_SMOKES_160_PASS_PYTHON_UNITTEST_7_PASS_CLASSNAME_REVIEW_PENDING",
     "baseline": "67f457414c37784ef0469e7235d39006342edb40",
     "source_doc": "docs/projects/policy-editor/P0_CONTRACTS_20261024.md",
     "fixture_file": "machine/policy/p0_contract_fixtures_v1.json",
@@ -196,7 +196,7 @@
     "arma_spike": "spikes/policy-p0/runPolicyP0Smoke.sqf",
     "fixtures_count": 28,
     "fixtures_checked_with_js_oracle": 28,
-    "python_unittest_ran": false,
+    "python_unittest_ran": true,
     "arma_sp_smoke_ran": true,
     "arma_mp_smoke_ran": false,
     "no_runtime_implementation": true,
@@ -231,7 +231,6 @@
     "arma_sp_smoke_evidence": "docs/projects/policy-editor/evidence/P0_SP_SMOKE_RPT_20261024.md",
     "gates_pending": [
       "REAL_CLASSNAME_VALIDATION_BEFORE_FREEZING_REGEX",
-      "PYTHON_UNITTEST_EXECUTION_OR_DOCUMENTED_EXCLUSION",
       "FINAL_P0_CONTRACT_REVIEW",
       "P1_P2_REAL_ADDON_AND_LOADER_GATES_NOT_PART_OF_P0"
     ],
@@ -294,6 +293,20 @@
       ],
       "actual_pass": 140,
       "actual_fail": 0
+    },
+    "python_unittest_result": {
+      "executed": true,
+      "python_version": "3.13.5",
+      "framework": "unittest",
+      "methods_passed": 7,
+      "methods_failed": 0,
+      "errors": 0,
+      "fixture_scenarios": 28,
+      "exit_code": 0,
+      "source_blob_sha": "7d46f8957da4a1599c5ef538b0173c4bba2371c3",
+      "fixture_blob_sha": "e6fcc4ad3d81a82494ebd6042bbe22c90f0a40c9",
+      "evidence": "docs/projects/policy-editor/evidence/P0_PYTHON_UNITTEST_20261024.md",
+      "log_sha256": "42f2f32c7cfbcfc6f5e4dcfba7b1173be14ea2331f49a0c1e751d4ea2c9db683"
     }
   }
 }
