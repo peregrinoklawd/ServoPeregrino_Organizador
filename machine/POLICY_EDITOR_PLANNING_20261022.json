@@ -7,7 +7,7 @@
   "project": "SPORG_POLICY_EDITOR",
   "owner": "Policy",
   "addon": "ServoPeregrino_Organizador_Policy",
-  "status": "P0_QA_PASSED_CLASSNAME_REVIEW_PENDING",
+  "status": "P0_CLASSNAME_AUDIT_G_RPT_PENDING",
   "docs": [
     "docs/modules/Policy.md",
     "docs/projects/policy-editor/README.md",
@@ -84,7 +84,7 @@
     {
       "phase": "P0",
       "name": "Contracts and feasibility",
-      "status": "ENGINE_160_PASS_PYTHON_7_PASS_CLASSNAME_REVIEW_PENDING"
+      "status": "SP160_PY7_PASS_AUDIT_G_MISSION_PREPARED_RPT_PENDING"
     },
     {
       "phase": "P1",
@@ -152,7 +152,7 @@
   "merge_performed": false,
   "audit_doc": "docs/73_AUDITORIA_COMPLETA_ITEMS_POLICY_DECISOES_20261022.md",
   "autonomous_handoff_doc": "docs/74_CONTINUIDADE_AUTOSSUFICIENTE_ITEMS_POLICY_20261022.md",
-  "record_revision": "2026-10-24-p0-python-unittest-seven-pass",
+  "record_revision": "2026-10-25-p0-g-classname-audit-prepared",
   "policy_lifecycle": {
     "default": "STATIC_LOADED_BEFORE_OR_AT_SESSION_START",
     "admin_live_updates": "OPTIONAL_LATER_NOT_REQUIRED_FOR_FIRST_IMPLEMENTATION",
@@ -188,7 +188,7 @@
     "icons_assets": "APPROVED_VERSIONED_UI_INTEGRATION_PAUSED"
   },
   "p0": {
-    "status": "SP_ENGINE_SMOKES_160_PASS_PYTHON_UNITTEST_7_PASS_CLASSNAME_REVIEW_PENDING",
+    "status": "SP_ENGINE_160_PASS_PYTHON_7_PASS_CLASSNAME_AUDIT_G_RPT_PENDING",
     "baseline": "67f457414c37784ef0469e7235d39006342edb40",
     "source_doc": "docs/projects/policy-editor/P0_CONTRACTS_20261024.md",
     "fixture_file": "machine/policy/p0_contract_fixtures_v1.json",
@@ -307,6 +307,28 @@
       "fixture_blob_sha": "e6fcc4ad3d81a82494ebd6042bbe22c90f0a40c9",
       "evidence": "docs/projects/policy-editor/evidence/P0_PYTHON_UNITTEST_20261024.md",
       "log_sha256": "42f2f32c7cfbcfc6f5e4dcfba7b1173be14ea2331f49a0c1e751d4ea2c9db683"
+    },
+    "classname_audit_mission": {
+      "scenario": "P0_G_REAL_MODSET_CLASSNAME_AUDIT",
+      "prepared": true,
+      "engine_executed": false,
+      "expected_selftests": 10,
+      "expected_in_game_summary": "PASS_OR_REVIEW_WITH_ROOT_COUNTS_AND_ANOMALIES",
+      "zip": "SP_ORG_Policy_P0_G_Auditoria_Classnames_20261025.zip",
+      "zip_sha256": "0bd55b4742ffb2837f2ae26cb33d165cdf284b2f51b8460d9669d816a0f6d7f7",
+      "mission_folder": "SP_ORG_Policy_P0_G_ClassnameAudit.VR",
+      "mode": "SINGLE_PLAYER_EDEN_VR",
+      "roots": [
+        "CfgWeapons",
+        "CfgMagazines",
+        "CfgGlasses",
+        "CfgVehicles"
+      ],
+      "policy_regex_proposed": "^[A-Za-z_][A-Za-z0-9_]{0,127}$",
+      "qa_static_pass": true,
+      "only_read_config": true,
+      "evidence_preparation": "docs/projects/policy-editor/evidence/P0_G_CLASSNAME_AUDIT_PREP_20261025.md",
+      "results_from_rpt": "PENDING"
     }
   }
 }
