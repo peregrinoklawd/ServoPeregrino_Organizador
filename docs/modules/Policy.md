@@ -1,7 +1,7 @@
 # Policy — módulo opcional de autorização de itens/equipamentos
 
 **Data da consolidação:** 22/10/2026  
-**Status (24/10/2026):** P0 contratos/fixtures **EM ANDAMENTO**, smoke SP A–F **160/160 PASS** ([A/B](../projects/policy-editor/evidence/P0_SP_SMOKE_RPT_20261024.md), [C–F](../projects/policy-editor/evidence/P0_NEGATIVE_SP_RPT_20261024.md)), Python 7/7 PASS; auditoria P0 G **REVIEW**, G2 concluída **PASS**, todas 532 elegíveis recuperadas por permitir dígitos iniciais; Python revisado 8/8 PASS, SQF H RPT pendente; módulo Policy **NÃO IMPLEMENTADO**. Ver [P0](../projects/policy-editor/P0_CONTRACTS_20261024.md) e [preparação P0 G](../projects/policy-editor/evidence/P0_G_CLASSNAME_AUDIT_PREP_20261025.md).  
+**Status (25/10/2026): P0 CONTRATOS E VIABILIDADE SP CONCLUÍDOS**: scanner G2 **12/12 PASS** e 532 elegíveis recuperados; unittest Python revisado **8/8 PASS** (32 fixtures); regressão SQF H **156/156 PASS**. Classname v1: `^[A-Za-z0-9_]{1,128}$`. [RPT H](../projects/policy-editor/evidence/P0_H_REVISED_CLASSNAME_SQF_RPT_20261025.md). **Módulo Policy runtime/editor/autoridade MP ainda NÃO IMPLEMENTADOS**; fases P1–P7 planejadas.
 **Proprietário único:** `ServoPeregrino_Organizador_Policy` (futuro PBO); dependência planejada: Nexus.  
 **Projeto do editor:** [../projects/policy-editor/README.md](../projects/policy-editor/README.md) e [ROADMAP](../projects/policy-editor/ROADMAP.md).
 
@@ -252,3 +252,8 @@ P0 G avaliou 133.399 classnames na modlist real; 532 dos 54.003 elegíveis ficar
 
 
 **Evidência G2 25/10:** [auditoria diferencial PASS](../projects/policy-editor/evidence/P0_G2_REGEX_COMPARISON_RPT_20261025.md), [regressão Python 8 PASS](../projects/policy-editor/evidence/P0_G2_PYTHON_REGRESSION_20261025.md), [H SQF pendente](../projects/policy-editor/evidence/P0_H_REVISED_CLASSNAME_SQF_PREP_20261025.md). P0 ainda em validação final, Policy runtime não implementado.
+
+
+### P0 concluído — 25/10/2026
+
+A análise do RPT de regressão H confirmou **156 PASS/0 FAIL** e validação de prefixos numéricos no Arma, encerrando a homologação de **contratos Policy em laboratório single-player**. [Evidência H](../projects/policy-editor/evidence/P0_H_REVISED_CLASSNAME_SQF_RPT_20261025.md). Mudança de classname **não modifica compatibilidade física de Weapons**: motor é `compatibleItems`/`compatibleMagazines`. Risco real separado para futura revisão Weapons: `magazinesByMuzzle` já é retornado, mas o seletor UI consome lista plana `magazines`. Ver [registro no owner Weapons](Weapons.md). Não afirmar addon real, PBO ou MP testado.
