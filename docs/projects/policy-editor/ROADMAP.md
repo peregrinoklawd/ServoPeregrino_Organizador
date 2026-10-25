@@ -1,6 +1,6 @@
 # Roadmap — Policy + Policy Editor
 
-**Planejamento:** 22/10/2026 | **Checkpoint 24/10/2026:** **P0 EM REVISÃO DO CONTRATO DE CLASSNAME (SP A–F 160/160 PASS; Python 7/7 PASS; P0 G REVIEW — 532 classes elegíveis incompatíveis; G2 RPT pendente); P1–P7 PENDENTES**.
+**Planejamento:** 22/10/2026 | **Checkpoint 24/10/2026:** **P0 EM REGRESSÃO FINAL (G2 PASS recuperou 532/532; Python revisado 8/8 PASS com 32 fixtures; P0 H SQF aguardando RPT); P1–P7 PENDENTES**.
 **Fonte funcional:** [README do projeto](README.md) | **módulo proprietário:** [Policy](../../modules/Policy.md).
 
 > **CHECKPOINT AUDITORIA 22/10/2026 (histórico):** naquela data todo P0–P7 estava pendente. P0 deve diferenciar claramente fonte interna (fallback vazio) de fonte externa (opt-in) e decidir técnica de configuração **sem presumir** `CfgSPORGPolicy` já implantado. A política é **estática por padrão**; ativação de nova revisão em runtime é capacidade futura opcional. Validar explícito: UI do jogador com blacklist não inclui proibidos, mas o editor mostra catálogo base completo; ausência de mod permanece vermelha; role kit fora; ícones dos botões ficam texto. Detalhes: [auditoria](../../73_AUDITORIA_COMPLETA_ITEMS_POLICY_DECISOES_20261022.md) e [continuidade](../../74_CONTINUIDADE_AUTOSSUFICIENTE_ITEMS_POLICY_20261022.md).
@@ -73,3 +73,8 @@ Nenhuma dessas milestones foi executada; projetos anteriores de Items (R2.2) per
 ### Checkpoint P0 G (25/10/2026)
 
 A auditoria P0 G sobre modset real identificou **532 classnames elegíveis (529 no pre-filtro Items) fora da regex provisória** e confirmou dígitos iniciais em classnames carregados de `@BGD - Tools of the Trade`. 10 autotestes passaram; resultado global **REVIEW, não PASS**. [Evidência](evidence/P0_G_CLASSNAME_AUDIT_RPT_20261025.md). A missão G2 de diagnóstico diferencial já está preparada, **ainda sem RPT**. [Preparação](evidence/P0_G2_REGEX_COMPARISON_PREP_20261025.md). A revisão do contrato pode exigir atualização de testes Python/SQF antes do fechamento P0; não declarar retroativamente os 160 PASS como prova da regex revisada.
+
+
+### Checkpoint P0 G2 (25/10/2026)
+
+G2 executada na mesma modlist real: **PASS 12/12 SELFTEST, 0 ROOT ERROR**, 133.399 brutas, **668/668 incompatibilidades anteriores recuperadas** (532/532 elegíveis, 529/529 no pré-filtro Items), zero restantes; classnames iniciando por número também aparecem em carregadores vanilla/ACE. [RPT G2](evidence/P0_G2_REGEX_COMPARISON_RPT_20261025.md). Revisão canônica de regex `^[A-Za-z0-9_]{1,128}$` aplicada ao oráculo Python e fixtures; **8/8 métodos Python PASS, 32 fixtures**. [Regressão Python](evidence/P0_G2_PYTHON_REGRESSION_20261025.md). Pacote de regressão SQF **P0 H preparado, não executado** (4 missões, 39 assertions cada, 156 esperadas), [instruções](evidence/P0_H_REVISED_CLASSNAME_SQF_PREP_20261025.md). O P0 não é considerado formalmente encerrado até H RPT PASS e revisão documental; P1–P7 continuam pendentes, sem alteração em runtime Items/Nexus/Weapons/UICommon.
