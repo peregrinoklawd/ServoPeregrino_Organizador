@@ -1,71 +1,39 @@
-# P0 — Contratos de Policy e prova de viabilidade (24/10/2026)
+# Policy P0 — contratos v1 e viabilidade (fechado em 25/10/2026)
 
-**STATUS FINAL — 25/10/2026: P0 CONTRATOS E VIABILIDADE EM SP CONCLUÍDOS**. G2 scanner real **12/12 PASS**, 532/532 elegíveis recuperados, 0 restantes; contrato de classname v1 **`^[A-Za-z0-9_]{1,128}$`**; unittest Python revisado **8/8 PASS** com 32 fixtures; regressão SQF H **156/156 PASS**. Smokes positivos A/B **20/20 PASS**; C–F antigos **140/140 PASS** somente como histórico da regra anterior. Fontes: [G2](evidence/P0_G2_REGEX_COMPARISON_RPT_20261025.md), [Python revisado](evidence/P0_G2_PYTHON_REGRESSION_20261025.md), [H](evidence/P0_H_REVISED_CLASSNAME_SQF_RPT_20261025.md). **Policy addon runtime, loader, integração Items/Weapons e MP não implementados ou homologados.**
-**Baseline imutável:** `baseline/items-uicommon-r2-2-sp-homologated-20261021` (`67f4574`).  
-**Branch:** `feature/policy-0.1-p0-contracts`.  
-**Ownership:** addon opcional `ServoPeregrino_Organizador_Policy`, depende só de Nexus. Sem runtime Policy instalado nesta entrega.
+**Status: CONCLUÍDO NO ESCOPO DE CONTRATOS E LABORATÓRIO SP.** RPTs reais: A/B 20/20 PASS; C–F 140/140 PASS históricos (regex anterior); auditoria G REVIEW identificou 532 elegíveis fora da regra anterior; G2 PASS 12/12 recuperou os 532, sem incompatibilidades restantes; nova regressão H **156/156 PASS**, 0 erros SQF; Python revisado **8/8 PASS**, **32 fixtures**. **Não há addon Policy instalado, PBO homologado, loader em uso, integração Items/Weapons ou autoridade multiplayer validada nesta fase.**
 
-## 1. Fronteiras e decisões
+**Fonte de evidência:** [A/B](evidence/P0_SP_SMOKE_RPT_20261024.md), [C–F histórico](evidence/P0_NEGATIVE_SP_RPT_20261024.md), [G](evidence/P0_G_CLASSNAME_AUDIT_RPT_20261025.md), [G2](evidence/P0_G2_REGEX_COMPARISON_RPT_20261025.md), [H](evidence/P0_H_REVISED_CLASSNAME_SQF_RPT_20261025.md) e [Python revisado](evidence/P0_G2_PYTHON_REGRESSION_20261025.md).
 
-1. Policy decide **autorização exata de classname**; não substitui `isClass`, que decide existência/ambiente. Role Kits e adapters BGD/FTAC excluídos do MVP.
-2. Duas listas vazias = OPEN; branca não vazia = filtro obrigatório; negra não vazia = exclusão; interseção = DENY. Cliente comum não controla regras autoritativas.
-3. Sem Policy instalada e sem exigência de sincronismo Policy: módulos consumidores mantêm comportamento OPEN (compatibilidade). Com política autoritativa **exigida**, mas snapshot pendente, inválido ou versão incompatível: bloquear **ADDS/APPLY protegidos**, não inventar OPEN.
-4. **Política estática por sessão** no MVP. Não construir hot reload como requisito P1/P2.
-5. Não tocar em `CfgRemoteExec` global, UICommon, Items e Weapons no P0.
+**Branch de encerramento original:** `feature/policy-0.1-p0-contracts`. **Branch de continuidade:** `feature/policy-0.1-a-core`, criada da anterior para P1. Baseline de Items/UICommon preservada: `baseline/items-uicommon-r2-2-sp-homologated-20261021`.
 
-## 2. Representações — schema v1 (contrato proposto)
+> Nota documental: esta versão recompõe a seção 2.1 que havia sofrido duplicação acidental de trechos em uma edição anterior. Não altera as decisões técnicas homologadas.
 
-### 2.1 PolicyExport (portabilidade, somente dados)
+## 1. Escopo e ownership
 
-~~~json
+Policy é um **addon opcional**, dependência planejada apenas do **Nexus**, proprietário das regras whitelist/blacklist aplicáveis a classes exatas de Items, Weapons, acessórios, magazines e equipamentos. Sem Policy instalada e sem obrigatoriedade explícita, consumidores mantêm modo OPEN. A existência de classe no modset (`isClass` / ambiente) **não** é autorização Policy; compatibilidade física de acessórios/munições (`compatibleItems`, `compatibleMagazines`) pertence a Weapons. Role Kits e adapters BGD/FTAC ficam fora do MVP; BGD não é dependência obrigatória.
+
+Uma política **obrigatória** cujo snapshot esteja `PENDING`, `INVALID` ou ausente não pode autorizar operações de ADD/APPLY por omissão (*fail closed*). Remoções de itens já presentes podem permanecer disponíveis conforme regra do consumidor. Kits persistidos não devem ser destruídos por alterações de política ou ausência temporária de mods.
+
+## 2. Contratos de dados
+
+### 2.1 PolicyExport v1 (portátil e sem autoridade)
+
+```json
 {
   "schema": "SPORG_POLICY_EXPORT",
   "schemaVersion": 1,
-  "whitelist": ["FirstAidKit", "ItemGPS"],
-  "blacklist": ["ItemGPS"]
+  "whitelist": ["FirstAidKit", "30Rnd_556x45_Stanag"],
+  "blacklist": ["ItemGPS", "121_SP10M_18_FDE"]
 }
-~~~
+```
 
-Campos **exatos**; `schema` string constante; `schemaVersion` inteiro 1; listas de strings, sem aninhamento. Campos não reconhecidos são **rejeitados**, sobretudo `serverRevision`, `admin`, `source` ou funções/fragmentos de SQF. Tamanho máximo proposto: 4096 entradas por lista, 128 caracteres por classname, 512 KiB de texto de entrada; confirmar limites por teste de engine/uso real.
+**Campos exatos:** `schema`, `schemaVersion`, `whitelist`, `blacklist`; quaisquer outros rejeitados, especialmente `admin`, `source`, `revision`, `fingerprint` e fragmentos SQF. Versão é número inteiro 1. Listas são arrays de strings, até **4.096 entradas cada**. Texto serializado limitado a **512 KiB**. Cada classname passa por `trim`, exige **1–128 caracteres** com formato final **`^[A-Za-z0-9_]{1,128}$`**, com **dígito inicial permitido**. Rejeitar duplicação case-insensitive **dentro da mesma lista**, preservar escrita original para exibição; usar `toLowerANSI` em comparações/índices. A presença da mesma classe em ambas as listas não invalida o documento: **blacklist vence** e conflito pode ser exposto ao editor.
 
-**Normalização:** trim de espaços laterais; comparação por `toLowerANSI`; manter ortografia original válida para exibição/consulta ao config. **Regra de formato revisada (G2): `^[A-Za-z0-9_]{1,128}# P0 — Contratos de Policy e prova de viabilidade (24/10/2026)
+A regra de nome foi confrontada com **133.399 classes reais** na modlist usada na auditoria; o máximo encontrado foi 78 caracteres. O resultado não é prova universal para todos os mods futuros. Importação e exportação futura usam `fromJSON`/`toJSON`; **nunca avaliar texto importado como código**. O P1 opera sobre HashMap já interpretado; interface/importação externa pertence ao P5.
 
-**Status atualizado após RPTs e unittest de 24/10:** **smoke Arma SP A/B 20/20 PASS + C/D/E/F 140/140 PASS = 160/160 PASS, 0 FAIL; Python unittest 7/7 PASS (28 fixtures)**. P0 permanece **EM REGRESSÃO DO CONTRATO CORRIGIDO**: G2 PASS recuperou **532 elegíveis incompatíveis**, Python revisado 8/8 PASS e 32 fixtures; missão H SQF pendente de RPT; runtime addon e MP continuam não implementados/testados. Evidências: [A/B](evidence/P0_SP_SMOKE_RPT_20261024.md), [C–F](evidence/P0_NEGATIVE_SP_RPT_20261024.md).  
-**Baseline imutável:** `baseline/items-uicommon-r2-2-sp-homologated-20261021` (`67f4574`).  
-**Branch:** `feature/policy-0.1-p0-contracts`.  
-**Ownership:** addon opcional `ServoPeregrino_Organizador_Policy`, depende só de Nexus. Sem runtime Policy instalado nesta entrega.
+### 2.2 PolicySnapshot v1
 
-## 1. Fronteiras e decisões
-
-1. Policy decide **autorização exata de classname**; não substitui `isClass`, que decide existência/ambiente. Role Kits e adapters BGD/FTAC excluídos do MVP.
-2. Duas listas vazias = OPEN; branca não vazia = filtro obrigatório; negra não vazia = exclusão; interseção = DENY. Cliente comum não controla regras autoritativas.
-3. Sem Policy instalada e sem exigência de sincronismo Policy: módulos consumidores mantêm comportamento OPEN (compatibilidade). Com política autoritativa **exigida**, mas snapshot pendente, inválido ou versão incompatível: bloquear **ADDS/APPLY protegidos**, não inventar OPEN.
-4. **Política estática por sessão** no MVP. Não construir hot reload como requisito P1/P2.
-5. Não tocar em `CfgRemoteExec` global, UICommon, Items e Weapons no P0.
-
-## 2. Representações — schema v1 (contrato proposto)
-
-### 2.1 PolicyExport (portabilidade, somente dados)
-
-~~~json
-{
-  "schema": "SPORG_POLICY_EXPORT",
-  "schemaVersion": 1,
-  "whitelist": ["FirstAidKit", "ItemGPS"],
-  "blacklist": ["ItemGPS"]
-}
-~~~
-
-Campos **exatos**; `schema` string constante; `schemaVersion` inteiro 1; listas de strings, sem aninhamento. Campos não reconhecidos são **rejeitados**, sobretudo `serverRevision`, `admin`, `source` ou funções/fragmentos de SQF. Tamanho máximo proposto: 4096 entradas por lista, 128 caracteres por classname, 512 KiB de texto de entrada; confirmar limites por teste de engine/uso real.
-
-, incluindo dígito na primeira posição.** A amostragem real G2 confirmou 0 classes incompatíveis nas 133.399 classes analisadas; a regra não foi testada com todos os mods existentes. A confirmação SQF do contrato corrigido aguarda RPT H. Rejeitar duplicatas case-insensitive dentro da mesma lista. Uma classe nas duas listas **não é schema inválido**: é conflito informado e a blacklist vence.
-
-Formato importável: JSON via `fromJSON` / `toJSON` (disponíveis no Arma 3 2.18, versão mínima atual do Nexus). **Nunca `compile` / `call compile` sobre texto importado.** Validar tipos, limites, chaves e versão antes de criar/ativar snapshot. A ordem das chaves no JSON não é garantia de hash; canonicalizar listas ordenadas case-insensitive para fingerprints determinísticos. `toJSON` só recebe tipos permitidos.
-
-### 2.2 PolicySnapshot (efetivo em sessão)
-
-HashMap conceitual:
-~~~json
+```json
 {
   "schema": "SPORG_POLICY_SNAPSHOT",
   "schemaVersion": 1,
@@ -76,14 +44,13 @@ HashMap conceitual:
   "whitelist": [],
   "blacklist": []
 }
-~~~
+```
 
-`state`: `ACTIVE`, `PENDING`, `INVALID`, `ABSENT`; `source`: `ADDON_FALLBACK`, `MISSION_EXPLICIT`, `SERVER_ACTIVE` e `NONE`. `revision` cresce monotonamente **somente no servidor autoritativo**, nunca do payload importado. `fingerprint` identifica conteúdo após normalização, **não é assinatura criptográfica nem autorização**. `whitelist/blacklist` são dados serializáveis; índices de lookup `HashMap` separados do DTO no runtime. Não confiar em `revision/source/fingerprint` enviados por clientes.
+Estados possíveis: **ACTIVE, PENDING, INVALID, ABSENT**. Fontes conceituais: **ADDON_FALLBACK, MISSION_EXPLICIT, SERVER_ACTIVE, NONE**. `revision` e `fingerprint` pertencem à instância confiável da política. `revision` monotônico só após existir publicador autoritativo; fingerprint identifica conteúdo canônico, não é assinatura de segurança. Clientes não enviam revisão ou origem que valha como autoridade. Índices de consulta (`HashMap`) ficam **separados do DTO**. P1 pode gerar contexto **não autoritativo** para testes (`revision=0`, fingerprint explícito), sem alegar que uma fonte server-side foi ativada.
 
-### 2.3 PolicyDecision (resultado por classe)
+### 2.3 PolicyDecision v1
 
-HashMap/Result Nexus proposto:
-~~~json
+```json
 {
   "schema": "SPORG_POLICY_DECISION",
   "schemaVersion": 1,
@@ -94,20 +61,18 @@ HashMap/Result Nexus proposto:
   "revision": 1,
   "fingerprint": "IMPLEMENTATION_DEFINED"
 }
-~~~
+```
 
-Códigos: `POLICY_ALLOW_OPEN`, `POLICY_ALLOW_WHITELIST`, `POLICY_DENY_BLACKLIST`, `POLICY_DENY_NOT_WHITELIST`, `POLICY_NOT_READY`, `POLICY_INVALID`. Validar `className`; não misturar `ITEMS_CLASS_UNAVAILABLE` neste resultado: a indisponibilidade ambiental é uma segunda dimensão, verificada pelo consumidor. Precedência visual *ausente vermelho > proibido amarelo > alterado laranja*, com amarelo x laranja ainda sujeito ao gate de UX.
+Códigos: `POLICY_ALLOW_OPEN`, `POLICY_ALLOW_WHITELIST`, `POLICY_DENY_BLACKLIST`, `POLICY_DENY_NOT_WHITELIST`, `POLICY_NOT_READY`, `POLICY_INVALID`. A decisão por classe: (1) blacklist contém → DENY; (2) whitelist não vazia e classe ausente dela → DENY; (3) whitelist preenchida contendo classe → ALLOW_WHITELIST; (4) whitelist vazia e classe não bloqueada → ALLOW_OPEN. Ambas vazias = OPEN. `ABSENT` apenas é OPEN quando Policy é opcional; `PENDING`/`INVALID` nunca são OPEN.
 
-**Regra de decisão:** blacklist contém classe => DENY; senão whitelist não vazia e não contém => DENY; senão whitelist não vazia => ALLOW_WHITELIST; senão => ALLOW_OPEN. Em `PENDING/INVALID` exigidos, nunca permitir ADD/APPLY. Em `ABSENT` opcional, compatibilidade OPEN. Resposta de `evaluate` **não autoriza o cliente MP a aplicar mutação**; executor valida em servidor na revisão vigente (P6).
+O resultado de `evaluate` **não substitui** a validação ambiental nem autoriza mutações no servidor. Em P6 o executor revalidará a revisão mais recente no servidor.
 
-## 3. Configuração — convenção candidata para P1/P2
+## 3. Fontes e precedência — implementação futura P2/P6
 
-**Addon interno:** `configFile >> "CfgSPORGPolicy"`, declarado **somente no futuro config.cpp do Policy** com `schemaVersion=1`, `whitelist[]={}`, `blacklist[]={}`. Isso ainda não existe em código. Não ler `CfgSPORGPolicy` de addons terceiros por autodiscovery.
+Fonte interna candidata: `configFile >> "CfgSPORGPolicy"`, declarada exclusivamente pelo addon Policy. Opt-in do operador na missão: `missionConfigFile >> "CfgSPORGPolicy"` com `enabled=1`, `schemaVersion=1` e arrays explícitos. Fonte autoritativa ativada pelo servidor futuramente (P6) prevalece sobre missão; missão válida prevalece sobre fallback interno. Configuração explícita inválida resulta em `INVALID`, **não em fallback OPEN silencioso**.
 
-**Opt-in do operador de missão:** `missionConfigFile >> "CfgSPORGPolicy"` em `description.ext`, exigindo `enabled=1` e `schemaVersion=1`, e listas declaradas. Ao iniciar, servidor lê e valida; caso a classe não exista ou `enabled != 1`, usa fallback interno. Se a fonte explícita existe e falha validação, retornar `INVALID`/diagnóstico, **não cair silenciosamente no fallback OPEN**.
-
-~~~cpp
-// description.ext da missão — exemplo do P0, NÃO instalado automaticamente
+```cpp
+// Apenas exemplo de description.ext — não instalado por P1.
 class CfgSPORGPolicy
 {
     enabled = 1;
@@ -115,236 +80,26 @@ class CfgSPORGPolicy
     whitelist[] = {};
     blacklist[] = {"ItemGPS"};
 };
-~~~
+```
 
-Hierarquia de fonte: `SERVER_ACTIVE` (somente autorização de servidor, pós-P6) > `MISSION_EXPLICIT` válida > `ADDON_FALLBACK`. **Não prometemos compatibilidade direta de `server.cfg` ou arquivos externos arbitrários**: `server.cfg` não é um `configFile` genérico da missão; edição fora do PBO, include via userconfig e adapters de arquivos necessitam spike separado. Um operador pode manter valores na missão/arquivo incluído conhecido, desde que o build seja feito com esse arquivo incluído.
+Não inferir que `server.cfg` é diretamente legível como `configFile`, nem prometer arquivos externos genéricos sem adapter/spike. A política inicial é **estática por sessão**. Ativação ao vivo pelo administrador e notificação dos clientes são capacidades futuras opcionais.
 
-## 4. Interoperabilidade Nexus e catálogo
+## 4. Nexus e consumo pelos outros módulos
 
-O Nexus atual registra capabilities por `id/version/provider/metadata` e **não faz dispatch automático de funções**. Contrato candidato para P1: `policy.evaluate` v1 e `policy.snapshot` v1, publicados por Policy, `provider="ServoPeregrino_Organizador_Policy"`. Consumidores verificam `hasCapability`/versão, obtêm metadata, e usam **funções SQF públicas fixas/validadas**, não `compile` de provider ou id vindo de payload.
+Nexus possui registro de capabilities por ID, versão, provider e metadata; ele **não despacha automaticamente** funções por strings. Capabilities candidatas `policy.evaluate` v1 e `policy.snapshot` v1; provider `ServoPeregrino_Organizador_Policy`. Consumidores devem testar a capacidade/versão e chamar funções públicas fixas, nunca `compile` de textos enviados por cliente.
 
-Provider de catálogo para futuro Editor: `catalog.base.items` v1 pode mapear ao `Items_fnc_getCatalog`, mas **somente quando Items estiver instalado**, com semântica de catálogo **não filtrado**. Hoje `Items_fnc_getCatalog` devolve o cache base e cria uma cópia por entrada; **não alterar isso neste P0**. Se Items ausente, editor deve oferecer provider opcional próprio reutilizável/paginação; *não* prometer scanner pronto. Evitar duplicar o scan de 73k classes. `Items_fnc_invalidateCatalogCache` realmente invalida o cache **base** e pode forçar 24–27 s de scan; não usar para refresh de revisão Policy.
+Editor administrativo deverá enxergar **catálogo base completo**, inclusive itens proibidos, para configurar regras. Jogador verá projeção autorizada. Alteração de revisão invalida apenas projeção de autorização e diagnósticos de kit; não força o scan custoso de `CONFIG_ALL` de Items. Ausência de mod: vermelho; classe presente porém proibida: amarelo; rascunho alterado: laranja (ausência tem precedência). A ordem amarelo/laranja quando simultâneos requer validação UX.
 
-## 5. Viabilidade: o que sabemos versus o que falta testar
+## 5. Gates e fronteiras
 
-| Área | Evidência | Consequência P0 |
-|---|---|---|
-| Config de missão | `missionConfigFile` lê `description.ext` | Opt-in explícito em missão é caminho candidato verificável em SP |
-| JSON nativo | `fromJSON` / `toJSON` existem desde 2.18 | Import/export de **conteúdo**, sem avaliar código |
-| Clipboard import | Wiki Bohemia: `copyFromClipboard` **desabilitado em multiplayer** | Não usar como única interface MP; importar por controle de texto colável, a validar |
-| Arquivos | `loadFile` é leitura com restrições de file-patching; servidor pode restringir extensões | Não garantir ler caminho externo livre nem gravar arquivo físico via SQF |
-| Persistência local | `profileNamespace` sobrevive à missão, mas não é arquivo de exportação | Futuro rascunho local P5, com limites/validação |
-| Autoridade | Server aplica e valida snapshot; credentials são server-side | Implementar P6 só com teste MP real; não expor ativação por cliente comum |
+- **P0 fechado:** contratos v1 e viabilidade em single-player, após G2 e H.
+- **P1:** construir motor puro SQF e registrar capabilities, sem loader ou autoridade MP; entrega de addon source é candidata até RPT próprio.
+- **P2:** loader de fallback/mission e estado efetivo estático por sessão.
+- **P3/P4:** integração Items, cache/projeção, diagnóstico e aplicação segura parcial; não destruir kits.
+- **P5:** editor, portabilidade de JSON, refresh e persistência local de rascunho.
+- **P6:** autenticação admin, ativação servidor, revisão e sincronismo MP/JIP, autoridade em cada mutação.
+- **P7:** adapters opcionais, hardening e distribuição/PBO.
 
-**Referências Bohemia:** 
-- https://community.bistudio.com/wiki/missionConfigFile
-- https://community.bistudio.com/wiki/Description.ext
-- https://community.bistudio.com/wiki/fromJSON
-- https://community.bistudio.com/wiki/toJSON
-- https://community.bistudio.com/wiki/copyFromClipboard
-- https://community.bistudio.com/wiki/loadFile
-- https://community.bistudio.com/wiki/Arma_3:_Server_Security
+**Segurança:** não definir propriedades globais `mode`/`jip` em `CfgRemoteExec` do addon; usar funções especificamente autorizadas após revisão de MP. Clipboard `copyFromClipboard` tem limitações no multiplayer; interface alternativa será testada em P5. Arquivos externos e file-patching precisam avaliação própria.
 
-## 6. QA — evidência obtida e gates ainda obrigatórios
-
-**Evidência nova:** [RPT do smoke SP 24/10](evidence/P0_SP_SMOKE_RPT_20261024.md): cenário sem `CfgSPORGPolicy` e cenário com opt-in explícito em `description.ext` foram aprovados na engine 2.22.154089 (10/10 cada). Testes negativos de schema/fail-closed C–F executados **140/140 PASS**, conforme [RPT adicional](evidence/P0_NEGATIVE_SP_RPT_20261024.md); addon runtime ainda inexistente. O arquivo de spike original no repo não deve ser confundido com o pacote de duas missões autoexecutáveis.
-
-- Contratos de fixture, casos OPEN, BLACKLIST, WHITELIST, COMBINED, conflitos, duplicatas, tipos inválidos, campo injetado, ausência da dependência e fail-closed: `machine/policy/p0_contract_fixtures_v1.json`.
-- Teste de oráculo Python **não é teste engine**: `tools/policy/test_p0_contracts.py`. **Executado 7/7 PASS** em Python 3.13.5; [evidência unittest](evidence/P0_PYTHON_UNITTEST_20261024.md). Reproduzir com `python -m unittest discover -s tools/policy -p 'test_*.py' -v`.
-- Smoke independente SQF da engine (pacote de missões A/B executado e aprovado em 24/10, reexecutar se mudar o contrato): `spikes/policy-p0/runPolicyP0Smoke.sqf`, copiar para missão de teste e executar via `[] execVM "runPolicyP0Smoke.sqf"` no Debug Console (SP), conferir RPT. Necessário testar JSON, 4 modos, `missionConfigFile`, `configFile` e disponibilidade de funções.
-- Repetir engine smoke com e sem classe de missão, e pelo menos um MP local para checar **limitação de entrada por clipboard** sem tratar como publicação/autoridade. Usuário precisa fornecer RPT de Arma para homologação. Houve duas rodadas de smoke Arma **SP isolado**, A–F 160/160 PASS; **não** houve teste MP nem PBO/loader real.
-- Os smoke SP da engine estão verdes (160/160) e a suíte Python 7/7 PASS, todos documentados. **P0 já concluiu auditorias reais G e G2; falta regressão SQF H com a regra corrigida e revisão final de consistência documental antes de fechar**. Teste completo de loader ocorre após implementação P1/P2. P1 começa depois de revisão P0 e gates considerados suficientes.
-
-## 7. Ordem da continuidade
-
-1. Validar teste offline e ler smoke no RPT do Arma (SP). Resolver campos/compatibilidade se o RPT apontar falhas.
-2. Congelar contratos v1 e atualizar estados de continuidade.
-3. P1: motor Policy puro/capabilities, sem mexer em Items.
-4. P2: loaders de config; P3/P4: integrações Items/cache/aplicação; P5: editor local; P6: sincronismo servidor/admin real; P7: adapters e pacote.
-
-**Preservação:** Items 0.13-A MP continua pendente; UICommon R2.2 homologação SP intocada; iconografia somente texto; sem merge na main.
-
-
-## Checkpoint 25/10 — auditoria real de classnames P0 G
-
-A missão P0 G **executou na engine** (Arma 3 2.22.154089, modset real) e retornou **REVIEW**, com autotestes 10/10 PASS e scan concluído: **133.399** classes raw, **54.003** elegíveis, **532** elegíveis fora da regex proposta (pré-filtro Items **529**). O limite 128 não foi atingido (máximo observado **78**). Em exemplos de BGD Tools of the Trade, `121_SP10M_18_FDE` e `121_USASOC_CNVD_ITEM` começam em dígitos, razão `BAD_START`, logo a regex atual **não é compatível com todos os classnames carregados**. O primeiro scanner só detalhou 40 elegíveis e não prova que todas as 532 incompatibilidades são dígitos no primeiro caractere. [Evidência RPT P0 G](evidence/P0_G_CLASSNAME_AUDIT_RPT_20261025.md).
-
-**G2 foi executada e aprovada.** Comparou a regex anterior com a candidata `^[A-Za-z0-9_]{1,128}# P0 — Contratos de Policy e prova de viabilidade (24/10/2026)
-
-**Status atualizado após RPTs e unittest de 24/10:** **smoke Arma SP A/B 20/20 PASS + C/D/E/F 140/140 PASS = 160/160 PASS, 0 FAIL; Python unittest 7/7 PASS (28 fixtures)**. P0 permanece **EM REGRESSÃO DO CONTRATO CORRIGIDO**: G2 PASS recuperou **532 elegíveis incompatíveis**, Python revisado 8/8 PASS e 32 fixtures; missão H SQF pendente de RPT; runtime addon e MP continuam não implementados/testados. Evidências: [A/B](evidence/P0_SP_SMOKE_RPT_20261024.md), [C–F](evidence/P0_NEGATIVE_SP_RPT_20261024.md).  
-**Baseline imutável:** `baseline/items-uicommon-r2-2-sp-homologated-20261021` (`67f4574`).  
-**Branch:** `feature/policy-0.1-p0-contracts`.  
-**Ownership:** addon opcional `ServoPeregrino_Organizador_Policy`, depende só de Nexus. Sem runtime Policy instalado nesta entrega.
-
-## 1. Fronteiras e decisões
-
-1. Policy decide **autorização exata de classname**; não substitui `isClass`, que decide existência/ambiente. Role Kits e adapters BGD/FTAC excluídos do MVP.
-2. Duas listas vazias = OPEN; branca não vazia = filtro obrigatório; negra não vazia = exclusão; interseção = DENY. Cliente comum não controla regras autoritativas.
-3. Sem Policy instalada e sem exigência de sincronismo Policy: módulos consumidores mantêm comportamento OPEN (compatibilidade). Com política autoritativa **exigida**, mas snapshot pendente, inválido ou versão incompatível: bloquear **ADDS/APPLY protegidos**, não inventar OPEN.
-4. **Política estática por sessão** no MVP. Não construir hot reload como requisito P1/P2.
-5. Não tocar em `CfgRemoteExec` global, UICommon, Items e Weapons no P0.
-
-## 2. Representações — schema v1 (contrato proposto)
-
-### 2.1 PolicyExport (portabilidade, somente dados)
-
-~~~json
-{
-  "schema": "SPORG_POLICY_EXPORT",
-  "schemaVersion": 1,
-  "whitelist": ["FirstAidKit", "ItemGPS"],
-  "blacklist": ["ItemGPS"]
-}
-~~~
-
-Campos **exatos**; `schema` string constante; `schemaVersion` inteiro 1; listas de strings, sem aninhamento. Campos não reconhecidos são **rejeitados**, sobretudo `serverRevision`, `admin`, `source` ou funções/fragmentos de SQF. Tamanho máximo proposto: 4096 entradas por lista, 128 caracteres por classname, 512 KiB de texto de entrada; confirmar limites por teste de engine/uso real.
-
-**Normalização:** trim de espaços laterais; comparação por `toLowerANSI`; manter ortografia original válida para exibição/consulta ao config. **Regra de formato revisada (G2): `^[A-Za-z0-9_]{1,128}# P0 — Contratos de Policy e prova de viabilidade (24/10/2026)
-
-**Status atualizado após RPTs e unittest de 24/10:** **smoke Arma SP A/B 20/20 PASS + C/D/E/F 140/140 PASS = 160/160 PASS, 0 FAIL; Python unittest 7/7 PASS (28 fixtures)**. P0 permanece **EM REGRESSÃO DO CONTRATO CORRIGIDO**: G2 PASS recuperou **532 elegíveis incompatíveis**, Python revisado 8/8 PASS e 32 fixtures; missão H SQF pendente de RPT; runtime addon e MP continuam não implementados/testados. Evidências: [A/B](evidence/P0_SP_SMOKE_RPT_20261024.md), [C–F](evidence/P0_NEGATIVE_SP_RPT_20261024.md).  
-**Baseline imutável:** `baseline/items-uicommon-r2-2-sp-homologated-20261021` (`67f4574`).  
-**Branch:** `feature/policy-0.1-p0-contracts`.  
-**Ownership:** addon opcional `ServoPeregrino_Organizador_Policy`, depende só de Nexus. Sem runtime Policy instalado nesta entrega.
-
-## 1. Fronteiras e decisões
-
-1. Policy decide **autorização exata de classname**; não substitui `isClass`, que decide existência/ambiente. Role Kits e adapters BGD/FTAC excluídos do MVP.
-2. Duas listas vazias = OPEN; branca não vazia = filtro obrigatório; negra não vazia = exclusão; interseção = DENY. Cliente comum não controla regras autoritativas.
-3. Sem Policy instalada e sem exigência de sincronismo Policy: módulos consumidores mantêm comportamento OPEN (compatibilidade). Com política autoritativa **exigida**, mas snapshot pendente, inválido ou versão incompatível: bloquear **ADDS/APPLY protegidos**, não inventar OPEN.
-4. **Política estática por sessão** no MVP. Não construir hot reload como requisito P1/P2.
-5. Não tocar em `CfgRemoteExec` global, UICommon, Items e Weapons no P0.
-
-## 2. Representações — schema v1 (contrato proposto)
-
-### 2.1 PolicyExport (portabilidade, somente dados)
-
-~~~json
-{
-  "schema": "SPORG_POLICY_EXPORT",
-  "schemaVersion": 1,
-  "whitelist": ["FirstAidKit", "ItemGPS"],
-  "blacklist": ["ItemGPS"]
-}
-~~~
-
-Campos **exatos**; `schema` string constante; `schemaVersion` inteiro 1; listas de strings, sem aninhamento. Campos não reconhecidos são **rejeitados**, sobretudo `serverRevision`, `admin`, `source` ou funções/fragmentos de SQF. Tamanho máximo proposto: 4096 entradas por lista, 128 caracteres por classname, 512 KiB de texto de entrada; confirmar limites por teste de engine/uso real.
-
-, incluindo dígito na primeira posição.** A amostragem real G2 confirmou 0 classes incompatíveis nas 133.399 classes analisadas; a regra não foi testada com todos os mods existentes. A confirmação SQF do contrato corrigido aguarda RPT H. Rejeitar duplicatas case-insensitive dentro da mesma lista. Uma classe nas duas listas **não é schema inválido**: é conflito informado e a blacklist vence.
-
-Formato importável: JSON via `fromJSON` / `toJSON` (disponíveis no Arma 3 2.18, versão mínima atual do Nexus). **Nunca `compile` / `call compile` sobre texto importado.** Validar tipos, limites, chaves e versão antes de criar/ativar snapshot. A ordem das chaves no JSON não é garantia de hash; canonicalizar listas ordenadas case-insensitive para fingerprints determinísticos. `toJSON` só recebe tipos permitidos.
-
-### 2.2 PolicySnapshot (efetivo em sessão)
-
-HashMap conceitual:
-~~~json
-{
-  "schema": "SPORG_POLICY_SNAPSHOT",
-  "schemaVersion": 1,
-  "state": "ACTIVE",
-  "source": "ADDON_FALLBACK",
-  "revision": 1,
-  "fingerprint": "IMPLEMENTATION_DEFINED",
-  "whitelist": [],
-  "blacklist": []
-}
-~~~
-
-`state`: `ACTIVE`, `PENDING`, `INVALID`, `ABSENT`; `source`: `ADDON_FALLBACK`, `MISSION_EXPLICIT`, `SERVER_ACTIVE` e `NONE`. `revision` cresce monotonamente **somente no servidor autoritativo**, nunca do payload importado. `fingerprint` identifica conteúdo após normalização, **não é assinatura criptográfica nem autorização**. `whitelist/blacklist` são dados serializáveis; índices de lookup `HashMap` separados do DTO no runtime. Não confiar em `revision/source/fingerprint` enviados por clientes.
-
-### 2.3 PolicyDecision (resultado por classe)
-
-HashMap/Result Nexus proposto:
-~~~json
-{
-  "schema": "SPORG_POLICY_DECISION",
-  "schemaVersion": 1,
-  "className": "ItemGPS",
-  "allowed": false,
-  "code": "POLICY_DENY_BLACKLIST",
-  "source": "SERVER_ACTIVE",
-  "revision": 1,
-  "fingerprint": "IMPLEMENTATION_DEFINED"
-}
-~~~
-
-Códigos: `POLICY_ALLOW_OPEN`, `POLICY_ALLOW_WHITELIST`, `POLICY_DENY_BLACKLIST`, `POLICY_DENY_NOT_WHITELIST`, `POLICY_NOT_READY`, `POLICY_INVALID`. Validar `className`; não misturar `ITEMS_CLASS_UNAVAILABLE` neste resultado: a indisponibilidade ambiental é uma segunda dimensão, verificada pelo consumidor. Precedência visual *ausente vermelho > proibido amarelo > alterado laranja*, com amarelo x laranja ainda sujeito ao gate de UX.
-
-**Regra de decisão:** blacklist contém classe => DENY; senão whitelist não vazia e não contém => DENY; senão whitelist não vazia => ALLOW_WHITELIST; senão => ALLOW_OPEN. Em `PENDING/INVALID` exigidos, nunca permitir ADD/APPLY. Em `ABSENT` opcional, compatibilidade OPEN. Resposta de `evaluate` **não autoriza o cliente MP a aplicar mutação**; executor valida em servidor na revisão vigente (P6).
-
-## 3. Configuração — convenção candidata para P1/P2
-
-**Addon interno:** `configFile >> "CfgSPORGPolicy"`, declarado **somente no futuro config.cpp do Policy** com `schemaVersion=1`, `whitelist[]={}`, `blacklist[]={}`. Isso ainda não existe em código. Não ler `CfgSPORGPolicy` de addons terceiros por autodiscovery.
-
-**Opt-in do operador de missão:** `missionConfigFile >> "CfgSPORGPolicy"` em `description.ext`, exigindo `enabled=1` e `schemaVersion=1`, e listas declaradas. Ao iniciar, servidor lê e valida; caso a classe não exista ou `enabled != 1`, usa fallback interno. Se a fonte explícita existe e falha validação, retornar `INVALID`/diagnóstico, **não cair silenciosamente no fallback OPEN**.
-
-~~~cpp
-// description.ext da missão — exemplo do P0, NÃO instalado automaticamente
-class CfgSPORGPolicy
-{
-    enabled = 1;
-    schemaVersion = 1;
-    whitelist[] = {};
-    blacklist[] = {"ItemGPS"};
-};
-~~~
-
-Hierarquia de fonte: `SERVER_ACTIVE` (somente autorização de servidor, pós-P6) > `MISSION_EXPLICIT` válida > `ADDON_FALLBACK`. **Não prometemos compatibilidade direta de `server.cfg` ou arquivos externos arbitrários**: `server.cfg` não é um `configFile` genérico da missão; edição fora do PBO, include via userconfig e adapters de arquivos necessitam spike separado. Um operador pode manter valores na missão/arquivo incluído conhecido, desde que o build seja feito com esse arquivo incluído.
-
-## 4. Interoperabilidade Nexus e catálogo
-
-O Nexus atual registra capabilities por `id/version/provider/metadata` e **não faz dispatch automático de funções**. Contrato candidato para P1: `policy.evaluate` v1 e `policy.snapshot` v1, publicados por Policy, `provider="ServoPeregrino_Organizador_Policy"`. Consumidores verificam `hasCapability`/versão, obtêm metadata, e usam **funções SQF públicas fixas/validadas**, não `compile` de provider ou id vindo de payload.
-
-Provider de catálogo para futuro Editor: `catalog.base.items` v1 pode mapear ao `Items_fnc_getCatalog`, mas **somente quando Items estiver instalado**, com semântica de catálogo **não filtrado**. Hoje `Items_fnc_getCatalog` devolve o cache base e cria uma cópia por entrada; **não alterar isso neste P0**. Se Items ausente, editor deve oferecer provider opcional próprio reutilizável/paginação; *não* prometer scanner pronto. Evitar duplicar o scan de 73k classes. `Items_fnc_invalidateCatalogCache` realmente invalida o cache **base** e pode forçar 24–27 s de scan; não usar para refresh de revisão Policy.
-
-## 5. Viabilidade: o que sabemos versus o que falta testar
-
-| Área | Evidência | Consequência P0 |
-|---|---|---|
-| Config de missão | `missionConfigFile` lê `description.ext` | Opt-in explícito em missão é caminho candidato verificável em SP |
-| JSON nativo | `fromJSON` / `toJSON` existem desde 2.18 | Import/export de **conteúdo**, sem avaliar código |
-| Clipboard import | Wiki Bohemia: `copyFromClipboard` **desabilitado em multiplayer** | Não usar como única interface MP; importar por controle de texto colável, a validar |
-| Arquivos | `loadFile` é leitura com restrições de file-patching; servidor pode restringir extensões | Não garantir ler caminho externo livre nem gravar arquivo físico via SQF |
-| Persistência local | `profileNamespace` sobrevive à missão, mas não é arquivo de exportação | Futuro rascunho local P5, com limites/validação |
-| Autoridade | Server aplica e valida snapshot; credentials são server-side | Implementar P6 só com teste MP real; não expor ativação por cliente comum |
-
-**Referências Bohemia:** 
-- https://community.bistudio.com/wiki/missionConfigFile
-- https://community.bistudio.com/wiki/Description.ext
-- https://community.bistudio.com/wiki/fromJSON
-- https://community.bistudio.com/wiki/toJSON
-- https://community.bistudio.com/wiki/copyFromClipboard
-- https://community.bistudio.com/wiki/loadFile
-- https://community.bistudio.com/wiki/Arma_3:_Server_Security
-
-## 6. QA — evidência obtida e gates ainda obrigatórios
-
-**Evidência nova:** [RPT do smoke SP 24/10](evidence/P0_SP_SMOKE_RPT_20261024.md): cenário sem `CfgSPORGPolicy` e cenário com opt-in explícito em `description.ext` foram aprovados na engine 2.22.154089 (10/10 cada). Testes negativos de schema/fail-closed C–F executados **140/140 PASS**, conforme [RPT adicional](evidence/P0_NEGATIVE_SP_RPT_20261024.md); addon runtime ainda inexistente. O arquivo de spike original no repo não deve ser confundido com o pacote de duas missões autoexecutáveis.
-
-- Contratos de fixture, casos OPEN, BLACKLIST, WHITELIST, COMBINED, conflitos, duplicatas, tipos inválidos, campo injetado, ausência da dependência e fail-closed: `machine/policy/p0_contract_fixtures_v1.json`.
-- Teste de oráculo Python **não é teste engine**: `tools/policy/test_p0_contracts.py`. **Executado 7/7 PASS** em Python 3.13.5; [evidência unittest](evidence/P0_PYTHON_UNITTEST_20261024.md). Reproduzir com `python -m unittest discover -s tools/policy -p 'test_*.py' -v`.
-- Smoke independente SQF da engine (pacote de missões A/B executado e aprovado em 24/10, reexecutar se mudar o contrato): `spikes/policy-p0/runPolicyP0Smoke.sqf`, copiar para missão de teste e executar via `[] execVM "runPolicyP0Smoke.sqf"` no Debug Console (SP), conferir RPT. Necessário testar JSON, 4 modos, `missionConfigFile`, `configFile` e disponibilidade de funções.
-- Repetir engine smoke com e sem classe de missão, e pelo menos um MP local para checar **limitação de entrada por clipboard** sem tratar como publicação/autoridade. Usuário precisa fornecer RPT de Arma para homologação. Houve duas rodadas de smoke Arma **SP isolado**, A–F 160/160 PASS; **não** houve teste MP nem PBO/loader real.
-- Os smoke SP da engine estão verdes (160/160) e a suíte Python 7/7 PASS, todos documentados. **P0 ainda exige revisão de classnames reais antes de congelar os contratos v1**. Teste completo de loader ocorre após implementação P1/P2. P1 começa depois de revisão P0 e gates considerados suficientes.
-
-## 7. Ordem da continuidade
-
-1. Validar teste offline e ler smoke no RPT do Arma (SP). Resolver campos/compatibilidade se o RPT apontar falhas.
-2. Congelar contratos v1 e atualizar estados de continuidade.
-3. P1: motor Policy puro/capabilities, sem mexer em Items.
-4. P2: loaders de config; P3/P4: integrações Items/cache/aplicação; P5: editor local; P6: sincronismo servidor/admin real; P7: adapters e pacote.
-
-**Preservação:** Items 0.13-A MP continua pendente; UICommon R2.2 homologação SP intocada; iconografia somente texto; sem merge na main.
-
-
-## Checkpoint 25/10 — auditoria real de classnames P0 G
-
-A missão P0 G **executou na engine** (Arma 3 2.22.154089, modset real) e retornou **REVIEW**, com autotestes 10/10 PASS e scan concluído: **133.399** classes raw, **54.003** elegíveis, **532** elegíveis fora da regex proposta (pré-filtro Items **529**). O limite 128 não foi atingido (máximo observado **78**). Em exemplos de BGD Tools of the Trade, `121_SP10M_18_FDE` e `121_USASOC_CNVD_ITEM` começam em dígitos, razão `BAD_START`, logo a regex atual **não é compatível com todos os classnames carregados**. O primeiro scanner só detalhou 40 elegíveis e não prova que todas as 532 incompatibilidades são dígitos no primeiro caractere. [Evidência RPT P0 G](evidence/P0_G_CLASSNAME_AUDIT_RPT_20261025.md).
-
-: 668/668 classes brutas, 532/532 elegíveis e 529/529 classes do pre-filtro Items recuperadas, 0 remanescentes; 12/12 autotestes PASS. [RPT G2](evidence/P0_G2_REGEX_COMPARISON_RPT_20261025.md). Validador Python e fixtures corrigidos e executados (**8/8 unittest PASS, 32 fixtures**); [regressão Python](evidence/P0_G2_PYTHON_REGRESSION_20261025.md). Prototipo SQF atualizado no pacote H (156 asserções esperadas), **ainda sem RPT**, [preparação](evidence/P0_H_REVISED_CLASSNAME_SQF_PREP_20261025.md). Não encerrar P0 até regressão H e revisão documental final. Policy runtime e MP seguem fases futuras.
-
-
-## Encerramento formal do P0 — 25/10/2026 (checkpoint que prevalece)
-
-A validação sintática do `PolicyExport` v1 fica **congelada para o escopo de contratos P0 SP** como `^[A-Za-z0-9_]{1,128}$` após trim e comparação case-insensitive. A **G2** provou compatibilidade com todas as 133.399 classes brutas observadas nesta modlist (532 elegíveis antes rejeitadas), mas não universalidade em todos os mods. A **H** revalidou C/D/E/F com 39/39 testes por missão, **156/156 PASS** e ausência de `Error in expression` no RPT. A suíte Python atualizada **8/8 PASS, 32 fixtures** é evidência separada. [RPT H](evidence/P0_H_REVISED_CLASSNAME_SQF_RPT_20261025.md).
-
-**P0 = COMPLETE no escopo contrato/viabilidade SP.** Gates P1–P7 correspondem a implementação e testes posteriores e não devem reabrir o P0 por padrão. **Questão Weapons não confundir:** compatibilidade de armas é derivada do engine, não de regex; na próxima fase Weapons validar seletores por muzzle (lista `magazinesByMuzzle` versus seletor plano `magazines`) e integração futura com Policy; owner e prioridades em [Weapons](../../modules/Weapons.md). Nenhum runtime da baseline modificado nesta rodada.
+**Referências complementares:** [Roadmap](ROADMAP.md), [Policy](../../modules/Policy.md), [continuidade P0](../../75_POLICY_P0_CONTINUIDADE_20261024.md), [Bohemia missionConfigFile](https://community.bistudio.com/wiki/missionConfigFile), [Bohemia fromJSON](https://community.bistudio.com/wiki/fromJSON) e [Bohemia Arma 3 server security](https://community.bistudio.com/wiki/Arma_3:_Server_Security).
