@@ -1,13 +1,13 @@
 {
   "schema_version": 1,
-  "record_date": "2026-10-24",
+  "record_date": "2026-10-25",
   "repository": "peregrinoklawd/ServoPeregrino_Organizador",
   "branch": "feature/policy-0.1-p0-contracts",
   "kind": "roadmap_with_p0_contract_work_not_runtime",
   "project": "SPORG_POLICY_EDITOR",
   "owner": "Policy",
   "addon": "ServoPeregrino_Organizador_Policy",
-  "status": "P0_REGEX_CONTRACT_REVISION_REQUIRED_G2_RPT_PENDING",
+  "status": "P0_REVISED_CLASSNAME_CONTRACT_H_SQF_RPT_PENDING",
   "docs": [
     "docs/modules/Policy.md",
     "docs/projects/policy-editor/README.md",
@@ -84,7 +84,7 @@
     {
       "phase": "P0",
       "name": "Contracts and feasibility",
-      "status": "SP_160_PASS_PY_7_PASS_G_REGEX_REVIEW_G2_RPT_PENDING"
+      "status": "G2_PASS_PYTHON_REVISED_8_PASS_H_SQF_RPT_PENDING"
     },
     {
       "phase": "P1",
@@ -152,7 +152,7 @@
   "merge_performed": false,
   "audit_doc": "docs/73_AUDITORIA_COMPLETA_ITEMS_POLICY_DECISOES_20261022.md",
   "autonomous_handoff_doc": "docs/74_CONTINUIDADE_AUTOSSUFICIENTE_ITEMS_POLICY_20261022.md",
-  "record_revision": "2026-10-25-p0-g-review-g2-prepared",
+  "record_revision": "2026-10-25-p0-g2-pass-python8-h-prepared",
   "policy_lifecycle": {
     "default": "STATIC_LOADED_BEFORE_OR_AT_SESSION_START",
     "admin_live_updates": "OPTIONAL_LATER_NOT_REQUIRED_FOR_FIRST_IMPLEMENTATION",
@@ -188,13 +188,13 @@
     "icons_assets": "APPROVED_VERSIONED_UI_INTEGRATION_PAUSED"
   },
   "p0": {
-    "status": "REAL_MODSET_AUDIT_G_REVIEW_532_REGEX_CONFLICT_G2_PENDING",
+    "status": "G2_REAL_MODSET_PASS_PYTHON_REVISED_8_PASS_H_RPT_PENDING",
     "baseline": "67f457414c37784ef0469e7235d39006342edb40",
     "source_doc": "docs/projects/policy-editor/P0_CONTRACTS_20261024.md",
     "fixture_file": "machine/policy/p0_contract_fixtures_v1.json",
     "reference_test": "tools/policy/test_p0_contracts.py",
     "arma_spike": "spikes/policy-p0/runPolicyP0Smoke.sqf",
-    "fixtures_count": 28,
+    "fixtures_count": 32,
     "fixtures_checked_with_js_oracle": 28,
     "python_unittest_ran": true,
     "arma_sp_smoke_ran": true,
@@ -230,9 +230,8 @@
     "arma_sp_smoke_rpt_sha256": "d4bb57129e89914174dc550a718602f41f91d33611092c6ab0717a2b7b295979",
     "arma_sp_smoke_evidence": "docs/projects/policy-editor/evidence/P0_SP_SMOKE_RPT_20261024.md",
     "gates_pending": [
-      "G2_DIFFERENTIAL_REAL_MODSET_RPT",
-      "REVISE_CONTRACT_PY_FIXTURES_SQF_NEGATIVE_AND_RETEST_IF_REGEX_CHANGES",
-      "FINAL_P0_CONTRACT_REVIEW",
+      "P0_H_REVISED_SQF_ENGINE_RPT",
+      "P0_CONTRACT_FINAL_CONSISTENCY_REVIEW",
       "P1_P2_REAL_ADDON_AND_LOADER_ARE_LATER_PHASES"
     ],
     "negative_smoke_package": {
@@ -297,17 +296,16 @@
     },
     "python_unittest_result": {
       "executed": true,
-      "python_version": "3.13.5",
       "framework": "unittest",
-      "methods_passed": 7,
+      "methods_passed": 8,
       "methods_failed": 0,
       "errors": 0,
-      "fixture_scenarios": 28,
+      "fixture_scenarios": 32,
       "exit_code": 0,
-      "source_blob_sha": "7d46f8957da4a1599c5ef538b0173c4bba2371c3",
-      "fixture_blob_sha": "e6fcc4ad3d81a82494ebd6042bbe22c90f0a40c9",
-      "evidence": "docs/projects/policy-editor/evidence/P0_PYTHON_UNITTEST_20261024.md",
-      "log_sha256": "42f2f32c7cfbcfc6f5e4dcfba7b1173be14ea2331f49a0c1e751d4ea2c9db683"
+      "source_blob_sha": "8080d70c1a5bed07fa4cce1ca988f20c31bcb3bc",
+      "fixture_blob_sha": "1a75b9541999c62b818c024026872cf185eec62b",
+      "evidence": "docs/projects/policy-editor/evidence/P0_G2_PYTHON_REGRESSION_20261025.md",
+      "log_sha256": "c31c5dcba515db32cb9d8767cee1d33468d9700448665daf1e68a5695262adbd"
     },
     "classname_audit_mission": {
       "scenario": "P0_G_REAL_MODSET_CLASSNAME_AUDIT",
@@ -384,11 +382,11 @@
         }
       ],
       "reason_confirmed_for_logged_samples": "BAD_START_NUMERIC_PREFIX_BGDTOOLS",
-      "cause_of_other_anomalies": "UNKNOWN_G2_REQUIRED"
+      "cause_of_other_anomalies": "ALL_668_CONFIRMED_DIGIT_PREFIX_BY_G2_RPT"
     },
     "classname_audit_g2": {
       "prepared": true,
-      "engine_executed": false,
+      "engine_executed": true,
       "mission": "SP_ORG_Policy_P0_G2_RegexComparison.VR",
       "zip": "SP_ORG_Policy_P0_G2_Comparacao_Classnames_20261025.zip",
       "zip_sha256": "d4359363eca916f6a40e4a9d58b7e56fd332c841390d36f01529f105ca8b79a8",
@@ -396,8 +394,114 @@
       "strict_regex": "^[A-Za-z_][A-Za-z0-9_]{0,127}$",
       "candidate_relaxed_regex": "^[A-Za-z0-9_]{1,128}$",
       "purpose": "Count fixedByDigit and remainingInvalid per root in same real modset",
+      "status": "PASS",
+      "evidence_preparation": "docs/projects/policy-editor/evidence/P0_G2_REGEX_COMPARISON_PREP_20261025.md",
+      "rpt_sha256": "d3eabefdc7c96e6aabc715d4626f8f32b6f559b520c33ed50fcffb6a9e3497d1",
+      "evidence_rpt": "docs/projects/policy-editor/evidence/P0_G2_REGEX_COMPARISON_RPT_20261025.md",
+      "arma_version": "2.22.154089_STABLE",
+      "local_time_start": "2026-10-25T02:07:26-03:00",
+      "local_time_end": "2026-10-25T02:08:27-03:00",
+      "elapsed_ms": 60481,
+      "selftest_pass": 12,
+      "selftest_fail": 0,
+      "root_errors": 0,
+      "raw_total": 133399,
+      "raw_strict_invalid": 668,
+      "raw_fixed_by_digit": 668,
+      "raw_remaining_invalid": 0,
+      "eligible_total": 54003,
+      "eligible_strict_invalid": 532,
+      "eligible_fixed_by_digit": 532,
+      "eligible_remaining_invalid": 0,
+      "items_prefilter_total": 50727,
+      "items_prefilter_strict_invalid": 529,
+      "items_prefilter_fixed_by_digit": 529,
+      "items_prefilter_remaining_invalid": 0,
+      "root_summary": [
+        {
+          "root": "CfgWeapons",
+          "raw": 69763,
+          "strictInvalid": 62,
+          "fixedByDigit": 62,
+          "remainingInvalid": 0,
+          "eligible": 49502,
+          "eligibleStrictInvalid": 49,
+          "eligibleFixedByDigit": 49,
+          "eligibleRemainingInvalid": 0
+        },
+        {
+          "root": "CfgMagazines",
+          "raw": 3697,
+          "strictInvalid": 536,
+          "fixedByDigit": 536,
+          "remainingInvalid": 0,
+          "eligible": 2967,
+          "eligibleStrictInvalid": 480,
+          "eligibleFixedByDigit": 480,
+          "eligibleRemainingInvalid": 0
+        },
+        {
+          "root": "CfgGlasses",
+          "raw": 1000,
+          "strictInvalid": 0,
+          "fixedByDigit": 0,
+          "remainingInvalid": 0,
+          "eligible": 904,
+          "eligibleStrictInvalid": 0,
+          "eligibleFixedByDigit": 0,
+          "eligibleRemainingInvalid": 0
+        },
+        {
+          "root": "CfgVehicles",
+          "raw": 58939,
+          "strictInvalid": 70,
+          "fixedByDigit": 70,
+          "remainingInvalid": 0,
+          "eligible": 630,
+          "eligibleStrictInvalid": 3,
+          "eligibleFixedByDigit": 3,
+          "eligibleRemainingInvalid": 0
+        }
+      ]
+    },
+    "classname_format_v1": {
+      "status": "CANDIDATE_TESTED_REAL_MODSET_G2_PASSED_AWAIT_H_REGRESSION",
+      "regex": "^[A-Za-z0-9_]{1,128}$",
+      "allow_numeric_prefix": true,
+      "invalid_special_characters": true,
+      "maximum_characters": 128,
+      "environment_checked": "real modset G2",
+      "universally_proven": false
+    },
+    "python_unittest_result_original": {
+      "executed": true,
+      "python_version": "3.13.5",
+      "framework": "unittest",
+      "methods_passed": 7,
+      "methods_failed": 0,
+      "errors": 0,
+      "fixture_scenarios": 28,
+      "exit_code": 0,
+      "source_blob_sha": "7d46f8957da4a1599c5ef538b0173c4bba2371c3",
+      "fixture_blob_sha": "e6fcc4ad3d81a82494ebd6042bbe22c90f0a40c9",
+      "evidence": "docs/projects/policy-editor/evidence/P0_PYTHON_UNITTEST_20261024.md",
+      "log_sha256": "42f2f32c7cfbcfc6f5e4dcfba7b1173be14ea2331f49a0c1e751d4ea2c9db683"
+    },
+    "revised_sqf_smoke_h": {
+      "prepared": true,
+      "engine_executed": false,
       "status": "RPT_PENDING",
-      "evidence_preparation": "docs/projects/policy-editor/evidence/P0_G2_REGEX_COMPARISON_PREP_20261025.md"
+      "package": "SP_ORG_Policy_P0_H_Regressao_Contrato_G2_20261025.zip",
+      "sha256": "e7549e7ef6fbe60ada06669efa6af982a7c84b49a691a96aaef2047b2ffab7ec",
+      "missions": [
+        "SP_ORG_Policy_P0_H_C_InvalidVersion.VR",
+        "SP_ORG_Policy_P0_H_D_InvalidArray.VR",
+        "SP_ORG_Policy_P0_H_E_DuplicateClass.VR",
+        "SP_ORG_Policy_P0_H_F_RequiredMissing.VR"
+      ],
+      "expected_pass_per_mission": 39,
+      "expected_total_pass": 156,
+      "evidence_preparation": "docs/projects/policy-editor/evidence/P0_H_REVISED_CLASSNAME_SQF_PREP_20261025.md"
     }
   }
 }
