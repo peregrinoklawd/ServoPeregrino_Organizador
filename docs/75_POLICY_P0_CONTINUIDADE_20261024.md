@@ -87,3 +87,14 @@ Após o smoke SP positivo **20/20 PASS**, foi entregue novo pacote `SP_ORG_Polic
 - Os bytes de código e fixtures foram conferidos contra os respectivos hashes Git blob da branch (test script `7d46f8957da4a1599c5ef538b0173c4bba2371c3`, fixtures `e6fcc4ad3d81a82494ebd6042bbe22c90f0a40c9`).
 - Evidência completa: [P0_PYTHON_UNITTEST_20261024.md](projects/policy-editor/evidence/P0_PYTHON_UNITTEST_20261024.md); log SHA-256 `42f2f32c7cfbcfc6f5e4dcfba7b1173be14ea2331f49a0c1e751d4ea2c9db683`.
 - **Único gate P0 substantivo pendente:** validar regex classname no modset real e fechar revisão documental dos contratos. Addon/loader e MP continuam fases posteriores.
+
+
+## Checkpoint 25/10/2026 — missão P0 G pronta, RPT pendente
+
+A execução de 160 asserções SP de P0 A–F e 7 testes Python / 28 fixtures já foi confirmada; **Policy runtime continua NÃO implementado**. O último gate P0 é confrontar a regex ASCII proposta com os classnames realmente presentes no modset do operador.
+
+**Foi criado e entregue ZIP pronto:** `SP_ORG_Policy_P0_G_Auditoria_Classnames_20261025.zip`, SHA-256 `0bd55b4742ffb2837f2ae26cb33d165cdf284b2f51b8460d9669d816a0f6d7f7`, contendo pasta `SP_ORG_Policy_P0_G_ClassnameAudit.VR`. Instalar a pasta `.VR` em `missions`, executar no Eden → VR → Preview com a modlist normal. A missão roda sem console/debug e registra RPT prefixado `[SPORG_POLICY_P0_G]`. **O RPT não foi recebido, logo nenhum PASS de classname real é alegado.**
+
+Metodologia: percorre `CfgWeapons`, `CfgMagazines`, `CfgGlasses`, `CfgVehicles`, confirma `scope`, `scopeArsenal`, `displayName`, mochila `isBackpack`, e pré-filtro de `Items` para `CfgWeapons` com `ItemInfo` / `CfgMagazines`. Total bruto, elegíveis, anomalias (incluindo exemplos e origem mod) e 10 autotestes de regex separados por bloco `[ROOT_SUMMARY]`, `[SUMMARY]`. Estados PASS, REVIEW e FAIL têm semântica própria; REVIEW pede inspeção humana, não aprovação automática.
+
+**Evidência de preparação e instruções exatas:** [P0_G_CLASSNAME_AUDIT_PREP_20261025.md](projects/policy-editor/evidence/P0_G_CLASSNAME_AUDIT_PREP_20261025.md). Com o RPT real, revisar falsos positivos/negativos do pre-filtro, e apenas então congelar regex/contratos de P0. Sem mudanças em runtime `addons/`, `missions/` do repo nem `main`.
