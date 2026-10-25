@@ -315,7 +315,7 @@
       "expected_selftests": 10,
       "expected_in_game_summary": "PASS_OR_REVIEW_WITH_ROOT_COUNTS_AND_ANOMALIES",
       "zip": "SP_ORG_Policy_P0_G_Auditoria_Classnames_20261025.zip",
-      "zip_sha256": "0bd55b4742ffb2837f2ae26cb33d165cdf284b2f51b8460d9669d816a0f6d7f7",
+      "zip_sha256": "ffc30f29a957eadf2586c5270e3719095f57583456e24db4d077bf28c2c92c79",
       "mission_folder": "SP_ORG_Policy_P0_G_ClassnameAudit.VR",
       "mode": "SINGLE_PLAYER_EDEN_VR",
       "roots": [
