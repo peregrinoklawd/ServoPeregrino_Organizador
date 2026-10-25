@@ -1,7 +1,7 @@
 # Policy — módulo opcional de autorização de itens/equipamentos
 
 **Data da consolidação:** 22/10/2026  
-**Status (24/10/2026):** P0 contratos/fixtures **EM ANDAMENTO**, smoke SP A–F **160/160 PASS** ([A/B](../projects/policy-editor/evidence/P0_SP_SMOKE_RPT_20261024.md), [C–F](../projects/policy-editor/evidence/P0_NEGATIVE_SP_RPT_20261024.md)), revisão final de contratos/regex pendente; módulo Policy **NÃO IMPLEMENTADO**. Ver [P0](../projects/policy-editor/P0_CONTRACTS_20261024.md); smoke Arma ainda pendente.  
+**Status (24/10/2026):** P0 contratos/fixtures **EM ANDAMENTO**, smoke SP A–F **160/160 PASS** ([A/B](../projects/policy-editor/evidence/P0_SP_SMOKE_RPT_20261024.md), [C–F](../projects/policy-editor/evidence/P0_NEGATIVE_SP_RPT_20261024.md)), Python 7/7 PASS; auditoria de classnames reais P0 G preparada, RPT pendente; módulo Policy **NÃO IMPLEMENTADO**. Ver [P0](../projects/policy-editor/P0_CONTRACTS_20261024.md) e [preparação P0 G](../projects/policy-editor/evidence/P0_G_CLASSNAME_AUDIT_PREP_20261025.md).  
 **Proprietário único:** `ServoPeregrino_Organizador_Policy` (futuro PBO); dependência planejada: Nexus.  
 **Projeto do editor:** [../projects/policy-editor/README.md](../projects/policy-editor/README.md) e [ROADMAP](../projects/policy-editor/ROADMAP.md).
 
