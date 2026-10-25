@@ -93,7 +93,7 @@ Após o smoke SP positivo **20/20 PASS**, foi entregue novo pacote `SP_ORG_Polic
 
 A execução de 160 asserções SP de P0 A–F e 7 testes Python / 28 fixtures já foi confirmada; **Policy runtime continua NÃO implementado**. O último gate P0 é confrontar a regex ASCII proposta com os classnames realmente presentes no modset do operador.
 
-**Foi criado e entregue ZIP pronto:** `SP_ORG_Policy_P0_G_Auditoria_Classnames_20261025.zip`, SHA-256 `0bd55b4742ffb2837f2ae26cb33d165cdf284b2f51b8460d9669d816a0f6d7f7`, contendo pasta `SP_ORG_Policy_P0_G_ClassnameAudit.VR`. Instalar a pasta `.VR` em `missions`, executar no Eden → VR → Preview com a modlist normal. A missão roda sem console/debug e registra RPT prefixado `[SPORG_POLICY_P0_G]`. **O RPT não foi recebido, logo nenhum PASS de classname real é alegado.**
+**Foi criado e entregue ZIP pronto:** `SP_ORG_Policy_P0_G_Auditoria_Classnames_20261025.zip`, SHA-256 `ffc30f29a957eadf2586c5270e3719095f57583456e24db4d077bf28c2c92c79`, contendo pasta `SP_ORG_Policy_P0_G_ClassnameAudit.VR`. Instalar a pasta `.VR` em `missions`, executar no Eden → VR → Preview com a modlist normal. A missão roda sem console/debug e registra RPT prefixado `[SPORG_POLICY_P0_G]`. **O RPT não foi recebido, logo nenhum PASS de classname real é alegado.**
 
 Metodologia: percorre `CfgWeapons`, `CfgMagazines`, `CfgGlasses`, `CfgVehicles`, confirma `scope`, `scopeArsenal`, `displayName`, mochila `isBackpack`, e pré-filtro de `Items` para `CfgWeapons` com `ItemInfo` / `CfgMagazines`. Total bruto, elegíveis, anomalias (incluindo exemplos e origem mod) e 10 autotestes de regex separados por bloco `[ROOT_SUMMARY]`, `[SUMMARY]`. Estados PASS, REVIEW e FAIL têm semântica própria; REVIEW pede inspeção humana, não aprovação automática.
 
