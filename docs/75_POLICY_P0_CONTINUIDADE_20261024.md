@@ -2,7 +2,7 @@
 
 **Repo:** `peregrinoklawd/ServoPeregrino_Organizador`  
 **Branch atual:** `feature/policy-0.1-p0-contracts`, criada da baseline `67f457414c37784ef0469e7235d39006342edb40` (`baseline/items-uicommon-r2-2-sp-homologated-20261021`).  
-**Status P0 após dois RPTs de 24/10:** smoke SP positivo A/B **20/20 PASS** e negativo C–F **140/140 PASS**, acumulado **160/160 PASS, 0 FAIL**. P0 **em revisão final dos contratos** (amostragem de classnames/QA Python pendentes); **addon runtime e MP NÃO testados**. Evidências: [A/B](projects/policy-editor/evidence/P0_SP_SMOKE_RPT_20261024.md) e [C–F](projects/policy-editor/evidence/P0_NEGATIVE_SP_RPT_20261024.md).
+**Status P0 após dois RPTs de 24/10:** smoke SP positivo A/B **20/20 PASS** e negativo C–F **140/140 PASS**, acumulado **160/160 PASS, 0 FAIL**. P0 **em revisão final dos contratos** (amostragem de classnames e revisão final pendentes; Python 7/7 PASS); **addon runtime e MP NÃO testados**. Evidências: [A/B](projects/policy-editor/evidence/P0_SP_SMOKE_RPT_20261024.md) e [C–F](projects/policy-editor/evidence/P0_NEGATIVE_SP_RPT_20261024.md).
 
 ## Artefatos nesta branch
 
@@ -11,7 +11,7 @@
 - `docs/projects/policy-editor/P0_CONTRACTS_20261024.md`: candidatos PolicySnapshot, PolicyDecision, PolicyExport, config, segurança e open gates. **LER ANTES DE PROGRAMAR.**
 - `machine/POLICY_EDITOR_PLANNING_20261022.json`: P0 passou a EM ANDAMENTO, P1–P7 permanecem PLANNED; não existe runtime instalado.
 - `machine/policy/p0_contract_fixtures_v1.json`: 28 fixtures de autorização/validação/fail-closed/ambiente, aprovadas pelo oráculo JS independente em 24/10 (28/28).
-- `tools/policy/test_p0_contracts.py`: suíte Python unittest do oráculo de referência. **Ainda não executada neste ambiente**; não marcar PASS sem rodar.
+- `tools/policy/test_p0_contracts.py`: suíte Python unittest do oráculo de referência. **EXECUTADA e APROVADA em Python 3.13.5: 7 métodos/7 PASS (28 fixtures de referência)**. [Evidência](projects/policy-editor/evidence/P0_PYTHON_UNITTEST_20261024.md).
 - `spikes/policy-p0/runPolicyP0Smoke.sqf`: experimento **isolado**, deve ser copiado para missão SP; não é função registrada em `CfgFunctions`, nem foi executado no Arma.
 
 ## Contrato em avaliação
@@ -77,4 +77,13 @@ Após o smoke SP positivo **20/20 PASS**, foi entregue novo pacote `SP_ORG_Polic
 
 **Execução posterior confirmada no RPT, em 24/10/2026 às 22:19–22:21: 140/140 PASS e 0 FAIL;** evidência e SHA-256 do RPT: [P0_NEGATIVE_SP_RPT_20261024.md](projects/policy-editor/evidence/P0_NEGATIVE_SP_RPT_20261024.md). Evidência da preparação e hash do ZIP: [P0_NEGATIVE_MISSIONS_PREP_20261024.md](projects/policy-editor/evidence/P0_NEGATIVE_MISSIONS_PREP_20261024.md). P0 em revisão final (regex de classes reais e teste Python); ainda não há runtime Items/UICommon/Weapons alterado.
 
-**Retomar agora:** as missões C–F já foram executadas e aprovadas. Finalizar amostragem real de classnames para congelar regex, executar ou documentar exceção para suíte Python e consolidar contratos v1. Iniciar P1 depois do gate documental, mantendo motor e loader reais como fases ainda não homologadas.
+**Retomar agora:** as missões C–F já foram executadas e aprovadas e a suíte Python também (7/7 PASS, 28 fixtures). Finalizar amostragem real de classnames para congelar regex e consolidar contratos v1. Iniciar P1 depois do gate documental, mantendo motor e loader reais como fases ainda não homologadas.
+
+
+## QA Python validado após os smoke SP (24/10/2026)
+
+- **Executado no ambiente do assistente:** Python 3.13.5, `python -m unittest discover -s tools/policy -p 'test_*.py' -v`.
+- **Resultado real:** 7 métodos `unittest` OK, 0 falhas, 0 erros, exit code 0. A suíte usa os 28 fixtures e não requer pacotes `pip`.
+- Os bytes de código e fixtures foram conferidos contra os respectivos hashes Git blob da branch (test script `7d46f8957da4a1599c5ef538b0173c4bba2371c3`, fixtures `e6fcc4ad3d81a82494ebd6042bbe22c90f0a40c9`).
+- Evidência completa: [P0_PYTHON_UNITTEST_20261024.md](projects/policy-editor/evidence/P0_PYTHON_UNITTEST_20261024.md); log SHA-256 `42f2f32c7cfbcfc6f5e4dcfba7b1173be14ea2331f49a0c1e751d4ea2c9db683`.
+- **Único gate P0 substantivo pendente:** validar regex classname no modset real e fechar revisão documental dos contratos. Addon/loader e MP continuam fases posteriores.
