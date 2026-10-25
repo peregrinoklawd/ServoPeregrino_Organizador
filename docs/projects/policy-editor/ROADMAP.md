@@ -1,11 +1,11 @@
 # Roadmap — Policy + Policy Editor
 
-**Planejamento:** 22/10/2026 | **Checkpoint 24/10/2026:** **P0 EM ANDAMENTO (smoke engine SP A/B 20/20 PASS; testes negativos pendentes); P1–P7 PENDENTES**.
+**Planejamento:** 22/10/2026 | **Checkpoint 24/10/2026:** **P0 EM REVISÃO FINAL (smoke engine SP A–F 160/160 PASS; revisão de contrato, regex real e teste Python pendentes); P1–P7 PENDENTES**.
 **Fonte funcional:** [README do projeto](README.md) | **módulo proprietário:** [Policy](../../modules/Policy.md).
 
 > **CHECKPOINT AUDITORIA 22/10/2026 (histórico):** naquela data todo P0–P7 estava pendente. P0 deve diferenciar claramente fonte interna (fallback vazio) de fonte externa (opt-in) e decidir técnica de configuração **sem presumir** `CfgSPORGPolicy` já implantado. A política é **estática por padrão**; ativação de nova revisão em runtime é capacidade futura opcional. Validar explícito: UI do jogador com blacklist não inclui proibidos, mas o editor mostra catálogo base completo; ausência de mod permanece vermelha; role kit fora; ícones dos botões ficam texto. Detalhes: [auditoria](../../73_AUDITORIA_COMPLETA_ITEMS_POLICY_DECISOES_20261022.md) e [continuidade](../../74_CONTINUIDADE_AUTOSSUFICIENTE_ITEMS_POLICY_20261022.md).
 
-**P0 atual:** [Contratos, fontes, testes e gates](P0_CONTRACTS_20261024.md). Smoke Arma SP A/B aprovado via RPT em 24/10 ([evidência](evidence/P0_SP_SMOKE_RPT_20261024.md)); gates negativos e implementação do loader continuam pendentes; nenhum código runtime foi implementado.
+**P0 atual:** [Contratos, fontes, testes e gates](P0_CONTRACTS_20261024.md). Smoke Arma SP A/B 20/20 e C–F 140/140 aprovados via RPT ([evidência A/B](evidence/P0_SP_SMOKE_RPT_20261024.md), [C–F](evidence/P0_NEGATIVE_SP_RPT_20261024.md)); gates de fechamento de contrato/regex e implementação do loader continuam pendentes; nenhum código runtime foi implementado.
 
 ## Estratégia geral
 
