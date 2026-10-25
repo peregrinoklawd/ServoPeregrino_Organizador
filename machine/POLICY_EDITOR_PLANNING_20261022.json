@@ -2,19 +2,20 @@
   "schema_version": 1,
   "record_date": "2026-10-25",
   "repository": "peregrinoklawd/ServoPeregrino_Organizador",
-  "branch": "feature/policy-0.1-p0-contracts",
+  "branch": "feature/policy-0.1-a-core",
   "kind": "roadmap_with_p0_contract_work_not_runtime",
   "project": "SPORG_POLICY_EDITOR",
   "owner": "Policy",
   "addon": "ServoPeregrino_Organizador_Policy",
-  "status": "P0_SP_CONTRACTS_COMPLETE_P1_READY_NO_POLICY_ADDON_RUNTIME",
+  "status": "P1_0_1_A_CORE_SOURCE_PREPARED_OFFLINE_QA_PASSED_SP_RPT_PENDING",
   "docs": [
     "docs/modules/Policy.md",
     "docs/projects/policy-editor/README.md",
     "docs/projects/policy-editor/ROADMAP.md",
     "docs/72_BACKLOG_ICONOGRAFIA_MODULOS.md",
     "docs/projects/policy-editor/P0_CONTRACTS_20261024.md",
-    "docs/75_POLICY_P0_CONTINUIDADE_20261024.md"
+    "docs/75_POLICY_P0_CONTINUIDADE_20261024.md",
+    "docs/projects/policy-editor/P1_CORE_0_1_A_20261025.md"
   ],
   "decision": {
     "dependence_on_BGD": "NONE_OPTIONAL_ADAPTER_ONLY",
@@ -89,7 +90,7 @@
     {
       "phase": "P1",
       "name": "Policy core",
-      "status": "PLANNED"
+      "status": "SOURCE_PREPARED_OFFLINE_QA_PASS_SP_RPT_PENDING_NO_PBO"
     },
     {
       "phase": "P2",
@@ -148,11 +149,11 @@
     "all_status": "BACKLOG_NOT_RUNTIME",
     "items_master_pngs": "ASSETS_APPROVED_PRESERVED_IN_GIT_NOT_USED_IN_UI"
   },
-  "runtime_changes_in_this_turn": false,
+  "runtime_changes_in_this_turn": true,
   "merge_performed": false,
   "audit_doc": "docs/73_AUDITORIA_COMPLETA_ITEMS_POLICY_DECISOES_20261022.md",
   "autonomous_handoff_doc": "docs/74_CONTINUIDADE_AUTOSSUFICIENTE_ITEMS_POLICY_20261022.md",
-  "record_revision": "2026-10-25-p0-h-156-pass-weapons-cross-audit",
+  "record_revision": "2026-10-25-p1-0-1-a-source-and-sp-lab-prepared",
   "policy_lifecycle": {
     "default": "STATIC_LOADED_BEFORE_OR_AT_SESSION_START",
     "admin_live_updates": "OPTIONAL_LATER_NOT_REQUIRED_FOR_FIRST_IMPLEMENTATION",
@@ -586,5 +587,49 @@
       "WEAPONS-POLICY-CLASSNAME-01",
       "WEAPONS-COMPAT-REGRESSION-01"
     ]
+  },
+  "p1": {
+    "phase": "P1",
+    "delivery": "0.1-A",
+    "branch": "feature/policy-0.1-a-core",
+    "status": "MISSION_FIRST_CORE_CANDIDATE_RPT_PENDING",
+    "addon_source_prepared": true,
+    "engine_tested": false,
+    "source_runtime_in_repo": true,
+    "pbo_built": false,
+    "pbo_tested": false,
+    "registered_nexus_capabilities_in_pbo_tested": false,
+    "mp_tested": false,
+    "config_loader_implemented": false,
+    "server_authority_implemented": false,
+    "functions": [
+      "isValidClassname",
+      "validateExport",
+      "createContext",
+      "evaluate",
+      "snapshot",
+      "initialize"
+    ],
+    "capabilities_declared": [
+      "policy.evaluate v1",
+      "policy.snapshot v1"
+    ],
+    "non_authoritative_revision": 0,
+    "non_authoritative_fingerprint": "P1_NON_AUTHORITATIVE",
+    "uses_policy_regex": "^[A-Za-z0-9_]{1,128}$",
+    "mission": "SP_ORG_Policy_P1_A_CoreLab.VR",
+    "zip": "SP_ORG_Policy_P1_A_CoreLab_20261025.zip",
+    "zip_sha256": "a67bd800ec70c3bbe972859878ff0436c474968f6b2faf1e32bc5647e1e39a5d",
+    "static_qa_pass": true,
+    "runner_assertions_planned": 68,
+    "runner_engine_pass": 0,
+    "runner_engine_fail": null,
+    "rpt_pending": true,
+    "documentation": "docs/projects/policy-editor/P1_CORE_0_1_A_20261025.md",
+    "gate_pending": [
+      "P1_A_REAL_ENGINE_RPT_68_ASSERTIONS",
+      "P1_CAPABILITY_ADDON_RUNTIME_PBO_GATE_OR_SCOPE_LIMIT"
+    ],
+    "baseline_preserved": true
   }
 }
