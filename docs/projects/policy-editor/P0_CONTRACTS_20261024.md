@@ -1,6 +1,6 @@
 # P0 — Contratos de Policy e prova de viabilidade (24/10/2026)
 
-**Status atualizado após RPTs e unittest de 24/10:** **smoke Arma SP A/B 20/20 PASS + C/D/E/F 140/140 PASS = 160/160 PASS, 0 FAIL; Python unittest 7/7 PASS (28 fixtures)**. P0 permanece **EM REVISÃO FINAL DE CONTRATOS** (regex com modset real); runtime addon e MP continuam não implementados/testados. Evidências: [A/B](evidence/P0_SP_SMOKE_RPT_20261024.md), [C–F](evidence/P0_NEGATIVE_SP_RPT_20261024.md).  
+**Status atualizado após RPTs e unittest de 24/10:** **smoke Arma SP A/B 20/20 PASS + C/D/E/F 140/140 PASS = 160/160 PASS, 0 FAIL; Python unittest 7/7 PASS (28 fixtures)**. P0 permanece **EM REVISÃO DO CONTRATO DE CLASSNAME**: auditoria real P0 G detectou **532 elegíveis incompatíveis**, exigindo G2 e revisão de fixtures; runtime addon e MP continuam não implementados/testados. Evidências: [A/B](evidence/P0_SP_SMOKE_RPT_20261024.md), [C–F](evidence/P0_NEGATIVE_SP_RPT_20261024.md).  
 **Baseline imutável:** `baseline/items-uicommon-r2-2-sp-homologated-20261021` (`67f4574`).  
 **Branch:** `feature/policy-0.1-p0-contracts`.  
 **Ownership:** addon opcional `ServoPeregrino_Organizador_Policy`, depende só de Nexus. Sem runtime Policy instalado nesta entrega.
@@ -133,3 +133,10 @@ Provider de catálogo para futuro Editor: `catalog.base.items` v1 pode mapear ao
 4. P2: loaders de config; P3/P4: integrações Items/cache/aplicação; P5: editor local; P6: sincronismo servidor/admin real; P7: adapters e pacote.
 
 **Preservação:** Items 0.13-A MP continua pendente; UICommon R2.2 homologação SP intocada; iconografia somente texto; sem merge na main.
+
+
+## Checkpoint 25/10 — auditoria real de classnames P0 G
+
+A missão P0 G **executou na engine** (Arma 3 2.22.154089, modset real) e retornou **REVIEW**, com autotestes 10/10 PASS e scan concluído: **133.399** classes raw, **54.003** elegíveis, **532** elegíveis fora da regex proposta (pré-filtro Items **529**). O limite 128 não foi atingido (máximo observado **78**). Em exemplos de BGD Tools of the Trade, `121_SP10M_18_FDE` e `121_USASOC_CNVD_ITEM` começam em dígitos, razão `BAD_START`, logo a regex atual **não é compatível com todos os classnames carregados**. O primeiro scanner só detalhou 40 elegíveis e não prova que todas as 532 incompatibilidades são dígitos no primeiro caractere. [Evidência RPT P0 G](evidence/P0_G_CLASSNAME_AUDIT_RPT_20261025.md).
+
+**Não congelar a regex atual**. G2, missão diferencial entregue e aguardando RPT, compara a regex estrita com candidata `^[A-Za-z0-9_]{1,128}$` e contabiliza todas as causas por raiz. [Preparação G2](evidence/P0_G2_REGEX_COMPARISON_PREP_20261025.md). Se a candidata for aprovada, **atualizar fixtures, suíte Python e smoke negativos**, porque `1StartsWithDigit` deixaria de ser inválido; executar testes afetados novamente antes de encerrar P0. Policy runtime e MP seguem fases futuras.
