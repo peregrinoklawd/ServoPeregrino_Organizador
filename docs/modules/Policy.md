@@ -1,7 +1,7 @@
 # Policy — módulo opcional de autorização de itens/equipamentos
 
 **Data da consolidação:** 22/10/2026  
-**Status ATUAL 26/10/2026:** P0 fechado; **P1-A R1 CORE SQF em missão VR homologado 68/68 PASS e 0 erros SQF** ([evidência](../projects/policy-editor/evidence/P1_A_R1_CORE_SP_RPT_PASS_20261026.md)); **P1 addon/PBO e Nexus capabilities reais ainda não testados**. P2 loader, editor/UI, integração e autoridade MP não implementados. Regex v1 `^[A-Za-z0-9_]{1,128}$`, validada no P0.
+**Status ATUAL 26/10/2026:** P0 FECHADO; **P1-A R1 CORE SP HOMOLOGADO (68/68 PASS)**; **P1-B NEXUS REAL EM MISSÃO CfgFunctions/preInit PRONTO PARA TESTE (59 asserções, RPT pendente)** ([P1-B](../projects/policy-editor/P1_B_NEXUS_INTEGRATION_LAB_20261026.md)). P1-C addon/PBO Nexus/Policy, `CfgPatches` e `requiredAddons` ainda não testados; P2–P7 planejados. Regex classname v1 `^[A-Za-z0-9_]{1,128}$`.
 **Proprietário único:** `ServoPeregrino_Organizador_Policy` (futuro PBO); dependência planejada: Nexus.  
 **Projeto do editor:** [../projects/policy-editor/README.md](../projects/policy-editor/README.md) e [ROADMAP](../projects/policy-editor/ROADMAP.md).
 
@@ -274,3 +274,8 @@ O primeiro RPT do laboratório P1-A mostrou cinco funções core não encontrada
 A R1 real em Arma 3 Stable 2.22.154089 alcançou **68/68 PASS (68 IDs únicos)**, 5/5 fontes SQF encontrados, nenhum `TEST FAIL`, `FATAL`, `Error in expression` ou `Error position:`; o resumo `complete=true valid=true` confere com as linhas individuais. Os registros antigos de `RPT R1 pendente` são histórico superado, e a falha da R0 era de caminhos/harness. [Auditoria exata](../projects/policy-editor/evidence/P1_A_R1_CORE_SP_RPT_PASS_20261026.md).
 
 **Subgate P1 CORE SP: CONCLUÍDO; gate P1 ADDON/NEXUS: PENDENTE.** Ainda é necessário executar fonte em addon com seu `config.cpp` e dependência Nexus, conferir `preInit`, `CfgFunctions`, capabilities `policy.evaluate` e `policy.snapshot`, e comportamento real de `Nexus_fnc_createResult`. A missão R1 utiliza adapter local e declara `addonRuntime=false mp=false`. Não requer mudanças em Items, Weapons ou UICommon e não altera o P0 fechado.
+
+
+### P1-B 26/10 — integração Nexus REAL (missão, não addon)
+
+Foi criada candidata VR com os fontes reais Nexus e Policy, agora usando `CfgFunctions` de missão e `preInit=1` em ambos os inicializadores, em vez do stub `Nexus_fnc_createResult` do P1-A. **11/11 Nexus fontes Git correspondem após adaptação APENAS do include ao layout plano**, header + 6 funções Policy idênticos aos Git blobs. **59 asserções** previstas (registry, versões, metadata, conflitos, NexusResult, decisões e fail-closed), auditoria offline passou. [Documento e instruções](../projects/policy-editor/P1_B_NEXUS_INTEGRATION_LAB_20261026.md). **Status: RPT real pendente; sem homologação P1-B e sem binário PBO.** O gate P1-C validará `requiredAddons` real, `CfgFunctions` no addon, `preInit` e convivência com outros módulos. Ainda sem Policy loader ou servidor/MP.
