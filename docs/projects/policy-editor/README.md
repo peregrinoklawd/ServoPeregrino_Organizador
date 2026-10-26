@@ -1,7 +1,7 @@
 # Projeto futuro — Editor de Whitelist / Blacklist e Cache de Sessão
 
 **Proposta registrada:** 22/10/2026  
-**Status atual 26/10/2026:** P0 fechado; **Policy P1-A R1 CORE SP homologado com 68/68 testes PASS** ([RPT](evidence/P1_A_R1_CORE_SP_RPT_PASS_20261026.md)); **P1 addon/PBO com Nexus capabilities ainda não homologado**; P2 loader/servidor, P3/P4 Items, P5 editor e P6 multiplayer continuam planejados.
+**Status atual 26/10/2026:** P0 fechado; P1-A R1 motor SQF SP homologado **68/68 PASS**; **P1-B Nexus REAL via CfgFunctions mission-first preparado, 59 testes aguardam RPT**, sem addon PBO ([documento](P1_B_NEXUS_INTEGRATION_LAB_20261026.md)); P1-C PBO/Nexus ainda pendente. P2 loader, P3/P4 Items, P5 editor, P6 multiplayer planejados.
 **Módulo proprietário existente no planejamento:** `Policy`, futuro PBO opcional `ServoPeregrino_Organizador_Policy` (Nexus apenas).  
 **Plano de execução:** [ROADMAP.md](ROADMAP.md)  
 **Contrato base:** [../../modules/Policy.md](../../modules/Policy.md)
