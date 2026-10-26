@@ -7,7 +7,7 @@
   "project": "SPORG_POLICY_EDITOR",
   "owner": "Policy",
   "addon": "ServoPeregrino_Organizador_Policy",
-  "status": "P1_A_RPT_INVALID_5_CORE_SOURCES_NOT_FOUND_R1_MISSION_READY_RPT_PENDING",
+  "status": "P1_A_R1_CORE_SP_HOMOLOGATED_68_PASS_ADDON_NEXUS_RUNTIME_GATE_PENDING",
   "docs": [
     "docs/modules/Policy.md",
     "docs/projects/policy-editor/README.md",
@@ -15,7 +15,8 @@
     "docs/72_BACKLOG_ICONOGRAFIA_MODULOS.md",
     "docs/projects/policy-editor/P0_CONTRACTS_20261024.md",
     "docs/75_POLICY_P0_CONTINUIDADE_20261024.md",
-    "docs/projects/policy-editor/P1_CORE_0_1_A_20261025.md"
+    "docs/projects/policy-editor/P1_CORE_0_1_A_20261025.md",
+    "docs/projects/policy-editor/evidence/P1_A_R1_CORE_SP_RPT_PASS_20261026.md"
   ],
   "decision": {
     "dependence_on_BGD": "NONE_OPTIONAL_ADAPTER_ONLY",
@@ -90,7 +91,7 @@
     {
       "phase": "P1",
       "name": "Policy core",
-      "status": "P1_A_ORIGINAL_RPT_BOOTSTRAP_FAILED_R1_FIX_PREPARED_RPT_PENDING"
+      "status": "CORE_SP_HOMOLOGATED_68_OF_68_ADDON_RUNTIME_NEXUS_GATE_PENDING"
     },
     {
       "phase": "P2",
@@ -153,7 +154,7 @@
   "merge_performed": false,
   "audit_doc": "docs/73_AUDITORIA_COMPLETA_ITEMS_POLICY_DECISOES_20261022.md",
   "autonomous_handoff_doc": "docs/74_CONTINUIDADE_AUTOSSUFICIENTE_ITEMS_POLICY_20261022.md",
-  "record_revision": "2026-10-26-policy-p1-a-rpt-fail-5-missing-cores-r1-boot-hardened",
+  "record_revision": "2026-10-26-p1-a-r1-68-of-68-pass-rpt-engine-core-sp-accepted",
   "policy_lifecycle": {
     "default": "STATIC_LOADED_BEFORE_OR_AT_SESSION_START",
     "admin_live_updates": "OPTIONAL_LATER_NOT_REQUIRED_FOR_FIRST_IMPLEMENTATION",
@@ -592,7 +593,7 @@
     "phase": "P1",
     "delivery": "0.1-A",
     "branch": "feature/policy-0.1-a-core",
-    "status": "P1_A_RPT_FAILED_BOOTSTRAP_R1_PREPARED_WAIT_NEW_RPT",
+    "status": "CORE_MISSION_FIRST_SP_HOMOLOGATED_ADDON_NEXUS_PBO_PENDING",
     "addon_source_prepared": true,
     "engine_tested": true,
     "source_runtime_in_repo": true,
@@ -617,18 +618,17 @@
     "non_authoritative_revision": 0,
     "non_authoritative_fingerprint": "P1_NON_AUTHORITATIVE",
     "uses_policy_regex": "^[A-Za-z0-9_]{1,128}$",
-    "mission": "SP_ORG_Policy_P1_A_CoreLab.VR",
-    "zip": "SP_ORG_Policy_P1_A_CoreLab_20261025.zip",
-    "zip_sha256": "a67bd800ec70c3bbe972859878ff0436c474968f6b2faf1e32bc5647e1e39a5d",
+    "mission": "SP_ORG_Policy_P1_A_R1_CoreLab.VR",
+    "zip": "SP_ORG_Policy_P1_A_R1_Correcao_Load_20261026.zip",
+    "zip_sha256": "9f885450904ed3cf905743e2c2c81c39a93034787b61a6dfebecc836c2766e7d",
     "static_qa_pass": true,
     "runner_assertions_planned": 68,
-    "runner_engine_pass": 1,
-    "runner_engine_fail": null,
-    "rpt_pending": true,
+    "runner_engine_pass": 68,
+    "runner_engine_fail": 0,
+    "rpt_pending": false,
     "documentation": "docs/projects/policy-editor/P1_CORE_0_1_A_20261025.md",
     "gate_pending": [
-      "P1_A_R1_ENGINE_RPT_VALID_68_OF_68",
-      "P1_CAPABILITY_ADDON_RUNTIME_PBO_GATE_OR_SCOPE_LIMIT"
+      "P1_CAPABILITY_ADDON_RUNTIME_PBO_CfgFunctions_PREINIT_NEXUS_REAL_GATE"
     ],
     "baseline_preserved": true,
     "first_rpt_result": "BLOCKED_FILES_NOT_FOUND",
@@ -655,10 +655,10 @@
     },
     "fix_r1": {
       "prepared": true,
-      "engine_executed": false,
-      "status": "RPT_PENDING",
-      "zip": "SP_ORG_Policy_P1_A_R1_Fix_Carregamento_20261026.zip",
-      "zip_sha256": "018e04a78392410cf9e771771547b409bf124b673eb8f8e863d02737e7dde422",
+      "engine_executed": true,
+      "status": "CORE_SP_RPT_PASS",
+      "zip": "SP_ORG_Policy_P1_A_R1_Correcao_Load_20261026.zip",
+      "zip_sha256": "9f885450904ed3cf905743e2c2c81c39a93034787b61a6dfebecc836c2766e7d",
       "folder": "SP_ORG_Policy_P1_A_R1_CoreLab.VR",
       "rpt_prefix": "[SPORG_POLICY_P1_A_R1]",
       "expected_assertions": 68,
@@ -666,7 +666,10 @@
       "artifact_zip_validated": true,
       "core_source_changed": false,
       "loader_paths": "RELATIVE_MISSION_ROOT",
-      "fail_closed_summary": true
+      "fail_closed_summary": true,
+      "executed_rpt_sha256": "37d019a9800b679a5b1489e4d046c090fec6dcfdf0aec3c5a306288d4ff3c898",
+      "pass": 68,
+      "fail": 0
     },
     "first_rpt_validation": "INVALID_SCRIPT_LOAD_FAILURE",
     "first_rpt_sha256": "be8cd428684c70d12533f7128cc509c471b22a31f3742effe50ff08e839e7f70",
@@ -686,7 +689,7 @@
       "zip": "SP_ORG_Policy_P1_A_R1_Correcao_Load_20261026.zip",
       "zip_sha256": "9f885450904ed3cf905743e2c2c81c39a93034787b61a6dfebecc836c2766e7d",
       "prepared": true,
-      "engine_executed": false,
+      "engine_executed": true,
       "expected_assertions": 68,
       "core_sources_unchanged": true,
       "root_level_core_files": true,
@@ -695,7 +698,32 @@
       "fail_proof_summary": true,
       "rpt_prefix": "[SPORG_POLICY_P1_A_R1]",
       "evidence": "docs/projects/policy-editor/evidence/P1_A_RPT_FAIL_BOOTSTRAP_AND_R1_FIX_20261026.md",
-      "status": "AWAITING_REAL_ENGINE_RPT"
+      "status": "CORE_SP_RPT_PASS",
+      "engine_pass": 68,
+      "engine_fail": 0,
+      "found_sources": 5,
+      "missing_sources": 0,
+      "expression_errors": 0,
+      "syntax_error_position": 0,
+      "rpt_sha256": "37d019a9800b679a5b1489e4d046c090fec6dcfdf0aec3c5a306288d4ff3c898",
+      "rpt_bytes": 1061311,
+      "rpt_lines": 8226,
+      "execution_date": "2026-10-26",
+      "execution_time_log": "16:56:08",
+      "arma_version": "2.22.154089_STABLE",
+      "rpt_test_ids_unique": 68,
+      "rpt_expected": 68,
+      "rpt_complete": true,
+      "rpt_valid": true,
+      "evidence_pass": "docs/projects/policy-editor/evidence/P1_A_R1_CORE_SP_RPT_PASS_20261026.md"
+    },
+    "core_mission_first_homologated": true,
+    "core_mission_first_homologated_date": "2026-10-26",
+    "evidence_latest": "docs/projects/policy-editor/evidence/P1_A_R1_CORE_SP_RPT_PASS_20261026.md",
+    "next_gate": {
+      "name": "P1_ADDON_NEXUS_INTEGRATION_REAL_RUNTIME",
+      "requirement": "Validate PBO/CfgFunctions preInit and actual Nexus capability registry + provider metadata without loader/P2 or MP authority",
+      "not_tested_in_r1": true
     }
   }
 }
