@@ -1,6 +1,6 @@
 # Roadmap — Policy + Policy Editor
 
-**Checkpoint 25/10/2026:** **P0 FECHADO — CONTRATOS/VIABILIDADE SP**; **P1 0.1-A CORE SOURCE PREPARADO, MISSÃO 68 ASSERTIONS AGUARDANDO RPT**, código de addon com CfgFunctions/capabilities ainda sem prova de PBO/engine. P2–P7 planejados.
+**Checkpoint 26/10/2026:** **P0 FECHADO**; P1 0.1-A primeira missão RPT inválido por **5 fontes não encontrados + 91 erros em cascata**, resumo 1/68 falso positivo; **R1 com correção de bootstrap pronta, RPT de reteste pendente**. Addon/CfgFunctions/PBO não testado; P2–P7 planejados.
 **Fonte funcional:** [README do projeto](README.md) | **módulo proprietário:** [Policy](../../modules/Policy.md).
 
 > **CHECKPOINT AUDITORIA 22/10/2026 (histórico):** naquela data todo P0–P7 estava pendente. P0 deve diferenciar claramente fonte interna (fallback vazio) de fonte externa (opt-in) e decidir técnica de configuração **sem presumir** `CfgSPORGPolicy` já implantado. A política é **estática por padrão**; ativação de nova revisão em runtime é capacidade futura opcional. Validar explícito: UI do jogador com blacklist não inclui proibidos, mas o editor mostra catálogo base completo; ausência de mod permanece vermelha; role kit fora; ícones dos botões ficam texto. Detalhes: [auditoria](../../73_AUDITORIA_COMPLETA_ITEMS_POLICY_DECISOES_20261022.md) e [continuidade](../../74_CONTINUIDADE_AUTOSSUFICIENTE_ITEMS_POLICY_20261022.md).
@@ -93,3 +93,8 @@ A branch `feature/policy-0.1-a-core` deriva da P0 encerrada. Foram criados sourc
 ### Checkpoint P1-A RPT 26/10 — incidente de loader
 
 Primeira missão P1-A **não passou**: cinco SQFs não encontrados (apesar de incluídos no ZIP original), 91 erros de expressão subsequentes, só 1 teste [TEST] registrado entre 68 planejados; status `READY_FOR_OPERATOR_REVIEW` antigo era inválido. Correção R1 empacotada como `SP_ORG_Policy_P1_A_R1_Fix_Carregamento_20261026.zip` (SHA256 `018e04a78392410cf9e771771547b409bf124b673eb8f8e863d02737e7dde422`), fonte core imutável, cinco scripts na raiz da missão, preflight e bloqueio se incompleta, prefixo `[SPORG_POLICY_P1_A_R1]`. **P1 continua candidato, RPT R1 pendente**. [Auditoria RPT e fix](evidence/P1_A_RPT_20261026_LOADER_FAILURE.md). Não iniciar P2 nem declarar 68 PASS sem execução real.
+
+
+### P1 A R1 — correção de diagnóstico, 26/10/2026
+
+RPT primeiro P1-A executado mas **INVÁLIDO**: arquivos SQF nested não encontrados e harness retornou contador inconsistente. Não tratar como falha de regra de negócio, nem como PASS. A missão `SP_ORG_Policy_P1_A_R1_CoreLab.VR` agora usa fontes no root, falha rápida se não encontrados e resumo completo `expected=68 complete=true valid=true` apenas se todos os checks efetivos passaram. **R1 só passou QA offline**; ainda precisa RPT real do operador. [Auditoria e pacote](evidence/P1_A_RPT_FAIL_BOOTSTRAP_AND_R1_FIX_20261026.md). P0 preservado, nenhum código de Items/Weapons/UICommon alterado, não partir para P2 até resolver gate P1.
