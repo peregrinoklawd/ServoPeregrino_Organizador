@@ -262,3 +262,8 @@ A análise do RPT de regressão H confirmou **156 PASS/0 FAIL** e validação de
 ## P1 0.1-A — primeira candidata de motor (25/10/2026)
 
 Na branch [`feature/policy-0.1-a-core`](https://github.com/peregrinoklawd/ServoPeregrino_Organizador/tree/feature/policy-0.1-a-core), fonte do addon `addons/ServoPeregrino_Organizador_Policy` contém `config.cpp` e cinco operações puras com whitelist/blacklist, índice case-insensitive e `PolicySnapshot/PolicyDecision`. Uma missão VR self-contained empacotada `SP_ORG_Policy_P1_A_CoreLab_20261025.zip` realiza **68 asserções automáticas** quando executada pelo operador. **Somente QA offline e equivalência byte-a-byte foram feitos; RPT SP e teste de addon/PBO ainda pendentes**. O núcleo não ativa policy, não acessa server.cfg, não aplica loadout, não define CfgRemoteExec global e não é autoridade de servidor. [Documento P1](../projects/policy-editor/P1_CORE_0_1_A_20261025.md).
+
+
+### 26/10 — teste P1-A inválido, correção R1 pronta
+
+O primeiro RPT do laboratório P1-A mostrou cinco funções core não encontradas ao fazer `preprocessFileLineNumbers` em caminhos de subdiretórios, seguidas de 91 erros; houve **apenas 1/68 TEST registrado** apesar da SUMMARY antiga afirmar `READY_FOR_OPERATOR_REVIEW`. Isso **não indica erro confirmado da regex ou engine-derived Weapons**; o motor ainda não foi testado efetivamente. Pacote R1 corrige o laboratório (arquivos na raiz, paths relativos, preflight, status bloqueado quando incompleto), mantendo o código-fonte Policy core intocado. RPT R1 pendente. [Evidência](../projects/policy-editor/evidence/P1_A_RPT_20261026_LOADER_FAILURE.md).
