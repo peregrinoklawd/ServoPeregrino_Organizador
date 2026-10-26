@@ -1,6 +1,6 @@
 # Roadmap — Policy + Policy Editor
 
-**Checkpoint MAIS RECENTE 26/10/2026:** P0 fechado; **P1-A R1 CORE SQF mission-first HOMOLOGADO 68/68 PASS**, 5/5 fontes carregados, 0 erros SQF. **GATE P1 PENDENTE: validar addon/PBO e capabilities Nexus reais**. P2 loader, P3–P7 continuam planejados. [RPT R1](evidence/P1_A_R1_CORE_SP_RPT_PASS_20261026.md).
+**Checkpoint MAIS RECENTE 26/10/2026:** P0 fechado; P1-A R1 core SP homologado **68/68 PASS**; **P1-B missão CfgFunctions/preInit com Nexus REAL preparada, 59 verificações, RPT Arma pendente**. P1-C addon/PBO e `requiredAddons` continuam sem validação; P2–P7 planejados. [P1-B detalhes](P1_B_NEXUS_INTEGRATION_LAB_20261026.md).
 **Fonte funcional:** [README do projeto](README.md) | **módulo proprietário:** [Policy](../../modules/Policy.md).
 
 > **CHECKPOINT AUDITORIA 22/10/2026 (histórico):** naquela data todo P0–P7 estava pendente. P0 deve diferenciar claramente fonte interna (fallback vazio) de fonte externa (opt-in) e decidir técnica de configuração **sem presumir** `CfgSPORGPolicy` já implantado. A política é **estática por padrão**; ativação de nova revisão em runtime é capacidade futura opcional. Validar explícito: UI do jogador com blacklist não inclui proibidos, mas o editor mostra catálogo base completo; ausência de mod permanece vermelha; role kit fora; ícones dos botões ficam texto. Detalhes: [auditoria](../../73_AUDITORIA_COMPLETA_ITEMS_POLICY_DECISOES_20261022.md) e [continuidade](../../74_CONTINUIDADE_AUTOSSUFICIENTE_ITEMS_POLICY_20261022.md).
@@ -103,3 +103,8 @@ RPT primeiro P1-A executado mas **INVÁLIDO**: arquivos SQF nested não encontra
 ### Marco P1-A R1 — núcleo SP homologado em 26/10/2026
 
 **Execução real aprovada:** Arma 3 Stable 2.22.154089, 68 asserções distintas PASS, 0 FAIL, 5 BOOT corretos, SUMMARY coerente (68 total=68 expected=68 complete=true valid=true); 0 `Error in expression` e `Error position` no RPT. [Auditoria detalhada](evidence/P1_A_R1_CORE_SP_RPT_PASS_20261026.md). Isso encerra o **subgate P1 CORE MISSION-FIRST**. **Não encerra P1 como addon**: ainda faltam instalação/PBO, dependência Nexus, CfgFunctions/preInit e registro real de capabilities v1. Na próxima rodada priorizar laboratório de addon/Nexus, não recauchutar testes de regex G/G2/H ou rodar repetidamente 68 smokes inalterados. P2 somente após decisão documentada do gate addon P1; P6 terá QA MP separado.
+
+
+### P1-B — integração Nexus real em missão, candidato 26/10/2026
+
+Branch `feature/policy-0.1-b-nexus-integration`: laboratório VR `SP_ORG_Policy_P1_B_NexusIntegration.VR` com **Nexus SQF original sem shim** (11 funções, 1 header version; apenas `#include` relocado para a raiz), Policy 5 core + initialize originais e `CfgFunctions` definidos na missão com preInit de ambos. **59 testes previstos** de boot, capabilities, idempotência/conflitos, real NexusResult, decisões e metadados não autoritativos. ZIP SHA256 `618faca9a6fd4a23bfb890a29c1d1e59581af423c41cd5074021eb8b90416a32`; QA estático de 18/18 hashes canônicos e 19/19 SQF delimiter PASS. **Não executado no Arma; sem PBO/MP**. [Especificação](P1_B_NEXUS_INTEGRATION_LAB_20261026.md). **P1-C será necessário para testar CfgPatches.requiredAddons e binários reais; não declarar P1 concluído antes desse gate.** Nenhum código protegido Items/Weapons/UICommon modificado e sem merge.
