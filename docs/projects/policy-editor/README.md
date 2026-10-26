@@ -3,6 +3,7 @@
 **Proposta registrada:** 22/10/2026  
 **CHECKPOINT ATUAL 26/10/2026:** P0 fechado; **P1-A R1 68/68 PASS**, **P1-B Nexus REAL em missão SP 59/59 PASS** ([auditoria](evidence/P1_B_NEXUS_REAL_CFGFUNCTIONS_SP_RPT_PASS_20261026.md)); **P1-C addon Nexus+Policy em PBO não iniciado**. P2 loader, P3/P4 Items, P5 editor, P6 multiplayer e P7 adapters planejados.
 **Módulo proprietário existente no planejamento:** `Policy`, futuro PBO opcional `ServoPeregrino_Organizador_Policy` (Nexus apenas).  
+**Continuidade para novo chat:** [P1-B homologado → P1-C addon real](CONTINUIDADE_POLICY_P1B_P1C_20261026.md).  
 **Plano de execução:** [ROADMAP.md](ROADMAP.md)  
 **Contrato base:** [../../modules/Policy.md](../../modules/Policy.md)
 
