@@ -2,12 +2,12 @@
   "schema_version": 1,
   "record_date": "2026-10-26",
   "repository": "peregrinoklawd/ServoPeregrino_Organizador",
-  "branch": "feature/policy-0.1-a-core",
+  "branch": "feature/policy-0.1-b-nexus-integration",
   "kind": "roadmap_with_p0_contract_work_not_runtime",
   "project": "SPORG_POLICY_EDITOR",
   "owner": "Policy",
   "addon": "ServoPeregrino_Organizador_Policy",
-  "status": "P1_A_R1_CORE_SP_HOMOLOGATED_68_PASS_ADDON_NEXUS_RUNTIME_GATE_PENDING",
+  "status": "P1_B_REAL_NEXUS_MISSION_CFGFUNCTIONS_PREPARED_59_TESTS_RPT_PENDING",
   "docs": [
     "docs/modules/Policy.md",
     "docs/projects/policy-editor/README.md",
@@ -16,7 +16,8 @@
     "docs/projects/policy-editor/P0_CONTRACTS_20261024.md",
     "docs/75_POLICY_P0_CONTINUIDADE_20261024.md",
     "docs/projects/policy-editor/P1_CORE_0_1_A_20261025.md",
-    "docs/projects/policy-editor/evidence/P1_A_R1_CORE_SP_RPT_PASS_20261026.md"
+    "docs/projects/policy-editor/evidence/P1_A_R1_CORE_SP_RPT_PASS_20261026.md",
+    "docs/projects/policy-editor/P1_B_NEXUS_INTEGRATION_LAB_20261026.md"
   ],
   "decision": {
     "dependence_on_BGD": "NONE_OPTIONAL_ADAPTER_ONLY",
@@ -91,7 +92,7 @@
     {
       "phase": "P1",
       "name": "Policy core",
-      "status": "CORE_SP_HOMOLOGATED_68_OF_68_ADDON_RUNTIME_NEXUS_GATE_PENDING"
+      "status": "P1_A_R1_CORE_SP_68_PASS_P1_B_NEXUS_REAL_MISSION_TEST_READY_59_RPT_PENDING"
     },
     {
       "phase": "P2",
@@ -150,11 +151,11 @@
     "all_status": "BACKLOG_NOT_RUNTIME",
     "items_master_pngs": "ASSETS_APPROVED_PRESERVED_IN_GIT_NOT_USED_IN_UI"
   },
-  "runtime_changes_in_this_turn": true,
+  "runtime_changes_in_this_turn": false,
   "merge_performed": false,
   "audit_doc": "docs/73_AUDITORIA_COMPLETA_ITEMS_POLICY_DECISOES_20261022.md",
   "autonomous_handoff_doc": "docs/74_CONTINUIDADE_AUTOSSUFICIENTE_ITEMS_POLICY_20261022.md",
-  "record_revision": "2026-10-26-p1-a-r1-68-of-68-pass-rpt-engine-core-sp-accepted",
+  "record_revision": "2026-10-26-policy-p1b-mission-real-nexus-cfgfunctions-preinit-59-tests-prepared",
   "policy_lifecycle": {
     "default": "STATIC_LOADED_BEFORE_OR_AT_SESSION_START",
     "admin_live_updates": "OPTIONAL_LATER_NOT_REQUIRED_FOR_FIRST_IMPLEMENTATION",
@@ -593,7 +594,7 @@
     "phase": "P1",
     "delivery": "0.1-A",
     "branch": "feature/policy-0.1-a-core",
-    "status": "CORE_MISSION_FIRST_SP_HOMOLOGATED_ADDON_NEXUS_PBO_PENDING",
+    "status": "CORE_SP_R1_68_PASS_P1_B_REAL_NEXUS_CFGFUNCTIONS_MISSION_RPT_PENDING",
     "addon_source_prepared": true,
     "engine_tested": true,
     "source_runtime_in_repo": true,
@@ -628,7 +629,8 @@
     "rpt_pending": false,
     "documentation": "docs/projects/policy-editor/P1_CORE_0_1_A_20261025.md",
     "gate_pending": [
-      "P1_CAPABILITY_ADDON_RUNTIME_PBO_CfgFunctions_PREINIT_NEXUS_REAL_GATE"
+      "P1_B_REAL_NEXUS_MISSION_CFGFUNCTIONS_PREINIT_RPT_59",
+      "P1_C_ADDON_PBO_CfgPatches_CfgFunctions_PREINIT_NEXUS"
     ],
     "baseline_preserved": true,
     "first_rpt_result": "BLOCKED_FILES_NOT_FOUND",
@@ -724,6 +726,47 @@
       "name": "P1_ADDON_NEXUS_INTEGRATION_REAL_RUNTIME",
       "requirement": "Validate PBO/CfgFunctions preInit and actual Nexus capability registry + provider metadata without loader/P2 or MP authority",
       "not_tested_in_r1": true
+    },
+    "b": {
+      "delivery": "0.1-B",
+      "phase": "P1",
+      "branch": "feature/policy-0.1-b-nexus-integration",
+      "status": "MISSION_FIRST_REAL_NEXUS_CFGFUNCTIONS_59_ASSERTIONS_RPT_PENDING",
+      "addon_runtime_built": false,
+      "mission_compiled_functions_candidate": true,
+      "cfgfunctions_in_mission": true,
+      "nexus_preinit_configured": true,
+      "policy_preinit_configured": true,
+      "real_nexus_create_result": true,
+      "nexus_shim_used": false,
+      "nexus_sources_canonical_verified": 11,
+      "nexus_header_canonical_verified": 1,
+      "policy_sources_canonical_verified": 6,
+      "nexus_include_path_adapter_only": true,
+      "zip": "SP_ORG_Policy_P1_B_Nexus_Integration_Lab_20261026.zip",
+      "zip_sha256": "618faca9a6fd4a23bfb890a29c1d1e59581af423c41cd5074021eb8b90416a32",
+      "zip_bytes": 19692,
+      "zip_members": 23,
+      "sqf_files": 19,
+      "unique_assertions_expected": 59,
+      "engine_pass": null,
+      "engine_fail": null,
+      "engine_executed": false,
+      "rpt_pending": true,
+      "rpt_prefix": "[SPORG_POLICY_P1_B]",
+      "mission": "SP_ORG_Policy_P1_B_NexusIntegration.VR",
+      "evidence_offline": "docs/projects/policy-editor/P1_B_NEXUS_INTEGRATION_LAB_20261026.md",
+      "blockers": [
+        "P1_B_REAL_ENGINE_RPT_59_OF_59",
+        "P1_C_ADDON_PBO_CfgPatches_CfgFunctions_PREINIT_NEXUS_CAPABILITIES"
+      ],
+      "protected_modules": [
+        "Items",
+        "Weapons",
+        "UICommon"
+      ],
+      "p2_loader_implemented": false,
+      "mp_authority_implemented": false
     }
   }
 }
