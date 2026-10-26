@@ -1,7 +1,7 @@
 # Policy — módulo opcional de autorização de itens/equipamentos
 
 **Data da consolidação:** 22/10/2026  
-**Status (25/10/2026): P0 CONTRATOS E VIABILIDADE SP CONCLUÍDOS**: scanner G2 **12/12 PASS** e 532 elegíveis recuperados; unittest Python revisado **8/8 PASS** (32 fixtures); regressão SQF H **156/156 PASS**. Classname v1: `^[A-Za-z0-9_]{1,128}$`. [RPT H](../projects/policy-editor/evidence/P0_H_REVISED_CLASSNAME_SQF_RPT_20261025.md). **Módulo Policy P1 CORE SOURCE agora existe como candidata**, mas não está validado em runtime PBO; editor/loader/autoridade MP NÃO IMPLEMENTADOS; P2–P7 planejadas.
+**Status ATUAL 26/10/2026:** P0 fechado; **P1-A R1 CORE SQF em missão VR homologado 68/68 PASS e 0 erros SQF** ([evidência](../projects/policy-editor/evidence/P1_A_R1_CORE_SP_RPT_PASS_20261026.md)); **P1 addon/PBO e Nexus capabilities reais ainda não testados**. P2 loader, editor/UI, integração e autoridade MP não implementados. Regex v1 `^[A-Za-z0-9_]{1,128}$`, validada no P0.
 **Proprietário único:** `ServoPeregrino_Organizador_Policy` (futuro PBO); dependência planejada: Nexus.  
 **Projeto do editor:** [../projects/policy-editor/README.md](../projects/policy-editor/README.md) e [ROADMAP](../projects/policy-editor/ROADMAP.md).
 
@@ -267,3 +267,10 @@ Na branch [`feature/policy-0.1-a-core`](https://github.com/peregrinoklawd/ServoP
 ### 26/10 — teste P1-A inválido, correção R1 pronta
 
 O primeiro RPT do laboratório P1-A mostrou cinco funções core não encontradas ao fazer `preprocessFileLineNumbers` em caminhos de subdiretórios, seguidas de 91 erros; houve **apenas 1/68 TEST registrado** apesar da SUMMARY antiga afirmar `READY_FOR_OPERATOR_REVIEW`. Isso **não indica erro confirmado da regex ou engine-derived Weapons**; o motor ainda não foi testado efetivamente. Pacote R1 corrige o laboratório (arquivos na raiz, paths relativos, preflight, status bloqueado quando incompleto), mantendo o código-fonte Policy core intocado. RPT R1 pendente. [Evidência](../projects/policy-editor/evidence/P1_A_RPT_20261026_LOADER_FAILURE.md).
+
+
+### 26/10 — homologação do núcleo P1-A R1 em SP (checkpoint mais recente)
+
+A R1 real em Arma 3 Stable 2.22.154089 alcançou **68/68 PASS (68 IDs únicos)**, 5/5 fontes SQF encontrados, nenhum `TEST FAIL`, `FATAL`, `Error in expression` ou `Error position:`; o resumo `complete=true valid=true` confere com as linhas individuais. Os registros antigos de `RPT R1 pendente` são histórico superado, e a falha da R0 era de caminhos/harness. [Auditoria exata](../projects/policy-editor/evidence/P1_A_R1_CORE_SP_RPT_PASS_20261026.md).
+
+**Subgate P1 CORE SP: CONCLUÍDO; gate P1 ADDON/NEXUS: PENDENTE.** Ainda é necessário executar fonte em addon com seu `config.cpp` e dependência Nexus, conferir `preInit`, `CfgFunctions`, capabilities `policy.evaluate` e `policy.snapshot`, e comportamento real de `Nexus_fnc_createResult`. A missão R1 utiliza adapter local e declara `addonRuntime=false mp=false`. Não requer mudanças em Items, Weapons ou UICommon e não altera o P0 fechado.
