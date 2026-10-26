@@ -1,6 +1,6 @@
 # Roadmap — Policy + Policy Editor
 
-**Checkpoint 26/10/2026:** **P0 FECHADO**; P1 0.1-A primeira missão RPT inválido por **5 fontes não encontrados + 91 erros em cascata**, resumo 1/68 falso positivo; **R1 com correção de bootstrap pronta, RPT de reteste pendente**. Addon/CfgFunctions/PBO não testado; P2–P7 planejados.
+**Checkpoint MAIS RECENTE 26/10/2026:** P0 fechado; **P1-A R1 CORE SQF mission-first HOMOLOGADO 68/68 PASS**, 5/5 fontes carregados, 0 erros SQF. **GATE P1 PENDENTE: validar addon/PBO e capabilities Nexus reais**. P2 loader, P3–P7 continuam planejados. [RPT R1](evidence/P1_A_R1_CORE_SP_RPT_PASS_20261026.md).
 **Fonte funcional:** [README do projeto](README.md) | **módulo proprietário:** [Policy](../../modules/Policy.md).
 
 > **CHECKPOINT AUDITORIA 22/10/2026 (histórico):** naquela data todo P0–P7 estava pendente. P0 deve diferenciar claramente fonte interna (fallback vazio) de fonte externa (opt-in) e decidir técnica de configuração **sem presumir** `CfgSPORGPolicy` já implantado. A política é **estática por padrão**; ativação de nova revisão em runtime é capacidade futura opcional. Validar explícito: UI do jogador com blacklist não inclui proibidos, mas o editor mostra catálogo base completo; ausência de mod permanece vermelha; role kit fora; ícones dos botões ficam texto. Detalhes: [auditoria](../../73_AUDITORIA_COMPLETA_ITEMS_POLICY_DECISOES_20261022.md) e [continuidade](../../74_CONTINUIDADE_AUTOSSUFICIENTE_ITEMS_POLICY_20261022.md).
@@ -98,3 +98,8 @@ Primeira missão P1-A **não passou**: cinco SQFs não encontrados (apesar de in
 ### P1 A R1 — correção de diagnóstico, 26/10/2026
 
 RPT primeiro P1-A executado mas **INVÁLIDO**: arquivos SQF nested não encontrados e harness retornou contador inconsistente. Não tratar como falha de regra de negócio, nem como PASS. A missão `SP_ORG_Policy_P1_A_R1_CoreLab.VR` agora usa fontes no root, falha rápida se não encontrados e resumo completo `expected=68 complete=true valid=true` apenas se todos os checks efetivos passaram. **R1 só passou QA offline**; ainda precisa RPT real do operador. [Auditoria e pacote](evidence/P1_A_RPT_FAIL_BOOTSTRAP_AND_R1_FIX_20261026.md). P0 preservado, nenhum código de Items/Weapons/UICommon alterado, não partir para P2 até resolver gate P1.
+
+
+### Marco P1-A R1 — núcleo SP homologado em 26/10/2026
+
+**Execução real aprovada:** Arma 3 Stable 2.22.154089, 68 asserções distintas PASS, 0 FAIL, 5 BOOT corretos, SUMMARY coerente (68 total=68 expected=68 complete=true valid=true); 0 `Error in expression` e `Error position` no RPT. [Auditoria detalhada](evidence/P1_A_R1_CORE_SP_RPT_PASS_20261026.md). Isso encerra o **subgate P1 CORE MISSION-FIRST**. **Não encerra P1 como addon**: ainda faltam instalação/PBO, dependência Nexus, CfgFunctions/preInit e registro real de capabilities v1. Na próxima rodada priorizar laboratório de addon/Nexus, não recauchutar testes de regex G/G2/H ou rodar repetidamente 68 smokes inalterados. P2 somente após decisão documentada do gate addon P1; P6 terá QA MP separado.
