@@ -7,7 +7,7 @@
   "project": "SPORG_POLICY_EDITOR",
   "owner": "Policy",
   "addon": "ServoPeregrino_Organizador_Policy",
-  "status": "P1_B_REAL_NEXUS_MISSION_CFGFUNCTIONS_PREPARED_59_TESTS_RPT_PENDING",
+  "status": "P1_A_CORE_68_PASS_P1_B_NEXUS_MISSION_59_PASS_P1_C_ADDON_PBO_RUNTIME_PENDING",
   "docs": [
     "docs/modules/Policy.md",
     "docs/projects/policy-editor/README.md",
@@ -17,7 +17,8 @@
     "docs/75_POLICY_P0_CONTINUIDADE_20261024.md",
     "docs/projects/policy-editor/P1_CORE_0_1_A_20261025.md",
     "docs/projects/policy-editor/evidence/P1_A_R1_CORE_SP_RPT_PASS_20261026.md",
-    "docs/projects/policy-editor/P1_B_NEXUS_INTEGRATION_LAB_20261026.md"
+    "docs/projects/policy-editor/P1_B_NEXUS_INTEGRATION_LAB_20261026.md",
+    "docs/projects/policy-editor/evidence/P1_B_NEXUS_REAL_CFGFUNCTIONS_SP_RPT_PASS_20261026.md"
   ],
   "decision": {
     "dependence_on_BGD": "NONE_OPTIONAL_ADAPTER_ONLY",
@@ -92,7 +93,7 @@
     {
       "phase": "P1",
       "name": "Policy core",
-      "status": "P1_A_R1_CORE_SP_68_PASS_P1_B_NEXUS_REAL_MISSION_TEST_READY_59_RPT_PENDING"
+      "status": "P1_A_CORE_SP_68_PASS_P1_B_NEXUS_SP_59_PASS_P1_C_ADDON_RUNTIME_PENDING"
     },
     {
       "phase": "P2",
@@ -155,7 +156,7 @@
   "merge_performed": false,
   "audit_doc": "docs/73_AUDITORIA_COMPLETA_ITEMS_POLICY_DECISOES_20261022.md",
   "autonomous_handoff_doc": "docs/74_CONTINUIDADE_AUTOSSUFICIENTE_ITEMS_POLICY_20261022.md",
-  "record_revision": "2026-10-26-policy-p1b-mission-real-nexus-cfgfunctions-preinit-59-tests-prepared",
+  "record_revision": "2026-10-26-p1-b-real-nexus-cfgfunctions-mission-sp-rpt-59-59-pass-p1-c-pbo-gate-next",
   "policy_lifecycle": {
     "default": "STATIC_LOADED_BEFORE_OR_AT_SESSION_START",
     "admin_live_updates": "OPTIONAL_LATER_NOT_REQUIRED_FOR_FIRST_IMPLEMENTATION",
@@ -594,7 +595,7 @@
     "phase": "P1",
     "delivery": "0.1-A",
     "branch": "feature/policy-0.1-a-core",
-    "status": "CORE_SP_R1_68_PASS_P1_B_REAL_NEXUS_CFGFUNCTIONS_MISSION_RPT_PENDING",
+    "status": "P1_A_R1_CORE_SP_68_PASS_P1_B_REAL_NEXUS_MISSION_59_PASS_P1_C_ADDON_RUNTIME_PENDING",
     "addon_source_prepared": true,
     "engine_tested": true,
     "source_runtime_in_repo": true,
@@ -629,8 +630,7 @@
     "rpt_pending": false,
     "documentation": "docs/projects/policy-editor/P1_CORE_0_1_A_20261025.md",
     "gate_pending": [
-      "P1_B_REAL_NEXUS_MISSION_CFGFUNCTIONS_PREINIT_RPT_59",
-      "P1_C_ADDON_PBO_CfgPatches_CfgFunctions_PREINIT_NEXUS"
+      "P1_C_REAL_NEXUS_POLICY_ADDONS_PBO_CFGPATCHES_CFGFUNCTIONS_PREINIT_CAPABILITIES"
     ],
     "baseline_preserved": true,
     "first_rpt_result": "BLOCKED_FILES_NOT_FOUND",
@@ -723,15 +723,15 @@
     "core_mission_first_homologated_date": "2026-10-26",
     "evidence_latest": "docs/projects/policy-editor/evidence/P1_A_R1_CORE_SP_RPT_PASS_20261026.md",
     "next_gate": {
-      "name": "P1_ADDON_NEXUS_INTEGRATION_REAL_RUNTIME",
-      "requirement": "Validate PBO/CfgFunctions preInit and actual Nexus capability registry + provider metadata without loader/P2 or MP authority",
-      "not_tested_in_r1": true
+      "name": "P1_C_REAL_ADDONS_PBO_NEXUS_POLICY",
+      "requirement": "Build and load actual Nexus and Policy addons; validate CfgPatches/requiredAddons, $PBOPREFIX$, config.cpp CfgFunctions/preInit, capability registry and core calls without mission CfgFunctions masks; record RPT and build hashes",
+      "not_tested_in_p1_b": true
     },
     "b": {
       "delivery": "0.1-B",
       "phase": "P1",
       "branch": "feature/policy-0.1-b-nexus-integration",
-      "status": "MISSION_FIRST_REAL_NEXUS_CFGFUNCTIONS_59_ASSERTIONS_RPT_PENDING",
+      "status": "MISSION_FIRST_REAL_NEXUS_CFGFUNCTIONS_SP_HOMOLOGATED_59_OF_59",
       "addon_runtime_built": false,
       "mission_compiled_functions_candidate": true,
       "cfgfunctions_in_mission": true,
@@ -749,16 +749,15 @@
       "zip_members": 23,
       "sqf_files": 19,
       "unique_assertions_expected": 59,
-      "engine_pass": null,
-      "engine_fail": null,
-      "engine_executed": false,
-      "rpt_pending": true,
+      "engine_pass": 59,
+      "engine_fail": 0,
+      "engine_executed": true,
+      "rpt_pending": false,
       "rpt_prefix": "[SPORG_POLICY_P1_B]",
       "mission": "SP_ORG_Policy_P1_B_NexusIntegration.VR",
       "evidence_offline": "docs/projects/policy-editor/P1_B_NEXUS_INTEGRATION_LAB_20261026.md",
       "blockers": [
-        "P1_B_REAL_ENGINE_RPT_59_OF_59",
-        "P1_C_ADDON_PBO_CfgPatches_CfgFunctions_PREINIT_NEXUS_CAPABILITIES"
+        "P1_C_REAL_ADDON_NEXUS_POLICY_PBO_NOT_BUILT_OR_TESTED"
       ],
       "protected_modules": [
         "Items",
@@ -766,7 +765,53 @@
         "UICommon"
       ],
       "p2_loader_implemented": false,
-      "mp_authority_implemented": false
+      "mp_authority_implemented": false,
+      "homologated_scope": "MISSION_CFGFUNCTIONS_NEXUS_POLICY_NOT_ADDON_RUNTIME_NOT_MP",
+      "rpt_filename": "Texto colado(20261026-210613).txt",
+      "rpt_sha256": "fe37a41b8fe353615bff55fd5c1441c8d4cf9d44771e4e19d330169e71971bd7",
+      "rpt_bytes": 26525,
+      "rpt_lines": 330,
+      "rpt_excerpt_no_engine_build_header": true,
+      "rpt_arma_clock_test": "18:04:16",
+      "rpt_mission_start": "18:04:08",
+      "boot_expected": 18,
+      "boot_found": 18,
+      "boot_false": 0,
+      "test_lines": 59,
+      "unique_test_ids": 59,
+      "groups": {
+        "CFG": 4,
+        "NEXUS": 25,
+        "POLICY": 30
+      },
+      "rpt_expression_errors": 0,
+      "rpt_error_positions": 0,
+      "rpt_fatals": 0,
+      "rpt_summary": "status=PASS pass=59 fail=0 total=59 expected=59 complete=true valid=true scope=MISSION_CFGFUNCTIONS_NEXUS_POLICY addonRuntime=false mp=false",
+      "evidence_rpt": "docs/projects/policy-editor/evidence/P1_B_NEXUS_REAL_CFGFUNCTIONS_SP_RPT_PASS_20261026.md",
+      "p1_b_homologated_date": "2026-10-26"
+    },
+    "c": {
+      "status": "PENDING_NOT_STARTED",
+      "gate": "P1_C_REAL_ADDON_RUNTIME",
+      "build_pbo": false,
+      "engine_tested": false,
+      "mp_tested": false,
+      "tests_required": [
+        "NEXUS_ADDON_WITHOUT_POLICY",
+        "NEXUS_AND_POLICY_ADDONS_TOGETHER",
+        "CFG_PATCHES_REQUIREDADDONS_DEPENDENCY",
+        "CFGFUNCTIONS_PREINIT_FROM_ADDON_NOT_MISSION",
+        "CAPABILITIES_REAL_REGISTRY_V1",
+        "POLICY_CALLS_RETURN_REAL_NEXUS_RESULT",
+        "CORE_ONLY_NO_LOADER_NO_AUTHORITY"
+      ],
+      "restrictions": [
+        "NO_ITEMS_WEAPONS_UICOMMON_CHANGES",
+        "NO_GLOBAL_CFGREMOTEEXEC_MODE_JIP",
+        "NO_MERGE_MAIN",
+        "NO_P2_LOADER_PREMATURELY"
+      ]
     }
   }
 }
