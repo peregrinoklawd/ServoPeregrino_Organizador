@@ -1,6 +1,6 @@
 # Policy P1-B — integração com Nexus real em missão (26/10/2026)
 
-**STATUS: CANDIDATA PREPARADA, QA OFFLINE APROVADO, RPT ARMA PENDENTE. Não homologar até execução real.**
+**CHECKPOINT ATUAL 26/10/2026: HOMOLOGADO EM MISSÃO SP — RPT real 59/59 PASS, 18 BOOT OK, 0 erros SQF. P1-C addon/PBO AINDA PENDENTE.** [Evidência de execução](evidence/P1_B_NEXUS_REAL_CFGFUNCTIONS_SP_RPT_PASS_20261026.md). Os textos abaixo sobre execução futura descrevem o plano anterior ao RPT, e estão superados pelos resultados abaixo.
 
 **Branch nova:** `feature/policy-0.1-b-nexus-integration`, derivada de `feature/policy-0.1-a-core`. **P0 fechado; P1-A R1 core SQF SP homologado (68/68 PASS)**; P1-B realiza integração mission-first. No momento **nenhum addon Policy/Nexus PBO novo foi construído/testado**. Items, Weapons, UICommon e sua baseline ficam intactos, sem merge.
 
@@ -60,3 +60,10 @@ Se RPT passar, **homologar somente P1-B Nexus/Policy mission-first** e construir
 - Nexus `config.cpp`, `script_version.hpp`, `functions/{lifecycle,results,capabilities,contracts,diagnostics}` na árvore `addons/ServoPeregrino_Organizador_Nexus`.
 - Policy `config.cpp`, `functions/core/*.sqf`, `functions/lifecycle/fn_initialize.sqf` na árvore `addons/ServoPeregrino_Organizador_Policy`.
 - Prova anterior: [P1-A R1 68 PASS](evidence/P1_A_R1_CORE_SP_RPT_PASS_20261026.md).
+
+
+## Homologação pós-RPT — 26/10/2026 (seção canônica mais recente)
+
+O usuário executou `SP_ORG_Policy_P1_B_NexusIntegration.VR` e enviou `Texto colado(20261026-210613).txt` (SHA-256 `fe37a41b8fe353615bff55fd5c1441c8d4cf9d44771e4e19d330169e71971bd7`, 26.525 bytes / 330 linhas, recorte de missão sem cabeçalho geral do executável). **18 BOOT exists=true**, **1 START**, **59 [TEST] PASS distintos** (CFG 4, NEXUS 25, POLICY 30), **1 SUMMARY PASS**, zero `[TEST] FAIL`, `FATAL`, `Error in expression`, `Error position:`, `Script ... not found`. A linha `status=PASS pass=59 fail=0 total=59 expected=59 complete=true valid=true scope=MISSION_CFGFUNCTIONS_NEXUS_POLICY addonRuntime=false mp=false` é coerente.
+
+Foi confirmada a inicialização Nexus antes do Policy (`nexus.runtime`, `policy.evaluate` e `policy.snapshot` v1), registro real `CAPABILITY_REGISTERED`, segundo registro `CAPABILITY_ALREADY_REGISTERED`, metadata e comportamento com resultados Nexus reais. Tests de colisão owner/versão, ownership de remoção, deny-wins, nomes numéricos e ausência required/optional passaram. **P1-B mission-first homologado.** O P1 completo permanece **INCOMPLETO**: falta **P1-C — addons reais em PBO com `CfgPatches.requiredAddons`, `CfgFunctions`/`preInit` de addon e capabilities reais, sem máscara de missão**. [Auditoria completa](evidence/P1_B_NEXUS_REAL_CFGFUNCTIONS_SP_RPT_PASS_20261026.md). Não iniciar P2 sem resolver formalmente P1-C.
