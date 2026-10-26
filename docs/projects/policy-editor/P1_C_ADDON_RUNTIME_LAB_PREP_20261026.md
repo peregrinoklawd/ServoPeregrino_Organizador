@@ -13,7 +13,7 @@
 ## Artefato de missão criado nesta continuação
 
 - ZIP para download no chat: `SP_ORG_Policy_P1_C_AddonRuntime_Lab_20261026.zip`.
-- SHA-256 do ZIP: `ddd26deead812807d0e4a8b79775d8ae5e9076a24ce3481361425cd287907fe0`. Tamanho 7.314 bytes; 4 membros; teste de integridade ZIP passou.
+- SHA-256 do ZIP: `390968a47817cae66b55dc556938a6f166a6ae471a747d6e4a0fd2c450889554`. Tamanho 7.313 bytes; 4 membros; teste de integridade ZIP passou.
 - Pasta: `SP_ORG_Policy_P1_C_AddonRuntime_Lab.VR/`.
 - Arquivos: `mission.sqm`, `init.sqf`, `runPolicyP1C.sqf`, `README.md`.
 - O laboratório foi criado no ambiente da conversa e **não foi adicionado como arquivo de missão ao Git** nesta etapa; para transportar os bytes para um chat posterior, recuperar o ZIP do chat de entrega. Não assumir que um nome de arquivo equivale a link Git.
