@@ -18,7 +18,8 @@
     "docs/projects/policy-editor/P1_CORE_0_1_A_20261025.md",
     "docs/projects/policy-editor/evidence/P1_A_R1_CORE_SP_RPT_PASS_20261026.md",
     "docs/projects/policy-editor/P1_B_NEXUS_INTEGRATION_LAB_20261026.md",
-    "docs/projects/policy-editor/evidence/P1_B_NEXUS_REAL_CFGFUNCTIONS_SP_RPT_PASS_20261026.md"
+    "docs/projects/policy-editor/evidence/P1_B_NEXUS_REAL_CFGFUNCTIONS_SP_RPT_PASS_20261026.md",
+    "docs/projects/policy-editor/CONTINUIDADE_POLICY_P1B_P1C_20261026.md"
   ],
   "decision": {
     "dependence_on_BGD": "NONE_OPTIONAL_ADAPTER_ONLY",
@@ -156,7 +157,7 @@
   "merge_performed": false,
   "audit_doc": "docs/73_AUDITORIA_COMPLETA_ITEMS_POLICY_DECISOES_20261022.md",
   "autonomous_handoff_doc": "docs/74_CONTINUIDADE_AUTOSSUFICIENTE_ITEMS_POLICY_20261022.md",
-  "record_revision": "2026-10-26-p1-b-real-nexus-cfgfunctions-mission-sp-rpt-59-59-pass-p1-c-pbo-gate-next",
+  "record_revision": "2026-10-26-policy-p1b-59-pass-p1c-addon-real-pending-continuity-created",
   "policy_lifecycle": {
     "default": "STATIC_LOADED_BEFORE_OR_AT_SESSION_START",
     "admin_live_updates": "OPTIONAL_LATER_NOT_REQUIRED_FOR_FIRST_IMPLEMENTATION",
@@ -789,7 +790,8 @@
       "rpt_fatals": 0,
       "rpt_summary": "status=PASS pass=59 fail=0 total=59 expected=59 complete=true valid=true scope=MISSION_CFGFUNCTIONS_NEXUS_POLICY addonRuntime=false mp=false",
       "evidence_rpt": "docs/projects/policy-editor/evidence/P1_B_NEXUS_REAL_CFGFUNCTIONS_SP_RPT_PASS_20261026.md",
-      "p1_b_homologated_date": "2026-10-26"
+      "p1_b_homologated_date": "2026-10-26",
+      "continuity": "docs/projects/policy-editor/CONTINUIDADE_POLICY_P1B_P1C_20261026.md"
     },
     "c": {
       "status": "PENDING_NOT_STARTED",
@@ -811,7 +813,8 @@
         "NO_GLOBAL_CFGREMOTEEXEC_MODE_JIP",
         "NO_MERGE_MAIN",
         "NO_P2_LOADER_PREMATURELY"
-      ]
+      ],
+      "continuity": "docs/projects/policy-editor/CONTINUIDADE_POLICY_P1B_P1C_20261026.md"
     }
   }
 }
