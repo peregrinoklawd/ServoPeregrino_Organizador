@@ -88,3 +88,8 @@ G2 executada na mesma modlist real: **PASS 12/12 SELFTEST, 0 ROOT ERROR**, 133.3
 ## Checkpoint P1 0.1-A — 25/10/2026
 
 A branch `feature/policy-0.1-a-core` deriva da P0 encerrada. Foram criados source do addon Policy opcional, cinco funções puras de domínio (`isValidClassname`, `validateExport`, `createContext`, `evaluate`, `snapshot`), inicializador de capabilities Nexus v1 e configuração CfgFunctions sem política global `CfgRemoteExec`. **Não há loader de servidor, integração Items/Weapons, PBO construído ou autoridade MP**. Missão self-contained `SP_ORG_Policy_P1_A_CoreLab.VR` em ZIP com **68 asserções projetadas**, QA offline positivo, **RPT da engine pendente**. [Escopo técnico e evidência](P1_CORE_0_1_A_20261025.md). P0 permanece fechado. Não iniciar P2 sem validar P1 com RPT, respeitando decisões de escopo.
+
+
+### Checkpoint P1-A RPT 26/10 — incidente de loader
+
+Primeira missão P1-A **não passou**: cinco SQFs não encontrados (apesar de incluídos no ZIP original), 91 erros de expressão subsequentes, só 1 teste [TEST] registrado entre 68 planejados; status `READY_FOR_OPERATOR_REVIEW` antigo era inválido. Correção R1 empacotada como `SP_ORG_Policy_P1_A_R1_Fix_Carregamento_20261026.zip` (SHA256 `018e04a78392410cf9e771771547b409bf124b673eb8f8e863d02737e7dde422`), fonte core imutável, cinco scripts na raiz da missão, preflight e bloqueio se incompleta, prefixo `[SPORG_POLICY_P1_A_R1]`. **P1 continua candidato, RPT R1 pendente**. [Auditoria RPT e fix](evidence/P1_A_RPT_20261026_LOADER_FAILURE.md). Não iniciar P2 nem declarar 68 PASS sem execução real.
