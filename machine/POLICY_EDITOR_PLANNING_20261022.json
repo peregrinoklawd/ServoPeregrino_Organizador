@@ -7,7 +7,7 @@
   "project": "SPORG_POLICY_EDITOR",
   "owner": "Policy",
   "addon": "ServoPeregrino_Organizador_Policy",
-  "status": "P1_A_R1_FIX_LOADER_PACKAGED_ENGINE_RPT_PENDING",
+  "status": "P1_A_RPT_INVALID_5_CORE_SOURCES_NOT_FOUND_R1_MISSION_READY_RPT_PENDING",
   "docs": [
     "docs/modules/Policy.md",
     "docs/projects/policy-editor/README.md",
@@ -90,7 +90,7 @@
     {
       "phase": "P1",
       "name": "Policy core",
-      "status": "SOURCE_PREPARED_OFFLINE_QA_PASS_SP_RPT_PENDING_NO_PBO"
+      "status": "P1_A_ORIGINAL_RPT_BOOTSTRAP_FAILED_R1_FIX_PREPARED_RPT_PENDING"
     },
     {
       "phase": "P2",
@@ -153,7 +153,7 @@
   "merge_performed": false,
   "audit_doc": "docs/73_AUDITORIA_COMPLETA_ITEMS_POLICY_DECISOES_20261022.md",
   "autonomous_handoff_doc": "docs/74_CONTINUIDADE_AUTOSSUFICIENTE_ITEMS_POLICY_20261022.md",
-  "record_revision": "2026-10-26-p1-a-rpt-blocked-loader-r1-prepared",
+  "record_revision": "2026-10-26-policy-p1-a-rpt-fail-5-missing-cores-r1-boot-hardened",
   "policy_lifecycle": {
     "default": "STATIC_LOADED_BEFORE_OR_AT_SESSION_START",
     "admin_live_updates": "OPTIONAL_LATER_NOT_REQUIRED_FOR_FIRST_IMPLEMENTATION",
@@ -592,7 +592,7 @@
     "phase": "P1",
     "delivery": "0.1-A",
     "branch": "feature/policy-0.1-a-core",
-    "status": "MISSION_FIRST_P1_A_R1_FIXED_TEST_HARNESS_ENGINE_RPT_PENDING",
+    "status": "P1_A_RPT_FAILED_BOOTSTRAP_R1_PREPARED_WAIT_NEW_RPT",
     "addon_source_prepared": true,
     "engine_tested": true,
     "source_runtime_in_repo": true,
@@ -623,11 +623,11 @@
     "static_qa_pass": true,
     "runner_assertions_planned": 68,
     "runner_engine_pass": 1,
-    "runner_engine_fail": 0,
+    "runner_engine_fail": null,
     "rpt_pending": true,
     "documentation": "docs/projects/policy-editor/P1_CORE_0_1_A_20261025.md",
     "gate_pending": [
-      "P1_A_R1_REAL_ENGINE_RPT_WITH_5_LOAD_68_TEST_PASS_0_SQF_ERRORS",
+      "P1_A_R1_ENGINE_RPT_VALID_68_OF_68",
       "P1_CAPABILITY_ADDON_RUNTIME_PBO_GATE_OR_SCOPE_LIMIT"
     ],
     "baseline_preserved": true,
@@ -667,6 +667,35 @@
       "core_source_changed": false,
       "loader_paths": "RELATIVE_MISSION_ROOT",
       "fail_closed_summary": true
+    },
+    "first_rpt_validation": "INVALID_SCRIPT_LOAD_FAILURE",
+    "first_rpt_sha256": "be8cd428684c70d12533f7128cc509c471b22a31f3742effe50ff08e839e7f70",
+    "first_rpt_date": "2026-10-26",
+    "first_rpt_matched_start": 1,
+    "first_rpt_missing_core_files": 5,
+    "first_rpt_error_in_expression": 91,
+    "first_rpt_undefined_variables": {
+      "_ok": 67,
+      "_ctx": 22,
+      "_result": 1,
+      "_v": 1
+    },
+    "first_rpt_summary_unreliable": true,
+    "r1": {
+      "mission": "SP_ORG_Policy_P1_A_R1_CoreLab.VR",
+      "zip": "SP_ORG_Policy_P1_A_R1_Correcao_Load_20261026.zip",
+      "zip_sha256": "9f885450904ed3cf905743e2c2c81c39a93034787b61a6dfebecc836c2766e7d",
+      "prepared": true,
+      "engine_executed": false,
+      "expected_assertions": 68,
+      "core_sources_unchanged": true,
+      "root_level_core_files": true,
+      "bootstrap_fileExists_guard": true,
+      "bootstrap_fail_fast": true,
+      "fail_proof_summary": true,
+      "rpt_prefix": "[SPORG_POLICY_P1_A_R1]",
+      "evidence": "docs/projects/policy-editor/evidence/P1_A_RPT_FAIL_BOOTSTRAP_AND_R1_FIX_20261026.md",
+      "status": "AWAITING_REAL_ENGINE_RPT"
     }
   }
 }
