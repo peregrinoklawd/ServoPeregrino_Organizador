@@ -1,7 +1,10 @@
 # Policy — módulo opcional de autorização de itens/equipamentos
 
 **Data da consolidação:** 22/10/2026  
-**Status ATUAL 26/10/2026:** P0 FECHADO; **P1-A R1 CORE SP HOMOLOGADO (68/68 PASS)**; **P1-B NEXUS REAL EM MISSÃO CfgFunctions/preInit PRONTO PARA TESTE (59 asserções, RPT pendente)** ([P1-B](../projects/policy-editor/P1_B_NEXUS_INTEGRATION_LAB_20261026.md)). P1-C addon/PBO Nexus/Policy, `CfgPatches` e `requiredAddons` ainda não testados; P2–P7 planejados. Regex classname v1 `^[A-Za-z0-9_]{1,128}$`.
+**CHECKPOINT ATUAL 26/10/2026:** **P0 FECHADO**; **P1-A R1 CORE SP 68/68 PASS**; **P1-B Nexus/Policy REAL mission-first 59/59 PASS** ([RPT](../projects/policy-editor/evidence/P1_B_NEXUS_REAL_CFGFUNCTIONS_SP_RPT_PASS_20261026.md)). **P1-C addons reais em PBO / CfgPatches + CfgFunctions de addon PENDENTE**. P2–P7 ainda planejados. Classname v1 `^[A-Za-z0-9_]{1,128}# Policy — módulo opcional de autorização de itens/equipamentos
+
+**Data da consolidação:** 22/10/2026  
+.
 **Proprietário único:** `ServoPeregrino_Organizador_Policy` (futuro PBO); dependência planejada: Nexus.  
 **Projeto do editor:** [../projects/policy-editor/README.md](../projects/policy-editor/README.md) e [ROADMAP](../projects/policy-editor/ROADMAP.md).
 
@@ -279,3 +282,10 @@ A R1 real em Arma 3 Stable 2.22.154089 alcançou **68/68 PASS (68 IDs únicos)**
 ### P1-B 26/10 — integração Nexus REAL (missão, não addon)
 
 Foi criada candidata VR com os fontes reais Nexus e Policy, agora usando `CfgFunctions` de missão e `preInit=1` em ambos os inicializadores, em vez do stub `Nexus_fnc_createResult` do P1-A. **11/11 Nexus fontes Git correspondem após adaptação APENAS do include ao layout plano**, header + 6 funções Policy idênticos aos Git blobs. **59 asserções** previstas (registry, versões, metadata, conflitos, NexusResult, decisões e fail-closed), auditoria offline passou. [Documento e instruções](../projects/policy-editor/P1_B_NEXUS_INTEGRATION_LAB_20261026.md). **Status: RPT real pendente; sem homologação P1-B e sem binário PBO.** O gate P1-C validará `requiredAddons` real, `CfgFunctions` no addon, `preInit` e convivência com outros módulos. Ainda sem Policy loader ou servidor/MP.
+
+
+### P1-B concluído em missão SP — 26/10/2026, subgate de Nexus real
+
+O RPT `Texto colado(20261026-210613).txt` confirma **59/59 PASS** com 59 IDs únicos, 18 BOOT arquivos carregados, 0 erros SQF no recorte, `CfgFunctions` mission-first `preInit` de Nexus/Policy em sequência funcional, registro `CAPABILITY_REGISTERED` de `policy.evaluate` e `policy.snapshot` v1, segundo registro idempotente `CAPABILITY_ALREADY_REGISTERED`, formatos reais de `NexusResult` e autorização Policy. [Auditoria completa](../projects/policy-editor/evidence/P1_B_NEXUS_REAL_CFGFUNCTIONS_SP_RPT_PASS_20261026.md). Os textos antigos dizendo RPT P1-B pendente representam cronologia, **não status atual**.
+
+**Próximo: P1-C (não iniciado):** addon Nexus e Policy em PBO carregados realmente, testar `CfgPatches.requiredAddons`, `$PBOPREFIX$`, `config.cpp`, `CfgFunctions`/`preInit` em addon real, `policy.evaluate`/`policy.snapshot` v1 sem redefinições de funções na missão. Depois P2 loader estático, sem simular autoridade MP. Não alterar UICommon/Items/Weapons nem política global de `CfgRemoteExec`.
