@@ -43,3 +43,9 @@ Arma 3 Tools / Addon Builder no Windows é o caminho oficial para empacotar esse
 2. Executar cenário `NONE`, `NEXUS_ONLY` e `BOTH` com os modsets separados, em SP Preview; registrar RPT, contagem por ID e erros globais relevantes.
 3. Documentar startup sem Nexus separadamente (pode falhar antes de entrar na missão).
 4. Concluir P1-C só com RPT real e revisão. Depois P2, nunca antes.
+
+## Primeiro RPT executado — checkpoint de 26/10/2026
+
+**Controle sem addons (`NONE`) executado e aprovado 7/7 em SP, sem falhas do laboratório.** O comando de lançamento continha somente `@CBA_A3;@ace;@Dog;@K9 Companion`; portanto nenhum PBO Nexus/Policy estava instalado nesta sessão. O runner detectou `nexusPatch=false`, `policyPatch=false` e `missionCfgFunctions=false`; `gate=CONTROL_NO_ADDONS`, `p1cHomologated=false`. **Isto não fecha P1-C**. Evidência e hash do RPT: [P1_C_CONTROL_NONE_SP_RPT_PASS_20261026.md](evidence/P1_C_CONTROL_NONE_SP_RPT_PASS_20261026.md).
+
+**Próximo passo:** usar a **mesma missão** para `NEXUS_ONLY` e `BOTH` depois de empacotar os dois PBOs reais, com build/toolchain e SHA-256 registrados. Não repetir `NONE` sem alteração pertinente; não confundir os erros de animação MFR Dog/K9 e SetFace observados no RPT com erro Policy.
