@@ -55,3 +55,10 @@ Arma 3 Tools / Addon Builder no Windows é o caminho oficial para empacotar esse
 A missão foi novamente executada em SP com o ambiente BGD carregado, **duas baterias consecutivas de 7/7 PASS, 0 falhas**. O modo continua `scenario=NONE`, `nexusPatch=false`, `policyPatch=false`, `p1cHomologated=false`; portanto ainda **nenhum PBO Nexus/Policy foi testado**. O RPT é recorte, sem cabeçalho de build nem lista completa de mods. Registrados separadamente: 117 mensagens de tentativa de sobrescrever funções ACE finalizadas (30 nomes), CBA XEH fallback, macro antiga LAxemann, FTAC setting errado, Blastcore sem userconfig legível, `CfgRemoteExec mode=2` externo e BGD Garage com 42485 entradas virtuais autorizadas/41764 estocadas. Esses avisos **não são erros Policy comprovados**. Evidência: [P1_C_CONTROL_NONE_BGD_SP_RPT_PASS_20261027.md](evidence/P1_C_CONTROL_NONE_BGD_SP_RPT_PASS_20261027.md).
 
 **Gate inalterado:** construir PBOs reais e provar `NEXUS_ONLY` e `BOTH`; reutilizar missão existente, sem gerar nova. Comparar posteriormente no BGD completo quando os addons estiverem disponíveis.
+
+
+## Artefatos PBO produzidos no GitHub Actions — 27/10/2026
+
+**Atualização posterior ao preparo inicial:** foram construídos dois PBOs reais **não binarizados/não assinados** a partir dos diretórios canônicos, por pipeline GitHub Actions, com parser independente, roundtrip de arquivos, integridade SHA-1 e hashes SHA-256. O GitHub Actions concluiu o job com `success`; **não há ainda execução/homologação in-game**. Este resultado substitui o bloqueio de empacotamento mencionado no preparo original, mas **NÃO fecha P1-C**.
+
+[Documento de build, hashes, artefato e roteiro](P1_C_PBO_BUILD_20261027.md). [Workflow executado com sucesso](https://github.com/peregrinoklawd/ServoPeregrino_Organizador/actions/runs/40437476079). Próxima evidência obrigatória: RPT de **NEXUS_ONLY**, seguido de **BOTH**, ambos com os dois PBOs reais; posteriormente **BOTH com modset BGD**. Não alterar núcleo Policy nem marcar P1 homologado antes dessas execuções.
