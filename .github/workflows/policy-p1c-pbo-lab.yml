@@ -1,0 +1,62 @@
+name: "SP_ORG Policy P1-C - build unsigned PBO lab"
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - "feature/policy-0.1-b-nexus-integration"
+    paths:
+      - ".github/workflows/policy-p1c-pbo-lab.yml"
+      - "tools/build_p1c_pbos.py"
+      - "addons/ServoPeregrino_Organizador_Nexus/**"
+      - "addons/ServoPeregrino_Organizador_Policy/**"
+
+permissions:
+  contents: read
+
+jobs:
+  pack-and-audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - name: Checkout canonical Policy P1-C branch
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Verify branch, syntax and construct two real PBO files
+        shell: bash
+        run: |
+          test "$GITHUB_REF_NAME" = "feature/policy-0.1-b-nexus-integration" || exit 4
+          python3 -m py_compile tools/build_p1c_pbos.py
+          python3 tools/build_p1c_pbos.py --repo . --out dist/policy-p1c
+          test -s dist/policy-p1c/@SPORG_Nexus_P1C/addons/ServoPeregrino_Organizador_Nexus.pbo
+          test -s dist/policy-p1c/@SPORG_Policy_P1C/addons/ServoPeregrino_Organizador_Policy.pbo
+      - name: Add instructions and Git provenance
+        shell: bash
+        run: |
+          printf "%s\n" "$GITHUB_SHA" > dist/policy-p1c/GITHUB_SOURCE_COMMIT.txt
+          cat > dist/policy-p1c/LEIA_PRIMEIRO.txt <<'EOF'
+          POLICY P1-C — PBOs NAO BINARIZADOS / NAO ASSINADOS / TESTE SP
+
+          1) Extrair estas pastas de mod em uma pasta simples no computador, por exemplo:
+             C:\Arma3Mods\@SPORG_Nexus_P1C\addons\ServoPeregrino_Organizador_Nexus.pbo
+             C:\Arma3Mods\@SPORG_Policy_P1C\addons\ServoPeregrino_Organizador_Policy.pbo
+          2) No Launcher, adicionar cada pasta de mod em Mods > Mod local.
+          3) Primeiro rodar apenas Nexus; Policy DESMARCADO.
+          4) Abrir a missao SP_ORG_Policy_P1_C_AddonRuntime_Lab.VR no Editor VR.
+          5) Executar Preview SP, coletar RPT; verificar scenario=NEXUS_ONLY, 0 FAIL.
+          6) Encerrar o Arma. Ativar ambos Nexus+Policy, repetir.
+          7) Coletar RPT; verificar scenario=BOTH, 0 FAIL.
+          8) Repetir apos isso com modset BGD completo, sem mudar fonte da missao.
+
+          Os logs contidos no RPT sao a prova de carga. Binarizacao e assinatura
+          oficiais nao foram feitas; os arquivos precisam passar pelo Arma 3 real.
+          Veja manifest.json com hashes SHA256 de cada PBO.
+          Nao usar em servidor publico nem ambiente de producao.
+          EOF
+      - name: Publish self-contained test package
+        uses: actions/upload-artifact@v4
+        with:
+          name: SPORG_Policy_P1C_Unsigned_PBOs
+          path: dist/policy-p1c/
+          if-no-files-found: error
+          retention-days: 14
