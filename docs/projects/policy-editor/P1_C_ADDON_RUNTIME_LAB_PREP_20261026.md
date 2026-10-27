@@ -49,3 +49,9 @@ Arma 3 Tools / Addon Builder no Windows é o caminho oficial para empacotar esse
 **Controle sem addons (`NONE`) executado e aprovado 7/7 em SP, sem falhas do laboratório.** O comando de lançamento continha somente `@CBA_A3;@ace;@Dog;@K9 Companion`; portanto nenhum PBO Nexus/Policy estava instalado nesta sessão. O runner detectou `nexusPatch=false`, `policyPatch=false` e `missionCfgFunctions=false`; `gate=CONTROL_NO_ADDONS`, `p1cHomologated=false`. **Isto não fecha P1-C**. Evidência e hash do RPT: [P1_C_CONTROL_NONE_SP_RPT_PASS_20261026.md](evidence/P1_C_CONTROL_NONE_SP_RPT_PASS_20261026.md).
 
 **Próximo passo:** usar a **mesma missão** para `NEXUS_ONLY` e `BOTH` depois de empacotar os dois PBOs reais, com build/toolchain e SHA-256 registrados. Não repetir `NONE` sem alteração pertinente; não confundir os erros de animação MFR Dog/K9 e SetFace observados no RPT com erro Policy.
+
+## Segundo RPT — controle NONE em modset BGD (27/10/2026)
+
+A missão foi novamente executada em SP com o ambiente BGD carregado, **duas baterias consecutivas de 7/7 PASS, 0 falhas**. O modo continua `scenario=NONE`, `nexusPatch=false`, `policyPatch=false`, `p1cHomologated=false`; portanto ainda **nenhum PBO Nexus/Policy foi testado**. O RPT é recorte, sem cabeçalho de build nem lista completa de mods. Registrados separadamente: 117 mensagens de tentativa de sobrescrever funções ACE finalizadas (30 nomes), CBA XEH fallback, macro antiga LAxemann, FTAC setting errado, Blastcore sem userconfig legível, `CfgRemoteExec mode=2` externo e BGD Garage com 42485 entradas virtuais autorizadas/41764 estocadas. Esses avisos **não são erros Policy comprovados**. Evidência: [P1_C_CONTROL_NONE_BGD_SP_RPT_PASS_20261027.md](evidence/P1_C_CONTROL_NONE_BGD_SP_RPT_PASS_20261027.md).
+
+**Gate inalterado:** construir PBOs reais e provar `NEXUS_ONLY` e `BOTH`; reutilizar missão existente, sem gerar nova. Comparar posteriormente no BGD completo quando os addons estiverem disponíveis.
