@@ -68,3 +68,10 @@ A missão foi novamente executada em SP com o ambiente BGD carregado, **duas bat
 **A fase positiva do P1-C foi aprovada em PBO real:** Nexus isolado 2 × 25/25 PASS; Nexus+Policy em modset com CBA/Canil 2 × 50/50 PASS; Nexus+Policy no modset BGD completo 1 × 50/50 PASS. Total **200 asserções PASS, 0 FAIL, 5 execuções**. Comprovados CfgPatches e CfgFunctions de `configFile`, preInit real, paths, registro e idempotência, políticas whitelist/blacklist, NexusResult, metadados de no authority, sem shadow de missão.
 
 **Limite:** o runner deliberadamente reporta `p1cHomologated=false`; não é falha da execução. **P1-C formal pendente apenas revisão final do controle negativo POLICY sem Nexus** (startup pode ser bloqueado pela engine; requiredAddons comprovado na configuração). Não repetir baterias positivas sem mudança. Os 1.772 erros de bones OFP2_ManSkeleton e 220 warnings de configuração observados no BGD são achados externos a investigar separadamente; não atribuir a Policy sem isolamento. Evidência integral com hashes: [RPTs P1-C de 30/10](evidence/P1_C_PBO_RUNTIME_3_RPTS_SP_PASS_20261030.md).
+
+
+## Decisão de fechamento do gate — 30/10/2026
+
+**P1-C HOMOLOGADO PARA RUNTIME DE PBOs NO SINGLE-PLAYER** após revisão de três RPTs positivos (Nexus 2×25, ambos 2×50, ambos+BGD 1×50) e captura do controle negativo 'Policy habilitado sem Nexus'. A engine apresentou `Addon 'ServoPeregrino_Organizador_Policy' requires addon 'ServoPeregrino_Organizador_Nexus'`; clicar OK permite ao jogo continuar abrindo. **Foi comprovada a detecção de dependência, não bloqueio absoluto**. A ausência de RPT do caso negativo é limitação explícita, não evidência inventada. Não é necessário novo teste para o escopo P1-C definido. [Fechamento formal e evidência visual transcrita](evidence/P1_C_POLICY_WITHOUT_NEXUS_WARNING_AND_SP_GATE_20261030.md).
+
+Todos os checkpoints antigos 'P1-C aberto' deste documento são históricos e **não expressam o estado mais recente**. `p1cHomologated=false` é marcador fixo do runner, sujeito a homologação documental externa. **P2 é o próximo marco, ainda não implementado.** Sem homologação MP, JIP, assinatura ou hard-block de startup.
