@@ -595,14 +595,14 @@
   "p1": {
     "phase": "P1",
     "delivery": "0.1-A",
-    "branch": "feature/policy-0.1-a-core",
-    "status": "P1_A_R1_CORE_SP_68_PASS_P1_B_REAL_NEXUS_MISSION_59_PASS_P1_C_ADDON_RUNTIME_PENDING",
+    "branch": "feature/policy-0.1-b-nexus-integration",
+    "status": "P1_A_P1_B_P1_C_SP_HOMOLOGATED_RUNTIME_REAL_PBOS",
     "addon_source_prepared": true,
     "engine_tested": true,
     "source_runtime_in_repo": true,
-    "pbo_built": false,
-    "pbo_tested": false,
-    "registered_nexus_capabilities_in_pbo_tested": false,
+    "pbo_built": true,
+    "pbo_tested": true,
+    "registered_nexus_capabilities_in_pbo_tested": true,
     "mp_tested": false,
     "config_loader_implemented": false,
     "server_authority_implemented": false,
@@ -630,9 +630,7 @@
     "runner_engine_fail": 0,
     "rpt_pending": false,
     "documentation": "docs/projects/policy-editor/P1_CORE_0_1_A_20261025.md",
-    "gate_pending": [
-      "P1_C_REAL_NEXUS_POLICY_ADDONS_PBO_CFGPATCHES_CFGFUNCTIONS_PREINIT_CAPABILITIES"
-    ],
+    "gate_pending": [],
     "baseline_preserved": true,
     "first_rpt_result": "BLOCKED_FILES_NOT_FOUND",
     "first_rpt": {
@@ -724,9 +722,9 @@
     "core_mission_first_homologated_date": "2026-10-26",
     "evidence_latest": "docs/projects/policy-editor/evidence/P1_A_R1_CORE_SP_RPT_PASS_20261026.md",
     "next_gate": {
-      "name": "P1_C_REAL_ADDONS_PBO_NEXUS_POLICY",
-      "requirement": "Build and load actual Nexus and Policy addons; validate CfgPatches/requiredAddons, $PBOPREFIX$, config.cpp CfgFunctions/preInit, capability registry and core calls without mission CfgFunctions masks; record RPT and build hashes",
-      "not_tested_in_p1_b": true
+      "name": "P2_STATIC_POLICY_LOADER",
+      "requirement": "Implement static policy loading, explicit precedence and invalid/pending handling while preserving P1 contracts. P2 not implemented.",
+      "started": false
     },
     "b": {
       "delivery": "0.1-B",
@@ -794,10 +792,10 @@
       "continuity": "docs/projects/policy-editor/CONTINUIDADE_POLICY_P1B_P1C_20261026.md"
     },
     "c": {
-      "status": "PENDING_NOT_STARTED",
+      "status": "SP_REAL_PBO_HOMOLOGATED",
       "gate": "P1_C_REAL_ADDON_RUNTIME",
-      "build_pbo": false,
-      "engine_tested": false,
+      "build_pbo": true,
+      "engine_tested": true,
       "mp_tested": false,
       "tests_required": [
         "NEXUS_ADDON_WITHOUT_POLICY",
@@ -814,7 +812,53 @@
         "NO_MERGE_MAIN",
         "NO_P2_LOADER_PREMATURELY"
       ],
-      "continuity": "docs/projects/policy-editor/CONTINUIDADE_POLICY_P1B_P1C_20261026.md"
-    }
+      "continuity": "docs/projects/policy-editor/CONTINUIDADE_POLICY_P1B_P1C_20261026.md",
+      "pbo_signed": false,
+      "pbo_binarized": false,
+      "engine_test_date": "2026-10-30",
+      "engine_version": "2.22.154089",
+      "nexus_only": {
+        "runs": 2,
+        "each_pass": 25,
+        "each_fail": 0,
+        "scenario": "NEXUS_ONLY"
+      },
+      "both_canil": {
+        "runs": 2,
+        "each_pass": 50,
+        "each_fail": 0,
+        "scenario": "BOTH"
+      },
+      "both_bgd": {
+        "runs": 1,
+        "pass": 50,
+        "fail": 0,
+        "scenario": "BOTH"
+      },
+      "positive_test_runs": 5,
+      "positive_assertions_pass": 200,
+      "positive_assertions_fail": 0,
+      "policy_without_nexus": {
+        "evidence_type": "USER_SCREENSHOT",
+        "screenshot_filename": "image(20261030-215441).png",
+        "evidence_date": "2026-10-30",
+        "warning_text": "Addon 'ServoPeregrino_Organizador_Policy' requires addon 'ServoPeregrino_Organizador_Nexus'",
+        "engine_detected_required_addon_missing": true,
+        "game_continued_to_launch_after_acknowledging_warning": true,
+        "full_process_block": false,
+        "actual_policy_runtime_without_nexus": "NOT_OBSERVED",
+        "dedicated_rpt_available": false,
+        "criterion": "RECOGNIZABLE_DEPENDENCY_ERROR",
+        "criterion_pass": true
+      },
+      "homologated_scope": "SP_RUNTIME_ONLY_NO_MP_NO_SIGNED_RELEASE_NO_P2",
+      "evidence_positive": "docs/projects/policy-editor/evidence/P1_C_PBO_RUNTIME_3_RPTS_SP_PASS_20261030.md",
+      "evidence_negative": "docs/projects/policy-editor/evidence/P1_C_POLICY_WITHOUT_NEXUS_WARNING_AND_SP_GATE_20261030.md",
+      "build_provenance": "docs/projects/policy-editor/P1_C_PBO_BUILD_20261027.md",
+      "new_tests_required_before_p2": [],
+      "p2_loader_implemented": false
+    },
+    "homologated_scope": "SINGLE_PLAYER_REAL_UNSIGNED_UNBINARIZED_ADDON_RUNTIME",
+    "homologated_date": "2026-10-30"
   }
 }
